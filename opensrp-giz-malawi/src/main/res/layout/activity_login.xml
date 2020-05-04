@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1.0"
-        android:background="#F6F6F6"
+        android:background="@drawable/login_background"
         android:paddingBottom="@dimen/login_bottom_margin">
 
 
@@ -33,7 +33,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/logo_string"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_malawi_logo" />
+                app:srcCompat="@drawable/opensrp_logo" />
 
             <TextView
                 android:id="@+id/login_title_text_view"
@@ -54,7 +54,7 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
                 android:text="@string/app_version"
-                android:textColor="#999999"
+                android:textColor="#ffffff"
                 android:textSize="@dimen/login_build_text_view_textSize" />
 
         </LinearLayout>
@@ -121,8 +121,8 @@
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="3dp"
-                    android:layout_marginRight="5dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginRight="5dp"
                     android:button="@drawable/white_checkbox_bg_selector" />
 
                 <TextView
@@ -133,7 +133,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/login_show_password_checkbox"
                     android:text="@string/show_password_text"
-                    android:textColor="#585858"
+                    android:textColor="#ffffff"
                     android:textSize="@dimen/login_edit_text_textSize" />
             </RelativeLayout>
 
@@ -144,7 +144,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:layout_weight="8"
-                android:background="@drawable/login_button_bg"
+                android:background="@drawable/login_button"
                 android:ems="10"
                 android:shadowColor="#ffffff"
                 android:shadowDx="0"
@@ -152,7 +152,7 @@
                 android:shadowRadius="0.5"
                 android:text="@string/login_text"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
+                android:textColor="@color/black_text_color"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -162,8 +162,8 @@
             android:id="@+id/bottom_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_below="@+id/middle_section"
+            android:layout_alignParentBottom="true"
             android:orientation="vertical"
             android:paddingTop="30dp">
 
@@ -171,11 +171,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:paddingBottom="5dp"
                 android:paddingTop="10dp"
+                android:paddingBottom="5dp"
                 android:text="@string/powered_by"
                 android:textAlignment="center"
-                android:textColor="#585858" />
+                android:textColor="#ffffff" />
 
             <ImageView
                 android:id="@+id/opensrp_logo_image_view"

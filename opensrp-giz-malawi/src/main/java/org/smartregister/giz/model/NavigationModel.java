@@ -10,8 +10,6 @@ import java.util.List;
 
 import timber.log.Timber;
 
-import static java.util.Arrays.asList;
-
 public class NavigationModel implements NavigationContract.Model {
     private static NavigationModel instance;
     private static List<NavigationOption> navigationOptions = new ArrayList<>();
@@ -27,13 +25,6 @@ public class NavigationModel implements NavigationContract.Model {
     public List<NavigationOption> getNavigationItems() {
         if (navigationOptions.size() == 0) {
 
-            NavigationOption allClientsOption = new NavigationOption(R.mipmap.sidemenu_children
-                    , R.mipmap.sidemenu_children_active, R.string.all_clients, GizConstants.DrawerMenu.ALL_CLIENTS, 0, false);
-
-            if (allClientsOption.isEnabled()) {
-                navigationOptions.add(allClientsOption);
-            }
-
             NavigationOption childNavigationOption = new NavigationOption(R.mipmap.sidemenu_children,
                     R.mipmap.sidemenu_children_active, R.string.menu_child_clients, GizConstants.DrawerMenu.CHILD_CLIENTS,
                     0, true);
@@ -41,12 +32,7 @@ public class NavigationModel implements NavigationContract.Model {
                 navigationOptions.add(childNavigationOption);
             }
 
-            NavigationOption ancNavigationOption = new NavigationOption(R.mipmap.sidemenu_children,
-                    R.mipmap.sidemenu_children_active, R.string.menu_anc_clients, GizConstants.DrawerMenu.ANC_CLIENTS,
-                    0, true);
-            if (ancNavigationOption.isEnabled()) {
-                navigationOptions.add(ancNavigationOption);
-            }
+
         }
 
         return navigationOptions;

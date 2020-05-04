@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Malawi-eRegister</string>
+    <string name="app_name" translatable="false">Tunisia-eRegister</string>
     <string name="action_settings" translatable="false">Settings</string>
     <string name="sync" translatable="false">Sync</string>
     <string name="action_log_out">Logging Out</string>
@@ -22,7 +22,7 @@
     <string name="french">Français</string>
     <string name="arabic">عربى</string>
 
-    <string name="nav_logo" translatable="false">Malawi-eRegister</string>
+    <string name="nav_logo" translatable="false">Tunisia-eRegister</string>
     <string name="title_activity_child_immunization">ChildImmunizationActivity</string>
 
     <string name="error_code">Erreur: %1$s</string>
