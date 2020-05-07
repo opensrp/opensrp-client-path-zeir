@@ -560,6 +560,33 @@
     <string name="dhis2_reports">DHIS2 Reports</string>
     <string name="child_report_grouping_title">Child</string>
     <string name="anc_report_grouping_title">ANC</string>
+    <!-- Immunization Names-->
+    <string name="bcg">BCG</string>
+    <string name="hepb">HepB</string>
+    <string name="opv_0">OPV 0</string>
+    <string name="opv_1">OPV 1</string>
+    <string name="pcv_1">PCV 1</string>
+    <string name="penta_1">Penta 1</string>
+    <string name="rota_1">Rota 1</string>
+    <string name="opv_2">OPV 2</string>
+    <string name="pcv_2">PCV 2</string>
+    <string name="penta_2">Penta 2</string>
+    <string name="rota_2">Rota 2</string>
+    <string name="opv_3">OPV 3</string>
+    <string name="ipv">IPV</string>
+    <string name="pcv_3">PCV 3</string>
+    <string name="penta_3">Penta 3</string>
+    <string name="meningococcal">Meningococcal</string>
+    <string name="yellow_fever">Yellow Fever</string>
+    <string name="mr_1">MR 1</string>
+    <string name="mr_2">MR 2</string>
+    <string name="vit_a_1">Vit A 6 Months</string>
+    <string name="vit_a_2">Vit A 12 Months</string>
+    <string name="mv_1">MV 1</string>
+    <string name="mv_2">MV 2</string>
+    <string name="mv_3">MV 3</string>
+    <string name="mv_4">MV 4</string>
+
 
 
 </resources>
