@@ -24,9 +24,9 @@ public class ChildRegistrationDataFragment extends BaseChildRegistrationDataFrag
         Map<String, Integer> resourceIds = new HashMap<>();
 
         resourceIds.put("birth_registration_number", R.string.birth_registration_number);
-        resourceIds.put("First_Name", R.string.first_name);
-        resourceIds.put("Last_Name", R.string.last_name);
-        resourceIds.put("Middle_Name", R.string.middle_name);
+        resourceIds.put("first_name", R.string.first_name);
+        resourceIds.put("last_name", R.string.last_name);
+        resourceIds.put("middle_name", R.string.middle_name);
         resourceIds.put("Sex", R.string.sex);
         resourceIds.put("Date_Birth", R.string.child_dob);
         resourceIds.put("Birth_Weight", R.string.birth_weight);

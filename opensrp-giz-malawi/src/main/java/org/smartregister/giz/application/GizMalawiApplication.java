@@ -81,6 +81,7 @@ import org.smartregister.repository.Repository;
 import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.sync.helper.ECSyncHelper;
+import org.smartregister.util.LangUtils;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.receiver.TimeChangedBroadcastReceiver;
 
@@ -248,6 +249,8 @@ public class GizMalawiApplication extends DrishtiApplication implements TimeChan
         super.onCreate();
         mInstance = this;
         context = Context.getInstance();
+
+        LangUtils.saveLanguage(getApplicationContext(), Locale.getDefault().getLanguage());
 
         String lang = GizUtils.getLanguage(getApplicationContext());
         Locale locale = new Locale(lang);

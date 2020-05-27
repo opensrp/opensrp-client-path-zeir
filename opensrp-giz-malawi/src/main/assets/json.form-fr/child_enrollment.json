@@ -280,7 +280,7 @@
         "openmrs_entity_id": "159429AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_data_type": "text",
         "type": "edit_text",
-        "hint": "Hauteur de naissance (cm) (cm)",
+        "hint": "Hauteur de naissance (cm)",
         "v_min": {
           "value": "0.1",
           "err": "La hauteur doit être supérieure à 0"

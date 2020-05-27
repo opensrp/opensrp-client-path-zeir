@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Tunisia-eRegister</string>
+    <string name="app_name" translatable="false">Unicef-Tunisia</string>
     <string name="action_settings" translatable="false">Settings</string>
     <string name="sync" translatable="false">Sync</string>
     <string name="action_log_out">Logging Out</string>
@@ -22,7 +22,7 @@
     <string name="french">Français</string>
     <string name="arabic">عربى</string>
 
-    <string name="nav_logo" translatable="false">Tunisia-eRegister</string>
+    <string name="nav_logo" translatable="false">Unicef-Tunisia</string>
     <string name="title_activity_child_immunization">ChildImmunizationActivity</string>
 
     <string name="error_code">Erreur: %1$s</string>
@@ -147,4 +147,31 @@
     <string name="mv_3">MV 3</string>
     <string name="mv_4">MV 4</string>
 
+    <string name="reports">Rapports</string>
+    <string name="nav_registers">Registres</string>
+    <string name="menu_child_clients">Dossiers des enfants</string>
+    <string name="log_out_as">Se déconnecter comme </string>
+    <string name="nav_last">Dernière: </string>
+
+
+    <string name="birth_registration_number">Nombre d\'enregistrement de naissance NRB de l\'enfant</string>
+    <string name="middle_name">Deuxième nom</string>
+    <string name="home_address">Le village</string>
+    <string name="village">Adresse lieu</string>
+    <string name="traditional_authority">Autorité traditionnelle</string>
+    <string name="nrc_number">Numéro d\'identification NRB de la mère / du tuteur</string>
+    <string name="protected_at_birth">Enfant protégé à la naissance contre le tétanos</string>
+    <string name="mother_hiv_status">Statut VIH de la mère</string>
+    <string name="child_hiv_status">Statut VIH de l\'enfant</string>
+    <string name="child_treatment">Indiquez si l\'enfant est sous CPT et/ou ART.</string>
+
+    <string name="second_phone_number">Numéro de téléphone alternatif</string>
+    <string name="Birth_Height">Hauteur de naissance (cm) </string>
+    <string name="Birth_Weight">Poids à la naissance (kg) </string>
+    <string name="zeir_id">Identifiant MER de l\'enfant</string>
+    <string name="child_reg">Nombre d\'enregistrement de l\'enfant</string>
+
+
+
+    <string name="opensrp_url">https://jembi-staging.smartregister.org/opensrp/</string>
 </resources>

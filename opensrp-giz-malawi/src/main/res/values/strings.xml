@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Tunisia HIS</string>
+    <string name="app_name" translatable="false">Unicef-Tunisia</string>
     <string name="action_settings" translatable="false">Settings</string>
     <string name="sync" translatable="false">Sync</string>
     <string name="action_log_out">Logging Out</string>
@@ -27,7 +27,7 @@
     <string name="zeir_id" translatable="false">MER ID</string>
     <string name="iz_id_hint">MER ID number</string>
 
-    <string name="nav_logo" translatable="false">Tunisia HIS</string>
+    <string name="nav_logo" translatable="false">Unicef-Tunisia</string>
     <string name="title_activity_child_immunization" translatable="false">ChildImmunizationActivity</string>
 
     <!-- Nfc-->
@@ -82,7 +82,7 @@
     <string name="logo_string">logo</string>
 
     <string name="birth_registration_number">Birth registration number</string>
-    <string name="middle_name">Middle Number</string>
+    <string name="middle_name">Middle Name</string>
     <string name="home_address">Home Address</string>
     <string name="village">Village</string>
     <string name="traditional_authority">Traditional Authority</string>
@@ -94,7 +94,7 @@
 
     <string name="nav_registers">Registers</string>
     <string name="nav_logout_as">Logout as</string>
-    <string name="nav_sync">Sync</string>
+    <string name="nav_sync" translatable="false">Sync</string>
     <string name="nav_last">"Last: </string>
     <string name="nav_last_sync_time">HH:mm a , MMM DD</string>
     <string name="log_out_as">Log out as</string>
@@ -560,8 +560,8 @@
     <string name="dhis2_reports">DHIS2 Reports</string>
     <string name="child_report_grouping_title">Child</string>
     <string name="anc_report_grouping_title">ANC</string>
+
     <!-- Immunization Names-->
-    <string name="bcg">BCG</string>
     <string name="hepb">HepB</string>
     <string name="opv_0">OPV 0</string>
     <string name="opv_1">OPV 1</string>
@@ -573,20 +573,22 @@
     <string name="penta_2">Penta 2</string>
     <string name="rota_2">Rota 2</string>
     <string name="opv_3">OPV 3</string>
-    <string name="ipv">IPV</string>
     <string name="pcv_3">PCV 3</string>
     <string name="penta_3">Penta 3</string>
     <string name="meningococcal">Meningococcal</string>
     <string name="yellow_fever">Yellow Fever</string>
     <string name="mr_1">MR 1</string>
     <string name="mr_2">MR 2</string>
-    <string name="vit_a_1">Vit A 6 Months</string>
-    <string name="vit_a_2">Vit A 12 Months</string>
-    <string name="mv_1">MV 1</string>
-    <string name="mv_2">MV 2</string>
-    <string name="mv_3">MV 3</string>
-    <string name="mv_4">MV 4</string>
+
+    <string name="nrc_number">Mother/guardian NRB Identification number</string>
+    <string name="mother_guardian_number">Mother/guardian NRB Identification number</string>
+    <string name="second_phone_number">Alternative phone number</string>
+
+    <string name="Birth_Height">Birth Height (cm) </string>
+    <string name="Birth_Weight">Birth weight/First weight (kg) </string>
+    <string name="child_reg">Child\'s Registration Number</string>
 
 
+    <string name="opensrp_url">https://jembi-staging.smartregister.org/opensrp/</string>
 
 </resources>
