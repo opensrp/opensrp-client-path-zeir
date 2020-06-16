@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#358CB7</color>
+    <color name="primary">#358CB7</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="login_sub_text">#a4e7c8</color>
+    <color name="btn_gray">#F7F7F7</color>
+    <color name="gray">#eae8e8</color>
+    <color name="light_gray">#C3C2C0</color>
+    <color name="colorPink">#fce4ed</color>
+    <color name="holo_blue">#81D4FA</color>
+    <color name="colorGreen">#51B86B</color>
+    <color name="grey">#979797</color>
+    <color name="white_dark">#fafafa</color>
+    <color name="check_in_bg_grey">#f4f4f4</color>
+    <color name="check_in_txt_dark_grey">#686868</color>
+
+    <color name="list_view_divider_black">@color/black</color>
+    <color name="black_text_color">#000000</color>
+</resources>
