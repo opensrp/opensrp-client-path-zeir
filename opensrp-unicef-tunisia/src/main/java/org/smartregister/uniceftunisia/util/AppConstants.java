@@ -11,6 +11,10 @@ public class AppConstants {
     public static final String MOTHER_HIV_STATUS = "mother_hiv_status";
     public static final String BIRTH_REGISTRATION_NUMBER = "birth_registration_number";
 
+    public interface LOCALE {
+        String ARABIC_LOCALE = "ar";
+    }
+
     public static final class KEY {
         public static final String MOTHER_BASE_ENTITY_ID = "mother_base_entity_id";
         public static final String CHILD = "child";
@@ -59,7 +63,7 @@ public class AppConstants {
         public static final String LASTNAME = "lastName";
         public static final String ATTRIBUTES = "attributes";
         public static final int FIVE_YEAR = 5;
-        public static final String OPD_REGISTRATION = "Opd Registration" ;
+        public static final String OPD_REGISTRATION = "Opd Registration";
         public static final String VILLAGE = "village";
         public static final String HOME_ADDRESS = "home_address";
         public static final String DOB_UNKNOWN = "dob_unknown";

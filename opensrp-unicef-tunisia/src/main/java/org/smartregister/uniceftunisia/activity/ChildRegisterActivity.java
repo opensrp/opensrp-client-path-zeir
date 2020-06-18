@@ -85,11 +85,7 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
 
     private void createDrawer() {
         WeakReference<ChildRegisterActivity> weakReference = new WeakReference<>(this);
-        navigationMenu = NavigationMenu.getInstance(weakReference.get(), null, null);
-        if (navigationMenu != null) {
-            navigationMenu.getNavigationAdapter().setSelectedView(AppConstants.DrawerMenu.CHILD_CLIENTS);
-            navigationMenu.runRegisterCount();
-        }
+        navigationMenu = NavigationMenu.getInstance(weakReference.get());
     }
 
     @Override

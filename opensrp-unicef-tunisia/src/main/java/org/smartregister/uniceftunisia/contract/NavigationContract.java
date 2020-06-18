@@ -13,8 +13,6 @@ public interface NavigationContract {
 
         NavigationContract.View getNavigationView();
 
-        void refreshNavigationCount();
-
         void refreshLastSync();
 
         void displayCurrentUser();
@@ -34,7 +32,6 @@ public interface NavigationContract {
 
         void logout(Activity activity);
 
-        void refreshCount();
     }
 
     interface Model {

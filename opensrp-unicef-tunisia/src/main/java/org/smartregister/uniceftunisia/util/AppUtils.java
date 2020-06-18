@@ -162,37 +162,6 @@ public class AppUtils extends Utils {
         return selectedLocation;
     }
 
-    public static void showLocations(@Nullable Activity context, @NonNull OnLocationChangeListener onLocationChangeListener, @Nullable NavigationMenu navigationMenu) {
-        try {
-            ArrayList<String> allLevels = getLocationLevels();
-            ArrayList<String> healthFacilities = getHealthFacilityLevels();
-            ArrayList<String> defaultLocation = (ArrayList<String>) LocationHelper.getInstance().generateDefaultLocationHierarchy(allLevels);
-            List<FormLocation> upToFacilities = LocationHelper.getInstance().generateLocationHierarchyTree(false, healthFacilities);
-            String upToFacilitiesString = AssetHandler.javaToJsonString(upToFacilities, new TypeToken<List<FormLocation>>() {
-            }.getType());
-            AppTreeViewDialog treeViewDialog = new AppTreeViewDialog(context,
-                    new JSONArray(upToFacilitiesString), defaultLocation, new ArrayList<>());
-
-            treeViewDialog.setCancelable(true);
-            treeViewDialog.setCanceledOnTouchOutside(true);
-            treeViewDialog.setOnDismissListener(dialog -> {
-                ArrayList<String> treeViewDialogName = treeViewDialog.getName();
-                if (!treeViewDialogName.isEmpty()) {
-                    String newLocation = treeViewDialogName.get(treeViewDialogName.size() - 1);
-                    UnicefTunisiaApplication.getInstance().context().allSharedPreferences().saveCurrentLocality(newLocation);
-                    onLocationChangeListener.updateUi(newLocation);
-                    if (navigationMenu != null) {
-                        navigationMenu.updateUi(newLocation);
-                    }
-                }
-
-            });
-            treeViewDialog.show();
-        } catch (JSONException e) {
-            Timber.e(e);
-        }
-    }
-
 
     public static void startReportJob(Context context) {
         String reportJobExecutionTime = UnicefTunisiaApplication.getInstance().context().allSharedPreferences().getPreference("report_job_execution_time");

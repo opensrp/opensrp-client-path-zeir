@@ -19,8 +19,6 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
 
-import timber.log.Timber;
-
 public class NavigationPresenter implements NavigationContract.Presenter {
 
     private NavigationContract.Model mModel;
@@ -46,31 +44,6 @@ public class NavigationPresenter implements NavigationContract.Presenter {
     @Override
     public NavigationContract.View getNavigationView() {
         return mView.get();
-    }
-
-    @Override
-    public void refreshNavigationCount() {
-        int navigationItems = 0;
-        while (navigationItems < mModel.getNavigationItems().size()) {
-            final int finalNavigationItems = navigationItems;
-            String menuTitle = mModel.getNavigationItems().get(navigationItems).getMenuTitle();
-            mInteractor.getRegisterCount(tableMap.get(menuTitle),
-                    new NavigationContract.InteractorCallback<Integer>() {
-                        @Override
-                        public void onResult(Integer result) {
-                            mModel.getNavigationItems().get(finalNavigationItems).setRegisterCount(result);
-                            getNavigationView().refreshCount();
-                        }
-
-                        @Override
-                        public void onError(Exception e) {
-                            Timber.e(e, "Error retrieving count for %s",
-                                    tableMap.get(mModel.getNavigationItems().get(finalNavigationItems).getMenuTitle()));
-                        }
-                    });
-            navigationItems++;
-        }
-
     }
 
     @Override

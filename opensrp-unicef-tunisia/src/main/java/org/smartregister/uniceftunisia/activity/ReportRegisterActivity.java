@@ -83,10 +83,9 @@ public class ReportRegisterActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btn_back_to_home:
 
-                NavigationMenu navigationMenu = NavigationMenu.getInstance(this, null, null);
+                NavigationMenu navigationMenu = NavigationMenu.getInstance(this);
                 if (navigationMenu != null) {
-                    navigationMenu.getDrawer()
-                            .openDrawer(GravityCompat.START);
+                    navigationMenu.getDrawer().openDrawer(GravityCompat.START);
                 }
                 break;
             default:
@@ -143,7 +142,6 @@ public class ReportRegisterActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        createDrawer();
 
         if (reportSyncBtn == null)
             return;
@@ -154,13 +152,4 @@ public class ReportRegisterActivity extends BaseActivity {
             reportSyncBtn.setVisibility(View.GONE);
         }
     }
-
-    public void createDrawer() {
-        NavigationMenu navigationMenu = NavigationMenu.getInstance(this, null, null);
-        if (navigationMenu != null) {
-            navigationMenu.getNavigationAdapter().setSelectedView(null);
-            navigationMenu.runRegisterCount();
-        }
-    }
-
 }
