@@ -37,11 +37,7 @@ public class ChildImmunizationActivity extends BaseChildImmunizationActivity {
         LocationSwitcherToolbar myToolbar = (LocationSwitcherToolbar) this.getToolbar();
 
         if (myToolbar != null) {
-            myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    finish();
-                }
-            });
+            myToolbar.setNavigationOnClickListener(v -> finish());
         }
     }
 
@@ -73,6 +69,7 @@ public class ChildImmunizationActivity extends BaseChildImmunizationActivity {
         bundle.putString(Constants.INTENT_KEY.LOCATION_ID,
                 Utils.context().allSharedPreferences().getPreference(AllConstants.CURRENT_LOCATION_ID));
         bundle.putSerializable(Constants.INTENT_KEY.EXTRA_CHILD_DETAILS, childDetails);
+        bundle.putSerializable(Constants.INTENT_KEY.BASE_ENTITY_ID, childDetails.getCaseId());
         bundle.putSerializable(Constants.INTENT_KEY.EXTRA_REGISTER_CLICKABLES, registerClickables);
         intent.putExtras(bundle);
 

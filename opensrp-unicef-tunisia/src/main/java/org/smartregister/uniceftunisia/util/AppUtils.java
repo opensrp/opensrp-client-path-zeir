@@ -60,11 +60,6 @@ public class AppUtils extends Utils {
         ALLOWED_LEVELS.add(FACILITY);
     }
 
-    public static void showDialogMessage(Context context, int title, int message) {
-        showDialogMessage(context, title > 0 ? context.getResources().getString(title) : "",
-                message > 0 ? context.getResources().getString(message) : "");
-    }
-
     public static void showDialogMessage(Context context, String title, String message) {
         new AlertDialog.Builder(context)
                 .setTitle(title)
@@ -114,25 +109,6 @@ public class AppUtils extends Utils {
         config.setLocale(locale);
         newContext = newContext.createConfigurationContext(config);
         return newContext;
-    }
-
-    public static void postStickyEvent(
-            BaseEvent event) {//Each Sticky event must be manually cleaned by calling GizUtils.removeStickyEvent
-        // after
-        // handling
-        EventBus.getDefault().postSticky(event);
-    }
-
-    public static void removeStickyEvent(BaseEvent event) {
-        EventBus.getDefault().removeStickyEvent(event);
-    }
-
-    public static String childAgeLimitFilter() {
-        return childAgeLimitFilter(AppConstants.KEY.DOB, AppConstants.KEY.FIVE_YEAR);
-    }
-
-    private static String childAgeLimitFilter(String dateColumn, int age) {
-        return " ((( julianday('now') - julianday(" + dateColumn + "))/365.25) <" + age + ")";
     }
 
     public static boolean updateChildDeath(@NonNull EventClient eventClient) {

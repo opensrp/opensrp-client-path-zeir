@@ -169,12 +169,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         LinearLayout locationLayout = rootView.findViewById(R.id.app_location_layout);
 
 
-        locationLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AppUtils.showLocations(activity, (OnLocationChangeListener) instance, null);
-            }
-        });
+        locationLayout.setOnClickListener(v -> AppUtils.showLocations(activity, instance, null));
 
         txtLocationSelected = rootView.findViewById(R.id.app_txt_location_selected);
 

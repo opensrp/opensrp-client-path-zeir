@@ -17,6 +17,7 @@ import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.child.ChildLibrary;
 import org.smartregister.child.domain.ChildMetadata;
+import org.smartregister.child.util.ChildAppProperties;
 import org.smartregister.child.util.DBConstants;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.configurableviews.ConfigurableViewsLibrary;
@@ -68,8 +69,10 @@ import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.receiver.TimeChangedBroadcastReceiver;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -226,8 +229,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         mInstance = this;
         context = Context.getInstance();
 
-        LangUtils.saveLanguage(getApplicationContext(), Locale.getDefault().getLanguage());
-
         String lang = AppUtils.getLanguage(getApplicationContext());
         Locale locale = new Locale(lang);
         Resources res = getApplicationContext().getResources();
@@ -241,6 +242,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
 
         //Initialize Modules
         CoreLibrary.init(context, new AppSyncConfiguration(), BuildConfig.BUILD_TIMESTAMP);
+
         GrowthMonitoringLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
         GrowthMonitoringLibrary.getInstance().setGrowthMonitoringSyncTime(3, TimeUnit.MINUTES);
         ImmunizationLibrary.init(context, getRepository(), createCommonFtsObject(context.applicationContext()),
@@ -249,7 +251,12 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         fixHardcodedVaccineConfiguration();
 
         ConfigurableViewsLibrary.init(context);
+
         ChildLibrary.init(context, getRepository(), getMetadata(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
+        ChildLibrary.getInstance().setApplicationVersionName(BuildConfig.VERSION_NAME);
+        ChildLibrary.getInstance().setClientProcessorForJava(getClientProcessor());
+        ChildLibrary.getInstance().getProperties().setProperty(ChildAppProperties.KEY.FEATURE_SCAN_QR_ENABLED, "true");
+
         ReportingLibrary.init(context, getRepository(), null, BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
         ReportingLibrary.getInstance().addMultiResultProcessor(new TripleResultProcessor());
 
@@ -259,7 +266,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         initOfflineSchedules();
 
         SyncStatusBroadcastReceiver.init(this);
-        LocationHelper.init(AppUtils.ALLOWED_LEVELS, AppUtils.DEFAULT_LOCATION_LEVEL);
+        LocationHelper.init(new ArrayList<>(Arrays.asList(BuildConfig.LOCATION_LEVELS)), BuildConfig.DEFAULT_LOCATION);
         jsonSpecHelper = new JsonSpecHelper(this);
 
         //init Job Manager
@@ -275,7 +282,9 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
                 AppConstants.TABLE_NAME.ALL_CLIENTS, AppConstants.EventType.CHILD_REGISTRATION,
                 AppConstants.EventType.UPDATE_CHILD_REGISTRATION, AppConstants.EventType.OUT_OF_CATCHMENT, AppConstants.CONFIGURATION.CHILD_REGISTER,
                 AppConstants.RELATIONSHIP.MOTHER, AppConstants.JSON_FORM.OUT_OF_CATCHMENT_SERVICE);
-        metadata.setFieldsWithLocationHierarchy(Collections.singleton(AppConstants.KEY.VILLAGE));
+        metadata.setFieldsWithLocationHierarchy(new HashSet<>(Collections.singletonList(AppConstants.KEY.HOME_ADDRESS)));
+        metadata.setLocationLevels(AppUtils.getLocationLevels());
+        metadata.setHealthFacilityLevels(AppUtils.getHealthFacilityLevels());
         return metadata;
     }
 
@@ -292,7 +301,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
             List<VaccineGroup> childVaccines = VaccinatorUtils.getSupportedVaccines(this);
             List<Vaccine> specialVaccines = VaccinatorUtils.getSpecialVaccines(this);
             VaccineSchedule.init(childVaccines, specialVaccines, AppConstants.KEY.CHILD);
-            //  VaccineSchedule.vaccineSchedules.get(GizConstants.KEY.CHILD).remove("BCG 2");
+            //  VaccineSchedule.vaccineSchedules.get(AppConstants.KEY.CHILD).remove("BCG 2");
         } catch (Exception e) {
             Timber.e(e, "UnicefTunisiaApplication --> initOfflineSchedules");
         }

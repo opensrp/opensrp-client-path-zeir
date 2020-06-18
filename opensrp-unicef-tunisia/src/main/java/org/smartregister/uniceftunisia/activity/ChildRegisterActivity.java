@@ -1,17 +1,13 @@
 package org.smartregister.uniceftunisia.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v4.app.Fragment;
+import android.view.MenuItem;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 import org.smartregister.child.activity.BaseChildRegisterActivity;
 import org.smartregister.child.model.BaseChildRegisterModel;
@@ -20,7 +16,7 @@ import org.smartregister.child.util.JsonFormUtils;
 import org.smartregister.child.util.Utils;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.contract.NavigationMenuContract;
-import org.smartregister.uniceftunisia.event.LoginEvent;
+import org.smartregister.uniceftunisia.fragment.AdvancedSearchFragment;
 import org.smartregister.uniceftunisia.fragment.ChildRegisterFragment;
 import org.smartregister.uniceftunisia.presenter.AppChildRegisterPresenter;
 import org.smartregister.uniceftunisia.util.AppConstants;
@@ -47,30 +43,17 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
         super.attachBaseContext(AppUtils.setAppLocale(base, lang));
     }
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     @Override
     protected Fragment[] getOtherFragments() {
-        return new Fragment[0];
+        ADVANCED_SEARCH_POSITION = 1;
+        Fragment[] fragments = new Fragment[1];
+        fragments[ADVANCED_SEARCH_POSITION - 1] = new WeakReference<>(new AdvancedSearchFragment()).get();
+        return fragments;
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    protected void registerBottomNavigation() {
-        //do nothing
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -90,10 +73,8 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
 
     @Override
     protected BaseRegisterFragment getRegisterFragment() {
-        WeakReference<ChildRegisterFragment> childRegisterFragmentWeakReference = new WeakReference<>(
-                new ChildRegisterFragment());
-
-        return childRegisterFragmentWeakReference.get();
+        WeakReference<ChildRegisterFragment> weakReference = new WeakReference<>(new ChildRegisterFragment());
+        return weakReference.get();
     }
 
     @Override
@@ -103,10 +84,12 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
     }
 
     private void createDrawer() {
-        WeakReference<ChildRegisterActivity> childRegisterActivityWeakReference = new WeakReference<>(this);
-        navigationMenu = NavigationMenu.getInstance(childRegisterActivityWeakReference.get(), null, null);
-        navigationMenu.getNavigationAdapter().setSelectedView(AppConstants.DrawerMenu.CHILD_CLIENTS);
-        navigationMenu.runRegisterCount();
+        WeakReference<ChildRegisterActivity> weakReference = new WeakReference<>(this);
+        navigationMenu = NavigationMenu.getInstance(weakReference.get(), null, null);
+        if (navigationMenu != null) {
+            navigationMenu.getNavigationAdapter().setSelectedView(AppConstants.DrawerMenu.CHILD_CLIENTS);
+            navigationMenu.runRegisterCount();
+        }
     }
 
     @Override
@@ -119,7 +102,7 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
     @Override
     public void closeDrawer() {
         if (navigationMenu != null) {
-            navigationMenu.closeDrawer();
+            NavigationMenu.closeDrawer();
         }
     }
 
@@ -127,30 +110,6 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
     public void onPause() {
         EventBus.getDefault().unregister(this);
         super.onPause();
-    }
-
-    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void showNfcNotInstalledDialog(LoginEvent event) {
-        if (event != null) {
-            AppUtils.removeStickyEvent(event);
-
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                @Override
-                public void run() {
-                    showNfcDialog();
-                }
-            });
-        }
-    }
-
-    private void showNfcDialog() {
-        AppUtils.showDialogMessage(this, R.string.nfc_sdk_missing, R.string.please_install_nfc_sdk);
-    }
-
-    public void refresh() {
-        Intent intent = new Intent(ChildRegisterActivity.this, ChildRegisterActivity.class);
-        getApplicationContext()
-                .startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     @Override
@@ -175,5 +134,16 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
     @Override
     public void finishActivity() {
         finish();
+    }
+
+    @Override
+    protected void registerBottomNavigation() {
+        super.registerBottomNavigation();
+
+        MenuItem clients = bottomNavigationView.getMenu().findItem(R.id.action_clients);
+        if (clients != null) {
+            clients.setTitle(getString(R.string.header_children));
+        }
+        bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_library);
     }
 }

@@ -38,15 +38,12 @@ import java.util.ArrayList;
 
 import timber.log.Timber;
 
-
 public class UnicefTunisiaRepository extends Repository {
 
-    protected SQLiteDatabase readableDatabase;
-    protected SQLiteDatabase writableDatabase;
+    private SQLiteDatabase readableDatabase;
+    private SQLiteDatabase writableDatabase;
 
     private Context context;
-    private String indicatorsConfigFile = AppConstants.File.INDICATOR_CONFIG_FILE;
-    private String indicatorDataInitialisedPref = AppConstants.Pref.INDICATOR_DATA_INITIALISED;
     private String appVersionCodePref = AppConstants.Pref.APP_VERSION_CODE;
 
     public UnicefTunisiaRepository(@NonNull Context context, @NonNull org.smartregister.Context openSRPContext) {
@@ -82,16 +79,18 @@ public class UnicefTunisiaRepository extends Repository {
 
         runLegacyUpgrades(database);
 
-        onUpgrade(database, 8, BuildConfig.DATABASE_VERSION);
+        onUpgrade(database, 10, BuildConfig.DATABASE_VERSION);
 
         // initialize from yml file
         ReportingLibrary reportingLibraryInstance = ReportingLibrary.getInstance();
         // Check if indicator data initialised
+        String indicatorDataInitialisedPref = AppConstants.Pref.INDICATOR_DATA_INITIALISED;
         boolean indicatorDataInitialised = Boolean.parseBoolean(reportingLibraryInstance.getContext()
                 .allSharedPreferences().getPreference(indicatorDataInitialisedPref));
         boolean isUpdated = checkIfAppUpdated();
         if (!indicatorDataInitialised || isUpdated) {
             Timber.d("Initialising indicator repositories!!");
+            String indicatorsConfigFile = AppConstants.File.INDICATOR_CONFIG_FILE;
             reportingLibraryInstance.initIndicatorData(indicatorsConfigFile, database); // This will persist the data in the DB
             reportingLibraryInstance.getContext().allSharedPreferences().savePreference(indicatorDataInitialisedPref, "true");
             reportingLibraryInstance.getContext().allSharedPreferences().savePreference(appVersionCodePref, String.valueOf(BuildConfig.VERSION_CODE));
@@ -138,7 +137,6 @@ public class UnicefTunisiaRepository extends Repository {
 
         ChildDbMigrations.addShowBcg2ReminderAndBcgScarColumnsToEcChildDetails(db);
 
-//        DailyIndicatorCountRepository.performMigrations(db);
         IndicatorQueryRepository.performMigrations(db);
 
     }
@@ -148,9 +146,8 @@ public class UnicefTunisiaRepository extends Repository {
         String pass = UnicefTunisiaApplication.getInstance().getPassword();
         if (StringUtils.isNotBlank(pass)) {
             return getReadableDatabase(pass);
-        } else {
-            throw new IllegalStateException("Password is blank");
         }
+        return null;
     }
 
     @Override
@@ -220,7 +217,7 @@ public class UnicefTunisiaRepository extends Repository {
     /**
      * Version 16 added service_group column
      *
-     * @param database
+     * @param database SQLiteDatabase
      */
     private void upgradeToVersion8AddServiceGroupColumn(@NonNull SQLiteDatabase database) {
         try {
@@ -411,6 +408,4 @@ public class UnicefTunisiaRepository extends Repository {
             return (BuildConfig.VERSION_CODE > savedVersion);
         }
     }
-
-
 }

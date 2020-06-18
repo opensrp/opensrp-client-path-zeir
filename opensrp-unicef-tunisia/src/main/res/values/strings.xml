@@ -589,6 +589,6 @@
     <string name="child_reg">Child\'s Registration Number</string>
 
 
-    <string name="opensrp_url">https://jembi-staging.smartregister.org/opensrp/</string>
+    <string name="opensrp_url">https://unicef-tunisia-stage.smartregister.org/opensrp/</string>
 
 </resources>
