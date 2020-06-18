@@ -14,9 +14,9 @@ import org.smartregister.child.toolbar.LocationSwitcherToolbar;
 import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.Utils;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.immunization.job.VaccineSchedulesUpdateJob;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.util.AppUtils;
-import org.smartregister.immunization.job.VaccineSchedulesUpdateJob;
 
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;

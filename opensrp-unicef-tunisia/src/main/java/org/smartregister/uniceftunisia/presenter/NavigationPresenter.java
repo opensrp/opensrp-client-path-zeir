@@ -2,11 +2,6 @@ package org.smartregister.uniceftunisia.presenter;
 
 import android.app.Activity;
 
-import org.smartregister.uniceftunisia.contract.NavigationContract;
-import org.smartregister.uniceftunisia.interactor.NavigationInteractor;
-import org.smartregister.uniceftunisia.model.NavigationModel;
-import org.smartregister.uniceftunisia.model.NavigationOption;
-import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.growthmonitoring.job.HeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.WeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.ZScoreRefreshIntentServiceJob;
@@ -14,6 +9,11 @@ import org.smartregister.immunization.job.VaccineServiceJob;
 import org.smartregister.job.ImageUploadServiceJob;
 import org.smartregister.job.SyncServiceJob;
 import org.smartregister.job.SyncSettingsServiceJob;
+import org.smartregister.uniceftunisia.contract.NavigationContract;
+import org.smartregister.uniceftunisia.interactor.NavigationInteractor;
+import org.smartregister.uniceftunisia.model.NavigationModel;
+import org.smartregister.uniceftunisia.model.NavigationOption;
+import org.smartregister.uniceftunisia.util.AppConstants;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;

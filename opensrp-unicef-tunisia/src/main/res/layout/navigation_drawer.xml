@@ -204,7 +204,7 @@
                             android:textSize="24sp" />
 
                         <LinearLayout
-                            android:id="@+id/giz_location_layout"
+                            android:id="@+id/app_location_layout"
                             android:layout_width="match_parent"
                             android:layout_height="50sp"
                             android:layout_marginStart="10dp"
@@ -215,7 +215,7 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/giz_txt_location_selected"
+                                android:id="@+id/app_txt_location_selected"
                                 style="@style/CustomFontTextViewStyle.StatusBar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="fill_parent"

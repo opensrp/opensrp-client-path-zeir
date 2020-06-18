@@ -214,7 +214,7 @@ dependencies {
         exclude group: 'com.rengwuxian.materialedittext', module: 'library'
     }
 
-    implementation('org.smartregister:opensrp-client-child:0.3.1-LOCAL-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-child:0.3.1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
@@ -260,7 +260,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
     }
 
-    implementation('org.smartregister:opensrp-client-growth-monitoring:1.1.20-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-growth-monitoring:1.1.22-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
@@ -269,7 +269,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
-    implementation('org.smartregister:opensrp-client-reporting:0.0.20-LOCAL-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-reporting:0.0.20-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'

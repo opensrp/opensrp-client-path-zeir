@@ -15,13 +15,13 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.smartregister.child.ChildLibrary;
 import org.smartregister.child.domain.ChildMetadata;
 import org.smartregister.child.util.Constants;
+import org.smartregister.immunization.ImmunizationLibrary;
+import org.smartregister.immunization.db.VaccineRepo;
+import org.smartregister.immunization.util.VaccineCache;
 import org.smartregister.uniceftunisia.activity.ChildFormActivity;
 import org.smartregister.uniceftunisia.activity.ChildImmunizationActivity;
 import org.smartregister.uniceftunisia.activity.ChildProfileActivity;
 import org.smartregister.uniceftunisia.repository.AppChildRegisterQueryProvider;
-import org.smartregister.immunization.ImmunizationLibrary;
-import org.smartregister.immunization.db.VaccineRepo;
-import org.smartregister.immunization.util.VaccineCache;
 
 import java.util.ArrayList;
 import java.util.HashMap;

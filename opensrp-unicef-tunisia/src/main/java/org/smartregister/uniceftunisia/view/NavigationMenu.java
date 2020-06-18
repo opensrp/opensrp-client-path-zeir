@@ -27,6 +27,8 @@ import com.github.ybq.android.spinkit.style.FadingCircle;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.domain.FetchStatus;
+import org.smartregister.location.helper.LocationHelper;
+import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.activity.ReportRegisterActivity;
 import org.smartregister.uniceftunisia.adapter.NavigationAdapter;
@@ -36,8 +38,6 @@ import org.smartregister.uniceftunisia.listener.OnLocationChangeListener;
 import org.smartregister.uniceftunisia.model.NavigationOption;
 import org.smartregister.uniceftunisia.presenter.NavigationPresenter;
 import org.smartregister.uniceftunisia.util.AppUtils;
-import org.smartregister.location.helper.LocationHelper;
-import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.view.activity.BaseRegisterActivity;
 
 import java.lang.ref.WeakReference;
@@ -166,7 +166,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         reportView = rootView.findViewById(R.id.report_view);
 
         ImageView ivLogo = rootView.findViewById(R.id.ivLogo);
-        LinearLayout locationLayout = rootView.findViewById(R.id.giz_location_layout);
+        LinearLayout locationLayout = rootView.findViewById(R.id.app_location_layout);
 
 
         locationLayout.setOnClickListener(new View.OnClickListener() {
@@ -176,7 +176,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             }
         });
 
-        txtLocationSelected = rootView.findViewById(R.id.giz_txt_location_selected);
+        txtLocationSelected = rootView.findViewById(R.id.app_txt_location_selected);
 
         updateUi(LocationHelper.getInstance().getOpenMrsReadableName(AppUtils.getCurrentLocality()));
 

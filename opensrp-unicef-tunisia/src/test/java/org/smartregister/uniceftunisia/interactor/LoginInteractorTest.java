@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.smartregister.uniceftunisia.BaseRobolectricTest;
-import org.smartregister.uniceftunisia.shadow.ShadowBaseJob;
 import org.smartregister.growthmonitoring.job.HeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.WeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.ZScoreRefreshIntentServiceJob;
@@ -15,6 +13,8 @@ import org.smartregister.job.ImageUploadServiceJob;
 import org.smartregister.job.PullUniqueIdsServiceJob;
 import org.smartregister.job.SyncServiceJob;
 import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
+import org.smartregister.uniceftunisia.BaseRobolectricTest;
+import org.smartregister.uniceftunisia.shadow.ShadowBaseJob;
 import org.smartregister.view.contract.BaseLoginContract;
 
 import java.util.ArrayList;

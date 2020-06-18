@@ -3,11 +3,11 @@ package org.smartregister.uniceftunisia.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import org.smartregister.task.SaveTeamLocationsTask;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.presenter.LoginPresenter;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppUtils;
-import org.smartregister.task.SaveTeamLocationsTask;
 import org.smartregister.view.activity.BaseLoginActivity;
 import org.smartregister.view.contract.BaseLoginContract;
 

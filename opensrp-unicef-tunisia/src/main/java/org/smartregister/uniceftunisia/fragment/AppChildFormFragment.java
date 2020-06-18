@@ -34,8 +34,9 @@ public class AppChildFormFragment extends ChildFormFragment {
 
     @Override
     protected ChildFormFragmentPresenter createPresenter() {
-        WeakReference gizChildFormFragmentWeakReference = new WeakReference<>(this);
-        return new AppChildFormFragmentPresenter((JsonFormFragment) gizChildFormFragmentWeakReference.get(), ChildFormInteractor.getChildInteractorInstance());
+        WeakReference weakReference = new WeakReference<>(this);
+        return new AppChildFormFragmentPresenter((JsonFormFragment) weakReference.get(),
+                ChildFormInteractor.getChildInteractorInstance());
     }
 
     public interface OnReactionVaccineSelected {

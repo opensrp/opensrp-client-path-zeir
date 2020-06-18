@@ -5,11 +5,11 @@ import android.support.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.reporting.domain.CompositeIndicatorTally;
 import org.smartregister.reporting.domain.IndicatorTally;
 import org.smartregister.reporting.exception.MultiResultProcessorException;
 import org.smartregister.reporting.processor.MultiResultProcessor;
+import org.smartregister.uniceftunisia.util.AppConstants;
 
 import java.util.ArrayList;
 import java.util.List;

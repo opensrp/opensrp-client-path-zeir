@@ -8,8 +8,8 @@ import org.smartregister.child.cursor.AdvancedMatrixCursor;
 import org.smartregister.child.presenter.BaseChildAdvancedSearchPresenter;
 import org.smartregister.uniceftunisia.cursor.CreateRemoteLocalCursor;
 import org.smartregister.uniceftunisia.model.AdvancedSearchModel;
-import org.smartregister.uniceftunisia.util.DBQueryHelper;
 import org.smartregister.uniceftunisia.util.AppConstants;
+import org.smartregister.uniceftunisia.util.DBQueryHelper;
 
 /**
  * Created by ndegwamartin on 11/04/2019.

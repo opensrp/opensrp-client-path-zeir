@@ -21,24 +21,6 @@ import org.smartregister.child.util.DBConstants;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.configurableviews.ConfigurableViewsLibrary;
 import org.smartregister.configurableviews.helper.JsonSpecHelper;
-import org.smartregister.uniceftunisia.BuildConfig;
-import org.smartregister.uniceftunisia.activity.ChildFormActivity;
-import org.smartregister.uniceftunisia.activity.ChildImmunizationActivity;
-import org.smartregister.uniceftunisia.activity.ChildProfileActivity;
-import org.smartregister.uniceftunisia.activity.LoginActivity;
-import org.smartregister.uniceftunisia.job.AppJobCreator;
-import org.smartregister.uniceftunisia.processor.AppClientProcessorForJava;
-import org.smartregister.uniceftunisia.processor.TripleResultProcessor;
-import org.smartregister.uniceftunisia.repository.ChildAlertUpdatedRepository;
-import org.smartregister.uniceftunisia.repository.ClientRegisterTypeRepository;
-import org.smartregister.uniceftunisia.repository.DailyTalliesRepository;
-import org.smartregister.uniceftunisia.repository.AppChildRegisterQueryProvider;
-import org.smartregister.uniceftunisia.repository.UnicefTunisiaRepository;
-import org.smartregister.uniceftunisia.repository.HIA2IndicatorsRepository;
-import org.smartregister.uniceftunisia.repository.MonthlyTalliesRepository;
-import org.smartregister.uniceftunisia.util.AppConstants;
-import org.smartregister.uniceftunisia.util.AppUtils;
-import org.smartregister.uniceftunisia.util.VaccineDuplicate;
 import org.smartregister.growthmonitoring.GrowthMonitoringLibrary;
 import org.smartregister.growthmonitoring.repository.HeightRepository;
 import org.smartregister.growthmonitoring.repository.HeightZScoreRepository;
@@ -63,11 +45,30 @@ import org.smartregister.repository.Repository;
 import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.sync.helper.ECSyncHelper;
+import org.smartregister.uniceftunisia.BuildConfig;
+import org.smartregister.uniceftunisia.activity.ChildFormActivity;
+import org.smartregister.uniceftunisia.activity.ChildImmunizationActivity;
+import org.smartregister.uniceftunisia.activity.ChildProfileActivity;
+import org.smartregister.uniceftunisia.activity.LoginActivity;
+import org.smartregister.uniceftunisia.job.AppJobCreator;
+import org.smartregister.uniceftunisia.processor.AppClientProcessorForJava;
+import org.smartregister.uniceftunisia.processor.TripleResultProcessor;
+import org.smartregister.uniceftunisia.repository.AppChildRegisterQueryProvider;
+import org.smartregister.uniceftunisia.repository.ChildAlertUpdatedRepository;
+import org.smartregister.uniceftunisia.repository.ClientRegisterTypeRepository;
+import org.smartregister.uniceftunisia.repository.DailyTalliesRepository;
+import org.smartregister.uniceftunisia.repository.HIA2IndicatorsRepository;
+import org.smartregister.uniceftunisia.repository.MonthlyTalliesRepository;
+import org.smartregister.uniceftunisia.repository.UnicefTunisiaRepository;
+import org.smartregister.uniceftunisia.util.AppConstants;
+import org.smartregister.uniceftunisia.util.AppUtils;
+import org.smartregister.uniceftunisia.util.VaccineDuplicate;
 import org.smartregister.util.LangUtils;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.receiver.TimeChangedBroadcastReceiver;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -114,11 +115,17 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     }
 
     private static String[] getFtsTables() {
-        return new String[]{DBConstants.RegisterTable.CHILD_DETAILS};
+        return new String[]{"ec_client", "ec_mother_details", DBConstants.RegisterTable.CHILD_DETAILS};
     }
 
     private static String[] getFtsSearchFields(String tableName) {
-        if (tableName.equals(DBConstants.RegisterTable.CHILD_DETAILS)) {
+        if (tableName.equalsIgnoreCase("ec_client")) {
+            return new String[]{"first_name", "last_name", "zeir_d"};
+        } else if (tableName.equals("ec_client")) {
+            return new String[]{"first_name", "last_name", "opensrp_id", DBConstants.KEY.ZEIR_ID};
+        } else if ("ec_mother_details".equals(tableName)) {
+            return new String[]{"next_contact"};
+        } else if (tableName.equals(DBConstants.RegisterTable.CHILD_DETAILS)) {
             return new String[]{DBConstants.KEY.LOST_TO_FOLLOW_UP, DBConstants.KEY.INACTIVE};
         }
         return null;
@@ -268,6 +275,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
                 AppConstants.TABLE_NAME.ALL_CLIENTS, AppConstants.EventType.CHILD_REGISTRATION,
                 AppConstants.EventType.UPDATE_CHILD_REGISTRATION, AppConstants.EventType.OUT_OF_CATCHMENT, AppConstants.CONFIGURATION.CHILD_REGISTER,
                 AppConstants.RELATIONSHIP.MOTHER, AppConstants.JSON_FORM.OUT_OF_CATCHMENT_SERVICE);
+        metadata.setFieldsWithLocationHierarchy(Collections.singleton(AppConstants.KEY.VILLAGE));
         return metadata;
     }
 

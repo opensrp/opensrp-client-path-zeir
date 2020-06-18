@@ -1,7 +1,5 @@
 package org.smartregister.uniceftunisia.interactor;
 
-import org.smartregister.uniceftunisia.BuildConfig;
-import org.smartregister.uniceftunisia.job.AppVaccineUpdateJob;
 import org.smartregister.growthmonitoring.job.HeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.WeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.ZScoreRefreshIntentServiceJob;
@@ -12,6 +10,8 @@ import org.smartregister.job.PullUniqueIdsServiceJob;
 import org.smartregister.job.SyncServiceJob;
 import org.smartregister.login.interactor.BaseLoginInteractor;
 import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
+import org.smartregister.uniceftunisia.BuildConfig;
+import org.smartregister.uniceftunisia.job.AppVaccineUpdateJob;
 import org.smartregister.view.contract.BaseLoginContract;
 
 import java.util.concurrent.TimeUnit;

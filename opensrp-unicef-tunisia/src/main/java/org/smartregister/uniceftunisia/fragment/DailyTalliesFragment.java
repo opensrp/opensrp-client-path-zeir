@@ -10,13 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
+import org.smartregister.reporting.ReportingLibrary;
+import org.smartregister.reporting.dao.ReportIndicatorDaoImpl;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.activity.HIA2ReportsActivity;
 import org.smartregister.uniceftunisia.activity.ReportSummaryActivity;
 import org.smartregister.uniceftunisia.adapter.ExpandedListAdapter;
 import org.smartregister.uniceftunisia.util.AppExecutors;
-import org.smartregister.reporting.ReportingLibrary;
-import org.smartregister.reporting.dao.ReportIndicatorDaoImpl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

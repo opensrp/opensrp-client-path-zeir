@@ -2,8 +2,8 @@ package org.smartregister.uniceftunisia.repository;
 
 import org.smartregister.child.provider.RegisterQueryProvider;
 import org.smartregister.child.util.Constants;
-import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.growthmonitoring.util.GrowthMonitoringConstants;
+import org.smartregister.uniceftunisia.util.AppConstants;
 
 public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
 
@@ -25,10 +25,10 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 getMotherDetailsTable() + "." + Constants.KEY.NRC_NUMBER + " as mother_nrc_number",
                 getDemographicTable() + "." + Constants.KEY.CLIENT_REG_DATE,
                 getDemographicTable() + "." + Constants.KEY.LAST_INTERACTED_WITH,
-                getChildDetailsTable() + "." + Constants.KEY.INACTIVE,
+                getChildDetailsTable() + "." + AppConstants.KEY.INACTIVE,
                 getChildDetailsTable() + "." + Constants.KEY.LOST_TO_FOLLOW_UP,
-                getDemographicTable() + "." + Constants.KEY.VILLAGE,
-                getDemographicTable() + "." + Constants.KEY.HOME_ADDRESS,
+                getDemographicTable() + "." + AppConstants.KEY.VILLAGE,
+                getDemographicTable() + "." + AppConstants.KEY.HOME_ADDRESS,
                 getChildDetailsTable() + "." + Constants.SHOW_BCG_SCAR,
                 getChildDetailsTable() + "." + Constants.SHOW_BCG2_REMINDER,
                 getMotherDetailsTable() + "." + AppConstants.PROTECTED_AT_BIRTH,

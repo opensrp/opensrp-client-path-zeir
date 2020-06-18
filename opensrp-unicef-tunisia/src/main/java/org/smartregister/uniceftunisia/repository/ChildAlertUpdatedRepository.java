@@ -6,8 +6,8 @@ import android.support.annotation.NonNull;
 import net.sqlcipher.Cursor;
 import net.sqlcipher.database.SQLiteDatabase;
 
-import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.repository.BaseRepository;
+import org.smartregister.uniceftunisia.util.AppConstants;
 
 import java.util.Date;
 

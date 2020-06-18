@@ -6,10 +6,10 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.robolectric.util.ReflectionHelpers;
+import org.smartregister.repository.Hia2ReportRepository;
 import org.smartregister.uniceftunisia.BaseRobolectricTest;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.domain.ReportHia2Indicator;
-import org.smartregister.repository.Hia2ReportRepository;
 
 import java.util.ArrayList;
 import java.util.Date;

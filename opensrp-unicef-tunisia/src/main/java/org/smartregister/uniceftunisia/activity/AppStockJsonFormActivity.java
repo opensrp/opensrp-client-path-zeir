@@ -7,9 +7,9 @@ import com.vijay.jsonwizard.constants.JsonFormConstants;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smartregister.stock.activity.StockJsonFormActivity;
 import org.smartregister.uniceftunisia.fragment.AppJsonFormFragment;
 import org.smartregister.uniceftunisia.util.AppConstants;
-import org.smartregister.stock.activity.StockJsonFormActivity;
 
 import timber.log.Timber;
 

@@ -2,9 +2,9 @@ package org.smartregister.uniceftunisia;
 
 
 import org.fest.util.Lists;
-import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.immunization.domain.jsonmapping.Vaccine;
 import org.smartregister.immunization.domain.jsonmapping.VaccineGroup;
+import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 
 import java.util.ArrayList;
 import java.util.List;

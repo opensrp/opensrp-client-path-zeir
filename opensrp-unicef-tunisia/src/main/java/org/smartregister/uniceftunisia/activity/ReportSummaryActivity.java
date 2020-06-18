@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import org.apache.commons.lang3.tuple.Triple;
 import org.smartregister.child.activity.BaseActivity;
 import org.smartregister.child.toolbar.SimpleToolbar;
+import org.smartregister.reporting.ReportingLibrary;
+import org.smartregister.reporting.domain.IndicatorTally;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.domain.MonthlyTally;
 import org.smartregister.uniceftunisia.domain.Tally;
@@ -24,8 +26,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedHashMap;
-import org.smartregister.reporting.ReportingLibrary;
-import org.smartregister.reporting.domain.IndicatorTally;
 
 /**
  * Created by Ephraim Kigamba - ekigamba@ona.io on 2019-07-11

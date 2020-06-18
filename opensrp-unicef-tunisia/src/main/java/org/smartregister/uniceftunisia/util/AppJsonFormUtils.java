@@ -11,7 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.child.ChildLibrary;
-import org.smartregister.child.enums.LocationHierarchy;
 import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.JsonFormUtils;
 import org.smartregister.child.util.Utils;
@@ -34,15 +33,14 @@ public class AppJsonFormUtils extends JsonFormUtils {
             JSONObject birthRegistrationForm = FormUtils.getInstance(context)
                     .getFormJson(Utils.metadata().childRegister.formName);
             updateRegistrationEventType(birthRegistrationForm);
-            JsonFormUtils.addChildRegLocHierarchyQuestions(birthRegistrationForm, AppConstants.KEY.REGISTRATION_HOME_ADDRESS,
-                    LocationHierarchy.ENTIRE_TREE);
+            JsonFormUtils.addChildRegLocHierarchyQuestions(birthRegistrationForm);
 
             if (birthRegistrationForm != null) {
                 birthRegistrationForm.put(JsonFormUtils.ENTITY_ID, childDetails.get(Constants.KEY.BASE_ENTITY_ID));
                 birthRegistrationForm.put(JsonFormUtils.ENCOUNTER_TYPE, Utils.metadata().childRegister.updateEventType);
                 birthRegistrationForm.put(JsonFormUtils.RELATIONAL_ID, childDetails.get(RELATIONAL_ID));
                 birthRegistrationForm.put(JsonFormUtils.CURRENT_ZEIR_ID,
-                        Utils.getValue(childDetails, AppConstants.KEY.MALAWI_ID, true).replace("-",
+                        Utils.getValue(childDetails, AppConstants.KEY.APP_ID, true).replace("-",
                                 ""));
                 birthRegistrationForm.put(JsonFormUtils.CURRENT_OPENSRP_ID,
                         Utils.getValue(childDetails, Constants.JSON_FORM_KEY.UNIQUE_ID, false));
@@ -58,7 +56,7 @@ public class AppJsonFormUtils extends JsonFormUtils {
                 return birthRegistrationForm.toString();
             }
         } catch (Exception e) {
-            Timber.e(e, "GizJsonFormUtils --> getMetadataForEditForm");
+            Timber.e(e, "AppJsonFormUtils --> getMetadataForEditForm");
         }
 
         return "";
@@ -73,10 +71,10 @@ public class AppJsonFormUtils extends JsonFormUtils {
 
             if (jsonObject.getString(JsonFormUtils.KEY).equalsIgnoreCase(Constants.KEY.PHOTO)) {
                 processPhoto(childDetails.get(Constants.KEY.BASE_ENTITY_ID), jsonObject);
-            } else if (jsonObject.getString(JsonFormUtils.KEY).equalsIgnoreCase(Constants.JSON_FORM_KEY.DOB_UNKNOWN)) {
+            } else if (jsonObject.getString(JsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.DOB_UNKNOWN)) {
                 getDobUnknown(childDetails, jsonObject);
             } else if (jsonObject.getString(JsonFormUtils.KEY).equalsIgnoreCase(Constants.JSON_FORM_KEY.AGE)) {
-                processAge(Utils.getValue(childDetails, Constants.JSON_FORM_KEY.DOB, false), jsonObject);
+                processAge(Utils.getValue(childDetails, AppConstants.KEY.DOB, false), jsonObject);
             } else if (jsonObject.getString(JsonFormConstants.TYPE).equalsIgnoreCase(JsonFormConstants.DATE_PICKER)) {
                 processDate(childDetails, prefix, jsonObject);
             } else if (jsonObject.getString(JsonFormUtils.OPENMRS_ENTITY).equalsIgnoreCase(JsonFormUtils.PERSON_INDENTIFIER)) {
@@ -116,7 +114,7 @@ public class AppJsonFormUtils extends JsonFormUtils {
     private static void getDobUnknown(Map<String, String> childDetails, JSONObject jsonObject) throws JSONException {
         JSONObject optionsObject = jsonObject.getJSONArray(Constants.JSON_FORM_KEY.OPTIONS).getJSONObject(0);
         optionsObject.put(JsonFormUtils.VALUE,
-                Utils.getValue(childDetails, Constants.JSON_FORM_KEY.DOB_UNKNOWN, false));
+                Utils.getValue(childDetails, AppConstants.KEY.DOB_UNKNOWN, false));
     }
 
     @NotNull

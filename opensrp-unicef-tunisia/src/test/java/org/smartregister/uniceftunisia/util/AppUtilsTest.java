@@ -21,9 +21,9 @@ import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.domain.db.Client;
 import org.smartregister.domain.db.Event;
 import org.smartregister.domain.db.EventClient;
-import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 
 @PrepareForTest({Utils.class, UnicefTunisiaApplication.class, CoreLibrary.class, LocationHelper.class})
 @RunWith(PowerMockRunner.class)

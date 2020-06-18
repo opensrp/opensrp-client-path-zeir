@@ -12,9 +12,9 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.smartregister.Context;
 import org.smartregister.domain.Setting;
+import org.smartregister.repository.AllSettings;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.util.AppConstants;
-import org.smartregister.repository.AllSettings;
 import org.smartregister.view.contract.BaseLoginContract;
 
 @RunWith(PowerMockRunner.class)

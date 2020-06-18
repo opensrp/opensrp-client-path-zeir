@@ -4,9 +4,9 @@ import android.database.Cursor;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
+import org.smartregister.repository.BaseRepository;
 import org.smartregister.uniceftunisia.domain.Hia2Indicator;
 import org.smartregister.uniceftunisia.util.DbConstants;
-import org.smartregister.repository.BaseRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;

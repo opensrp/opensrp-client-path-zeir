@@ -42,7 +42,7 @@ public class AppConstants {
         public static final String MOTHER_SECOND_PHONE_NUMBER = "second_phone_number";
         public static final String VIEW_CONFIGURATION_PREFIX = "ViewConfiguration_";
         public static final String HOME_FACILITY = "home_address";
-        public static final String MALAWI_ID = "mer_id";
+        public static final String APP_ID = "mer_id";
         public static final String MIDDLE_NAME = "middle_name";
         public static final String OTHER = "other";
         public static final String BIRTH_FACILITY_NAME_OTHER = "Birth_Facility_Name_Other";
@@ -60,6 +60,10 @@ public class AppConstants {
         public static final String ATTRIBUTES = "attributes";
         public static final int FIVE_YEAR = 5;
         public static final String OPD_REGISTRATION = "Opd Registration" ;
+        public static final String VILLAGE = "village";
+        public static final String HOME_ADDRESS = "home_address";
+        public static final String DOB_UNKNOWN = "dob_unknown";
+        public static final String DATE_BIRTH = "Date_Birth";
         public static String SITE_CHARACTERISTICS = "site_characteristics";
 
         public static final String FIELDS = "fields";

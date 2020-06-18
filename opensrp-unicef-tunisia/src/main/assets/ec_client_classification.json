@@ -28,45 +28,7 @@
               "ec_client",
               "ec_child_details"
             ]
-          },
-          {
-            "field": "eventType",
-            "field_value": "ANC Close",
-            "creates_case": [
-              "ec_mother_details"
-            ]
-          },
-          {
-            "field": "eventType",
-            "field_value": "ANC Registration",
-            "creates_case": [
-              "ec_client",
-              "ec_mother_details"
-            ]
-          },
-          {
-            "field": "eventType",
-            "field_value": "Update ANC Registration",
-            "creates_case": [
-              "ec_client",
-              "ec_mother_details"
-            ]
-          },
-          {
-            "field": "eventType",
-            "field_value": "Visit",
-            "creates_case": [
-              "ec_mother_details"
-            ]
-          },
-          {
-            "field": "eventType",
-            "field_value": "Opd Registration",
-            "creates_case": [
-              "ec_client"
-            ]
           }
-
         ]
       }
     }

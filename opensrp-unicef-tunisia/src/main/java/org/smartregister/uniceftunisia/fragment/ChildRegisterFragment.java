@@ -10,6 +10,7 @@ import org.smartregister.child.domain.RegisterClickables;
 import org.smartregister.child.fragment.BaseChildRegisterFragment;
 import org.smartregister.child.util.Constants;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.immunization.job.VaccineSchedulesUpdateJob;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.activity.ChildImmunizationActivity;
 import org.smartregister.uniceftunisia.activity.ChildRegisterActivity;
@@ -17,7 +18,6 @@ import org.smartregister.uniceftunisia.model.ChildRegisterFragmentModel;
 import org.smartregister.uniceftunisia.presenter.ChildRegisterFragmentPresenter;
 import org.smartregister.uniceftunisia.util.DBQueryHelper;
 import org.smartregister.uniceftunisia.view.NavigationMenu;
-import org.smartregister.immunization.job.VaccineSchedulesUpdateJob;
 import org.smartregister.view.activity.BaseRegisterActivity;
 
 import java.util.Calendar;

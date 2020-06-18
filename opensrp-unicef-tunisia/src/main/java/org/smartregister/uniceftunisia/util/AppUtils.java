@@ -25,15 +25,15 @@ import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.domain.db.Client;
 import org.smartregister.domain.db.EventClient;
 import org.smartregister.domain.form.FormLocation;
+import org.smartregister.location.helper.LocationHelper;
+import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
+import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.uniceftunisia.BuildConfig;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.event.BaseEvent;
 import org.smartregister.uniceftunisia.listener.OnLocationChangeListener;
 import org.smartregister.uniceftunisia.view.NavigationMenu;
 import org.smartregister.uniceftunisia.widget.AppTreeViewDialog;
-import org.smartregister.location.helper.LocationHelper;
-import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
-import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.util.AssetHandler;
 
 import java.text.SimpleDateFormat;

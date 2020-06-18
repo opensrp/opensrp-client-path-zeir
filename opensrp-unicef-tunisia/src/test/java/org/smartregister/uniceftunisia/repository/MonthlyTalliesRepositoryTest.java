@@ -15,12 +15,12 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.util.ReflectionHelpers;
-import org.smartregister.uniceftunisia.BaseRobolectricTest;
-import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
-import org.smartregister.uniceftunisia.domain.MonthlyTally;
 import org.smartregister.reporting.ReportingLibrary;
 import org.smartregister.reporting.domain.IndicatorTally;
 import org.smartregister.reporting.repository.DailyIndicatorCountRepository;
+import org.smartregister.uniceftunisia.BaseRobolectricTest;
+import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
+import org.smartregister.uniceftunisia.domain.MonthlyTally;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

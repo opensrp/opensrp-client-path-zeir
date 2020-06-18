@@ -7,8 +7,8 @@ import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.contract.NavigationContract;
-import org.smartregister.uniceftunisia.util.AppExecutors;
 import org.smartregister.uniceftunisia.util.AppConstants;
+import org.smartregister.uniceftunisia.util.AppExecutors;
 
 import java.text.MessageFormat;
 import java.util.Date;

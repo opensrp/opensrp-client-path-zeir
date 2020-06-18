@@ -9,13 +9,13 @@ import android.text.TextUtils;
 import net.sqlcipher.SQLException;
 import net.sqlcipher.database.SQLiteDatabase;
 
+import org.smartregister.reporting.ReportingLibrary;
+import org.smartregister.reporting.domain.IndicatorTally;
+import org.smartregister.repository.BaseRepository;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.domain.MonthlyTally;
 import org.smartregister.uniceftunisia.domain.Tally;
 import org.smartregister.uniceftunisia.util.DbConstants;
-import org.smartregister.reporting.ReportingLibrary;
-import org.smartregister.reporting.domain.IndicatorTally;
-import org.smartregister.repository.BaseRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

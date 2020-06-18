@@ -19,13 +19,13 @@ import org.smartregister.child.util.Constants;
 import org.smartregister.configurableviews.model.LoginConfiguration;
 import org.smartregister.configurableviews.model.ViewConfiguration;
 import org.smartregister.domain.Setting;
+import org.smartregister.login.model.BaseLoginModel;
+import org.smartregister.login.presenter.BaseLoginPresenter;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.interactor.LoginInteractor;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.ImageLoaderRequest;
-import org.smartregister.login.model.BaseLoginModel;
-import org.smartregister.login.presenter.BaseLoginPresenter;
 import org.smartregister.view.contract.BaseLoginContract;
 
 import java.lang.ref.WeakReference;

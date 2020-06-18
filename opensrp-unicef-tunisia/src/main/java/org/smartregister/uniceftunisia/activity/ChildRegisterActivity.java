@@ -14,7 +14,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 import org.smartregister.child.activity.BaseChildRegisterActivity;
-import org.smartregister.child.enums.LocationHierarchy;
 import org.smartregister.child.model.BaseChildRegisterModel;
 import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.JsonFormUtils;
@@ -54,11 +53,7 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
 
     @Override
     protected Fragment[] getOtherFragments() {
-        ME_POSITION = 1;
-
-        Fragment[] fragments = new Fragment[1];
-
-        return fragments;
+        return new Fragment[0];
     }
 
 
@@ -163,7 +158,7 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
         Intent intent = new Intent(this, Utils.metadata().childFormActivity);
         if (jsonForm.has(AppConstants.KEY.ENCOUNTER_TYPE) && jsonForm.optString(AppConstants.KEY.ENCOUNTER_TYPE).equals(
                 AppConstants.KEY.BIRTH_REGISTRATION)) {
-            JsonFormUtils.addChildRegLocHierarchyQuestions(jsonForm, AppConstants.KEY.REGISTRATION_HOME_ADDRESS, LocationHierarchy.ENTIRE_TREE);
+            JsonFormUtils.addChildRegLocHierarchyQuestions(jsonForm);
         }
         intent.putExtra(Constants.INTENT_KEY.JSON, jsonForm.toString());
 

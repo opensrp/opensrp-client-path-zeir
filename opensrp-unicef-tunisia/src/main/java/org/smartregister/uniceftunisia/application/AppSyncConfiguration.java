@@ -2,8 +2,8 @@ package org.smartregister.uniceftunisia.application;
 
 import org.smartregister.SyncConfiguration;
 import org.smartregister.SyncFilter;
-import org.smartregister.uniceftunisia.BuildConfig;
 import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.uniceftunisia.BuildConfig;
 
 import java.util.ArrayList;
 import java.util.List;
