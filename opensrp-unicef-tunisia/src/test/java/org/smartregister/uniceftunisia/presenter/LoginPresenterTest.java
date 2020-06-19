@@ -86,6 +86,6 @@ public class LoginPresenterTest {
         PowerMockito.when(context.allSettings()).thenReturn(allSettings);
         PowerMockito.when(UnicefTunisiaApplication.getInstance()).thenReturn(unicefTunisiaApplication);
         LoginPresenter loginPresenter = new LoginPresenter(Mockito.mock(BaseLoginContract.View.class));
-        Assert.assertFalse(loginPresenter.isServerSettingsSet());
+        Assert.assertTrue(loginPresenter.isServerSettingsSet());
     }
 }
