@@ -267,12 +267,9 @@
                     <ImageView
                         android:layout_width="@dimen/register_link_width"
                         android:layout_height="@dimen/register_link_height"
-                        android:layout_margin="5dp"
-                        android:paddingTop="10dp"
-                        android:paddingEnd="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingBottom="10dp"
-                        android:src="@drawable/ic_woman_child" />
+                        android:padding="8dp"
+                        android:tint="@color/white"
+                        android:src="@mipmap/sidemenu_children" />
 
                     <org.smartregister.view.customcontrols.CustomFontTextView
                         style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"

@@ -24,7 +24,6 @@ public class ReportGroupingModel {
     public ArrayList<ReportGrouping> getReportGroupings() {
         if (groupings.isEmpty()) {
             groupings.add(new ReportGrouping(context.getString(R.string.child_report_grouping_title), "child"));
-            groupings.add(new ReportGrouping(context.getString(R.string.anc_report_grouping_title), "anc"));
         }
 
         return groupings;

@@ -58,6 +58,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
     private LinearLayout registerView;
     private LinearLayout reportView;
     private TextView loggedInUserTextView;
+    private TextView userInitialsTextView;
     private TextView syncTextView;
     private TextView logoutButton;
     private NavigationContract.Presenter mPresenter;
@@ -115,6 +116,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         reportView = activity.findViewById(R.id.report_view);
         enrollmentMenuItem = activity.findViewById(R.id.enrollment);
         loggedInUserTextView = activity.findViewById(R.id.logged_in_user_text_view);
+        userInitialsTextView = activity.findViewById(R.id.user_initials_text_view);
         syncTextView = activity.findViewById(R.id.sync_text_view);
         cancelButton = drawer.findViewById(R.id.cancel_button);
         languageSpinner = activity.findViewById(R.id.language_spinner);
@@ -236,6 +238,9 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
     public void refreshCurrentUser(String name) {
         if (loggedInUserTextView != null) {
             loggedInUserTextView.setText(name);
+        }
+        if (userInitialsTextView != null) {
+            userInitialsTextView.setText(mPresenter.getLoggedInUserInitials());
         }
     }
 

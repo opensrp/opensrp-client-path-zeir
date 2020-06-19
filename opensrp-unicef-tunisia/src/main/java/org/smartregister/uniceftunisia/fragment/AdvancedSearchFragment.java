@@ -11,7 +11,6 @@ import org.smartregister.child.presenter.BaseChildAdvancedSearchPresenter;
 import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.DBConstants;
 import org.smartregister.uniceftunisia.R;
-import org.smartregister.uniceftunisia.activity.ChildRegisterActivity;
 import org.smartregister.uniceftunisia.presenter.AdvancedSearchPresenter;
 import org.smartregister.uniceftunisia.util.DBQueryHelper;
 import org.smartregister.view.activity.BaseRegisterActivity;

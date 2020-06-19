@@ -20,6 +20,8 @@ public interface NavigationContract {
         void sync(Activity activity);
 
         List<NavigationOption> getOptions();
+
+        String getLoggedInUserInitials();
     }
 
     interface View {

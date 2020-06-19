@@ -1,7 +1,9 @@
 package org.smartregister.uniceftunisia.presenter;
 
 import android.app.Activity;
+import android.text.TextUtils;
 
+import org.smartregister.Context;
 import org.smartregister.growthmonitoring.job.HeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.WeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.ZScoreRefreshIntentServiceJob;
@@ -9,6 +11,7 @@ import org.smartregister.immunization.job.VaccineServiceJob;
 import org.smartregister.job.ImageUploadServiceJob;
 import org.smartregister.job.SyncServiceJob;
 import org.smartregister.job.SyncSettingsServiceJob;
+import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.uniceftunisia.contract.NavigationContract;
 import org.smartregister.uniceftunisia.interactor.NavigationInteractor;
 import org.smartregister.uniceftunisia.model.NavigationModel;
@@ -18,6 +21,8 @@ import org.smartregister.uniceftunisia.util.AppConstants;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.List;
+
+import timber.log.Timber;
 
 public class NavigationPresenter implements NavigationContract.Presenter {
 
@@ -66,11 +71,36 @@ public class NavigationPresenter implements NavigationContract.Presenter {
         WeightIntentServiceJob.scheduleJobImmediately(WeightIntentServiceJob.TAG);
         HeightIntentServiceJob.scheduleJobImmediately(HeightIntentServiceJob.TAG);
         VaccineServiceJob.scheduleJobImmediately(VaccineServiceJob.TAG);
-//        RecurringIndicatorGeneratingJob.scheduleJobImmediately(RecurringIndicatorGeneratingJob.TAG);
     }
 
     @Override
     public List<NavigationOption> getOptions() {
         return mModel.getNavigationItems();
+    }
+
+
+    @Override
+    public String getLoggedInUserInitials() {
+
+        try {
+            AllSharedPreferences allSharedPreferences = Context.getInstance().allSharedPreferences();
+            String preferredName = allSharedPreferences.getANMPreferredName(allSharedPreferences.fetchRegisteredANM());
+            if (!TextUtils.isEmpty(preferredName)) {
+                String[] initialsArray = preferredName.split(" ");
+                String initials = "";
+                if (initialsArray.length > 0) {
+                    initials = initialsArray[0].substring(0, 1);
+                    if (initialsArray.length > 1) {
+                        initials = initials + initialsArray[1].substring(0, 1);
+                    }
+                }
+                return initials.toUpperCase();
+            }
+
+        } catch (Exception e) {
+            Timber.e(e, "Error fetching initials");
+        }
+
+        return null;
     }
 }

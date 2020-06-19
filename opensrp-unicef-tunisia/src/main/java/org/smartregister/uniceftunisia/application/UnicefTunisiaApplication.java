@@ -64,7 +64,6 @@ import org.smartregister.uniceftunisia.repository.UnicefTunisiaRepository;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppUtils;
 import org.smartregister.uniceftunisia.util.VaccineDuplicate;
-import org.smartregister.util.LangUtils;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.receiver.TimeChangedBroadcastReceiver;
 

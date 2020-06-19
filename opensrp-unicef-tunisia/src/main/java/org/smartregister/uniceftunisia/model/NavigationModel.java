@@ -40,13 +40,13 @@ public class NavigationModel implements NavigationContract.Model {
 
     @Override
     public String getCurrentUser() {
-        String prefferedName = "";
+        String currentUser = "";
         try {
-            prefferedName = Utils.getPrefferedName().split(" ")[0];
+            currentUser = Utils.getPrefferedName();
         } catch (Exception e) {
             Timber.e(e);
         }
 
-        return prefferedName;
+        return currentUser;
     }
 }

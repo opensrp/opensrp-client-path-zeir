@@ -1,6 +1,5 @@
 package org.smartregister.uniceftunisia.util;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,35 +10,23 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
-import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
 import org.apache.commons.lang3.StringUtils;
-import org.greenrobot.eventbus.EventBus;
-import org.jetbrains.annotations.Nullable;
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.Utils;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.domain.db.Client;
 import org.smartregister.domain.db.EventClient;
-import org.smartregister.domain.form.FormLocation;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.uniceftunisia.BuildConfig;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
-import org.smartregister.uniceftunisia.event.BaseEvent;
-import org.smartregister.uniceftunisia.listener.OnLocationChangeListener;
-import org.smartregister.uniceftunisia.view.NavigationMenu;
-import org.smartregister.uniceftunisia.widget.AppTreeViewDialog;
-import org.smartregister.util.AssetHandler;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
