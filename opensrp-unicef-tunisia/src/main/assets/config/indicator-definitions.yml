@@ -1,0 +1,555 @@
+indicators:
+  - key: "ME_Child_Total"
+    description: "ME_Child_Total_label"
+    indicatorQuery: "select count(*) from ec_client child WHERE '%s' = strftime('%Y-%m-%d', child.date)"
+    grouping: "child"
+
+  - key: "ME_PAB_Gender"
+    description: "ME_PAB_Gender_label"
+    indicatorQuery: "SELECT ec_client.gender, count(*)
+                     FROM ec_child_details
+                     JOIN ec_client ON ec_child_details.base_entity_id = ec_client.base_entity_id
+                     JOIN ec_mother_details ON ec_child_details.relational_id = ec_mother_details.base_entity_id
+                     WHERE '%s' = strftime('%Y-%m-%d', ec_client.date)
+                     AND ec_client.dob >= date('now','-2 years')
+                     AND ec_mother_details.protected_at_birth IS NOT NULL
+                     group by ec_client.gender"
+    isMultiResult: true
+    expectedIndicators: ["ME_PAB_Gender_Female", "ME_PAB_Gender_Male"]
+    grouping: "child"
+
+  - key: "ME_PAB_Age"
+    description: "ME_PAB_Age_label"
+    indicatorQuery: "select
+                     CASE
+                     WHEN round(julianday('now') - julianday(ec_client.dob)) > 365.0 THEN 'Over_1'
+                     WHEN round(julianday('now') - julianday(ec_client.dob)) < 365.0 THEN 'Under_1'
+                     ELSE 'Null'
+                     END age, count(*) counter
+                     FROM ec_child_details
+                     JOIN ec_client ON ec_child_details.base_entity_id = ec_client.base_entity_id
+                     JOIN ec_mother_details ON ec_child_details.relational_id = ec_mother_details.base_entity_id
+                     WHERE ec_mother_details.protected_at_birth IS NOT NULL AND '%s' = strftime('%Y-%m-%d', ec_client.date)
+                     AND ec_client.dob >= date('now','-2 years')
+                     group by age
+                     UNION
+                     Select 'Total', count(distinct ec_client.base_entity_id) from ec_child_details
+                     JOIN ec_client ON ec_child_details.base_entity_id = ec_client.base_entity_id
+                     JOIN ec_mother_details ON ec_child_details.relational_id = ec_mother_details.base_entity_id
+                     WHERE  ec_mother_details.protected_at_birth IS NOT NULL AND  '%s' = strftime('%Y-%m-%d', ec_client.date) AND ec_client.dob >= date('now','-2 years')
+                     ORDER BY counter"
+    isMultiResult: true
+    expectedIndicators: ["ME_PAB_Age_Over_1", "ME_PAB_Age_Under_1", "ME_PAB_Age_Total"]
+    grouping: "child"
+
+  - key: "ME_Vaccines_Gender"
+    description: "ME_Vaccines_Gender_label"
+    indicatorQuery: "SELECT vaccines.name, ec_client.gender, count(*) from vaccines
+                      INNER JOIN ec_client
+                      ON vaccines.base_entity_id = ec_client.base_entity_id
+                      WHERE vaccines.date >= round((julianday(strftime('%Y-%m-%d', '%s', 'utc')) - 2440587.5) * 86400.0 * 1000)
+                      AND vaccines.date < round((julianday(strftime('%Y-%m-%d', '%s', '+1 day', 'utc')) - 2440587.5) * 86400.0 * 1000)
+                      AND ec_client.dob >= date('now', '-2 years')
+                      GROUP BY vaccines.name, ec_client.gender"
+    isMultiResult: true
+    expectedIndicators:
+      - "ME_Vaccines_Gender_bcg_Female"
+      - "ME_Vaccines_Gender_bcg_Male"
+      - "ME_Vaccines_Gender_hepb_Female"
+      - "ME_Vaccines_Gender_hepb_Male"
+      - "ME_Vaccines_Gender_opv_0_Male"
+      - "ME_Vaccines_Gender_opv_0_Female"
+      - "ME_Vaccines_Gender_opv_1_Male"
+      - "ME_Vaccines_Gender_opv_1_Female"
+      - "ME_Vaccines_Gender_opv_2_Male"
+      - "ME_Vaccines_Gender_opv_2_Female"
+      - "ME_Vaccines_Gender_opv_3_Male"
+      - "ME_Vaccines_Gender_opv_3_Female"
+      - "ME_Vaccines_Gender_penta_1_Male"
+      - "ME_Vaccines_Gender_penta_1_Female"
+      - "ME_Vaccines_Gender_penta_2_Male"
+      - "ME_Vaccines_Gender_penta_2_Female"
+      - "ME_Vaccines_Gender_penta_3_Male"
+      - "ME_Vaccines_Gender_penta_3_Female"
+      - "ME_Vaccines_Gender_pcv_1_Male"
+      - "ME_Vaccines_Gender_pcv_1_Female"
+      - "ME_Vaccines_Gender_pcv_2_Male"
+      - "ME_Vaccines_Gender_pcv_2_Female"
+      - "ME_Vaccines_Gender_pcv_3_Male"
+      - "ME_Vaccines_Gender_pcv_3_Female"
+      - "ME_Vaccines_Gender_rota_1_Male"
+      - "ME_Vaccines_Gender_rota_1_Female"
+      - "ME_Vaccines_Gender_rota_2_Male"
+      - "ME_Vaccines_Gender_rota_2_Female"
+      - "ME_Vaccines_Gender_mv_1_Male"
+      - "ME_Vaccines_Gender_mv_1_Female"
+      - "ME_Vaccines_Gender_mv_2_Male"
+      - "ME_Vaccines_Gender_mv_2_Female"
+      - "ME_Vaccines_Gender_mv_3_Male"
+      - "ME_Vaccines_Gender_mv_3_Female"
+      - "ME_Vaccines_Gender_mv_4_Male"
+      - "ME_Vaccines_Gender_mv_4_Female"
+      - "ME_Vaccines_Gender_measles_1_/_mr_1_Male"
+      - "ME_Vaccines_Gender_measles_1_/_mr_1_Female"
+      - "ME_Vaccines_Gender_measles_2_/_mr_2_Male"
+      - "ME_Vaccines_Gender_measles_2_/_mr_2_Female"
+      - "ME_Vaccines_Gender_ipv_Male"
+      - "ME_Vaccines_Gender_ipv_Female"
+    grouping: "child"
+
+  - key: "ME_Vaccines_Age"
+    description: "ME_Vaccines_Age_label"
+    indicatorQuery: "SELECT vaccines.name,
+                       CASE
+                          WHEN round(julianday('now')-julianday(ec_client.dob)) > 365.0 THEN 'Over_1'
+                          WHEN round(julianday('now')-julianday(ec_client.dob)) < 365.0 THEN 'Under_1'
+                          ELSE 'Null'
+                          END age, count(*) counter
+                      FROM vaccines
+                      INNER JOIN ec_client
+                      ON vaccines.base_entity_id = ec_client.base_entity_id
+                      WHERE vaccines.date >= round((julianday(strftime('%Y-%m-%d', '%s', 'utc')) - 2440587.5) * 86400.0 * 1000)
+                      AND vaccines.date < round((julianday(strftime('%Y-%m-%d', '%s', '+1 day', 'utc')) - 2440587.5) * 86400.0 * 1000)
+                      AND ec_client.dob >= date('now', '-2 years')
+                      GROUP BY vaccines.name, age"
+    isMultiResult: true
+    expectedIndicators:
+      - "ME_Vaccines_Age_bcg_Over_1"
+      - "ME_Vaccines_Age_bcg_Under_1"
+      - "ME_Vaccines_Age_opv_0_Over_1"
+      - "ME_Vaccines_Age_opv_0_Under_1"
+      - "ME_Vaccines_Age_opv_1_Over_1"
+      - "ME_Vaccines_Age_opv_1_Under_1"
+      - "ME_Vaccines_Age_opv_2_Over_1"
+      - "ME_Vaccines_Age_opv_2_Under_1"
+      - "ME_Vaccines_Age_opv_3_Over_1"
+      - "ME_Vaccines_Age_opv_3_Under_1"
+      - "ME_Vaccines_Age_penta_1_Over_1"
+      - "ME_Vaccines_Age_penta_1_Under_1"
+      - "ME_Vaccines_Age_penta_2_Over_1"
+      - "ME_Vaccines_Age_penta_2_Under_1"
+      - "ME_Vaccines_Age_penta_3_Over_1"
+      - "ME_Vaccines_Age_penta_3_Under_1"
+      - "ME_Vaccines_Age_pcv_1_Over_1"
+      - "ME_Vaccines_Age_pcv_1_Under_1"
+      - "ME_Vaccines_Age_pcv_2_Over_1"
+      - "ME_Vaccines_Age_pcv_2_Under_1"
+      - "ME_Vaccines_Age_rota_1_Over_1"
+      - "ME_Vaccines_Age_rota_1_Under_1"
+      - "ME_Vaccines_Age_rota_2_Over_1"
+      - "ME_Vaccines_Age_rota_2_Under_1"
+      - "ME_Vaccines_Age_mv_1_Over_1"
+      - "ME_Vaccines_Age_mv_1_Under_1"
+      - "ME_Vaccines_Age_mv_2_Over_1"
+      - "ME_Vaccines_Age_mv_2_Under_1"
+      - "ME_Vaccines_Age_mv_3_Over_1"
+      - "ME_Vaccines_Age_mv_3_Under_1"
+      - "ME_Vaccines_Age_measles_1_/_mr_1_Over_1"
+      - "ME_Vaccines_Age_measles_1_/_mr_1_Under_1"
+      - "ME_Vaccines_Age_ipv_Over_1"
+      - "ME_Vaccines_Age_ipv_Under_1"
+    grouping: "child"
+
+  - key: "ME_Vaccines_Under2"
+    description: "ME_Vaccines_Under2_label"
+    indicatorQuery: "SELECT vaccines.name, count(*) counter
+                     FROM vaccines
+                     INNER JOIN ec_client
+                     ON vaccines.base_entity_id = ec_client.base_entity_id
+                     WHERE vaccines.date >= round((julianday(strftime('%Y-%m-%d', '%s', 'utc')) - 2440587.5) * 86400.0 * 1000)
+                     AND vaccines.date < round((julianday(strftime('%Y-%m-%d', '%s', '+1 day', 'utc')) - 2440587.5) * 86400.0 * 1000)
+                     AND ec_client.dob >= date('now', '-2 years')
+                     GROUP BY vaccines.name"
+    isMultiResult: true
+    expectedIndicators:
+      - "ME_Vaccines_Under2_bcg"
+      - "ME_Vaccines_Under2_opv_0"
+      - "ME_Vaccines_Under2_opv_1"
+      - "ME_Vaccines_Under2_opv_2"
+      - "ME_Vaccines_Under2_opv_3"
+      - "ME_Vaccines_Under2_penta_1"
+      - "ME_Vaccines_Under2_penta_2"
+      - "ME_Vaccines_Under2_penta_3"
+      - "ME_Vaccines_Under2_pcv_1"
+      - "ME_Vaccines_Under2_pcv_2"
+      - "ME_Vaccines_Under2_rota_1"
+      - "ME_Vaccines_Under2_rota_2"
+      - "ME_Vaccines_Under2_mv_1"
+      - "ME_Vaccines_Under2_mv_2"
+      - "ME_Vaccines_Under2_mv_3"
+      - "ME_Vaccines_Under2_measles_1_/_mr_1"
+    grouping: "child"
+
+  - key: "ME_Child_HIV_Status_Under2_Gender"
+    description: "ME_Child_HIV_Status_Under2_Gender_label"
+    indicatorQuery: "SELECT case
+                     WHEN ec_child_details.child_hiv_status IS NULL THEN 'HIV Unknown'
+                     ELSE 'HIV ' || ec_child_details.child_hiv_status
+                     END as hiv_status, count(*) counter
+                     FROM ec_child_details
+                     JOIN ec_client ON ec_child_details.base_entity_id = ec_client.base_entity_id
+                     WHERE '%s' = strftime('%Y-%m-%d', ec_client.date)
+                     AND ec_client.dob >= date('now', '-2 years')
+                     group by ec_child_details.child_hiv_status,ec_client.gender"
+    isMultiResult: true
+    expectedIndicators:
+      - "ME_Child_HIV_Status_Under2_Gender_HIV Exposed_Female"
+      - "ME_Child_HIV_Status_Under2_Gender_HIV Exposed_Male"
+      - "ME_Child_HIV_Status_Under2_Gender_HIV Negative_Female"
+      - "ME_Child_HIV_Status_Under2_Gender_HIV Negative_Male"
+      - "ME_Child_HIV_Status_Under2_Gender_HIV Positive_Female"
+      - "ME_Child_HIV_Status_Under2_Gender_HIV Positive_Male"
+      - "ME_Child_HIV_Status_Under2_Gender_HIV Unknown_Female"
+      - "ME_Child_HIV_Status_Under2_Gender_HIV Unknown_Male"
+    grouping: "child"
+
+  - key: "ME_Child_HIV_Status_Over2_Gender"
+    description: "ME_Child_HIV_Status_Over2_Gender_label"
+    indicatorQuery: "SELECT case
+                     WHEN ec_child_details.child_hiv_status IS NULL THEN 'HIV Unknown'
+                     ELSE 'HIV ' || ec_child_details.child_hiv_status
+                     END as hiv_status, count(*) counter
+                     FROM ec_child_details
+                     JOIN ec_client ON ec_child_details.base_entity_id = ec_client.base_entity_id
+                     WHERE '%s' = strftime('%Y-%m-%d', ec_client.date)
+                     AND ec_client.dob < date('now', '-2 years')
+                     AND ec_client.dob >= date('now', '-5 years')
+                     group by ec_child_details.child_hiv_status, ec_client.gender"
+    isMultiResult: true
+    expectedIndicators:
+      - "ME_Child_HIV_Status_Over2_Gender_HIV Exposed_Female"
+      - "ME_Child_HIV_Status_Over2_Gender_HIV Exposed_Male"
+      - "ME_Child_HIV_Status_Over2_Gender_HIV Negative_Female"
+      - "ME_Child_HIV_Status_Over2_Gender_HIV Negative_Male"
+      - "ME_Child_HIV_Status_Over2_Gender_HIV Positive_Female"
+      - "ME_Child_HIV_Status_Over2_Gender_HIV Positive_Male"
+      - "ME_Child_HIV_Status_Over2_Gender_HIV Unknown_Female"
+      - "ME_Child_HIV_Status_Over2_Gender_HIV Unknown_Male"
+    grouping: "child"
+
+  - key: "ME_Child_HIV_Treatment_Under2_Gender"
+    description: "Me_Child_HIV_Treatment_Under2_Gender_label"
+    indicatorQuery: "SELECT ec_child_details.child_treatment, ec_client.gender, count(*) counter
+                     FROM ec_child_details
+                     JOIN ec_client ON ec_child_details.base_entity_id = ec_client.base_entity_id
+                     WHERE '%s' = strftime('%Y-%m-%d', ec_client.date)
+                     AND ec_client.dob >= date('now', '-2 years')
+                     AND ec_child_details.child_treatment IS NOT NULL
+                     GROUP BY ec_child_details.child_treatment, ec_client.gender"
+    isMultiResult: true
+    expectedIndicators:
+      - "ME_Child_HIV_Treatment_Under2_Gender_ART_Female"
+      - "ME_Child_HIV_Treatment_Under2_Gender_ART_Male"
+      - "ME_Child_HIV_Treatment_Under2_Gender_CPT_Female"
+      - "ME_Child_HIV_Treatment_Under2_Gender_CPT_Male"
+    grouping: "child"
+
+  - key: "ME_Child_HIV_Treatment_Over2_Gender"
+    description: "ME_Child_HIV_Treatment_Over2_Gender_label"
+    indicatorQuery: "SELECT ec_child_details.child_treatment, ec_client.gender, count(*) counter
+                     FROM ec_child_details
+                     JOIN ec_client ON ec_child_details.base_entity_id = ec_client.base_entity_id
+                     WHERE '%s' = strftime('%Y-%m-%d', ec_client.date)
+                     AND ec_client.dob < date('now', '-2 years')
+                     AND ec_client.dob >= date('now', '-5 years')
+                     AND ec_child_details.child_treatment IS NOT NULL
+                     GROUP BY ec_child_details.child_treatment, ec_client.gender"
+    isMultiResult: true
+    expectedIndicators:
+      - "ME_Child_HIV_Treatment_Over2_Gender_ART_Female"
+      - "ME_Child_HIV_Treatment_Over2_Gender_ART_Male"
+      - "ME_Child_HIV_Treatment_Over2_Gender_CPT_Female"
+      - "ME_Child_HIV_Treatment_Over2_Gender_CPT_Male"
+    grouping: "child"
+
+  - key: "ME_Child_HIV_Status_Over2"
+    description: "ME_Child_HIV_Status_Over2_label"
+    indicatorQuery: "SELECT case
+                     WHEN ec_child_details.child_hiv_status IS NULL THEN 'HIV Unknown'
+                     ELSE 'HIV ' || ec_child_details.child_hiv_status
+                     END as hiv_status, count(*) counter
+                     FROM ec_child_details
+                     JOIN ec_client ON ec_child_details.base_entity_id = ec_client.base_entity_id
+                     WHERE '%s' = strftime('%Y-%m-%d', ec_client.date)
+                     AND ec_client.dob < date('now', '-2 years')
+                     AND ec_client.dob >= date('now', '-5 years')
+                     group by ec_child_details.child_hiv_status"
+    isMultiResult: true
+    expectedIndicators:
+      - "ME_Child_HIV_Status_Over2_HIV Unknown"
+      - "ME_Child_HIV_Status_Over2_HIV Positive"
+      - "ME_Child_HIV_Status_Over2_HIV Exposed"
+      - "ME_Child_HIV_Status_Over2_HIV Negative"
+    grouping: "child"
+
+  - key: "ME_Child_HIV_Status_Under2"
+    description: "ME_Child_HIV_Status_Under2_label"
+    indicatorQuery: "SELECT case
+                     WHEN ec_child_details.child_hiv_status IS NULL THEN 'HIV Unknown'
+                     ELSE 'HIV ' || ec_child_details.child_hiv_status
+                     END as hiv_status, count(*) counter
+                     FROM ec_child_details
+                     JOIN ec_client ON ec_child_details.base_entity_id = ec_client.base_entity_id
+                     WHERE '%s' = strftime('%Y-%m-%d', ec_client.date)
+                     AND ec_client.dob >= date('now', '-2 years')
+                     group by ec_child_details.child_hiv_status"
+    isMultiResult: true
+    expectedIndicators:
+      - "ME_Child_HIV_Status_Under2_HIV Unknown"
+      - "ME_Child_HIV_Status_Under2_HIV Positive"
+      - "ME_Child_HIV_Status_Under2_HIV Exposed"
+      - "ME_Child_HIV_Status_Under2_HIV Negative"
+    grouping: "child"
+
+  - key: "ME_Child_HIV_Treatment_Over2"
+    description: "ME_Child_HIV_Treatment_Over2_label"
+    indicatorQuery: "SELECT ec_child_details.child_treatment, count(*) counter FROM ec_child_details
+                     JOIN ec_client ON ec_child_details.base_entity_id = ec_client.base_entity_id
+                     WHERE '%s' = strftime('%Y-%m-%d', ec_client.date)
+                     AND ec_client.dob < date('now', '-2 years')
+                     AND ec_client.dob >= date('now', '-5 years')
+                     AND ec_child_details.child_treatment IS NOT NULL
+                     GROUP BY ec_child_details.child_treatment"
+    isMultiResult: true
+    expectedIndicators:
+      - "ME_Child_HIV_Treatment_Over2_ART"
+      - "ME_Child_HIV_Treatment_Over2_CPT"
+    grouping: "child"
+
+  - key: "ME_Child_HIV_Treatment_Under2"
+    description: "ME_Child_HIV_Treatment_Under2_label"
+    indicatorQuery: "SELECT ec_child_details.child_treatment, count(*) counter FROM ec_child_details
+                     JOIN ec_client ON ec_child_details.base_entity_id = ec_client.base_entity_id
+                     WHERE '%s' = strftime('%Y-%m-%d', ec_client.date)
+                     AND ec_client.dob >= date('now', '-2 years')
+                     AND ec_child_details.child_treatment IS NOT NULL
+                     GROUP BY ec_child_details.child_treatment"
+    isMultiResult: true
+    expectedIndicators:
+      - "ME_Child_HIV_Treatment_Under2_ART"
+      - "ME_Child_HIV_Treatment_Under2_CPT"
+    grouping: "child"
+
+  - key: "ME_Weight_Over2"
+    description: "ME_Weight_Over2_label"
+    indicatorQuery: "SELECT
+                     CASE
+                     WHEN weights.z_score > -2 AND weights.z_score < 2 THEN 'Normal'
+                     WHEN weights.z_score <= -2 THEN 'Underweight'
+                     WHEN weights.z_score >= 2 THEN 'Overweight'
+                     ELSE 'Severe'
+                     END AS waz_score, count(*)
+                      FROM weights
+                     INNER JOIN ec_client
+                     ON weights.base_entity_id = ec_client.base_entity_id
+                      WHERE weights.date >= round((julianday(strftime('%Y-%m-%d', '%s')) - 2440587.5) * 86400.0 * 1000)
+                      AND weights.date < round((julianday(strftime('%Y-%m-%d', '%s', '+1 day')) - 2440587.5) * 86400.0 * 1000)
+                      AND ec_client.dob < date('now', '-2 years')
+                     AND ec_client.dob >= date('now', '-5 years')
+                     AND weights.z_score <= 3
+                     AND weights.z_score >= -3
+                     GROUP  BY waz_score"
+    expectedIndicators:
+      - "ME_Weight_Over2_Normal"
+      - "ME_Weight_Over2_Overweight"
+      - "ME_Weight_Over2_Underweight"
+    grouping: "child"
+
+  - key: "ME_Weight_Over2_Gender"
+    description: "ME_Weight_Over2_Gender_label"
+    indicatorQuery: "SELECT
+                      CASE
+                      WHEN weights.z_score > -2 AND weights.z_score < 2 THEN 'Normal'
+                      WHEN weights.z_score <= -2 THEN 'Underweight'
+                      WHEN weights.z_score >= 2 THEN 'Overweight'
+                      ELSE 'Severe'
+                      END AS waz_score, ec_client.gender, count(*)
+                       FROM weights
+                      INNER JOIN ec_client
+                      ON weights.base_entity_id = ec_client.base_entity_id
+                       WHERE weights.date >= round((julianday(strftime('%Y-%m-%d', '%s')) - 2440587.5) * 86400.0 * 1000)
+                       AND weights.date < round((julianday(strftime('%Y-%m-%d', '%s', '+1 day')) - 2440587.5) * 86400.0 * 1000)
+                       AND ec_client.dob < date('now', '-2 years')
+                      AND ec_client.dob >= date('now', '-5 years')
+                      AND weights.z_score <= 3
+                      AND weights.z_score >= -3
+                      GROUP  BY waz_score, ec_client.gender"
+    expectedIndicators:
+      - "ME_Weight_Over2_Gender_Normal_Female"
+      - "ME_Weight_Over2_Gender_Normal_Male"
+      - "ME_Weight_Over2_Gender_Overweight_Female"
+      - "ME_Weight_Over2_Gender_Overweight_Male"
+      - "ME_Weight_Over2_Gender_Underweight_Female"
+      - "ME_Weight_Over2_Gender_Underweight_Male"
+    grouping: "child"
+
+  - key: "ME_Weight_Under2_Age"
+    description: "ME_Weight_Under2_Age_label"
+    indicatorQuery: "SELECT
+                     CASE
+                     WHEN weights.z_score > -2 AND weights.z_score < 2 THEN 'Normal'
+                     WHEN weights.z_score <= -2 THEN 'Underweight'
+                     WHEN weights.z_score >= 2 THEN 'Overweight'
+                     ELSE 'Severe'
+                     END AS waz_score,
+                     CASE
+                     WHEN round(julianday('now') - julianday(ec_client.dob)) > 365.0 THEN 'Over_1'
+                     WHEN round(julianday('now') - julianday(ec_client.dob)) < 365.0 THEN 'Under_1'
+                     ELSE 'Null'
+                     END age, count(*)
+                     FROM weights
+                     INNER JOIN ec_client
+                     ON weights.base_entity_id = ec_client.base_entity_id
+                     WHERE weights.date >= round((julianday(strftime('%Y-%m-%d', '%s')) - 2440587.5) * 86400.0 * 1000)
+                     AND weights.date < round((julianday(strftime('%Y-%m-%d', '%s', '+1 day')) - 2440587.5) * 86400.0 * 1000)
+                     AND ec_client.dob >= date('now', '-2 years')
+                     AND weights.z_score <= 3
+                     AND weights.z_score >= -3
+                     GROUP  BY waz_score, age"
+    expectedIndicators:
+      - "ME_Weight_Under2_Age_Normal_Under_1"
+      - "ME_Weight_Under2_Age_Normal_Over_1"
+      - "ME_Weight_Under2_Age_Overweight_Under_1"
+      - "ME_Weight_Under2_Age_Overweight_Over_1"
+      - "ME_Weight_Under2_Age_Underweight_Under_1"
+    grouping: "child"
+
+  - key: "ME_Weight_Under2_Age_Gender"
+    description: "ME_Weight_Under2_Age_Gender_label"
+    indicatorQuery: "SELECT
+                      CASE
+                      WHEN weights.z_score > -2 AND weights.z_score < 2 THEN 'Normal'
+                      WHEN weights.z_score <= -2 THEN 'Underweight'
+                      WHEN weights.z_score >= 2 THEN 'Overweight'
+                      ELSE 'Severe'
+                      END AS waz_score,
+                      CASE
+                      WHEN round(julianday('now') - julianday(ec_client.dob)) > 365.0 THEN 'Over_1'
+                      WHEN round(julianday('now') - julianday(ec_client.dob)) < 365.0 THEN 'Under_1'
+                      ELSE 'Null'
+                      END age, ec_client.gender, count(*)
+                      FROM weights
+                      INNER JOIN ec_client
+                      ON weights.base_entity_id = ec_client.base_entity_id
+                      WHERE weights.date >= round((julianday(strftime('%Y-%m-%d', '%s')) - 2440587.5) * 86400.0 * 1000)
+                      AND weights.date < round((julianday(strftime('%Y-%m-%d', '%s', '+1 day')) - 2440587.5) * 86400.0 * 1000)
+                      AND ec_client.dob >= date('now', '-2 years')
+                      AND weights.z_score <= 3
+                      AND weights.z_score >= -3
+                      GROUP  BY waz_score, age, ec_client.gender"
+    expectedIndicators:
+      - "ME_Weight_Under2_Age_Gender_Normal_Over_1_Female"
+      - "ME_Weight_Under2_Age_Gender_Normal_Over_1_Male"
+      - "ME_Weight_Under2_Age_Gender_Normal_Under_1_Female"
+      - "ME_Weight_Under2_Age_Gender_Normal_Under_1_Male"
+      - "ME_Weight_Under2_Age_Gender_Overweight_Over_1_Female"
+      - "ME_Weight_Under2_Age_Gender_Overweight_Over_1_Male"
+      - "ME_Weight_Under2_Age_Gender_Overweight_Under_1_Female"
+      - "ME_Weight_Under2_Age_Gender_Overweight_Under_1_Male"
+      - "ME_Weight_Under2_Age_Gender_Underweight_Over_1_Female"
+      - "ME_Weight_Under2_Age_Gender_Underweight_Over_1_Male"
+      - "ME_Weight_Under2_Age_Gender_Underweight_Under_1_Female"
+      - "ME_Weight_Under2_Age_Gender_Underweight_Under_1_Male"
+    grouping: "child"
+
+  - key: "ME_Height_Over2_Gender"
+    description: "ME_Height_Over2_Gender_label"
+    indicatorQuery: "SELECT
+                  CASE
+                  WHEN heights.z_score > 3 OR heights.z_score < -3 THEN 'Severe'
+                  WHEN heights.z_score > -2 AND heights.z_score < 2 THEN 'Normal'
+                  WHEN heights.z_score <= -2 || heights.z_score >= 2 THEN 'Stunted'
+                  ELSE ''
+                  END AS haz_score, ec_client.gender, count(*)
+                   FROM heights
+                  INNER JOIN ec_client
+                  ON heights.base_entity_id = ec_client.base_entity_id
+                   WHERE heights.date >= round((julianday(strftime('%Y-%m-%d', '%s')) - 2440587.5) * 86400.0 * 1000)
+                   AND heights.date < round((julianday(strftime('%Y-%m-%d', '%s', '+1 day')) - 2440587.5) * 86400.0 * 1000)
+                   AND ec_client.dob < date('now', '-2 years')
+                  AND ec_client.dob >= date('now', '-5 years')
+                  GROUP  BY haz_score, ec_client.gender"
+    expectedIndicators:
+      - "ME_Height_Over2_Gender_Normal_Female"
+      - "ME_Height_Over2_Gender_Normal_Male"
+      - "ME_Height_Over2_Gender_Stunted_Female"
+      - "ME_Height_Over2_Gender_Stunted_Male"
+    grouping: "child"
+
+  - key: "ME_Height_Under2_Age"
+    description: "ME_Height_Under2_Age_label"
+    indicatorQuery: "SELECT
+                      CASE
+                      WHEN heights.z_score > -2 AND heights.z_score < 2 THEN 'Normal'
+                      WHEN heights.z_score < -3 OR heights.z_score > 3 THEN 'Severe'
+                      WHEN heights.z_score <= -2 OR heights.z_score >= 2 THEN 'Stunted'
+                      ELSE ''
+                      END AS haz_score,
+                      CASE
+                      WHEN round(julianday('now') - julianday(ec_client.dob)) > 365.0 THEN 'Over_1'
+                      WHEN round(julianday('now') - julianday(ec_client.dob)) < 365.0 THEN 'Under_1'
+                      ELSE 'Null'
+                      END age, count(*)
+                      FROM heights
+                      INNER JOIN ec_client
+                      ON heights.base_entity_id = ec_client.base_entity_id
+                      WHERE heights.date >= round((julianday(strftime('%Y-%m-%d', '%s')) - 2440587.5) * 86400.0 * 1000)
+                      AND heights.date < round((julianday(strftime('%Y-%m-%d', '%s', '+1 day')) - 2440587.5) * 86400.0 * 1000)
+                      AND ec_client.dob >= date('now', '-2 years')
+                      GROUP  BY haz_score, age"
+    expectedIndicators:
+      - "ME_Height_Under2_Age_Normal_Under_1"
+      - "ME_Height_Under2_Age_Normal_Over_1"
+      - "ME_Height_Under2_Age_Severe_Under_1"
+      - "ME_Height_Under2_Age_Severe_Over_1"
+      - "ME_Height_Under2_Age_Stunted_Under_1"
+    grouping: "child"
+
+  - key: "ME_Height_Under2_Age_Gender"
+    description: "ME_Height_Under2_Age_Gender_label"
+    indicatorQuery: "SELECT
+                     CASE
+                     WHEN heights.z_score > -2 AND heights.z_score < 2 THEN 'Normal'
+                     WHEN heights.z_score < -3 OR heights.z_score > 3 THEN 'Severe'
+                     WHEN heights.z_score <= -2 OR heights.z_score >= 2 THEN 'Stunted'
+                     ELSE ''
+                     END AS haz_score,
+                     CASE
+                     WHEN round(julianday('now') - julianday(ec_client.dob)) > 365.0 THEN 'Over_1'
+                     WHEN round(julianday('now') - julianday(ec_client.dob)) < 365.0 THEN 'Under_1'
+                     ELSE 'Null'
+                     END age, ec_client.gender, count(*)
+                     FROM heights
+                     INNER JOIN ec_client
+                     ON heights.base_entity_id = ec_client.base_entity_id
+                     WHERE heights.date >= round((julianday(strftime('%Y-%m-%d', '%s')) - 2440587.5) * 86400.0 * 1000)
+                     AND heights.date < round((julianday(strftime('%Y-%m-%d', '%s', '+1 day')) - 2440587.5) * 86400.0 * 1000)
+                     AND ec_client.dob >= date('now', '-2 years')
+                     GROUP  BY haz_score, age, ec_client.gender"
+    expectedIndicators:
+      - "ME_Height_Under2_Age_Gender_Normal_Over_1_Female"
+      - "ME_Height_Under2_Age_Gender_Normal_Over_1_Male"
+      - "ME_Height_Under2_Age_Gender_Normal_Under_1_Female"
+      - "ME_Height_Under2_Age_Gender_Normal_Under_1_Male"
+      - "ME_Height_Under2_Age_Gender_Severe_Over_1_Female"
+      - "ME_Height_Under2_Age_Gender_Severe_Over_1_Male"
+      - "ME_Height_Under2_Age_Gender_Stunted_Under_1_Female"
+      - "ME_Height_Under2_Age_Gender_Stunted_Under_1_Male"
+    grouping: "child"
+
+  - key: "ME_Fully_Immunized"
+    description: "Fully Immunized"
+    indicatorQuery: "select count(1) from (select vaccines.base_entity_id from vaccines
+                     join ec_client on vaccines.base_entity_id = ec_client.base_entity_id where '%s' = strftime('%Y-%m-%d', ec_client.date)
+                     group by vaccines.base_entity_id
+                     having sum(case when name = 'bcg' then 1 else 0 end) > 0
+                     and sum(case when name = 'ipv' then 1 else 0 end) > 0
+                     and sum(case when name = 'mr_1' then 1 else 0 end) > 0
+                     and sum(case when name = 'opv_1' then 1 else 0 end) > 0
+                     and sum(case when name = 'opv_3' then 1 else 0 end) > 0
+                     and sum(case when name = 'pcv_1' then 1 else 0 end) > 0
+                     and sum(case when name = 'penta_1' then 1 else 0 end) > 0
+                     and sum(case when name = 'penta_2' then 1 else 0 end) > 0
+                     and sum(case when name = 'penta_3' then 1 else 0 end) > 0
+                     and sum(case when name = 'rota_1' then 1 else 0 end) > 0)"
+    grouping: "child"
