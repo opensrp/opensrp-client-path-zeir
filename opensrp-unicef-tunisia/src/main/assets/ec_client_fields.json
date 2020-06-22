@@ -311,62 +311,6 @@
           "json_mapping": {
             "field": "attributes.dateRemoved"
           }
-        },
-        {
-          "column_name": "red_flag_count",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.red_flag_count"
-          }
-        },
-        {
-          "column_name": "yellow_flag_count",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.yellow_flag_count"
-          }
-        },
-        {
-          "column_name": "contact_status",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.contact_status"
-          }
-        },
-        {
-          "column_name": "previous_contact_status",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.previous_contact_status"
-          }
-        },
-        {
-          "column_name": "next_contact",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.next_contact"
-          }
-        },
-        {
-          "column_name": "next_contact_date",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.next_contact_date"
-          }
-        },
-        {
-          "column_name": "last_contact_record_date",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.last_contact_record_date"
-          }
-        },
-        {
-          "column_name": "visit_start_date",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.visit_start_date"
-          }
         }
       ]
     },

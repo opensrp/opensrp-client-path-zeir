@@ -240,7 +240,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         if (loggedInUserTextView != null) {
             loggedInUserTextView.setText(name);
         }
-        if (userInitialsTextView != null) {
+        if (userInitialsTextView != null && mPresenter.getLoggedInUserInitials() != null) {
             userInitialsTextView.setText(mPresenter.getLoggedInUserInitials());
         }
     }
