@@ -45,15 +45,8 @@ public interface NavigationContract {
 
     interface Interactor {
 
-        void getRegisterCount(String registerType, InteractorCallback<Integer> callback);
-
         Date sync();
 
     }
 
-    interface InteractorCallback<T> {
-        void onResult(T result);
-
-        void onError(Exception e);
-    }
 }

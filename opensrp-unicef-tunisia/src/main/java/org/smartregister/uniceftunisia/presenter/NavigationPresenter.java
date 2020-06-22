@@ -97,8 +97,8 @@ public class NavigationPresenter implements NavigationContract.Presenter {
                 return initials.toUpperCase();
             }
 
-        } catch (Exception e) {
-            Timber.e(e, "Error fetching initials");
+        } catch (StringIndexOutOfBoundsException  exception) {
+            Timber.e(exception, "Error fetching initials");
         }
 
         return null;

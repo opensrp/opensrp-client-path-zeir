@@ -78,7 +78,7 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         motherGuardianPhoneNumber = view.findViewById(org.smartregister.child.R.id.mother_guardian_phone_number);
         motherGuardianPhoneNumber.addTextChangedListener(advancedSearchTextwatcher);
 
-//Defaults
+        //Defaults
         startDate.addTextChangedListener(advancedSearchTextwatcher);
         endDate.addTextChangedListener(advancedSearchTextwatcher);
 
@@ -167,19 +167,12 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
 
         Map<String, String> searchParams = new HashMap<>();
 
-
-        String fn = firstName.getText().toString();
-        String ln = lastName.getText().toString();
-
-
+        String firstName = this.firstName.getText().toString();
+        String lastName = this.lastName.getText().toString();
         String motherGuardianFirstNameString = motherGuardianFirstName.getText().toString();
-
         String motherGuardianLastNameString = motherGuardianLastName.getText().toString();
-
         String motherGuardianNrcString = motherGuardianNrc.getText().toString();
-
         String motherGuardianPhoneNumberString = motherGuardianPhoneNumber.getText().toString();
-
         String zeir = openSrpId.getText().toString();
 
 
@@ -192,7 +185,6 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         }
 
         if (StringUtils.isNotBlank(motherGuardianNrcString)) {
-
             searchParams.put(DBConstants.KEY.NRC_NUMBER, motherGuardianNrcString);
         }
 
@@ -200,13 +192,12 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
             searchParams.put(DBConstants.KEY.MOTHER_GUARDIAN_PHONE_NUMBER, motherGuardianPhoneNumberString);
         }
 
-
-        if (!TextUtils.isEmpty(fn)) {
-            searchParams.put(DBConstants.KEY.FIRST_NAME, fn);
+        if (!TextUtils.isEmpty(firstName)) {
+            searchParams.put(DBConstants.KEY.FIRST_NAME, firstName);
         }
 
-        if (!TextUtils.isEmpty(ln)) {
-            searchParams.put(DBConstants.KEY.LAST_NAME, ln);
+        if (!TextUtils.isEmpty(lastName)) {
+            searchParams.put(DBConstants.KEY.LAST_NAME, lastName);
         }
 
         if (!TextUtils.isEmpty(zeir)) {

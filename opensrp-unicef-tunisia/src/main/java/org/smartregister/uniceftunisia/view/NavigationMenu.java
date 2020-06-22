@@ -3,6 +3,7 @@ package org.smartregister.uniceftunisia.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.support.annotation.NonNull;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -66,7 +67,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
     private ImageButton cancelButton;
     private Spinner languageSpinner;
 
-    public static NavigationMenu getInstance(Activity activity) {
+    public static NavigationMenu getInstance(@NonNull Activity activity) {
 
         SyncStatusBroadcastReceiver.getInstance().removeSyncStatusListener(instance);
         int orientation = activity.getResources().getConfiguration().orientation;
@@ -251,7 +252,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         UnicefTunisiaApplication.getInstance().logoutCurrentUser();
     }
 
-    protected void startFormActivity(Activity activity, String formName) {
+    private void startFormActivity(Activity activity, String formName) {
         try {
             JsonFormUtils.startForm(activity, JsonFormUtils.REQUEST_CODE_GET_JSON, formName, null, ChildLibrary.getInstance().getLocationPickerView(activityWeakReference.get()).getSelectedItem());
 
@@ -360,10 +361,11 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         });
     }
 
-    public void launchActivity(Activity fromActivity, Class<?> clazz) {
+    private void launchActivity(Activity fromActivity, Class<?> clazz) {
         Intent intent = new Intent(fromActivity, clazz);
         fromActivity.getApplicationContext().startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
     }
+
     private void startReportActivity() {
 
         if (activityWeakReference.get() instanceof HIA2ReportsActivity) {

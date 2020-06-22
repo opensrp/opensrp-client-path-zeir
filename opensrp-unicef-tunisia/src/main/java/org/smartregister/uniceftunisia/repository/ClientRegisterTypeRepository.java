@@ -11,7 +11,6 @@ import org.smartregister.uniceftunisia.util.AppConstants;
 import java.util.Date;
 import java.util.List;
 
-
 public class ClientRegisterTypeRepository extends BaseRepository implements ClientRegisterTypeDao {
 
     private static final String CREATE_TABLE_SQL = "CREATE TABLE " + AppConstants.TABLE_NAME.REGISTER_TYPE + "("

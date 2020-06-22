@@ -141,11 +141,6 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                         UnicefTunisiaApplication.getInstance().registerTypeRepository().add(AppConstants.RegisterType.CHILD, event.getBaseEntityId());
                     }
 
-                    if (eventType.equals(Constants.EventType.NEW_WOMAN_REGISTRATION) && eventClient.getClient() != null) {
-                        UnicefTunisiaApplication.getInstance().registerTypeRepository().add(AppConstants.RegisterType.OPD, event.getBaseEntityId());
-                    }
-
-
                     if (clientClassification == null) {
                         continue;
                     }

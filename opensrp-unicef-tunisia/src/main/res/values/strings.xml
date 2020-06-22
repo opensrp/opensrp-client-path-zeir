@@ -588,6 +588,8 @@
     <string name="Birth_Weight">Birth weight/First weight (kg) </string>
     <string name="child_reg">Child\'s Registration Number</string>
 
+    <string name="str_field_search_hint">Search Register</string>
+    <string name="search_hint">Search Register</string>
 
     <string name="opensrp_url">https://unicef-tunisia-stage.smartregister.org/opensrp/</string>
 

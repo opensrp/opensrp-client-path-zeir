@@ -123,8 +123,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     private static String[] getFtsSearchFields(String tableName) {
         if (tableName.equalsIgnoreCase("ec_client")) {
             return new String[]{"first_name", "last_name", "zeir_d"};
-        } else if (tableName.equals("ec_client")) {
-            return new String[]{"first_name", "last_name", "opensrp_id", DBConstants.KEY.ZEIR_ID};
         } else if ("ec_mother_details".equals(tableName)) {
             return new String[]{"next_contact"};
         } else if (tableName.equals(DBConstants.RegisterTable.CHILD_DETAILS)) {
