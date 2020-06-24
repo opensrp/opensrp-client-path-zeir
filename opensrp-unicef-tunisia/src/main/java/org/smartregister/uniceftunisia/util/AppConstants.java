@@ -115,7 +115,7 @@ public class AppConstants {
 
     public static class RELATIONSHIP {
         public static final String MOTHER = "mother";
-
+        public static final String FATHER = "father";
     }
 
     public static class TABLE_NAME {

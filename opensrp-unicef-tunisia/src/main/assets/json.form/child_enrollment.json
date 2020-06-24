@@ -4,6 +4,9 @@
   "mother": {
     "encounter_type": "New Woman Registration"
   },
+  "father": {
+    "encounter_type": "Father Registration"
+  },
   "entity_id": "",
   "relational_id": "",
   "metadata": {
@@ -63,7 +66,7 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "choose_image",
-        "uploadButtonText": "Take a photo of the child"
+        "uploadButtonText": "Take a picture of the child"
       },
       {
         "key": "zeir_id",
@@ -71,8 +74,7 @@
         "openmrs_entity": "person_identifier",
         "openmrs_entity_id": "zeir_id",
         "type": "edit_text",
-        "hint": "Child's MER ID",
-        "label_info_text": "Write this number down on the child's health passport.",
+        "hint": "ID",
         "scanButtonText": "Scan QR Code",
         "value": "0",
         "read_only": true,
@@ -82,7 +84,7 @@
         },
         "v_required": {
           "value": "true",
-          "err": "Please enter the Child's MER ID"
+          "err": "Please enter the Child ID"
         }
       },
       {
@@ -91,16 +93,16 @@
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "Birth_Certificate",
         "type": "edit_text",
-        "hint": "Child's NRB birth registration number",
-        "label_info_text": "If the child was registered in vital registration, enter the registration number here.",
+        "hint": "Child's birth registration number",
+        "label_info_text": "If the child's birth was registered, enter the registration number here..",
         "edit_type": "name",
         "v_required": {
           "value": false,
           "err": "Please enter the Birth Registration Number"
         },
         "v_regex": {
-          "value": "([A-Z]{2,3}/[0-9]{8}/[0-9]{4})|\\s*",
-          "err": "Number must take the format of ###/########/####"
+          "value": "([0-9]{4}/[0-9]+)|\\s*",
+          "err": "Registration format number should be in the format YYYY/Act no."
         }
       },
       {
@@ -109,10 +111,20 @@
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "",
         "type": "edit_text",
-        "hint": "Child's Registration Number",
+        "hint": "Child's unique government ID",
+        "label_info_text": "This is the government unique ID assigned by the government",
+        "edit_type": "number",
         "v_required": {
           "value": false,
-          "err": "Please enter the Child Registration Number"
+          "err": "Please enter Child's unique government ID"
+        },
+        "v_regex": {
+          "value": "([0-9]{11})|\\s*",
+          "err": "Child's unique ID must contain 11 digits."
+        },
+        "v_numeric": {
+          "value": "true",
+          "err": "Invalid Government Unique ID"
         }
       },
       {
@@ -150,20 +162,21 @@
         }
       },
       {
-        "key": "middle_name",
+        "key": "place_of_birth",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "person",
-        "openmrs_entity_id": "middle_name",
-        "type": "edit_text",
-        "hint": "Middle name",
-        "edit_type": "name",
-        "v_regex": {
-          "value": "[A-Za-z\\s\\.\\-]*",
-          "err": "Please enter a valid name"
-        },
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "place_of_birth",
+        "type": "spinner",
+        "hint": "Place of birth",
+        "label_info_text": "Indicate whether child was born at a health facility.",
+        "values": [
+          "Home",
+          "Hospital",
+          "On the way to the hospital"
+        ],
         "v_required": {
-          "value": false,
-          "err": "Please enter the child's middle name"
+          "value": "true",
+          "err": "Please enter child place of birth"
         }
       },
       {
@@ -179,7 +192,33 @@
         ],
         "v_required": {
           "value": "true",
-          "err": "Please enter the Gender of the child"
+          "err": "Please enter the gender of the child"
+        }
+      },
+      {
+        "key": "ga_at_birth",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "ga_at_birth",
+        "type": "edit_text",
+        "hint": "Gestational age at birth (in weeks)",
+        "label_info_text": "Indicate how far along the mother was when the child was born.",
+        "edit_type": "name",
+        "v_min": {
+          "value": "20",
+          "err": "Gestation age must be greater than or equal to 20"
+        },
+        "v_max": {
+          "value": "42",
+          "err": "Gestation age must be less than or equal to 42"
+        },
+        "v_numeric": {
+          "value": "true",
+          "err": "Enter a valid GA"
+        },
+        "v_required": {
+          "value": true,
+          "err": "Please enter a gestational age at birth"
         }
       },
       {
@@ -188,7 +227,7 @@
         "openmrs_entity": "person",
         "openmrs_entity_id": "birthdate",
         "type": "date_picker",
-        "hint": "Child's DOB",
+        "hint": "Date of birth (DOB)",
         "expanded": false,
         "duration": {
           "label": "Age"
@@ -223,10 +262,10 @@
         "openmrs_data_type": "text",
         "type": "tree",
         "tree": [],
-        "hint": "Village",
+        "hint": "Home address",
         "v_required": {
           "value": true,
-          "err": "Please enter the village"
+          "err": "Please enter the home address"
         }
       },
       {
@@ -235,21 +274,12 @@
         "openmrs_entity": "person_address",
         "openmrs_entity_id": "address1",
         "type": "edit_text",
-        "label_info_text": "Indicate the area or location where the child comes from e.g in an urban setting Area X",
-        "hint": "Address/Location",
+        "label_info_text": "Indicate the village where the child lives.",
+        "hint": "Village",
         "v_required": {
-          "value": false,
-          "err": "Please enter the Child's Address/Location"
+          "value": true,
+          "err": "Please enter the child's village"
         }
-      },
-      {
-        "key": "traditional_authority",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "traditional_authority",
-        "hint": "Traditional Authority",
-        "label_info_text": "Indicate the name of the Traditional Authority for the child.",
-        "type": "edit_text"
       },
       {
         "key": "Birth_Weight",
@@ -258,8 +288,7 @@
         "openmrs_entity_id": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_data_type": "text",
         "type": "edit_text",
-        "label_info_text": "The weight as measured when the child is born",
-        "hint": "Birth weight/First weight (kg)",
+        "hint": "Birth weight (kg)",
         "v_min": {
           "value": "0.1",
           "err": "Weight must be greater than 0"
@@ -274,43 +303,118 @@
         }
       },
       {
-        "key": "Birth_Height",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "159429AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_data_type": "text",
-        "type": "edit_text",
-        "hint": "Birth Height (cm)",
-        "v_min": {
-          "value": "0.1",
-          "err": "Height must be greater than 0"
-        },
-        "v_numeric": {
-          "value": "true",
-          "err": "Enter a valid height"
-        },
-        "v_required": {
-          "value": false,
-          "err": "Enter the child's birth height"
-        }
-      },
-      {
-        "key": "mother_guardian_first_name",
+        "key": "father_lastname",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person",
         "openmrs_entity_id": "first_name",
-        "entity_id": "mother",
+        "entity_id": "father",
         "type": "edit_text",
-        "hint": "Mother/Guardian first name",
+        "hint": "Last name of the father",
         "edit_type": "name",
         "look_up": "true",
         "v_required": {
           "value": "true",
-          "err": "Please enter the mother/guardian's first name"
+          "err": "Please enter the father's last name"
         },
         "v_regex": {
           "value": "[A-Za-z\\s\\.\\-]*",
           "err": "Please enter a valid name"
+        }
+      },
+      {
+        "key": "father_firstname",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "first_name",
+        "entity_id": "father",
+        "type": "edit_text",
+        "hint": "First name of the father",
+        "edit_type": "name",
+        "look_up": "true",
+        "v_required": {
+          "value": "true",
+          "err": "Please enter the father's first name"
+        },
+        "v_regex": {
+          "value": "[A-Za-z\\s\\.\\-]*",
+          "err": "Please enter a valid name"
+        }
+      },
+      {
+        "key": "father_dob",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "birthdate",
+        "entity_id": "father",
+        "type": "date_picker",
+        "hint": "Date of birth of the father",
+        "look_up": "true",
+        "expanded": false,
+        "duration": {
+          "label": "Age"
+        },
+        "default": "01-01-1960",
+        "min_date": "01-01-1960",
+        "max_date": "today-10y",
+        "v_required": {
+          "value": "false",
+          "err": "Please enter the fathers's birth date"
+        }
+      },
+      {
+        "key": "father_nationality",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "father_nationality",
+        "entity_id": "father",
+        "type": "spinner",
+        "hint": "Nationality of the father",
+        "values": [
+          "Tunisian",
+          "Other",
+          "Not known"
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please enter father's nationality"
+        }
+      },
+      {
+        "key": "father_nationality_other",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "father_nationality_other",
+        "type": "edit_text",
+        "hint": "Indicate the father's nationality",
+        "entity_id": "father",
+        "edit_type": "name",
+        "v_regex": {
+          "value": "[A-Za-z\\s\\.\\-]*",
+          "err": "Please enter valid nationality"
+        },
+        "v_required": {
+          "value": true,
+          "err": "Please indicate father's nationality"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "father_phone",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "father_phone",
+        "entity_id": "father",
+        "type": "edit_text",
+        "hint": "Phone number of the father ",
+        "v_regex": {
+          "value": "([0-9]{8})|\\s*",
+          "err": "Number must  be a total of 8 digits in length"
         }
       },
       {
@@ -320,12 +424,31 @@
         "openmrs_entity_id": "last_name",
         "entity_id": "mother",
         "type": "edit_text",
-        "hint": "Mother/guardian last name",
+        "hint": "Last name of the mother/caregiver",
         "edit_type": "name",
         "look_up": "true",
         "v_required": {
           "value": "true",
-          "err": "Please enter the mother/guardian's last name"
+          "err": "Please enter the mother/caregiver's last name"
+        },
+        "v_regex": {
+          "value": "[A-Za-z\\s\\.\\-]*",
+          "err": "Please enter a valid name"
+        }
+      },
+      {
+        "key": "mother_guardian_first_name",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "first_name",
+        "entity_id": "mother",
+        "type": "edit_text",
+        "hint": "First name of the mother/caregiver",
+        "edit_type": "name",
+        "look_up": "true",
+        "v_required": {
+          "value": "true",
+          "err": "Please enter the mother/caregiver's first name"
         },
         "v_regex": {
           "value": "[A-Za-z\\s\\.\\-]*",
@@ -339,7 +462,7 @@
         "openmrs_entity_id": "birthdate",
         "entity_id": "mother",
         "type": "date_picker",
-        "hint": "Mother/guardian DOB",
+        "hint": "Date of birth of the mother/caregiver",
         "look_up": "true",
         "expanded": false,
         "duration": {
@@ -350,21 +473,48 @@
         "max_date": "today-10y",
         "v_required": {
           "value": "true",
-          "err": "Please enter the mother/guardian's birth date"
+          "err": "Please enter the mother/caregiver's birth date"
         }
       },
       {
-        "key": "nrc_number",
+        "key": "mother_nationality",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "nrc_number",
-        "entity_id": "mother",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "mother_nationality",
+        "type": "spinner",
+        "hint": "Nationality of the mother/caregiver",
+        "values": [
+          "Tunisian",
+          "Other",
+          "Not known"
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please enter mother's nationality"
+        }
+      },
+      {
+        "key": "mother_nationality_other",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "mother_nationality_other",
         "type": "edit_text",
-        "hint": "Mother/guardian NRB Identification number",
-        "look_up": "true",
+        "hint": "Indicate the mothers's nationality",
+        "edit_type": "name",
         "v_regex": {
-          "value": "([A-Za-z0-9]{1,11})|\\s*",
-          "err": "ID should be at-most 11 characters in length"
+          "value": "[A-Za-z\\s\\.\\-]*",
+          "err": "Please enter valid nationality"
+        },
+        "v_required": {
+          "value": true,
+          "err": "Please indicate mother's nationality"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_relevance_rules.yml"
+            }
+          }
         }
       },
       {
@@ -374,23 +524,23 @@
         "openmrs_entity_id": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "entity_id": "mother",
         "type": "edit_text",
-        "hint": "Mother/guardian phone number",
+        "hint": "Phone number of the mother/caregiver",
         "v_regex": {
-          "value": "([0][0-9]{9})|\\s*",
-          "err": "Number must begin with 0 and must be a total of 10 digits in length"
+          "value": "([0-9]{8})|\\s*",
+          "err": "Number must  be a total of 8 digits in length"
         }
       },
       {
         "key": "second_phone_number",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "person_attribute",
+        "openmrs_entity": "concept",
         "openmrs_entity_id": "second_phone_number",
         "entity_id": "mother",
         "type": "edit_text",
-        "hint": "Alternative phone number",
+        "hint": "Alternative phone number of the mother/caregiver",
         "v_regex": {
-          "value": "([0][0-9]{9})|\\s*",
-          "err": "Number must begin with 0 and must be a total of 10 digits in length"
+          "value": "([0-9]{8})|\\s*",
+          "err": "Number must  be a total of 8 digits in length"
         }
       },
       {
@@ -400,16 +550,15 @@
         "openmrs_entity_id": "mother_tdv_doses",
         "type": "spinner",
         "entity_id": "mother",
-        "label_info_text": "Whether the child's mother received 2 or more doses of TdV, which transfers protection against Td to the child when they're born.",
-        "hint": "How many doses of TdV did the mother receive?",
+        "hint": "How many doses of Td vaccine did the mother receive during pregnancy?",
         "v_required": {
-          "value": true,
+          "value": false,
           "err": "Please choose an option"
         },
         "values": [
-          ">=3 doses of TdV in past 5 years",
-          "1-4 doses of TdV in the past",
-          "TdV not received",
+          "1 dose of TDV during pregnancy",
+          "2+ doses of TDV during pregnancy",
+          "TDV not received",
           "Unknown"
         ]
       },
@@ -418,95 +567,52 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "164826AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "spinner",
-        "label_info_text": "Whether the child's mother received 2+ doses of Td.",
+        "type": "hidden",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_calculation_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "protected_at_birth_display",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "164826AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "type": "edit_text",
+        "label_info_text": "If the child's mother received 2 or more doses of a tetanus-containing vaccine during pregnancy, then the child is considered protected at birth (PAB) against tetanus.",
         "hint": "Protected at birth (PAB)",
         "entity_id": "mother",
+        "read_only": true,
         "v_required": {
           "value": true,
           "err": "Please choose an option"
         },
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_calculation_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "mother_rubella",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "mother_rubella",
+        "type": "spinner",
+        "hint": "Did the child's mother receive the Rubella vaccine?",
         "values": [
           "Yes",
           "No",
-          "Don't Know"
-        ],
-        "openmrs_choice_ids": {
-          "Yes": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "No": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "Don't Know": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        }
-      },
-      {
-        "key": "mother_hiv_status",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "1396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "entity_id": "mother",
-        "type": "spinner",
-        "hint": "HIV Status of the Child's Mother",
-        "values": [
-          "Positive",
-          "Negative",
           "Unknown"
         ],
-        "openmrs_choice_ids": {
-          "Positive": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "Negative": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "Unknown": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        }
-      },
-      {
-        "key": "child_hiv_status",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "5303AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "spinner",
-        "hint": "HIV Status of the Child",
-        "values": [
-          "Positive",
-          "Negative",
-          "Unknown",
-          "Exposed"
-        ],
-        "openmrs_choice_ids": {
-          "Positive": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "Negative": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "Unknown": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "Exposed": "822AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "child_register_registration_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "child_treatment",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "162240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "type": "spinner",
-        "label_info_text": "Indicate whether the child is on CPT and/or ART.",
-        "hint": "Child's treatment",
-        "values": [
-          "CPT",
-          "ART",
-          "None"
-        ],
-        "openmrs_choice_ids": {
-          "CPT": "160434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "ART": "160119AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "None": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "child_register_registration_relevance_rules.yml"
-            }
-          }
+        "v_required": {
+          "value": true,
+          "err": "Please indicate whether mother received Rubella vaccine"
         }
       },
       {

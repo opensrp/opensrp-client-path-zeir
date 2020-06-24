@@ -11,20 +11,6 @@
           }
         },
         {
-          "column_name": "register_id",
-          "type": "Client",
-          "json_mapping": {
-            "field": "identifiers.ANC_ID"
-          }
-        },
-        {
-          "column_name": "opensrp_id",
-          "type": "Client",
-          "json_mapping": {
-            "field": "identifiers.ANC_ID"
-          }
-        },
-        {
           "column_name": "dob_unknown",
           "type": "Client",
           "json_mapping": {
@@ -36,21 +22,6 @@
           "type": "Client",
           "json_mapping": {
             "field": "identifiers.zeir_id"
-          }
-        },
-        {
-          "column_name": "bht_mid",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "5325AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "bht_mid",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.bht_mid"
           }
         },
         {
@@ -118,31 +89,10 @@
           }
         },
         {
-          "column_name": "opd_reg_number",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.annual_serial_number"
-          }
-        },
-        {
-          "column_name": "bht_mid",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.bht_mid"
-          }
-        },
-        {
           "column_name": "phone_number",
           "type": "Client",
           "json_mapping": {
             "field": "attributes.phone_number"
-          }
-        },
-        {
-          "column_name": "reminders",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.reminders"
           }
         },
         {
@@ -209,13 +159,6 @@
           "json_mapping": {
             "field": "addresses.address1"
           }
-        },
-        {
-          "column_name": "traditional_authority",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.traditional_authority"
-          }
         }
       ]
     },
@@ -230,13 +173,6 @@
           }
         },
         {
-          "column_name": "nrc_number",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.NRC_Number"
-          }
-        },
-        {
           "column_name": "phone_number",
           "type": "Event",
           "json_mapping": {
@@ -245,34 +181,34 @@
           }
         },
         {
-          "column_name": "alt_name",
+          "column_name": "mother_nationality",
           "type": "Event",
           "json_mapping": {
             "field": "obs.fieldCode",
-            "concept": "163258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "concept": "mother_nationality"
           }
         },
         {
-          "column_name": "alt_phone_number",
+          "column_name": "mother_nationality_other",
           "type": "Event",
           "json_mapping": {
             "field": "obs.fieldCode",
-            "concept": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "concept": "mother_nationality_other"
           }
         },
         {
-          "column_name": "reminders",
+          "column_name": "second_phone_number",
           "type": "Event",
           "json_mapping": {
             "field": "obs.fieldCode",
-            "concept": "163164AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "concept": "second_phone_number"
           }
         },
         {
-          "column_name": "edd",
+          "column_name": "mother_tdv_doses",
           "type": "Client",
           "json_mapping": {
-            "field": "attributes.edd"
+            "field": "attributes.mother_tdv_doses"
           }
         },
         {
@@ -284,18 +220,11 @@
           }
         },
         {
-          "column_name": "mother_tdv_doses",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.mother_tdv_doses"
-          }
-        },
-        {
-          "column_name": "mother_hiv_status",
+          "column_name": "mother_rubella",
           "type": "Event",
           "json_mapping": {
             "field": "obs.fieldCode",
-            "concept": "1396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "concept": "mother_rubella"
           }
         },
         {
@@ -346,35 +275,11 @@
           }
         },
         {
-          "column_name": "child_hiv_status",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "5303AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "child_treatment",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "162240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
           "column_name": "contact_phone_number",
           "type": "Event",
           "json_mapping": {
             "field": "obs.fieldCode",
             "concept": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "pmtct_status",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "1396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         },
         {
@@ -389,6 +294,70 @@
           "type": "Client",
           "json_mapping": {
             "field": "attributes.child_reg"
+          }
+        },
+        {
+          "column_name": "place_of_birth",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.place_of_birth"
+          }
+        },
+        {
+          "column_name": "ga_at_birth",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.ga_at_birth"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ec_father_details",
+      "columns": [
+        {
+          "column_name": "base_entity_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "baseEntityId"
+          }
+        },
+        {
+          "column_name": "phone_number",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "father_phone"
+          }
+        },
+        {
+          "column_name": "father_nationality",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "father_nationality"
+          }
+        },
+        {
+          "column_name": "father_nationality_other",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "mother_nationality_other"
+          }
+        },
+        {
+          "column_name": "date",
+          "type": "Event",
+          "json_mapping": {
+            "field": "eventDate"
+          }
+        },
+        {
+          "column_name": "date_removed",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.dateRemoved"
           }
         }
       ]

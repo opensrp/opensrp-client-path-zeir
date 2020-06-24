@@ -5,3 +5,17 @@ priority: 1
 condition: "step1_Date_Birth != ''"
 actions:
   - 'calculation = helper.getDifferenceDays(step1_Date_Birth) / 365.25'
+---
+name: step1_protected_at_birth
+description: Protected at birth
+priority: 1
+condition: "step1_mother_tdv_doses != ''"
+actions:
+  - "calculation = step1_mother_tdv_doses == '2+ doses of TDV during pregnancy' ? 'Yes' : 'No'"
+---
+name: step1_protected_at_birth_display
+description: Protected at birth display
+priority: 1
+condition: "true"
+actions:
+  - "calculation = step1_protected_at_birth"

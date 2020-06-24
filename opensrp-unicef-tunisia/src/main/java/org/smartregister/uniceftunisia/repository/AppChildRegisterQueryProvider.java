@@ -2,7 +2,6 @@ package org.smartregister.uniceftunisia.repository;
 
 import org.smartregister.child.provider.RegisterQueryProvider;
 import org.smartregister.child.util.Constants;
-import org.smartregister.growthmonitoring.util.GrowthMonitoringConstants;
 import org.smartregister.uniceftunisia.util.AppConstants;
 
 public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
@@ -22,7 +21,6 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 "mother" + "." + Constants.KEY.LAST_NAME + " as mother_last_name",
                 getDemographicTable() + "." + Constants.KEY.DOB,
                 "mother" + "." + Constants.KEY.DOB + " as mother_dob",
-                getMotherDetailsTable() + "." + Constants.KEY.NRC_NUMBER + " as mother_nrc_number",
                 getDemographicTable() + "." + Constants.KEY.CLIENT_REG_DATE,
                 getDemographicTable() + "." + Constants.KEY.LAST_INTERACTED_WITH,
                 getChildDetailsTable() + "." + AppConstants.KEY.INACTIVE,
@@ -33,9 +31,7 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 getChildDetailsTable() + "." + Constants.SHOW_BCG2_REMINDER,
                 getMotherDetailsTable() + "." + AppConstants.PROTECTED_AT_BIRTH,
                 getMotherDetailsTable() + "." + AppConstants.MOTHER_TDV_DOSES,
-                getMotherDetailsTable() + "." + AppConstants.MOTHER_HIV_STATUS,
                 getChildDetailsTable() + "." + AppConstants.BIRTH_REGISTRATION_NUMBER,
-                getChildDetailsTable() + "." + GrowthMonitoringConstants.PMTCT_STATUS
         };
     }
 

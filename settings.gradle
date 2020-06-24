@@ -1,2 +1,2 @@
-include ':opensrp-unicef-tunisia' /*, ':opensrp-immunization'
-project(":opensrp-immunization").projectDir = new File("../opensrp-client-immunization/opensrp-immunization")*/
+include ':opensrp-unicef-tunisia' , ':opensrp-child'
+project(":opensrp-child").projectDir = new File("../opensrp-client-child/opensrp-child")

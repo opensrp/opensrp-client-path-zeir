@@ -113,47 +113,56 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 if (eventType == null) {
                     continue;
                 }
+                switch (eventType) {
+                    case VaccineIntentService.EVENT_TYPE:
+                    case VaccineIntentService.EVENT_TYPE_OUT_OF_CATCHMENT:
+                        processVaccinationEvent(vaccineTable, eventClient, event, eventType);
+                        break;
+                    case WeightIntentService.EVENT_TYPE:
+                    case WeightIntentService.EVENT_TYPE_OUT_OF_CATCHMENT:
+                        processWeightEvent(weightTable, heightTable, eventClient, eventType);
+                        break;
 
-                if (eventType.equals(VaccineIntentService.EVENT_TYPE) || eventType
-                        .equals(VaccineIntentService.EVENT_TYPE_OUT_OF_CATCHMENT)) {
-                    processVaccinationEvent(vaccineTable, eventClient, event, eventType);
-                } else if (eventType.equals(WeightIntentService.EVENT_TYPE) || eventType
-                        .equals(WeightIntentService.EVENT_TYPE_OUT_OF_CATCHMENT)) {
-                    processWeightEvent(weightTable, heightTable, eventClient, eventType);
-                } else if (eventType.equals(RecurringIntentService.EVENT_TYPE)) {
-                    if (serviceTable == null) {
-                        continue;
-                    }
-                    processService(eventClient, serviceTable);
-                } else if (eventType.equals(JsonFormUtils.BCG_SCAR_EVENT)) {
-                    processBCGScarEvent(eventClient);
-                } else if (eventType.equals(MoveToMyCatchmentUtils.MOVE_TO_CATCHMENT_EVENT)) {
-                    unsyncEvents.add(event);
-                } else if (eventType.equals(Constants.EventType.DEATH)) {
-                    if (processDeathEvent(eventClient)) {
+                    case RecurringIntentService.EVENT_TYPE:
+                        if (serviceTable == null) {
+                            continue;
+                        }
+                        processService(eventClient, serviceTable);
+                        break;
+                    case JsonFormUtils.BCG_SCAR_EVENT:
+                        processBCGScarEvent(eventClient);
+                        break;
+                    case MoveToMyCatchmentUtils.MOVE_TO_CATCHMENT_EVENT:
                         unsyncEvents.add(event);
-                    }
-                } else if (eventType.equals(Constants.EventType.BITRH_REGISTRATION) || eventType
-                        .equals(Constants.EventType.UPDATE_BITRH_REGISTRATION) || eventType
-                        .equals(Constants.EventType.NEW_WOMAN_REGISTRATION)) {
-
-                    if (eventType.equals(Constants.EventType.BITRH_REGISTRATION) && eventClient.getClient() != null) {
-                        UnicefTunisiaApplication.getInstance().registerTypeRepository().add(AppConstants.RegisterType.CHILD, event.getBaseEntityId());
-                    }
-
-                    if (clientClassification == null) {
-                        continue;
-                    }
-
-                    processBirthAndWomanRegistrationEvent(clientClassification, eventClient, event);
-                } else if (processorMap.containsKey(eventType)) {
-                    try {
-                        processEventUsingMiniprocessor(clientClassification, eventClient, eventType);
-                    } catch (Exception ex) {
-                        Timber.e(ex);
-                    }
+                        break;
+                    case Constants.EventType.DEATH:
+                        if (processDeathEvent(eventClient)) {
+                            unsyncEvents.add(event);
+                        }
+                        break;
+                    case Constants.EventType.FATHER_REGISTRATION:
+                    case Constants.EventType.BITRH_REGISTRATION:
+                    case Constants.EventType.UPDATE_BITRH_REGISTRATION:
+                    case Constants.EventType.NEW_WOMAN_REGISTRATION:
+                        if (eventType.equals(Constants.EventType.BITRH_REGISTRATION) && eventClient.getClient() != null) {
+                            UnicefTunisiaApplication.getInstance().registerTypeRepository().add(AppConstants.RegisterType.CHILD, event.getBaseEntityId());
+                        }
+                        if (clientClassification == null) {
+                            continue;
+                        }
+                        processChildRegistrationAndRelatedEvents(clientClassification, eventClient, event);
+                        break;
+                    default:
+                        if (processorMap.containsKey(eventType)) {
+                            try {
+                                processEventUsingMiniprocessor(clientClassification, eventClient, eventType);
+                            } catch (Exception ex) {
+                                Timber.e(ex);
+                            }
+                        }
                 }
             }
+
 
             // Unsync events that are should not be in this device
             processUnsyncEvents(unsyncEvents);
@@ -195,7 +204,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         }
     }
 
-    private void processBirthAndWomanRegistrationEvent(@NonNull ClientClassification clientClassification, @NonNull EventClient eventClient, @NonNull Event event) {
+    private void processChildRegistrationAndRelatedEvents(@NonNull ClientClassification clientClassification, @NonNull EventClient eventClient, @NonNull Event event) {
         Client client = eventClient.getClient();
         //iterate through the events
         if (client != null) {

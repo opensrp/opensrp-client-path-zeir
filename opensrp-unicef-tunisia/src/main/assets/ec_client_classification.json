@@ -15,6 +15,14 @@
           },
           {
             "field": "eventType",
+            "field_value": "Father Registration",
+            "creates_case": [
+              "ec_client",
+              "ec_father_details"
+            ]
+          },
+          {
+            "field": "eventType",
             "field_value": "Birth Registration",
             "creates_case": [
               "ec_client",
