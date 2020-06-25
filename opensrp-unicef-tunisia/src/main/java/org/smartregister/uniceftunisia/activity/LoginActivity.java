@@ -3,6 +3,7 @@ package org.smartregister.uniceftunisia.activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.task.SaveTeamLocationsTask;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.presenter.LoginPresenter;
@@ -40,7 +41,7 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
     @Override
     public void goToHome(boolean remote) {
         if (remote) {
-            org.smartregister.util.Utils.startAsyncTask(new SaveTeamLocationsTask(), null);
+            LocationHelper.getInstance().locationIdsFromHierarchy();
         }
 
         if (mLoginPresenter.isServerSettingsSet()) {

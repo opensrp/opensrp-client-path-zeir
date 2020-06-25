@@ -182,26 +182,23 @@
         },
         {
           "column_name": "mother_nationality",
-          "type": "Event",
+          "type": "Client",
           "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "mother_nationality"
+            "field": "attributes.mother_nationality"
           }
         },
         {
           "column_name": "mother_nationality_other",
-          "type": "Event",
+          "type": "Client",
           "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "mother_nationality_other"
+            "field": "attributes.mother_nationality_other"
           }
         },
         {
           "column_name": "second_phone_number",
-          "type": "Event",
+          "type": "Client",
           "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "second_phone_number"
+            "field": "attributes.second_phone_number"
           }
         },
         {
@@ -221,10 +218,9 @@
         },
         {
           "column_name": "mother_rubella",
-          "type": "Event",
+          "type": "Client",
           "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "mother_rubella"
+            "field": "attributes.mother_rubella"
           }
         },
         {
@@ -290,7 +286,7 @@
           }
         },
         {
-          "column_name": "child_reg_no",
+          "column_name": "child_reg",
           "type": "Client",
           "json_mapping": {
             "field": "attributes.child_reg"
@@ -324,26 +320,23 @@
         },
         {
           "column_name": "phone_number",
-          "type": "Event",
+          "type": "Client",
           "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "father_phone"
+            "field": "attributes.father_phone"
           }
         },
         {
           "column_name": "father_nationality",
-          "type": "Event",
+          "type": "Client",
           "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "father_nationality"
+            "field": "attributes.father_nationality"
           }
         },
         {
           "column_name": "father_nationality_other",
-          "type": "Event",
+          "type": "Client",
           "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "mother_nationality_other"
+            "field": "attributes.father_nationality_other"
           }
         },
         {

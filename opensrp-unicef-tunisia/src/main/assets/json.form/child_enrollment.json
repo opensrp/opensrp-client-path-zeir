@@ -109,7 +109,7 @@
         "key": "child_reg",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "",
+        "openmrs_entity_id": "child_reg",
         "type": "edit_text",
         "hint": "Child's unique government ID",
         "label_info_text": "This is the government unique ID assigned by the government",
@@ -260,8 +260,7 @@
         "openmrs_entity": "person_address",
         "openmrs_entity_id": "address2",
         "openmrs_data_type": "text",
-        "type": "tree",
-        "tree": [],
+        "type": "edit_text",
         "hint": "Home address",
         "v_required": {
           "value": true,
@@ -306,7 +305,7 @@
         "key": "father_lastname",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person",
-        "openmrs_entity_id": "first_name",
+        "openmrs_entity_id": "last_name",
         "entity_id": "father",
         "type": "edit_text",
         "hint": "Last name of the father",
@@ -364,7 +363,7 @@
       {
         "key": "father_nationality",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
+        "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "father_nationality",
         "entity_id": "father",
         "type": "spinner",
@@ -382,7 +381,7 @@
       {
         "key": "father_nationality_other",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
+        "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "father_nationality_other",
         "type": "edit_text",
         "hint": "Indicate the father's nationality",
@@ -407,7 +406,7 @@
       {
         "key": "father_phone",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
+        "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "father_phone",
         "entity_id": "father",
         "type": "edit_text",
@@ -479,8 +478,9 @@
       {
         "key": "mother_nationality",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
+        "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "mother_nationality",
+        "entity_id": "mother",
         "type": "spinner",
         "hint": "Nationality of the mother/caregiver",
         "values": [
@@ -496,8 +496,9 @@
       {
         "key": "mother_nationality_other",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
+        "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "mother_nationality_other",
+        "entity_id": "mother",
         "type": "edit_text",
         "hint": "Indicate the mothers's nationality",
         "edit_type": "name",
@@ -533,7 +534,7 @@
       {
         "key": "second_phone_number",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
+        "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "second_phone_number",
         "entity_id": "mother",
         "type": "edit_text",
@@ -584,7 +585,6 @@
         "type": "edit_text",
         "label_info_text": "If the child's mother received 2 or more doses of a tetanus-containing vaccine during pregnancy, then the child is considered protected at birth (PAB) against tetanus.",
         "hint": "Protected at birth (PAB)",
-        "entity_id": "mother",
         "read_only": true,
         "v_required": {
           "value": true,
@@ -601,8 +601,9 @@
       {
         "key": "mother_rubella",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
+        "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "mother_rubella",
+        "entity_id": "mother",
         "type": "spinner",
         "hint": "Did the child's mother receive the Rubella vaccine?",
         "values": [

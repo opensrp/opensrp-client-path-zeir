@@ -46,8 +46,8 @@ public class AppJsonFormUtils extends JsonFormUtils {
                         Utils.getValue(childDetails, Constants.JSON_FORM_KEY.UNIQUE_ID, false));
 
                 JSONObject metadata = birthRegistrationForm.getJSONObject(JsonFormUtils.METADATA);
-                metadata.put(JsonFormUtils.ENCOUNTER_LOCATION,
-                        ChildLibrary.getInstance().getLocationPickerView(context).getSelectedItem());
+                metadata.put(JsonFormUtils.ENCOUNTER_LOCATION, ChildLibrary.getInstance()
+                        .getLocationPickerView(context).getSelectedItem());
 
                 //inject zeir id into the birthRegistrationForm
                 JSONObject stepOne = birthRegistrationForm.getJSONObject(JsonFormUtils.STEP1);
