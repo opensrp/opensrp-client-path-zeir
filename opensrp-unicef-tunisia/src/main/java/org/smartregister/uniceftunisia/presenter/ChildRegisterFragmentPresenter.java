@@ -3,6 +3,7 @@ package org.smartregister.uniceftunisia.presenter;
 import org.smartregister.child.contract.ChildRegisterFragmentContract;
 import org.smartregister.child.presenter.BaseChildRegisterFragmentPresenter;
 import org.smartregister.child.util.Constants;
+import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.DBQueryHelper;
 
 public class ChildRegisterFragmentPresenter extends BaseChildRegisterFragmentPresenter {
@@ -14,7 +15,7 @@ public class ChildRegisterFragmentPresenter extends BaseChildRegisterFragmentPre
 
     @Override
     public String getMainCondition() {
-        return String.format(" %s is null ", Constants.KEY.DATE_REMOVED);
+        return String.format(" %s.%s is null ", AppConstants.TABLE_NAME.ALL_CLIENTS, Constants.KEY.DATE_REMOVED);
     }
 
     @Override

@@ -271,6 +271,13 @@
           }
         },
         {
+          "column_name": "father_relational_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "relationships.father"
+          }
+        },
+        {
           "column_name": "contact_phone_number",
           "type": "Event",
           "json_mapping": {

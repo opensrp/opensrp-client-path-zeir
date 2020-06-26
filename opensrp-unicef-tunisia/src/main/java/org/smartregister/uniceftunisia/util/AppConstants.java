@@ -2,8 +2,6 @@ package org.smartregister.uniceftunisia.util;
 
 public class AppConstants {
 
-    public static final String MOTHER_TDV_DOSES = "mother_tdv_doses";
-    public static final String PROTECTED_AT_BIRTH = "protected_at_birth";
     public static final String REACTION_VACCINE = "Reaction_Vaccine";
     public static final String NATIONAL_ID = "national_id";
     public static final String BHT_MID = "bht_mid";
@@ -35,47 +33,51 @@ public class AppConstants {
         public static final String TITLE = "title";
         public static final String HIA_2_INDICATOR = "hia2_indicator";
         public static final String RELATIONALID = "relationalid";
+        public static final String RELATIONAL_ID = "relational_id";
         public static final String ID_LOWER_CASE = "_id";
         public static final String BASE_ENTITY_ID = "base_entity_id";
         public static final String DOB = "dob";//Date Of Birth
         public static final String DOD = "dod";//Date Of Birth
         public static final String DATE_REMOVED = "date_removed";
         public static final String MOTHER_NRC_NUMBER = "nrc_number";
-        public static final String MOTHER_GUARDIAN_NUMBER = "mother_guardian_number";
-        public static final String MOTHER_SECOND_PHONE_NUMBER = "second_phone_number";
+        public static final String SECOND_PHONE_NUMBER = "second_phone_number";
+        public static final String PHONE_NUMBER = "phone_number";
         public static final String VIEW_CONFIGURATION_PREFIX = "ViewConfiguration_";
         public static final String HOME_FACILITY = "home_address";
         public static final String APP_ID = "mer_id";
         public static final String MIDDLE_NAME = "middle_name";
-        public static final String OTHER = "other";
-        public static final String BIRTH_FACILITY_NAME_OTHER = "Birth_Facility_Name_Other";
         public static final String ADDRESS_3 = "address3";
         public static final String BIRTH_FACILITY_NAME = "Birth_Facility_Name";
         public static final String RESIDENTIAL_AREA = "Residential_Area";
         public static final String MOTHER_ = "mother_";
         public static final String ENCOUNTER_TYPE = "encounter_type";
         public static final String BIRTH_REGISTRATION = "Birth Registration";
-        public static final String REGISTRATION_HOME_ADDRESS = "home_address";
         public static final String IDENTIFIERS = "identifiers";
         public static final String FIRSTNAME = "firstName";
         public static final String MIDDLENAME = "middleName";
         public static final String LASTNAME = "lastName";
         public static final String ATTRIBUTES = "attributes";
-        public static final int FIVE_YEAR = 5;
-        public static final String OPD_REGISTRATION = "Opd Registration";
         public static final String VILLAGE = "village";
         public static final String HOME_ADDRESS = "home_address";
         public static final String DOB_UNKNOWN = "dob_unknown";
         public static final String DATE_BIRTH = "Date_Birth";
         public static String SITE_CHARACTERISTICS = "site_characteristics";
-
+        public static String REGISTRATION_DATE = "client_reg_date";
         public static final String FIELDS = "fields";
         public static final String KEY = "key";
         public static final String IS_VACCINE_GROUP = "is_vaccine_group";
         public static final String OPTIONS = "options";
-
-        public static String HIDDEN_FIELDS = "hidden_fields";
-        public static String DISABLED_FIELDS = "disabled_fields";
+        public static final String MOTHER_NATIONALITY = "mother_nationality";
+        public static final String MOTHER_RUBELLA= "mother_rubella";
+        public static final String FATHER_NATIONALITY = "father_nationality";
+        public static final String MOTHER_NATIONALITY_OTHER = "mother_nationality_other";
+        public static final String FATHER_NATIONALITY_OTHER = "father_nationality_other";
+        public static final String MOTHER_TDV_DOSES = "mother_tdv_doses";
+        public static final String PROTECTED_AT_BIRTH = "protected_at_birth";
+        public static final String SHOW_BCG_SCAR = "show_bcg_scar";
+        public static final String SHOW_BCG2_REMINDER = "show_bcg2_reminder";
+        public static final String BIRTH_REGISTRATION_NUMBER  = "birth_registration_number";
+        public static final String ID  = "id";
     }
 
     public static final class DrawerMenu {
@@ -119,10 +121,12 @@ public class AppConstants {
     }
 
     public static class TABLE_NAME {
-        public static final String CHILD = "ec_client";
         public static final String ALL_CLIENTS = "ec_client";
         public static final String REGISTER_TYPE = "client_register_type";
         public static final String CHILD_UPDATED_ALERTS = "child_updated_alerts";
+        public static final String FATHER_DETAILS = "ec_father_details";
+        public static final String MOTHER_DETAILS = "ec_mother_details";
+        public static final String CHILD_DETAILS = "ec_child_details";
     }
 
     public interface Columns {

@@ -312,7 +312,7 @@
         "edit_type": "name",
         "look_up": "true",
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "Please enter the father's last name"
         },
         "v_regex": {
@@ -331,7 +331,7 @@
         "edit_type": "name",
         "look_up": "true",
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "Please enter the father's first name"
         },
         "v_regex": {
@@ -374,7 +374,7 @@
           "Not known"
         ],
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "Please enter father's nationality"
         }
       },
@@ -564,10 +564,10 @@
         ]
       },
       {
-        "key": "protected_at_birth",
+        "key": "protected_at_birth_calculation",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
-        "openmrs_entity_id": "164826AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity_id": "protected_at_birth_calculation",
         "type": "hidden",
         "calculation": {
           "rules-engine": {
@@ -578,7 +578,7 @@
         }
       },
       {
-        "key": "protected_at_birth_display",
+        "key": "protected_at_birth",
         "openmrs_entity_parent": "",
         "openmrs_entity": "concept",
         "openmrs_entity_id": "164826AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",

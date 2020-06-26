@@ -89,8 +89,8 @@ public class AppJsonFormUtils extends JsonFormUtils {
             } else if (jsonObject.getString(JsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.MOTHER_NRC_NUMBER)) {
                 String nidNumber = Utils.getValue(childDetails, AppConstants.KEY.MOTHER_NRC_NUMBER, true);
                 jsonObject.put(JsonFormUtils.VALUE, nidNumber);
-            } else if (jsonObject.getString(JsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.MOTHER_SECOND_PHONE_NUMBER)) {
-                String secondaryNumber = Utils.getValue(childDetails, AppConstants.KEY.MOTHER_SECOND_PHONE_NUMBER, true);
+            } else if (jsonObject.getString(JsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.SECOND_PHONE_NUMBER)) {
+                String secondaryNumber = Utils.getValue(childDetails, AppConstants.KEY.SECOND_PHONE_NUMBER, true);
                 jsonObject.put(JsonFormUtils.VALUE, secondaryNumber);
             } else if (jsonObject.has(JsonFormConstants.TREE)) {
                 processLocationTree(childDetails, nonEditableFields, jsonObject);

@@ -16,7 +16,7 @@ import java.util.List;
 public class DBQueryHelper {
 
     public static final String getHomeRegisterCondition() {
-        return AppConstants.TABLE_NAME.CHILD + "." + Constants.KEY.DATE_REMOVED + " IS NULL ";
+        return AppConstants.TABLE_NAME.ALL_CLIENTS + "." + Constants.KEY.DATE_REMOVED + " IS NULL ";
     }
 
     public static String getFilterSelectionCondition(boolean urgentOnly) {

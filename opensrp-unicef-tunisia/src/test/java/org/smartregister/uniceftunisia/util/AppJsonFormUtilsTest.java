@@ -104,7 +104,7 @@ public class AppJsonFormUtilsTest {
         childDetails.put(AppConstants.KEY.LAST_NAME, "last");
         childDetails.put(AppConstants.KEY.MIDDLE_NAME, "middle");
         childDetails.put(AppConstants.KEY.MOTHER_NRC_NUMBER, "nrc_number");
-        childDetails.put(AppConstants.KEY.MOTHER_SECOND_PHONE_NUMBER, "0232453923");
+        childDetails.put(AppConstants.KEY.SECOND_PHONE_NUMBER, "0232453923");
         List<String> nonEditableFields = new ArrayList<>();
         String result = AppJsonFormUtils.getMetadataForEditForm(context, childDetails, nonEditableFields);
         JSONObject jsonResultObject = new JSONObject(result);
@@ -127,7 +127,7 @@ public class AppJsonFormUtilsTest {
 
         Assert.assertEquals("Nrc Number", JsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.MOTHER_NRC_NUMBER));
 
-        Assert.assertEquals("0232453923", JsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.MOTHER_SECOND_PHONE_NUMBER));
+        Assert.assertEquals("0232453923", JsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.SECOND_PHONE_NUMBER));
     }
 
     @Test

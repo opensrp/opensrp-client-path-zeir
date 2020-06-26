@@ -299,7 +299,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
             List<VaccineGroup> childVaccines = VaccinatorUtils.getSupportedVaccines(this);
             List<Vaccine> specialVaccines = VaccinatorUtils.getSpecialVaccines(this);
             VaccineSchedule.init(childVaccines, specialVaccines, AppConstants.KEY.CHILD);
-            //  VaccineSchedule.vaccineSchedules.get(AppConstants.KEY.CHILD).remove("BCG 2");
+            //  VaccineSchedule.vaccineSchedules.get(AppConstants.KEY.ALL_CLIENTS).remove("BCG 2");
         } catch (Exception e) {
             Timber.e(e, "UnicefTunisiaApplication --> initOfflineSchedules");
         }
