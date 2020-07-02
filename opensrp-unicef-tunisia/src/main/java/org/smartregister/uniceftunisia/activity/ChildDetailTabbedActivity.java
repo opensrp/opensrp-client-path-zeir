@@ -11,14 +11,18 @@ import com.vijay.jsonwizard.domain.Form;
 
 import org.apache.commons.lang3.tuple.Triple;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.child.activity.BaseChildDetailTabbedActivity;
+import org.smartregister.child.domain.UpdateRegisterParams;
 import org.smartregister.child.fragment.StatusEditDialogFragment;
 import org.smartregister.child.task.LoadAsyncTask;
 import org.smartregister.child.util.ChildDbUtils;
+import org.smartregister.child.util.Constants;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.fragment.ChildRegistrationDataFragment;
+import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppJsonFormUtils;
 import org.smartregister.uniceftunisia.util.AppUtils;
 import org.smartregister.util.FormUtils;
@@ -78,7 +82,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
 
         switch (item.getItemId()) {
             case R.id.registration_data:
-                String populatedForm = AppJsonFormUtils.getMetadataForEditForm(this, detailsMap, nonEditableFields);
+                String populatedForm = AppJsonFormUtils.updateJsonFormWithClientDetails(this, detailsMap, nonEditableFields);
                 startFormActivity(populatedForm);
                 // User chose the "Settings" item, show the app settings UI...
                 return true;
@@ -138,12 +142,6 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
     }
 
     @Override

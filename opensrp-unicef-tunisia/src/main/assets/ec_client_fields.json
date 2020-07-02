@@ -173,7 +173,7 @@
           }
         },
         {
-          "column_name": "phone_number",
+          "column_name": "mother_guardian_number",
           "type": "Event",
           "json_mapping": {
             "field": "obs.fieldCode",
@@ -278,7 +278,7 @@
           }
         },
         {
-          "column_name": "contact_phone_number",
+          "column_name": "mother_guardian_number",
           "type": "Event",
           "json_mapping": {
             "field": "obs.fieldCode",
@@ -326,7 +326,7 @@
           }
         },
         {
-          "column_name": "phone_number",
+          "column_name": "father_phone",
           "type": "Client",
           "json_mapping": {
             "field": "attributes.father_phone"

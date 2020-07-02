@@ -302,7 +302,7 @@
         }
       },
       {
-        "key": "father_lastname",
+        "key": "father_last_name",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person",
         "openmrs_entity_id": "last_name",
@@ -321,7 +321,7 @@
         }
       },
       {
-        "key": "father_firstname",
+        "key": "father_first_name",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person",
         "openmrs_entity_id": "first_name",
@@ -586,6 +586,7 @@
         "label_info_text": "If the child's mother received 2 or more doses of a tetanus-containing vaccine during pregnancy, then the child is considered protected at birth (PAB) against tetanus.",
         "hint": "Protected at birth (PAB)",
         "read_only": true,
+        "entity_id": "mother",
         "v_required": {
           "value": true,
           "err": "Please choose an option"

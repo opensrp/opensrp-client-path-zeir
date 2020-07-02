@@ -63,6 +63,7 @@ import org.smartregister.uniceftunisia.repository.MonthlyTalliesRepository;
 import org.smartregister.uniceftunisia.repository.UnicefTunisiaRepository;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppUtils;
+import org.smartregister.uniceftunisia.util.DbConstants;
 import org.smartregister.uniceftunisia.util.VaccineDuplicate;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.receiver.TimeChangedBroadcastReceiver;
@@ -117,15 +118,14 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     }
 
     private static String[] getFtsTables() {
-        return new String[]{"ec_client", "ec_mother_details", DBConstants.RegisterTable.CHILD_DETAILS};
+        return new String[]{DBConstants.RegisterTable.CLIENT, DBConstants.RegisterTable.MOTHER_DETAILS,
+                DBConstants.RegisterTable.CHILD_DETAILS, DBConstants.RegisterTable.FATHER_DETAILS};
     }
 
     private static String[] getFtsSearchFields(String tableName) {
-        if (tableName.equalsIgnoreCase("ec_client")) {
+        if (tableName.equalsIgnoreCase(DBConstants.RegisterTable.CLIENT)) {
             return new String[]{"first_name", "last_name", "zeir_d"};
-        } else if ("ec_mother_details".equals(tableName)) {
-            return new String[]{"next_contact"};
-        } else if (tableName.equals(DBConstants.RegisterTable.CHILD_DETAILS)) {
+        } else if (tableName.equalsIgnoreCase(DBConstants.RegisterTable.CHILD_DETAILS)) {
             return new String[]{DBConstants.KEY.LOST_TO_FOLLOW_UP, DBConstants.KEY.INACTIVE};
         }
         return null;
@@ -201,7 +201,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
             } else {
 
                 // TODO: This needs to be fixed because it is a configuration & not a hardcoded string
-                map.put(vaccine.name, Pair.create("ec_child_details", false));
+                map.put(vaccine.name, Pair.create(DBConstants.RegisterTable.CHILD_DETAILS, false));
             }
     }
 

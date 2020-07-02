@@ -106,7 +106,7 @@ public class AppJsonFormUtilsTest {
         childDetails.put(AppConstants.KEY.MOTHER_NRC_NUMBER, "nrc_number");
         childDetails.put(AppConstants.KEY.SECOND_PHONE_NUMBER, "0232453923");
         List<String> nonEditableFields = new ArrayList<>();
-        String result = AppJsonFormUtils.getMetadataForEditForm(context, childDetails, nonEditableFields);
+        String result = AppJsonFormUtils.updateJsonFormWithClientDetails(context, childDetails, nonEditableFields);
         JSONObject jsonResultObject = new JSONObject(result);
         JSONObject stepOne = jsonResultObject.getJSONObject(JsonFormUtils.STEP1);
         JSONArray stepOneFields = stepOne.optJSONArray(org.smartregister.util.JsonFormUtils.FIELDS);

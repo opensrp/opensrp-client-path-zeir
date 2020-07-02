@@ -3,10 +3,6 @@ package org.smartregister.uniceftunisia.util;
 public class AppConstants {
 
     public static final String REACTION_VACCINE = "Reaction_Vaccine";
-    public static final String NATIONAL_ID = "national_id";
-    public static final String BHT_MID = "bht_mid";
-    public static final String MOTHER_HIV_STATUS = "mother_hiv_status";
-    public static final String BIRTH_REGISTRATION_NUMBER = "birth_registration_number";
 
     public interface LOCALE {
         String ARABIC_LOCALE = "ar";
@@ -16,6 +12,8 @@ public class AppConstants {
         public static final String MOTHER_BASE_ENTITY_ID = "mother_base_entity_id";
         public static final String CHILD = "child";
         public static final String MOTHER_FIRST_NAME = "mother_first_name";
+        public static final String FATHER_FIRST_NAME = "father_first_name";
+        public static final String FATHER_LAST_NAME = "father_last_name";
         public static final String FIRST_NAME = "first_name";
         public static final String LAST_NAME = "last_name";
         public static final String BIRTHDATE = "birthdate";
@@ -61,6 +59,7 @@ public class AppConstants {
         public static final String HOME_ADDRESS = "home_address";
         public static final String DOB_UNKNOWN = "dob_unknown";
         public static final String DATE_BIRTH = "Date_Birth";
+        public static final String BIRTH_WEIGHT = "Birth_Weight";
         public static String SITE_CHARACTERISTICS = "site_characteristics";
         public static String REGISTRATION_DATE = "client_reg_date";
         public static final String FIELDS = "fields";
@@ -70,14 +69,20 @@ public class AppConstants {
         public static final String MOTHER_NATIONALITY = "mother_nationality";
         public static final String MOTHER_RUBELLA= "mother_rubella";
         public static final String FATHER_NATIONALITY = "father_nationality";
+        public static final String FATHER_RELATIONAL_ID= "father_relational_id";
         public static final String MOTHER_NATIONALITY_OTHER = "mother_nationality_other";
         public static final String FATHER_NATIONALITY_OTHER = "father_nationality_other";
+        public static final String MOTHER_GUARDIAN_NUMBER = "mother_guardian_number";
+        public static final String FATHER_PHONE = "father_phone";
         public static final String MOTHER_TDV_DOSES = "mother_tdv_doses";
         public static final String PROTECTED_AT_BIRTH = "protected_at_birth";
         public static final String SHOW_BCG_SCAR = "show_bcg_scar";
         public static final String SHOW_BCG2_REMINDER = "show_bcg2_reminder";
         public static final String BIRTH_REGISTRATION_NUMBER  = "birth_registration_number";
         public static final String ID  = "id";
+        public static final String CHILD_REG = "child_reg";
+        public static final String GA_AT_BIRTH = "ga_at_birth";
+        public static final String PLACE_OF_BIRTH = "place_of_birth";
     }
 
     public static final class DrawerMenu {
@@ -106,7 +111,6 @@ public class AppConstants {
         public static final String CHILD_REGISTRATION = "Birth Registration";
         public static final String UPDATE_CHILD_REGISTRATION = "Update Birth Registration";
         public static final String OUT_OF_CATCHMENT = "Out of Catchment";
-
     }
 
     public static class JSON_FORM {

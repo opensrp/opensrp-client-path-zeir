@@ -144,6 +144,8 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                     case Constants.EventType.BITRH_REGISTRATION:
                     case Constants.EventType.UPDATE_BITRH_REGISTRATION:
                     case Constants.EventType.NEW_WOMAN_REGISTRATION:
+                    case Constants.EventType.UPDATE_FATHER_DETAILS:
+                    case Constants.EventType.UPDATE_MOTHER_DETAILS:
                         if (eventType.equals(Constants.EventType.BITRH_REGISTRATION) && eventClient.getClient() != null) {
                             UnicefTunisiaApplication.getInstance().registerTypeRepository().add(AppConstants.RegisterType.CHILD, event.getBaseEntityId());
                         }
@@ -206,7 +208,6 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
 
     private void processChildRegistrationAndRelatedEvents(@NonNull ClientClassification clientClassification, @NonNull EventClient eventClient, @NonNull Event event) {
         Client client = eventClient.getClient();
-        //iterate through the events
         if (client != null) {
             try {
                 processEvent(event, client, clientClassification);

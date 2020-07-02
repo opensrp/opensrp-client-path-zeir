@@ -36,6 +36,22 @@
               "ec_client",
               "ec_child_details"
             ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "Update Mother Details",
+            "creates_case": [
+              "ec_client",
+              "ec_mother_details"
+            ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "Update Father Details",
+            "creates_case": [
+              "ec_client",
+              "ec_father_details"
+            ]
           }
         ]
       }
