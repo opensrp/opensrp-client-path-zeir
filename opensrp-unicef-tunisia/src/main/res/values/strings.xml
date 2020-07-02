@@ -592,5 +592,6 @@
     <string name="search_hint">Search Register</string>
 
     <string name="opensrp_url">https://unicef-tunisia-stage.smartregister.org/opensrp/</string>
+    <string name="supported_by">Supported by</string>
 
 </resources>
