@@ -105,7 +105,6 @@
         </provider>
 
         <service android:name="org.smartregister.immunization.service.intent.VaccineIntentService" />
-        <service android:name="org.smartregister.immunization.service.intent.RecurringIntentService" />
         <service android:name="org.smartregister.immunization.service.intent.VaccineSchedulesUpdateIntentService" />
         <service android:name="org.smartregister.growthmonitoring.service.intent.ZScoreRefreshIntentService" />
         <service android:name="org.smartregister.growthmonitoring.service.intent.WeightIntentService" />

@@ -207,7 +207,6 @@ public class UnicefTunisiaRepository extends Repository {
         upgradeToVersion5(database);
         upgradeToVersion6(database);
         upgradeToVersion7OutOfArea(database);
-        upgradeToVersion7RecurringServiceUpdate(database);
         upgradeToVersion7EventWeightHeightVaccineRecurringChange(database);
         upgradeToVersion7VaccineRecurringServiceRecordChange(database);
         upgradeToVersion7WeightHeightVaccineRecurringServiceChange(database);
@@ -312,19 +311,6 @@ public class UnicefTunisiaRepository extends Repository {
 
         } catch (Exception e) {
             Timber.e(e, "upgradeToVersion7");
-        }
-    }
-
-    private void upgradeToVersion7RecurringServiceUpdate(@NonNull SQLiteDatabase db) {
-        try {
-
-            // Recurring service json changed. update
-            RecurringServiceTypeRepository recurringServiceTypeRepository = UnicefTunisiaApplication.getInstance()
-                    .recurringServiceTypeRepository();
-            IMDatabaseUtils.populateRecurringServices(context, db, recurringServiceTypeRepository);
-
-        } catch (Exception e) {
-            Timber.e(e, "upgradeToVersion7RecurringServiceUpdate");
         }
     }
 

@@ -137,4 +137,10 @@ public class ChildImmunizationActivity extends BaseChildImmunizationActivity {
             Timber.e(e);
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        serviceGroupCanvasLL.setVisibility(View.GONE);
+    }
 }

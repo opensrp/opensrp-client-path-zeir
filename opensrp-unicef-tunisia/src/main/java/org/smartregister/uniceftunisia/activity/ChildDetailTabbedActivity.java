@@ -2,6 +2,7 @@ package org.smartregister.uniceftunisia.activity;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,18 +12,14 @@ import com.vijay.jsonwizard.domain.Form;
 
 import org.apache.commons.lang3.tuple.Triple;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.child.activity.BaseChildDetailTabbedActivity;
-import org.smartregister.child.domain.UpdateRegisterParams;
 import org.smartregister.child.fragment.StatusEditDialogFragment;
 import org.smartregister.child.task.LoadAsyncTask;
 import org.smartregister.child.util.ChildDbUtils;
-import org.smartregister.child.util.Constants;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.fragment.ChildRegistrationDataFragment;
-import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppJsonFormUtils;
 import org.smartregister.uniceftunisia.util.AppUtils;
 import org.smartregister.util.FormUtils;
@@ -44,6 +41,12 @@ import static org.smartregister.uniceftunisia.util.AppUtils.setAppLocale;
  */
 public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
     private static List<String> nonEditableFields = Arrays.asList("Sex", "zeir_id", "Birth_Weight", "Birth_Height", "protected_at_birth");
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getChildUnderFiveFragment().showRecurringServices(false);
+    }
 
     @Override
     protected void attachBaseContext(android.content.Context base) {
@@ -71,6 +74,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
         super.onCreateOptionsMenu(menu);
         overflow.findItem(org.smartregister.child.R.id.register_card).setVisible(false);
         overflow.findItem(org.smartregister.child.R.id.write_to_card).setVisible(false);
+        overflow.findItem(org.smartregister.child.R.id.recurring_services_data).setVisible(false);
         return true;
     }
 

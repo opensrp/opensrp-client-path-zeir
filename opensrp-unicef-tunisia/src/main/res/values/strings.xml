@@ -593,5 +593,7 @@
 
     <string name="opensrp_url">https://unicef-tunisia-stage.smartregister.org/opensrp/</string>
     <string name="supported_by">Supported by</string>
+    <string name="tunisia_app_login_title" translatable="false">Carte électronique de vaccination Tunisienne\nبطـــــاقة التلقيـــــح الإلكترونيــــة التونسية
+</string>
 
 </resources>

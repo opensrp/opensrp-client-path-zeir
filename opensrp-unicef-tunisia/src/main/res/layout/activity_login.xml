@@ -22,36 +22,67 @@
             android:layout_alignParentTop="true"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_marginBottom="16dp"
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:id="@+id/imageView6"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="@dimen/login_horizontal_margin"
-                    android:layout_marginEnd="@dimen/login_horizontal_margin"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:contentDescription="@string/logo_string"
                     android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/logo_tunisia_moh" />
 
+                <TextView
+                    android:id="@+id/app_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/tunisia_app_login_title"
+                    android:textAlignment="center"
+                    android:textColor="@color/tunisia_app_color"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                    app:layout_constraintStart_toEndOf="@+id/imageView6"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </TextView>
+
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:id="@+id/imageView2"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
                     android:contentDescription="@string/logo_string"
-                    android:layout_marginStart="@dimen/login_horizontal_margin"
-                    android:layout_marginEnd="@dimen/login_horizontal_margin"
                     android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/flag_tunisia" />
-            </RelativeLayout>
+            </android.support.constraint.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/login_logo"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="140dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
                 android:contentDescription="@string/logo_string"
@@ -179,34 +210,69 @@
         </LinearLayout>
         <!-- Bottom section -->
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/bottom_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/middle_section"
             android:layout_alignParentBottom="true"
-            android:orientation="vertical"
-            android:paddingTop="30dp">
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="32dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="5dp"
-                android:text="@string/supported_by"
+                android:text="@string/powered_by"
                 android:textAlignment="center"
-                android:textSize="16sp" />
+                android:textColor="#585858"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/opensrp_logo_image_view"
-                android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
                 android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:scaleType="centerInside"
+                android:paddingTop="8dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/unicef_tunisia_opensrp_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView21"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:text="@string/supported_by"
+                android:textSize="16sp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/unicef_logo_image_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/unicef_logo_image_view"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="32dp"
+                android:adjustViewBounds="false"
+                android:paddingTop="8dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/logo_unicef" />
-        </LinearLayout>
+                android:src="@drawable/logo_unicef"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
     </RelativeLayout>
 </ScrollView>

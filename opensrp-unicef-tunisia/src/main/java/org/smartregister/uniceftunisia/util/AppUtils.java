@@ -19,7 +19,6 @@ import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.domain.db.Client;
 import org.smartregister.domain.db.EventClient;
 import org.smartregister.location.helper.LocationHelper;
-import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.uniceftunisia.BuildConfig;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
@@ -155,7 +154,6 @@ public class AppUtils extends Utils {
         if (StringUtils.isBlank(reportJobExecutionTime) || timeBetweenLastExecutionAndNow(30, reportJobExecutionTime)) {
             UnicefTunisiaApplication.getInstance().context().allSharedPreferences().savePreference("report_job_execution_time", String.valueOf(System.currentTimeMillis()));
             Toast.makeText(context, "Reporting Job Has Started, It will take some time", Toast.LENGTH_LONG).show();
-            RecurringIndicatorGeneratingJob.scheduleJobImmediately(RecurringIndicatorGeneratingJob.TAG);
         } else {
             Toast.makeText(context, "Reporting Job Has Already Been Started, Try again in 30 mins", Toast.LENGTH_LONG).show();
         }
