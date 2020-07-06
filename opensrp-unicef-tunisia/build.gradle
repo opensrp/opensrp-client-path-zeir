@@ -21,7 +21,6 @@ jacoco {
     toolVersion = jacocoVersion
 }
 
-
 android {
     useLibrary 'org.apache.http.legacy'
     compileSdkVersion androidCompileSdkVersion
@@ -32,7 +31,7 @@ android {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
         versionCode 1
-        versionName "0.0.2"
+        versionName "0.0.3"
         multiDexEnabled true
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
         buildConfigField "boolean", "TIME_CHECK", "false"
@@ -170,7 +169,6 @@ android {
             buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility", "Village"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
         }
-
     }
 
     packagingOptions {
@@ -185,9 +183,7 @@ android {
         exclude 'META-INF/dependencies.txt'
         exclude 'META-INF/LGPL2.1'
         exclude 'LICENSE.txt'
-
     }
-
 
     testOptions {
         unitTests {
@@ -328,7 +324,6 @@ dependencies {
         transitive = true
     }
     implementation group: 'io.fabric.sdk.android', name: 'fabric', version: '1.4.8'
-
 
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 
