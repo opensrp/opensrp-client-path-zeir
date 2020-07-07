@@ -60,6 +60,13 @@ public class AppConstants {
         public static final String DOB_UNKNOWN = "dob_unknown";
         public static final String DATE_BIRTH = "Date_Birth";
         public static final String BIRTH_WEIGHT = "Birth_Weight";
+        public static final String UNIQUE_ID = "govt_unique_id";
+        public static final String CARD_ID = "card_id";
+        public static final String MOTHER_PHONE_NUMBER = "mother_phone_number";
+        public static final String MOTHER_SECOND_PHONE_NUMBER = "mother_second_phone_number";
+        public static final String FATHER_PHONE_NUMBER = "father_phone_number";
+        public static final String MOTHER_DOB = "mother_dob";
+        public static final String FATHER_DOB = "father_dob";
         public static String SITE_CHARACTERISTICS = "site_characteristics";
         public static String REGISTRATION_DATE = "client_reg_date";
         public static final String FIELDS = "fields";

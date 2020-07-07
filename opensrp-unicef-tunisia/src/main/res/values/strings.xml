@@ -593,7 +593,13 @@
 
     <string name="opensrp_url">https://unicef-tunisia-stage.smartregister.org/opensrp/</string>
     <string name="supported_by">Supported by</string>
-    <string name="tunisia_app_login_title" translatable="false">Carte électronique de vaccination Tunisienne\nبطـــــاقة التلقيـــــح الإلكترونيــــة التونسية
-</string>
-
+    <string name="tunisia_app_login_title" translatable="false">Carte électronique de vaccination Tunisienne\nبطـــــاقة التلقيـــــح الإلكترونيــــة التونسية</string>
+    <string name="child_birth_registration_number">Child\'s birth registration number</string>
+    <string name="child_unique_id">Child\'s unique government ID</string>
+    <string name="child_first_name">Child\'s first name</string>
+    <string name="child_last_name">Child\'s last name</string>
+    <string name="dob_range">Child\'s date of birth (range)</string>
+    <string name="mother_caregiver_first_name">" Mother/caregiver first name"</string>
+    <string name="mother_caregiver_last_name">" Mother/caregiver last name"</string>
+    <string name="mother_caregiver_phone">Mother\'s phone number</string>
 </resources>

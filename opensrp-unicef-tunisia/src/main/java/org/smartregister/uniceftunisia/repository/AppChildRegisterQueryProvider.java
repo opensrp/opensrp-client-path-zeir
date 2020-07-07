@@ -43,11 +43,11 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 getMotherDetailsColumn(PROTECTED_AT_BIRTH),
                 getMotherDetailsColumn(MOTHER_TDV_DOSES),
                 getMotherDetailsColumn(MOTHER_RUBELLA),
-                getMotherDetailsColumn(MOTHER_GUARDIAN_NUMBER) + "as mother_phone_number",
-                getMotherDetailsColumn(SECOND_PHONE_NUMBER) + "as mother_second_phone_number",
+                getMotherDetailsColumn(MOTHER_GUARDIAN_NUMBER) + "as " + MOTHER_PHONE_NUMBER,
+                getMotherDetailsColumn(SECOND_PHONE_NUMBER) + "as " + MOTHER_SECOND_PHONE_NUMBER,
                 getFatherDetailsColumn(FATHER_NATIONALITY),
                 getFatherDetailsColumn(FATHER_NATIONALITY_OTHER),
-                getFatherDetailsColumn(FATHER_PHONE) + "as father_phone_number",
+                getFatherDetailsColumn(FATHER_PHONE) + "as " + FATHER_PHONE_NUMBER,
                 getChildDetailsColumn(INACTIVE),
                 getChildDetailsColumn(LOST_TO_FOLLOW_UP),
                 getChildDetailsColumn(RELATIONAL_ID),
@@ -58,12 +58,12 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 getChildDetailsColumn(PLACE_OF_BIRTH),
                 getChildDetailsColumn(GA_AT_BIRTH),
                 getChildDetailsColumn(FATHER_RELATIONAL_ID),
-                "mother.first_name                     as mother_first_name",
-                "mother.last_name                      as mother_last_name",
-                "mother.dob                            as mother_dob",
-                "father.first_name                     as father_first_name",
-                "father.last_name                      as father_last_name",
-                "father.dob                            as father_dob"
+                "mother.first_name                     as " + AppConstants.KEY.MOTHER_FIRST_NAME,
+                "mother.last_name                      as " + AppConstants.KEY.MOTHER_LAST_NAME,
+                "mother.dob                            as " + MOTHER_DOB,
+                "father.first_name                     as " + AppConstants.KEY.FATHER_FIRST_NAME,
+                "father.last_name                      as " + AppConstants.KEY.FATHER_LAST_NAME,
+                "father.dob                            as " + FATHER_DOB
         };
     }
 
