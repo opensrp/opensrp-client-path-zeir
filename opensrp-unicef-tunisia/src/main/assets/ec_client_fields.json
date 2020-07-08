@@ -312,6 +312,14 @@
           "json_mapping": {
             "field": "attributes.ga_at_birth"
           }
+        },
+        {
+          "column_name": "pcv4_required",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "pcv4_required"
+          }
         }
       ]
     },

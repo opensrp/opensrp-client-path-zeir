@@ -255,6 +255,21 @@
         }
       },
       {
+        "key": "pcv4_required",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "pcv4_required",
+        "type": "hidden",
+        "value": "",
+        "calculation": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_calculation_rules.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "home_address",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person_address",

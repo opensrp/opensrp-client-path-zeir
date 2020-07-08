@@ -240,8 +240,8 @@ dependencies {
     }
 
 
-    api('org.smartregister:opensrp-client-immunization:1.4.44-SNAPSHOT@aar') {
-        //api (project(':opensrp-immunization')) {
+//    api('org.smartregister:opensrp-client-immunization:1.4.44-SNAPSHOT@aar') {
+    api (project(':opensrp-immunization')) {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
@@ -270,7 +270,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
-    implementation('org.smartregister:opensrp-client-reporting:0.0.20-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-reporting:0.0.21-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'

@@ -63,16 +63,13 @@ import org.smartregister.uniceftunisia.repository.MonthlyTalliesRepository;
 import org.smartregister.uniceftunisia.repository.UnicefTunisiaRepository;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppUtils;
-import org.smartregister.uniceftunisia.util.DbConstants;
 import org.smartregister.uniceftunisia.util.VaccineDuplicate;
 import org.smartregister.view.activity.DrishtiApplication;
 import org.smartregister.view.receiver.TimeChangedBroadcastReceiver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -245,7 +242,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         ImmunizationLibrary.init(context, getRepository(), createCommonFtsObject(context.applicationContext()),
                 BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
         ImmunizationLibrary.getInstance().setVaccineSyncTime(3, TimeUnit.MINUTES);
-        fixHardcodedVaccineConfiguration();
+//        fixHardcodedVaccineConfiguration();
 
         ConfigurableViewsLibrary.init(context);
 
@@ -435,13 +432,11 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         VaccineRepo.Vaccine[] vaccines = ImmunizationLibrary.getInstance().getVaccines();
 
         HashMap<String, VaccineDuplicate> replacementVaccines = new HashMap<>();
-        replacementVaccines.put("MR 2", new VaccineDuplicate("MR 2", VaccineRepo.Vaccine.mr1, -1, 548, 183, "child"));
-        replacementVaccines.put("BCG 2", new VaccineDuplicate("BCG 2", VaccineRepo.Vaccine.bcg, 1825, 0, 42, "child"));
+        replacementVaccines.put("BCG 2", new VaccineDuplicate("BCG 2", VaccineRepo.Vaccine.bcg, 1825, 0, 15, "child"));
 
         for (VaccineRepo.Vaccine vaccine : vaccines) {
             if (replacementVaccines.containsKey(vaccine.display())) {
                 VaccineDuplicate vaccineDuplicate = replacementVaccines.get(vaccine.display());
-
                 vaccine.setCategory(vaccineDuplicate.category());
                 vaccine.setExpiryDays(vaccineDuplicate.expiryDays());
                 vaccine.setMilestoneGapDays(vaccineDuplicate.milestoneGapDays());

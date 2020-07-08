@@ -11,20 +11,15 @@
       "parent_entity": "886AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
       "entity": "concept",
       "entity_id": "1418AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "calculation": 2
+      "calculation": 1
     },
     "schedule": {
       "due": [
         {
           "reference": "prerequisite",
           "prerequisite": "BCG",
-          "offset": "+72d"
-        }
-      ],
-      "expiry": [
-        {
-          "reference": "dob",
-          "offset": "+5y"
+          "offset": "+15d",
+          "window": "+28d"
         }
       ]
     }

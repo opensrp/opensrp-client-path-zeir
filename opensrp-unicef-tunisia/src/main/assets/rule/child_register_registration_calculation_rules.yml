@@ -19,3 +19,10 @@ priority: 1
 condition: "true"
 actions:
   - "calculation = step1_protected_at_birth_calculation"
+---
+name: step1_pcv4_required
+description: Calculation of whether or not the child needs a 4th PCV dose, based on their GA at birth and their birth weight.
+priority: 1
+condition: "true"
+actions:
+  - "calculation = step1_ga_at_birth < 37 && step1_Birth_Weight < 2.5 ? '1' : '0'"
