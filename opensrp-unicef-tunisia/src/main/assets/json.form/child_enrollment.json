@@ -325,7 +325,6 @@
         "type": "edit_text",
         "hint": "Last name of the father",
         "edit_type": "name",
-        "look_up": "true",
         "v_required": {
           "value": "false",
           "err": "Please enter the father's last name"
@@ -344,7 +343,6 @@
         "type": "edit_text",
         "hint": "First name of the father",
         "edit_type": "name",
-        "look_up": "true",
         "v_required": {
           "value": "false",
           "err": "Please enter the father's first name"
@@ -362,7 +360,6 @@
         "entity_id": "father",
         "type": "date_picker",
         "hint": "Date of birth of the father",
-        "look_up": "true",
         "expanded": false,
         "duration": {
           "label": "Age"
@@ -437,10 +434,10 @@
         "openmrs_entity": "person",
         "openmrs_entity_id": "last_name",
         "entity_id": "mother",
+        "look_up": "true",
         "type": "edit_text",
         "hint": "Last name of the mother/caregiver",
         "edit_type": "name",
-        "look_up": "true",
         "v_required": {
           "value": "true",
           "err": "Please enter the mother/caregiver's last name"
@@ -456,10 +453,10 @@
         "openmrs_entity": "person",
         "openmrs_entity_id": "first_name",
         "entity_id": "mother",
+        "look_up": "true",
         "type": "edit_text",
         "hint": "First name of the mother/caregiver",
         "edit_type": "name",
-        "look_up": "true",
         "v_required": {
           "value": "true",
           "err": "Please enter the mother/caregiver's first name"
@@ -475,9 +472,9 @@
         "openmrs_entity": "person",
         "openmrs_entity_id": "birthdate",
         "entity_id": "mother",
+        "look_up": "true",
         "type": "date_picker",
         "hint": "Date of birth of the mother/caregiver",
-        "look_up": "true",
         "expanded": false,
         "duration": {
           "label": "Age"
@@ -496,6 +493,7 @@
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "mother_nationality",
         "entity_id": "mother",
+        "look_up": "true",
         "type": "spinner",
         "hint": "Nationality of the mother/caregiver",
         "values": [
@@ -514,8 +512,9 @@
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "mother_nationality_other",
         "entity_id": "mother",
+        "look_up": "true",
         "type": "edit_text",
-        "hint": "Indicate the mothers's nationality",
+        "hint": "Indicate the mother's nationality",
         "edit_type": "name",
         "v_regex": {
           "value": "[A-Za-z\\s\\.\\-]*",
@@ -539,6 +538,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "entity_id": "mother",
+        "look_up": "true",
         "type": "edit_text",
         "hint": "Phone number of the mother/caregiver",
         "v_regex": {
@@ -552,6 +552,7 @@
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "second_phone_number",
         "entity_id": "mother",
+        "look_up": "true",
         "type": "edit_text",
         "hint": "Alternative phone number of the mother/caregiver",
         "v_regex": {
@@ -566,6 +567,7 @@
         "openmrs_entity_id": "mother_tdv_doses",
         "type": "spinner",
         "entity_id": "mother",
+        "look_up": "true",
         "hint": "How many doses of Td vaccine did the mother receive during pregnancy?",
         "v_required": {
           "value": false,
@@ -620,6 +622,7 @@
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "mother_rubella",
         "entity_id": "mother",
+        "look_up": "true",
         "type": "spinner",
         "hint": "Did the child's mother receive the Rubella vaccine?",
         "values": [

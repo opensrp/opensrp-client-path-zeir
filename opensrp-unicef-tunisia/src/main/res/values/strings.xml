@@ -556,7 +556,6 @@
     <string name="fill_form_error_msg">Please register at least one service before saving</string>
     <string name="close">Close</string>
     <string name="tap_to_view">Tap to view</string>
-    <string name="mother_guardian_matches">\" mother/guardian match(es).\"</string>
     <string name="dhis2_reports">DHIS2 Reports</string>
     <string name="child_report_grouping_title">Child</string>
     <string name="anc_report_grouping_title">ANC</string>
