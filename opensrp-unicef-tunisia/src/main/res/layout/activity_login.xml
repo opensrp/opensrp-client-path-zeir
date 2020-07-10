@@ -82,7 +82,7 @@
             <ImageView
                 android:id="@+id/login_logo"
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="160dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
                 android:contentDescription="@string/logo_string"
