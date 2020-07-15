@@ -4,7 +4,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4a58cd4e1748432780ac66a9fbee0394)](https://www.codacy.com/app/OpenSRP/opensrp-client-unicef-tunisia?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=OpenSRP/opensrp-client-unicef-tunisia&amp;utm_campaign=Badge_Grade) 
 
 ## OpenSRP Unicef Tunisia
-UNICEF Tunisia is a child immunization digital project: it is a child health module. The module supports 3 languages; English, French and Arabic.
+UNICEF Tunisia is an immunization digital project targeting children under 5 years. The project focuses in a child module that supports 3 languages: English, French and Arabic.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
