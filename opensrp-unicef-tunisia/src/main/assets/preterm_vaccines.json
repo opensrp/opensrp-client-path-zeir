@@ -187,14 +187,7 @@
             }
           ]
         }
-      }
-    ]
-  },
-  {
-    "name": "4 months",
-    "id": "4_months",
-    "days_after_birth_due": 112,
-    "vaccines": [
+      },
       {
         "name": "PCV 2",
         "type": "pcv2",
@@ -215,6 +208,38 @@
               "reference": "prerequisite",
               "prerequisite": "PCV 1",
               "offset": "+2m",
+              "window": "+28d"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "4 months",
+    "id": "4_months",
+    "days_after_birth_due": 112,
+    "vaccines": [
+      {
+        "name": "PCV 3",
+        "type": "pcv3",
+        "openmrs_date": {
+          "parent_entity": "",
+          "entity": "concept",
+          "entity_id": "pcv3"
+        },
+        "openmrs_calculate": {
+          "parent_entity": "",
+          "entity": "concept",
+          "entity_id": "pcv3_calculation",
+          "calculation": 2
+        },
+        "schedule": {
+          "due": [
+            {
+              "reference": "prerequisite",
+              "prerequisite": "PCV 2",
+              "offset": "+1m",
               "window": "+28d"
             }
           ]
@@ -284,24 +309,24 @@
     "days_after_birth_due": 308,
     "vaccines": [
       {
-        "name": "PCV 3",
-        "type": "pcv3",
+        "name": "PCV 4",
+        "type": "F",
         "openmrs_date": {
           "parent_entity": "",
           "entity": "concept",
-          "entity_id": "pcv3"
+          "entity_id": "pcv4"
         },
         "openmrs_calculate": {
           "parent_entity": "",
           "entity": "concept",
-          "entity_id": "pcv3_calculation",
-          "calculation": 2
+          "entity_id": "pcv4_calculation",
+          "calculation": 3
         },
         "schedule": {
           "due": [
             {
               "reference": "prerequisite",
-              "prerequisite": "PCV 2",
+              "prerequisite": "PCV 3",
               "offset": "+7m",
               "window": "+28d"
             }

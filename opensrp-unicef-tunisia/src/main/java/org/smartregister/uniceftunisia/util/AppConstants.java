@@ -35,11 +35,10 @@ public class AppConstants {
         public static final String ID_LOWER_CASE = "_id";
         public static final String BASE_ENTITY_ID = "base_entity_id";
         public static final String DOB = "dob";//Date Of Birth
-        public static final String DOD = "dod";//Date Of Birth
+        public static final String DOD = "dod";//Date Of Death
         public static final String DATE_REMOVED = "date_removed";
         public static final String MOTHER_NRC_NUMBER = "nrc_number";
         public static final String SECOND_PHONE_NUMBER = "second_phone_number";
-        public static final String PHONE_NUMBER = "phone_number";
         public static final String VIEW_CONFIGURATION_PREFIX = "ViewConfiguration_";
         public static final String HOME_FACILITY = "home_address";
         public static final String APP_ID = "mer_id";
@@ -47,7 +46,6 @@ public class AppConstants {
         public static final String ADDRESS_3 = "address3";
         public static final String BIRTH_FACILITY_NAME = "Birth_Facility_Name";
         public static final String RESIDENTIAL_AREA = "Residential_Area";
-        public static final String MOTHER_ = "mother_";
         public static final String ENCOUNTER_TYPE = "encounter_type";
         public static final String BIRTH_REGISTRATION = "Birth Registration";
         public static final String IDENTIFIERS = "identifiers";
@@ -60,7 +58,6 @@ public class AppConstants {
         public static final String DOB_UNKNOWN = "dob_unknown";
         public static final String DATE_BIRTH = "Date_Birth";
         public static final String BIRTH_WEIGHT = "Birth_Weight";
-        public static final String UNIQUE_ID = "govt_unique_id";
         public static final String CARD_ID = "card_id";
         public static final String MOTHER_PHONE_NUMBER = "mother_phone_number";
         public static final String MOTHER_SECOND_PHONE_NUMBER = "mother_second_phone_number";
@@ -102,10 +99,6 @@ public class AppConstants {
 
     public static final class FormTitleUtil {
         public static final String UPDATE_CHILD_FORM = "Update Child Registration";
-    }
-
-    public static final class RQ_CODE {
-        public static final int STORAGE_PERMISIONS = 1;
     }
 
     public static class CONFIGURATION {
@@ -157,10 +150,6 @@ public class AppConstants {
         public static final String IS_REMOTE_LOGIN = "is_remote_login";
     }
 
-    public interface DateFormat {
-        String HH_MM_AMPM = "h:mm a";
-    }
-
     public interface RegisterType {
         String ANC = "anc";
         String CHILD = "child";
@@ -184,4 +173,7 @@ public class AppConstants {
         String INDICATOR_CONFIG_FILE = "config/indicator-definitions.yml";
     }
 
+    public interface ConditionalVaccines {
+        String PRETERM_VACCINES = "preterm_vaccines";
+    }
 }

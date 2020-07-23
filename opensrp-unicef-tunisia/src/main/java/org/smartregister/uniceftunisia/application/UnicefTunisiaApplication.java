@@ -242,7 +242,8 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         ImmunizationLibrary.init(context, getRepository(), createCommonFtsObject(context.applicationContext()),
                 BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
         ImmunizationLibrary.getInstance().setVaccineSyncTime(3, TimeUnit.MINUTES);
-//        fixHardcodedVaccineConfiguration();
+        ImmunizationLibrary.getInstance().getConditionalVaccinesMap().put(AppConstants.ConditionalVaccines.PRETERM_VACCINES, "preterm_vaccines.json");
+        fixHardcodedVaccineConfiguration();
 
         ConfigurableViewsLibrary.init(context);
 
@@ -257,7 +258,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         Fabric.with(this, new Crashlytics.Builder().core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build()).build());
 
         initRepositories();
-        initOfflineSchedules();
 
         SyncStatusBroadcastReceiver.init(this);
         LocationHelper.init(new ArrayList<>(Arrays.asList(BuildConfig.LOCATION_LEVELS)), BuildConfig.DEFAULT_LOCATION);
@@ -291,12 +291,11 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         heightZScoreRepository();
     }
 
-    private void initOfflineSchedules() {
+    public void initOfflineSchedules() {
         try {
             List<VaccineGroup> childVaccines = VaccinatorUtils.getSupportedVaccines(this);
             List<Vaccine> specialVaccines = VaccinatorUtils.getSpecialVaccines(this);
             VaccineSchedule.init(childVaccines, specialVaccines, AppConstants.KEY.CHILD);
-            //  VaccineSchedule.vaccineSchedules.get(AppConstants.KEY.ALL_CLIENTS).remove("BCG 2");
         } catch (Exception e) {
             Timber.e(e, "UnicefTunisiaApplication --> initOfflineSchedules");
         }

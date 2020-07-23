@@ -22,6 +22,7 @@ import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.fragment.ChildRegistrationDataFragment;
 import org.smartregister.uniceftunisia.util.AppJsonFormUtils;
 import org.smartregister.uniceftunisia.util.AppUtils;
+import org.smartregister.uniceftunisia.util.VaccineUtils;
 import org.smartregister.util.FormUtils;
 import org.smartregister.util.JsonFormUtils;
 import org.smartregister.util.Utils;
@@ -40,7 +41,7 @@ import static org.smartregister.uniceftunisia.util.AppUtils.setAppLocale;
  * Created by ndegwamartin on 06/03/2019.
  */
 public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
-    private static List<String> nonEditableFields = Arrays.asList("Sex", "zeir_id", "Birth_Weight", "Birth_Height", "protected_at_birth");
+    private static List<String> nonEditableFields = Arrays.asList("Sex", "zeir_id", "mother_rubella", "protected_at_birth");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,5 +201,13 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
             Timber.e(e);
         }
         return "";
+    }
+
+    @Override
+    public void onRegistrationSaved(boolean isEdit) {
+        super.onRegistrationSaved(isEdit);
+        if (isEdit) {
+            VaccineUtils.refreshImmunizationSchedules(childDetails.getCaseId());
+        }
     }
 }

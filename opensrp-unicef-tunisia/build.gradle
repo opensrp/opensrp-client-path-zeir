@@ -35,10 +35,10 @@ android {
         multiDexEnabled true
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
         buildConfigField "boolean", "TIME_CHECK", "false"
-        buildConfigField "String", "SYNC_TYPE", '"teamId"'
+        buildConfigField "String", "SYNC_TYPE", '"location"'
         buildConfigField "int", "MAX_SYNC_RETRIES", '3'
         buildConfigField "long", "BUILD_TIMESTAMP", System.currentTimeMillis() + "L"
-        buildConfigField "boolean", "IS_SYNC_SETTINGS", "true"
+        buildConfigField "boolean", "IS_SYNC_SETTINGS", "false"
         buildConfigField "long", "EVENT_VERSION", System.currentTimeMillis() + "L"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -85,7 +85,7 @@ android {
             buildConfigField "int", "CLIENT_SETTINGS_SYNC_MINUTES", '15'
             buildConfigField "int", "GROWTH_MONITORING_SYNC_TIME", '15'
             buildConfigField "String[]", "LOCATION_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
-            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility", "Village"}'
+            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
         }
 
@@ -108,7 +108,7 @@ android {
             buildConfigField "int", "CLIENT_SETTINGS_SYNC_MINUTES", '15'
             buildConfigField "int", "GROWTH_MONITORING_SYNC_TIME", '15'
             buildConfigField "String[]", "LOCATION_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
-            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility", "Village"}'
+            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
             testCoverageEnabled true
         }
@@ -138,7 +138,7 @@ android {
             buildConfigField "int", "CLIENT_SETTINGS_SYNC_MINUTES", '15'
             buildConfigField "int", "GROWTH_MONITORING_SYNC_TIME", '15'
             buildConfigField "String[]", "LOCATION_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
-            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility", "Village"}'
+            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
         }
 
@@ -166,7 +166,7 @@ android {
             buildConfigField "int", "CLIENT_SETTINGS_SYNC_MINUTES", '15'
             buildConfigField "int", "GROWTH_MONITORING_SYNC_TIME", '15'
             buildConfigField "String[]", "LOCATION_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
-            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility", "Village"}'
+            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
         }
     }
@@ -214,8 +214,8 @@ dependencies {
         exclude group: 'com.rengwuxian.materialedittext', module: 'library'
     }
 
-//    implementation(project(':opensrp-child')) {
-    implementation('org.smartregister:opensrp-client-child:0.3.2-SNAPSHOT@aar') {
+    implementation(project(':opensrp-child')) {
+//    implementation('org.smartregister:opensrp-client-child:0.3.2-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
@@ -239,8 +239,8 @@ dependencies {
         exclude group: 'io.ona.rdt-capture', module: 'lib'
     }
 
-    api('org.smartregister:opensrp-client-immunization:1.4.45-SNAPSHOT@aar') {
-//    api (project(':opensrp-immunization')) {
+//    api('org.smartregister:opensrp-client-immunization:1.4.45-SNAPSHOT@aar') {
+    api (project(':opensrp-immunization')) {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'

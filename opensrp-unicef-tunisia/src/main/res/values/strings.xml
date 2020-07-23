@@ -614,4 +614,5 @@
     <string name="mother_tdv_doses">"Mother Td vaccine doses "</string>
     <string name="mother_rubella">"Mother received Rubella vaccine  "</string>
     <string name="child_DOB">Date of birth</string>
+    <string name="mother_name">M/CG: %1$s</string>
 </resources>
