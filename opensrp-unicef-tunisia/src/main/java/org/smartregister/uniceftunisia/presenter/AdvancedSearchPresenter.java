@@ -25,7 +25,14 @@ public class AdvancedSearchPresenter extends BaseChildAdvancedSearchPresenter {
         Cursor cursor = getView().getRawCustomQueryForAdapter(query);
         if (cursor != null && cursor.getCount() > 0) {
             AdvancedMatrixCursor remoteLocalCursor = new AdvancedMatrixCursor(
-                    new String[]{AppConstants.KEY.ID_LOWER_CASE, AppConstants.KEY.RELATIONALID, AppConstants.KEY.FIRST_NAME, AppConstants.KEY.LAST_NAME, AppConstants.KEY.DOB, AppConstants.KEY.ZEIR_ID});
+                    new String[]{
+                            AppConstants.KEY.ID_LOWER_CASE,
+                            AppConstants.KEY.RELATIONALID,
+                            AppConstants.KEY.FIRST_NAME,
+                            AppConstants.KEY.LAST_NAME,
+                            AppConstants.KEY.DOB,
+                            AppConstants.KEY.ZEIR_ID
+                    });
 
             CursorJoiner joiner = new CursorJoiner(matrixCursor,
                     new String[]{AppConstants.KEY.ZEIR_ID, AppConstants.KEY.ID_LOWER_CASE}, cursor,

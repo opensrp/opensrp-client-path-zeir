@@ -11,7 +11,6 @@ import org.smartregister.uniceftunisia.util.AppConstants;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,12 +26,21 @@ public class AdvancedSearchModel extends BaseChildAdvancedSearchModel {
     @Override
     public AdvancedMatrixCursor createMatrixCursor(Response<String> response) {
 
-        String[] columns = new String[]{AppConstants.KEY.ID_LOWER_CASE, AppConstants.KEY.RELATIONALID,
-                AppConstants.KEY.FIRST_NAME, AppConstants.KEY.MIDDLE_NAME, AppConstants.KEY.LAST_NAME,
-                AppConstants.KEY.GENDER, AppConstants.KEY.DOB, AppConstants.KEY.ZEIR_ID,
-                AppConstants.KEY.MOTHER_BASE_ENTITY_ID, AppConstants.KEY.MOTHER_FIRST_NAME,
-                AppConstants.KEY.MOTHER_FIRST_NAME, AppConstants.KEY.INACTIVE,
-                AppConstants.KEY.LOST_TO_FOLLOW_UP};
+        String[] columns = new String[]{
+                AppConstants.KEY.ID_LOWER_CASE,
+                AppConstants.KEY.RELATIONALID,
+                AppConstants.KEY.FIRST_NAME,
+                AppConstants.KEY.MIDDLE_NAME,
+                AppConstants.KEY.LAST_NAME,
+                AppConstants.KEY.GENDER,
+                AppConstants.KEY.DOB,
+                AppConstants.KEY.ZEIR_ID,
+                AppConstants.KEY.MOTHER_BASE_ENTITY_ID,
+                AppConstants.KEY.MOTHER_FIRST_NAME,
+                AppConstants.KEY.MOTHER_LAST_NAME,
+                AppConstants.KEY.INACTIVE,
+                AppConstants.KEY.LOST_TO_FOLLOW_UP
+        };
 
         AdvancedMatrixCursor matrixCursor = new AdvancedMatrixCursor(columns);
 
@@ -85,37 +93,34 @@ public class AdvancedSearchModel extends BaseChildAdvancedSearchModel {
     }
 
     private void sortValues(List<JSONObject> jsonValues) {
-        Collections.sort(jsonValues, new Comparator<JSONObject>() {
-            @Override
-            public int compare(JSONObject lhs, JSONObject rhs) {
+        Collections.sort(jsonValues, (lhs, rhs) -> {
 
-                if (!lhs.has(AppConstants.KEY.CHILD) || !rhs.has(AppConstants.KEY.CHILD)) {
-                    return 0;
-                }
-
-                JSONObject lhsChild = getJsonObject(lhs, AppConstants.KEY.CHILD);
-                JSONObject rhsChild = getJsonObject(rhs, AppConstants.KEY.CHILD);
-
-                String lhsInactive = getJsonString(getJsonObject(lhsChild, AppConstants.KEY.ATTRIBUTES), AppConstants.KEY.INACTIVE);
-                String rhsInactive = getJsonString(getJsonObject(rhsChild, AppConstants.KEY.ATTRIBUTES), AppConstants.KEY.INACTIVE);
-
-                int aComp = 0;
-                if (lhsInactive.equalsIgnoreCase(Boolean.TRUE.toString()) && !rhsInactive.equalsIgnoreCase(Boolean.TRUE.toString())) {
-                    aComp = 1;
-                } else if (!lhsInactive.equalsIgnoreCase(Boolean.TRUE.toString()) && rhsInactive.equalsIgnoreCase(Boolean.TRUE.toString())) {
-                    aComp = -1;
-                }
-
-                if (aComp != 0) {
-                    return aComp;
-                } else {
-                    Integer lostToFollowUp = getLostToFollowUp(lhsChild, rhsChild);
-                    if (lostToFollowUp != null) return lostToFollowUp;
-                }
-
+            if (!lhs.has(AppConstants.KEY.CHILD) || !rhs.has(AppConstants.KEY.CHILD)) {
                 return 0;
-
             }
+
+            JSONObject lhsChild = getJsonObject(lhs, AppConstants.KEY.CHILD);
+            JSONObject rhsChild = getJsonObject(rhs, AppConstants.KEY.CHILD);
+
+            String lhsInactive = getJsonString(getJsonObject(lhsChild, AppConstants.KEY.ATTRIBUTES), AppConstants.KEY.INACTIVE);
+            String rhsInactive = getJsonString(getJsonObject(rhsChild, AppConstants.KEY.ATTRIBUTES), AppConstants.KEY.INACTIVE);
+
+            int aComp = 0;
+            if (lhsInactive.equalsIgnoreCase(Boolean.TRUE.toString()) && !rhsInactive.equalsIgnoreCase(Boolean.TRUE.toString())) {
+                aComp = 1;
+            } else if (!lhsInactive.equalsIgnoreCase(Boolean.TRUE.toString()) && rhsInactive.equalsIgnoreCase(Boolean.TRUE.toString())) {
+                aComp = -1;
+            }
+
+            if (aComp != 0) {
+                return aComp;
+            } else {
+                Integer lostToFollowUp = getLostToFollowUp(lhsChild, rhsChild);
+                if (lostToFollowUp != null) return lostToFollowUp;
+            }
+
+            return 0;
+
         });
     }
 

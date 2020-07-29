@@ -599,7 +599,9 @@
     <string name="child_last_name">Child\'s last name</string>
     <string name="dob_range">Child\'s date of birth (range)</string>
     <string name="mother_caregiver_first_name">"Mother/caregiver first name"</string>
+    <string name="mother_first_name">"Mother first name"</string>
     <string name="mother_caregiver_last_name">"Mother/caregiver last name"</string>
+    <string name="mother_last_name">"Mother last name"</string>
     <string name="mother_caregiver_phone">Mother/caregiver\'s phone number</string>
     <string name="father_last_name">Father last name</string>
     <string name="father_first_name">Father first name</string>
@@ -607,6 +609,7 @@
     <string name="father_nationality">Father nationality</string>
     <string name="father_nationality_other">Indicate father nationality</string>
     <string name="father_phone">Father phone number</string>
+    <string name="mother_phone_number">Mother phone number</string>
     <string name="mother_dob">Mother date of birth</string>
     <string name="mother_nationality">Mother/Caregiver nationality</string>
     <string name="mother_nationality_other">"Indicate Mother/caregiver nationality "</string>
@@ -615,4 +618,6 @@
     <string name="mother_rubella">"Mother received Rubella vaccine  "</string>
     <string name="child_DOB">Date of birth</string>
     <string name="mother_name">M/CG: %1$s</string>
+    <string name="adverse_effects">Adverse Effects</string>
+
 </resources>

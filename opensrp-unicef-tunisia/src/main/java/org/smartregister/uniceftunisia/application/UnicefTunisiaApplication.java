@@ -50,6 +50,7 @@ import org.smartregister.uniceftunisia.BuildConfig;
 import org.smartregister.uniceftunisia.activity.ChildFormActivity;
 import org.smartregister.uniceftunisia.activity.ChildImmunizationActivity;
 import org.smartregister.uniceftunisia.activity.ChildProfileActivity;
+import org.smartregister.uniceftunisia.activity.ChildRegisterActivity;
 import org.smartregister.uniceftunisia.activity.LoginActivity;
 import org.smartregister.uniceftunisia.job.AppJobCreator;
 import org.smartregister.uniceftunisia.processor.AppClientProcessorForJava;
@@ -115,13 +116,16 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     }
 
     private static String[] getFtsTables() {
-        return new String[]{DBConstants.RegisterTable.CLIENT, DBConstants.RegisterTable.MOTHER_DETAILS,
-                DBConstants.RegisterTable.CHILD_DETAILS, DBConstants.RegisterTable.FATHER_DETAILS};
+        return new String[]{DBConstants.RegisterTable.CLIENT, DBConstants.RegisterTable.CHILD_DETAILS};
     }
 
     private static String[] getFtsSearchFields(String tableName) {
         if (tableName.equalsIgnoreCase(DBConstants.RegisterTable.CLIENT)) {
-            return new String[]{"first_name", "last_name", "zeir_d"};
+            return new String[]{
+                    DBConstants.KEY.ZEIR_ID,
+                    DBConstants.KEY.FIRST_NAME,
+                    DBConstants.KEY.LAST_NAME
+            };
         } else if (tableName.equalsIgnoreCase(DBConstants.RegisterTable.CHILD_DETAILS)) {
             return new String[]{DBConstants.KEY.LOST_TO_FOLLOW_UP, DBConstants.KEY.INACTIVE};
         }
@@ -143,7 +147,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
             List<VaccineGroup> vaccineList = VaccinatorUtils.getVaccineGroupsFromVaccineConfigFile(context, VaccinatorUtils.vaccines_file);
             List<String> names = new ArrayList<>();
             names.add(DBConstants.KEY.INACTIVE);
-            names.add("relational_id");
+            names.add(DBConstants.KEY.RELATIONAL_ID);
             names.add(DBConstants.KEY.LOST_TO_FOLLOW_UP);
 
             for (VaccineGroup vaccineGroup : vaccineList) {
@@ -271,7 +275,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
 
     private ChildMetadata getMetadata() {
         ChildMetadata metadata = new ChildMetadata(ChildFormActivity.class, ChildProfileActivity.class,
-                ChildImmunizationActivity.class, true, new AppChildRegisterQueryProvider());
+                ChildImmunizationActivity.class, ChildRegisterActivity.class, true, new AppChildRegisterQueryProvider());
         metadata.updateChildRegister(AppConstants.JSON_FORM.CHILD_ENROLLMENT, AppConstants.TABLE_NAME.ALL_CLIENTS,
                 AppConstants.TABLE_NAME.ALL_CLIENTS, AppConstants.EventType.CHILD_REGISTRATION,
                 AppConstants.EventType.UPDATE_CHILD_REGISTRATION, AppConstants.EventType.OUT_OF_CATCHMENT, AppConstants.CONFIGURATION.CHILD_REGISTER,

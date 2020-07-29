@@ -230,7 +230,6 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         String motherGuardianPhoneNumberString = motherGuardianPhoneNumber.getText().toString();
         String zeir = openSrpId.getText().toString();
 
-
         if (StringUtils.isNotBlank(motherGuardianFirstNameString)) {
             searchParams.put(DBConstants.KEY.MOTHER_FIRST_NAME, motherGuardianFirstNameString);
         }
@@ -297,7 +296,7 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         if (!TextUtils.isEmpty(childUniqueId)) {
             searchParams.put(AppConstants.KEY.CHILD_REG, childUniqueId);
         }  
-        
+
         String childRegNumber = this.childRegistrationNumber.getText().toString();
         if (!TextUtils.isEmpty(childRegNumber)) {
             searchParams.put(AppConstants.KEY.BIRTH_REGISTRATION_NUMBER, childRegNumber);

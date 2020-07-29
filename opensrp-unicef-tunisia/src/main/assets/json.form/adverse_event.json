@@ -1,6 +1,8 @@
 {
-  "count": "1",
+  "count": "5",
   "encounter_type": "AEFI",
+  "validate_on_submit": true,
+  "show_errors_on_submit": true,
   "entity_id": "",
   "metadata": {
     "start": {
@@ -47,7 +49,8 @@
     "encounter_location": ""
   },
   "step1": {
-    "title": "Adverse Event Reporting",
+    "title": "Adverse Effects from Immunization",
+    "next": "step2",
     "fields": [
       {
         "key": "Reaction_Vaccine",
@@ -85,198 +88,1497 @@
         }
       },
       {
-        "key": "aefi_start_date",
-        "openmrs_entity_parent": "",
+        "key": "vaccine_frmwrk",
+        "type": "native_radio",
         "openmrs_entity": "",
-        "openmrs_entity_id": "",
-        "type": "date_picker",
-        "hint": "Date the adverse effects began",
-        "expanded": false,
-        "v_required": {
-          "value": true,
-          "err": "Please enter the date the adverse effects began"
-        }
-      },
-      {
-        "key": "reaction",
+        "openmrs_entity_id": "vaccine_frmwrk",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "149254AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_data_type": "",
-        "type": "check_box",
-        "label": "Select the reaction",
-        "hint": "Select the reaction",
-        "combine_checkbox_option_values": "true",
-        "label_text_style": "bold",
+        "label": "Was the vaccine administered during a campaign or regular immunization?",
+        "label_info_text": "Indicate whether this was a regular vaccination or a targeted campaign",
+        "label_info_title": "Vaccine Framework.",
         "options": [
           {
-            "key": "bacteria_abscesses",
-            "text": "Minor AEFI Bacteria abscesses",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "150632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "lymphadenitis",
-            "text": "Minor AEFI Lymphadenitis",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "116190AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "sepsis",
-            "text": "Minor AEFI Sepsis",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "126721AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "local_reaction",
-            "text": "Minor AEFI Severe local reaction",
-            "openmrs_entity_parent": "",
+            "key": "vaccine_frmwrk_imm",
             "openmrs_entity": "",
-            "openmrs_entity_id": ""
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Regular immunization"
           },
           {
-            "key": "birth_defect",
-            "text": "Serious AEFI Birth Defect",
-            "openmrs_entity_parent": "",
+            "key": "vaccine_frmwrk_campaign",
             "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          },
-          {
-            "key": "death",
-            "text": "Serious AEFI Death",
+            "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "154223AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "encephalopathy",
-            "text": "Serious AEFI Encephalopathy",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "119288AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "high_fever ",
-            "text": "Serious AEFI High fever > 38 Degrees Celcius",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "140238AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "paralysis",
-            "text": "Serious AEFI Paralysis",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "114362AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "seizures",
-            "text": "Serious AEFI Seizures",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "206AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "birth_defect",
-            "text": "Serious AEFI Significant Disability",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "162558AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "toxic_shock_syndrome",
-            "text": "Serious AEFI Toxic shock syndrome",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "24419AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          },
-          {
-            "key": "other",
-            "text": "Other (specify)",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "text": "Campaign based immunization"
           }
         ],
         "v_required": {
-          "value": false,
-          "err": "Please select at least one reaction"
+          "value": "true",
+          "err": "Please indicate whether vaccine was administered during campaign or not"
         }
       },
       {
-        "key": "other_reaction",
-        "openmrs_entity_parent": "149254AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_data_type": "text",
+        "key": "vaccine_location",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_location",
+        "openmrs_entity_parent": "",
+        "label": "Location of the vaccination",
+        "options": [
+          {
+            "key": "vaccine_location_hf",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Health facility"
+          },
+          {
+            "key": "vaccine_location_sch",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "School"
+          },
+          {
+            "key": "vaccine_location_other",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Other"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please specify location of vaccination"
+        }
+      },
+      {
+        "key": "vaccine_location_other",
         "type": "edit_text",
-        "hint": "Other Reaction",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_location",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "Indicate other location of vaccination",
+        "v_required": {
+          "value": "true",
+          "err": "Please specify other location of vaccination"
+        },
         "relevance": {
-          "step1:reaction": {
-            "ex-checkbox": [
-              {
-                "or": [
-                  "other"
-                ]
-              }
-            ]
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
           }
         }
       },
       {
-        "key": "child_referred",
+        "key": "vaccine_facility",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_location",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "1788AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_data_type": "select one",
-        "type": "native_radio",
-        "label": "Child Referred?",
-        "label_text_style": "bold",
+        "edit_type": "name",
+        "hint": "Name of hospital where vaccine was administered",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "vaccine_facility_unknown",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_facility_unknown",
+        "type": "check_box",
+        "label": "",
         "options": [
           {
-            "key": "Yes",
-            "text": "Yes",
+            "key": "vaccine_facility_unknown",
+            "text": "Hospital where vaccine was administered not known",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "lot_no",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "lot_no",
+        "openmrs_entity_parent": "",
+        "edit_type": "number",
+        "hint": "Lot number",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "expiry",
+        "type": "date_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "expiry",
+        "openmrs_entity_parent": "",
+        "expanded": false,
+        "hint": "Expiry date",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "outlet_no",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "outlet_no",
+        "openmrs_entity_parent": "",
+        "edit_type": "number",
+        "hint": "Outlet number",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "vaccine_diluents",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_diluents",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "Specify the type of the vaccine diluents used",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "thinner",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "thinner",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "Thinner name",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "thinner_lot",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "thinner_lot",
+        "openmrs_entity_parent": "",
+        "edit_type": "number",
+        "hint": "Thinner lot number",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "thinner_man_name",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "thinner_man_name",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "Thinner's manufacturer's name",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "thinner_exp",
+        "type": "date_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "thinner_exp",
+        "openmrs_entity_parent": "",
+        "expanded": false,
+        "hint": "Thinner's expiry date",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "injection",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "injection",
+        "openmrs_entity_parent": "",
+        "label": "Was the vaccine an injection?",
+        "options": [
+          {
+            "key": "injection_yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "text": "Yes"
           },
           {
-            "key": "No",
-            "text": "No",
+            "key": "injection_no",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "text": "No"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please specify whether vaccine was an injection"
+        }
+      },
+      {
+        "key": "injection_site",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "injection_site",
+        "openmrs_entity_parent": "",
+        "label": "Specify the injection site",
+        "options": [
+          {
+            "key": "upper_arm",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Upper left arm"
+          },
+          {
+            "key": "as_thigh",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Anterolateral side of the thigh"
+          },
+          {
+            "key": "injection_site_other",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Other"
+          }
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "injection_other",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "injection_other",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "Indicate other site(s) of injection",
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate other site (s) of injection"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "injection_admin",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "injection_admin",
+        "openmrs_entity_parent": "",
+        "label": "Specify injection mode of administration",
+        "options": [
+          {
+            "key": "injection_im",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Intramuscular (IM)"
+          },
+          {
+            "key": "injection_sc",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Subcutaneous (SC)"
+          },
+          {
+            "key": "injection_id",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Intradermal (ID)"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please Specify injection mode of administration "
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "eafi_symptoms",
+        "type": "check_box",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "eafi_symptoms",
+        "openmrs_entity_parent": "",
+        "label": "Description of symptoms observed",
+        "options": [
+          {
+            "key": "eafi_symptoms_abscess",
+            "openmrs_choice_id": "",
+            "text": "Abscess at the injection site (supply or aseptic abscess)",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_inflam",
+            "openmrs_choice_id": "",
+            "text": "Inflammation",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_swelling",
+            "openmrs_choice_id": "",
+            "text": "Swelling",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_edema",
+            "openmrs_choice_id": "",
+            "text": "Edema more than 3 cm in diameter (or including the nearest joint) lasting 3 days",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_hives",
+            "openmrs_choice_id": "",
+            "text": "Hives",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_eczema",
+            "openmrs_choice_id": "",
+            "text": "Eczema",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_gen_edema",
+            "openmrs_choice_id": "",
+            "text": "Swelling of the face or generalised edema",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_anaphylic_shock",
+            "openmrs_choice_id": "",
+            "text": "Anaphylactic shock",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_collapsus",
+            "openmrs_choice_id": "",
+            "text": "Septic or toxic shock, or collapsus",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_convulsions",
+            "openmrs_choice_id": "",
+            "text": "Convulsions with or without fever",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_conscience",
+            "openmrs_choice_id": "",
+            "text": "Disorder of the conscience",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_brachial_neuretis",
+            "openmrs_choice_id": "",
+            "text": "Brachial neuritis",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_acute_paralysis",
+            "openmrs_choice_id": "",
+            "text": "Acute flaccid paralysis",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_encephalopathy",
+            "openmrs_choice_id": "",
+            "text": "Encephalopathy",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_adenite",
+            "openmrs_choice_id": "",
+            "text": "Size adenite > 15 mm, especially if it is fistular or if it adheres to the skin or generalized BCGitis",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_fever",
+            "openmrs_choice_id": "",
+            "text": "Fever",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_other",
+            "openmrs_choice_id": "",
+            "text": "Other",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_none",
+            "openmrs_choice_id": "",
+            "text": "None",
+            "value": false
+          }
+        ],
+        "exclusive": [
+          "eafi_symptoms_none"
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate symptoms description"
+        }
+      },
+      {
+        "key": "eafi_symptoms_other",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "eafi_symptoms_other",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "Indicate other symptoms",
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate other symptoms"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "aefi_start_date",
+        "type": "date_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "aefi_start_date",
+        "openmrs_entity_parent": "",
+        "expanded": false,
+        "hint": "Date the adverse effects started",
+        "v_required": {
+          "value": "true",
+          "err": "Please specify date adverse effects started"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "aefi_hrs",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "aefi_hrs",
+        "openmrs_entity_parent": "",
+        "edit_type": "number",
+        "hint": "Delay in hours between taking the vaccine and the onset of symptoms",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "step2": {
+    "title": "Care Given",
+    "next": "step3",
+    "fields": [
+      {
+        "key": "place_care",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "place_care",
+        "openmrs_entity_parent": "",
+        "label": "Place where care was administered",
+        "options": [
+          {
+            "key": "home",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Home"
+          },
+          {
+            "key": "hospital",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Hospital"
+          },
+          {
+            "key": "other",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Other"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please specify place where care was administered"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "type_care",
+        "type": "check_box",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "type_care",
+        "openmrs_entity_parent": "",
+        "label": "Type of care administered",
+        "options": [
+          {
+            "key": "treated",
+            "openmrs_choice_id": "",
+            "text": "Treated",
+            "value": false
+          },
+          {
+            "key": "hospitalized",
+            "openmrs_choice_id": "",
+            "text": "Hospitalized",
+            "value": false
+          },
+          {
+            "key": "reffered",
+            "openmrs_choice_id": "",
+            "text": "Refered to a higher facility",
+            "value": false
+          },
+          {
+            "key": "no_care_given",
+            "openmrs_choice_id": "",
+            "text": "No care given",
+            "value": false
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please select type of care"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "care_home",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "care_home",
+        "openmrs_entity_parent": "",
+        "label": "Care adminsitered at home",
+        "options": [
+          {
+            "key": "home _remedies",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Home remedies"
+          },
+          {
+            "key": "care_home_no",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "No care given"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate whether care was administered at home"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "hospitalization_date",
+        "type": "date_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "hospitalization_date",
+        "openmrs_entity_parent": "",
+        "expanded": false,
+        "max_date": "today",
+        "hint": "Date of hospitalization",
+        "v_required": {
+          "value": "true",
+          "err": "Please specify hospitalization date"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "discharge",
+        "type": "date_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "discharge",
+        "openmrs_entity_parent": "",
+        "expanded": false,
+        "max_date": "today",
+        "hint": "Date discharged from hospital",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "hospt_location",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "hospt_location",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "Hospital location",
+        "v_required": {
+          "value": "false",
+          "err": "Please specify hospital location"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "step3": {
+    "title": "AEFI Persistence",
+    "next": "step4",
+    "fields": [
+      {
+        "key": "healing",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "healing",
+        "openmrs_entity_parent": "",
+        "label": "Is the child healing or did the child heal from the adverse effects?",
+        "options": [
+          {
+            "key": "healing_yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Yes"
+          },
+          {
+            "key": "healing_no",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "No"
+          },
+          {
+            "key": "child_died",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Child died"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate whether the child healed or is healing from any adverse effects"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "aefi_date_death",
+        "type": "date_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "aefi_date_death",
+        "openmrs_entity_parent": "",
+        "hint": "Date of death",
+        "expanded": false,
+        "max_date": "today",
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate the date of death"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "aefi_time_death",
+        "type": "time_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "aefi_time_death",
+        "openmrs_entity_parent": "",
+        "expanded": false,
+        "hint": "Time of death",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "aefi_autopsy",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "aefi_autopsy",
+        "openmrs_entity_parent": "",
+        "label": "Autopsy done?",
+        "label_info_text": "If autopsy done attach autopsy report to this form",
+        "label_info_title": "Autopsy form.",
+        "options": [
+          {
+            "key": "autopsy_yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Yes"
+          },
+          {
+            "key": "autopsy_no",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "No"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate whether autopsy was done"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "aefi_death_reg",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "aefi_death_reg",
+        "openmrs_entity_parent": "",
+        "type": "toaster_notes",
+        "text": "Fill in the death registration form ",
+        "toaster_info_text": "Fill in the death registration form to close the child's record.",
+        "toaster_info_title": "Fill death registration form",
+        "toaster_type": "info",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "duration_aefi",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "duration_aefi",
+        "openmrs_entity_parent": "",
+        "edit_type": "number",
+        "hint": "Specify total duration of the adverse events",
+        "v_required": {
+          "value": "true",
+          "err": "Please specify adverse effects total duration"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "persistent_aefi",
+        "type": "check_box",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "persistent_aefi",
+        "openmrs_entity_parent": "",
+        "label": "Specify the symptoms that persist",
+        "options": [
+          {
+            "key": "persistent_abscess",
+            "openmrs_choice_id": "",
+            "text": "Abscess at the injection site (supply or aseptic abscess)",
+            "value": false
+          },
+          {
+            "key": "persistent_inflam",
+            "openmrs_choice_id": "",
+            "text": "Inflammation",
+            "value": false
+          },
+          {
+            "key": "persistent_swelling",
+            "openmrs_choice_id": "",
+            "text": "Swelling",
+            "value": false
+          },
+          {
+            "key": "persistent_edema",
+            "openmrs_choice_id": "",
+            "text": "Edema more than 3 cm in diameter (or including the nearest joint) lasting 3 days",
+            "value": false
+          },
+          {
+            "key": "persistent_hives",
+            "openmrs_choice_id": "",
+            "text": "Hives",
+            "value": false
+          },
+          {
+            "key": "persistent_eczema",
+            "openmrs_choice_id": "",
+            "text": "Eczema",
+            "value": false
+          },
+          {
+            "key": "persistent_gen_edema",
+            "openmrs_choice_id": "",
+            "text": "Swelling of the face or generalised edema",
+            "value": false
+          },
+          {
+            "key": "persistent_anaphylic_shock",
+            "openmrs_choice_id": "",
+            "text": "Anaphylactic shock",
+            "value": false
+          },
+          {
+            "key": "persistent_collapsus",
+            "openmrs_choice_id": "",
+            "text": "Septic or toxic shock, or collapsus",
+            "value": false
+          },
+          {
+            "key": "persistent_convulsions",
+            "openmrs_choice_id": "",
+            "text": "Convulsions with or without fever",
+            "value": false
+          },
+          {
+            "key": "persistent_conscience",
+            "openmrs_choice_id": "",
+            "text": "Disorder of the conscience",
+            "value": false
+          },
+          {
+            "key": "persistent_brachial_neuretis",
+            "openmrs_choice_id": "",
+            "text": "Brachial neuritis",
+            "value": false
+          },
+          {
+            "key": "persistent_acute_paralysis",
+            "openmrs_choice_id": "",
+            "text": "Acute flaccid paralysis",
+            "value": false
+          },
+          {
+            "key": "persistent_encephalopathy",
+            "openmrs_choice_id": "",
+            "text": "Encephalopathy",
+            "value": false
+          },
+          {
+            "key": "persistent_adenite",
+            "openmrs_choice_id": "",
+            "text": "Size adenite > 15 mm, especially if it is fistular or if it adheres to the skin or generalized BCGitis",
+            "value": false
+          },
+          {
+            "key": "persistent_fever",
+            "openmrs_choice_id": "",
+            "text": "Fever",
+            "value": false
+          },
+          {
+            "key": "persistent_other",
+            "openmrs_choice_id": "",
+            "text": "Other",
+            "value": false
+          },
+          {
+            "key": "persistent_none",
+            "openmrs_choice_id": "",
+            "text": "None",
+            "value": false
+          }
+        ],
+        "exclusive": [
+          "persistent_none"
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "persistent_aefi_date",
+        "type": "date_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "persistent_aefi_date",
+        "openmrs_entity_parent": "",
+        "expanded": false,
+        "hint": "Date",
+        "v_required": {
+          "value": "true",
+          "err": "Specify date of persistence"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "step4": {
+    "title": "History of Child",
+    "next": "step5",
+    "fields": [
+      {
+        "key": "prev_vaccines_aefi",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "prev_vaccines_aefi",
+        "openmrs_entity_parent": "",
+        "label": "Has the child had reactions to other vaccines?",
+        "label_info_text": "Indicate any other reactions the child has had with other vaccines.",
+        "label_info_title": "Other vaccine reactions.",
+        "options": [
+          {
+            "key": "prev_vaccines_yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Yes"
+          },
+          {
+            "key": "prev_vaccines_no",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "No"
+          },
+          {
+            "key": "prev_vaccines_not_known",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Not known"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate reactions to other previous vaccines"
+        }
+      },
+      {
+        "key": "prev_aefi_rxns",
+        "type": "check_box",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "prev_aefi_rxns",
+        "openmrs_entity_parent": "",
+        "label": "What were the reactions to those vaccines?",
+        "options": [
+          {
+            "key": "prev_abscess",
+            "openmrs_choice_id": "",
+            "text": "Abscess at the injection site (supply or aseptic abscess)",
+            "value": false
+          },
+          {
+            "key": "prev_inflam",
+            "openmrs_choice_id": "",
+            "text": "Inflammation",
+            "value": false
+          },
+          {
+            "key": "prev_swelling",
+            "openmrs_choice_id": "",
+            "text": "Swelling",
+            "value": false
+          },
+          {
+            "key": "prev_edema",
+            "openmrs_choice_id": "",
+            "text": "Edema more than 3 cm in diameter (or including the nearest joint) lasting 3 days",
+            "value": false
+          },
+          {
+            "key": "prev_hives",
+            "openmrs_choice_id": "",
+            "text": "Hives",
+            "value": false
+          },
+          {
+            "key": "prev_eczema",
+            "openmrs_choice_id": "",
+            "text": "Eczema",
+            "value": false
+          },
+          {
+            "key": "prev_gen_edema",
+            "openmrs_choice_id": "",
+            "text": "Swelling of the face or generalised edema",
+            "value": false
+          },
+          {
+            "key": "prev_anaphylic_shock",
+            "openmrs_choice_id": "",
+            "text": "Anaphylactic shock",
+            "value": false
+          },
+          {
+            "key": "prev_collapsus",
+            "openmrs_choice_id": "",
+            "text": "Septic or toxic shock, or collapsus",
+            "value": false
+          },
+          {
+            "key": "prev_convulsions",
+            "openmrs_choice_id": "",
+            "text": "Convulsions with or without fever",
+            "value": false
+          },
+          {
+            "key": "prev_conscience",
+            "openmrs_choice_id": "",
+            "text": "Disorder of the conscience",
+            "value": false
+          },
+          {
+            "key": "prev_brachial_neuretis",
+            "openmrs_choice_id": "",
+            "text": "Brachial neuritis",
+            "value": false
+          },
+          {
+            "key": "prev_acute_paralysis",
+            "openmrs_choice_id": "",
+            "text": "Acute flaccid paralysis",
+            "value": false
+          },
+          {
+            "key": "prev_encephalopathy",
+            "openmrs_choice_id": "",
+            "text": "Encephalopathy",
+            "value": false
+          },
+          {
+            "key": "prev_adenite",
+            "openmrs_choice_id": "",
+            "text": "Size adenite > 15 mm, especially if it is fistular or if it adheres to the skin or generalized BCGitis",
+            "value": false
+          },
+          {
+            "key": "prev_fever",
+            "openmrs_choice_id": "",
+            "text": "Fever",
+            "value": false
+          },
+          {
+            "key": "prev_other",
+            "openmrs_choice_id": "",
+            "text": "Other",
+            "value": false
+          },
+          {
+            "key": "prev_none",
+            "openmrs_choice_id": "",
+            "text": "None",
+            "value": false
+          }
+        ],
+        "exclusive": [
+          "prev_none"
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please give details of the previous vaccines"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "prev_aefi_rxns_other",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "prev_aefi_rxns_other",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "Other reactions to vaccines",
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate other vaccine reactions"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "drug_allergy",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "drug_allergy",
+        "openmrs_entity_parent": "",
+        "label": "Does the child have any known allergy to a drug?",
+        "options": [
+          {
+            "key": "allergy_yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Yes"
+          },
+          {
+            "key": "allergy_no",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "No"
+          },
+          {
+            "key": "allergy_not_known",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Not known"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate any known drug allergies"
+        }
+      },
+      {
+        "key": "drug_allergy_drug",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "drug_allergy_drug",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "What drug is the child allergic to?",
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate the drugs the child is allergic to "
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "chronic_illness",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "chronic_illness",
+        "openmrs_entity_parent": "",
+        "label": "Was the child taking any chronic illness or long-term medication (corticosteroid, anti-epileptic or others) during the period of the accident?",
+        "options": [
+          {
+            "key": "chronic_illness_yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Yes"
+          },
+          {
+            "key": "chronic_illness_no",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "No"
+          },
+          {
+            "key": "chronic_illness_not_known",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Not known"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate whether child was taking any long-term medication for chronic illnesses"
+        }
+      },
+      {
+        "key": "illness_details",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "illness_details",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "Specify any useful details on the points raised",
+        "v_required": {
+          "value": "true",
+          "err": "Please give details of the drug allergies or long term chronic illness medication"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "step5": {
+    "title": "Investigation details",
+    "fields": [
+      {
+        "key": "investigation",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "investigation",
+        "openmrs_entity_parent": "",
+        "label": "Specify whether the incident is under investigation",
+        "options": [
+          {
+            "key": "isolated_case",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Is an isolated case"
+          },
+          {
+            "key": "several_cases",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Several cases of identical incidents in time and space"
+          },
+          {
+            "key": "same_symptoms",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "Same symptoms at the same time in individuals who did not receive the vaccine"
           }
         ]
       },
       {
-        "key": "aefi_form",
+        "key": "last_name_agent",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "last_name_agent",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "163340AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-        "openmrs_data_type": "select one",
-        "type": "native_radio",
-        "label": "Was the AEFI form completed?",
-        "label_text_style": "bold",
+        "edit_type": "name",
+        "hint": "Last name of vaccinator",
+        "v_required": {
+          "value": "true",
+          "err": "Please specify last name of vaccinator"
+        }
+      },
+      {
+        "key": "first_name_agent",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "first_name_agent",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "First name of vaccinator",
+        "v_required": {
+          "value": "true",
+          "err": "Please specify first name of vaccinator"
+        }
+      },
+      {
+        "key": "function_agent",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "function_agent",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "Function or supervision of the vaccinator",
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate function or supervision of the vaccinator"
+        }
+      },
+      {
+        "key": "vaccine_handling_find",
+        "type": "check_box",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_handling_find",
+        "openmrs_entity_parent": "",
+        "label": "Findings regarding the storage and handling of the vaccine",
         "options": [
           {
-            "key": "Yes",
-            "text": "Yes",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "key": "cold_chain_respect",
+            "openmrs_choice_id": "",
+            "text": "Respect for cold chain observed",
+            "value": false
           },
           {
-            "key": "No",
-            "text": "No",
-            "openmrs_entity_parent": "",
-            "openmrs_entity": "concept",
-            "openmrs_entity_id": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "key": "aseptic_gestures",
+            "openmrs_choice_id": "",
+            "text": "Aseptic gestures observed",
+            "value": false
+          },
+          {
+            "key": "correct_tech",
+            "openmrs_choice_id": "",
+            "text": "Correct techniques for replenishing the vaccine observed",
+            "value": false
+          },
+          {
+            "key": "vaccine_handling_other",
+            "openmrs_choice_id": "",
+            "text": "Other",
+            "value": false
           }
-        ]
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate findings on vaccine storage and handling"
+        }
+      },
+      {
+        "key": "vaccine_handling_find_other",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_handling_find_other",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "Other findings on vaccine storage and handling",
+        "v_required": {
+          "value": "true",
+          "err": "Please indicate other findings on vaccine storage and handling"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
       }
     ]
   }
