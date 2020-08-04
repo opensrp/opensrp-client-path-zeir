@@ -64,6 +64,9 @@ public class AppConstants {
         public static final String FATHER_PHONE_NUMBER = "father_phone_number";
         public static final String MOTHER_DOB = "mother_dob";
         public static final String FATHER_DOB = "father_dob";
+        public static final String M_ZEIR_ID = "M_ZEIR_ID";
+        public static final String FATHER_BASE_ENTITY_ID = "father_base_entity_id";
+        public static final String FATHER = "father";
         public static String SITE_CHARACTERISTICS = "site_characteristics";
         public static String REGISTRATION_DATE = "client_reg_date";
         public static final String FIELDS = "fields";
@@ -176,5 +179,19 @@ public class AppConstants {
 
     public interface ConditionalVaccines {
         String PRETERM_VACCINES = "preterm_vaccines";
+    }
+
+    public interface Client {
+        String DATE_CREATED = "dateCreated";
+        String FIRST_NAME = "firstName";
+        String LAST_NAME = "lastName";
+        String BIRTHDATE = "birthdate";
+        String ID_LOWER_CASE = "_id";
+        String IDENTIFIERS = "identifiers";
+        String GENDER = "gender";
+        String RELATIONSHIPS = "relationships" ;
+        String INACTIVE = "inactive";
+        String LOST_TO_FOLLOW_UP = "lost_to_follow_up";
+        String BASE_ENTITY_ID = "baseEntityId";
     }
 }

@@ -365,7 +365,6 @@
           "label": "Age"
         },
         "default": "01-01-1960",
-        "min_date": "01-01-1960",
         "max_date": "today-10y",
         "v_required": {
           "value": "false",
@@ -480,7 +479,6 @@
           "label": "Age"
         },
         "default": "01-01-1960",
-        "min_date": "01-01-1960",
         "max_date": "today-10y",
         "v_required": {
           "value": "true",

@@ -12,7 +12,7 @@ import org.smartregister.uniceftunisia.util.AppConstants;
 import java.util.Date;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CheckChildDetailsModelTest {
+public class ChildDetailsModelTest {
 
     @Test
     public void invoke() throws JSONException {
@@ -35,8 +35,8 @@ public class CheckChildDetailsModelTest {
         jsonChildObject.put(AppConstants.KEY.GENDER, "male");
 
         jsonObject.put(AppConstants.KEY.CHILD,jsonChildObject);
-        CheckChildDetailsModel checkChildDetailsModel = new CheckChildDetailsModel(jsonObject);
-        CheckChildDetailsModel resultChildDetailsModel = checkChildDetailsModel.invoke();
+        ChildDetailsModel childDetailsModel = new ChildDetailsModel(jsonObject);
+        ChildDetailsModel resultChildDetailsModel = childDetailsModel.invoke();
         Assert.assertEquals("entityId", resultChildDetailsModel.getEntityId());
         Assert.assertEquals("zeirid", resultChildDetailsModel.getZeirId());
         Assert.assertEquals("first", resultChildDetailsModel.getFirstName());

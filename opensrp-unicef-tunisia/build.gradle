@@ -31,7 +31,7 @@ android {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
         versionCode 1
-        versionName "0.0.5"
+        versionName "0.0.6"
         multiDexEnabled true
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
         buildConfigField "boolean", "TIME_CHECK", "false"
@@ -221,6 +221,7 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
         exclude group: 'org.smartregister', module: 'opensrp-client-immunization'
+        exclude group: 'org.smartregister', module: 'opensrp-client-growth-monitoring'
         exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
@@ -260,7 +261,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
     }
 
-    implementation('org.smartregister:opensrp-client-growth-monitoring:1.1.22-SNAPSHOT@aar') {
+//    implementation('org.smartregister:opensrp-client-growth-monitoring:1.1.22-SNAPSHOT@aar') {
+    implementation(project(':opensrp-growth-monitoring')) {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
