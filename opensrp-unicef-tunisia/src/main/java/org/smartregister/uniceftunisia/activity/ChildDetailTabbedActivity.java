@@ -26,7 +26,6 @@ import org.smartregister.uniceftunisia.fragment.ChildRegistrationDataFragment;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppJsonFormUtils;
 import org.smartregister.uniceftunisia.util.AppUtils;
-import org.smartregister.uniceftunisia.util.DbConstants;
 import org.smartregister.uniceftunisia.util.VaccineUtils;
 import org.smartregister.util.FormUtils;
 import org.smartregister.util.JsonFormUtils;
@@ -180,6 +179,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
                 form.setActionBarBackground(R.color.actionbar);
                 form.setNavigationBackground(R.color.primary_dark);
                 intent = new Intent(this, JsonWizardFormActivity.class);
+                formData = obtainUpdatedForm(formJson);
             } else {
                 form.setWizard(false);
                 form.setHideSaveLabel(true);
@@ -193,6 +193,20 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
         } catch (JSONException e) {
             Timber.e(e);
         }
+    }
+
+    private String obtainUpdatedForm(JSONObject formJson) throws JSONException {
+        JSONArray fields = JsonFormUtils.fields(formJson);
+       for(int i = 0; i < fields.length(); i++) {
+           JSONObject field = fields.getJSONObject(i);
+           if (field != null && field.getString(JsonFormConstants.TYPE).equalsIgnoreCase(JsonFormConstants.DATE_PICKER)
+                   && !childDetails.getDetails().isEmpty() && childDetails.getDetails().containsKey(AppConstants.KEY.DOB)) {
+               Date date = Utils.dobStringToDate(childDetails.getDetails().get(AppConstants.KEY.DOB));
+               field.put(JsonFormConstants.MIN_DATE, new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date));
+               field.put(JsonFormConstants.MAX_DATE, AppConstants.KEY.TODAY);
+           }
+       }
+      return formJson.toString();
     }
 
     @Override

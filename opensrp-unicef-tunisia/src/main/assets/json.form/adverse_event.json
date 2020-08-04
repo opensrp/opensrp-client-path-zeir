@@ -698,7 +698,7 @@
       },
       {
         "key": "type_care",
-        "type": "check_box",
+        "type": "native_radio",
         "openmrs_entity": "",
         "openmrs_entity_id": "type_care",
         "openmrs_entity_parent": "",

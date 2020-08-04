@@ -23,56 +23,56 @@ actions:
 name: step1_lot_no
 description: lot_no
 priority: 1
-condition: "step1_vaccine_facility_unknown.contains('vaccine_facility_unknown')"
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
 actions:
   - "isRelevant = true"
 ---
 name: step1_expiry
 description: expiry
 priority: 1
-condition: "step1_vaccine_facility_unknown.contains('vaccine_facility_unknown')"
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
 actions:
   - "isRelevant = true"
 ---
 name: step1_outlet_no
 description: outlet_no
 priority: 1
-condition: "step1_vaccine_facility_unknown.contains('vaccine_facility_unknown')"
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
 actions:
   - "isRelevant = true"
 ---
 name: step1_vaccine_diluents
 description: vaccine_diluents
 priority: 1
-condition: "step1_vaccine_facility_unknown.contains('vaccine_facility_unknown')"
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
 actions:
   - "isRelevant = true"
 ---
 name: step1_thinner
 description: lot_no
 priority: 1
-condition: "step1_vaccine_facility_unknown.contains('vaccine_facility_unknown')"
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
 actions:
   - "isRelevant = true"
 ---
 name: step1_thinner_lot
 description: thinner_lot
 priority: 1
-condition: "step1_vaccine_facility_unknown.contains('vaccine_facility_unknown')"
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
 actions:
   - "isRelevant = true"
 ---
 name: step1_thinner_man_name
 description: thinner_man_name
 priority: 1
-condition: "step1_vaccine_facility_unknown.contains('vaccine_facility_unknown')"
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
 actions:
   - "isRelevant = true"
 ---
 name: step1_thinner_exp
 description: thinner_exp
 priority: 1
-condition: "step1_vaccine_facility_unknown.contains('vaccine_facility_unknown')"
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
 actions:
   - "isRelevant = true"
 ---
