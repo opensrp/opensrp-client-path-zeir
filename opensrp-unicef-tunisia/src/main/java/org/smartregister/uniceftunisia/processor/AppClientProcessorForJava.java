@@ -140,6 +140,12 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                             unsyncEvents.add(event);
                         }
                         break;
+                    case Constants.EventType.ARCHIVE_CHILD_RECORD:
+                        if (eventClient.getClient() != null && clientClassification != null) {
+                            UnicefTunisiaApplication.getInstance().registerTypeRepository().removeAll(event.getBaseEntityId());
+                            processEventClient(clientClassification, eventClient, event);
+                        }
+                        break;
                     case Constants.EventType.FATHER_REGISTRATION:
                     case Constants.EventType.BITRH_REGISTRATION:
                     case Constants.EventType.UPDATE_BITRH_REGISTRATION:
@@ -175,6 +181,16 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         }
     }
 
+    private void processEventClient(@NonNull ClientClassification clientClassification, @NonNull EventClient eventClient, @NonNull Event event) {
+        Client client = eventClient.getClient();
+        if (client != null) {
+            try {
+                processEvent(event, client, clientClassification);
+            } catch (Exception e) {
+                Timber.e(e);
+            }
+        }
+    }
     private void updateClientAlerts(@NonNull HashMap<String, DateTime> clientsForAlertUpdates) {
         HashMap<String, DateTime> stringDateTimeHashMap = SerializationUtils.clone(clientsForAlertUpdates);
         for (String baseEntityId : stringDateTimeHashMap.keySet()) {

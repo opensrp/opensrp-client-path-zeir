@@ -1,5 +1,6 @@
 package org.smartregister.uniceftunisia.interactor;
 
+import org.smartregister.child.job.ArchiveClientsJob;
 import org.smartregister.growthmonitoring.job.HeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.WeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.ZScoreRefreshIntentServiceJob;
@@ -60,8 +61,10 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
         RecurringIndicatorGeneratingJob.scheduleJob(RecurringIndicatorGeneratingJob.TAG,
                 TimeUnit.HOURS.toMinutes(6), getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
 
-        // Schedule vaccine schedules update after midnight
-        AppVaccineUpdateJob.scheduleEverydayAt(AppVaccineUpdateJob.TAG, 1, 7);
+        ArchiveClientsJob.scheduleDaily();
+
+        // Schedule daily jobs
+        AppVaccineUpdateJob.scheduleEverydayAt(AppVaccineUpdateJob.TAG, 1, 20);
     }
 
     @Override
@@ -71,5 +74,6 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
         PullUniqueIdsServiceJob.scheduleJobImmediately(PullUniqueIdsServiceJob.TAG); //need these asap!
         ZScoreRefreshIntentServiceJob.scheduleJobImmediately(ZScoreRefreshIntentServiceJob.TAG);
         ImageUploadServiceJob.scheduleJobImmediately(ImageUploadServiceJob.TAG);
+        ArchiveClientsJob.runAtOnce();
     }
 }

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import com.evernote.android.job.Job;
 import com.evernote.android.job.JobCreator;
 
+import org.smartregister.child.job.ArchiveClientsJob;
 import org.smartregister.growthmonitoring.job.HeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.WeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.ZScoreRefreshIntentServiceJob;
@@ -18,6 +19,7 @@ import org.smartregister.job.SyncSettingsServiceJob;
 import org.smartregister.job.ValidateSyncDataServiceJob;
 import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
 import org.smartregister.sync.intent.SyncIntentService;
+import org.smartregister.uniceftunisia.service.intent.ArchiveChildrenAgedAboveFiveIntentService;
 
 import timber.log.Timber;
 
@@ -51,9 +53,10 @@ public class AppJobCreator implements JobCreator {
                 return new AppVaccineUpdateJob();
             case ImageUploadServiceJob.TAG:
                 return new ImageUploadServiceJob();
-
+            case ArchiveClientsJob.TAG:
+                return new ArchiveClientsJob(ArchiveChildrenAgedAboveFiveIntentService.class);
             default:
-                Timber.w(tag + " is not declared in Job Creator");
+                Timber.w("%s is not declared in Job Creator", tag);
                 return null;
         }
     }
