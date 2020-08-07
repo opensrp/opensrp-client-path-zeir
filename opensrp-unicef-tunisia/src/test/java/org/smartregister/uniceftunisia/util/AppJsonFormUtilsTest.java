@@ -75,14 +75,14 @@ public class AppJsonFormUtilsTest {
         PowerMockito.when(ImageUtils.profilePhotoByClientID(Mockito.<String>any(), Mockito.anyInt())).thenReturn(Mockito.mock(Photo.class));
         PowerMockito.when(ChildLibrary.getInstance()).thenReturn(childLibrary);
         PowerMockito.when(CoreLibrary.getInstance()).thenReturn(coreLibrary);
-        ChildMetadata childMetadata = new ChildMetadata(null, null, null, true);
+        ChildMetadata childMetadata = new ChildMetadata(null, null, null,null, true);
         PowerMockito.when(childLibrary.metadata()).thenReturn(childMetadata);
         LocationPickerView locationPickerView = Mockito.mock(LocationPickerView.class);
         PowerMockito.when(locationPickerView.getSelectedItem()).thenReturn("selected");
         PowerMockito.when(childLibrary.getLocationPickerView(context)).thenReturn(locationPickerView);
 
         childMetadata.childRegister = childRegister;
-        ChildMetadata metadata = new ChildMetadata(BaseChildFormActivity.class, null,
+        ChildMetadata metadata = new ChildMetadata(BaseChildFormActivity.class, null,null,
                 null, true);
         metadata.updateChildRegister("test", "test",
                 "test", "ChildRegister",
