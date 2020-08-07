@@ -7,7 +7,9 @@ import org.jetbrains.annotations.NotNull;
 import org.smartregister.child.contract.ChildAdvancedSearchContract;
 import org.smartregister.child.cursor.AdvancedMatrixCursor;
 import org.smartregister.child.presenter.BaseChildAdvancedSearchPresenter;
+import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.DBConstants;
+import org.smartregister.child.util.Utils;
 import org.smartregister.uniceftunisia.cursor.RemoteLocalCursor;
 import org.smartregister.uniceftunisia.model.AdvancedSearchModel;
 import org.smartregister.uniceftunisia.util.AppConstants;
@@ -81,6 +83,9 @@ public class AdvancedSearchPresenter extends BaseChildAdvancedSearchPresenter {
 
     @Override
     public String getMainCondition() {
-        return DBQueryHelper.getHomeRegisterCondition();
+        return  String.format("(%s is null AND %s == '0') OR %s == '0'",
+                Utils.metadata().getRegisterQueryProvider().getDemographicTable() + "." + Constants.KEY.DATE_REMOVED,
+                Utils.metadata().getRegisterQueryProvider().getDemographicTable() + "." + Constants.KEY.IS_CLOSED,
+                Utils.metadata().getRegisterQueryProvider().getChildDetailsTable() + "." + Constants.KEY.IS_CLOSED);
     }
 }

@@ -565,7 +565,6 @@
         "openmrs_entity_id": "mother_tdv_doses",
         "type": "spinner",
         "entity_id": "mother",
-        "look_up": "true",
         "hint": "How many doses of Td vaccine did the mother receive during pregnancy?",
         "v_required": {
           "value": false,
@@ -620,7 +619,6 @@
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "mother_rubella",
         "entity_id": "mother",
-        "look_up": "true",
         "type": "spinner",
         "hint": "Did the child's mother receive the Rubella vaccine?",
         "values": [
