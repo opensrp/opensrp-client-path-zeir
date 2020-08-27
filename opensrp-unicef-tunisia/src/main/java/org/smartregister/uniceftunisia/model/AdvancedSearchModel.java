@@ -3,10 +3,11 @@ package org.smartregister.uniceftunisia.model;
 import org.json.JSONArray;
 import org.smartregister.child.cursor.AdvancedMatrixCursor;
 import org.smartregister.child.model.BaseChildAdvancedSearchModel;
+import org.smartregister.child.model.ChildMotherDetailsModel;
+import org.smartregister.child.util.JsonFormUtils;
 import org.smartregister.domain.Response;
 import org.smartregister.uniceftunisia.util.AppConstants;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -43,13 +44,10 @@ public class AdvancedSearchModel extends BaseChildAdvancedSearchModel {
 
         JSONArray jsonArray = getJsonArray(response);
         if (jsonArray != null) {
-            List<ChildDetailsModel> childDetailsModels = new ArrayList<>();
-            for (int index = 0; index < jsonArray.length(); index++) {
-                childDetailsModels.add(new ChildDetailsModel(getJsonObject(jsonArray, index)));
-            }
-            Collections.sort(childDetailsModels, Collections.reverseOrder());
-            for (ChildDetailsModel childDetailsModel : childDetailsModels) {
-                matrixCursor.addRow(childDetailsModel.getColumnValuesFromJson());
+            List<ChildMotherDetailsModel> childMotherDetailsModels = JsonFormUtils.processReturnedAdvanceSearchResults(response);
+            Collections.sort(childMotherDetailsModels, Collections.reverseOrder());
+            for (ChildMotherDetailsModel childMotherDetailsModel : childMotherDetailsModels) {
+                matrixCursor.addRow(childMotherDetailsModel.getColumnValuesFromJson());
             }
         }
 

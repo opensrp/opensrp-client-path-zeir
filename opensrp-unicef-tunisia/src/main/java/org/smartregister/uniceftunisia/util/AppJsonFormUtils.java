@@ -178,33 +178,4 @@ public class AppJsonFormUtils extends JsonFormUtils {
             form.getJSONObject(Constants.KEY.MOTHER).put(ENCOUNTER_TYPE, Constants.EventType.UPDATE_MOTHER_DETAILS);
         }
     }
-
-    public static String getJsonString(JSONObject jsonObject, String field) {
-        try {
-            if (jsonObject != null && jsonObject.has(field)) {
-                String string = jsonObject.getString(field);
-                if (StringUtils.isBlank(string)) {
-                    return "";
-                }
-
-                return string;
-            }
-        } catch (JSONException e) {
-            Timber.e(e);
-        }
-
-        return "";
-    }
-
-    public static JSONObject getJsonObject(JSONObject jsonObject, String field) {
-        try {
-            if (jsonObject != null && jsonObject.has(field)) {
-                return jsonObject.getJSONObject(field);
-            }
-        } catch (JSONException e) {
-            Timber.e(e);
-        }
-
-        return null;
-    }
 }

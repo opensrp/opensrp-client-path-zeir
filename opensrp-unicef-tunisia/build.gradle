@@ -31,7 +31,7 @@ android {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
         versionCode 1
-        versionName "0.0.6"
+        versionName "0.0.7"
         multiDexEnabled true
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
         buildConfigField "boolean", "TIME_CHECK", "false"
@@ -220,7 +220,6 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
-        exclude group: 'org.smartregister', module: 'opensrp-client-immunization'
         exclude group: 'org.smartregister', module: 'opensrp-client-growth-monitoring'
         exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -240,16 +239,6 @@ dependencies {
         exclude group: 'io.ona.rdt-capture', module: 'lib'
     }
 
-//    api('org.smartregister:opensrp-client-immunization:1.4.45-SNAPSHOT@aar') {
-    api (project(':opensrp-immunization')) {
-        transitive = true
-        exclude group: 'id.zelory', module: 'compressor'
-        exclude group: 'org.smartregister', module: 'opensrp-client-core'
-        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
-        exclude group: 'com.android.support', module: 'design'
-        exclude group: 'com.android.support', module: 'appcompat-v7'
-    }
-
     implementation('org.smartregister:opensrp-client-configurable-views:1.1.5-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
@@ -261,8 +250,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
     }
 
-//    implementation('org.smartregister:opensrp-client-growth-monitoring:1.1.22-SNAPSHOT@aar') {
-    implementation(project(':opensrp-growth-monitoring')) {
+    implementation('org.smartregister:opensrp-client-growth-monitoring:1.1.23-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'

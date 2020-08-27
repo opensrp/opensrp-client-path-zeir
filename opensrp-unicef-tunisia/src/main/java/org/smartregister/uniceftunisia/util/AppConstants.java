@@ -181,18 +181,4 @@ public class AppConstants {
     public interface ConditionalVaccines {
         String PRETERM_VACCINES = "preterm_vaccines";
     }
-
-    public interface Client {
-        String DATE_CREATED = "dateCreated";
-        String FIRST_NAME = "firstName";
-        String LAST_NAME = "lastName";
-        String BIRTHDATE = "birthdate";
-        String ID_LOWER_CASE = "_id";
-        String IDENTIFIERS = "identifiers";
-        String GENDER = "gender";
-        String RELATIONSHIPS = "relationships" ;
-        String INACTIVE = "inactive";
-        String LOST_TO_FOLLOW_UP = "lost_to_follow_up";
-        String BASE_ENTITY_ID = "baseEntityId";
-    }
 }
