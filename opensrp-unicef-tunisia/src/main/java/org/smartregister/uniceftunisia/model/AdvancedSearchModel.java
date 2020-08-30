@@ -8,7 +8,6 @@ import org.smartregister.child.util.JsonFormUtils;
 import org.smartregister.domain.Response;
 import org.smartregister.uniceftunisia.util.AppConstants;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 

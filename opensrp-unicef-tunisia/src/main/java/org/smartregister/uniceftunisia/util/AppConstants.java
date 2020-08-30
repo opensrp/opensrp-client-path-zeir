@@ -75,6 +75,9 @@ public class AppConstants {
         public static final String IS_VACCINE_GROUP = "is_vaccine_group";
         public static final String OPTIONS = "options";
         public static final String MOTHER_NATIONALITY = "mother_nationality";
+        public static final String FIRST_BIRTH= "first_birth";
+        public static final String RUBELLA_SEROLOGY= "rubella_serology";
+        public static final String SEROLOGY_RESULTS= "serology_results";
         public static final String MOTHER_RUBELLA= "mother_rubella";
         public static final String FATHER_NATIONALITY = "father_nationality";
         public static final String FATHER_RELATIONAL_ID= "father_relational_id";

@@ -15,6 +15,7 @@ import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FATHER_NATIO
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FATHER_PHONE;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FATHER_PHONE_NUMBER;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FATHER_RELATIONAL_ID;
+import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FIRST_BIRTH;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FIRST_NAME;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.GA_AT_BIRTH;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.GENDER;
@@ -37,7 +38,9 @@ import static org.smartregister.uniceftunisia.util.AppConstants.KEY.PROTECTED_AT
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.REGISTRATION_DATE;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.RELATIONALID;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.RELATIONAL_ID;
+import static org.smartregister.uniceftunisia.util.AppConstants.KEY.RUBELLA_SEROLOGY;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.SECOND_PHONE_NUMBER;
+import static org.smartregister.uniceftunisia.util.AppConstants.KEY.SEROLOGY_RESULTS;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.SHOW_BCG2_REMINDER;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.SHOW_BCG_SCAR;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.VILLAGE;
@@ -78,6 +81,9 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 getMotherDetailsColumn(MOTHER_NATIONALITY_OTHER),
                 getMotherDetailsColumn(PROTECTED_AT_BIRTH),
                 getMotherDetailsColumn(MOTHER_TDV_DOSES),
+                getMotherDetailsColumn(FIRST_BIRTH),
+                getMotherDetailsColumn(RUBELLA_SEROLOGY),
+                getMotherDetailsColumn(SEROLOGY_RESULTS),
                 getMotherDetailsColumn(MOTHER_RUBELLA),
                 getMotherDetailsColumn(MOTHER_GUARDIAN_NUMBER) + "as " + MOTHER_PHONE_NUMBER,
                 getMotherDetailsColumn(SECOND_PHONE_NUMBER) + "as " + MOTHER_SECOND_PHONE_NUMBER,
