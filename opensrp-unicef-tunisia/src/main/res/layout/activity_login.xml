@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:gravity="center_horizontal"
-                android:text="@string/unicef_tunisia_app_name"
+                android:text="@string/app_name"
                 android:textColor="#272727"
                 android:textSize="@dimen/login_title_text_size"
                 android:textStyle="bold"

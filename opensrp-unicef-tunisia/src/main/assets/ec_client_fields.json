@@ -174,10 +174,10 @@
         },
         {
           "column_name": "mother_guardian_number",
-          "type": "Event",
+          "type": "Client",
           "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+            "field": "Client",
+            "concept": "attributes.mother_guardian_number"
           }
         },
         {
@@ -214,6 +214,27 @@
           "json_mapping": {
             "field": "obs.fieldCode",
             "concept": "164826AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+        {
+          "column_name": "first_birth",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.first_birth"
+          }
+        },
+        {
+          "column_name": "rubella_serology",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.rubella_serology"
+          }
+        },
+        {
+          "column_name": "serology_results",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.serology_results"
           }
         },
         {

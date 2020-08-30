@@ -45,7 +45,6 @@ public class AdvancedSearchModel extends BaseChildAdvancedSearchModel {
         JSONArray jsonArray = getJsonArray(response);
         if (jsonArray != null) {
             List<ChildMotherDetailsModel> childMotherDetailsModels = JsonFormUtils.processReturnedAdvanceSearchResults(response);
-            Collections.sort(childMotherDetailsModels, Collections.reverseOrder());
             for (ChildMotherDetailsModel childMotherDetailsModel : childMotherDetailsModels) {
                 matrixCursor.addRow(childMotherDetailsModel.getColumnValuesFromJson());
             }

@@ -533,8 +533,8 @@
       {
         "key": "mother_guardian_number",
         "openmrs_entity_parent": "",
-        "openmrs_entity": "concept",
-        "openmrs_entity_id": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "mother_guardian_number",
         "entity_id": "mother",
         "look_up": "true",
         "type": "edit_text",
@@ -614,6 +614,73 @@
         }
       },
       {
+        "key": "first_birth",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "first_birth",
+        "entity_id": "mother",
+        "type": "spinner",
+        "hint": "Mother's first delivery?",
+        "label_info_text": "Indicate whether the mother is primiparous (woman giving birth for the first time",
+        "values": [
+          "Yes",
+          "No"
+        ],
+        "v_required": {
+          "value": true,
+          "err": "Please indicate whether it's mother's first birth"
+        }
+      },
+      {
+        "key": "rubella_serology",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "rubella_serology",
+        "entity_id": "mother",
+        "type": "spinner",
+        "hint": "Did the mother receive a Rubella serology test?",
+        "label_info_text": "This is a serology test only for primiparous (giving birth for the first time) women.",
+        "values": [
+          "Yes",
+          "No"
+        ],
+        "v_required": {
+          "value": true,
+          "err": "Please indicate whether mother received serology test"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "serology_results",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "serology_results",
+        "entity_id": "mother",
+        "type": "spinner",
+        "hint": "Result of the Rubella serology test",
+        "values": [
+          "Positive",
+          "Negative"
+        ],
+        "v_required": {
+          "value": true,
+          "err": "Please indicate whether mother received serology test"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "mother_rubella",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person_attribute",
@@ -629,6 +696,13 @@
         "v_required": {
           "value": true,
           "err": "Please indicate whether mother received Rubella vaccine"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_relevance_rules.yml"
+            }
+          }
         }
       },
       {

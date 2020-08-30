@@ -12,3 +12,24 @@ priority: 1
 condition: "step1_mother_nationality == 'Other'"
 actions:
   - "isRelevant = true"
+---
+name: step1_rubella_serology
+description: rubella_serology
+priority: 1
+condition: "step1_first_birth == 'Yes'"
+actions:
+  - "isRelevant = true"
+---
+name: step1_serology_results
+description: serology_results
+priority: 1
+condition: "step1_rubella_serology == 'Yes'"
+actions:
+  - "isRelevant = true"
+---
+name: step1_mother_rubella
+description: mother_rubella
+priority: 1
+condition: "step1_serology_results == 'Negative'"
+actions:
+  - "isRelevant = true"
