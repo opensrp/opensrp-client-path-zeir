@@ -36,7 +36,7 @@ public class ChildRegistrationDataFragment extends BaseChildRegistrationDataFrag
 
     @Override
     protected List<String> addUnFormattedNumberFields(String... key) {
-        return Arrays.asList("mother_guardian_number");
+        return Arrays.asList("mother_guardian_number", "second_phone_number");
     }
 
     @Override
@@ -59,6 +59,9 @@ public class ChildRegistrationDataFragment extends BaseChildRegistrationDataFrag
                 put("second_phone_number", R.string.mother_caregiver_alt_phone);
                 put("mother_tdv_doses", R.string.mother_tdv_doses);
                 put("mother_rubella", R.string.mother_rubella);
+                put("first_birth", R.string.first_birth);
+                put("rubella_serology", R.string.rubella_serology);
+                put("serology_results", R.string.serology_results);
             }
         };
         return super.getDataRowLabelResourceIds();

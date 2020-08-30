@@ -618,5 +618,8 @@
     <string name="child_DOB">Date of birth</string>
     <string name="mother_name">M/CG: %1$s</string>
     <string name="adverse_effects">Adverse Effects</string>
+    <string name="first_birth">Mother\'s first birth</string>
+    <string name="rubella_serology">Mother received Rubella Serology test</string>
+    <string name="serology_results">Serology test result</string>
 
 </resources>
