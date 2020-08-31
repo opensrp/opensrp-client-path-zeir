@@ -29,15 +29,10 @@
     <string name="nav_logo" translatable="false">Unicef-Tunisia</string>
     <string name="title_activity_child_immunization" translatable="false">ChildImmunizationActivity</string>
 
-    <!-- Nfc-->
     <string name="error_code">Error: %1$s</string>
     <string name="something_went_wrong">Something went wrong&#8230;</string>
-    <string name="please_install_nfc_sdk">Please install the Nfc SDK first</string>
     <string name="install">Install</string>
     <string name="activate">Activate</string>
-    <string name="please_activate_nfc_sdk">Nfc SDK NOT activated. Please activate&#8230;</string>
-    <string name="nfc_sdk_missing">The Nfc SDK is missing </string>
-    <string name="nfc_error">Please contact the helpdesk with error code %1$s %2$s %3$s</string>
     <string name="alert">Alert</string>
     <string name="card_not_registered">This card is not registered&#8230;</string>
     <string name="successfully_updated_card">Successfully updated card &#8230;</string>
@@ -47,7 +42,6 @@
     <string name="the_card_is_full">The card is full and unusable. Please register another card</string>
     <string name="there_is_an_error_with_record"> There is an error with this record. Please contact the helpdesk with error code  %1$s %2$s %3$s and the client’s ID</string>
     <string name="the_operation_was_cancelled">The operation was cancelled. Please try again</string>
-    <string name="the_sdk_is_not_activated">The SDK is not activated. Please activate the SDK by going to settings and touching Activate Nfc SDK and try again after successful activation</string>
     <string name="the_operation_failed">The operation failed. Please try again. Please contact the helpdesk with error code %1$s %2$s %3$s</string>
     <string name="this_card_is_invalid">This card is invalid. Please use another card</string>
     <string name="new_child_record">New child record </string>

@@ -3,31 +3,4 @@
     <string name="action_settings" translatable="false">الإعدادات</string>
     <string name="action_log_out">قطع</string>
 
-
-    <!-- Navigation Strings -->
-    <string name="navigation_drawer_close">قريب</string>
-    <string name="scan_card">ماسحة البطاقة</string>
-    <string name="side_nav_add">أضف طفلا جديدا</string>
-    <string name="side_nav_out_of_catchment">سجل التطعيم مستجمعات المياه</string>
-    <string name="nav_register">تسجيل</string>
-    <string name="attribution_text">مدعوم من OpenSRP</string>
-    <string name="show_password_text">عرض كلمة المرور</string>
-    <string name="app_version">نسخة التطبيق: %1$s (مبنية على %2$s)</string>
-    <string name="login_text">تسجيل الدخول</string>
-    <string name="log_out_text">الخروج</string>
-
-
-    <string name="error_code">خطأ: %1$s</string>
-
-    <string name="something_went_wrong">هناك خطأ ما&#8230;</string>
-
-    <string name="please_install_nfc_sdk">قم أولاً بتثبيت SDK من Nfc&#8230;</string>
-
-    <string name="install">التثبت</string>
-
-    <string name="activate">تفعيل</string>
-
-    <string name="please_activate_nfc_sdk">لم يتم تنشيط Nfc SDK. يرجى تفعيل&#8230;</string>
-
-
 </resources>

@@ -302,7 +302,7 @@
           "column_name": "birth_registration_number",
           "type": "Client",
           "json_mapping": {
-            "field": "attributes.Birth_Certificate"
+            "field": "attributes.birth_registration_number"
           }
         },
         {

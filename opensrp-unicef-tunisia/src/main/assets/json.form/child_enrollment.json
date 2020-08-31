@@ -91,7 +91,7 @@
         "key": "birth_registration_number",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "Birth_Certificate",
+        "openmrs_entity_id": "birth_registration_number",
         "type": "edit_text",
         "hint": "Child's birth registration number",
         "label_info_text": "If the child's birth was registered, enter the registration number here..",

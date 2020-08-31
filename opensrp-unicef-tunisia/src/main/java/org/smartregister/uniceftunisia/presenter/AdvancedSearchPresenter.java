@@ -25,8 +25,8 @@ public class AdvancedSearchPresenter extends BaseChildAdvancedSearchPresenter {
     @Override
     protected AdvancedMatrixCursor getRemoteLocalMatrixCursor(AdvancedMatrixCursor matrixCursor) {
         String query = getView().filterAndSortQuery();
-        Cursor cursor = getView().getRawCustomQueryForAdapter(query);
-        if (cursor != null && cursor.getCount() > 0) {
+        Cursor localCursor = getView().getRawCustomQueryForAdapter(query);
+        if (localCursor != null && localCursor.getCount() > 0) {
             AdvancedMatrixCursor remoteLocalCursor = new AdvancedMatrixCursor(
                     new String[]{
                             AppConstants.KEY.ID_LOWER_CASE,
@@ -43,14 +43,14 @@ public class AdvancedSearchPresenter extends BaseChildAdvancedSearchPresenter {
                             AppConstants.KEY.INACTIVE,
                             AppConstants.KEY.LOST_TO_FOLLOW_UP
                     });
-            CursorJoiner joiner = new CursorJoiner(matrixCursor, new String[]{DBConstants.KEY.ZEIR_ID}, cursor, new String[]{DBConstants.KEY.ZEIR_ID});
+            CursorJoiner joiner = new CursorJoiner(localCursor, new String[]{DBConstants.KEY.ZEIR_ID}, matrixCursor, new String[]{DBConstants.KEY.ZEIR_ID});
             for (CursorJoiner.Result joinerResult : joiner) {
                 switch (joinerResult) {
                     case BOTH:
-                        remoteLocalCursor.addRow(getColumnValues(new RemoteLocalCursor(cursor, true)));
+                        remoteLocalCursor.addRow(getColumnValues(new RemoteLocalCursor(localCursor, true)));
                         break;
                     case RIGHT:
-                        remoteLocalCursor.addRow(getColumnValues(new RemoteLocalCursor(cursor, false)));
+                        remoteLocalCursor.addRow(getColumnValues(new RemoteLocalCursor(localCursor, false)));
                         break;
                     case LEFT:
                         remoteLocalCursor.addRow(getColumnValues(new RemoteLocalCursor(matrixCursor, true)));
@@ -60,7 +60,7 @@ public class AdvancedSearchPresenter extends BaseChildAdvancedSearchPresenter {
                 }
             }
 
-            cursor.close();
+            localCursor.close();
             matrixCursor.close();
             return remoteLocalCursor;
         } else {

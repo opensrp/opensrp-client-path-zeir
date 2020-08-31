@@ -8,7 +8,6 @@
 
     <!-- Navigation Strings -->
     <string name="navigation_drawer_close">Fermer</string>
-    <string name="scan_card">Lancer le Nfc NFC scan&#8230;</string>
     <string name="side_nav_add">Ajouter un nouvel enfant</string>
     <string name="side_nav_out_of_catchment">Enregistrer la vaccination de captage</string>
     <string name="nav_register">Registre</string>
@@ -28,17 +27,10 @@
     <string name="error_code">Erreur: %1$s</string>
     <string name="something_went_wrong">Quelque chose a mal tourné&#8230;</string>
 
-    <string name="please_install_nfc_sdk">Installez d\'abord le SDK Nfc</string>
 
     <string name="install">Installer</string>
 
     <string name="activate">Activer</string>
-
-    <string name="please_activate_nfc_sdk">Nfc SDK NON activé. S\'il vous plaît activer&#8230;</string>
-
-    <string name="nfc_sdk_missing"> SDK Nfc manquant </string>
-
-    <string name="nfc_error"> Veuillez contacter le soutien technique aver le code d’erreur %1$s %2$s %3$s</string>
 
     <string name="alert">Alerte</string>
 
@@ -57,8 +49,6 @@
     <string name="there_is_an_error_with_record"> Il y a un erreur avec le fichier. Veuillez contacter le soutien technique avec le code d’erreur  %1$s %2$s %3$s et l’ID du client</string>
 
     <string name="the_operation_was_cancelled">L’Opération était annulé. Veuillez essayer de nouveau</string>
-
-    <string name="the_sdk_is_not_activated">Le SDK n’est pas activé. Veuillez aller au paramètrage et sélectionner Activer Nfc SDK. Veuillez essayer de nouveau après avoir complété l’activation.</string>
 
     <string name="the_operation_failed">Opération échouée. Veuillez essayer de nouveau. Veuillez contacter le soutien technique avec le code d’erreur %1$s %2$s %3$s</string>
 
