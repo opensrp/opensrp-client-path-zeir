@@ -5,46 +5,11 @@ import org.smartregister.child.provider.RegisterQueryProvider;
 import org.smartregister.child.util.Constants;
 import org.smartregister.uniceftunisia.util.AppConstants;
 
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.BASE_ENTITY_ID;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.BIRTH_REGISTRATION_NUMBER;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.CHILD_REG;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.DOB;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FATHER_DOB;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FATHER_NATIONALITY;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FATHER_NATIONALITY_OTHER;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FATHER_PHONE;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FATHER_PHONE_NUMBER;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FATHER_RELATIONAL_ID;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FIRST_BIRTH;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FIRST_NAME;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.GA_AT_BIRTH;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.GENDER;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.HOME_ADDRESS;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.ID;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.INACTIVE;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.LAST_INTERACTED_WITH;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.LAST_NAME;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.LOST_TO_FOLLOW_UP;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.MOTHER_DOB;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.MOTHER_GUARDIAN_NUMBER;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.MOTHER_NATIONALITY;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.MOTHER_NATIONALITY_OTHER;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.MOTHER_PHONE_NUMBER;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.MOTHER_RUBELLA;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.MOTHER_SECOND_PHONE_NUMBER;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.MOTHER_TDV_DOSES;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.PLACE_OF_BIRTH;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.PROTECTED_AT_BIRTH;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.REGISTRATION_DATE;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.RELATIONALID;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.RELATIONAL_ID;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.RUBELLA_SEROLOGY;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.SECOND_PHONE_NUMBER;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.SEROLOGY_RESULTS;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.SHOW_BCG2_REMINDER;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.SHOW_BCG_SCAR;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.VILLAGE;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.ZEIR_ID;
+import static org.smartregister.uniceftunisia.util.AppConstants.KEY.*;
+import static org.smartregister.uniceftunisia.util.TableUtil.getAllClientColumn;
+import static org.smartregister.uniceftunisia.util.TableUtil.getChildDetailsColumn;
+import static org.smartregister.uniceftunisia.util.TableUtil.getFatherDetailsColumn;
+import static org.smartregister.uniceftunisia.util.TableUtil.getMotherDetailsColumn;
 
 public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
 
@@ -107,25 +72,5 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 "father.last_name                      as " + AppConstants.KEY.FATHER_LAST_NAME,
                 "father.dob                            as " + FATHER_DOB
         };
-    }
-
-    private static String getAllClientColumn(String column) {
-        return getColumn(AppConstants.TABLE_NAME.ALL_CLIENTS, column);
-    }
-
-    public static String getMotherDetailsColumn(String column) {
-        return getColumn(AppConstants.TABLE_NAME.MOTHER_DETAILS, column);
-    }
-
-    private static String getFatherDetailsColumn(String column) {
-        return getColumn(AppConstants.TABLE_NAME.FATHER_DETAILS, column);
-    }
-
-    private static String getChildDetailsColumn(String column) {
-        return getColumn(AppConstants.TABLE_NAME.CHILD_DETAILS, column);
-    }
-
-    private static String getColumn(String tableName, String column) {
-        return String.format("%s.%s ", tableName, column);
     }
 }

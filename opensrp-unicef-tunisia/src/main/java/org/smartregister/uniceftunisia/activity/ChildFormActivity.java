@@ -16,7 +16,6 @@ import org.smartregister.uniceftunisia.util.AppConstants;
 import java.util.Map;
 
 import static org.smartregister.uniceftunisia.fragment.AppChildFormFragment.getFormFragment;
-import static org.smartregister.uniceftunisia.repository.AppChildRegisterQueryProvider.getMotherDetailsColumn;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FIRST_NAME;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.LAST_NAME;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.MOTHER_GUARDIAN_NUMBER;
@@ -26,6 +25,7 @@ import static org.smartregister.uniceftunisia.util.AppConstants.KEY.MOTHER_RUBEL
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.MOTHER_TDV_DOSES;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.PROTECTED_AT_BIRTH;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.SECOND_PHONE_NUMBER;
+import static org.smartregister.uniceftunisia.util.TableUtil.getMotherDetailsColumn;
 
 public class ChildFormActivity extends BaseChildFormActivity {
     @Override

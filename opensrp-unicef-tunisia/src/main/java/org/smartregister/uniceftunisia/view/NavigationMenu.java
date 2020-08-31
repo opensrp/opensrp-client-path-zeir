@@ -255,7 +255,6 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
     private void startFormActivity(Activity activity, String formName) {
         try {
             JsonFormUtils.startForm(activity, JsonFormUtils.REQUEST_CODE_GET_JSON, formName, null, ChildLibrary.getInstance().getLocationPickerView(activityWeakReference.get()).getSelectedItem());
-
         } catch (Exception e) {
             Timber.e(e);
         }

@@ -4,15 +4,14 @@ import android.database.Cursor;
 
 import net.sqlcipher.InvalidRowColumnException;
 
-import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.DBConstants;
-import org.smartregister.uniceftunisia.util.AppConstants;
 
 import timber.log.Timber;
 
 public class RemoteLocalCursor {
     private String id;
     private String relationalId;
+    private String motherBaseEntityId;
     private String firstName;
     private String lastName;
     private String gender;
@@ -20,19 +19,14 @@ public class RemoteLocalCursor {
     private String openSrpId;
     private String motherFirstName;
     private String motherLastName;
-    private String motherBaseEntityId;
-    private String fatherBaseEntityId;
     private String inactive;
     private String lostToFollowUp;
 
-    public RemoteLocalCursor(Cursor cursor, boolean isRemote) {
+    public RemoteLocalCursor(Cursor cursor) {
         try {
-            if (isRemote) {
-                id = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.ID_LOWER_CASE));
-            } else {
-                id = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.BASE_ENTITY_ID));
-            }
+            id = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.ID_LOWER_CASE));
             relationalId = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.RELATIONALID));
+            motherBaseEntityId = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.RELATIONAL_ID));
             firstName = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.FIRST_NAME));
             lastName = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.LAST_NAME));
             dob = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.DOB));
@@ -42,13 +36,6 @@ public class RemoteLocalCursor {
             motherLastName = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.MOTHER_LAST_NAME));
             inactive = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.INACTIVE));
             lostToFollowUp = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.LOST_TO_FOLLOW_UP));
-            if (isRemote) {
-                motherBaseEntityId = cursor.getString(cursor.getColumnIndex(Constants.KEY.MOTHER_BASE_ENTITY_ID));
-                fatherBaseEntityId = cursor.getString(cursor.getColumnIndex(AppConstants.KEY.FATHER_BASE_ENTITY_ID));
-            } else {
-                motherBaseEntityId = cursor.getString(cursor.getColumnIndex(AppConstants.KEY.RELATIONAL_ID));
-                fatherBaseEntityId = cursor.getString(cursor.getColumnIndex(AppConstants.KEY.FATHER_RELATIONAL_ID));
-            }
         } catch (InvalidRowColumnException ex) {
             Timber.e(ex);
         }
@@ -107,11 +94,4 @@ public class RemoteLocalCursor {
         return motherBaseEntityId;
     }
 
-    public String getFatherBaseEntityId() {
-        return fatherBaseEntityId;
-    }
-
-    public void setFatherBaseEntityId(String fatherBaseEntityId) {
-        this.fatherBaseEntityId = fatherBaseEntityId;
-    }
 }

@@ -18,12 +18,13 @@ import org.smartregister.uniceftunisia.util.AppConstants;
  * Created by ndegwamartin on 11/04/2019.
  */
 public class AdvancedSearchPresenter extends BaseChildAdvancedSearchPresenter {
+
     public AdvancedSearchPresenter(ChildAdvancedSearchContract.View view, String viewConfigurationIdentifier) {
         super(view, viewConfigurationIdentifier, new AdvancedSearchModel());
     }
 
     @Override
-    protected AdvancedMatrixCursor getRemoteLocalMatrixCursor(AdvancedMatrixCursor matrixCursor) {
+    protected AdvancedMatrixCursor getRemoteLocalMatrixCursor(AdvancedMatrixCursor remoteCursor) {
         String query = getView().filterAndSortQuery();
         Cursor localCursor = getView().getRawCustomQueryForAdapter(query);
         if (localCursor != null && localCursor.getCount() > 0) {
@@ -31,29 +32,25 @@ public class AdvancedSearchPresenter extends BaseChildAdvancedSearchPresenter {
                     new String[]{
                             AppConstants.KEY.ID_LOWER_CASE,
                             AppConstants.KEY.RELATIONALID,
+                            AppConstants.KEY.RELATIONAL_ID,
                             AppConstants.KEY.FIRST_NAME,
                             AppConstants.KEY.LAST_NAME,
                             AppConstants.KEY.GENDER,
                             AppConstants.KEY.DOB,
                             AppConstants.KEY.ZEIR_ID,
-                            AppConstants.KEY.MOTHER_BASE_ENTITY_ID,
-                            AppConstants.KEY.FATHER_BASE_ENTITY_ID,
                             AppConstants.KEY.MOTHER_FIRST_NAME,
                             AppConstants.KEY.MOTHER_LAST_NAME,
                             AppConstants.KEY.INACTIVE,
                             AppConstants.KEY.LOST_TO_FOLLOW_UP
                     });
-            CursorJoiner joiner = new CursorJoiner(localCursor, new String[]{DBConstants.KEY.ZEIR_ID}, matrixCursor, new String[]{DBConstants.KEY.ZEIR_ID});
+            CursorJoiner joiner = new CursorJoiner(remoteCursor, new String[]{DBConstants.KEY.ZEIR_ID}, localCursor, new String[]{DBConstants.KEY.ZEIR_ID});
             for (CursorJoiner.Result joinerResult : joiner) {
                 switch (joinerResult) {
                     case BOTH:
-                        remoteLocalCursor.addRow(getColumnValues(new RemoteLocalCursor(localCursor, true)));
-                        break;
-                    case RIGHT:
-                        remoteLocalCursor.addRow(getColumnValues(new RemoteLocalCursor(localCursor, false)));
+                        remoteLocalCursor.addRow(getColumnValues(new RemoteLocalCursor(localCursor)));
                         break;
                     case LEFT:
-                        remoteLocalCursor.addRow(getColumnValues(new RemoteLocalCursor(matrixCursor, true)));
+                        remoteLocalCursor.addRow(getColumnValues(new RemoteLocalCursor(remoteCursor)));
                         break;
                     default:
                         break;
@@ -61,10 +58,10 @@ public class AdvancedSearchPresenter extends BaseChildAdvancedSearchPresenter {
             }
 
             localCursor.close();
-            matrixCursor.close();
+            remoteCursor.close();
             return remoteLocalCursor;
         } else {
-            return matrixCursor;
+            return remoteCursor;
         }
     }
 
@@ -72,17 +69,17 @@ public class AdvancedSearchPresenter extends BaseChildAdvancedSearchPresenter {
     private Object[] getColumnValues(RemoteLocalCursor remoteLocalCursor) {
         return new Object[]{
                 remoteLocalCursor.getId(), remoteLocalCursor.getRelationalId(),
+                remoteLocalCursor.getMotherBaseEntityId(),
                 remoteLocalCursor.getFirstName(), remoteLocalCursor.getLastName(),
                 remoteLocalCursor.getGender(), remoteLocalCursor.getDob(),
-                remoteLocalCursor.getOpenSrpId(), remoteLocalCursor.getMotherBaseEntityId(),
-                remoteLocalCursor.getFatherBaseEntityId(), remoteLocalCursor.getMotherFirstName(),
+                remoteLocalCursor.getOpenSrpId(), remoteLocalCursor.getMotherFirstName(),
                 remoteLocalCursor.getMotherLastName(), remoteLocalCursor.getInactive(),
                 remoteLocalCursor.getLostToFollowUp()};
     }
 
     @Override
     public String getMainCondition() {
-        return  String.format("(%s is null AND %s == '0') OR %s == '0'",
+        return String.format("(%s is null AND %s == '0') OR %s == '0'",
                 Utils.metadata().getRegisterQueryProvider().getDemographicTable() + "." + Constants.KEY.DATE_REMOVED,
                 Utils.metadata().getRegisterQueryProvider().getDemographicTable() + "." + Constants.KEY.IS_CLOSED,
                 Utils.metadata().getRegisterQueryProvider().getChildDetailsTable() + "." + Constants.KEY.IS_CLOSED);
