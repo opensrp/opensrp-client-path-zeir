@@ -15,12 +15,10 @@ import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.uniceftunisia.contract.NavigationContract;
 import org.smartregister.uniceftunisia.interactor.NavigationInteractor;
 import org.smartregister.uniceftunisia.model.NavigationModel;
-import org.smartregister.uniceftunisia.model.NavigationOption;
 import org.smartregister.uniceftunisia.util.AppConstants;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
-import java.util.List;
 
 import timber.log.Timber;
 
@@ -72,12 +70,6 @@ public class NavigationPresenter implements NavigationContract.Presenter {
         HeightIntentServiceJob.scheduleJobImmediately(HeightIntentServiceJob.TAG);
         VaccineServiceJob.scheduleJobImmediately(VaccineServiceJob.TAG);
     }
-
-    @Override
-    public List<NavigationOption> getOptions() {
-        return mModel.getNavigationItems();
-    }
-
 
     @Override
     public String getLoggedInUserInitials() {

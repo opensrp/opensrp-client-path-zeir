@@ -1,21 +1,35 @@
 ---
-name: step1_child_hiv_status
-description: child_hiv_status
+name: step1_father_nationality_other
+description: father_nationality_other
 priority: 1
-condition: "step1_mother_hiv_status == 'Positive' || step1_mother_hiv_status == 'Unknown'"
+condition: "step1_father_nationality == 'Other'"
 actions:
   - "isRelevant = true"
 ---
-name: step1_child_treatment
-description: child_treatment
+name: step1_mother_nationality_other
+description: mother_nationality_other
 priority: 1
-condition: "step1_child_hiv_status == 'Positive' || step1_child_hiv_status == 'Exposed'"
+condition: "step1_mother_nationality == 'Other'"
 actions:
   - "isRelevant = true"
 ---
-name: step1_protected_at_birth
-description: protected_at_birth
+name: step1_rubella_serology
+description: rubella_serology
 priority: 1
-condition: "step1_age != '' && step1_age < 2"
+condition: "step1_first_birth == 'Yes'"
+actions:
+  - "isRelevant = true"
+---
+name: step1_serology_results
+description: serology_results
+priority: 1
+condition: "step1_rubella_serology == 'Yes'"
+actions:
+  - "isRelevant = true"
+---
+name: step1_mother_rubella
+description: mother_rubella
+priority: 1
+condition: "step1_serology_results == 'Negative'"
 actions:
   - "isRelevant = true"

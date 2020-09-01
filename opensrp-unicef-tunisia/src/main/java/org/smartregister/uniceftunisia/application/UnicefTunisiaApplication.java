@@ -22,6 +22,7 @@ import org.smartregister.child.util.DBConstants;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.configurableviews.ConfigurableViewsLibrary;
 import org.smartregister.configurableviews.helper.JsonSpecHelper;
+import org.smartregister.growthmonitoring.GrowthMonitoringConfig;
 import org.smartregister.growthmonitoring.GrowthMonitoringLibrary;
 import org.smartregister.growthmonitoring.repository.HeightRepository;
 import org.smartregister.growthmonitoring.repository.HeightZScoreRepository;
@@ -50,6 +51,7 @@ import org.smartregister.uniceftunisia.BuildConfig;
 import org.smartregister.uniceftunisia.activity.ChildFormActivity;
 import org.smartregister.uniceftunisia.activity.ChildImmunizationActivity;
 import org.smartregister.uniceftunisia.activity.ChildProfileActivity;
+import org.smartregister.uniceftunisia.activity.ChildRegisterActivity;
 import org.smartregister.uniceftunisia.activity.LoginActivity;
 import org.smartregister.uniceftunisia.job.AppJobCreator;
 import org.smartregister.uniceftunisia.processor.AppClientProcessorForJava;
@@ -69,9 +71,7 @@ import org.smartregister.view.receiver.TimeChangedBroadcastReceiver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -117,15 +117,17 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     }
 
     private static String[] getFtsTables() {
-        return new String[]{"ec_client", "ec_mother_details", DBConstants.RegisterTable.CHILD_DETAILS};
+        return new String[]{DBConstants.RegisterTable.CLIENT, DBConstants.RegisterTable.CHILD_DETAILS};
     }
 
     private static String[] getFtsSearchFields(String tableName) {
-        if (tableName.equalsIgnoreCase("ec_client")) {
-            return new String[]{"first_name", "last_name", "zeir_d"};
-        } else if ("ec_mother_details".equals(tableName)) {
-            return new String[]{"next_contact"};
-        } else if (tableName.equals(DBConstants.RegisterTable.CHILD_DETAILS)) {
+        if (tableName.equalsIgnoreCase(DBConstants.RegisterTable.CLIENT)) {
+            return new String[]{
+                    DBConstants.KEY.ZEIR_ID,
+                    DBConstants.KEY.FIRST_NAME,
+                    DBConstants.KEY.LAST_NAME
+            };
+        } else if (tableName.equalsIgnoreCase(DBConstants.RegisterTable.CHILD_DETAILS)) {
             return new String[]{DBConstants.KEY.LOST_TO_FOLLOW_UP, DBConstants.KEY.INACTIVE};
         }
         return null;
@@ -146,7 +148,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
             List<VaccineGroup> vaccineList = VaccinatorUtils.getVaccineGroupsFromVaccineConfigFile(context, VaccinatorUtils.vaccines_file);
             List<String> names = new ArrayList<>();
             names.add(DBConstants.KEY.INACTIVE);
-            names.add("relational_id");
+            names.add(DBConstants.KEY.RELATIONAL_ID);
             names.add(DBConstants.KEY.LOST_TO_FOLLOW_UP);
 
             for (VaccineGroup vaccineGroup : vaccineList) {
@@ -201,7 +203,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
             } else {
 
                 // TODO: This needs to be fixed because it is a configuration & not a hardcoded string
-                map.put(vaccine.name, Pair.create("ec_child_details", false));
+                map.put(vaccine.name, Pair.create(DBConstants.RegisterTable.CHILD_DETAILS, false));
             }
     }
 
@@ -240,11 +242,15 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         //Initialize Modules
         CoreLibrary.init(context, new AppSyncConfiguration(), BuildConfig.BUILD_TIMESTAMP);
 
-        GrowthMonitoringLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
+        GrowthMonitoringConfig growthMonitoringConfig = new GrowthMonitoringConfig();
+        growthMonitoringConfig.setWeightForHeightZScoreFile("weight_for_height.csv");
+        GrowthMonitoringLibrary.init(context, getRepository(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION, growthMonitoringConfig);
         GrowthMonitoringLibrary.getInstance().setGrowthMonitoringSyncTime(3, TimeUnit.MINUTES);
+
         ImmunizationLibrary.init(context, getRepository(), createCommonFtsObject(context.applicationContext()),
                 BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
         ImmunizationLibrary.getInstance().setVaccineSyncTime(3, TimeUnit.MINUTES);
+        ImmunizationLibrary.getInstance().getConditionalVaccinesMap().put(AppConstants.ConditionalVaccines.PRETERM_VACCINES, "preterm_vaccines.json");
         fixHardcodedVaccineConfiguration();
 
         ConfigurableViewsLibrary.init(context);
@@ -260,7 +266,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         Fabric.with(this, new Crashlytics.Builder().core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build()).build());
 
         initRepositories();
-        initOfflineSchedules();
 
         SyncStatusBroadcastReceiver.init(this);
         LocationHelper.init(new ArrayList<>(Arrays.asList(BuildConfig.LOCATION_LEVELS)), BuildConfig.DEFAULT_LOCATION);
@@ -274,12 +279,13 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
 
     private ChildMetadata getMetadata() {
         ChildMetadata metadata = new ChildMetadata(ChildFormActivity.class, ChildProfileActivity.class,
-                ChildImmunizationActivity.class, true, new AppChildRegisterQueryProvider());
+                ChildImmunizationActivity.class, ChildRegisterActivity.class, true, new AppChildRegisterQueryProvider());
         metadata.updateChildRegister(AppConstants.JSON_FORM.CHILD_ENROLLMENT, AppConstants.TABLE_NAME.ALL_CLIENTS,
                 AppConstants.TABLE_NAME.ALL_CLIENTS, AppConstants.EventType.CHILD_REGISTRATION,
                 AppConstants.EventType.UPDATE_CHILD_REGISTRATION, AppConstants.EventType.OUT_OF_CATCHMENT, AppConstants.CONFIGURATION.CHILD_REGISTER,
                 AppConstants.RELATIONSHIP.MOTHER, AppConstants.JSON_FORM.OUT_OF_CATCHMENT_SERVICE);
-        metadata.setFieldsWithLocationHierarchy(new HashSet<>(Collections.singletonList(AppConstants.KEY.HOME_ADDRESS)));
+        metadata.setupFatherRelation(AppConstants.TABLE_NAME.ALL_CLIENTS, AppConstants.RELATIONSHIP.FATHER);
+        //TODO include this metadata.setFieldsWithLocationHierarchy(new HashSet<>(Collections.singletonList(AppConstants.KEY.HOME_ADDRESS)));
         metadata.setLocationLevels(AppUtils.getLocationLevels());
         metadata.setHealthFacilityLevels(AppUtils.getHealthFacilityLevels());
         return metadata;
@@ -293,12 +299,11 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         heightZScoreRepository();
     }
 
-    private void initOfflineSchedules() {
+    public void initOfflineSchedules() {
         try {
             List<VaccineGroup> childVaccines = VaccinatorUtils.getSupportedVaccines(this);
             List<Vaccine> specialVaccines = VaccinatorUtils.getSpecialVaccines(this);
             VaccineSchedule.init(childVaccines, specialVaccines, AppConstants.KEY.CHILD);
-            //  VaccineSchedule.vaccineSchedules.get(AppConstants.KEY.CHILD).remove("BCG 2");
         } catch (Exception e) {
             Timber.e(e, "UnicefTunisiaApplication --> initOfflineSchedules");
         }
@@ -434,13 +439,11 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         VaccineRepo.Vaccine[] vaccines = ImmunizationLibrary.getInstance().getVaccines();
 
         HashMap<String, VaccineDuplicate> replacementVaccines = new HashMap<>();
-        replacementVaccines.put("MR 2", new VaccineDuplicate("MR 2", VaccineRepo.Vaccine.mr1, -1, 548, 183, "child"));
-        replacementVaccines.put("BCG 2", new VaccineDuplicate("BCG 2", VaccineRepo.Vaccine.bcg, 1825, 0, 42, "child"));
+        replacementVaccines.put("BCG 2", new VaccineDuplicate("BCG 2", VaccineRepo.Vaccine.bcg, 1825, 0, 15, "child"));
 
         for (VaccineRepo.Vaccine vaccine : vaccines) {
             if (replacementVaccines.containsKey(vaccine.display())) {
                 VaccineDuplicate vaccineDuplicate = replacementVaccines.get(vaccine.display());
-
                 vaccine.setCategory(vaccineDuplicate.category());
                 vaccine.setExpiryDays(vaccineDuplicate.expiryDays());
                 vaccine.setMilestoneGapDays(vaccineDuplicate.milestoneGapDays());

@@ -73,7 +73,7 @@ public class MonthlyTalliesRepository extends BaseRepository {
     public static final String INDEX_UNIQUE = "CREATE UNIQUE INDEX " + DbConstants.Table.MonthlyTalliesRepository.TABLE_NAME + "_" + DbConstants.Table.MonthlyTalliesRepository.INDICATOR_CODE + "_" + DbConstants.Table.MonthlyTalliesRepository.MONTH + "_index" +
             " ON " + DbConstants.Table.MonthlyTalliesRepository.TABLE_NAME + "(" + DbConstants.Table.MonthlyTalliesRepository.INDICATOR_CODE + "," + DbConstants.Table.MonthlyTalliesRepository.MONTH + ");";
 
-    protected static void createTable(SQLiteDatabase database) {
+    public static void createTable(SQLiteDatabase database) {
         database.execSQL(CREATE_TABLE_QUERY);
         database.execSQL(INDEX_PROVIDER_ID);
         database.execSQL(INDEX_INDICATOR_ID);

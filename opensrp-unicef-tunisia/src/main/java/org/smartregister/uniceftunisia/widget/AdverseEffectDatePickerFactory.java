@@ -9,10 +9,10 @@ import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.customviews.DatePickerDialog;
 import com.vijay.jsonwizard.fragments.JsonFormFragment;
 import com.vijay.jsonwizard.interfaces.CommonListener;
-import com.vijay.jsonwizard.widgets.DatePickerFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smartregister.child.widgets.ChildDatePickerFactory;
 import org.smartregister.uniceftunisia.fragment.AppChildFormFragment;
 
 import java.lang.ref.WeakReference;
@@ -20,8 +20,7 @@ import java.util.List;
 
 import timber.log.Timber;
 
-
-public class AdverseEffectDatePickerFactory extends DatePickerFactory implements AppChildFormFragment.OnReactionVaccineSelected {
+public class AdverseEffectDatePickerFactory extends ChildDatePickerFactory implements AppChildFormFragment.OnReactionVaccineSelected {
 
     private AppChildFormFragment formFragment;
     private TextView txtDuration;

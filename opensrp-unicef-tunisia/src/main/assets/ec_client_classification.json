@@ -15,6 +15,14 @@
           },
           {
             "field": "eventType",
+            "field_value": "Father Registration",
+            "creates_case": [
+              "ec_client",
+              "ec_father_details"
+            ]
+          },
+          {
+            "field": "eventType",
             "field_value": "Birth Registration",
             "creates_case": [
               "ec_client",
@@ -25,6 +33,30 @@
             "field": "eventType",
             "field_value": "Update Birth Registration",
             "creates_case": [
+              "ec_client",
+              "ec_child_details"
+            ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "Update Mother Details",
+            "creates_case": [
+              "ec_client",
+              "ec_mother_details"
+            ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "Update Father Details",
+            "creates_case": [
+              "ec_client",
+              "ec_father_details"
+            ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "archive_child_record",
+            "closes_case": [
               "ec_client",
               "ec_child_details"
             ]

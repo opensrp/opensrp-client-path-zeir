@@ -13,6 +13,7 @@ import org.smartregister.configurableviews.repository.ConfigurableViewsRepositor
 import org.smartregister.domain.db.Column;
 import org.smartregister.growthmonitoring.repository.HeightRepository;
 import org.smartregister.growthmonitoring.repository.HeightZScoreRepository;
+import org.smartregister.growthmonitoring.repository.WeightForHeightRepository;
 import org.smartregister.growthmonitoring.repository.WeightRepository;
 import org.smartregister.growthmonitoring.repository.WeightZScoreRepository;
 import org.smartregister.immunization.repository.RecurringServiceRecordRepository;
@@ -66,6 +67,7 @@ public class UnicefTunisiaRepository extends Repository {
         WeightRepository.createTable(database);
         HeightRepository.createTable(database);
         VaccineRepository.createTable(database);
+        WeightForHeightRepository.createTable(database);
 
         ClientRegisterTypeRepository.createTable(database);
         ChildAlertUpdatedRepository.createTable(database);
@@ -207,7 +209,6 @@ public class UnicefTunisiaRepository extends Repository {
         upgradeToVersion5(database);
         upgradeToVersion6(database);
         upgradeToVersion7OutOfArea(database);
-        upgradeToVersion7RecurringServiceUpdate(database);
         upgradeToVersion7EventWeightHeightVaccineRecurringChange(database);
         upgradeToVersion7VaccineRecurringServiceRecordChange(database);
         upgradeToVersion7WeightHeightVaccineRecurringServiceChange(database);
@@ -312,19 +313,6 @@ public class UnicefTunisiaRepository extends Repository {
 
         } catch (Exception e) {
             Timber.e(e, "upgradeToVersion7");
-        }
-    }
-
-    private void upgradeToVersion7RecurringServiceUpdate(@NonNull SQLiteDatabase db) {
-        try {
-
-            // Recurring service json changed. update
-            RecurringServiceTypeRepository recurringServiceTypeRepository = UnicefTunisiaApplication.getInstance()
-                    .recurringServiceTypeRepository();
-            IMDatabaseUtils.populateRecurringServices(context, db, recurringServiceTypeRepository);
-
-        } catch (Exception e) {
-            Timber.e(e, "upgradeToVersion7RecurringServiceUpdate");
         }
     }
 

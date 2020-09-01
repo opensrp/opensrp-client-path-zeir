@@ -23,7 +23,6 @@ import org.smartregister.view.customcontrols.CustomFontTextView;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
@@ -129,12 +128,7 @@ public class ReportSummaryActivity extends BaseActivity {
         this.tallies = new LinkedHashMap<>();
         this.tallies.put("", new ArrayList<>());
 
-        Collections.sort(tallies, new Comparator<MonthlyTally>() {
-            @Override
-            public int compare(MonthlyTally lhs, MonthlyTally rhs) {
-                return lhs.getIndicator().compareTo(rhs.getIndicator());
-            }
-        });
+        Collections.sort(tallies, (lhs, rhs) -> lhs.getIndicator().compareTo(rhs.getIndicator()));
 
         for (MonthlyTally curTally : tallies) {
             if (curTally != null && !TextUtils.isEmpty(curTally.getIndicator())) {
@@ -149,12 +143,7 @@ public class ReportSummaryActivity extends BaseActivity {
         this.tallies = new LinkedHashMap<>();
         this.tallies.put("", new ArrayList<>());
 
-        Collections.sort(tallies, new Comparator<IndicatorTally>() {
-            @Override
-            public int compare(IndicatorTally lhs, IndicatorTally rhs) {
-                return lhs.getIndicatorCode().compareTo(rhs.getIndicatorCode());
-            }
-        });
+        Collections.sort(tallies, (lhs, rhs) -> lhs.getIndicatorCode().compareTo(rhs.getIndicatorCode()));
 
         for (IndicatorTally curTally : tallies) {
             if (curTally != null && !TextUtils.isEmpty(curTally.getIndicatorCode())) {

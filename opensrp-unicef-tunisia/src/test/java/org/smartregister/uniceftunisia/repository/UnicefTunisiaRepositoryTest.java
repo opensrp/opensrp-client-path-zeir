@@ -43,12 +43,12 @@ public class UnicefTunisiaRepositoryTest extends BaseRobolectricTest {
 
     // TODO: FIX THIS
     @Test
-    public void onCreateShouldCreate31tables() {
+    public void onCreateShouldCreate32tables() {
         Mockito.doNothing().when(unicefTunisiaRepository).onUpgrade(Mockito.any(SQLiteDatabase.class), Mockito.anyInt(), Mockito.anyInt());
         SQLiteDatabase database = Mockito.mock(SQLiteDatabase.class);
         unicefTunisiaRepository.onCreate(database);
 
         // TODO: Investigate this counter
-        Mockito.verify(database, Mockito.times(31)).execSQL(Mockito.contains("CREATE TABLE"));
+        Mockito.verify(database, Mockito.times(32)).execSQL(Mockito.contains("CREATE TABLE"));
     }
 }

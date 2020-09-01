@@ -2,25 +2,31 @@ package org.smartregister.uniceftunisia.activity;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.vijay.jsonwizard.activities.JsonWizardFormActivity;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
 import org.apache.commons.lang3.tuple.Triple;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.child.activity.BaseChildDetailTabbedActivity;
 import org.smartregister.child.fragment.StatusEditDialogFragment;
 import org.smartregister.child.task.LoadAsyncTask;
 import org.smartregister.child.util.ChildDbUtils;
+import org.smartregister.child.util.Constants;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.fragment.ChildRegistrationDataFragment;
+import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppJsonFormUtils;
 import org.smartregister.uniceftunisia.util.AppUtils;
+import org.smartregister.uniceftunisia.util.VaccineUtils;
 import org.smartregister.util.FormUtils;
 import org.smartregister.util.JsonFormUtils;
 import org.smartregister.util.Utils;
@@ -39,7 +45,13 @@ import static org.smartregister.uniceftunisia.util.AppUtils.setAppLocale;
  * Created by ndegwamartin on 06/03/2019.
  */
 public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
-    private static List<String> nonEditableFields = Arrays.asList("Sex", "zeir_id", "Birth_Weight", "Birth_Height");
+    private static List<String> nonEditableFields = Arrays.asList("Sex", "zeir_id", "mother_rubella", "protected_at_birth");
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getChildUnderFiveFragment().showRecurringServices(false);
+    }
 
     @Override
     protected void attachBaseContext(android.content.Context base) {
@@ -67,6 +79,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
         super.onCreateOptionsMenu(menu);
         overflow.findItem(org.smartregister.child.R.id.register_card).setVisible(false);
         overflow.findItem(org.smartregister.child.R.id.write_to_card).setVisible(false);
+        overflow.findItem(org.smartregister.child.R.id.recurring_services_data).setVisible(false);
         return true;
     }
 
@@ -78,7 +91,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
 
         switch (item.getItemId()) {
             case R.id.registration_data:
-                String populatedForm = AppJsonFormUtils.getMetadataForEditForm(this, detailsMap, nonEditableFields);
+                String populatedForm = AppJsonFormUtils.updateJsonFormWithClientDetails(this, detailsMap, nonEditableFields);
                 startFormActivity(populatedForm);
                 // User chose the "Settings" item, show the app settings UI...
                 return true;
@@ -141,12 +154,6 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-    }
-
-    @Override
     protected void navigateToRegisterActivity() {
         Intent intent = new Intent(getApplicationContext(), ChildRegisterActivity.class);
         intent.putExtra(AllConstants.INTENT_KEY.IS_REMOTE_LOGIN, false);
@@ -156,16 +163,50 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
 
     @Override
     public void startFormActivity(String formData) {
-        Form formParam = new Form();
-        formParam.setWizard(false);
-        formParam.setHideSaveLabel(true);
-        formParam.setNextLabel("");
+        try {
+            Intent intent;
+            Form form = new Form();
 
-        Intent intent = new Intent(getApplicationContext(), org.smartregister.child.util.Utils.metadata().childFormActivity);
-        intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, formParam);
-        intent.putExtra(JsonFormConstants.JSON_FORM_KEY.JSON, formData);
+            JSONObject formJson = new JSONObject(formData);
+            if (formJson.has(JsonFormConstants.ENCOUNTER_TYPE) &&
+                    formJson.getString(JsonFormConstants.ENCOUNTER_TYPE).equalsIgnoreCase(Constants.EventType.AEFI)) {
+                form.setWizard(true);
+                form.setName(getString(R.string.adverse_effects));
+                form.setHideSaveLabel(true);
+                form.setNextLabel(getString(R.string.next));
+                form.setPreviousLabel(getString(R.string.previous));
+                form.setSaveLabel(getString(R.string.save));
+                form.setActionBarBackground(R.color.actionbar);
+                form.setNavigationBackground(R.color.primary_dark);
+                intent = new Intent(this, JsonWizardFormActivity.class);
+                formData = obtainUpdatedForm(formJson);
+            } else {
+                form.setWizard(false);
+                form.setHideSaveLabel(true);
+                form.setNextLabel("");
+                intent = new Intent(this, org.smartregister.child.util.Utils.metadata().childFormActivity);
+            }
 
-        startActivityForResult(intent, REQUEST_CODE_GET_JSON);
+            intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
+            intent.putExtra(JsonFormConstants.JSON_FORM_KEY.JSON, formData);
+            startActivityForResult(intent, REQUEST_CODE_GET_JSON);
+        } catch (JSONException e) {
+            Timber.e(e);
+        }
+    }
+
+    private String obtainUpdatedForm(JSONObject formJson) throws JSONException {
+        JSONArray fields = JsonFormUtils.fields(formJson);
+       for(int i = 0; i < fields.length(); i++) {
+           JSONObject field = fields.getJSONObject(i);
+           if (field != null && field.getString(JsonFormConstants.TYPE).equalsIgnoreCase(JsonFormConstants.DATE_PICKER)
+                   && !childDetails.getDetails().isEmpty() && childDetails.getDetails().containsKey(AppConstants.KEY.DOB)) {
+               Date date = Utils.dobStringToDate(childDetails.getDetails().get(AppConstants.KEY.DOB));
+               field.put(JsonFormConstants.MIN_DATE, new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date));
+               field.put(JsonFormConstants.MAX_DATE, AppConstants.KEY.TODAY);
+           }
+       }
+      return formJson.toString();
     }
 
     @Override
@@ -198,5 +239,13 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
             Timber.e(e);
         }
         return "";
+    }
+
+    @Override
+    public void onRegistrationSaved(boolean isEdit) {
+        super.onRegistrationSaved(isEdit);
+        if (isEdit) {
+            VaccineUtils.refreshImmunizationSchedules(childDetails.getCaseId());
+        }
     }
 }

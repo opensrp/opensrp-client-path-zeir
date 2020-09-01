@@ -15,8 +15,8 @@ import java.util.List;
 
 public class DBQueryHelper {
 
-    public static final String getHomeRegisterCondition() {
-        return AppConstants.TABLE_NAME.CHILD + "." + Constants.KEY.DATE_REMOVED + " IS NULL ";
+    public static String getHomeRegisterCondition() {
+        return AppConstants.TABLE_NAME.ALL_CLIENTS + "." + Constants.KEY.DATE_REMOVED + " IS NULL ";
     }
 
     public static String getFilterSelectionCondition(boolean urgentOnly) {
@@ -68,12 +68,4 @@ public class DBQueryHelper {
         return Utils.metadata().getRegisterQueryProvider().getDemographicTable() + "." + AppConstants.KEY.LAST_INTERACTED_WITH + " DESC ";
     }
 
-    public static String ancDueOverdueFilter(boolean overdue) {
-        if (overdue) {
-            return "(contact_status IS NULL OR contact_status != 'active') \n" +
-                    "AND DATE('now') > DATE(next_contact_date, '+6 day') AND (edd IS NOT NULL AND DATE(edd) > DATE('now')) ";
-        } else {
-            return "(contact_status IS NULL OR contact_status != 'active') AND DATE('now') > DATE(next_contact_date, '-1 day') AND DATE('now') < DATE(next_contact_date, '+7 day') AND (edd IS NOT NULL AND DATE(edd) > DATE('now'))";
-        }
-    }
 }

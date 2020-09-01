@@ -17,6 +17,7 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.immunization.job.VaccineSchedulesUpdateJob;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.util.AppUtils;
+import org.smartregister.uniceftunisia.util.VaccineUtils;
 
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
@@ -34,8 +35,8 @@ public class ChildImmunizationActivity extends BaseChildImmunizationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        VaccineUtils.refreshImmunizationSchedules(childDetails.getCaseId());
         LocationSwitcherToolbar myToolbar = (LocationSwitcherToolbar) this.getToolbar();
-
         if (myToolbar != null) {
             myToolbar.setNavigationOnClickListener(v -> finish());
         }
@@ -136,5 +137,11 @@ public class ChildImmunizationActivity extends BaseChildImmunizationActivity {
         } catch (Exception e) {
             Timber.e(e);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        serviceGroupCanvasLL.setVisibility(View.GONE);
     }
 }

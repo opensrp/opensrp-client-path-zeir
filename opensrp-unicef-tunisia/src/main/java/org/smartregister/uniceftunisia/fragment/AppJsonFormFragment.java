@@ -33,7 +33,6 @@ import org.smartregister.child.provider.MotherLookUpSmartClientsProvider;
 import org.smartregister.child.util.MotherLookUpUtils;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
-import org.smartregister.event.Listener;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.activity.AppStockJsonFormActivity;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
@@ -57,7 +56,6 @@ import static org.smartregister.util.Utils.getValue;
 public class AppJsonFormFragment extends JsonFormFragment {
     private Snackbar snackbar = null;
     private AlertDialog alertDialog = null;
-    private boolean lookedUp = false;
 
     public static AppJsonFormFragment getFormFragment(String stepName) {
         AppJsonFormFragment jsonFormFragment = new AppJsonFormFragment();
@@ -84,11 +82,6 @@ public class AppJsonFormFragment extends JsonFormFragment {
 
     public Context context() {
         return UnicefTunisiaApplication.getInstance().context();
-    }
-
-    //Mother Lookup
-    public Listener<HashMap<CommonPersonObject, List<CommonPersonObject>>> motherLookUpListener() {
-        return motherLookUpListener;
     }
 
     private void showMotherLookUp(final HashMap<CommonPersonObject, List<CommonPersonObject>> map) {
@@ -132,7 +125,7 @@ public class AppJsonFormFragment extends JsonFormFragment {
 
             @Override
             public long getItemId(int position) {
-                return Long.valueOf(mothers.get(position).getCaseId().replaceAll("\\D+", ""));
+                return Long.parseLong(mothers.get(position).getCaseId().replaceAll("\\D+", ""));
             }
 
             @Override
@@ -182,7 +175,6 @@ public class AppJsonFormFragment extends JsonFormFragment {
 
                 writeMetaDataValue(FormUtils.LOOK_UP_JAVAROSA_PROPERTY, metadataMap);
 
-                lookedUp = false;
             }
         }
     }
@@ -190,12 +182,7 @@ public class AppJsonFormFragment extends JsonFormFragment {
     private void tapToView(final HashMap<CommonPersonObject, List<CommonPersonObject>> map) {
         snackbar = Snackbar
                 .make(getMainView(), map.size() + getString(R.string.mother_guardian_matches), Snackbar.LENGTH_INDEFINITE);
-        snackbar.setAction(R.string.tap_to_view, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateResults(map);
-            }
-        });
+        snackbar.setAction(R.string.tap_to_view, v -> updateResults(map));
         show(snackbar, 30000);
 
     }
@@ -235,33 +222,18 @@ public class AppJsonFormFragment extends JsonFormFragment {
         TextView textView = snackbarView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         textView.setGravity(Gravity.CENTER);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                actionView.performClick();
-            }
-        });
+        textView.setOnClickListener(v -> actionView.performClick());
         textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_error, 0, 0, 0);
         textView.setCompoundDrawablePadding(paddingInt);
         textView.setPadding(paddingInt, 0, 0, 0);
         textView.setTextColor(getResources().getColor(R.color.text_black));
 
-        snackbarView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                actionView.performClick();
-            }
-        });
+        snackbarView.setOnClickListener(v -> actionView.performClick());
 
         snackbar.show();
 
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                snackbar.dismiss();
-            }
-        }, duration);
+        handler.postDelayed(() -> snackbar.dismiss(), duration);
 
     }
 
@@ -322,56 +294,25 @@ public class AppJsonFormFragment extends JsonFormFragment {
 
                     writeMetaDataValue(FormUtils.LOOK_UP_JAVAROSA_PROPERTY, metadataMap);
 
-                    lookedUp = true;
                     clearView();
                 }
             }
         }
     }
 
-    private final Listener<HashMap<CommonPersonObject, List<CommonPersonObject>>> motherLookUpListener = new Listener<HashMap<CommonPersonObject, List<CommonPersonObject>>>() {
-        @Override
-        public void onEvent(HashMap<CommonPersonObject, List<CommonPersonObject>> data) {
-            if (!lookedUp) {
-                showMotherLookUp(data);
+    private final View.OnClickListener lookUpRecordOnClickLister = view -> {
+        if (alertDialog != null && alertDialog.isShowing()) {
+            alertDialog.dismiss();
+            CommonPersonObjectClient client = null;
+            if (view.getTag() != null && view.getTag() instanceof CommonPersonObjectClient) {
+                client = (CommonPersonObjectClient) view.getTag();
+            }
+
+            if (client != null) {
+                lookupDialogDismissed(client);
             }
         }
     };
-
-    private final View.OnClickListener lookUpRecordOnClickLister = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            if (alertDialog != null && alertDialog.isShowing()) {
-                alertDialog.dismiss();
-                CommonPersonObjectClient client = null;
-                if (view.getTag() != null && view.getTag() instanceof CommonPersonObjectClient) {
-                    client = (CommonPersonObjectClient) view.getTag();
-                }
-
-                if (client != null) {
-                    lookupDialogDismissed(client);
-                }
-            }
-        }
-    };
-
-    public String getRelevantTextViewString(String currentKey) {
-        String toreturn = "";
-        if (getMainView() != null) {
-            int childCount = getMainView().getChildCount();
-            for (int i = 0; i < childCount; i++) {
-                View view = getMainView().getChildAt(i);
-                if (view instanceof TextView) {
-                    TextView textView = (TextView) view;
-                    String key = (String) textView.getTag(com.vijay.jsonwizard.R.id.key);
-                    if (key.equals(currentKey)) {
-                        toreturn = textView.getText().toString();
-                    }
-                }
-            }
-        }
-        return toreturn;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

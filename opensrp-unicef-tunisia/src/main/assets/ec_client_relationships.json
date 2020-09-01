@@ -2,6 +2,11 @@
   {
     "client_relationship": "mother",
     "field": "entity_id",
-    "comment": "this field is the name as it appears in the parent client document"
+    "comment": "Mother relational id"
+  },
+  {
+    "client_relationship": "father",
+    "field": "entity_id",
+    "comment": "Father relational id"
   }
 ]

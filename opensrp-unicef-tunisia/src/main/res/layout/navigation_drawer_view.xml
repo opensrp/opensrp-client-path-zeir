@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="@string/nav_logo"
+                    android:text="@string/app_name"
                     android:textColor="@color/white"
                     android:textSize="30sp"
                     android:layout_marginBottom="20dp"
@@ -167,6 +167,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:layout_marginBottom="10dp"
                     android:orientation="horizontal">
 

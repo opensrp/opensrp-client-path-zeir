@@ -88,6 +88,25 @@ public class ChildRegisterFragment extends BaseChildRegisterFragment {
     }
 
     @Override
+    public void setupViews(View view) {
+        super.setupViews(view);
+        View globalSearchButton = view.findViewById(org.smartregister.child.R.id.global_search);
+        View registerClientButton = view.findViewById(org.smartregister.child.R.id.register_client);
+        if (globalSearchButton != null && registerClientButton != null) {
+            globalSearchButton.setVisibility(View.INVISIBLE);
+            registerClientButton.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(clinicSelection.getText().toString().isEmpty());{
+            clinicSelection.init();
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         onViewClicked(view);
     }

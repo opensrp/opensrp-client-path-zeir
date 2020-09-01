@@ -11,10 +11,8 @@
         android:id="@+id/login_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.0"
-        android:background="@drawable/login_background"
+        android:background="@color/white"
         android:paddingBottom="@dimen/login_bottom_margin">
-
 
         <!-- Top section -->
         <LinearLayout
@@ -22,18 +20,75 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="60dp"
             android:orientation="vertical">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="@dimen/login_horizontal_margin"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:contentDescription="@string/logo_string"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/logo_tunisia_moh" />
+
+                <TextView
+                    android:id="@+id/app_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/tunisia_app_login_title"
+                    android:textAlignment="center"
+                    android:textColor="@color/tunisia_app_color"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                    app:layout_constraintStart_toEndOf="@+id/imageView6"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </TextView>
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:contentDescription="@string/logo_string"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/flag_tunisia" />
+            </android.support.constraint.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/login_logo"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
+                android:layout_marginBottom="16dp"
                 android:contentDescription="@string/logo_string"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/opensrp_logo" />
+                app:srcCompat="@drawable/logo_pnv" />
 
             <TextView
                 android:id="@+id/login_title_text_view"
@@ -41,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:gravity="center_horizontal"
-                android:text="@string/unicef_tunisia_app_name"
+                android:text="@string/app_name"
                 android:textColor="#272727"
                 android:textSize="@dimen/login_title_text_size"
                 android:textStyle="bold"
@@ -54,21 +109,20 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
                 android:text="@string/app_version"
-                android:textColor="#ffffff"
                 android:textSize="@dimen/login_build_text_view_textSize" />
 
         </LinearLayout>
-
         <!-- Middle section -->
         <LinearLayout
             android:id="@+id/middle_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/top_section"
+            android:layout_marginStart="@dimen/login_mid_section_horizontal_margin"
             android:layout_marginTop="@dimen/login_middle_section_padding_top"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/login_horizontal_margin"
-            android:paddingRight="@dimen/login_horizontal_margin">
+            android:layout_marginEnd="@dimen/login_mid_section_horizontal_margin"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/login_user_name_edit_text"
@@ -83,8 +137,8 @@
                 android:inputType="text"
                 android:lines="1"
                 android:paddingLeft="10dp"
-                android:textColor="#666666"
-                android:textColorHint="#bfbfbf"
+                android:textColor="@color/login_text_color"
+                android:textColorHint="@color/login_hint_color"
                 android:textCursorDrawable="@null"
                 android:textSize="@dimen/login_edit_text_textSize"
                 android:typeface="sans" />
@@ -104,8 +158,8 @@
                 android:inputType="textPassword"
                 android:lines="1"
                 android:paddingLeft="10dp"
-                android:textColor="#666666"
-                android:textColorHint="#bfbfbf"
+                android:textColor="@color/login_text_color"
+                android:textColorHint="@color/login_hint_color"
                 android:textCursorDrawable="@null"
                 android:textSize="@dimen/login_edit_text_textSize"
                 android:typeface="sans" />
@@ -120,9 +174,9 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="6dp"
                     android:button="@drawable/white_checkbox_bg_selector" />
 
                 <TextView
@@ -130,10 +184,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/login_show_password_checkbox"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@id/login_show_password_checkbox"
                     android:text="@string/show_password_text"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/dark_grey"
                     android:textSize="@dimen/login_edit_text_textSize" />
             </RelativeLayout>
 
@@ -144,7 +198,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:layout_weight="8"
-                android:background="@drawable/login_button"
+                android:background="@drawable/login_button_bg"
                 android:ems="10"
                 android:shadowColor="#ffffff"
                 android:shadowDx="0"
@@ -152,41 +206,73 @@
                 android:shadowRadius="0.5"
                 android:text="@string/login_text"
                 android:textAllCaps="true"
-                android:textColor="@color/black_text_color"
+                android:textColor="@color/white"
                 android:textSize="18sp" />
 
         </LinearLayout>
         <!-- Bottom section -->
-
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/bottom_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/middle_section"
             android:layout_alignParentBottom="true"
-            android:orientation="vertical"
-            android:paddingTop="30dp">
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="32dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="5dp"
                 android:text="@string/powered_by"
                 android:textAlignment="center"
-                android:textColor="#ffffff" />
+                android:textColor="#585858"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/opensrp_logo_image_view"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/login_opensrp_logo_height"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:adjustViewBounds="false"
                 android:cropToPadding="false"
+                android:paddingTop="8dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/unicef_tunisia_opensrp_logo" />
-        </LinearLayout>
+                android:src="@drawable/unicef_tunisia_opensrp_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView21"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="8dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:text="@string/supported_by"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/unicef_logo_image_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/unicef_logo_image_view"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="32dp"
+                android:adjustViewBounds="false"
+                android:paddingTop="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo_unicef"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
     </RelativeLayout>
 </ScrollView>
