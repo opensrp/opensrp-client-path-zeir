@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DBQueryHelper {
 
-    public static final String getHomeRegisterCondition() {
+    public static String getHomeRegisterCondition() {
         return AppConstants.TABLE_NAME.ALL_CLIENTS + "." + Constants.KEY.DATE_REMOVED + " IS NULL ";
     }
 

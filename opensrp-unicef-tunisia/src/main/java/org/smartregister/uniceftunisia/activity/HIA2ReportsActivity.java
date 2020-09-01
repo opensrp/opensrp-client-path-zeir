@@ -222,7 +222,7 @@ public class HIA2ReportsActivity extends AppCompatActivity {
 
                 boolean saveClicked;
                 if (result.containsKey(FORM_KEY_CONFIRM)) {
-                    saveClicked = Boolean.valueOf(result.get(FORM_KEY_CONFIRM));
+                    saveClicked = Boolean.parseBoolean(result.get(FORM_KEY_CONFIRM));
                     result.remove(FORM_KEY_CONFIRM);
                     if (skipValidationSet) {
                         Snackbar.make(tabLayout, R.string.all_changes_saved, Snackbar.LENGTH_LONG).show();
@@ -274,21 +274,18 @@ public class HIA2ReportsActivity extends AppCompatActivity {
 
         AppExecutors appExecutors = new AppExecutors();
         appExecutors.networkIO()
-                .execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        generateAndSaveMonthlyReport(month);
+                .execute(() -> {
+                    generateAndSaveMonthlyReport(month);
 
-                        // push report to server
-                        pushUnsentReportsToServer();
+                    // push report to server
+                    pushUnsentReportsToServer();
 
-                        appExecutors.mainThread().execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                hideProgressDialog();
-                            }
-                        });
-                    }
+                    appExecutors.mainThread().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            hideProgressDialog();
+                        }
+                    });
                 });
 
     }
@@ -297,22 +294,19 @@ public class HIA2ReportsActivity extends AppCompatActivity {
         Utils.startAsyncTask(new FetchEditedMonthlyTalliesTask(reportGrouping, new FetchEditedMonthlyTalliesTask.TaskListener() {
             @Override
             public void onPostExecute(final List<MonthlyTally> monthlyTallies) {
-                tabLayout.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-                                TabLayout.Tab tab = tabLayout.getTabAt(i);
-                                if (tab != null && tab.getText() != null && tab.getText().toString()
-                                        .contains(getString(R.string.hia2_draft_monthly))) {
-                                    tab.setText(String.format(
-                                            getString(R.string.hia2_draft_monthly_with_count),
-                                            monthlyTallies == null ? 0 : monthlyTallies.size()));
-                                }
+                tabLayout.post(() -> {
+                    try {
+                        for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+                            TabLayout.Tab tab = tabLayout.getTabAt(i);
+                            if (tab != null && tab.getText() != null && tab.getText().toString()
+                                    .contains(getString(R.string.hia2_draft_monthly))) {
+                                tab.setText(String.format(
+                                        getString(R.string.hia2_draft_monthly_with_count),
+                                        monthlyTallies == null ? 0 : monthlyTallies.size()));
                             }
-                        } catch (Exception e) {
-                            Timber.e(e);
                         }
+                    } catch (Exception e) {
+                        Timber.e(e);
                     }
                 });
             }

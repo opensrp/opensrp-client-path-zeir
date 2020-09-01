@@ -78,4 +78,9 @@ public class DBQueryHelperTest {
 
         Assert.assertEquals(expectedUrgentFalse, DBQueryHelper.getFilterSelectionCondition(false));
     }
+
+    @Test
+    public void testGetHomeRegisterCondition() {
+        Assert.assertEquals(AppConstants.TABLE_NAME.ALL_CLIENTS + "." + Constants.KEY.DATE_REMOVED + " IS NULL ", DBQueryHelper.getHomeRegisterCondition());
+    }
 }
