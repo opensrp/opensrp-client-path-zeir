@@ -21,6 +21,7 @@ import org.smartregister.immunization.util.VaccineCache;
 import org.smartregister.uniceftunisia.activity.ChildFormActivity;
 import org.smartregister.uniceftunisia.activity.ChildImmunizationActivity;
 import org.smartregister.uniceftunisia.activity.ChildProfileActivity;
+import org.smartregister.uniceftunisia.activity.ChildRegisterActivity;
 import org.smartregister.uniceftunisia.repository.AppChildRegisterQueryProvider;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class DBQueryHelperTest {
         PowerMockito.when(ChildLibrary.getInstance()).thenReturn(childLibrary);
 
         ChildMetadata metadata = new ChildMetadata(ChildFormActivity.class, ChildProfileActivity.class,
-                ChildImmunizationActivity.class, true, new AppChildRegisterQueryProvider());
+                ChildImmunizationActivity.class, ChildRegisterActivity.class, true, new AppChildRegisterQueryProvider());
         metadata.updateChildRegister(AppConstants.JSON_FORM.CHILD_ENROLLMENT, AppConstants.TABLE_NAME.ALL_CLIENTS,
                 AppConstants.TABLE_NAME.ALL_CLIENTS, AppConstants.EventType.CHILD_REGISTRATION,
                 AppConstants.EventType.UPDATE_CHILD_REGISTRATION, AppConstants.EventType.OUT_OF_CATCHMENT, AppConstants.CONFIGURATION.CHILD_REGISTER,
