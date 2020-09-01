@@ -1,5 +1,6 @@
 package org.smartregister.uniceftunisia.fragment;
 
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -127,11 +128,13 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         motherGuardianPhoneNumber.addTextChangedListener(advancedSearchTextwatcher);
         motherGuardianPhoneNumber.setHint(R.string.mother_caregiver_phone);
         motherGuardianPhoneNumber.setFloatingLabelText(getString(R.string.mother_caregiver_phone));
+        motherGuardianPhoneNumber.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         //Defaults
         startDate.addTextChangedListener(advancedSearchTextwatcher);
         endDate.addTextChangedListener(advancedSearchTextwatcher);
         childUniqueGovtId.addTextChangedListener(advancedSearchTextwatcher);
+        childUniqueGovtId.setInputType(InputType.TYPE_CLASS_NUMBER);
         childRegistrationNumber.addTextChangedListener(advancedSearchTextwatcher);
 
         advancedFormSearchableFields.put(AppConstants.KEY.CARD_ID, cardId);
@@ -142,7 +145,7 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         advancedFormSearchableFields.put(DBConstants.KEY.ZEIR_ID, openSrpId);
         advancedFormSearchableFields.put(DBConstants.KEY.MOTHER_FIRST_NAME, motherGuardianFirstName);
         advancedFormSearchableFields.put(DBConstants.KEY.MOTHER_LAST_NAME, motherGuardianLastName);
-        advancedFormSearchableFields.put(AppConstants.KEY.MOTHER_PHONE_NUMBER, motherGuardianPhoneNumber);
+        advancedFormSearchableFields.put(Constants.KEY.MOTHER_GUARDIAN_NUMBER, motherGuardianPhoneNumber);
         advancedFormSearchableFields.put(START_DATE, startDate);
         advancedFormSearchableFields.put(END_DATE, endDate);
     }
@@ -174,7 +177,7 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
             lastName.setText(searchFormData.get(DBConstants.KEY.LAST_NAME));
             motherGuardianFirstName.setText(searchFormData.get(DBConstants.KEY.MOTHER_FIRST_NAME));
             motherGuardianLastName.setText(searchFormData.get(DBConstants.KEY.MOTHER_LAST_NAME));
-            motherGuardianPhoneNumber.setText(searchFormData.get(AppConstants.KEY.MOTHER_PHONE_NUMBER));
+            motherGuardianPhoneNumber.setText(searchFormData.get(Constants.KEY.MOTHER_GUARDIAN_NUMBER));
             openSrpId.setText(searchFormData.get(DBConstants.KEY.ZEIR_ID));
             cardId.setText(searchFormData.get(AppConstants.KEY.CARD_ID));
             childRegistrationNumber.setText(searchFormData.get(AppConstants.KEY.BIRTH_REGISTRATION_NUMBER));
@@ -189,7 +192,7 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         fields.put(DBConstants.KEY.LAST_NAME, lastName.getText().toString());
         fields.put(DBConstants.KEY.MOTHER_FIRST_NAME, motherGuardianFirstName.getText().toString());
         fields.put(DBConstants.KEY.MOTHER_LAST_NAME, motherGuardianLastName.getText().toString());
-        fields.put(AppConstants.KEY.MOTHER_PHONE_NUMBER, motherGuardianPhoneNumber.getText().toString());
+        fields.put(Constants.KEY.MOTHER_GUARDIAN_NUMBER, motherGuardianPhoneNumber.getText().toString());
         fields.put(DBConstants.KEY.ZEIR_ID, openSrpId.getText().toString());
         fields.put(START_DATE, startDate.getText().toString());
         fields.put(END_DATE, endDate.getText().toString());
@@ -239,7 +242,7 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         }
 
         if (StringUtils.isNotBlank(motherGuardianPhoneNumberString)) {
-            searchParams.put(AppConstants.KEY.MOTHER_PHONE_NUMBER, motherGuardianPhoneNumberString);
+            searchParams.put(Constants.KEY.MOTHER_GUARDIAN_NUMBER, motherGuardianPhoneNumberString);
         }
 
         if (!TextUtils.isEmpty(firstName)) {
