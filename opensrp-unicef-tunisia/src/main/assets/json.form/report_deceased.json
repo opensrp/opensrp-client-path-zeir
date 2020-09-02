@@ -46,8 +46,6 @@
     },
     "encounter_location": ""
   },
-
-
   "step1": {
     "title": "Report Death",
     "fields": [
@@ -74,18 +72,20 @@
         "openmrs_entity_id": "1541AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "spinner",
         "hint": "Where did the death occur?",
-        "values": [
-          "Home",
-          "Health Facility"
+        "options": [
+          {
+            "key": "Home",
+            "text": "Home",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "1536AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "health_facility",
+            "text": "Health Facility",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "1588AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
         ],
-        "keys": [
-          "Home",
-          "Health Facility"
-        ],
-        "openmrs_choice_ids": {
-          "Home": "1536AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "Health Facility": "1588AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
         "v_required": {
           "value": "true",
           "err": "Please select one option"

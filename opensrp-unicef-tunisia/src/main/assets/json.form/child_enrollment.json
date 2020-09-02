@@ -169,10 +169,25 @@
         "type": "spinner",
         "hint": "Place of birth",
         "label_info_text": "Indicate whether child was born at a health facility.",
-        "values": [
-          "Home",
-          "Hospital",
-          "On the way to the hospital"
+        "options": [
+          {
+            "key": "home",
+            "text": "Home",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "hospital",
+            "text": "Hospital",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "on_way_to_hospital",
+            "text": "On the way to the hospital",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          }
         ],
         "v_required": {
           "value": "true",
@@ -186,9 +201,19 @@
         "openmrs_entity_id": "gender",
         "type": "spinner",
         "hint": "Sex",
-        "values": [
-          "Male",
-          "Female"
+        "options": [
+          {
+            "key": "male",
+            "text": "Male",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "female",
+            "text": "Female",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          }
         ],
         "v_required": {
           "value": "true",
@@ -379,10 +404,25 @@
         "entity_id": "father",
         "type": "spinner",
         "hint": "Nationality of the father",
-        "values": [
-          "Tunisian",
-          "Other",
-          "Not known"
+        "options": [
+          {
+            "key": "tunisian",
+            "text": "Tunisian",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "other",
+            "text": "Other",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "unknown",
+            "text": "Unknown",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          }
         ],
         "v_required": {
           "value": "false",
@@ -494,10 +534,25 @@
         "look_up": "true",
         "type": "spinner",
         "hint": "Nationality of the mother/caregiver",
-        "values": [
-          "Tunisian",
-          "Other",
-          "Not known"
+        "options": [
+          {
+            "key": "tunisian",
+            "text": "Tunisian",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "other",
+            "text": "Other",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "unknown",
+            "text": "Unknown",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          }
         ],
         "v_required": {
           "value": "true",
@@ -566,16 +621,36 @@
         "type": "spinner",
         "entity_id": "mother",
         "hint": "How many doses of Td vaccine did the mother receive during pregnancy?",
+        "options": [
+          {
+            "key": "one_tdv_doses",
+            "text": "1 dose of TDV during pregnancy",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "2_plus_tdv_doses",
+            "text": "2+ doses of TDV during pregnancy",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "tdv_not_received",
+            "text": "TDV not received",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "unknown",
+            "text": "Unknown",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          }
+        ],
         "v_required": {
           "value": false,
           "err": "Please choose an option"
-        },
-        "values": [
-          "1 dose of TDV during pregnancy",
-          "2+ doses of TDV during pregnancy",
-          "TDV not received",
-          "Unknown"
-        ]
+        }
       },
       {
         "key": "protected_at_birth_calculation",
@@ -622,9 +697,19 @@
         "type": "spinner",
         "hint": "Mother's first delivery?",
         "label_info_text": "Indicate whether the mother is primiparous (woman giving birth for the first time",
-        "values": [
-          "Yes",
-          "No"
+        "options": [
+          {
+            "key": "yes",
+            "text": "Yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "no",
+            "text": "No",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          }
         ],
         "v_required": {
           "value": true,
@@ -640,9 +725,19 @@
         "type": "spinner",
         "hint": "Did the mother receive a Rubella serology test?",
         "label_info_text": "This is a serology test only for primiparous (giving birth for the first time) women.",
-        "values": [
-          "Yes",
-          "No"
+        "options": [
+          {
+            "key": "yes",
+            "text": "Yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "no",
+            "text": "No",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          }
         ],
         "v_required": {
           "value": true,
@@ -664,9 +759,19 @@
         "entity_id": "mother",
         "type": "spinner",
         "hint": "Result of the Rubella serology test",
-        "values": [
-          "Positive",
-          "Negative"
+        "options": [
+          {
+            "key": "positive",
+            "text": "Positive",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "negative",
+            "text": "Negative",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          }
         ],
         "v_required": {
           "value": true,
@@ -688,10 +793,25 @@
         "entity_id": "mother",
         "type": "spinner",
         "hint": "Did the child's mother receive the Rubella vaccine?",
-        "values": [
-          "Yes",
-          "No",
-          "Unknown"
+        "options": [
+          {
+            "key": "yes",
+            "text": "Yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "no",
+            "text": "No",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "unknown",
+            "text": "Unknown",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          }
         ],
         "v_required": {
           "value": true,

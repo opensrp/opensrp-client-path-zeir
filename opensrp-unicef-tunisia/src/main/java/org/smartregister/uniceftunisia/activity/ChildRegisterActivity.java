@@ -123,6 +123,7 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
         form.setNextLabel("");
 
         intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
+//        intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION,  true);
         startActivityForResult(intent, JsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 

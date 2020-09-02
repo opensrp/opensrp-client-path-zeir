@@ -189,6 +189,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
 
             intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
             intent.putExtra(JsonFormConstants.JSON_FORM_KEY.JSON, formData);
+            intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION,  true);
             startActivityForResult(intent, REQUEST_CODE_GET_JSON);
         } catch (JSONException e) {
             Timber.e(e);
