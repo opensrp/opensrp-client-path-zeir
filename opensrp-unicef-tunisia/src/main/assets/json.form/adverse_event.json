@@ -61,7 +61,27 @@
         "type": "spinner",
         "hint": "Vaccine that caused the reaction",
         "values": [
+          "BCG",
+          "HepB",
+          "OPV",
+          "Penta",
+          "PCV",
+          "Rota",
+          "Measles",
+          "MR",
+          "Yellow Fever"
         ],
+        "openmrs_choice_ids": {
+          "BCG": "149310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "HepB": "162269AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "OPV": "129578AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "Penta": "162265AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "PCV": "162266AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "Rota": "162272AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "Measles": "149286AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "MR": "149286AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "Yellow Fever": "149253AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
         "v_required": {
           "value": true,
           "err": "Please enter the vaccine that caused the reaction"
