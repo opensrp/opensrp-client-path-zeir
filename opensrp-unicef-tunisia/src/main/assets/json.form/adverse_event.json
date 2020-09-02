@@ -49,7 +49,7 @@
     "encounter_location": ""
   },
   "step1": {
-    "title": "Adverse Effects from Immunization",
+    "title": "{{adverse_event.step1.title}}",
     "next": "step2",
     "fields": [
       {
@@ -59,7 +59,7 @@
         "openmrs_entity_id": "6042AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_data_type": "select one",
         "type": "spinner",
-        "hint": "Vaccine that caused the reaction",
+        "hint": "{{adverse_event.step1.Reaction_Vaccine.hint}}",
         "values": [
           "BCG",
           "HepB",
@@ -84,7 +84,7 @@
         },
         "v_required": {
           "value": true,
-          "err": "Please enter the vaccine that caused the reaction"
+          "err": "{{adverse_event.step1.Reaction_Vaccine.v_required.err}}"
         }
       },
       {
@@ -93,28 +93,28 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "vaccine_frmwrk",
         "openmrs_entity_parent": "",
-        "label": "Was the vaccine administered during a campaign or regular immunization?",
-        "label_info_text": "Indicate whether this was a regular vaccination or a targeted campaign",
-        "label_info_title": "Vaccine Framework.",
+        "label": "{{adverse_event.step1.vaccine_frmwrk.label}}",
+        "label_info_text": "{{adverse_event.step1.vaccine_frmwrk.label_info_text}}",
+        "label_info_title": "{{adverse_event.step1.vaccine_frmwrk.label_info_title}}",
         "options": [
           {
             "key": "vaccine_frmwrk_imm",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Regular immunization"
+            "text": "{{adverse_event.step1.vaccine_frmwrk.options.vaccine_frmwrk_imm.text}}"
           },
           {
             "key": "vaccine_frmwrk_campaign",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Campaign based immunization"
+            "text": "{{adverse_event.step1.vaccine_frmwrk.options.vaccine_frmwrk_campaign.text}}"
           }
         ],
         "v_required": {
           "value": "true",
-          "err": "Please indicate whether vaccine was administered during campaign or not"
+          "err": "{{adverse_event.step1.vaccine_frmwrk.v_required.err}}"
         }
       },
       {
@@ -123,33 +123,33 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "vaccine_location",
         "openmrs_entity_parent": "",
-        "label": "Location of the vaccination",
+        "label": "{{adverse_event.step1.vaccine_location.label}}",
         "options": [
           {
             "key": "vaccine_location_hf",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Health facility"
+            "text": "{{adverse_event.step1.vaccine_location.options.vaccine_location_hf.text}}"
           },
           {
             "key": "vaccine_location_sch",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "School"
+            "text": "{{adverse_event.step1.vaccine_location.options.vaccine_location_sch.text}}"
           },
           {
             "key": "vaccine_location_other",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Other"
+            "text": "{{adverse_event.step1.vaccine_location.options.vaccine_location_other.text}}"
           }
         ],
         "v_required": {
           "value": "true",
-          "err": "Please specify location of vaccination"
+          "err": "{{adverse_event.step1.vaccine_location.v_required.err}}"
         }
       },
       {
@@ -159,10 +159,10 @@
         "openmrs_entity_id": "vaccine_location",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "Indicate other location of vaccination",
+        "hint": "{{adverse_event.step1.vaccine_location_other.hint}}",
         "v_required": {
           "value": "true",
-          "err": "Please specify other location of vaccination"
+          "err": "{{adverse_event.step1.vaccine_location_other.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -179,7 +179,7 @@
         "openmrs_entity_id": "vaccine_location",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "Name of hospital where vaccine was administered",
+        "hint": "{{adverse_event.step1.vaccine_facility.hint}}",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -194,11 +194,11 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "vaccine_facility_unknown",
         "type": "check_box",
-        "label": "",
+        "label": "{{adverse_event.step1.vaccine_facility_unknown.label}}",
         "options": [
           {
             "key": "vaccine_facility_unknown",
-            "text": "Hospital where vaccine was administered not known",
+            "text": "{{adverse_event.step1.vaccine_facility_unknown.options.vaccine_facility_unknown.text}}",
             "text_size": "18px",
             "value": "false"
           }
@@ -218,7 +218,7 @@
         "openmrs_entity_id": "lot_no",
         "openmrs_entity_parent": "",
         "edit_type": "number",
-        "hint": "Lot number",
+        "hint": "{{adverse_event.step1.lot_no.hint}}",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -234,7 +234,7 @@
         "openmrs_entity_id": "expiry",
         "openmrs_entity_parent": "",
         "expanded": false,
-        "hint": "Expiry date",
+        "hint": "{{adverse_event.step1.expiry.hint}}",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -250,7 +250,7 @@
         "openmrs_entity_id": "outlet_no",
         "openmrs_entity_parent": "",
         "edit_type": "number",
-        "hint": "Outlet number",
+        "hint": "{{adverse_event.step1.outlet_no.hint}}",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -266,7 +266,7 @@
         "openmrs_entity_id": "vaccine_diluents",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "Specify the type of the vaccine diluents used",
+        "hint": "{{adverse_event.step1.vaccine_diluents.hint}}",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -282,7 +282,7 @@
         "openmrs_entity_id": "thinner",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "Thinner name",
+        "hint": "{{adverse_event.step1.thinner.hint}}",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -298,7 +298,7 @@
         "openmrs_entity_id": "thinner_lot",
         "openmrs_entity_parent": "",
         "edit_type": "number",
-        "hint": "Thinner lot number",
+        "hint": "{{adverse_event.step1.thinner_lot.hint}}",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -314,7 +314,7 @@
         "openmrs_entity_id": "thinner_man_name",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "Thinner's manufacturer's name",
+        "hint": "{{adverse_event.step1.thinner_man_name.hint}}",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -330,7 +330,7 @@
         "openmrs_entity_id": "thinner_exp",
         "openmrs_entity_parent": "",
         "expanded": false,
-        "hint": "Thinner's expiry date",
+        "hint": "{{adverse_event.step1.thinner_exp.hint}}",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -345,26 +345,26 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "injection",
         "openmrs_entity_parent": "",
-        "label": "Was the vaccine an injection?",
+        "label": "{{adverse_event.step1.injection.label}}",
         "options": [
           {
             "key": "injection_yes",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Yes"
+            "text": "{{adverse_event.step1.injection.options.injection_yes.text}}"
           },
           {
             "key": "injection_no",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "No"
+            "text": "{{adverse_event.step1.injection.options.injection_no.text}}"
           }
         ],
         "v_required": {
           "value": "true",
-          "err": "Please specify whether vaccine was an injection"
+          "err": "{{adverse_event.step1.injection.v_required.err}}"
         }
       },
       {
@@ -373,28 +373,28 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "injection_site",
         "openmrs_entity_parent": "",
-        "label": "Specify the injection site",
+        "label": "{{adverse_event.step1.injection_site.label}}",
         "options": [
           {
             "key": "upper_arm",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Upper left arm"
+            "text": "{{adverse_event.step1.injection_site.options.upper_arm.text}}"
           },
           {
             "key": "as_thigh",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Anterolateral side of the thigh"
+            "text": "{{adverse_event.step1.injection_site.options.as_thigh.text}}"
           },
           {
             "key": "injection_site_other",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Other"
+            "text": "{{adverse_event.step1.injection_site.options.injection_site_other.text}}"
           }
         ],
         "relevance": {
@@ -412,10 +412,10 @@
         "openmrs_entity_id": "injection_other",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "Indicate other site(s) of injection",
+        "hint": "{{adverse_event.step1.injection_other.hint}}",
         "v_required": {
           "value": "true",
-          "err": "Please indicate other site (s) of injection"
+          "err": "{{adverse_event.step1.injection_other.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -431,33 +431,33 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "injection_admin",
         "openmrs_entity_parent": "",
-        "label": "Specify injection mode of administration",
+        "label": "{{adverse_event.step1.injection_admin.label}}",
         "options": [
           {
             "key": "injection_im",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Intramuscular (IM)"
+            "text": "{{adverse_event.step1.injection_admin.options.injection_im.text}}"
           },
           {
             "key": "injection_sc",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Subcutaneous (SC)"
+            "text": "{{adverse_event.step1.injection_admin.options.injection_sc.text}}"
           },
           {
             "key": "injection_id",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Intradermal (ID)"
+            "text": "{{adverse_event.step1.injection_admin.options.injection_id.text}}"
           }
         ],
         "v_required": {
           "value": "true",
-          "err": "Please Specify injection mode of administration "
+          "err": "{{adverse_event.step1.injection_admin.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -473,114 +473,114 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "eafi_symptoms",
         "openmrs_entity_parent": "",
-        "label": "Description of symptoms observed",
+        "label": "{{adverse_event.step1.eafi_symptoms.label}}",
         "options": [
           {
             "key": "eafi_symptoms_abscess",
             "openmrs_choice_id": "",
-            "text": "Abscess at the injection site (supply or aseptic abscess)",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_abscess.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_inflam",
             "openmrs_choice_id": "",
-            "text": "Inflammation",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_inflam.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_swelling",
             "openmrs_choice_id": "",
-            "text": "Swelling",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_swelling.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_edema",
             "openmrs_choice_id": "",
-            "text": "Edema more than 3 cm in diameter (or including the nearest joint) lasting 3 days",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_edema.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_hives",
             "openmrs_choice_id": "",
-            "text": "Hives",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_hives.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_eczema",
             "openmrs_choice_id": "",
-            "text": "Eczema",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_eczema.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_gen_edema",
             "openmrs_choice_id": "",
-            "text": "Swelling of the face or generalised edema",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_gen_edema.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_anaphylic_shock",
             "openmrs_choice_id": "",
-            "text": "Anaphylactic shock",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_anaphylic_shock.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_collapsus",
             "openmrs_choice_id": "",
-            "text": "Septic or toxic shock, or collapsus",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_collapsus.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_convulsions",
             "openmrs_choice_id": "",
-            "text": "Convulsions with or without fever",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_convulsions.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_conscience",
             "openmrs_choice_id": "",
-            "text": "Disorder of the conscience",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_conscience.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_brachial_neuretis",
             "openmrs_choice_id": "",
-            "text": "Brachial neuritis",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_brachial_neuretis.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_acute_paralysis",
             "openmrs_choice_id": "",
-            "text": "Acute flaccid paralysis",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_acute_paralysis.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_encephalopathy",
             "openmrs_choice_id": "",
-            "text": "Encephalopathy",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_encephalopathy.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_adenite",
             "openmrs_choice_id": "",
-            "text": "Size adenite > 15 mm, especially if it is fistular or if it adheres to the skin or generalized BCGitis",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_adenite.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_fever",
             "openmrs_choice_id": "",
-            "text": "Fever",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_fever.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_other",
             "openmrs_choice_id": "",
-            "text": "Other",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_other.text}}",
             "value": false
           },
           {
             "key": "eafi_symptoms_none",
             "openmrs_choice_id": "",
-            "text": "None",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_none.text}}",
             "value": false
           }
         ],
@@ -589,7 +589,7 @@
         ],
         "v_required": {
           "value": "true",
-          "err": "Please indicate symptoms description"
+          "err": "{{adverse_event.step1.eafi_symptoms.v_required.err}}"
         }
       },
       {
@@ -599,10 +599,10 @@
         "openmrs_entity_id": "eafi_symptoms_other",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "Indicate other symptoms",
+        "hint": "{{adverse_event.step1.eafi_symptoms_other.hint}}",
         "v_required": {
           "value": "true",
-          "err": "Please indicate other symptoms"
+          "err": "{{adverse_event.step1.eafi_symptoms_other.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -619,10 +619,10 @@
         "openmrs_entity_id": "aefi_start_date",
         "openmrs_entity_parent": "",
         "expanded": false,
-        "hint": "Date the adverse effects started",
+        "hint": "{{adverse_event.step1.aefi_start_date.hint}}",
         "v_required": {
           "value": "true",
-          "err": "Please specify date adverse effects started"
+          "err": "{{adverse_event.step1.aefi_start_date.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -639,7 +639,7 @@
         "openmrs_entity_id": "aefi_hrs",
         "openmrs_entity_parent": "",
         "edit_type": "number",
-        "hint": "Delay in hours between taking the vaccine and the onset of symptoms",
+        "hint": "{{adverse_event.step1.aefi_hrs.hint}}",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -651,7 +651,7 @@
     ]
   },
   "step2": {
-    "title": "Care Given",
+    "title": "{{adverse_event.step2.title}}",
     "next": "step3",
     "fields": [
       {
@@ -660,33 +660,33 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "place_care",
         "openmrs_entity_parent": "",
-        "label": "Place where care was administered",
+        "label": "{{adverse_event.step2.place_care.label}}",
         "options": [
           {
             "key": "home",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Home"
+            "text": "{{adverse_event.step2.place_care.options.home.text}}"
           },
           {
             "key": "hospital",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Hospital"
+            "text": "{{adverse_event.step2.place_care.options.hospital.text}}"
           },
           {
             "key": "other",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Other"
+            "text": "{{adverse_event.step2.place_care.options.other.text}}"
           }
         ],
         "v_required": {
           "value": "true",
-          "err": "Please specify place where care was administered"
+          "err": "{{adverse_event.step2.place_care.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -702,36 +702,36 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "type_care",
         "openmrs_entity_parent": "",
-        "label": "Type of care administered",
+        "label": "{{adverse_event.step2.type_care.label}}",
         "options": [
           {
             "key": "treated",
             "openmrs_choice_id": "",
-            "text": "Treated",
+            "text": "{{adverse_event.step2.type_care.options.treated.text}}",
             "value": false
           },
           {
             "key": "hospitalized",
             "openmrs_choice_id": "",
-            "text": "Hospitalized",
+            "text": "{{adverse_event.step2.type_care.options.hospitalized.text}}",
             "value": false
           },
           {
             "key": "reffered",
             "openmrs_choice_id": "",
-            "text": "Refered to a higher facility",
+            "text": "{{adverse_event.step2.type_care.options.reffered.text}}",
             "value": false
           },
           {
             "key": "no_care_given",
             "openmrs_choice_id": "",
-            "text": "No care given",
+            "text": "{{adverse_event.step2.type_care.options.no_care_given.text}}",
             "value": false
           }
         ],
         "v_required": {
           "value": "true",
-          "err": "Please select type of care"
+          "err": "{{adverse_event.step2.type_care.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -747,26 +747,26 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "care_home",
         "openmrs_entity_parent": "",
-        "label": "Care adminsitered at home",
+        "label": "{{adverse_event.step2.care_home.label}}",
         "options": [
           {
             "key": "home _remedies",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Home remedies"
+            "text": "{{adverse_event.step2.care_home.options.home__remedies.text}}"
           },
           {
             "key": "care_home_no",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "No care given"
+            "text": "{{adverse_event.step2.care_home.options.care_home_no.text}}"
           }
         ],
         "v_required": {
           "value": "true",
-          "err": "Please indicate whether care was administered at home"
+          "err": "{{adverse_event.step2.care_home.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -784,10 +784,10 @@
         "openmrs_entity_parent": "",
         "expanded": false,
         "max_date": "today",
-        "hint": "Date of hospitalization",
+        "hint": "{{adverse_event.step2.hospitalization_date.hint}}",
         "v_required": {
           "value": "true",
-          "err": "Please specify hospitalization date"
+          "err": "{{adverse_event.step2.hospitalization_date.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -805,7 +805,7 @@
         "openmrs_entity_parent": "",
         "expanded": false,
         "max_date": "today",
-        "hint": "Date discharged from hospital",
+        "hint": "{{adverse_event.step2.discharge.hint}}",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -821,10 +821,10 @@
         "openmrs_entity_id": "hospt_location",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "Hospital location",
+        "hint": "{{adverse_event.step2.hospt_location.hint}}",
         "v_required": {
           "value": "false",
-          "err": "Please specify hospital location"
+          "err": "{{adverse_event.step2.hospt_location.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -837,7 +837,7 @@
     ]
   },
   "step3": {
-    "title": "AEFI Persistence",
+    "title": "{{adverse_event.step3.title}}",
     "next": "step4",
     "fields": [
       {
@@ -846,33 +846,33 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "healing",
         "openmrs_entity_parent": "",
-        "label": "Is the child healing or did the child heal from the adverse effects?",
+        "label": "{{adverse_event.step3.healing.label}}",
         "options": [
           {
             "key": "healing_yes",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Yes"
+            "text": "{{adverse_event.step3.healing.options.healing_yes.text}}"
           },
           {
             "key": "healing_no",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "No"
+            "text": "{{adverse_event.step3.healing.options.healing_no.text}}"
           },
           {
             "key": "child_died",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Child died"
+            "text": "{{adverse_event.step3.healing.options.child_died.text}}"
           }
         ],
         "v_required": {
           "value": "true",
-          "err": "Please indicate whether the child healed or is healing from any adverse effects"
+          "err": "{{adverse_event.step3.healing.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -888,12 +888,12 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "aefi_date_death",
         "openmrs_entity_parent": "",
-        "hint": "Date of death",
+        "hint": "{{adverse_event.step3.aefi_date_death.hint}}",
         "expanded": false,
         "max_date": "today",
         "v_required": {
           "value": "true",
-          "err": "Please indicate the date of death"
+          "err": "{{adverse_event.step3.aefi_date_death.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -910,7 +910,7 @@
         "openmrs_entity_id": "aefi_time_death",
         "openmrs_entity_parent": "",
         "expanded": false,
-        "hint": "Time of death",
+        "hint": "{{adverse_event.step3.aefi_time_death.hint}}",
         "relevance": {
           "rules-engine": {
             "ex-rules": {
@@ -925,28 +925,28 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "aefi_autopsy",
         "openmrs_entity_parent": "",
-        "label": "Autopsy done?",
-        "label_info_text": "If autopsy done attach autopsy report to this form",
-        "label_info_title": "Autopsy form.",
+        "label": "{{adverse_event.step3.aefi_autopsy.label}}",
+        "label_info_text": "{{adverse_event.step3.aefi_autopsy.label_info_text}}",
+        "label_info_title": "{{adverse_event.step3.aefi_autopsy.label_info_title}}",
         "options": [
           {
             "key": "autopsy_yes",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Yes"
+            "text": "{{adverse_event.step3.aefi_autopsy.options.autopsy_yes.text}}"
           },
           {
             "key": "autopsy_no",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "No"
+            "text": "{{adverse_event.step3.aefi_autopsy.options.autopsy_no.text}}"
           }
         ],
         "v_required": {
           "value": "true",
-          "err": "Please indicate whether autopsy was done"
+          "err": "{{adverse_event.step3.aefi_autopsy.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -962,9 +962,9 @@
         "openmrs_entity_id": "aefi_death_reg",
         "openmrs_entity_parent": "",
         "type": "toaster_notes",
-        "text": "Fill in the death registration form ",
-        "toaster_info_text": "Fill in the death registration form to close the child's record.",
-        "toaster_info_title": "Fill death registration form",
+        "text": "{{adverse_event.step3.aefi_death_reg.text}}",
+        "toaster_info_text": "{{adverse_event.step3.aefi_death_reg.toaster_info_text}}",
+        "toaster_info_title": "{{adverse_event.step3.aefi_death_reg.toaster_info_title}}",
         "toaster_type": "info",
         "relevance": {
           "rules-engine": {
@@ -981,10 +981,10 @@
         "openmrs_entity_id": "duration_aefi",
         "openmrs_entity_parent": "",
         "edit_type": "number",
-        "hint": "Specify total duration of the adverse events",
+        "hint": "{{adverse_event.step3.duration_aefi.hint}}",
         "v_required": {
           "value": "true",
-          "err": "Please specify adverse effects total duration"
+          "err": "{{adverse_event.step3.duration_aefi.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -1000,114 +1000,114 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "persistent_aefi",
         "openmrs_entity_parent": "",
-        "label": "Specify the symptoms that persist",
+        "label": "{{adverse_event.step3.persistent_aefi.label}}",
         "options": [
           {
             "key": "persistent_abscess",
             "openmrs_choice_id": "",
-            "text": "Abscess at the injection site (supply or aseptic abscess)",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_abscess.text}}",
             "value": false
           },
           {
             "key": "persistent_inflam",
             "openmrs_choice_id": "",
-            "text": "Inflammation",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_inflam.text}}",
             "value": false
           },
           {
             "key": "persistent_swelling",
             "openmrs_choice_id": "",
-            "text": "Swelling",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_swelling.text}}",
             "value": false
           },
           {
             "key": "persistent_edema",
             "openmrs_choice_id": "",
-            "text": "Edema more than 3 cm in diameter (or including the nearest joint) lasting 3 days",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_edema.text}}",
             "value": false
           },
           {
             "key": "persistent_hives",
             "openmrs_choice_id": "",
-            "text": "Hives",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_hives.text}}",
             "value": false
           },
           {
             "key": "persistent_eczema",
             "openmrs_choice_id": "",
-            "text": "Eczema",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_eczema.text}}",
             "value": false
           },
           {
             "key": "persistent_gen_edema",
             "openmrs_choice_id": "",
-            "text": "Swelling of the face or generalised edema",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_gen_edema.text}}",
             "value": false
           },
           {
             "key": "persistent_anaphylic_shock",
             "openmrs_choice_id": "",
-            "text": "Anaphylactic shock",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_anaphylic_shock.text}}",
             "value": false
           },
           {
             "key": "persistent_collapsus",
             "openmrs_choice_id": "",
-            "text": "Septic or toxic shock, or collapsus",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_collapsus.text}}",
             "value": false
           },
           {
             "key": "persistent_convulsions",
             "openmrs_choice_id": "",
-            "text": "Convulsions with or without fever",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_convulsions.text}}",
             "value": false
           },
           {
             "key": "persistent_conscience",
             "openmrs_choice_id": "",
-            "text": "Disorder of the conscience",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_conscience.text}}",
             "value": false
           },
           {
             "key": "persistent_brachial_neuretis",
             "openmrs_choice_id": "",
-            "text": "Brachial neuritis",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_brachial_neuretis.text}}",
             "value": false
           },
           {
             "key": "persistent_acute_paralysis",
             "openmrs_choice_id": "",
-            "text": "Acute flaccid paralysis",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_acute_paralysis.text}}",
             "value": false
           },
           {
             "key": "persistent_encephalopathy",
             "openmrs_choice_id": "",
-            "text": "Encephalopathy",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_encephalopathy.text}}",
             "value": false
           },
           {
             "key": "persistent_adenite",
             "openmrs_choice_id": "",
-            "text": "Size adenite > 15 mm, especially if it is fistular or if it adheres to the skin or generalized BCGitis",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_adenite.text}}",
             "value": false
           },
           {
             "key": "persistent_fever",
             "openmrs_choice_id": "",
-            "text": "Fever",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_fever.text}}",
             "value": false
           },
           {
             "key": "persistent_other",
             "openmrs_choice_id": "",
-            "text": "Other",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_other.text}}",
             "value": false
           },
           {
             "key": "persistent_none",
             "openmrs_choice_id": "",
-            "text": "None",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_none.text}}",
             "value": false
           }
         ],
@@ -1129,10 +1129,10 @@
         "openmrs_entity_id": "persistent_aefi_date",
         "openmrs_entity_parent": "",
         "expanded": false,
-        "hint": "Date",
+        "hint": "{{adverse_event.step3.persistent_aefi_date.hint}}",
         "v_required": {
           "value": "true",
-          "err": "Specify date of persistence"
+          "err": "{{adverse_event.step3.persistent_aefi_date.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -1145,7 +1145,7 @@
     ]
   },
   "step4": {
-    "title": "History of Child",
+    "title": "{{adverse_event.step4.title}}",
     "next": "step5",
     "fields": [
       {
@@ -1154,35 +1154,35 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "prev_vaccines_aefi",
         "openmrs_entity_parent": "",
-        "label": "Has the child had reactions to other vaccines?",
-        "label_info_text": "Indicate any other reactions the child has had with other vaccines.",
-        "label_info_title": "Other vaccine reactions.",
+        "label": "{{adverse_event.step4.prev_vaccines_aefi.label}}",
+        "label_info_text": "{{adverse_event.step4.prev_vaccines_aefi.label_info_text}}",
+        "label_info_title": "{{adverse_event.step4.prev_vaccines_aefi.label_info_title}}",
         "options": [
           {
             "key": "prev_vaccines_yes",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Yes"
+            "text": "{{adverse_event.step4.prev_vaccines_aefi.options.prev_vaccines_yes.text}}"
           },
           {
             "key": "prev_vaccines_no",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "No"
+            "text": "{{adverse_event.step4.prev_vaccines_aefi.options.prev_vaccines_no.text}}"
           },
           {
             "key": "prev_vaccines_not_known",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Not known"
+            "text": "{{adverse_event.step4.prev_vaccines_aefi.options.prev_vaccines_not_known.text}}"
           }
         ],
         "v_required": {
           "value": "true",
-          "err": "Please indicate reactions to other previous vaccines"
+          "err": "{{adverse_event.step4.prev_vaccines_aefi.v_required.err}}"
         }
       },
       {
@@ -1191,114 +1191,114 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "prev_aefi_rxns",
         "openmrs_entity_parent": "",
-        "label": "What were the reactions to those vaccines?",
+        "label": "{{adverse_event.step4.prev_aefi_rxns.label}}",
         "options": [
           {
             "key": "prev_abscess",
             "openmrs_choice_id": "",
-            "text": "Abscess at the injection site (supply or aseptic abscess)",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_abscess.text}}",
             "value": false
           },
           {
             "key": "prev_inflam",
             "openmrs_choice_id": "",
-            "text": "Inflammation",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_inflam.text}}",
             "value": false
           },
           {
             "key": "prev_swelling",
             "openmrs_choice_id": "",
-            "text": "Swelling",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_swelling.text}}",
             "value": false
           },
           {
             "key": "prev_edema",
             "openmrs_choice_id": "",
-            "text": "Edema more than 3 cm in diameter (or including the nearest joint) lasting 3 days",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_edema.text}}",
             "value": false
           },
           {
             "key": "prev_hives",
             "openmrs_choice_id": "",
-            "text": "Hives",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_hives.text}}",
             "value": false
           },
           {
             "key": "prev_eczema",
             "openmrs_choice_id": "",
-            "text": "Eczema",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_eczema.text}}",
             "value": false
           },
           {
             "key": "prev_gen_edema",
             "openmrs_choice_id": "",
-            "text": "Swelling of the face or generalised edema",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_gen_edema.text}}",
             "value": false
           },
           {
             "key": "prev_anaphylic_shock",
             "openmrs_choice_id": "",
-            "text": "Anaphylactic shock",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_anaphylic_shock.text}}",
             "value": false
           },
           {
             "key": "prev_collapsus",
             "openmrs_choice_id": "",
-            "text": "Septic or toxic shock, or collapsus",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_collapsus.text}}",
             "value": false
           },
           {
             "key": "prev_convulsions",
             "openmrs_choice_id": "",
-            "text": "Convulsions with or without fever",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_convulsions.text}}",
             "value": false
           },
           {
             "key": "prev_conscience",
             "openmrs_choice_id": "",
-            "text": "Disorder of the conscience",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_conscience.text}}",
             "value": false
           },
           {
             "key": "prev_brachial_neuretis",
             "openmrs_choice_id": "",
-            "text": "Brachial neuritis",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_brachial_neuretis.text}}",
             "value": false
           },
           {
             "key": "prev_acute_paralysis",
             "openmrs_choice_id": "",
-            "text": "Acute flaccid paralysis",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_acute_paralysis.text}}",
             "value": false
           },
           {
             "key": "prev_encephalopathy",
             "openmrs_choice_id": "",
-            "text": "Encephalopathy",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_encephalopathy.text}}",
             "value": false
           },
           {
             "key": "prev_adenite",
             "openmrs_choice_id": "",
-            "text": "Size adenite > 15 mm, especially if it is fistular or if it adheres to the skin or generalized BCGitis",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_adenite.text}}",
             "value": false
           },
           {
             "key": "prev_fever",
             "openmrs_choice_id": "",
-            "text": "Fever",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_fever.text}}",
             "value": false
           },
           {
             "key": "prev_other",
             "openmrs_choice_id": "",
-            "text": "Other",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_other.text}}",
             "value": false
           },
           {
             "key": "prev_none",
             "openmrs_choice_id": "",
-            "text": "None",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_none.text}}",
             "value": false
           }
         ],
@@ -1307,7 +1307,7 @@
         ],
         "v_required": {
           "value": "true",
-          "err": "Please give details of the previous vaccines"
+          "err": "{{adverse_event.step4.prev_aefi_rxns.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -1324,10 +1324,10 @@
         "openmrs_entity_id": "prev_aefi_rxns_other",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "Other reactions to vaccines",
+        "hint": "{{adverse_event.step4.prev_aefi_rxns_other.hint}}",
         "v_required": {
           "value": "true",
-          "err": "Please indicate other vaccine reactions"
+          "err": "{{adverse_event.step4.prev_aefi_rxns_other.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -1343,33 +1343,33 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "drug_allergy",
         "openmrs_entity_parent": "",
-        "label": "Does the child have any known allergy to a drug?",
+        "label": "{{adverse_event.step4.drug_allergy.label}}",
         "options": [
           {
             "key": "allergy_yes",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Yes"
+            "text": "{{adverse_event.step4.drug_allergy.options.allergy_yes.text}}"
           },
           {
             "key": "allergy_no",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "No"
+            "text": "{{adverse_event.step4.drug_allergy.options.allergy_no.text}}"
           },
           {
             "key": "allergy_not_known",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Not known"
+            "text": "{{adverse_event.step4.drug_allergy.options.allergy_not_known.text}}"
           }
         ],
         "v_required": {
           "value": "true",
-          "err": "Please indicate any known drug allergies"
+          "err": "{{adverse_event.step4.drug_allergy.v_required.err}}"
         }
       },
       {
@@ -1379,10 +1379,10 @@
         "openmrs_entity_id": "drug_allergy_drug",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "What drug is the child allergic to?",
+        "hint": "{{adverse_event.step4.drug_allergy_drug.hint}}",
         "v_required": {
           "value": "true",
-          "err": "Please indicate the drugs the child is allergic to "
+          "err": "{{adverse_event.step4.drug_allergy_drug.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -1398,33 +1398,33 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "chronic_illness",
         "openmrs_entity_parent": "",
-        "label": "Was the child taking any chronic illness or long-term medication (corticosteroid, anti-epileptic or others) during the period of the accident?",
+        "label": "{{adverse_event.step4.chronic_illness.label}}",
         "options": [
           {
             "key": "chronic_illness_yes",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Yes"
+            "text": "{{adverse_event.step4.chronic_illness.options.chronic_illness_yes.text}}"
           },
           {
             "key": "chronic_illness_no",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "No"
+            "text": "{{adverse_event.step4.chronic_illness.options.chronic_illness_no.text}}"
           },
           {
             "key": "chronic_illness_not_known",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Not known"
+            "text": "{{adverse_event.step4.chronic_illness.options.chronic_illness_not_known.text}}"
           }
         ],
         "v_required": {
           "value": "true",
-          "err": "Please indicate whether child was taking any long-term medication for chronic illnesses"
+          "err": "{{adverse_event.step4.chronic_illness.v_required.err}}"
         }
       },
       {
@@ -1434,10 +1434,10 @@
         "openmrs_entity_id": "illness_details",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "Specify any useful details on the points raised",
+        "hint": "{{adverse_event.step4.illness_details.hint}}",
         "v_required": {
           "value": "true",
-          "err": "Please give details of the drug allergies or long term chronic illness medication"
+          "err": "{{adverse_event.step4.illness_details.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -1450,7 +1450,7 @@
     ]
   },
   "step5": {
-    "title": "Investigation details",
+    "title": "{{adverse_event.step5.title}}",
     "fields": [
       {
         "key": "investigation",
@@ -1458,28 +1458,28 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "investigation",
         "openmrs_entity_parent": "",
-        "label": "Specify whether the incident is under investigation",
+        "label": "{{adverse_event.step5.investigation.label}}",
         "options": [
           {
             "key": "isolated_case",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Is an isolated case"
+            "text": "{{adverse_event.step5.investigation.options.isolated_case.text}}"
           },
           {
             "key": "several_cases",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Several cases of identical incidents in time and space"
+            "text": "{{adverse_event.step5.investigation.options.several_cases.text}}"
           },
           {
             "key": "same_symptoms",
             "openmrs_entity": "",
             "openmrs_entity_id": "",
             "openmrs_entity_parent": "",
-            "text": "Same symptoms at the same time in individuals who did not receive the vaccine"
+            "text": "{{adverse_event.step5.investigation.options.same_symptoms.text}}"
           }
         ]
       },
@@ -1490,10 +1490,10 @@
         "openmrs_entity_id": "last_name_agent",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "Last name of vaccinator",
+        "hint": "{{adverse_event.step5.last_name_agent.hint}}",
         "v_required": {
           "value": "true",
-          "err": "Please specify last name of vaccinator"
+          "err": "{{adverse_event.step5.last_name_agent.v_required.err}}"
         }
       },
       {
@@ -1503,10 +1503,10 @@
         "openmrs_entity_id": "first_name_agent",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "First name of vaccinator",
+        "hint": "{{adverse_event.step5.first_name_agent.hint}}",
         "v_required": {
           "value": "true",
-          "err": "Please specify first name of vaccinator"
+          "err": "{{adverse_event.step5.first_name_agent.v_required.err}}"
         }
       },
       {
@@ -1516,10 +1516,10 @@
         "openmrs_entity_id": "function_agent",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "Function or supervision of the vaccinator",
+        "hint": "{{adverse_event.step5.function_agent.hint}}",
         "v_required": {
           "value": "true",
-          "err": "Please indicate function or supervision of the vaccinator"
+          "err": "{{adverse_event.step5.function_agent.v_required.err}}"
         }
       },
       {
@@ -1528,36 +1528,36 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "vaccine_handling_find",
         "openmrs_entity_parent": "",
-        "label": "Findings regarding the storage and handling of the vaccine",
+        "label": "{{adverse_event.step5.vaccine_handling_find.label}}",
         "options": [
           {
             "key": "cold_chain_respect",
             "openmrs_choice_id": "",
-            "text": "Respect for cold chain observed",
+            "text": "{{adverse_event.step5.vaccine_handling_find.options.cold_chain_respect.text}}",
             "value": false
           },
           {
             "key": "aseptic_gestures",
             "openmrs_choice_id": "",
-            "text": "Aseptic gestures observed",
+            "text": "{{adverse_event.step5.vaccine_handling_find.options.aseptic_gestures.text}}",
             "value": false
           },
           {
             "key": "correct_tech",
             "openmrs_choice_id": "",
-            "text": "Correct techniques for replenishing the vaccine observed",
+            "text": "{{adverse_event.step5.vaccine_handling_find.options.correct_tech.text}}",
             "value": false
           },
           {
             "key": "vaccine_handling_other",
             "openmrs_choice_id": "",
-            "text": "Other",
+            "text": "{{adverse_event.step5.vaccine_handling_find.options.vaccine_handling_other.text}}",
             "value": false
           }
         ],
         "v_required": {
           "value": "true",
-          "err": "Please indicate findings on vaccine storage and handling"
+          "err": "{{adverse_event.step5.vaccine_handling_find.v_required.err}}"
         }
       },
       {
@@ -1567,10 +1567,10 @@
         "openmrs_entity_id": "vaccine_handling_find_other",
         "openmrs_entity_parent": "",
         "edit_type": "name",
-        "hint": "Other findings on vaccine storage and handling",
+        "hint": "{{adverse_event.step5.vaccine_handling_find_other.hint}}",
         "v_required": {
           "value": "true",
-          "err": "Please indicate other findings on vaccine storage and handling"
+          "err": "{{adverse_event.step5.vaccine_handling_find_other.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
@@ -1581,5 +1581,6 @@
         }
       }
     ]
-  }
+  },
+  "properties_file_name": "adverse_event"
 }
