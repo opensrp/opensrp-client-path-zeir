@@ -21,14 +21,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.vijay.jsonwizard.activities.JsonFormActivity;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Hours;
 import org.joda.time.Minutes;
 import org.joda.time.Seconds;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.smartregister.child.ChildLibrary;
 import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.JsonFormUtils;
@@ -43,6 +47,7 @@ import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.contract.NavigationContract;
 import org.smartregister.uniceftunisia.presenter.NavigationPresenter;
 import org.smartregister.uniceftunisia.util.AppConstants;
+import org.smartregister.util.FormUtils;
 import org.smartregister.util.LangUtils;
 
 import java.lang.ref.WeakReference;
@@ -98,7 +103,6 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             prepareViews(activity);
             appLogout(activity);
             syncApp(activity);
-            enrollment(activity);
             goToReport();
             recordOutOfArea(activity);
             attachCloseDrawer();
@@ -177,10 +181,8 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
                 params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
                 current.setLayoutParams(params);
-                rl.addView(current);
-            } else {
-                rl.addView(current);
             }
+            rl.addView(current);
         }
     }
 
@@ -193,25 +195,12 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         });
     }
 
-    private void enrollment(final Activity parentActivity) {
-        enrollmentMenuItem.setOnClickListener(v -> {
-            if (parentActivity instanceof ChildRegisterActivity) {
-                startFormActivity(parentActivity, Utils.metadata().childRegister.formName);
-            } else if (parentActivity instanceof HIA2ReportsActivity) {
-                //make child registration form return back to child registration page
-                startFormActivity(parentActivity, Utils.metadata().childRegister.formName);
-                drawer.closeDrawer(GravityCompat.START);
-                parentActivity.finish();
-            }
-        });
-    }
-
     private void goToReport() {
         reportView.setOnClickListener(v -> startReportActivity());
     }
 
     private void recordOutOfArea(final Activity parentActivity) {
-        outOfAreaMenu.setOnClickListener(v -> startFormActivity(parentActivity, "out_of_catchment_service"));
+        outOfAreaMenu.setOnClickListener(v -> startFormActivity(parentActivity));
     }
 
     private void attachCloseDrawer() {
@@ -256,9 +245,22 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         UnicefTunisiaApplication.getInstance().logoutCurrentUser();
     }
 
-    private void startFormActivity(Activity activity, String formName) {
+    private void startFormActivity(Activity activity) {
         try {
-            JsonFormUtils.startForm(activity, JsonFormUtils.REQUEST_CODE_GET_JSON, formName, null, ChildLibrary.getInstance().getLocationPickerView(activityWeakReference.get()).getSelectedItem());
+            JSONObject formJson = new FormUtils(activity).getFormJson(AppConstants.JSON_FORM.OUT_OF_CATCHMENT_SERVICE);
+            JsonFormUtils.addAvailableVaccines(ChildLibrary.getInstance().context().applicationContext(), formJson);
+
+            Form form = new Form();
+            form.setWizard(false);
+            form.setHideSaveLabel(true);
+            form.setNextLabel("");
+
+            Intent intent = new Intent(activity, Utils.metadata().childFormActivity);
+            intent.putExtra(Constants.INTENT_KEY.JSON, formJson.toString());
+            intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
+            intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
+            activity.startActivityForResult(intent, JsonFormUtils.REQUEST_CODE_GET_JSON);
+
         } catch (Exception e) {
             Timber.e(e);
         }
@@ -352,7 +354,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
                     // save language
                     LangUtils.saveLanguage(activity.getApplicationContext(), LOCALE.getLanguage());
 
-                    launchActivity(activity, activity.getClass() );
+                    launchActivity(activity, activity.getClass());
                 }
                 count++;
             }
