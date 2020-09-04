@@ -33,6 +33,7 @@ public class AdvancedSearchPresenter extends BaseChildAdvancedSearchPresenter {
                             AppConstants.KEY.ID_LOWER_CASE,
                             AppConstants.KEY.RELATIONALID,
                             AppConstants.KEY.RELATIONAL_ID,
+                            AppConstants.KEY.FATHER_BASE_ENTITY_ID,
                             AppConstants.KEY.FIRST_NAME,
                             AppConstants.KEY.LAST_NAME,
                             AppConstants.KEY.GENDER,
@@ -69,7 +70,7 @@ public class AdvancedSearchPresenter extends BaseChildAdvancedSearchPresenter {
     private Object[] getColumnValues(RemoteLocalCursor remoteLocalCursor) {
         return new Object[]{
                 remoteLocalCursor.getId(), remoteLocalCursor.getRelationalId(),
-                remoteLocalCursor.getMotherBaseEntityId(),
+                remoteLocalCursor.getMotherBaseEntityId(), remoteLocalCursor.getFatherBaseEntityId(),
                 remoteLocalCursor.getFirstName(), remoteLocalCursor.getLastName(),
                 remoteLocalCursor.getGender(), remoteLocalCursor.getDob(),
                 remoteLocalCursor.getOpenSrpId(), remoteLocalCursor.getMotherFirstName(),

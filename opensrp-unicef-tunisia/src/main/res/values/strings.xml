@@ -121,8 +121,8 @@
     <string name="anc_register">ANC Register</string>
 
     <!-- Override labels in profile and immunization section -->
-    <string name="label_zeir">MER ID</string>
-    <string name="system_id_colon">MER ID:</string>
+    <string name="label_zeir">IDV NUMBER</string>
+    <string name="system_id_colon">IDV NUMBER:</string>
     <string name="title_child">Child</string>
     <string name="settings">Settings</string>
 

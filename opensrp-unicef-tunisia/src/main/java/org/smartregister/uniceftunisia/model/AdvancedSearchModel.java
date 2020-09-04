@@ -14,8 +14,10 @@ import org.smartregister.uniceftunisia.util.AppConstants;
 import java.util.List;
 import java.util.Map;
 
+import static org.smartregister.child.util.Constants.KEY.FATHER_RELATIONAL_ID;
 import static org.smartregister.child.util.Constants.KEY.RELATIONALID;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.DOB;
+import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FATHER_BASE_ENTITY_ID;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FIRST_NAME;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.GENDER;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.ID;
@@ -44,6 +46,7 @@ public class AdvancedSearchModel extends BaseChildAdvancedSearchModel {
                 AppConstants.KEY.ID_LOWER_CASE,
                 AppConstants.KEY.RELATIONALID,
                 AppConstants.KEY.RELATIONAL_ID,
+                AppConstants.KEY.FATHER_BASE_ENTITY_ID,
                 AppConstants.KEY.FIRST_NAME,
                 AppConstants.KEY.LAST_NAME,
                 AppConstants.KEY.GENDER,
@@ -83,6 +86,7 @@ public class AdvancedSearchModel extends BaseChildAdvancedSearchModel {
                 getAllClientColumn(ID) + "as _id",
                 getChildDetailsColumn(RELATIONALID),
                 getChildDetailsColumn(RELATIONAL_ID),
+                getChildDetailsColumn(FATHER_RELATIONAL_ID),
                 getAllClientColumn(FIRST_NAME),
                 getAllClientColumn(LAST_NAME),
                 getAllClientColumn(GENDER),

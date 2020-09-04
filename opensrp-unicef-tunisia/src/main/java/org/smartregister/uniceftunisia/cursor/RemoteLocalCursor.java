@@ -5,6 +5,7 @@ import android.database.Cursor;
 import net.sqlcipher.InvalidRowColumnException;
 
 import org.smartregister.child.util.DBConstants;
+import org.smartregister.uniceftunisia.util.AppConstants;
 
 import timber.log.Timber;
 
@@ -21,12 +22,14 @@ public class RemoteLocalCursor {
     private String motherLastName;
     private String inactive;
     private String lostToFollowUp;
+    private String fatherBaseEntityId;
 
     public RemoteLocalCursor(Cursor cursor) {
         try {
             id = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.ID_LOWER_CASE));
             relationalId = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.RELATIONALID));
             motherBaseEntityId = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.RELATIONAL_ID));
+            fatherBaseEntityId = cursor.getString(cursor.getColumnIndex(AppConstants.KEY.FATHER_BASE_ENTITY_ID));
             firstName = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.FIRST_NAME));
             lastName = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.LAST_NAME));
             dob = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.DOB));
@@ -92,6 +95,10 @@ public class RemoteLocalCursor {
 
     public String getMotherBaseEntityId() {
         return motherBaseEntityId;
+    }
+
+    public String getFatherBaseEntityId() {
+        return fatherBaseEntityId;
     }
 
 }

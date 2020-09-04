@@ -260,7 +260,6 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
             intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
             activity.startActivityForResult(intent, JsonFormUtils.REQUEST_CODE_GET_JSON);
-
         } catch (Exception e) {
             Timber.e(e);
         }
