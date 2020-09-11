@@ -44,15 +44,5 @@
         <!-- item size in menu-->
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.AppBarOverlay.NavigationDrawerStyle">
-        <item name="android:textSize">20sp</item>
-        <!-- text size in menu-->
-        <item name="android:listPreferredItemHeightSmall">70dp</item>
-        <!-- item size in menu-->
-    </style>
 
-    <style name="switchTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorControlActivated">@color/white</item>
-        <item name="colorSwitchThumbNormal">@color/white_dark</item>
-    </style>
 </resources>

@@ -11,104 +11,17 @@
     <string name="side_nav_add">Ajouter un nouvel enfant</string>
     <string name="side_nav_out_of_catchment">Enregistrer la vaccination de captage</string>
     <string name="nav_register">Registre</string>
-    <string name="attribution_text">Alimenté par OpenSRP</string>
     <string name="show_password_text">Montrer le mot de passe</string>
     <string name="app_version">Version de l\'application: %1$s (construit %2$s)</string>
     <string name="login_text">S\'identifier</string>
     <string name="log_out_text">Connectez - Out</string>
 
-    <string name="english">English</string>
-    <string name="french">Français</string>
-    <string name="arabic">عربى</string>
-
-    <string name="nav_logo" translatable="false">Unicef-Tunisia</string>
     <string name="title_activity_child_immunization">ChildImmunizationActivity</string>
 
-    <string name="error_code">Erreur: %1$s</string>
-    <string name="something_went_wrong">Quelque chose a mal tourné&#8230;</string>
-
-
-    <string name="install">Installer</string>
-
-    <string name="activate">Activer</string>
-
-    <string name="alert">Alerte</string>
-
-    <string name="card_not_registered">Cette carte n’est pas enregistrée&#8230;</string>
-
-    <string name="successfully_updated_card">Mise à jour de la carte effectué&#8230;</string>
-
-    <string name="card_already_registered">Cette carte est déjà enregistré&#8230;</string>
-
-    <string name="card_no">No. de carte %1$s </string>
-
-    <string name="no_information_on_card"> Aucun données sur la carte. La carte n’a pas de stockage pour cette application</string>
-
-    <string name="the_card_is_full">La carte est pleine et inutilisable. Veuillez enregistrer une autre carte</string>
-
-    <string name="there_is_an_error_with_record"> Il y a un erreur avec le fichier. Veuillez contacter le soutien technique avec le code d’erreur  %1$s %2$s %3$s et l’ID du client</string>
-
-    <string name="the_operation_was_cancelled">L’Opération était annulé. Veuillez essayer de nouveau</string>
-
-    <string name="the_operation_failed">Opération échouée. Veuillez essayer de nouveau. Veuillez contacter le soutien technique avec le code d’erreur %1$s %2$s %3$s</string>
-
-    <string name="this_card_is_invalid">Cette carte est invalide. Veuillez utiliser une autre carte.</string>
-
-    <string name="new_child_record">Nouveau fichier d’enfant </string>
-
-    <string name="no_child_record_found"> Aucun fichier spécifique à cette carte retrouvé sur l’appareil, voudriez vous créer un fichier?</string>
-
-    <string name="operation_not_allowed">Opération non-permis</string>
-
-    <string name="store_already_exists">Stockage existe déjà</string>
-
-    <string name="store_does_not_exist">Stockage n’existe pas</string>
-
-    <string name="store_full">Stockage remplis</string>
-
-    <string name="operation_Cancelled">Opération annulée</string>
 
     <string name="authentication_failed">Authentification échouée</string>
 
-    <string name="sdk_is_not_configured">SDK non-configurée</string>
-
-    <string name="operation_failed">Opération échouée</string>
-
-    <string name="authentication_method_not_supported">Méthode d’authentification non-supportée</string>
-
-    <string name="read_card_write_timed_out">Lecture/écriture de la carte a éxcédée le temps imparti</string>
-
-    <string name="unable_to_read_card">Impossible de lire la carte</string>
-
-    <string name="not_a_valid_card">Carte non-valide</string>
-
-    <string name="key_expired">Clé périmé</string>
-
-    <string name="Key_validation_error">Erreur de validation du clé</string>
-
-    <string name="incorrect_key">Clé éronné</string>
-
-    <string name="key_revoked">Clé révoqué</string>
-
-    <string name="application_ey_mismatch">Inadéquation de l’application et le clé</string>
-
-    <string name="not_found">Non-retrouvé</string>
-
-    <string name="record_data_exceeds_limit">Données appartenant au fichier dépassent la limite</string>
-
-    <string name="partially_successful">Partiellement réussi</string>
-
-    <string name="user_authentication_failed">Autentification d’utilisateur échouée</string>
-
-    <string name="new_card_registration">Enregistrement d’une nouvelle carte</string>
-
-    <string name="no_child_registration_found">Aucune carte associée avec l’enfant sur cet appareil, voudriez vous enregistrer une carte?</string>
-
     <string name="reset_card">Réinitialiser la carte</string>
-
-    <string name="are_you_sure_reset_card">Êtes-vous certain de vouloir réinitialiser la carte? \n\nCette action NE PEUT ËTRE reprise&#8230;</string>
-
-    <string name="arabic_not_supported">Vaccination en Arabe n’est pas supportée dans cette version</string>
 
     <!-- Immunization Names-->
     <string name="bcg">BCG</string>
@@ -132,35 +45,8 @@
     <string name="mr_2">RR 2</string>
     <string name="vit_a_1">Vit A 6 Mois</string>
     <string name="vit_a_2">Vit A 12 Mois</string>
-    <string name="mv_1">MV 1</string>
-    <string name="mv_2">MV 2</string>
-    <string name="mv_3">MV 3</string>
-    <string name="mv_4">MV 4</string>
 
     <string name="reports">Rapports</string>
-    <string name="nav_registers">Registres</string>
-    <string name="menu_child_clients">Dossiers des enfants</string>
-    <string name="log_out_as">Se déconnecter comme </string>
-    <string name="nav_last">Dernière: </string>
-
-
-    <string name="birth_registration_number">Nombre d\'enregistrement de naissance NRB de l\'enfant</string>
-    <string name="middle_name">Deuxième nom</string>
-    <string name="home_address">Le village</string>
-    <string name="village">Adresse lieu</string>
-    <string name="traditional_authority">Autorité traditionnelle</string>
-    <string name="nrc_number">Numéro d\'identification NRB de la mère / du tuteur</string>
-    <string name="protected_at_birth">Enfant protégé à la naissance contre le tétanos</string>
-    <string name="mother_hiv_status">Statut VIH de la mère</string>
-    <string name="child_hiv_status">Statut VIH de l\'enfant</string>
-    <string name="child_treatment">Indiquez si l\'enfant est sous CPT et/ou ART.</string>
-
-    <string name="second_phone_number">Numéro de téléphone alternatif</string>
-    <string name="Birth_Height">Hauteur de naissance (cm) </string>
-    <string name="Birth_Weight">Poids à la naissance (kg) </string>
-    <string name="zeir_id">Identifiant MER de l\'enfant</string>
-    <string name="child_reg">Nombre d\'enregistrement de l\'enfant</string>
-
 
 
     <string name="opensrp_url">https://unicef-tunisia-stage.smartregister.org/opensrp/</string>

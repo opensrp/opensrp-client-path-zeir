@@ -117,7 +117,7 @@ public class AppConstants {
     public static final class EventType {
         public static final String CHILD_REGISTRATION = "Birth Registration";
         public static final String UPDATE_CHILD_REGISTRATION = "Update Birth Registration";
-        public static final String OUT_OF_CATCHMENT = "out_of_catchment_service";
+        public static final String OUT_OF_CATCHMENT = "Out of Area Service";
         public static final String ADVERSE_EFFECTS = "adverse_effects";
     }
 

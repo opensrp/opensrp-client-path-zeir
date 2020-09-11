@@ -146,6 +146,10 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                             processEventClient(clientClassification, eventClient, event);
                         }
                         break;
+                    case Constants.EventType.DYNAMIC_VACCINES:
+                        if (clientClassification != null) {
+                            processEventClient(clientClassification, eventClient, event);
+                        }
                     case Constants.EventType.FATHER_REGISTRATION:
                     case Constants.EventType.BITRH_REGISTRATION:
                     case Constants.EventType.UPDATE_BITRH_REGISTRATION:

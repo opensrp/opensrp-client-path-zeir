@@ -1,0 +1,190 @@
+{
+  "count": "1",
+  "encounter_type": "dynamic_vaccines",
+  "entity_id": "",
+  "relational_id": "",
+  "validate_on_submit": true,
+  "show_errors_on_submit": true,
+  "metadata": {
+    "start": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "start",
+      "openmrs_entity_id": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "end": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "end",
+      "openmrs_entity_id": "163138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "today": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "encounter",
+      "openmrs_entity_id": "encounter_date"
+    },
+    "deviceid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "deviceid",
+      "openmrs_entity_id": "163149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "subscriberid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "subscriberid",
+      "openmrs_entity_id": "163150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "simserial": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "simserial",
+      "openmrs_entity_id": "163151AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "phonenumber": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "phonenumber",
+      "openmrs_entity_id": "163152AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "encounter_location": "",
+    "look_up": {
+      "entity_id": "",
+      "value": ""
+    }
+  },
+  "step1": {
+    "title": "Record Private Sector Vaccines",
+    "fields": [
+      {
+        "key": "private_sector_vaccine",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "private_sector_vaccine",
+        "buttonText": "+ Add vaccine",
+        "sort": true,
+        "dialogTitle": "Private sector vaccine given",
+        "searchHint": "Type vaccine name",
+        "options": [
+          {
+            "key": "550024",
+            "text": "550024 - TETRAXIM Susp. Inj. Bt 1Ser/0.5ml/1Dose (F)",
+            "property": {}
+          },
+          {
+            "key": "550027",
+            "text": "550027 - PRIORIX Pdre.Prep.Inj. Bt 1Fl + Ser. / 0.5ml + 2 Needles (F)",
+            "property": {}
+          },
+          {
+            "key": "550030",
+            "text": "550030 - VAXIGRIP Sol.Inj. Bt 1Ser./0.5ml (F)",
+            "property": {}
+          },
+          {
+            "key": "550045",
+            "text": "550045 - HAVRIX 720 Pediatric Susp.Inj. Bt 1Ser./1Dose (F)",
+            "property": {}
+          },
+          {
+            "key": "550088",
+            "text": "550088 - PENTAXIM BOX / 1 SYRINGE / 1 DOSE",
+            "property": {
+            }
+          },
+          {
+            "key": "551054",
+            "text": " 551054 - DULTAVAX Susp. Inj. Bt 1Ser. Pre-filled / 0.5ml (F)",
+            "property": {}
+          },
+          {
+            "key": "551298",
+            "text": "551298 - MOVAX POLIO Susp.Inj. Bt 1Ser./1Dose 0.5ml (F)",
+            "property": {}
+          },
+          {
+            "key": "551299",
+            "text": "551299 - TYPHIM VI Sol.Inj. Bt 1Ser./0.5ml/1Dose(F) ",
+            "property": {}
+          },
+          {
+            "key": "551300",
+            "text": "551300 - ANTITETANIC VACCINE (TETANIC ANATOXIN ADSORB) Inj. Bt 1Amp / 1Dose (F)",
+            "property": {}
+          },
+          {
+            "key": "551311",
+            "text": "551311 - VACCIN BCG Lyophilise Intradermique Pdre. P. Prep. Inj. Bt 1Fl+1Fl. Solv/2ml (F)",
+            "property": {}
+          },
+          {
+            "key": "551313",
+            "text": "551313 - SYNFLORIX Susp.Inj. Bt 1Dose (F)",
+            "property": {}
+          },
+          {
+            "key": "551317",
+            "text": "551317 - PREVENAR 13 Susp.Inj. Bt 1Fl / 0.5ml (F)",
+            "property": {}
+          },
+          {
+            "key": "551364",
+            "text": "551364 - HAEMOPHILUS INFLUENZAE TYPE B CONJUGATE VACCINE \nInj. Fl 1 Dose vial plus diluent/thinner",
+            "property": {}
+          },
+          {
+            "key": "551372",
+            "text": "551372 - ROTARIX oral suspension in pre-filled oral applicator (1 Dose/1.5ml) (F)",
+            "property": {}
+          },
+          {
+            "key": "551380",
+            "text": "551380 - HEPATITIS-B (rDNA) Ped. 10µg Susp.Inj. Bt 1Fl/1Dose/0.5ml (F)",
+            "property": {}
+          },
+          {
+            "key": "551402",
+            "text": "551402 - HEXAXIM Susp. Inj. Bt 1Ser Pre-filled /0.5ml (F",
+            "property": {}
+          },
+          {
+            "key": "551405",
+            "text": "551405 - PNEUMOVAX 23 Sol.Inj. Bt 1Ser./1Dose (F)",
+            "property": {}
+          },
+          {
+            "key": "551420",
+            "text": "551420 - NIMENRIX pdre / solv p sol \nPrep Inj. Bt 1 Fl 1Dose + Solv. (F) in pre-filled syringe",
+            "property": {}
+          },
+          {
+            "key": "551428",
+            "text": "551428 - BCG Vaccine Inj. Bt1/10 doses (F)",
+            "property": {}
+          },
+          {
+            "key": "551438",
+            "text": "551438 - GC FLU 1 pre-filled syringe (F)",
+            "property": {}
+          }
+        ],
+        "type": "multi_select_list"
+      },
+      {
+        "key": "private_sector_vaccine_date",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "private_sector_vaccine_date",
+        "openmrs_data_type": "date",
+        "type": "date_picker",
+        "hint": "Date vaccine given",
+        "expanded": false,
+        "max_date": "today",
+        "v_required": {
+          "value": "true",
+          "err": "Please enter date the vaccine was given"
+        }
+      }
+    ]
+  }
+}

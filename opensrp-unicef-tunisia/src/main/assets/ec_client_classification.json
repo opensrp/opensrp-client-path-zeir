@@ -60,6 +60,13 @@
               "ec_client",
               "ec_child_details"
             ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "dynamic_vaccines",
+            "creates_case": [
+              "ec_dynamic_vaccines"
+            ]
           }
         ]
       }

@@ -38,7 +38,6 @@
                     android:src="@drawable/illustration_report_empty_state" />
 
                 <TextView
-                    android:id="@+id/empty_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/illustration"
@@ -54,7 +53,6 @@
     </FrameLayout>
 
     <LinearLayout
-        android:id="@+id/start_report_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="2dp"

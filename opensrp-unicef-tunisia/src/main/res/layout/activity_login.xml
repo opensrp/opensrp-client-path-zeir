@@ -44,7 +44,6 @@
                     app:srcCompat="@drawable/logo_tunisia_moh" />
 
                 <TextView
-                    android:id="@+id/app_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"

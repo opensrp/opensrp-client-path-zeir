@@ -80,12 +80,12 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
         overflow.findItem(org.smartregister.child.R.id.register_card).setVisible(false);
         overflow.findItem(org.smartregister.child.R.id.write_to_card).setVisible(false);
         overflow.findItem(org.smartregister.child.R.id.recurring_services_data).setVisible(false);
+        overflow.findItem(org.smartregister.child.R.id.record_dynamic_vaccines).setVisible(true);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
         detailsMap = ChildDbUtils.fetchChildDetails(getChildDetails().entityId());
         detailsMap.putAll(ChildDbUtils.fetchChildFirstGrowthAndMonitoring(getChildDetails().entityId()));
 
@@ -145,7 +145,9 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
                 return true;
             case R.id.report_adverse_event:
                 return launchAdverseEventForm();
-
+            case R.id.record_dynamic_vaccines:
+                 launchDynamicVaccinesForm(Constants.JSON_FORM.DYNAMIC_VACCINES);
+                 return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.

@@ -47,7 +47,6 @@
               >
 
                 <TextView
-                    android:id="@+id/app_logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
@@ -73,7 +72,6 @@
                         android:gravity="center"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:text="MM"
                         android:textColor="@color/colorPrimary"
                         android:textSize="48dp" />
 
@@ -132,7 +130,6 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/language"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -303,7 +300,6 @@
                         android:src="@drawable/ic_daily_tallies" />
 
                     <org.smartregister.view.customcontrols.CustomFontTextView
-                        android:id="@+id/report_text_view"
                         style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -335,7 +331,6 @@
                         android:src="@mipmap/ic_card_white" />
 
                     <org.smartregister.view.customcontrols.CustomFontTextView
-                        android:id="@+id/scan_card_text_view"
                         style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

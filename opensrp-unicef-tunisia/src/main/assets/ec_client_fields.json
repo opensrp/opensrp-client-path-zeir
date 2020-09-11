@@ -74,21 +74,6 @@
           }
         },
         {
-          "column_name": "national_id",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "163084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-          }
-        },
-        {
-          "column_name": "national_id",
-          "type": "Client",
-          "json_mapping": {
-            "field": "attributes.national_id"
-          }
-        },
-        {
           "column_name": "phone_number",
           "type": "Client",
           "json_mapping": {
@@ -379,6 +364,41 @@
           "type": "Client",
           "json_mapping": {
             "field": "attributes.dateRemoved"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ec_dynamic_vaccines",
+      "columns": [
+        {
+          "column_name": "entity_id",
+          "type": "Event",
+          "json_mapping": {
+            "field": "baseEntityId"
+          }
+        },
+        {
+          "column_name": "base_entity_id",
+          "type": "Event",
+          "json_mapping": {
+            "field": "formSubmissionId"
+          }
+        },
+        {
+          "column_name": "private_sector_vaccine",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "private_sector_vaccine"
+          }
+        },
+        {
+          "column_name": "private_sector_vaccine_date",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "private_sector_vaccine_date"
           }
         }
       ]

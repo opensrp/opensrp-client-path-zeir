@@ -1,46 +1,19 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="login_font_size">10sp</dimen>
-    <dimen name="login_build_version_font_size">14sp</dimen>
 
     <dimen name="custom_navigation_icon_size">35dp</dimen>
     <dimen name="table_contents_text_size">22sp</dimen>
     <dimen name="register_link_width">85dp</dimen>
     <dimen name="register_link_height">85dp</dimen>
     <dimen name="divider_margin">27dp</dimen>
-    <dimen name="drawer_margin">32dp</dimen>
     <dimen name="login_logo_top_padding">256dp</dimen>
-    <dimen name="login_build_version_margin_bottom">32dp</dimen>
 
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="nav_header_vertical_spacing">16dp</dimen>
-    <dimen name="nav_header_height">160dp</dimen>
-    <dimen name="root_padding">25dp</dimen>
-    <dimen name="card_padding">10dp</dimen>
-    <dimen name="cardheight">230dip</dimen>
-    <dimen name="cardelevation">3dp</dimen>
-    <dimen name="fivedp">5dp</dimen>
-    <dimen name="tickdimen">50dp</dimen>
-    <dimen name="sixtydimen">60dp</dimen>
-    <dimen name="tickwidthdimen">75dp</dimen>
-    <dimen name="tickwidthhundred">100dp</dimen>
-    <dimen name="fortydimen">30dp</dimen>
-    <dimen name="title_text">18sp</dimen>
-    <dimen name="large_text">24sp</dimen>
-    <dimen name="subtitle_text">14sp</dimen>
-
-    <dimen name="small_text">12sp</dimen>
-    <dimen name="cell_height">40dp</dimen>
-    <dimen name="row_header_width">55dp</dimen>
-    <dimen name="text_size">12sp</dimen>
 
     <!-- Material Design TableView dimensions -->
-    <dimen name="md_cell_height">40dp</dimen>
-    <dimen name="md_cell_text_size">13sp</dimen>
-    <dimen name="md_column_header_text_size">13sp</dimen>
-    <dimen name="md_column_header_gap_size">28dp</dimen>
 
     <!-- ANC REGISTER SEARCH BAR -->
     <dimen name="register_search_bar_min_margin">20dp</dimen>
@@ -51,10 +24,7 @@
     <dimen name="checkbox_margin_top">10dp</dimen>
 
     <dimen name="login_logo_height">190dp</dimen>
-    <dimen name="login_logo_width">190dp</dimen>
 
-    <dimen name="sync_time_padding_right">20dp</dimen>
-    <dimen name="sync_time_padding">15dp</dimen>
     <dimen name="login_horizontal_margin">16dp</dimen>
     <dimen name="login_mid_section_horizontal_margin">32dp</dimen>
 
