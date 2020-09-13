@@ -84,6 +84,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
 
     private static CommonFtsObject commonFtsObject;
     private static JsonSpecHelper jsonSpecHelper;
+    private ClientProcessorForJava clientProcessorForJava;
 
     private EventClientRepository eventClientRepository;
     private HIA2IndicatorsRepository hia2IndicatorsRepository;
@@ -367,7 +368,10 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     @NotNull
     @Override
     public ClientProcessorForJava getClientProcessor() {
-        return AppClientProcessorForJava.getInstance(this);
+        if (clientProcessorForJava == null) {
+            clientProcessorForJava = new AppClientProcessorForJava(getApplicationContext());
+        }
+        return clientProcessorForJava;
     }
 
     @Override

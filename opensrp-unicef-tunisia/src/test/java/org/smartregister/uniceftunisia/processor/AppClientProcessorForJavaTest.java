@@ -87,7 +87,7 @@ public class AppClientProcessorForJavaTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        processorForJava = Mockito.spy(AppClientProcessorForJava.getInstance(Mockito.mock(Context.class)));
+        processorForJava = Mockito.spy(new AppClientProcessorForJava(Mockito.mock(Context.class)));
     }
 
     @Test

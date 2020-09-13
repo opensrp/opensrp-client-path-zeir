@@ -22,7 +22,6 @@ import org.smartregister.domain.db.Client;
 import org.smartregister.domain.db.Event;
 import org.smartregister.domain.db.EventClient;
 import org.smartregister.domain.jsonmapping.ClientClassification;
-import org.smartregister.domain.jsonmapping.ClientField;
 import org.smartregister.domain.jsonmapping.Column;
 import org.smartregister.domain.jsonmapping.Table;
 import org.smartregister.growthmonitoring.domain.Height;
@@ -57,19 +56,19 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 
 import timber.log.Timber;
 
 public class AppClientProcessorForJava extends ClientProcessorForJava {
 
-    private static AppClientProcessorForJava instance;
-
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
     private HashMap<String, MiniClientProcessorForJava> processorMap = new HashMap<>();
     private HashMap<MiniClientProcessorForJava, List<Event>> unsyncEventsPerProcessor = new HashMap<>();
     private AppExecutors appExecutors = new AppExecutors();
     private HashMap<String, DateTime> clientsForAlertUpdates = new HashMap<>();
 
-    private AppClientProcessorForJava(Context context) {
+    public AppClientProcessorForJava(Context context) {
         super(context);
     }
 
@@ -85,15 +84,8 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         }
     }
 
-    public static AppClientProcessorForJava getInstance(Context context) {
-        if (instance == null) {
-            instance = new AppClientProcessorForJava(context);
-        }
-        return instance;
-    }
-
     @Override
-    public void processClient(List<EventClient> eventClients) throws Exception {
+    public void processClient(List<EventClient> eventClients) {
         ClientClassification clientClassification = assetJsonToJava("ec_client_classification.json",
                 ClientClassification.class);
         Table vaccineTable = assetJsonToJava("ec_client_vaccine.json", Table.class);
@@ -175,9 +167,6 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 }
             }
 
-
-            // Unsync events that are should not be in this device
-            processUnsyncEvents(unsyncEvents);
             // Process alerts for clients
             Runnable runnable = () -> updateClientAlerts(clientsForAlertUpdates);
 
@@ -215,23 +204,11 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         return false;
     }
 
-    private void processUnsyncEvents(@NonNull List<Event> unsyncEvents) {
-        if (!unsyncEvents.isEmpty()) {
-            unSync(unsyncEvents);
-        }
-
-        for (MiniClientProcessorForJava miniClientProcessorForJava : unsyncEventsPerProcessor.keySet()) {
-            List<Event> processorUnsyncEvents = unsyncEventsPerProcessor.get(miniClientProcessorForJava);
-            miniClientProcessorForJava.unSync(processorUnsyncEvents);
-        }
-    }
-
     private void processChildRegistrationAndRelatedEvents(@NonNull ClientClassification clientClassification, @NonNull EventClient eventClient, @NonNull Event event) {
         Client client = eventClient.getClient();
         if (client != null) {
             try {
                 processEvent(event, client, clientClassification);
-
                 scheduleUpdatingClientAlerts(client.getBaseEntityId(), client.getBirthdate());
             } catch (Exception e) {
                 Timber.e(e);
@@ -252,12 +229,8 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         }
     }
 
-    private void processWeightEvent(Table weightTable, Table heightTable, EventClient eventClient, String eventType) throws Exception {
-        if (weightTable == null) {
-            return;
-        }
-
-        if (heightTable == null) {
+    private void processWeightEvent(Table weightTable, Table heightTable, EventClient eventClient, String eventType) {
+        if (weightTable == null || heightTable == null) {
             return;
         }
 
@@ -267,45 +240,36 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 eventType.equals(HeightIntentService.EVENT_TYPE_OUT_OF_CATCHMENT));
     }
 
-    private void processVaccinationEvent(Table vaccineTable, EventClient eventClient, Event event, String eventType) throws Exception {
-        if (vaccineTable == null) {
+    private void processVaccinationEvent(Table vaccineTable, EventClient eventClient, Event event, String eventType) {
+        if (vaccineTable == null || eventClient.getClient() == null) {
             return;
         }
 
         Client client = eventClient.getClient();
-        if (!childExists(client.getBaseEntityId())) {
+
+        if ( UnicefTunisiaApplication.getInstance().eventClientRepository().checkIfExists(
+                EventClientRepository.Table.client, client.getBaseEntityId())) {
             List<String> createCase = new ArrayList<>();
             createCase.add(Utils.metadata().childRegister.tableName);
             processCaseModel(event, client, createCase);
-        }
-
-        processVaccine(eventClient, vaccineTable,
-                eventType.equals(VaccineIntentService.EVENT_TYPE_OUT_OF_CATCHMENT));
-
-        scheduleUpdatingClientAlerts(client.getBaseEntityId(), client.getBirthdate());
+            processVaccine(eventClient, vaccineTable, eventType.equals(VaccineIntentService.EVENT_TYPE_OUT_OF_CATCHMENT));
+            scheduleUpdatingClientAlerts(client.getBaseEntityId(), client.getBirthdate());
+        }      
     }
 
-    private boolean childExists(String entityId) {
-        return UnicefTunisiaApplication.getInstance().eventClientRepository().checkIfExists(EventClientRepository.Table.client, entityId);
-    }
-
-    private Boolean processVaccine(@Nullable EventClient vaccine, @Nullable Table vaccineTable, boolean outOfCatchment) throws Exception {
+    private void processVaccine(@Nullable EventClient vaccine, @Nullable Table vaccineTable, boolean outOfCatchment) {
         try {
-            if (vaccine == null || vaccine.getEvent() == null) {
-                return false;
+            if (vaccine == null || vaccine.getEvent() == null || vaccineTable == null) {
+                return;
             }
 
-            if (vaccineTable == null) {
-                return false;
-            }
-
-            Timber.d("Starting processVaccine table: %s", vaccineTable.name);
+            Timber.i("Starting processVaccine table: %s", vaccineTable.name);
 
             ContentValues contentValues = processCaseModel(vaccine, vaccineTable);
 
             // save the values to db
             if (contentValues != null && contentValues.size() > 0) {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat simpleDateFormat = this.simpleDateFormat;
                 Date date = simpleDateFormat.parse(contentValues.getAsString(VaccineRepository.DATE));
 
                 VaccineRepository vaccineRepository = UnicefTunisiaApplication.getInstance().vaccineRepository();
@@ -329,29 +293,23 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
 
                 Utils.addVaccine(vaccineRepository, vaccineObj);
 
-                Timber.d("Ending processVaccine table: %s", vaccineTable.name);
+                Timber.i("Ending processVaccine table: %s", vaccineTable.name);
             }
-            return true;
 
         } catch (Exception e) {
             Timber.e(e, "Process Vaccine Error");
-            return null;
         }
     }
 
-    private Boolean processWeight(EventClient weight, Table weightTable, boolean outOfCatchment) throws Exception {
+    private void processWeight(EventClient weight, Table weightTable, boolean outOfCatchment) {
 
         try {
 
-            if (weight == null || weight.getEvent() == null) {
-                return false;
+            if (weight == null || weight.getEvent() == null || weightTable == null) {
+                return;
             }
 
-            if (weightTable == null) {
-                return false;
-            }
-
-            Timber.d("Starting processWeight table: %s", weightTable.name);
+            Timber.i("Starting processWeight table: %s", weightTable.name);
 
             ContentValues contentValues = processCaseModel(weight, weightTable);
 
@@ -387,29 +345,23 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
 
                 weightRepository.add(weightObj);
 
-                Timber.d("Ending processWeight table: %s", weightTable.name);
+                Timber.i("Ending processWeight table: %s", weightTable.name);
             }
-            return true;
 
         } catch (Exception e) {
             Timber.e(e, "Process Weight Error");
-            return null;
         }
     }
 
-    private Boolean processHeight(@Nullable EventClient height, @Nullable Table heightTable, boolean outOfCatchment) {
+    private void processHeight(@Nullable EventClient height, @Nullable Table heightTable, boolean outOfCatchment) {
 
         try {
 
-            if (height == null || height.getEvent() == null) {
-                return false;
+            if (height == null || height.getEvent() == null || heightTable == null) {
+                return;
             }
 
-            if (heightTable == null) {
-                return false;
-            }
-
-            Timber.d("Starting processWeight table: %s", heightTable.name);
+            Timber.i("Starting processWeight table: %s", heightTable.name);
 
             ContentValues contentValues = processCaseModel(height, heightTable);
 
@@ -445,27 +397,21 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
 
                 heightRepository.add(heightObject);
 
-                Timber.d("Ending processWeight table: %s", heightTable.name);
+                Timber.i("Ending processWeight table: %s", heightTable.name);
             }
-            return true;
 
         } catch (Exception e) {
             Timber.e(e, "Process Height Error");
-            return null;
         }
     }
 
-    private Boolean processService(EventClient service, Table serviceTable) {
+    private void processService(EventClient service, Table serviceTable) {
         try {
-            if (service == null || service.getEvent() == null) {
-                return false;
+            if (service == null || service.getEvent() == null || serviceTable == null) {
+                return;
             }
 
-            if (serviceTable == null) {
-                return false;
-            }
-
-            Timber.d("Starting processService table: %s", serviceTable.name);
+            Timber.i("Starting processService table: %s", serviceTable.name);
 
             ContentValues contentValues = processCaseModel(service, serviceTable);
 
@@ -479,7 +425,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 String value = null;
 
                 if (StringUtils.containsIgnoreCase(name, "ITN")) {
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat simpleDateFormat = this.simpleDateFormat;
                     String itnDateString = contentValues.getAsString("itn_date");
                     if (StringUtils.isNotBlank(itnDateString)) {
                         date = simpleDateFormat.parse(itnDateString);
@@ -490,23 +436,16 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 }
 
                 List<ServiceType> serviceTypeList = getServiceTypes(name);
-                if (serviceTypeList == null || serviceTypeList.isEmpty()) {
-                    return false;
+                if (serviceTypeList == null || serviceTypeList.isEmpty() || date == null) {
+                    return;
                 }
-
-                if (date == null) {
-                    return false;
-                }
-
+                
                 recordServiceRecord(service, contentValues, name, date, value, serviceTypeList);
-
-                Timber.d("Ending processService table: %s", serviceTable.name);
+                Timber.i("Ending processService table: %s", serviceTable.name);
             }
-            return true;
 
         } catch (Exception e) {
             Timber.e(e, "Process Service Error");
-            return null;
         }
     }
 
@@ -536,7 +475,6 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         String createdAtString = contentValues.getAsString(RecurringServiceRecordRepository.CREATED_AT);
         Date createdAt = getDate(createdAtString);
         serviceObj.setCreatedAt(createdAt);
-
         recurringServiceRecordRepository.add(serviceObj);
     }
 
@@ -560,23 +498,6 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         }
 
         ChildDbUtils.updateChildDetailsValue(Constants.SHOW_BCG_SCAR, String.valueOf(date), baseEntityId);
-    }
-
-    private boolean unSync(List<Event> events) {
-        try {
-
-            if (events == null || events.isEmpty()) {
-                return false;
-            }
-
-            ClientField clientField = assetJsonToJava("ec_client_fields.json", ClientField.class);
-            return clientField != null;
-
-        } catch (Exception e) {
-            Timber.e(e);
-        }
-
-        return false;
     }
 
     @VisibleForTesting
@@ -610,11 +531,11 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         Date date = null;
         if (StringUtils.isNotBlank(eventDateStr)) {
             try {
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ");
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", Locale.getDefault());
                 date = dateFormat.parse(eventDateStr);
             } catch (ParseException e) {
                 try {
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault());
                     date = dateFormat.parse(eventDateStr);
                 } catch (ParseException pe) {
                     try {
@@ -657,7 +578,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
     @Override
     public void updateFTSsearch(String tableName, String entityId, ContentValues contentValues) {
 
-        Timber.d("Starting updateFTSsearch table: %s", tableName);
+        Timber.i("Starting updateFTSsearch table: %s", tableName);
 
         AllCommonsRepository allCommonsRepository = UnicefTunisiaApplication.getInstance().context().
                 allCommonsRepositoryobjects(tableName);
@@ -679,7 +600,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
             }
         }
 
-        Timber.d("Finished updateFTSsearch table: %s", tableName);
+        Timber.i("Finished updateFTSsearch table: %s", tableName);
     }
 
     @Override

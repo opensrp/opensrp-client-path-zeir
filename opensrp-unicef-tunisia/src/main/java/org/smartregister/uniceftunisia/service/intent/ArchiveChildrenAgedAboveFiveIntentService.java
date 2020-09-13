@@ -1,7 +1,7 @@
 package org.smartregister.uniceftunisia.service.intent;
 
 import org.smartregister.child.service.intent.ArchiveClientRecordIntentService;
-import org.smartregister.uniceftunisia.dao.ChildDao;
+import org.smartregister.uniceftunisia.dao.AppChildDao;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class ArchiveChildrenAgedAboveFiveIntentService extends ArchiveClientReco
 
     @Override
     protected List<String> getClientIdsToArchive() {
-        return ChildDao.getChildrenAboveFiveYears();
+        return AppChildDao.getChildrenAboveFiveYears();
     }
 
     @Override

@@ -1,11 +1,11 @@
 package org.smartregister.uniceftunisia.dao;
 
-import org.smartregister.dao.AbstractDao;
+import org.smartregister.child.dao.ChildDao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChildDao extends AbstractDao {
+public class AppChildDao extends ChildDao {
 
     public static boolean isPrematureBaby(String baseEntityID) {
         String sql = String.format("SELECT count(*) count\n" +

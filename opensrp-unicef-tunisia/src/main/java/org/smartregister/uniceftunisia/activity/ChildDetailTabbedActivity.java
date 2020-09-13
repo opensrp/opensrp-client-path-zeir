@@ -146,8 +146,12 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
             case R.id.report_adverse_event:
                 return launchAdverseEventForm();
             case R.id.record_dynamic_vaccines:
-                 launchDynamicVaccinesForm(Constants.JSON_FORM.DYNAMIC_VACCINES);
-                 return true;
+                if (getExtraChildVaccines().size() < 10) {
+                    launchDynamicVaccinesForm(Constants.JSON_FORM.DYNAMIC_VACCINES, Constants.KEY.PRIVATE_SECTOR_VACCINE);
+                } else {
+                    Utils.showToast(this, getString(R.string.maximum_extra_vaccines_reached));
+                }
+                return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
@@ -191,7 +195,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
 
             intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
             intent.putExtra(JsonFormConstants.JSON_FORM_KEY.JSON, formData);
-            intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION,  true);
+            intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
             startActivityForResult(intent, REQUEST_CODE_GET_JSON);
         } catch (JSONException e) {
             Timber.e(e);
@@ -200,16 +204,16 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
 
     private String obtainUpdatedForm(JSONObject formJson) throws JSONException {
         JSONArray fields = JsonFormUtils.fields(formJson);
-       for(int i = 0; i < fields.length(); i++) {
-           JSONObject field = fields.getJSONObject(i);
-           if (field != null && field.getString(JsonFormConstants.TYPE).equalsIgnoreCase(JsonFormConstants.DATE_PICKER)
-                   && !childDetails.getDetails().isEmpty() && childDetails.getDetails().containsKey(AppConstants.KEY.DOB)) {
-               Date date = Utils.dobStringToDate(childDetails.getDetails().get(AppConstants.KEY.DOB));
-               field.put(JsonFormConstants.MIN_DATE, new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date));
-               field.put(JsonFormConstants.MAX_DATE, AppConstants.KEY.TODAY);
-           }
-       }
-      return formJson.toString();
+        for (int i = 0; i < fields.length(); i++) {
+            JSONObject field = fields.getJSONObject(i);
+            if (field != null && field.getString(JsonFormConstants.TYPE).equalsIgnoreCase(JsonFormConstants.DATE_PICKER)
+                    && !childDetails.getDetails().isEmpty() && childDetails.getDetails().containsKey(AppConstants.KEY.DOB)) {
+                Date date = Utils.dobStringToDate(childDetails.getDetails().get(AppConstants.KEY.DOB));
+                field.put(JsonFormConstants.MIN_DATE, new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date));
+                field.put(JsonFormConstants.MAX_DATE, AppConstants.KEY.TODAY);
+            }
+        }
+        return formJson.toString();
     }
 
     @Override
