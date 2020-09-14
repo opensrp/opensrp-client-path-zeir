@@ -241,20 +241,23 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
     }
 
     private void processVaccinationEvent(Table vaccineTable, EventClient eventClient, Event event, String eventType) {
-        if (vaccineTable == null || eventClient.getClient() == null) {
+        if (vaccineTable == null) {
             return;
         }
 
         Client client = eventClient.getClient();
-
-        if ( UnicefTunisiaApplication.getInstance().eventClientRepository().checkIfExists(
-                EventClientRepository.Table.client, client.getBaseEntityId())) {
+        if (!childExists(client.getBaseEntityId())) {
             List<String> createCase = new ArrayList<>();
             createCase.add(Utils.metadata().childRegister.tableName);
             processCaseModel(event, client, createCase);
-            processVaccine(eventClient, vaccineTable, eventType.equals(VaccineIntentService.EVENT_TYPE_OUT_OF_CATCHMENT));
-            scheduleUpdatingClientAlerts(client.getBaseEntityId(), client.getBirthdate());
-        }      
+        }
+
+        processVaccine(eventClient, vaccineTable, eventType.equals(VaccineIntentService.EVENT_TYPE_OUT_OF_CATCHMENT));
+        scheduleUpdatingClientAlerts(client.getBaseEntityId(), client.getBirthdate());
+    }
+
+    private boolean childExists(String entityId) {
+        return UnicefTunisiaApplication.getInstance().eventClientRepository().checkIfExists(EventClientRepository.Table.client, entityId);
     }
 
     private void processVaccine(@Nullable EventClient vaccine, @Nullable Table vaccineTable, boolean outOfCatchment) {
