@@ -17,7 +17,6 @@ import java.util.Map;
 import static org.smartregister.child.util.Constants.KEY.FATHER_RELATIONAL_ID;
 import static org.smartregister.child.util.Constants.KEY.RELATIONALID;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.DOB;
-import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FATHER_BASE_ENTITY_ID;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FIRST_NAME;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.GENDER;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.ID;

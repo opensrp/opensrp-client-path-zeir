@@ -21,17 +21,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.vijay.jsonwizard.activities.JsonFormActivity;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
-import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Hours;
 import org.joda.time.Minutes;
 import org.joda.time.Seconds;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.smartregister.child.ChildLibrary;
 import org.smartregister.child.util.Constants;
@@ -335,12 +332,10 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
                     String lang = adapter.getItem(i).toString().toLowerCase();
                     Locale LOCALE;
                     switch (lang) {
-                        case "english":
-                            LOCALE = Locale.ENGLISH;
-                            break;
                         case "français":
                             LOCALE = Locale.FRENCH;
                             break;
+                        case "عربى":
                         case "العربية":
                             LOCALE = new Locale(AppConstants.LOCALE.ARABIC_LOCALE);
                             languageSpinner.setSelection(i);
