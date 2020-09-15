@@ -1,53 +1,62 @@
 <resources>
-    <string name="app_name" translatable="false">Unicef-Tunisia</string>
-    <string name="action_settings" translatable="false">Settings</string>
-    <string name="sync" translatable="false">Sync</string>
-    <string name="action_log_out">Logging Out</string>
-    <string name="powered_by" translatable="false">Powered by</string>
-
+    <string name="action_log_out">Déconnecter</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="done">Terminé</string>
 
     <!-- Navigation Strings -->
     <string name="navigation_drawer_close">Fermer</string>
     <string name="side_nav_add">Ajouter un nouvel enfant</string>
-    <string name="side_nav_out_of_catchment">Enregistrer la vaccination de captage</string>
-    <string name="nav_register">Registre</string>
+    <string name="side_nav_out_of_catchment">Enregistrer la vaccination hors bassin</string>
+    <string name="nav_register">S\'inscrire</string>
     <string name="show_password_text">Montrer le mot de passe</string>
-    <string name="app_version">Version de l\'application: %1$s (construit %2$s)</string>
+    <string name="app_version">Version de l\'application %1$s (construit sur%2$s)</string>
     <string name="login_text">S\'identifier</string>
-    <string name="log_out_text">Connectez - Out</string>
+    <string name="log_out_text">Se déconnecter</string>
 
-    <string name="title_activity_child_immunization">ChildImmunizationActivity</string>
-
+    <string name="iz_id_hint">Numéro IDV</string>
 
     <string name="authentication_failed">Authentification échouée</string>
+    <!-- Override BCG 2 dialog text to read BCG Repeated Dose -->
+    <string name="create_reminder_label">Créer un rappel de dose répétée BCG?</string>
+    <string name="bcg_scar_not_present_label">L\'enfant n\'a pas de cicatrice BCG donc BCG 2 est necessaire.</string>
+    <string name="bcg_scar_present_label">Cicatrice de BCG est présent aucun BCG 2 necéssaire.</string>
 
-    <string name="reset_card">Réinitialiser la carte</string>
-
-    <!-- Immunization Names-->
+    <string name="ipv">VPI 1</string>
     <string name="bcg">BCG</string>
-    <string name="hepb">HepB à la naissance</string>
-    <string name="opv_0">Polio Oral 0</string>
-    <string name="opv_1">Polio Oral 1</string>
-    <string name="pcv_1">Pneumo 1</string>
-    <string name="penta_1">Penta 1</string>
-    <string name="rota_1">Rota virus 1</string>
-    <string name="opv_2">Polio Oral 2</string>
-    <string name="pcv_2">Pneumo 2</string>
-    <string name="penta_2">Penta 2</string>
-    <string name="rota_2">Rota virus 2</string>
-    <string name="opv_3">Polio Oral 3</string>
-    <string name="ipv">Polio Injectable</string>
-    <string name="pcv_3">Pneumo 3</string>
-    <string name="penta_3">Penta 3</string>
-    <string name="meningococcal">Men A</string>
-    <string name="yellow_fever">F. Jaune (VAA)</string>
-    <string name="mr_1">RR 1</string>
-    <string name="mr_2">RR 2</string>
-    <string name="vit_a_1">Vit A 6 Mois</string>
-    <string name="vit_a_2">Vit A 12 Mois</string>
 
+    <string name="due_only">Dû seulement</string>
+
+    <!-- Override labels in profile and immunization section -->
+    <string name="label_zeir">Numéro IDV</string>
+    <string name="system_id_colon">Numéro IDV:</string>
+    <string name="loading">Chargement</string>
+    <string name="please_wait_message">S\'il vous plaît, attendez</string>
     <string name="reports">Rapports</string>
 
+    <string name="indicator">Indicaor</string>
+    <string name="dismiss_lookup">Confirmer</string>
+    <string name="close">Fermer</string>
+    <string name="child_report_grouping_title">Enfant</string>
 
-    <string name="opensrp_url">https://unicef-tunisia-stage.smartregister.org/opensrp/</string>
+    <!-- Immunization Names-->
+    <string name="hepb">HBV</string>
+    <string name="opv_0">VPO 0</string>
+    <string name="opv_1">VPO 1</string>
+    <string name="pcv_1">PCV 1</string>
+    <string name="penta_1">Pentavalent 1</string>
+    <string name="opv_2">VPO 2</string>
+    <string name="pcv_2">PCV 2</string>
+    <string name="penta_2">Pentavalent 2</string>
+    <string name="opv_3">VPO 3</string>
+    <string name="pcv_3">PCV 3</string>
+    <string name="penta_3">Pentavalent 3 </string>
+    <string name="mr_1">RR 1</string>
+    <string name="mr_2">RR 2</string>
+
+    <string name="search_hint">Rechercher dans le registre</string>
+
+    <string name="child_birth_registration_number">Numéro d\'enregistrement de naissance de l\'enfant</string>
+    <string name="child_unique_id">Identifiant unique du citoyen</string>
+    <string name="mother_nationality_other">Indiquez la nationalité de la mère</string>
 </resources>
