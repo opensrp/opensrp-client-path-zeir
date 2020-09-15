@@ -30,7 +30,7 @@ public class ChildRegistrationDataFragment extends BaseChildRegistrationDataFrag
 
     @Override
     public String getRegistrationForm() {
-        return AppConstants.JSON_FORM.CHILD_ENROLLMENT;
+        return AppConstants.JsonForm.CHILD_ENROLLMENT;
     }
 
 

@@ -121,9 +121,10 @@ public class AppConstants {
         public static final String ADVERSE_EFFECTS = "adverse_effects";
     }
 
-    public static class JSON_FORM {
-        public static String CHILD_ENROLLMENT = "child_enrollment";
-        public static String OUT_OF_CATCHMENT_SERVICE = "out_of_catchment_service";
+    public interface JsonForm {
+        String DYNAMIC_VACCINES = "dynamic_vaccines";
+        String CHILD_ENROLLMENT = "child_enrollment";
+        String OUT_OF_CATCHMENT_SERVICE = "out_of_catchment_service";
     }
 
     public static class RELATIONSHIP {

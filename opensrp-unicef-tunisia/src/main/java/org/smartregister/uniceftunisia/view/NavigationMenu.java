@@ -244,7 +244,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
     private void startFormActivity(Activity activity) {
         try {
-            JSONObject formJson = new FormUtils(activity).getFormJson(AppConstants.JSON_FORM.OUT_OF_CATCHMENT_SERVICE);
+            JSONObject formJson = new FormUtils(activity).getFormJson(AppConstants.JsonForm.OUT_OF_CATCHMENT_SERVICE);
             JsonFormUtils.addAvailableVaccines(ChildLibrary.getInstance().context().applicationContext(), formJson);
 
             Form form = new Form();

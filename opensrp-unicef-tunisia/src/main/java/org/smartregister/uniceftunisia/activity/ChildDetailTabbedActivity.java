@@ -147,7 +147,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
                 return launchAdverseEventForm();
             case R.id.record_dynamic_vaccines:
                 if (getExtraChildVaccines().size() < 10) {
-                    launchDynamicVaccinesForm(Constants.JSON_FORM.DYNAMIC_VACCINES, Constants.KEY.PRIVATE_SECTOR_VACCINE);
+                    launchDynamicVaccinesForm(AppConstants.JsonForm.DYNAMIC_VACCINES, Constants.KEY.PRIVATE_SECTOR_VACCINE);
                 } else {
                     Utils.showToast(this, getString(R.string.maximum_extra_vaccines_reached));
                 }
