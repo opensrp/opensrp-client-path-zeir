@@ -214,8 +214,8 @@ dependencies {
         exclude group: 'com.rengwuxian.materialedittext', module: 'library'
     }
 
-//    implementation(project(':opensrp-child')) {
-    implementation('org.smartregister:opensrp-client-child:0.3.5-ALPHA1-SNAPSHOT@aar') {
+    implementation(project(':opensrp-child')) {
+//    implementation('org.smartregister:opensrp-client-child:0.3.5-ALPHA1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
