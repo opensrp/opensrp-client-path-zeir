@@ -11,7 +11,7 @@ description: Protected at birth
 priority: 1
 condition: "step1_mother_tdv_doses != ''"
 actions:
-  - "calculation = step1_mother_tdv_doses == '2+ doses of TDV during pregnancy' ? 'Yes' : 'No'"
+  - "calculation = step1_mother_tdv_doses == '2_plus_tdv_doses' ? 'Yes' : 'No'"
 ---
 name: step1_protected_at_birth
 description: Protected at birth display

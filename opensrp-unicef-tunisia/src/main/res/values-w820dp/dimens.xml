@@ -3,5 +3,4 @@
          (such as screen margins) for screens with more than 820dp of available width. This
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
 
-    <dimen name="login_build_version_font_size">22sp</dimen>
 </resources>

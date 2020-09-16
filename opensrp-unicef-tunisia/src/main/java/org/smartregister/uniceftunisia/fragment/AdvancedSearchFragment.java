@@ -166,11 +166,6 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
     }
 
     @Override
-    public void onClick(View view) {
-        view.toString();
-    }
-
-    @Override
     public void assignedValuesBeforeBarcode() {
         if (searchFormData.size() > 0) {
             firstName.setText(searchFormData.get(DBConstants.KEY.FIRST_NAME));

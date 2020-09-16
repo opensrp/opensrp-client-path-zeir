@@ -1,6 +1,6 @@
 {
   "count": "1",
-  "encounter_type": "Out of Catchment Service",
+  "encounter_type": "Out of Area Service",
   "entity_id": "",
   "metadata": {
     "start": {
@@ -47,7 +47,7 @@
     "encounter_location": ""
   },
   "step1": {
-    "title": "Out of Area Service",
+    "title": "{{out_of_catchment_service.step1.title}}",
     "fields": [
       {
         "key": "opensrp_id",
@@ -55,11 +55,11 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "edit_text",
-        "hint": "Unique ID",
+        "hint": "{{out_of_catchment_service.step1.opensrp_id.hint}}",
         "value": "",
         "v_required": {
           "value": "true",
-          "err": "Enter the card Id"
+          "err": "{{out_of_catchment_service.step1.opensrp_id.v_required.err}}"
         }
       },
       {
@@ -68,14 +68,15 @@
         "openmrs_entity": "encounter",
         "openmrs_entity_id": "encounter_date",
         "type": "date_picker",
-        "hint": "Date of Service",
+        "hint": "{{out_of_catchment_service.step1.OA_Service_Date.hint}}",
         "expanded": false,
         "max_date": "today",
         "v_required": {
           "value": "true",
-          "err": "Enter the date of service"
+          "err": "{{out_of_catchment_service.step1.OA_Service_Date.v_required.err}}"
         }
       }
     ]
-  }
+  },
+  "properties_file_name": "out_of_catchment_service"
 }

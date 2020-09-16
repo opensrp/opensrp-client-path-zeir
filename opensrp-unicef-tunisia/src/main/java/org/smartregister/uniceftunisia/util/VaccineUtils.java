@@ -4,11 +4,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.immunization.ImmunizationLibrary;
 import org.smartregister.immunization.domain.VaccineSchedule;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
-import org.smartregister.uniceftunisia.dao.ChildDao;
+import org.smartregister.uniceftunisia.dao.AppChildDao;
 
 public class VaccineUtils {
     public static void refreshImmunizationSchedules(String caseId) {
-        boolean prematureBaby = ChildDao.isPrematureBaby(caseId);
+        boolean prematureBaby = AppChildDao.isPrematureBaby(caseId);
         String conditionalVaccine = null;
 
         if (prematureBaby) {

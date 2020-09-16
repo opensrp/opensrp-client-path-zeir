@@ -1,6 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="action_settings" translatable="false">الإعدادات</string>
-    <string name="action_log_out">قطع</string>
+    <string name="action_log_out">تسجيل الخروج</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="password">كلمه السر</string>
+    <string name="done">منجز</string>
 
+    <!-- Navigation Strings -->
+    <string name="navigation_drawer_close">قريب</string>
+    <string name="side_nav_add">إضافة طفل جديد</string>
+    <string name="side_nav_out_of_catchment">سجل خارج مستجمعات التطعيم</string>
+    <string name="nav_register">تسجيل</string>
+    <string name="show_password_text">عرض كلمة المرور</string>
+    <string name="app_version">نسخة التطبيق%1$s(مبني عليه%2$s)</string>
+    <string name="login_text">تسجيل الدخول</string>
+    <string name="log_out_text">تسجيل خروج</string>
+
+    <string name="iz_id_hint">رقم IDV</string>
+
+    <string name="authentication_failed">المصادقة فشلت</string>
+    <!-- Override BCG 2 dialog text to read BCG Repeated Dose -->
+    <string name="create_reminder_label">إنشاء تذكير بجرعة BCG المتكررة؟</string>
+    <string name="bcg_scar_not_present_label">لا يعاني الطفل من ندبة لقاح عصية كالميت (BCG) لذا فإن الجرعة المتكررة من BCG ضرورية.</string>
+    <string name="bcg_scar_present_label">ندبة لقاح السل موجودة وبالتالي لقاح السل 2 غيرضروري</string>
+
+    <string name="bcg">لقاح الب.س.ج (ضد السل)</string>
+
+    <string name="due_only">المستحق فقط</string>
+
+    <!-- Override labels in profile and immunization section -->
+    <string name="label_zeir">رقم IDV</string>
+    <string name="system_id_colon">رقم IDV:</string>
+    <string name="loading">جار التحميل</string>
+    <string name="please_wait_message">ارجوك انتظر</string>
+    <string name="reports">التقارير</string>
+
+    <string name="indicator">إنديكور</string>
+    <string name="dismiss_lookup">تؤكد</string>
+    <string name="close">قريب</string>
+    <string name="child_report_grouping_title">طفل</string>
+
+    <string name="opv_1">اللقاح الفموي للشلل</string>
+    <string name="pcv_1">لقاح المكورات الرئوية</string>
+    <string name="penta_1">اللقاح الخماسي : ضد السعال الديكي و الكزاز و الخناق و إلتهاب الكبد الفيروسي \"ب\" و الهيموفيلوس</string>
+    <string name="opv_2">اللقاح الفموي للشلل</string>
+    <string name="pcv_2">لقاح المكورات الرئوية</string>
+    <string name="penta_2">اللقاح الخماسي</string>
+    <string name="pcv_3">لقاح المكورات الرئوية</string>
+    <string name="penta_3">اللقاح الخماسي</string>
+    <string name="mr_1">لقاح أول ضد الحصبة و الحميراء</string>
+    <string name="mr_2">لقاح ثاني ضد الحصبة و الحميراء</string>
+
+    <string name="search_hint">سجل البحث</string>
+
+    <string name="child_birth_registration_number">رقم تسحيل الطفل بالسجل المدني</string>
+    <string name="child_unique_id">المعرف الوحيد للمواطن</string>
 </resources>

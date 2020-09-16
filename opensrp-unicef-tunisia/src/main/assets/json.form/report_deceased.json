@@ -46,10 +46,8 @@
     },
     "encounter_location": ""
   },
-
-
   "step1": {
-    "title": "Report Death",
+    "title": "{{report_deceased.step1.title}}",
     "fields": [
       {
         "key": "Date_of_Death",
@@ -58,13 +56,13 @@
         "openmrs_entity_id": "1543AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "openmrs_data_type": "date",
         "type": "date_picker",
-        "hint": "Date of death",
+        "hint": "{{report_deceased.step1.Date_of_Death.hint}}",
         "expanded": false,
         "min_date": "01-01-1900",
         "max_date": "today",
         "v_required": {
           "value": "true",
-          "err": "Please enter the date of death"
+          "err": "{{report_deceased.step1.Date_of_Death.v_required.err}}"
         }
       },
       {
@@ -73,22 +71,24 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "1541AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "spinner",
-        "hint": "Where did the death occur?",
-        "values": [
-          "Home",
-          "Health Facility"
+        "hint": "{{report_deceased.step1.place_of_death.hint}}",
+        "options": [
+          {
+            "key": "Home",
+            "text": "{{report_deceased.step1.place_of_death.options.Home.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "1536AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          },
+          {
+            "key": "health_facility",
+            "text": "{{report_deceased.step1.place_of_death.options.health_facility.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "1588AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
         ],
-        "keys": [
-          "Home",
-          "Health Facility"
-        ],
-        "openmrs_choice_ids": {
-          "Home": "1536AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "Health Facility": "1588AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-        },
         "v_required": {
           "value": "true",
-          "err": "Please select one option"
+          "err": "{{report_deceased.step1.place_of_death.v_required.err}}"
         }
       },
       {
@@ -97,10 +97,11 @@
         "openmrs_entity": "",
         "openmrs_entity_id": "",
         "type": "date_picker",
-        "hint": "Child's DOB",
+        "hint": "{{report_deceased.step1.Date_Birth.hint}}",
         "read_only": true,
         "hidden": true
       }
     ]
-  }
+  },
+  "properties_file_name": "report_deceased"
 }

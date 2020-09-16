@@ -2,34 +2,34 @@
 name: step1_father_nationality_other
 description: father_nationality_other
 priority: 1
-condition: "step1_father_nationality == 'Other'"
+condition: "step1_father_nationality == 'other'"
 actions:
   - "isRelevant = true"
 ---
 name: step1_mother_nationality_other
 description: mother_nationality_other
 priority: 1
-condition: "step1_mother_nationality == 'Other'"
+condition: "step1_mother_nationality == 'other'"
 actions:
   - "isRelevant = true"
 ---
 name: step1_rubella_serology
 description: rubella_serology
 priority: 1
-condition: "step1_first_birth == 'Yes'"
+condition: "step1_first_birth == 'yes'"
 actions:
   - "isRelevant = true"
 ---
 name: step1_serology_results
 description: serology_results
 priority: 1
-condition: "step1_rubella_serology == 'Yes'"
+condition: "step1_rubella_serology == 'yes'"
 actions:
   - "isRelevant = true"
 ---
 name: step1_mother_rubella
 description: mother_rubella
 priority: 1
-condition: "step1_serology_results == 'Negative'"
+condition: "step1_serology_results == 'negative'"
 actions:
   - "isRelevant = true"

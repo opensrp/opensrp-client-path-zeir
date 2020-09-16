@@ -110,7 +110,7 @@ public class AppJsonFormUtils extends JsonFormUtils {
             } else if (jsonObject.getString(JsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.BIRTH_WEIGHT)) {
                 jsonObject.put(JsonFormUtils.VALUE, childDetails.get(AppConstants.KEY.BIRTH_WEIGHT.toLowerCase()));
             } else {
-                jsonObject.put(JsonFormUtils.VALUE, childDetails.get(jsonObject.optString(JsonFormUtils.KEY)));
+                jsonObject.put(JsonFormUtils.VALUE, childDetails.get(jsonObject.getString(JsonFormUtils.KEY)));
             }
             jsonObject.put(JsonFormUtils.READ_ONLY, nonEditableFields.contains(jsonObject.getString(JsonFormUtils.KEY)));
         }

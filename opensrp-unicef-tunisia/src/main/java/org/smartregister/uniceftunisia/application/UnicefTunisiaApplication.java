@@ -84,6 +84,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
 
     private static CommonFtsObject commonFtsObject;
     private static JsonSpecHelper jsonSpecHelper;
+    private ClientProcessorForJava clientProcessorForJava;
 
     private EventClientRepository eventClientRepository;
     private HIA2IndicatorsRepository hia2IndicatorsRepository;
@@ -280,10 +281,10 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     private ChildMetadata getMetadata() {
         ChildMetadata metadata = new ChildMetadata(ChildFormActivity.class, ChildProfileActivity.class,
                 ChildImmunizationActivity.class, ChildRegisterActivity.class, true, new AppChildRegisterQueryProvider());
-        metadata.updateChildRegister(AppConstants.JSON_FORM.CHILD_ENROLLMENT, AppConstants.TABLE_NAME.ALL_CLIENTS,
+        metadata.updateChildRegister(AppConstants.JsonForm.CHILD_ENROLLMENT, AppConstants.TABLE_NAME.ALL_CLIENTS,
                 AppConstants.TABLE_NAME.ALL_CLIENTS, AppConstants.EventType.CHILD_REGISTRATION,
                 AppConstants.EventType.UPDATE_CHILD_REGISTRATION, AppConstants.EventType.OUT_OF_CATCHMENT, AppConstants.CONFIGURATION.CHILD_REGISTER,
-                AppConstants.RELATIONSHIP.MOTHER, AppConstants.JSON_FORM.OUT_OF_CATCHMENT_SERVICE);
+                AppConstants.RELATIONSHIP.MOTHER, AppConstants.JsonForm.OUT_OF_CATCHMENT_SERVICE);
         metadata.setupFatherRelation(AppConstants.TABLE_NAME.ALL_CLIENTS, AppConstants.RELATIONSHIP.FATHER);
         //TODO include this metadata.setFieldsWithLocationHierarchy(new HashSet<>(Collections.singletonList(AppConstants.KEY.HOME_ADDRESS)));
         metadata.setLocationLevels(AppUtils.getLocationLevels());
@@ -367,7 +368,10 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     @NotNull
     @Override
     public ClientProcessorForJava getClientProcessor() {
-        return AppClientProcessorForJava.getInstance(this);
+        if (clientProcessorForJava == null) {
+            clientProcessorForJava = new AppClientProcessorForJava(getApplicationContext());
+        }
+        return clientProcessorForJava;
     }
 
     @Override

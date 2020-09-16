@@ -87,21 +87,21 @@ public class AppClientProcessorForJavaTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        processorForJava = Mockito.spy(AppClientProcessorForJava.getInstance(Mockito.mock(Context.class)));
+        processorForJava = Mockito.spy(new AppClientProcessorForJava(Mockito.mock(Context.class)));
     }
 
     @Test
-    public void processHeightWithEventClientNullShouldReturnFalse() throws Exception {
+    public void processHeightWithEventClientNullShouldReturn() throws Exception {
         Object[] params = {null, null, true};
-        Boolean result = Whitebox.invokeMethod(processorForJava, "processHeight", params);
-        Assert.assertFalse(result);
+        Whitebox.invokeMethod(processorForJava, "processHeight", params);
+        Mockito.verify(heightRepository, Mockito.atLeast(0)).add(Mockito.any(Height.class));
     }
 
     @Test
-    public void processHeightWithTableNullShouldReturnFalse() throws Exception {
+    public void processHeightWithTableNullShouldReturn() throws Exception {
         Object[] params = {new EventClient(new Event(), new Client("23")), null, true};
-        Boolean result = Whitebox.invokeMethod(processorForJava, "processHeight", params);
-        Assert.assertFalse(result);
+        Whitebox.invokeMethod(processorForJava, "processHeight", params);
+        Mockito.verify(heightRepository, Mockito.atLeast(0)).add(Mockito.any(Height.class));
     }
 
     @Test
@@ -128,7 +128,7 @@ public class AppClientProcessorForJavaTest {
         Client client = new Client("234");
         EventClient eventClient = new EventClient(event, client);
 
-        Boolean result = Whitebox.invokeMethod(processorForJava, "processHeight", eventClient, table, false);
+        Whitebox.invokeMethod(processorForJava, "processHeight", eventClient, table, false);
         Mockito.verify(heightRepository).add(processHeightArgumentCaptor.capture());
         Height resultHeightobj = processHeightArgumentCaptor.getValue();
         Assert.assertEquals(java.util.Optional.of(0).get(), resultHeightobj.getOutOfCatchment());
@@ -138,21 +138,20 @@ public class AppClientProcessorForJavaTest {
         Assert.assertEquals(HeightRepository.TYPE_Synced, resultHeightobj.getSyncStatus());
         Assert.assertEquals(Utils.getDate("2019-09-27 09:45:44"), resultHeightobj.getDate());
         Assert.assertEquals(Utils.getDate("2019-09-27 09:45:44"), resultHeightobj.getCreatedAt());
-        Assert.assertTrue(result);
     }
 
     @Test
-    public void processServiceWithEventClientNullShouldReturnFalse() throws Exception {
+    public void processServiceWithEventClientNullShouldReturn() throws Exception {
         Object[] params = {null, null};
-        Boolean result = Whitebox.invokeMethod(processorForJava, "processService", params);
-        Assert.assertFalse(result);
+        Whitebox.invokeMethod(processorForJava, "processService", params);
+        Mockito.verify(recurringServiceRecordRepository, Mockito.atLeast(0)).add(Mockito.any(ServiceRecord.class));
     }
 
     @Test
-    public void processServiceWithTableNullShouldReturnFalse() throws Exception {
+    public void processServiceWithTableNullShouldReturn() throws Exception {
         Object[] params = {new EventClient(new Event(), new Client("23")), null};
-        Boolean result = Whitebox.invokeMethod(processorForJava, "processService", params);
-        Assert.assertFalse(result);
+        Whitebox.invokeMethod(processorForJava, "processService", params);
+        Mockito.verify(recurringServiceRecordRepository, Mockito.atLeast(0)).add(Mockito.any(ServiceRecord.class));
     }
 
     @Test
@@ -193,7 +192,7 @@ public class AppClientProcessorForJavaTest {
         Table table = new Table();
         table.name = "recurring_service_records";
         Object[] params = {new EventClient(event, new Client("23")), table};
-        Boolean result = Whitebox.invokeMethod(processorForJava, "processService", params);
+        Whitebox.invokeMethod(processorForJava, "processService", params);
 
         Mockito.verify(recurringServiceRecordRepository).add(recordServiceArgumentCaptor.capture());
         ServiceRecord resultServiceRecord = recordServiceArgumentCaptor.getValue();
@@ -205,7 +204,6 @@ public class AppClientProcessorForJavaTest {
         Assert.assertEquals("231", resultServiceRecord.getEventId());
         Assert.assertEquals("1234", resultServiceRecord.getFormSubmissionId());
         Assert.assertEquals("1234", resultServiceRecord.getFormSubmissionId());
-        Assert.assertTrue(result);
     }
 
     @Test
@@ -230,17 +228,17 @@ public class AppClientProcessorForJavaTest {
     }
 
     @Test
-    public void processWeightWithEventClientNullShouldReturnFalse() throws Exception {
+    public void processWeightWithEventClientNullShouldReturn() throws Exception {
         Object[] params = {null, null, true};
-        Boolean result = Whitebox.invokeMethod(processorForJava, "processWeight", params);
-        Assert.assertFalse(result);
+        Whitebox.invokeMethod(processorForJava, "processWeight", params);
+        Mockito.verify(weightRepository, Mockito.atLeast(0)).add(Mockito.any(Weight.class));
     }
 
     @Test
-    public void processWeightWithTableNullShouldReturnFalse() throws Exception {
+    public void testProcessWeightWithTableNull() throws Exception {
         Object[] params = {new EventClient(new Event(), new Client("23")), null, true};
-        Boolean result = Whitebox.invokeMethod(processorForJava, "processWeight", params);
-        Assert.assertFalse(result);
+        Whitebox.invokeMethod(processorForJava, "processWeight", params);
+        Mockito.verify(weightRepository, Mockito.atLeast(0)).add(Mockito.any(Weight.class));
     }
 
     @Test
@@ -267,7 +265,7 @@ public class AppClientProcessorForJavaTest {
         Client client = new Client("234");
         EventClient eventClient = new EventClient(event, client);
 
-        Boolean result = Whitebox.invokeMethod(processorForJava, "processWeight", eventClient, table, false);
+        Whitebox.invokeMethod(processorForJava, "processWeight", eventClient, table, false);
         Mockito.verify(weightRepository).add(processWeightArgumentCaptor.capture());
         Weight resultWeightObj = processWeightArgumentCaptor.getValue();
         Assert.assertEquals(java.util.Optional.of(0).get(), resultWeightObj.getOutOfCatchment());
@@ -277,7 +275,5 @@ public class AppClientProcessorForJavaTest {
         Assert.assertEquals(WeightRepository.TYPE_Synced, resultWeightObj.getSyncStatus());
         Assert.assertEquals(Utils.getDate("2019-09-27 09:45:44"), resultWeightObj.getDate());
         Assert.assertEquals(Utils.getDate("2019-09-27 09:45:44"), resultWeightObj.getCreatedAt());
-        Assert.assertTrue(result);
     }
-
 }
