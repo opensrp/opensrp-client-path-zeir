@@ -1,0 +1,29 @@
+[main]
+host = https://www.transifex.com
+
+[opensrp-client-unicef-tunisia.adverse_eventproperties]
+file_filter = opensrp-unicef-tunisia/src/main/resources/adverse_event_<lang>.properties
+source_file = opensrp-unicef-tunisia/src/main/resources/adverse_event.properties
+source_lang = en
+
+[opensrp-client-unicef-tunisia.child_enrollmentproperties]
+file_filter = opensrp-unicef-tunisia/src/main/resources/child_enrollment_<lang>.properties
+source_file = opensrp-unicef-tunisia/src/main/resources/child_enrollment.properties
+source_lang = en
+
+[opensrp-client-unicef-tunisia.out_of_catchment_serviceproperties]
+file_filter = opensrp-unicef-tunisia/src/main/resources/out_of_catchment_service_<lang>.properties
+source_file = opensrp-unicef-tunisia/src/main/resources/out_of_catchment_service.properties
+source_lang = en
+
+[opensrp-client-unicef-tunisia.report_deceasedproperties]
+file_filter = opensrp-unicef-tunisia/src/main/resources/report_deceased_<lang>.properties
+source_file = opensrp-unicef-tunisia/src/main/resources/report_deceased.properties
+source_lang = en
+
+[opensrp-client-unicef-tunisia.stringsxml]
+file_filter = opensrp-unicef-tunisia/src/main/res/values-<lang>/strings.xml
+source_file = opensrp-unicef-tunisia/src/main/res/values/strings.xml
+source_lang = en
+type = ANDROID
+
