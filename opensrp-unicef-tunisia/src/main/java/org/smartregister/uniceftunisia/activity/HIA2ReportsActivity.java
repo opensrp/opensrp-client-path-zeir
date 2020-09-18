@@ -25,7 +25,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smartregister.child.util.JsonFormUtils;
+import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.domain.Response;
 import org.smartregister.reporting.domain.TallyStatus;
 import org.smartregister.reporting.event.IndicatorTallyEvent;
@@ -210,7 +210,7 @@ public class HIA2ReportsActivity extends AppCompatActivity {
                 JSONObject monthlyDraftForm = new JSONObject(jsonString);
 
                 //Map<String, String> result = JsonFormUtils.sectionFields(monthlyDraftForm);
-                JSONArray fieldsArray = JsonFormUtils.fields(monthlyDraftForm);
+                JSONArray fieldsArray = ChildJsonFormUtils.fields(monthlyDraftForm);
 
                 Map<String, String> result = new HashMap<>();
                 for (int j = 0; j < fieldsArray.length(); j++) {

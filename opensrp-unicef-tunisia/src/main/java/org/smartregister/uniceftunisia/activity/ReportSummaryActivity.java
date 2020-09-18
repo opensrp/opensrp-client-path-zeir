@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by Ephraim Kigamba - ekigamba@ona.io on 2019-07-11
@@ -177,9 +178,10 @@ public class ReportSummaryActivity extends BaseActivity {
         }
     }
 
+
     @Override
-    public void onUniqueIdFetched(Triple<String, String, String> triple, String entityId) {
-        // Nothing to do
+    public void onUniqueIdFetched(Triple<String, Map<String, String>, String> triple, String s) {
+        // Overridden
     }
 
     @Override

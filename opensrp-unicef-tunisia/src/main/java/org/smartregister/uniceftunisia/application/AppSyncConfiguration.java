@@ -4,6 +4,8 @@ import org.smartregister.SyncConfiguration;
 import org.smartregister.SyncFilter;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.uniceftunisia.BuildConfig;
+import org.smartregister.uniceftunisia.activity.LoginActivity;
+import org.smartregister.view.activity.BaseLoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +67,21 @@ public class AppSyncConfiguration extends SyncConfiguration {
     @Override
     public String getTopAllowedLocationLevel() {
         return null;
+    }
+
+    @Override
+    public String getOauthClientId() {
+        return BuildConfig.OAUTH_CLIENT_ID;
+    }
+
+    @Override
+    public String getOauthClientSecret() {
+        return BuildConfig.OAUTH_CLIENT_SECRET;
+    }
+
+    @Override
+    public Class<? extends BaseLoginActivity> getAuthenticationActivity() {
+        return LoginActivity.class;
     }
 }
 

@@ -100,7 +100,7 @@ public class ChildFormActivity extends BaseChildFormActivity {
                 getMotherDetailsColumn(SECOND_PHONE_NUMBER)};
 
         SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
-        queryBuilder.SelectInitiateMainTable(tableName, lookupColumns);
+        queryBuilder.selectInitiateMainTable(tableName, lookupColumns);
         queryBuilder.customJoin(
                 " join " + queryProvider.getMotherDetailsTable() + " on " + queryProvider.getMotherDetailsTable() + "." + AppConstants.KEY.BASE_ENTITY_ID + "=" + queryProvider.getDemographicTable() + "." + Constants.KEY.BASE_ENTITY_ID +
                         " join " + queryProvider.getChildDetailsTable() + " on " + queryProvider.getChildDetailsTable() + "." + Constants.KEY.RELATIONAL_ID + " = " + queryProvider.getMotherDetailsTable() + "." + Constants.KEY.BASE_ENTITY_ID);

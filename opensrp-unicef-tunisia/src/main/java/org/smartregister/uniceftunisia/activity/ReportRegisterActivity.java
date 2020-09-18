@@ -20,6 +20,7 @@ import org.smartregister.uniceftunisia.util.AppUtils;
 import org.smartregister.uniceftunisia.view.NavigationMenu;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ReportRegisterActivity extends BaseActivity {
 
@@ -94,18 +95,18 @@ public class ReportRegisterActivity extends BaseActivity {
     }
 
     @Override
-    public void onUniqueIdFetched(Triple<String, String, String> triple, String s) {
-        // Nothing to happen here
+    public void onUniqueIdFetched(Triple<String, Map<String, String>, String> triple, String s) {
+        //Overridden - not required
     }
 
     @Override
     public void onNoUniqueId() {
-        // Nothing to happen here
+        //Overridden - not required
     }
 
     @Override
     public void onRegistrationSaved(boolean b) {
-        // Nothing to happen here
+        //Overridden - not required
     }
 
     @Override

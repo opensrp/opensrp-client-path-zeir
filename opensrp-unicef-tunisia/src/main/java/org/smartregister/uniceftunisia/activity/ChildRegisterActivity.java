@@ -12,7 +12,7 @@ import org.json.JSONObject;
 import org.smartregister.child.activity.BaseChildRegisterActivity;
 import org.smartregister.child.model.BaseChildRegisterModel;
 import org.smartregister.child.util.Constants;
-import org.smartregister.child.util.JsonFormUtils;
+import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Utils;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.contract.NavigationMenuContract;
@@ -112,7 +112,7 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
     public void startFormActivity(JSONObject jsonForm) {
         if (jsonForm.has(AppConstants.KEY.ENCOUNTER_TYPE) && jsonForm.optString(AppConstants.KEY.ENCOUNTER_TYPE).equals(
                 AppConstants.KEY.BIRTH_REGISTRATION)) {
-            JsonFormUtils.addChildRegLocHierarchyQuestions(jsonForm);
+            ChildJsonFormUtils.addRegistrationFormLocationHierarchyQuestions(jsonForm);
         }
 
         Form form = new Form();
@@ -124,7 +124,7 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
         intent.putExtra(Constants.INTENT_KEY.JSON, jsonForm.toString());
         intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
         intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION,  true);
-        startActivityForResult(intent, JsonFormUtils.REQUEST_CODE_GET_JSON);
+        startActivityForResult(intent, ChildJsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 
 

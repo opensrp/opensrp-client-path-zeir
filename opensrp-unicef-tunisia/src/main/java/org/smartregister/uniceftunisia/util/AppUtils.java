@@ -16,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.Utils;
 import org.smartregister.commonregistry.AllCommonsRepository;
-import org.smartregister.domain.db.Client;
+import org.smartregister.domain.Client;
 import org.smartregister.domain.db.EventClient;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.repository.AllSharedPreferences;

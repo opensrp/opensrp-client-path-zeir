@@ -1,7 +1,7 @@
 package org.smartregister.uniceftunisia;
 
+import com.google.common.collect.Lists;
 
-import org.fest.util.Lists;
 import org.smartregister.immunization.domain.jsonmapping.Vaccine;
 import org.smartregister.immunization.domain.jsonmapping.VaccineGroup;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
@@ -73,11 +73,6 @@ public class TestUnicefTunisiaApplication extends UnicefTunisiaApplication {
     @Override
     protected void fixHardcodedVaccineConfiguration() {
         //Override
-    }
-
-    @Override
-    public String getPassword() {
-        return "somepassword";
     }
 
 }

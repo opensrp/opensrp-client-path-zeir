@@ -353,14 +353,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         return repository;
     }
 
-    public String getPassword() {
-        if (password == null) {
-            String username = getContext().userService().getAllSharedPreferences().fetchRegisteredANM();
-            password = getContext().userService().getGroupId(username);
-        }
-        return password;
-    }
-
     public Context getContext() {
         return context;
     }
@@ -394,13 +386,13 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
 
     @Override
     public void onTimeChanged() {
-        context.userService().forceRemoteLogin();
+        context.userService().forceRemoteLogin(context().allSharedPreferences().fetchRegisteredANM());
         logoutCurrentUser();
     }
 
     @Override
     public void onTimeZoneChanged() {
-        context.userService().forceRemoteLogin();
+        context.userService().forceRemoteLogin(context().allSharedPreferences().fetchRegisteredANM());
         logoutCurrentUser();
     }
 

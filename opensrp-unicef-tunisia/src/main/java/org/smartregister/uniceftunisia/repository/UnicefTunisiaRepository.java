@@ -145,8 +145,8 @@ public class UnicefTunisiaRepository extends Repository {
 
     @Override
     public SQLiteDatabase getReadableDatabase() {
-        String pass = UnicefTunisiaApplication.getInstance().getPassword();
-        if (StringUtils.isNotBlank(pass)) {
+        byte[] pass = UnicefTunisiaApplication.getInstance().getPassword();
+        if (pass != null && pass.length > 0) {
             return getReadableDatabase(pass);
         }
         return null;
@@ -154,8 +154,8 @@ public class UnicefTunisiaRepository extends Repository {
 
     @Override
     public SQLiteDatabase getWritableDatabase() {
-        String pass = UnicefTunisiaApplication.getInstance().getPassword();
-        if (StringUtils.isNotBlank(pass)) {
+        byte[] pass = UnicefTunisiaApplication.getInstance().getPassword();
+        if (pass != null && pass.length > 0) {
             return getWritableDatabase(pass);
         } else {
             throw new IllegalStateException("Password is blank");

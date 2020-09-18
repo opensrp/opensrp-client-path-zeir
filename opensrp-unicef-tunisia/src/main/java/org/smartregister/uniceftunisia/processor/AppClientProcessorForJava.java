@@ -12,14 +12,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joda.time.DateTime;
 import org.smartregister.child.util.ChildDbUtils;
+import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
-import org.smartregister.child.util.JsonFormUtils;
 import org.smartregister.child.util.MoveToMyCatchmentUtils;
 import org.smartregister.child.util.Utils;
 import org.smartregister.clientandeventmodel.DateUtil;
 import org.smartregister.commonregistry.AllCommonsRepository;
-import org.smartregister.domain.db.Client;
-import org.smartregister.domain.db.Event;
+import org.smartregister.domain.Client;
+import org.smartregister.domain.Event;
 import org.smartregister.domain.db.EventClient;
 import org.smartregister.domain.jsonmapping.ClientClassification;
 import org.smartregister.domain.jsonmapping.Column;
@@ -74,7 +74,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
 
     public void addMiniProcessors(MiniClientProcessorForJava... miniClientProcessorsForJava) {
         for (MiniClientProcessorForJava miniClientProcessorForJava : miniClientProcessorsForJava) {
-            unsyncEventsPerProcessor.put(miniClientProcessorForJava, new ArrayList<Event>());
+            unsyncEventsPerProcessor.put(miniClientProcessorForJava, new ArrayList<>());
 
             HashSet<String> eventTypes = miniClientProcessorForJava.getEventTypes();
 
@@ -121,7 +121,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                         }
                         processService(eventClient, serviceTable);
                         break;
-                    case JsonFormUtils.BCG_SCAR_EVENT:
+                    case ChildJsonFormUtils.BCG_SCAR_EVENT:
                         processBCGScarEvent(eventClient);
                         break;
                     case MoveToMyCatchmentUtils.MOVE_TO_CATCHMENT_EVENT:

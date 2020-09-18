@@ -20,6 +20,7 @@ import org.smartregister.uniceftunisia.util.AppUtils;
 import org.smartregister.uniceftunisia.util.VaccineUtils;
 
 import java.util.Calendar;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import timber.log.Timber;
@@ -98,17 +99,17 @@ public class ChildImmunizationActivity extends BaseChildImmunizationActivity {
 
     @Override
     public void onClick(View view) {
-        // Todo
+        // Overridden
     }
 
     @Override
-    public void onUniqueIdFetched(Triple<String, String, String> triple, String entityId) {
-        // Todo
+    public void onUniqueIdFetched(Triple<String, Map<String, String>, String> triple, String s) {
+        // Overridden
     }
 
     @Override
     public void onNoUniqueId() {
-        // Todo
+        // Overridden
     }
 
     @Override
