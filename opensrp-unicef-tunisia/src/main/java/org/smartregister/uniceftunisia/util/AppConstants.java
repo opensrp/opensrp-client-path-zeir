@@ -68,6 +68,10 @@ public class AppConstants {
         public static final String FATHER_BASE_ENTITY_ID = "father_base_entity_id";
         public static final String FATHER = "father";
         public static final String TODAY = "today";
+        public static final String BUTTON_TEXT = "buttonText";
+        public static final String DIALOG_TITLE = "dialogTitle";
+        public static final String SEARCH_HINT = "searchHint";
+        public static final String OPTIONS_TEXT = "options.text";
         public static String SITE_CHARACTERISTICS = "site_characteristics";
         public static String REGISTRATION_DATE = "client_reg_date";
         public static final String FIELDS = "fields";

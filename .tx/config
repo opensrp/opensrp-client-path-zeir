@@ -27,3 +27,8 @@ source_file = opensrp-unicef-tunisia/src/main/res/values/strings.xml
 source_lang = en
 type = ANDROID
 
+[opensrp-client-unicef-tunisia.dynamic_vaccinesproperties]
+file_filter = opensrp-unicef-tunisia/src/main/resources/dynamic_vaccines_<lang>.properties
+source_file = opensrp-unicef-tunisia/src/main/resources/dynamic_vaccines.properties
+source_lang = en
+
