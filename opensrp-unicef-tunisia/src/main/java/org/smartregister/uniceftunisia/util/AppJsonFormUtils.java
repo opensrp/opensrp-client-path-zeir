@@ -12,8 +12,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.child.ChildLibrary;
-import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.ChildJsonFormUtils;
+import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.Utils;
 import org.smartregister.domain.form.FormLocation;
 import org.smartregister.location.helper.LocationHelper;
@@ -141,9 +141,8 @@ public class AppJsonFormUtils extends ChildJsonFormUtils {
 
     private static void updateHomeFacilityHierarchy(Map<String, String> childDetails, JSONObject jsonObject) throws JSONException {
         if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.HOME_FACILITY)) {
-            List<String> homeFacilityHierarchy = LocationHelper.getInstance()
-                    .getOpenMrsLocationHierarchy(Utils.getValue(childDetails,
-                            AppConstants.KEY.HOME_FACILITY, false), false);
+            List<String> homeFacilityHierarchy = LocationHelper.getInstance().getOpenMrsLocationHierarchy(
+                    Utils.getValue(childDetails, AppConstants.KEY.HOME_FACILITY, false), false);
             String homeFacilityHierarchyString = AssetHandler
                     .javaToJsonString(homeFacilityHierarchy, new TypeToken<List<String>>() {
                     }.getType());

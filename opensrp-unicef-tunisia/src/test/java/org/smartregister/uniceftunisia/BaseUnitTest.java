@@ -13,7 +13,7 @@ import org.smartregister.uniceftunisia.shadow.ShadowAssetHandler;
 
 @RunWith (PowerMockRunner.class)
 @PowerMockRunnerDelegate (RobolectricTestRunner.class)
-@Config (application = TestUnicefTunisiaApplication.class, sdk = Build.VERSION_CODES.O_MR1, constants = BuildConfig.class, shadows = {ShadowAssetHandler.class})
+@Config (application = TestUnicefTunisiaApplication.class, sdk = Build.VERSION_CODES.O_MR1, shadows = {ShadowAssetHandler.class})
 @PowerMockIgnore ({"org.mockito.*", "org.robolectric.*", "android.*"})
 public abstract class BaseUnitTest {
 

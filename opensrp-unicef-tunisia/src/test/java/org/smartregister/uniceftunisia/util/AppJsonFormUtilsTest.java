@@ -6,7 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -15,14 +14,13 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.reflect.Whitebox;
 import org.smartregister.CoreLibrary;
 import org.smartregister.child.ChildLibrary;
 import org.smartregister.child.activity.BaseChildFormActivity;
 import org.smartregister.child.domain.ChildMetadata;
 import org.smartregister.child.domain.ChildMetadata.ChildRegister;
+import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
-import org.smartregister.child.util.JsonFormUtils;
 import org.smartregister.domain.Photo;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.util.FormUtils;
@@ -30,7 +28,6 @@ import org.smartregister.util.ImageUtils;
 import org.smartregister.view.LocationPickerView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,15 +53,30 @@ public class AppJsonFormUtilsTest {
 
     @Mock
     private FormUtils formUtils;
+    private Map<String, String> childDetails;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        childDetails = new HashMap<String, String>() {
+            {
+                put(Constants.KEY.BASE_ENTITY_ID, "baseEntityId");
+                put(Constants.KEY.RELATIONAL_ID, "relationalId");
+                put(AppConstants.KEY.APP_ID, "unicef_tunisia");
+                put(Constants.JSON_FORM_KEY.UNIQUE_ID, "opensrpId");
+                put(AppConstants.KEY.DOB, "2010-06-30");
+                put(AppConstants.KEY.FIRST_NAME, "first");
+                put(AppConstants.KEY.LAST_NAME, "last");
+                put(AppConstants.KEY.MIDDLE_NAME, "middle");
+                put(AppConstants.KEY.MOTHER_NRC_NUMBER, "nrc_number");
+                put(AppConstants.KEY.MOTHER_SECOND_PHONE_NUMBER, "0232453923");
+                put(AppConstants.KEY.HOME_FACILITY, "facility");
+            }
+        };
     }
 
     @Test
-    @Ignore("Will fix this later")
-    public void getMetadataForEditForm() throws Exception {
+    public void testGetMetadataForEditForm() throws Exception {
         PowerMockito.mockStatic(FormUtils.class);
         PowerMockito.mockStatic(ChildLibrary.class);
         PowerMockito.mockStatic(CoreLibrary.class);
@@ -75,14 +87,14 @@ public class AppJsonFormUtilsTest {
         PowerMockito.when(ImageUtils.profilePhotoByClientID(Mockito.<String>any(), Mockito.anyInt())).thenReturn(Mockito.mock(Photo.class));
         PowerMockito.when(ChildLibrary.getInstance()).thenReturn(childLibrary);
         PowerMockito.when(CoreLibrary.getInstance()).thenReturn(coreLibrary);
-        ChildMetadata childMetadata = new ChildMetadata(null, null, null,null, true);
+        ChildMetadata childMetadata = new ChildMetadata(null, null, null, null, true);
         PowerMockito.when(childLibrary.metadata()).thenReturn(childMetadata);
         LocationPickerView locationPickerView = Mockito.mock(LocationPickerView.class);
         PowerMockito.when(locationPickerView.getSelectedItem()).thenReturn("selected");
         PowerMockito.when(childLibrary.getLocationPickerView(context)).thenReturn(locationPickerView);
 
         childMetadata.childRegister = childRegister;
-        ChildMetadata metadata = new ChildMetadata(BaseChildFormActivity.class, null,null,
+        ChildMetadata metadata = new ChildMetadata(BaseChildFormActivity.class, null, null,
                 null, true);
         metadata.updateChildRegister("test", "test",
                 "test", "ChildRegister",
@@ -95,71 +107,29 @@ public class AppJsonFormUtilsTest {
         PowerMockito.when(formUtils.getFormJson(null)).thenReturn(jsonObject);
         PowerMockito.when(FormUtils.getInstance(context)).thenReturn(formUtils);
 
-        Map<String, String> childDetails = new HashMap<>();
-        childDetails.put(Constants.KEY.BASE_ENTITY_ID, "baseEntityId");
-        childDetails.put(Constants.KEY.RELATIONAL_ID, "relationalId");
-        childDetails.put(AppConstants.KEY.APP_ID, "unicef_tunisia");
-        childDetails.put(Constants.JSON_FORM_KEY.UNIQUE_ID, "opensrpId");
-        childDetails.put(AppConstants.KEY.DOB, "2010-06-30");
-        childDetails.put(AppConstants.KEY.FIRST_NAME, "first");
-        childDetails.put(AppConstants.KEY.LAST_NAME, "last");
-        childDetails.put(AppConstants.KEY.MIDDLE_NAME, "middle");
-        childDetails.put(AppConstants.KEY.MOTHER_NRC_NUMBER, "nrc_number");
-        childDetails.put(AppConstants.KEY.SECOND_PHONE_NUMBER, "0232453923");
+
         List<String> nonEditableFields = new ArrayList<>();
         String result = AppJsonFormUtils.updateJsonFormWithClientDetails(context, childDetails, nonEditableFields);
         JSONObject jsonResultObject = new JSONObject(result);
-        JSONObject stepOne = jsonResultObject.getJSONObject(JsonFormUtils.STEP1);
+        JSONObject stepOne = jsonResultObject.getJSONObject(ChildJsonFormUtils.STEP1);
         JSONArray stepOneFields = stepOne.optJSONArray(org.smartregister.util.JsonFormUtils.FIELDS);
 
-        Assert.assertEquals("first", JsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.FIRST_NAME));
+        Assert.assertEquals("first", ChildJsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.FIRST_NAME));
 
-        Assert.assertEquals("last", JsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.LAST_NAME));
+        Assert.assertEquals("last", ChildJsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.LAST_NAME));
 
-        Assert.assertEquals("30-06-2010", JsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.DATE_BIRTH));
+        Assert.assertEquals("30-06-2010", ChildJsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.DATE_BIRTH));
 
-        Assert.assertEquals("Middle", JsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.MIDDLE_NAME));
+        Assert.assertEquals("Middle", ChildJsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.MIDDLE_NAME));
 
-        Assert.assertEquals("baseEntityId", jsonResultObject.optString(JsonFormUtils.ENTITY_ID));
+        Assert.assertEquals("baseEntityId", jsonResultObject.optString(ChildJsonFormUtils.ENTITY_ID));
 
         Assert.assertEquals("relationalId", jsonResultObject.optString(Constants.KEY.RELATIONAL_ID));
 
-        Assert.assertEquals("Unicef Tunisia", jsonResultObject.optString(JsonFormUtils.CURRENT_ZEIR_ID));
+        Assert.assertEquals("Unicef Tunisia", jsonResultObject.optString(ChildJsonFormUtils.CURRENT_ZEIR_ID));
 
-        Assert.assertEquals("Nrc Number", JsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.MOTHER_NRC_NUMBER));
+        Assert.assertEquals("nrc_number", ChildJsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.MOTHER_NRC_NUMBER));
 
-        Assert.assertEquals("0232453923", JsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.SECOND_PHONE_NUMBER));
-    }
-
-    @Test
-    @Ignore("Need to investigate whether this method was removed: updateBirthFacilityHierarchy")
-    public void updateBirthFacilityHierarchy() throws Exception {
-        PowerMockito.mockStatic(LocationHelper.class);
-        PowerMockito.when(LocationHelper.getInstance()).thenReturn(locationHelper);
-
-        PowerMockito.when(locationHelper.getOpenMrsLocationHierarchy("facility", true))
-                .thenReturn(Collections.singletonList("location"));
-        Map<String, String> childDetails = new HashMap<>();
-        childDetails.put(AppConstants.KEY.BIRTH_FACILITY_NAME, "facility");
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put(JsonFormUtils.KEY, AppConstants.KEY.BIRTH_FACILITY_NAME);
-        Whitebox.invokeMethod(AppJsonFormUtils.class, "updateBirthFacilityHierarchy", childDetails, jsonObject);
-        Assert.assertEquals("[\"location\"]", jsonObject.getString(JsonFormUtils.VALUE));
-    }
-
-    @Test
-    @Ignore("Need to investigate whether this method was removed: updateResidentialAreaHierarchy")
-    public void updateResidentialAreaHierarchy() throws Exception {
-        PowerMockito.mockStatic(LocationHelper.class);
-        PowerMockito.when(LocationHelper.getInstance()).thenReturn(locationHelper);
-
-        PowerMockito.when(locationHelper.getOpenMrsLocationHierarchy("address", true))
-                .thenReturn(Collections.singletonList("location"));
-        Map<String, String> childDetails = new HashMap<>();
-        childDetails.put(AppConstants.KEY.ADDRESS_3, "address");
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put(JsonFormUtils.KEY, AppConstants.KEY.RESIDENTIAL_AREA);
-        Whitebox.invokeMethod(AppJsonFormUtils.class, "updateResidentialAreaHierarchy", childDetails, jsonObject);
-        Assert.assertEquals("[\"location\"]", jsonObject.getString(JsonFormUtils.VALUE));
+        Assert.assertEquals("0232453923", ChildJsonFormUtils.getFieldValue(stepOneFields, AppConstants.KEY.SECOND_PHONE_NUMBER));
     }
 }

@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
-import org.apache.commons.lang3.StringUtils;
 import org.smartregister.AllConstants;
 import org.smartregister.child.util.ChildDbMigrations;
 import org.smartregister.child.util.Utils;

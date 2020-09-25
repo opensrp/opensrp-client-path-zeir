@@ -99,14 +99,6 @@ public class ChildRegisterFragment extends BaseChildRegisterFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        if(clinicSelection.getText().toString().isEmpty());{
-            clinicSelection.init();
-        }
-    }
-
-    @Override
     public void onClick(View view) {
         onViewClicked(view);
     }

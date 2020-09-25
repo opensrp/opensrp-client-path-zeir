@@ -120,7 +120,6 @@ public class ChildImmunizationActivity extends BaseChildImmunizationActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data == null) return;
     }
 
     @Override
@@ -143,6 +142,6 @@ public class ChildImmunizationActivity extends BaseChildImmunizationActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        serviceGroupCanvasLL.setVisibility(View.GONE);
+        getServiceGroupCanvasLL().setVisibility(View.VISIBLE);
     }
 }
