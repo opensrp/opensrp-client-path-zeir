@@ -17,7 +17,7 @@
         android:orientation="vertical"
         tools:context=".activity.ReportRegisterActivity">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             <!--<include layout="@layout/toolbar_hia2" />-->
             <include layout="@layout/toolbar_hia2" />
 
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <include layout="@layout/content_report_register"/>
 

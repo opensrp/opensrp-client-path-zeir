@@ -2,8 +2,8 @@ package org.smartregister.uniceftunisia.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
+import androidx.annotation.Nullable;
+import com.google.android.material.snackbar.Snackbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -79,7 +79,7 @@ public class AppJsonFormFragment extends JsonFormFragment {
             // Changing message text color
             snackbar.setActionTextColor(Color.WHITE);
             View sbView = snackbar.getView();
-            TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
+            TextView textView = sbView.findViewById(R.id.snackbar_text);
             textView.setTextColor(Color.WHITE);
             snackbar.show();
             return true;

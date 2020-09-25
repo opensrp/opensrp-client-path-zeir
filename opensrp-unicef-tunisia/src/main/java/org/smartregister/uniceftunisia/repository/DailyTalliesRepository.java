@@ -2,7 +2,7 @@ package org.smartregister.uniceftunisia.repository;
 
 import android.database.Cursor;
 import android.database.SQLException;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 
 import org.smartregister.reporting.util.Constants;
