@@ -43,7 +43,7 @@ public class MonthlyTalliesRepositoryTest extends BaseRobolectricTest {
     private DailyTalliesRepository dailyTalliesRepository;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         monthlyTalliesRepository = Mockito.spy(new MonthlyTalliesRepository());
         dailyTalliesRepository = Mockito.spy(UnicefTunisiaApplication.getInstance().dailyTalliesRepository());
         ReflectionHelpers.setField(UnicefTunisiaApplication.getInstance(), "dailyTalliesRepository", dailyTalliesRepository);
@@ -273,7 +273,7 @@ public class MonthlyTalliesRepositoryTest extends BaseRobolectricTest {
 
         Mockito.doAnswer(new Answer() {
             @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
+            public Object answer(InvocationOnMock invocation) {
                 throw new SQLException("Some test error");
             }
         }).when(database).insertWithOnConflict(Mockito.eq("monthly_tallies")
@@ -306,7 +306,7 @@ public class MonthlyTalliesRepositoryTest extends BaseRobolectricTest {
         // Mock throwing an exception
         Mockito.doAnswer(new Answer() {
             @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
+            public Object answer(InvocationOnMock invocation) {
                 throw new SQLException("Some test error");
             }
         }).when(database).insertWithOnConflict(Mockito.eq("monthly_tallies")

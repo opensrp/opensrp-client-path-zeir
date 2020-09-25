@@ -15,7 +15,6 @@ import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.Utils;
 import org.smartregister.uniceftunisia.R;
-import org.smartregister.uniceftunisia.contract.NavigationMenuContract;
 import org.smartregister.uniceftunisia.fragment.AdvancedSearchFragment;
 import org.smartregister.uniceftunisia.fragment.ChildRegisterFragment;
 import org.smartregister.uniceftunisia.presenter.AppChildRegisterPresenter;
@@ -27,14 +26,9 @@ import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.lang.ref.WeakReference;
 
-public class ChildRegisterActivity extends BaseChildRegisterActivity implements NavDrawerActivity, NavigationMenuContract {
+public class ChildRegisterActivity extends BaseChildRegisterActivity implements NavDrawerActivity {
 
     private NavigationMenu navigationMenu;
-
-    @Override
-    public NavigationMenu getNavigationMenu() {
-        return navigationMenu;
-    }
 
     @Override
     protected void attachBaseContext(android.content.Context base) {
@@ -92,13 +86,6 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
     public void openDrawer() {
         if (navigationMenu != null) {
             navigationMenu.openDrawer();
-        }
-    }
-
-    @Override
-    public void closeDrawer() {
-        if (navigationMenu != null) {
-            NavigationMenu.closeDrawer();
         }
     }
 

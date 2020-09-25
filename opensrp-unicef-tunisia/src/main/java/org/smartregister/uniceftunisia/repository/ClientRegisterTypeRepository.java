@@ -9,7 +9,6 @@ import org.smartregister.repository.BaseRepository;
 import org.smartregister.uniceftunisia.util.AppConstants;
 
 import java.util.Date;
-import java.util.List;
 
 public class ClientRegisterTypeRepository extends BaseRepository implements ClientRegisterTypeDao {
 
@@ -27,16 +26,6 @@ public class ClientRegisterTypeRepository extends BaseRepository implements Clie
     public static void createTable(@NonNull SQLiteDatabase database) {
         database.execSQL(CREATE_TABLE_SQL);
         database.execSQL(INDEX_BASE_ENTITY_ID);
-    }
-
-    @Override
-    public List<ClientRegisterType> findAll(String baseEntityId) {
-        return null;
-    }
-
-    @Override
-    public boolean remove(String registerType, String baseEntityId) {
-        return false;
     }
 
     @Override

@@ -10,5 +10,4 @@ public interface NavDrawerActivity {
 
     void openDrawer();
 
-    void closeDrawer();
 }

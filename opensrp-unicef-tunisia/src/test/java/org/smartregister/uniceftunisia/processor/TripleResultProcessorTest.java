@@ -27,7 +27,7 @@ public class TripleResultProcessorTest {
     public ExpectedException thrownException = ExpectedException.none();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         tripleResultProcessor = new TripleResultProcessor();
     }
 

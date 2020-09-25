@@ -49,7 +49,7 @@ public class NavigationInteractor implements NavigationContract.Interactor {
             String query = MessageFormat.format("select count(*) from {0} inner join client_register_type on ec_client.id=client_register_type.base_entity_id {1}", AppConstants.TABLE_NAME.ALL_CLIENTS, mainCondition);
             query = smartRegisterQueryBuilder.Endquery(query);
             Timber.i("2%s", query);
-            cursor = commonRepository(AppConstants.TABLE_NAME.ALL_CLIENTS).rawCustomQueryForAdapter(query);
+            cursor = commonRepository().rawCustomQueryForAdapter(query);
             if (cursor.moveToFirst()) {
                 count = cursor.getInt(0);
             }
@@ -64,8 +64,8 @@ public class NavigationInteractor implements NavigationContract.Interactor {
         return count;
     }
 
-    private CommonRepository commonRepository(String tableName) {
-        return UnicefTunisiaApplication.getInstance().getContext().commonrepository(tableName);
+    private CommonRepository commonRepository() {
+        return UnicefTunisiaApplication.getInstance().getContext().commonrepository(AppConstants.TABLE_NAME.ALL_CLIENTS);
     }
 
     @Override

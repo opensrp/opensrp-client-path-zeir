@@ -97,7 +97,7 @@ public class HIA2ReportsActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private ReportingProcessingSnackbar reportingProcessingSnackbar;
-    private ArrayList<FragmentRefreshListener> fragmentRefreshListeners = new ArrayList<>();
+    private final ArrayList<FragmentRefreshListener> fragmentRefreshListeners = new ArrayList<>();
 
     @Nullable
     private String reportGrouping;
@@ -336,12 +336,8 @@ public class HIA2ReportsActivity extends AppCompatActivity {
     }
 
     public void onClickReport(View view) {
-        switch (view.getId()) {
-            case R.id.btn_back_to_home:
-                finish();
-                break;
-            default:
-                break;
+        if (view.getId() == R.id.btn_back_to_home) {
+            finish();
         }
     }
 
@@ -385,9 +381,8 @@ public class HIA2ReportsActivity extends AppCompatActivity {
         Hia2ReportRepository hia2ReportRepository = UnicefTunisiaApplication.getInstance().hia2ReportRepository();
 
         try {
-            boolean keepSyncing = true;
             int limit = 50;
-            while (keepSyncing) {
+            while (true) {
                 List<JSONObject> pendingReports = hia2ReportRepository.getUnSyncedReports(limit);
 
                 if (pendingReports.isEmpty()) {

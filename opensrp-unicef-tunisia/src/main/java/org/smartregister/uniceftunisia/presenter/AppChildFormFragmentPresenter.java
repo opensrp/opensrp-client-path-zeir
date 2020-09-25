@@ -21,7 +21,7 @@ import timber.log.Timber;
 
 public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
 
-    private AppChildFormFragment formFragment;
+    private final AppChildFormFragment formFragment;
 
     public AppChildFormFragmentPresenter(JsonFormFragment formFragment, JsonFormInteractor jsonFormInteractor) {
         super(formFragment, jsonFormInteractor);

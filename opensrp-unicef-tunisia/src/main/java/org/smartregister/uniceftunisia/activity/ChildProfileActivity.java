@@ -22,11 +22,6 @@ public class ChildProfileActivity extends BaseProfileActivity {
     }
 
     @Override
-    protected void onResumption() {
-        super.onResumption();
-    }
-
-    @Override
     protected void initializePresenter() {
         // Todo
     }

@@ -63,10 +63,10 @@ import timber.log.Timber;
 public class AppClientProcessorForJava extends ClientProcessorForJava {
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-    private HashMap<String, MiniClientProcessorForJava> processorMap = new HashMap<>();
-    private HashMap<MiniClientProcessorForJava, List<Event>> unsyncEventsPerProcessor = new HashMap<>();
-    private AppExecutors appExecutors = new AppExecutors();
-    private HashMap<String, DateTime> clientsForAlertUpdates = new HashMap<>();
+    private final HashMap<String, MiniClientProcessorForJava> processorMap = new HashMap<>();
+    private final HashMap<MiniClientProcessorForJava, List<Event>> unsyncEventsPerProcessor = new HashMap<>();
+    private final AppExecutors appExecutors = new AppExecutors();
+    private final HashMap<String, DateTime> clientsForAlertUpdates = new HashMap<>();
 
     public AppClientProcessorForJava(Context context) {
         super(context);

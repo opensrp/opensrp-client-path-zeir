@@ -491,7 +491,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
 
     @VisibleForTesting
     public void setVaccineGroups(List<VaccineGroup> vaccines) {
-        this.vaccineGroups = vaccines;
+        vaccineGroups = vaccines;
     }
 
     public ClientRegisterTypeRepository registerTypeRepository() {

@@ -18,8 +18,8 @@ import java.util.List;
 
 public class FetchUneditedMonthlyTalliesTask extends AsyncTask<Void, Void, List<Date>>{
 
-    private TaskListener taskListener;
-    private String reportGrouping;
+    private final TaskListener taskListener;
+    private final String reportGrouping;
 
     public FetchUneditedMonthlyTalliesTask(@Nullable String reportGrouping, @NonNull TaskListener taskListener) {
         this.reportGrouping = reportGrouping;

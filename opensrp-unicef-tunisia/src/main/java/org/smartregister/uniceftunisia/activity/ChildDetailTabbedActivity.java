@@ -46,7 +46,7 @@ import static org.smartregister.uniceftunisia.util.AppUtils.setAppLocale;
  * Created by ndegwamartin on 06/03/2019.
  */
 public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
-    private static List<String> nonEditableFields = Arrays.asList("Sex", "zeir_id", "mother_rubella", "protected_at_birth");
+    private final static List<String> nonEditableFields = Arrays.asList("Sex", "zeir_id", "mother_rubella", "protected_at_birth");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

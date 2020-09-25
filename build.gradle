@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:3.5.3"
+        classpath "com.android.tools.build:gradle:4.0.1"
     }
 }
 
@@ -22,6 +22,7 @@ allprojects {
         maven { url "https://repo.maven.apache.org/maven2" }
         maven { url "http://cloudant.github.io/cloudant-sync-eap/repository" }
         maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
+        maven { url 'https://dl.bintray.com/ibm-watson-health/ibm-fhir-server-releases'}
         google()
         jcenter()
     }
@@ -33,17 +34,16 @@ subprojects {
 
     group = 'org.smartregister'
 
-    ext.androidToolsBuildGradle = '3.5.3'
-    ext.androidBuildToolsVersion = '28.0.3'
-    ext.androidMinSdkVersion = 18
-    ext.androidCompileSdkVersion = 28
-    ext.androidTargetSdkVersion = 28
+    ext.androidToolsBuildGradle = '4.0.1'
+    ext.androidBuildToolsVersion = '29.0.3'
+    ext.androidMinSdkVersion = 19
+    ext.androidCompileSdkVersion = 29
+    ext.androidTargetSdkVersion = 29
 
     ext.androidAnnotationsVersion = '3.0.1'
     ext.androidAnnotationsAPIVersion = '3.0.1'
 
     ext.jacocoVersion = "0.8.5"
-    ext.coverallsVersion = "2.8.1"
 
     // Improve build server performance by allowing disabling of pre-dexing
     // (see http://tools.android.com/tech-docs/new-build-system/tips#TOC-Improving-Build-Server-performance.)

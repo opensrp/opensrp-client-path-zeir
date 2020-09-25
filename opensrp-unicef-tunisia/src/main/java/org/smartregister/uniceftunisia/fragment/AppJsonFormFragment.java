@@ -16,11 +16,9 @@ import com.vijay.jsonwizard.presenters.JsonFormFragmentPresenter;
 import com.vijay.jsonwizard.viewstates.JsonFormFragmentViewState;
 
 import org.json.JSONObject;
-import org.smartregister.Context;
 import org.smartregister.child.interactor.ChildFormInteractor;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.activity.AppStockJsonFormActivity;
-import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.util.AppConstants;
 
 import timber.log.Timber;
@@ -52,10 +50,6 @@ public class AppJsonFormFragment extends JsonFormFragment {
     @Override
     protected JsonFormFragmentPresenter createPresenter() {
         return new JsonFormFragmentPresenter(this, ChildFormInteractor.getChildInteractorInstance());
-    }
-
-    public Context context() {
-        return UnicefTunisiaApplication.getInstance().context();
     }
 
     @Override

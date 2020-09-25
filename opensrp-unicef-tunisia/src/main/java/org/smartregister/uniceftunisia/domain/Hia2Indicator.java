@@ -18,7 +18,7 @@ public class Hia2Indicator implements Serializable {
     @JsonProperty
     private String description;
     @JsonProperty
-    private String category;
+    private final String category;
 
     public Hia2Indicator() {
         this.category = "Immunization";

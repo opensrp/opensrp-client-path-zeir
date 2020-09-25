@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class MonthlyDraftsAdapter extends BaseAdapter {
 
-    private Activity activity;
+    private final Activity activity;
     private List<MonthlyTally> list;
     private View.OnClickListener onMonthlyDraftClickListener;
 

@@ -21,8 +21,6 @@ import static org.smartregister.uniceftunisia.fragment.AppJsonFormFragment.getFo
 
 public class AppStockJsonFormActivity extends StockJsonFormActivity {
 
-    private AppJsonFormFragment appJsonFormFragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +28,7 @@ public class AppStockJsonFormActivity extends StockJsonFormActivity {
 
     @Override
     public void initializeFormFragment() {
-        appJsonFormFragment = getFormFragment(JsonFormConstants.FIRST_STEP_NAME);
+        AppJsonFormFragment appJsonFormFragment = getFormFragment(JsonFormConstants.FIRST_STEP_NAME);
         getSupportFragmentManager().beginTransaction()
                 .add(com.vijay.jsonwizard.R.id.container, appJsonFormFragment).commit();
     }

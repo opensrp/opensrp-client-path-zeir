@@ -21,7 +21,7 @@ import java.util.Locale;
 
 public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.MyViewHolder> {
 
-    private List<NavigationOption> navigationOptionList;
+    private final List<NavigationOption> navigationOptionList;
     private String selectedView = AppConstants.DrawerMenu.ALL_FAMILIES;
     private View.OnClickListener onClickListener;
     private Activity context;

@@ -24,7 +24,7 @@ public class UnicefTunisiaApplicationTest extends BaseUnitTest {
         UnicefTunisiaApplication unicefTunisiaApplication = new TestUnicefTunisiaApplication();
         Assert.assertNotNull(unicefTunisiaApplication);
 
-        CommonFtsObject commonFtsObject = unicefTunisiaApplication.createCommonFtsObject(RuntimeEnvironment.application);
+        CommonFtsObject commonFtsObject = UnicefTunisiaApplication.createCommonFtsObject(RuntimeEnvironment.application);
         Assert.assertNotNull(commonFtsObject);
 
         String[] ftsObjectTables = commonFtsObject.getTables();

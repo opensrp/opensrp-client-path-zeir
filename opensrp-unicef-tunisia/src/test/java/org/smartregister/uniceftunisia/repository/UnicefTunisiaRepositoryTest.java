@@ -30,7 +30,7 @@ public class UnicefTunisiaRepositoryTest extends BaseRobolectricTest {
     private SQLiteDatabase sqLiteDatabase;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         unicefTunisiaRepository = Mockito.spy((UnicefTunisiaRepository) UnicefTunisiaApplication.getInstance().getRepository());
 
         Mockito.doReturn(sqLiteDatabase).when(unicefTunisiaRepository).getReadableDatabase();

@@ -37,7 +37,7 @@ public class DBQueryHelperTest {
     @Mock
     private ChildLibrary childLibrary;
 
-    private Map<String, VaccineCache> vaccineCacheMap = new HashMap<>();
+    private final Map<String, VaccineCache> vaccineCacheMap = new HashMap<>();
 
     @Before
     public void setUp() {
@@ -70,7 +70,7 @@ public class DBQueryHelperTest {
         vaccineCache.vaccineRepo = Lists.newArrayList(arrayList);
 
         vaccineCacheMap.put(Constants.CHILD_TYPE, vaccineCache);
-        PowerMockito.when(immunizationLibrary.getVaccineCacheMap()).thenReturn(vaccineCacheMap);
+        PowerMockito.when(ImmunizationLibrary.getVaccineCacheMap()).thenReturn(vaccineCacheMap);
 
         String expectedUrgentTrue = " ( dod is NULL OR dod = '' )  AND  ( ec_child_details.inactive IS NULL OR ec_child_details.inactive != 'true' )  AND  ( ec_child_details.lost_to_follow_up IS NULL OR ec_child_details.lost_to_follow_up != 'true' )  AND  (  HepB = 'urgent' OR  PENTA_1 = 'urgent'";
         String expectedUrgentFalse = expectedUrgentTrue + "  OR  HepB = 'normal' OR  PENTA_1 = 'normal'  ) ";

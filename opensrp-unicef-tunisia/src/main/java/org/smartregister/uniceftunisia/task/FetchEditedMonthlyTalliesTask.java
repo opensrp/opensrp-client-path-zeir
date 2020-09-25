@@ -16,17 +16,13 @@ import java.util.List;
  */
 
 public class FetchEditedMonthlyTalliesTask extends AsyncTask<Void, Void, List<MonthlyTally>> {
+
     private final TaskListener taskListener;
-    private String reportGrouping;
+    private final String reportGrouping;
 
     public FetchEditedMonthlyTalliesTask(@Nullable String reportGrouping, @NonNull TaskListener taskListener) {
         this.taskListener = taskListener;
         this.reportGrouping = reportGrouping;
-    }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
     }
 
     @Override

@@ -31,7 +31,7 @@ public class LoginInteractorTest extends BaseRobolectricTest {
     private LoginInteractor loginInteractor;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         loginInteractor = new LoginInteractor(Mockito.mock(BaseLoginContract.Presenter.class));
     }
 

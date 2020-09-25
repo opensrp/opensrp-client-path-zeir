@@ -20,6 +20,7 @@ import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
  */
 
 public class SendMonthlyDraftDialogFragment extends DialogFragment {
+
     private String date;
     private String month;
     private View.OnClickListener onSendClickedListener;

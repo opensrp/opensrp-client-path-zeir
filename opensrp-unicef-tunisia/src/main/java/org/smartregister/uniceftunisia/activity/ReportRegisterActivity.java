@@ -81,16 +81,11 @@ public class ReportRegisterActivity extends BaseActivity {
     }
 
     public void onClickReport(View view) {
-        switch (view.getId()) {
-            case R.id.btn_back_to_home:
-
-                NavigationMenu navigationMenu = NavigationMenu.getInstance(this);
-                if (navigationMenu != null) {
-                    navigationMenu.getDrawer().openDrawer(GravityCompat.START);
-                }
-                break;
-            default:
-                break;
+        if (view.getId() == R.id.btn_back_to_home) {
+            NavigationMenu navigationMenu = NavigationMenu.getInstance(this);
+            if (navigationMenu != null) {
+                navigationMenu.getDrawer().openDrawer(GravityCompat.START);
+            }
         }
     }
 
