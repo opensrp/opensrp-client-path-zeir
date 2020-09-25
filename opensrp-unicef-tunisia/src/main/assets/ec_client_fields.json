@@ -318,6 +318,13 @@
             "field": "obs.fieldCode",
             "concept": "pcv4_required"
           }
+        },
+        {
+          "column_name": "sms_recipient",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.sms_recipient"
+          }
         }
       ]
     },

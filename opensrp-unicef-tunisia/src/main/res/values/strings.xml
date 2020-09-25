@@ -114,5 +114,6 @@
     <string name="rubella_serology">Mother received Rubella Serology test</string>
     <string name="serology_results">Serology test result</string>
     <string name="maximum_extra_vaccines_reached">You can only record a maximum of 10 vaccines</string>
+    <string name="sms_recipient">Vaccines  SMS reminder recipient</string>
 
 </resources>
