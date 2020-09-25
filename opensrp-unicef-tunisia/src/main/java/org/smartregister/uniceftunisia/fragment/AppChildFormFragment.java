@@ -39,7 +39,7 @@ public class AppChildFormFragment extends ChildFormFragment {
     protected ChildFormFragmentPresenter createPresenter() {
         WeakReference<JsonFormFragment> weakReference = new WeakReference<>(this);
         return new AppChildFormFragmentPresenter((JsonFormFragment) weakReference.get(),
-                ChildFormInteractor.getChildInteractorInstance());
+                ChildFormInteractor.getInstance());
     }
 
     public interface OnReactionVaccineSelected {

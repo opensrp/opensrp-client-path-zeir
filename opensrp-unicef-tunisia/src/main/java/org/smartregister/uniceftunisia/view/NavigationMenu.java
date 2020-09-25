@@ -60,7 +60,6 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
     private static WeakReference<Activity> activityWeakReference;
     private static String[] langArray;
     private LinearLayout syncMenuItem;
-    private LinearLayout enrollmentMenuItem;
     private LinearLayout outOfAreaMenu;
     private LinearLayout registerView;
     private LinearLayout reportView;
@@ -120,7 +119,6 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         outOfAreaMenu = activity.findViewById(R.id.out_of_area_menu);
         registerView = activity.findViewById(R.id.register_view);
         reportView = activity.findViewById(R.id.report_view);
-        enrollmentMenuItem = activity.findViewById(R.id.enrollment);
         loggedInUserTextView = activity.findViewById(R.id.logged_in_user_text_view);
         userInitialsTextView = activity.findViewById(R.id.user_initials_text_view);
         syncTextView = activity.findViewById(R.id.sync_text_view);
