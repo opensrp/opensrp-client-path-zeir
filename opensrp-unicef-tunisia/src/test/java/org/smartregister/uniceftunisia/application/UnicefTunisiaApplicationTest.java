@@ -1,10 +1,11 @@
 package org.smartregister.uniceftunisia.application;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.uniceftunisia.BaseUnitTest;
 import org.smartregister.uniceftunisia.TestUnicefTunisiaApplication;
@@ -24,7 +25,7 @@ public class UnicefTunisiaApplicationTest extends BaseUnitTest {
         UnicefTunisiaApplication unicefTunisiaApplication = new TestUnicefTunisiaApplication();
         Assert.assertNotNull(unicefTunisiaApplication);
 
-        CommonFtsObject commonFtsObject = UnicefTunisiaApplication.createCommonFtsObject(RuntimeEnvironment.application);
+        CommonFtsObject commonFtsObject = UnicefTunisiaApplication.createCommonFtsObject(ApplicationProvider.getApplicationContext());
         Assert.assertNotNull(commonFtsObject);
 
         String[] ftsObjectTables = commonFtsObject.getTables();

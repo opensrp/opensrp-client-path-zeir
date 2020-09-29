@@ -3,23 +3,18 @@ package org.smartregister.uniceftunisia.presenter;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 import org.smartregister.Context;
 import org.smartregister.domain.Setting;
 import org.smartregister.repository.AllSettings;
+import org.smartregister.uniceftunisia.BaseUnitTest;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.view.contract.BaseLoginContract;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(UnicefTunisiaApplication.class)
-public class LoginPresenterTest {
+public class LoginPresenterTest extends BaseUnitTest {
 
     @Mock
     private UnicefTunisiaApplication unicefTunisiaApplication;
@@ -37,8 +32,6 @@ public class LoginPresenterTest {
 
     @Test
     public void isServerSettingsSetShouldReturnTrue() {
-        PowerMockito.mockStatic(UnicefTunisiaApplication.class);
-        PowerMockito.when(unicefTunisiaApplication.getContext()).thenReturn(context);
         String value = "{\"identifier\":" +
                 "\"site_characteristics\"," +
                 "\"settings\":[" +
@@ -55,17 +48,14 @@ public class LoginPresenterTest {
 
         Setting setting = new Setting();
         setting.setValue(value);
-        PowerMockito.when(allSettings.getSetting(AppConstants.KEY.SITE_CHARACTERISTICS)).thenReturn(setting);
-        PowerMockito.when(context.allSettings()).thenReturn(allSettings);
-        PowerMockito.when(UnicefTunisiaApplication.getInstance()).thenReturn(unicefTunisiaApplication);
+        Mockito.when(allSettings.getSetting(AppConstants.KEY.SITE_CHARACTERISTICS)).thenReturn(setting);
+        Mockito.when(context.allSettings()).thenReturn(allSettings);
         LoginPresenter loginPresenter = new LoginPresenter(Mockito.mock(BaseLoginContract.View.class));
         Assert.assertTrue(loginPresenter.isServerSettingsSet());
     }
 
     @Test
     public void isServerSettingsSetShouldReturnFalse() {
-        PowerMockito.mockStatic(UnicefTunisiaApplication.class);
-        PowerMockito.when(unicefTunisiaApplication.getContext()).thenReturn(context);
         String value = "{\"identifier\":" +
                 "\"site_characteristics\"," +
                 "\"settings\":[" +
@@ -82,9 +72,8 @@ public class LoginPresenterTest {
 
         Setting setting = new Setting();
         setting.setValue(value);
-        PowerMockito.when(allSettings.getSetting(AppConstants.KEY.SITE_CHARACTERISTICS)).thenReturn(setting);
-        PowerMockito.when(context.allSettings()).thenReturn(allSettings);
-        PowerMockito.when(UnicefTunisiaApplication.getInstance()).thenReturn(unicefTunisiaApplication);
+        Mockito.when(allSettings.getSetting(AppConstants.KEY.SITE_CHARACTERISTICS)).thenReturn(setting);
+        Mockito.when(context.allSettings()).thenReturn(allSettings);
         LoginPresenter loginPresenter = new LoginPresenter(Mockito.mock(BaseLoginContract.View.class));
         Assert.assertTrue(loginPresenter.isServerSettingsSet());
     }

@@ -92,7 +92,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     private MonthlyTalliesRepository monthlyTalliesRepository;
     private Hia2ReportRepository hia2ReportRepository;
 
-    private String password;
     private boolean lastModified;
     private ECSyncHelper ecSyncHelper;
 

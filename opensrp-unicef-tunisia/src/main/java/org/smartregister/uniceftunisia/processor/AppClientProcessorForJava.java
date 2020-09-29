@@ -134,7 +134,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                         break;
                     case Constants.EventType.ARCHIVE_CHILD_RECORD:
                         if (eventClient.getClient() != null && clientClassification != null) {
-                            UnicefTunisiaApplication.getInstance().registerTypeRepository().removeAll(event.getBaseEntityId());
+                            getApplication().registerTypeRepository().removeAll(event.getBaseEntityId());
                             processEventClient(clientClassification, eventClient, event);
                         }
                         break;
@@ -149,7 +149,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                     case Constants.EventType.UPDATE_FATHER_DETAILS:
                     case Constants.EventType.UPDATE_MOTHER_DETAILS:
                         if (eventType.equals(Constants.EventType.BITRH_REGISTRATION) && eventClient.getClient() != null) {
-                            UnicefTunisiaApplication.getInstance().registerTypeRepository().add(AppConstants.RegisterType.CHILD, event.getBaseEntityId());
+                            getApplication().registerTypeRepository().add(AppConstants.RegisterType.CHILD, event.getBaseEntityId());
                         }
                         if (clientClassification == null) {
                             continue;
@@ -257,7 +257,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
     }
 
     private boolean childExists(String entityId) {
-        return UnicefTunisiaApplication.getInstance().eventClientRepository().checkIfExists(EventClientRepository.Table.client, entityId);
+        return getApplication().eventClientRepository().checkIfExists(EventClientRepository.Table.client, entityId);
     }
 
     private void processVaccine(@Nullable EventClient vaccine, @Nullable Table vaccineTable, boolean outOfCatchment) {
@@ -275,7 +275,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 SimpleDateFormat simpleDateFormat = this.simpleDateFormat;
                 Date date = simpleDateFormat.parse(contentValues.getAsString(VaccineRepository.DATE));
 
-                VaccineRepository vaccineRepository = UnicefTunisiaApplication.getInstance().vaccineRepository();
+                VaccineRepository vaccineRepository = getApplication().vaccineRepository();
                 Vaccine vaccineObj = new Vaccine();
                 vaccineObj.setBaseEntityId(contentValues.getAsString(VaccineRepository.BASE_ENTITY_ID));
                 vaccineObj.setName(contentValues.getAsString(VaccineRepository.NAME));
@@ -321,7 +321,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 String eventDateStr = contentValues.getAsString(WeightRepository.DATE);
                 Date date = getDate(eventDateStr);
 
-                WeightRepository weightRepository = UnicefTunisiaApplication.getInstance().weightRepository();
+                WeightRepository weightRepository = getApplication().weightRepository();
                 Weight weightObj = new Weight();
                 weightObj.setBaseEntityId(contentValues.getAsString(WeightRepository.BASE_ENTITY_ID));
                 if (contentValues.containsKey(WeightRepository.KG)) {
@@ -356,6 +356,10 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         }
     }
 
+    public UnicefTunisiaApplication getApplication() {
+        return UnicefTunisiaApplication.getInstance();
+    }
+
     private void processHeight(@Nullable EventClient height, @Nullable Table heightTable, boolean outOfCatchment) {
 
         try {
@@ -373,7 +377,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 String eventDateStr = contentValues.getAsString(HeightRepository.DATE);
                 Date date = getDate(eventDateStr);
 
-                HeightRepository heightRepository = UnicefTunisiaApplication.getInstance().heightRepository();
+                HeightRepository heightRepository = getApplication().heightRepository();
                 Height heightObject = new Height();
                 heightObject.setBaseEntityId(contentValues.getAsString(WeightRepository.BASE_ENTITY_ID));
                 if (contentValues.containsKey(HeightRepository.CM)) {
@@ -472,7 +476,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
     }
 
     private void recordServiceRecord(EventClient service, ContentValues contentValues, String name, Date date, String value, List<ServiceType> serviceTypeList) {
-        RecurringServiceRecordRepository recurringServiceRecordRepository = UnicefTunisiaApplication.getInstance()
+        RecurringServiceRecordRepository recurringServiceRecordRepository = getApplication()
                 .recurringServiceRecordRepository();
         ServiceRecord serviceObj = getServiceRecord(service, contentValues, name, date, value, serviceTypeList);
         String createdAtString = contentValues.getAsString(RecurringServiceRecordRepository.CREATED_AT);
@@ -482,7 +486,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
     }
 
     private List<ServiceType> getServiceTypes(String name) {
-        RecurringServiceTypeRepository recurringServiceTypeRepository = UnicefTunisiaApplication.getInstance()
+        RecurringServiceTypeRepository recurringServiceTypeRepository = getApplication()
                 .recurringServiceTypeRepository();
         return recurringServiceTypeRepository.searchByName(name);
     }
@@ -583,7 +587,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
 
         Timber.i("Starting updateFTSsearch table: %s", tableName);
 
-        AllCommonsRepository allCommonsRepository = UnicefTunisiaApplication.getInstance().context().
+        AllCommonsRepository allCommonsRepository = getApplication().context().
                 allCommonsRepositoryobjects(tableName);
 
         if (allCommonsRepository != null) {

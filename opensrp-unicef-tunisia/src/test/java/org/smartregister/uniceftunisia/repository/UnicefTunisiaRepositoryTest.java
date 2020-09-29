@@ -49,6 +49,6 @@ public class UnicefTunisiaRepositoryTest extends BaseRobolectricTest {
         unicefTunisiaRepository.onCreate(database);
 
         // TODO: Investigate this counter
-        Mockito.verify(database, Mockito.times(32)).execSQL(Mockito.contains("CREATE TABLE"));
+        Mockito.verify(database, Mockito.times(35)).execSQL(Mockito.contains("CREATE TABLE"));
     }
 }
