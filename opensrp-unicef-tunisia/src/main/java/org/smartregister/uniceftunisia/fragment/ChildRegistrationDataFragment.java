@@ -62,6 +62,7 @@ public class ChildRegistrationDataFragment extends BaseChildRegistrationDataFrag
                 put("first_birth", R.string.first_birth);
                 put("rubella_serology", R.string.rubella_serology);
                 put("serology_results", R.string.serology_results);
+                put("sms_recipient", R.string.sms_recipient);
             }
         };
         return super.getDataRowLabelResourceIds();

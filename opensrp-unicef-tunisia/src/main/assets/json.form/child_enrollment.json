@@ -94,7 +94,7 @@
         "openmrs_entity_id": "birth_registration_number",
         "type": "edit_text",
         "hint": "{{child_enrollment.step1.birth_registration_number.hint}}",
-        "label_info_text": "If the child\u0027s birth was registered, enter the registration number here..",
+        "label_info_text": "{{child_enrollment.step1.birth_registration_number.label_info_text}}",
         "edit_type": "name",
         "v_required": {
           "value": false,
@@ -112,7 +112,7 @@
         "openmrs_entity_id": "child_reg",
         "type": "edit_text",
         "hint": "{{child_enrollment.step1.child_reg.hint}}",
-        "label_info_text": "This is the government unique ID assigned by the government",
+        "label_info_text": "{{child_enrollment.step1.child_reg.label_info_text}}",
         "edit_type": "number",
         "v_required": {
           "value": false,
@@ -168,7 +168,7 @@
         "openmrs_entity_id": "place_of_birth",
         "type": "spinner",
         "hint": "{{child_enrollment.step1.place_of_birth.hint}}",
-        "label_info_text": "Indicate whether child was born at a health facility.",
+        "label_info_text": "{{child_enrollment.step1.place_of_birth.label_info_text}}",
         "options": [
           {
             "key": "home",
@@ -227,7 +227,7 @@
         "openmrs_entity_id": "ga_at_birth",
         "type": "edit_text",
         "hint": "{{child_enrollment.step1.ga_at_birth.hint}}",
-        "label_info_text": "Indicate how far along the mother was when the child was born.",
+        "label_info_text": "{{child_enrollment.step1.ga_at_birth.label_info_text}}",
         "edit_type": "name",
         "v_min": {
           "value": "20",
@@ -313,7 +313,7 @@
         "openmrs_entity": "person_address",
         "openmrs_entity_id": "address1",
         "type": "edit_text",
-        "label_info_text": "Indicate the village where the child lives.",
+        "label_info_text": "{{child_enrollment.step1.village.label_info_text}}",
         "hint": "{{child_enrollment.step1.village.hint}}",
         "v_required": {
           "value": true,
@@ -614,6 +614,44 @@
         }
       },
       {
+        "key": "sms_recipient",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "sms_recipient",
+        "type": "spinner",
+        "hint": "{{child_enrollment.step1.sms_recipient.hint}}",
+        "options": [
+          {
+            "key": "father",
+            "text": "{{child_enrollment.step1.sms_recipient.options.father.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "mother",
+            "text": "{{child_enrollment.step1.sms_recipient.options.mother.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "both",
+            "text": "{{child_enrollment.step1.sms_recipient.options.both.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "none",
+            "text": "{{child_enrollment.step1.sms_recipient.options.none.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{child_enrollment.step1.sms_recipient.v_required.err}}"
+        }
+      },
+      {
         "key": "mother_tdv_doses",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person_attribute",
@@ -672,7 +710,7 @@
         "openmrs_entity": "concept",
         "openmrs_entity_id": "164826AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
         "type": "edit_text",
-        "label_info_text": "If the child\u0027s mother received 2 or more doses of a tetanus-containing vaccine during pregnancy, then the child is considered protected at birth (PAB) against tetanus.",
+        "label_info_text": "{{child_enrollment.step1.protected_at_birth.label_info_text}}",
         "hint": "{{child_enrollment.step1.protected_at_birth.hint}}",
         "read_only": true,
         "entity_id": "mother",
@@ -696,7 +734,7 @@
         "entity_id": "mother",
         "type": "spinner",
         "hint": "{{child_enrollment.step1.first_birth.hint}}",
-        "label_info_text": "Indicate whether the mother is primiparous (woman giving birth for the first time",
+        "label_info_text": "{{child_enrollment.step1.first_birth.label_info_text}}",
         "options": [
           {
             "key": "yes",
@@ -724,7 +762,7 @@
         "entity_id": "mother",
         "type": "spinner",
         "hint": "{{child_enrollment.step1.rubella_serology.hint}}",
-        "label_info_text": "This is a serology test only for primiparous (giving birth for the first time) women.",
+        "label_info_text": "{{child_enrollment.step1.rubella_serology.label_info_text}}",
         "options": [
           {
             "key": "yes",

@@ -3,50 +3,49 @@ package org.smartregister.uniceftunisia.processor;
 import android.content.ContentValues;
 import android.content.Context;
 
+import net.sqlcipher.database.SQLiteDatabase;
+
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.reflect.Whitebox;
+import org.mockito.Spy;
+import org.robolectric.util.ReflectionHelpers;
+import org.robolectric.util.ReflectionHelpers.ClassParameter;
 import org.smartregister.child.ChildLibrary;
-import org.smartregister.child.util.ChildDbUtils;
-import org.smartregister.child.util.Constants;
+import org.smartregister.child.activity.BaseChildFormActivity;
+import org.smartregister.child.activity.BaseChildImmunizationActivity;
+import org.smartregister.child.domain.ChildMetadata;
 import org.smartregister.child.util.Utils;
-import org.smartregister.domain.db.Client;
-import org.smartregister.domain.db.Event;
+import org.smartregister.domain.Client;
+import org.smartregister.domain.Event;
 import org.smartregister.domain.db.EventClient;
 import org.smartregister.domain.jsonmapping.Table;
 import org.smartregister.growthmonitoring.domain.Height;
 import org.smartregister.growthmonitoring.domain.Weight;
 import org.smartregister.growthmonitoring.repository.HeightRepository;
 import org.smartregister.growthmonitoring.repository.WeightRepository;
+import org.smartregister.immunization.ImmunizationLibrary;
 import org.smartregister.immunization.domain.ServiceRecord;
-import org.smartregister.immunization.domain.ServiceSchedule;
 import org.smartregister.immunization.domain.ServiceType;
-import org.smartregister.immunization.domain.VaccineSchedule;
 import org.smartregister.immunization.repository.RecurringServiceRecordRepository;
 import org.smartregister.immunization.repository.RecurringServiceTypeRepository;
 import org.smartregister.repository.DetailsRepository;
+import org.smartregister.repository.Repository;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
+import org.smartregister.view.activity.BaseProfileActivity;
 
 import java.util.Arrays;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({UnicefTunisiaApplication.class, Utils.class, VaccineSchedule.class, ServiceSchedule.class, ChildDbUtils.class, ChildLibrary.class})
 public class AppClientProcessorForJavaTest {
 
-    @Mock
+    @Spy
     private UnicefTunisiaApplication unicefTunisiaApplication;
 
     @Mock
@@ -70,9 +69,6 @@ public class AppClientProcessorForJavaTest {
     @Captor
     private ArgumentCaptor<ServiceRecord> recordServiceArgumentCaptor;
 
-    @Captor
-    private ArgumentCaptor addDetailsRepoArgumentCaptor;
-
     @Mock
     private RecurringServiceTypeRepository recurringServiceTypeRepository;
 
@@ -84,31 +80,41 @@ public class AppClientProcessorForJavaTest {
     @Mock
     private DetailsRepository detailsRepository;
 
+    @Mock
+    private ImmunizationLibrary immunizationLibrary;
+
+    @Mock
+    private ChildLibrary childLibrary;
+
+    @Mock
+    private Repository repository;
+
+    @Mock
+    private SQLiteDatabase sqLiteDatabase;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         processorForJava = Mockito.spy(new AppClientProcessorForJava(Mockito.mock(Context.class)));
+        Mockito.doReturn(unicefTunisiaApplication).when(processorForJava).getApplication();
     }
 
     @Test
-    public void processHeightWithEventClientNullShouldReturn() throws Exception {
-        Object[] params = {null, null, true};
-        Whitebox.invokeMethod(processorForJava, "processHeight", params);
+    public void processHeightWithEventClientNullShouldReturn() {
+        ReflectionHelpers.callInstanceMethod(processorForJava, "processHeight", ClassParameter.from(EventClient.class, null), ClassParameter.from(Table.class, null), ClassParameter.from(boolean.class, true));
         Mockito.verify(heightRepository, Mockito.atLeast(0)).add(Mockito.any(Height.class));
     }
 
     @Test
-    public void processHeightWithTableNullShouldReturn() throws Exception {
-        Object[] params = {new EventClient(new Event(), new Client("23")), null, true};
-        Whitebox.invokeMethod(processorForJava, "processHeight", params);
+    public void processHeightWithTableNullShouldReturn() {
+        ReflectionHelpers.callInstanceMethod(processorForJava, "processHeight", ClassParameter.from(EventClient.class,
+                new EventClient(new Event(), new Client("23"))), ClassParameter.from(Table.class, null), ClassParameter.from(boolean.class, true));
         Mockito.verify(heightRepository, Mockito.atLeast(0)).add(Mockito.any(Height.class));
     }
 
     @Test
-    public void processHeightWithValidEventClientAndTableShouldReturnTrue() throws Exception {
-        PowerMockito.mockStatic(UnicefTunisiaApplication.class);
-        PowerMockito.when(UnicefTunisiaApplication.getInstance()).thenReturn(unicefTunisiaApplication);
-        PowerMockito.when(unicefTunisiaApplication.heightRepository()).thenReturn(heightRepository);
+    public void processHeightWithValidEventClientAndTableShouldReturnTrue() {
+        Mockito.doReturn(heightRepository).when(unicefTunisiaApplication).heightRepository();
         Mockito.when(processorForJava.processCaseModel(ArgumentMatchers.any(EventClient.class), ArgumentMatchers.any(Table.class))).thenReturn(contentValues);
         Mockito.when(contentValues.size()).thenReturn(7);
         Mockito.when(contentValues.getAsString(HeightRepository.DATE)).thenReturn("2019-09-27 09:45:44");
@@ -127,8 +133,8 @@ public class AppClientProcessorForJavaTest {
         event.setFormSubmissionId("343");
         Client client = new Client("234");
         EventClient eventClient = new EventClient(event, client);
-
-        Whitebox.invokeMethod(processorForJava, "processHeight", eventClient, table, false);
+        ReflectionHelpers.callInstanceMethod(processorForJava, "processHeight",
+                ClassParameter.from(EventClient.class, eventClient), ClassParameter.from(Table.class, table), ClassParameter.from(boolean.class, false));
         Mockito.verify(heightRepository).add(processHeightArgumentCaptor.capture());
         Height resultHeightobj = processHeightArgumentCaptor.getValue();
         Assert.assertEquals(java.util.Optional.of(0).get(), resultHeightobj.getOutOfCatchment());
@@ -141,25 +147,23 @@ public class AppClientProcessorForJavaTest {
     }
 
     @Test
-    public void processServiceWithEventClientNullShouldReturn() throws Exception {
-        Object[] params = {null, null};
-        Whitebox.invokeMethod(processorForJava, "processService", params);
+    public void processServiceWithEventClientNullShouldReturn() {
+        ReflectionHelpers.callInstanceMethod(processorForJava, "processService", ClassParameter.from(EventClient.class, null), ClassParameter.from(Table.class, null));
         Mockito.verify(recurringServiceRecordRepository, Mockito.atLeast(0)).add(Mockito.any(ServiceRecord.class));
     }
 
     @Test
-    public void processServiceWithTableNullShouldReturn() throws Exception {
-        Object[] params = {new EventClient(new Event(), new Client("23")), null};
-        Whitebox.invokeMethod(processorForJava, "processService", params);
+    public void processServiceWithTableNullShouldReturn() {
+        ReflectionHelpers.callInstanceMethod(processorForJava, "processService",
+                ClassParameter.from(EventClient.class, new EventClient(new Event(), new Client("23"))), ClassParameter.from(Table.class, null));
         Mockito.verify(recurringServiceRecordRepository, Mockito.atLeast(0)).add(Mockito.any(ServiceRecord.class));
     }
 
     @Test
-    public void processServiceWithNameNotHavingITNShouldReturnTrue() throws Exception {
-        PowerMockito.mockStatic(UnicefTunisiaApplication.class);
-        PowerMockito.when(UnicefTunisiaApplication.getInstance()).thenReturn(unicefTunisiaApplication);
-        PowerMockito.when(unicefTunisiaApplication.recurringServiceTypeRepository()).thenReturn(recurringServiceTypeRepository);
-        PowerMockito.when(unicefTunisiaApplication.recurringServiceRecordRepository()).thenReturn(recurringServiceRecordRepository);
+    public void processServiceWithNameNotHavingITNShouldReturnTrue() {
+        ReflectionHelpers.setStaticField(ImmunizationLibrary.class, "instance", immunizationLibrary);
+        Mockito.when(unicefTunisiaApplication.recurringServiceTypeRepository()).thenReturn(recurringServiceTypeRepository);
+        Mockito.when(unicefTunisiaApplication.recurringServiceRecordRepository()).thenReturn(recurringServiceRecordRepository);
         ServiceType serviceTypeDeworming2 = new ServiceType();
         serviceTypeDeworming2.setId(1L);
         serviceTypeDeworming2.setName("Deworming_2");
@@ -191,8 +195,8 @@ public class AppClientProcessorForJavaTest {
 
         Table table = new Table();
         table.name = "recurring_service_records";
-        Object[] params = {new EventClient(event, new Client("23")), table};
-        Whitebox.invokeMethod(processorForJava, "processService", params);
+        ReflectionHelpers.callInstanceMethod(processorForJava, "processService",
+                ClassParameter.from(EventClient.class, new EventClient(event, new Client("23"))), ClassParameter.from(Table.class, table));
 
         Mockito.verify(recurringServiceRecordRepository).add(recordServiceArgumentCaptor.capture());
         ServiceRecord resultServiceRecord = recordServiceArgumentCaptor.getValue();
@@ -207,45 +211,50 @@ public class AppClientProcessorForJavaTest {
     }
 
     @Test
-    @Ignore("Fix this: Mocking ChildLibrary")
-    public void processBCScarEventWithValidEventClientShouldPassCorrectArgsToDetailsRepo() throws Exception {
-        PowerMockito.mockStatic(UnicefTunisiaApplication.class);
-        PowerMockito.when(UnicefTunisiaApplication.getInstance()).thenReturn(unicefTunisiaApplication);
-        Mockito.when(unicefTunisiaApplication.context()).thenReturn(openSrpContext);
+    public void processBCScarEventWithValidEventClientShouldPassCorrectArgsToDetailsRepo() {
+        ReflectionHelpers.setStaticField(ChildLibrary.class, "instance", childLibrary);
         Mockito.when(openSrpContext.detailsRepository()).thenReturn(detailsRepository);
+        Mockito.when(childLibrary.getRepository()).thenReturn(repository);
+        Mockito.when(repository.getWritableDatabase()).thenReturn(sqLiteDatabase);
+        ChildMetadata childMetadata = new ChildMetadata(BaseChildFormActivity.class, BaseProfileActivity.class, BaseChildImmunizationActivity.class, null, true);
+        childMetadata.updateChildRegister(
+                "crazy_form_name",
+                "childTable",
+                "guardianTable",
+                "Birth Registration",
+                "Birth Registration",
+                "Immunization",
+                "none",
+                "12345",
+                "Out of Catchment");
+        Mockito.when(childLibrary.metadata()).thenReturn(childMetadata);
         Event event = new Event();
         event.setBaseEntityId("23213");
         event.setEventDate(new DateTime());
         Client client = new Client("23213");
-        PowerMockito.when(ChildLibrary.getInstance()).thenReturn(Mockito.spy(ChildLibrary.getInstance()));
-        Whitebox.invokeMethod(processorForJava, "processBCGScarEvent", new EventClient(event, client));
-        Mockito.verify(detailsRepository).add((String) addDetailsRepoArgumentCaptor.capture(), (String) addDetailsRepoArgumentCaptor.capture(),
-                (String) addDetailsRepoArgumentCaptor.capture(), (Long) addDetailsRepoArgumentCaptor.capture());
-        Assert.assertEquals("23213", addDetailsRepoArgumentCaptor.getAllValues().get(0));
-        Assert.assertEquals(Constants.SHOW_BCG_SCAR, addDetailsRepoArgumentCaptor.getAllValues().get(1));
-        Assert.assertEquals(String.valueOf(event.getEventDate().getMillis()), addDetailsRepoArgumentCaptor.getAllValues().get(2));
-        Assert.assertEquals(event.getEventDate().getMillis(), addDetailsRepoArgumentCaptor.getAllValues().get(3));
+        ReflectionHelpers.callInstanceMethod(processorForJava, "processBCGScarEvent", ClassParameter.from(EventClient.class, new EventClient(event, client)));
+        Mockito.verify(sqLiteDatabase, Mockito.atLeastOnce()).update(Mockito.anyString(), Mockito.any(ContentValues.class), Mockito.anyString(), Mockito.any());
     }
 
     @Test
-    public void processWeightWithEventClientNullShouldReturn() throws Exception {
-        Object[] params = {null, null, true};
-        Whitebox.invokeMethod(processorForJava, "processWeight", params);
+    public void processWeightWithEventClientNullShouldReturn() {
+        ReflectionHelpers.callInstanceMethod(processorForJava, "processWeight",
+                ClassParameter.from(EventClient.class, null), ClassParameter.from(Table.class, null),
+                ClassParameter.from(boolean.class, true));
         Mockito.verify(weightRepository, Mockito.atLeast(0)).add(Mockito.any(Weight.class));
     }
 
     @Test
     public void testProcessWeightWithTableNull() throws Exception {
-        Object[] params = {new EventClient(new Event(), new Client("23")), null, true};
-        Whitebox.invokeMethod(processorForJava, "processWeight", params);
+        ReflectionHelpers.callInstanceMethod(processorForJava, "processWeight",
+                ClassParameter.from(EventClient.class, new EventClient(new Event(), new Client("23"))),
+                ClassParameter.from(Table.class, null), ClassParameter.from(boolean.class, true));
         Mockito.verify(weightRepository, Mockito.atLeast(0)).add(Mockito.any(Weight.class));
     }
 
     @Test
-    public void processWeightWithValidEventClientAndTableShouldReturnTrue() throws Exception {
-        PowerMockito.mockStatic(UnicefTunisiaApplication.class);
-        PowerMockito.when(UnicefTunisiaApplication.getInstance()).thenReturn(unicefTunisiaApplication);
-        PowerMockito.when(unicefTunisiaApplication.weightRepository()).thenReturn(weightRepository);
+    public void processWeightWithValidEventClientAndTableShouldReturnTrue() {
+        Mockito.doReturn(weightRepository).when(unicefTunisiaApplication).weightRepository();
         Mockito.when(processorForJava.processCaseModel(ArgumentMatchers.any(EventClient.class), ArgumentMatchers.any(Table.class))).thenReturn(contentValues);
         Mockito.when(contentValues.size()).thenReturn(7);
         Mockito.when(contentValues.getAsString(WeightRepository.DATE)).thenReturn("2019-09-27 09:45:44");
@@ -265,7 +274,9 @@ public class AppClientProcessorForJavaTest {
         Client client = new Client("234");
         EventClient eventClient = new EventClient(event, client);
 
-        Whitebox.invokeMethod(processorForJava, "processWeight", eventClient, table, false);
+        ReflectionHelpers.callInstanceMethod(processorForJava, "processWeight",
+                ClassParameter.from(EventClient.class, eventClient), ClassParameter.from(Table.class, table),
+                ClassParameter.from(boolean.class, false));
         Mockito.verify(weightRepository).add(processWeightArgumentCaptor.capture());
         Weight resultWeightObj = processWeightArgumentCaptor.getValue();
         Assert.assertEquals(java.util.Optional.of(0).get(), resultWeightObj.getOutOfCatchment());

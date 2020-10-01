@@ -10,7 +10,7 @@
     android:orientation="vertical"
     tools:context=".activity.HIA2ReportsActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         <include layout="@layout/toolbar_hia2" />
 
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="fill_parent"
             android:layout_height="?attr/actionBarSize"
@@ -33,9 +33,9 @@
             app:tabSelectedTextColor="#404040"
             app:tabTextAppearance="@style/CustomFontTextViewStyle.tabIndicator" />
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

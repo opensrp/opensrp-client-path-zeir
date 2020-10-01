@@ -3,8 +3,8 @@ package org.smartregister.uniceftunisia.application;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AppCompatDelegate;
 import android.util.DisplayMetrics;
 import android.util.Pair;
 
@@ -92,7 +92,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     private MonthlyTalliesRepository monthlyTalliesRepository;
     private Hia2ReportRepository hia2ReportRepository;
 
-    private String password;
     private boolean lastModified;
     private ECSyncHelper ecSyncHelper;
 
@@ -353,14 +352,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         return repository;
     }
 
-    public String getPassword() {
-        if (password == null) {
-            String username = getContext().userService().getAllSharedPreferences().fetchRegisteredANM();
-            password = getContext().userService().getGroupId(username);
-        }
-        return password;
-    }
-
     public Context getContext() {
         return context;
     }
@@ -394,13 +385,13 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
 
     @Override
     public void onTimeChanged() {
-        context.userService().forceRemoteLogin();
+        context.userService().forceRemoteLogin(context().allSharedPreferences().fetchRegisteredANM());
         logoutCurrentUser();
     }
 
     @Override
     public void onTimeZoneChanged() {
-        context.userService().forceRemoteLogin();
+        context.userService().forceRemoteLogin(context().allSharedPreferences().fetchRegisteredANM());
         logoutCurrentUser();
     }
 
@@ -499,7 +490,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
 
     @VisibleForTesting
     public void setVaccineGroups(List<VaccineGroup> vaccines) {
-        this.vaccineGroups = vaccines;
+        vaccineGroups = vaccines;
     }
 
     public ClientRegisterTypeRepository registerTypeRepository() {

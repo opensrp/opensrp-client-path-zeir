@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.NonNull;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -16,14 +14,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.Utils;
 import org.smartregister.commonregistry.AllCommonsRepository;
-import org.smartregister.domain.db.Client;
+import org.smartregister.domain.Client;
 import org.smartregister.domain.db.EventClient;
 import org.smartregister.location.helper.LocationHelper;
-import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.uniceftunisia.BuildConfig;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
@@ -36,7 +32,6 @@ public class AppUtils extends Utils {
     public static final ArrayList<String> ALLOWED_LEVELS;
     public static final String FACILITY = "Facility";
     public static final String DEFAULT_LOCATION_LEVEL = "Health Facility";
-    public static final SimpleDateFormat DB_DF = new SimpleDateFormat("yyyy-MM-dd");
     public static final String LANGUAGE = "language";
     private static final String PREFERENCES_FILE = "lang_prefs";
 
@@ -44,40 +39,6 @@ public class AppUtils extends Utils {
         ALLOWED_LEVELS = new ArrayList<>();
         ALLOWED_LEVELS.add(DEFAULT_LOCATION_LEVEL);
         ALLOWED_LEVELS.add(FACILITY);
-    }
-
-    public static void showDialogMessage(Context context, String title, String message) {
-        new AlertDialog.Builder(context)
-                .setTitle(title)
-                .setMessage(message)
-
-                .setPositiveButton(android.R.string.ok, null)
-
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
-    }
-
-    public static void saveLanguage(Context ctx, String language) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(LANGUAGE, language);
-        editor.apply();
-        saveGlobalLanguage(language, ctx);
-    }
-
-    public static void saveGlobalLanguage(String language, Context activity) {
-        AllSharedPreferences allSharedPreferences = new AllSharedPreferences(PreferenceManager.getDefaultSharedPreferences(
-                UnicefTunisiaApplication.getInstance().getApplicationContext()));
-        allSharedPreferences.saveLanguagePreference(language);
-        setLocale(new Locale(language), activity);
-    }
-
-    public static void setLocale(Locale locale, Context activity) {
-        Locale.setDefault(locale);
-        Resources resources = activity.getResources();
-        Configuration configuration = resources.getConfiguration();
-        configuration.setLocale(locale);
-        UnicefTunisiaApplication.getInstance().getApplicationContext().createConfigurationContext(configuration);
     }
 
     public static String getLanguage(Context ctx) {

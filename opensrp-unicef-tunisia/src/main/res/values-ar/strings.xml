@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">TUNeVACC</string>
     <string name="action_log_out">تسجيل الخروج</string>
     <string name="username">اسم المستخدم</string>
     <string name="password">كلمه السر</string>
@@ -53,4 +54,4 @@
 
     <string name="child_birth_registration_number">رقم تسحيل الطفل بالسجل المدني</string>
     <string name="child_unique_id">المعرف الوحيد للمواطن</string>
-</resources>
+    </resources>

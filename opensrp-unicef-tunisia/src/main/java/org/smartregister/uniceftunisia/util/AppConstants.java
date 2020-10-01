@@ -9,23 +9,18 @@ public class AppConstants {
     }
 
     public static final class KEY {
-        public static final String MOTHER_BASE_ENTITY_ID = "mother_base_entity_id";
         public static final String CHILD = "child";
         public static final String MOTHER_FIRST_NAME = "mother_first_name";
         public static final String FATHER_FIRST_NAME = "father_first_name";
         public static final String FATHER_LAST_NAME = "father_last_name";
         public static final String FIRST_NAME = "first_name";
         public static final String LAST_NAME = "last_name";
-        public static final String BIRTHDATE = "birthdate";
-        public static final String DEATHDATE = "deathdate";
         public static final String MOTHER_LAST_NAME = "mother_last_name";
         public static final String ZEIR_ID = "zeir_id";
         public static final String LOST_TO_FOLLOW_UP = "lost_to_follow_up";
         public static final String GENDER = "gender";
         public static final String INACTIVE = "inactive";
         public static final String LAST_INTERACTED_WITH = "last_interacted_with";
-        public static final String MOTHER = "mother";
-        public static final String ENTITY_ID = "entity_id";
         public static final String VALUE = "value";
         public static final String STEPNAME = "stepName";
         public static final String TITLE = "title";
@@ -43,16 +38,8 @@ public class AppConstants {
         public static final String HOME_FACILITY = "home_address";
         public static final String APP_ID = "mer_id";
         public static final String MIDDLE_NAME = "middle_name";
-        public static final String ADDRESS_3 = "address3";
-        public static final String BIRTH_FACILITY_NAME = "Birth_Facility_Name";
-        public static final String RESIDENTIAL_AREA = "Residential_Area";
         public static final String ENCOUNTER_TYPE = "encounter_type";
         public static final String BIRTH_REGISTRATION = "Birth Registration";
-        public static final String IDENTIFIERS = "identifiers";
-        public static final String FIRSTNAME = "firstName";
-        public static final String MIDDLENAME = "middleName";
-        public static final String LASTNAME = "lastName";
-        public static final String ATTRIBUTES = "attributes";
         public static final String VILLAGE = "village";
         public static final String HOME_ADDRESS = "home_address";
         public static final String DOB_UNKNOWN = "dob_unknown";
@@ -64,12 +51,14 @@ public class AppConstants {
         public static final String FATHER_PHONE_NUMBER = "father_phone_number";
         public static final String MOTHER_DOB = "mother_dob";
         public static final String FATHER_DOB = "father_dob";
-        public static final String M_ZEIR_ID = "M_ZEIR_ID";
         public static final String FATHER_BASE_ENTITY_ID = "father_base_entity_id";
-        public static final String FATHER = "father";
         public static final String TODAY = "today";
-        public static String SITE_CHARACTERISTICS = "site_characteristics";
-        public static String REGISTRATION_DATE = "client_reg_date";
+        public static final String BUTTON_TEXT = "buttonText";
+        public static final String DIALOG_TITLE = "dialogTitle";
+        public static final String SEARCH_HINT = "searchHint";
+        public static final String OPTIONS_TEXT = "options.text";
+        public static final String SITE_CHARACTERISTICS = "site_characteristics";
+        public static final String REGISTRATION_DATE = "client_reg_date";
         public static final String FIELDS = "fields";
         public static final String KEY = "key";
         public static final String IS_VACCINE_GROUP = "is_vaccine_group";
@@ -118,7 +107,6 @@ public class AppConstants {
         public static final String CHILD_REGISTRATION = "Birth Registration";
         public static final String UPDATE_CHILD_REGISTRATION = "Update Birth Registration";
         public static final String OUT_OF_CATCHMENT = "Out of Area Service";
-        public static final String ADVERSE_EFFECTS = "adverse_effects";
     }
 
     public interface JsonForm {
@@ -154,8 +142,8 @@ public class AppConstants {
         public static final String CHILD = "child";
     }
 
-    public class IntentKeyUtil {
-        public static final String IS_REMOTE_LOGIN = "is_remote_login";
+    public interface IntentKeyUtil {
+        String IS_REMOTE_LOGIN = "is_remote_login";
     }
 
     public interface RegisterType {

@@ -1,7 +1,7 @@
 package org.smartregister.uniceftunisia.activity;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 
 import org.smartregister.child.util.Utils;
 import org.smartregister.uniceftunisia.util.AppUtils;
@@ -19,11 +19,6 @@ public class ChildProfileActivity extends BaseProfileActivity {
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         Utils.showToast(this, "In the profile page!!");
-    }
-
-    @Override
-    protected void onResumption() {
-        super.onResumption();
     }
 
     @Override

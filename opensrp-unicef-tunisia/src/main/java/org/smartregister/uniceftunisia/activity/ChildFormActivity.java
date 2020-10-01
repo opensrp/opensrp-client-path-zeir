@@ -10,6 +10,7 @@ import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.MotherLookUpUtils;
 import org.smartregister.child.util.Utils;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
+import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.fragment.AppChildFormFragment;
 import org.smartregister.uniceftunisia.util.AppConstants;
 
@@ -34,8 +35,8 @@ public class ChildFormActivity extends BaseChildFormActivity {
     }
 
     protected void initializeFormFragmentCore() {
-        AppChildFormFragment AppChildFormFragment = getFormFragment(JsonFormConstants.FIRST_STEP_NAME);
-        getSupportFragmentManager().beginTransaction().add(com.vijay.jsonwizard.R.id.container, AppChildFormFragment).commit();
+        AppChildFormFragment childFormFragment = getFormFragment(JsonFormConstants.FIRST_STEP_NAME);
+        getSupportFragmentManager().beginTransaction().add(R.id.container, childFormFragment).commit();
     }
 
     protected static String getMainConditionString(Map<String, String> entityMap) {
@@ -100,7 +101,7 @@ public class ChildFormActivity extends BaseChildFormActivity {
                 getMotherDetailsColumn(SECOND_PHONE_NUMBER)};
 
         SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
-        queryBuilder.SelectInitiateMainTable(tableName, lookupColumns);
+        queryBuilder.selectInitiateMainTable(tableName, lookupColumns);
         queryBuilder.customJoin(
                 " join " + queryProvider.getMotherDetailsTable() + " on " + queryProvider.getMotherDetailsTable() + "." + AppConstants.KEY.BASE_ENTITY_ID + "=" + queryProvider.getDemographicTable() + "." + Constants.KEY.BASE_ENTITY_ID +
                         " join " + queryProvider.getChildDetailsTable() + " on " + queryProvider.getChildDetailsTable() + "." + Constants.KEY.RELATIONAL_ID + " = " + queryProvider.getMotherDetailsTable() + "." + Constants.KEY.BASE_ENTITY_ID);

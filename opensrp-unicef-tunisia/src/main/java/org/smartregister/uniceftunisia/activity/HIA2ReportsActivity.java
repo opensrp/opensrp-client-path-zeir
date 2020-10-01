@@ -5,14 +5,16 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +27,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smartregister.child.util.JsonFormUtils;
+import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.domain.Response;
 import org.smartregister.reporting.domain.TallyStatus;
 import org.smartregister.reporting.event.IndicatorTallyEvent;
@@ -80,12 +82,12 @@ public class HIA2ReportsActivity extends AppCompatActivity {
     public static final String REPORT_NAME = "HIA2";
 
     /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
+     * The {@link PagerAdapter} that will provide
      * fragments for each of the sections. We use a
      * {@link FragmentPagerAdapter} derivative, which will keep every
      * loaded fragment in memory. If this becomes too memory intensive, it
      * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     * {@link FragmentStatePagerAdapter}.
      */
     private ReportsSectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -97,7 +99,7 @@ public class HIA2ReportsActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private ReportingProcessingSnackbar reportingProcessingSnackbar;
-    private ArrayList<FragmentRefreshListener> fragmentRefreshListeners = new ArrayList<>();
+    private final ArrayList<FragmentRefreshListener> fragmentRefreshListeners = new ArrayList<>();
 
     @Nullable
     private String reportGrouping;
@@ -210,7 +212,7 @@ public class HIA2ReportsActivity extends AppCompatActivity {
                 JSONObject monthlyDraftForm = new JSONObject(jsonString);
 
                 //Map<String, String> result = JsonFormUtils.sectionFields(monthlyDraftForm);
-                JSONArray fieldsArray = JsonFormUtils.fields(monthlyDraftForm);
+                JSONArray fieldsArray = ChildJsonFormUtils.fields(monthlyDraftForm);
 
                 Map<String, String> result = new HashMap<>();
                 for (int j = 0; j < fieldsArray.length(); j++) {
@@ -336,12 +338,8 @@ public class HIA2ReportsActivity extends AppCompatActivity {
     }
 
     public void onClickReport(View view) {
-        switch (view.getId()) {
-            case R.id.btn_back_to_home:
-                finish();
-                break;
-            default:
-                break;
+        if (view.getId() == R.id.btn_back_to_home) {
+            finish();
         }
     }
 
@@ -385,9 +383,8 @@ public class HIA2ReportsActivity extends AppCompatActivity {
         Hia2ReportRepository hia2ReportRepository = UnicefTunisiaApplication.getInstance().hia2ReportRepository();
 
         try {
-            boolean keepSyncing = true;
             int limit = 50;
-            while (keepSyncing) {
+            while (true) {
                 List<JSONObject> pendingReports = hia2ReportRepository.getUnSyncedReports(limit);
 
                 if (pendingReports.isEmpty()) {

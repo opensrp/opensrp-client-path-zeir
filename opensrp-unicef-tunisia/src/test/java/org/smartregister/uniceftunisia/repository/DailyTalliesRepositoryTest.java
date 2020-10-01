@@ -26,7 +26,7 @@ public class DailyTalliesRepositoryTest extends BaseRobolectricTest {
     private SQLiteDatabase database;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         dailyTalliesRepository = Mockito.spy(new DailyTalliesRepository());
         Mockito.doReturn(database).when(dailyTalliesRepository).getReadableDatabase();
     }

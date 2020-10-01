@@ -2,7 +2,6 @@ package org.smartregister.uniceftunisia.listener;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.view.View;
 
 import org.smartregister.uniceftunisia.activity.ChildRegisterActivity;
@@ -13,8 +12,8 @@ import org.smartregister.uniceftunisia.view.NavigationMenu;
 
 public class NavigationListener implements View.OnClickListener {
 
-    private Activity activity;
-    private NavigationAdapter navigationAdapter;
+    private final Activity activity;
+    private final NavigationAdapter navigationAdapter;
 
     public NavigationListener(Activity activity, NavigationAdapter adapter) {
         this.activity = activity;
@@ -27,13 +26,13 @@ public class NavigationListener implements View.OnClickListener {
             String tag = (String) v.getTag();
 
             if (AppConstants.DrawerMenu.CHILD_CLIENTS.equals(tag)) {
-                navigateToActivity(ChildRegisterActivity.class);
+                navigateToActivity();
             }
             navigationAdapter.setSelectedView(tag);
         }
     }
 
-    private void navigateToActivity(@NonNull Class<?> clas) {
+    private void navigateToActivity() {
         NavigationMenu.closeDrawer();
 
         if (activity instanceof NavDrawerActivity) {
@@ -42,6 +41,6 @@ public class NavigationListener implements View.OnClickListener {
             activity.finish();
         }
 
-        activity.startActivity(new Intent(activity, clas));
+        activity.startActivity(new Intent(activity, ChildRegisterActivity.class));
     }
 }

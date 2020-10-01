@@ -2,7 +2,7 @@ package org.smartregister.uniceftunisia.adapter;
 
 import android.app.Activity;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +17,14 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Ephraim Kigamba - ekigamba@ona.io on 2019-12-02
  */
 public class MonthlyDraftsAdapter extends BaseAdapter {
 
-    private Activity activity;
+    private final Activity activity;
     private List<MonthlyTally> list;
     private View.OnClickListener onMonthlyDraftClickListener;
 
@@ -36,12 +37,7 @@ public class MonthlyDraftsAdapter extends BaseAdapter {
     public void setList(List<MonthlyTally> list) {
         this.list = list;
         if (this.list != null) {
-            Collections.sort(list, new Comparator<MonthlyTally>() {
-                @Override
-                public int compare(MonthlyTally lhs, MonthlyTally rhs) {
-                    return rhs.getMonth().compareTo(lhs.getMonth());
-                }
-            });
+            Collections.sort(list, (lhs, rhs) -> rhs.getMonth().compareTo(lhs.getMonth()));
         }
     }
 
@@ -63,7 +59,7 @@ public class MonthlyDraftsAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
-        SimpleDateFormat df = new SimpleDateFormat("MMM yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("MMM yyyy", Locale.getDefault());
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater)
                     activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -82,7 +78,7 @@ public class MonthlyDraftsAdapter extends BaseAdapter {
         tv.setText(text);
         tv.setTypeface(tv.getTypeface(), Typeface.BOLD);
         tv.setTag(text);
-        startedAt.setText(started + " " + startDate);
+        startedAt.setText(String.format("%s %s", started, startDate));
 
         view.setOnClickListener(onMonthlyDraftClickListener);
         view.setTag(date.getMonth());

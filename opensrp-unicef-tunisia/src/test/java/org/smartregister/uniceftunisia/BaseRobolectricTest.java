@@ -9,7 +9,6 @@ import org.robolectric.annotation.Config;
 import org.smartregister.uniceftunisia.shadow.CustomFontTextViewShadow;
 import org.smartregister.uniceftunisia.shadow.ShadowAssetHandler;
 import org.smartregister.uniceftunisia.shadow.ShadowBaseJob;
-import org.smartregister.view.customcontrols.CustomFontTextView;
 
 /**
  * Created by Ephraim Kigamba - nek.eam@gmail.com on 05-03-2020.

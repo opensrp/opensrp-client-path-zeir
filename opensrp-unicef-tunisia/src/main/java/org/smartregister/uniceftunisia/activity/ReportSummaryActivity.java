@@ -2,8 +2,8 @@ package org.smartregister.uniceftunisia.activity;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Created by Ephraim Kigamba - ekigamba@ona.io on 2019-07-11
@@ -40,7 +41,6 @@ public class ReportSummaryActivity extends BaseActivity {
     private LinkedHashMap<String, ArrayList<Tally>> tallies;
 
     private String subTitle;
-    private String reportGrouping;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -52,21 +52,16 @@ public class ReportSummaryActivity extends BaseActivity {
         }
 
         SimpleToolbar toolbar = (SimpleToolbar) getToolbar();
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
         toolbar.setBackground(new ColorDrawable(getResources().getColor(R.color.smart_register_blue)));
 
         Bundle extras = this.getIntent().getExtras();
         if (extras != null) {
             Serializable talliesSerializable = extras.getSerializable(EXTRA_TALLIES);
             Serializable tallyDaySerializable = extras.getSerializable(EXTRA_DAY);
-            reportGrouping = extras.getString(EXTRA_REPORT_GROUPING);
+            String reportGrouping = extras.getString(EXTRA_REPORT_GROUPING);
 
-            if (talliesSerializable != null && talliesSerializable instanceof  ArrayList) {
+            if (talliesSerializable instanceof ArrayList) {
                 ArrayList<MonthlyTally> tallies = (ArrayList<MonthlyTally>) talliesSerializable;
                 setTallies(tallies, false);
             }
@@ -139,7 +134,7 @@ public class ReportSummaryActivity extends BaseActivity {
         if (refreshViews) refreshIndicatorViews();
     }
 
-    private void setDailyTallies(@NonNull ArrayList<IndicatorTally> tallies, boolean refreshViews) {
+    private void setDailyTallies(@NonNull ArrayList<IndicatorTally> tallies) {
         this.tallies = new LinkedHashMap<>();
         this.tallies.put("", new ArrayList<>());
 
@@ -161,7 +156,7 @@ public class ReportSummaryActivity extends BaseActivity {
             }
         }
 
-        if (refreshViews) refreshIndicatorViews();
+        if (true) refreshIndicatorViews();
     }
 
     private void refreshIndicatorViews() {
@@ -177,9 +172,10 @@ public class ReportSummaryActivity extends BaseActivity {
         }
     }
 
+
     @Override
-    public void onUniqueIdFetched(Triple<String, String, String> triple, String entityId) {
-        // Nothing to do
+    public void onUniqueIdFetched(Triple<String, Map<String, String>, String> triple, String s) {
+        // Overridden
     }
 
     @Override
@@ -204,7 +200,7 @@ public class ReportSummaryActivity extends BaseActivity {
                 appExecutors.mainThread().execute(new Runnable() {
                     @Override
                     public void run() {
-                        setDailyTallies(indicatorTallies, true);
+                        setDailyTallies(indicatorTallies);
                     }
                 });
             }

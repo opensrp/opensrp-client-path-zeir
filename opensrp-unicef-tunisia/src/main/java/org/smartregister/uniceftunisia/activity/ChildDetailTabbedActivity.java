@@ -36,6 +36,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import timber.log.Timber;
 
@@ -45,7 +46,7 @@ import static org.smartregister.uniceftunisia.util.AppUtils.setAppLocale;
  * Created by ndegwamartin on 06/03/2019.
  */
 public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
-    private static List<String> nonEditableFields = Arrays.asList("Sex", "zeir_id", "mother_rubella", "protected_at_birth");
+    private final static List<String> nonEditableFields = Arrays.asList("Sex", "zeir_id", "mother_rubella", "protected_at_birth");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +62,13 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
     }
 
     @Override
-    public void onUniqueIdFetched(Triple<String, String, String> triple, String entityId) {
-        // Todo
+    public void onUniqueIdFetched(Triple<String, Map<String, String>, String> triple, String s) {
+        //Overridden - not required
     }
 
     @Override
     public void onNoUniqueId() {
-        // Todo
+        //Overridden - not required
     }
 
     public ChildRegistrationDataFragment getChildRegistrationDataFragment() {

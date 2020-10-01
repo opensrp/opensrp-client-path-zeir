@@ -30,7 +30,7 @@ public class UnicefTunisiaRepositoryTest extends BaseRobolectricTest {
     private SQLiteDatabase sqLiteDatabase;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         unicefTunisiaRepository = Mockito.spy((UnicefTunisiaRepository) UnicefTunisiaApplication.getInstance().getRepository());
 
         Mockito.doReturn(sqLiteDatabase).when(unicefTunisiaRepository).getReadableDatabase();
@@ -49,6 +49,6 @@ public class UnicefTunisiaRepositoryTest extends BaseRobolectricTest {
         unicefTunisiaRepository.onCreate(database);
 
         // TODO: Investigate this counter
-        Mockito.verify(database, Mockito.times(32)).execSQL(Mockito.contains("CREATE TABLE"));
+        Mockito.verify(database, Mockito.times(35)).execSQL(Mockito.contains("CREATE TABLE"));
     }
 }

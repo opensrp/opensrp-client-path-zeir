@@ -2,7 +2,7 @@ package org.smartregister.uniceftunisia.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
+import androidx.core.view.GravityCompat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -20,6 +20,7 @@ import org.smartregister.uniceftunisia.util.AppUtils;
 import org.smartregister.uniceftunisia.view.NavigationMenu;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ReportRegisterActivity extends BaseActivity {
 
@@ -80,32 +81,27 @@ public class ReportRegisterActivity extends BaseActivity {
     }
 
     public void onClickReport(View view) {
-        switch (view.getId()) {
-            case R.id.btn_back_to_home:
-
-                NavigationMenu navigationMenu = NavigationMenu.getInstance(this);
-                if (navigationMenu != null) {
-                    navigationMenu.getDrawer().openDrawer(GravityCompat.START);
-                }
-                break;
-            default:
-                break;
+        if (view.getId() == R.id.btn_back_to_home) {
+            NavigationMenu navigationMenu = NavigationMenu.getInstance(this);
+            if (navigationMenu != null) {
+                navigationMenu.getDrawer().openDrawer(GravityCompat.START);
+            }
         }
     }
 
     @Override
-    public void onUniqueIdFetched(Triple<String, String, String> triple, String s) {
-        // Nothing to happen here
+    public void onUniqueIdFetched(Triple<String, Map<String, String>, String> triple, String s) {
+        //Overridden - not required
     }
 
     @Override
     public void onNoUniqueId() {
-        // Nothing to happen here
+        //Overridden - not required
     }
 
     @Override
     public void onRegistrationSaved(boolean b) {
-        // Nothing to happen here
+        //Overridden - not required
     }
 
     @Override

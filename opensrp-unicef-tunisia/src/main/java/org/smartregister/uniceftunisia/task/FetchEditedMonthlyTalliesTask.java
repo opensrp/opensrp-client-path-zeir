@@ -1,8 +1,8 @@
 package org.smartregister.uniceftunisia.task;
 
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.domain.MonthlyTally;
@@ -16,17 +16,13 @@ import java.util.List;
  */
 
 public class FetchEditedMonthlyTalliesTask extends AsyncTask<Void, Void, List<MonthlyTally>> {
+
     private final TaskListener taskListener;
-    private String reportGrouping;
+    private final String reportGrouping;
 
     public FetchEditedMonthlyTalliesTask(@Nullable String reportGrouping, @NonNull TaskListener taskListener) {
         this.taskListener = taskListener;
         this.reportGrouping = reportGrouping;
-    }
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
     }
 
     @Override

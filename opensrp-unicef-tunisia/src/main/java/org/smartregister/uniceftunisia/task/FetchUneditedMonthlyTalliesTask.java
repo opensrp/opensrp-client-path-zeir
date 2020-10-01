@@ -1,8 +1,8 @@
 package org.smartregister.uniceftunisia.task;
 
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.smartregister.uniceftunisia.activity.HIA2ReportsActivity;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
@@ -18,8 +18,8 @@ import java.util.List;
 
 public class FetchUneditedMonthlyTalliesTask extends AsyncTask<Void, Void, List<Date>>{
 
-    private TaskListener taskListener;
-    private String reportGrouping;
+    private final TaskListener taskListener;
+    private final String reportGrouping;
 
     public FetchUneditedMonthlyTalliesTask(@Nullable String reportGrouping, @NonNull TaskListener taskListener) {
         this.reportGrouping = reportGrouping;

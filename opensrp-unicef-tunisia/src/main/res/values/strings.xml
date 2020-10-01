@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">TUNeVACC</string>
+    <string name="app_name">TUNeVACC</string>
     <string name="tunisia_app_login_title" translatable="false">Carte électronique de vaccination Tunisienne\nبطـــــاقة التلقيـــــح الإلكترونيــــة التونسية</string>
     <string name="action_settings" translatable="false">Settings</string>
     <string name="sync" translatable="false">Sync</string>
@@ -114,5 +114,6 @@
     <string name="rubella_serology">Mother received Rubella Serology test</string>
     <string name="serology_results">Serology test result</string>
     <string name="maximum_extra_vaccines_reached">You can only record a maximum of 10 vaccines</string>
+    <string name="sms_recipient">Vaccines  SMS reminder recipient</string>
 
 </resources>

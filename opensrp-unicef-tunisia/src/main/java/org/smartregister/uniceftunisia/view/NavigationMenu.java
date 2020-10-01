@@ -3,10 +3,10 @@ package org.smartregister.uniceftunisia.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.support.annotation.NonNull;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -31,8 +31,8 @@ import org.joda.time.Minutes;
 import org.joda.time.Seconds;
 import org.json.JSONObject;
 import org.smartregister.child.ChildLibrary;
+import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
-import org.smartregister.child.util.JsonFormUtils;
 import org.smartregister.child.util.Utils;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
@@ -60,7 +60,6 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
     private static WeakReference<Activity> activityWeakReference;
     private static String[] langArray;
     private LinearLayout syncMenuItem;
-    private LinearLayout enrollmentMenuItem;
     private LinearLayout outOfAreaMenu;
     private LinearLayout registerView;
     private LinearLayout reportView;
@@ -120,7 +119,6 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         outOfAreaMenu = activity.findViewById(R.id.out_of_area_menu);
         registerView = activity.findViewById(R.id.register_view);
         reportView = activity.findViewById(R.id.report_view);
-        enrollmentMenuItem = activity.findViewById(R.id.enrollment);
         loggedInUserTextView = activity.findViewById(R.id.logged_in_user_text_view);
         userInitialsTextView = activity.findViewById(R.id.user_initials_text_view);
         syncTextView = activity.findViewById(R.id.sync_text_view);
@@ -245,7 +243,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
     private void startFormActivity(Activity activity) {
         try {
             JSONObject formJson = new FormUtils(activity).getFormJson(AppConstants.JsonForm.OUT_OF_CATCHMENT_SERVICE);
-            JsonFormUtils.addAvailableVaccines(ChildLibrary.getInstance().context().applicationContext(), formJson);
+            ChildJsonFormUtils.addAvailableVaccines(ChildLibrary.getInstance().context().applicationContext(), formJson);
 
             Form form = new Form();
             form.setWizard(false);
@@ -256,7 +254,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             intent.putExtra(Constants.INTENT_KEY.JSON, formJson.toString());
             intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
             intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
-            activity.startActivityForResult(intent, JsonFormUtils.REQUEST_CODE_GET_JSON);
+            activity.startActivityForResult(intent, ChildJsonFormUtils.REQUEST_CODE_GET_JSON);
         } catch (Exception e) {
             Timber.e(e);
         }

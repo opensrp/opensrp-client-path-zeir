@@ -1,6 +1,6 @@
 package org.smartregister.uniceftunisia.job;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import org.smartregister.immunization.job.VaccineSchedulesUpdateJob;
 

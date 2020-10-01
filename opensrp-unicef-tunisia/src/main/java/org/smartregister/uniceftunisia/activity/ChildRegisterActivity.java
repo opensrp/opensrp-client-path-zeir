@@ -1,7 +1,7 @@
 package org.smartregister.uniceftunisia.activity;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.MenuItem;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
@@ -11,11 +11,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 import org.smartregister.child.activity.BaseChildRegisterActivity;
 import org.smartregister.child.model.BaseChildRegisterModel;
+import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
-import org.smartregister.child.util.JsonFormUtils;
 import org.smartregister.child.util.Utils;
 import org.smartregister.uniceftunisia.R;
-import org.smartregister.uniceftunisia.contract.NavigationMenuContract;
 import org.smartregister.uniceftunisia.fragment.AdvancedSearchFragment;
 import org.smartregister.uniceftunisia.fragment.ChildRegisterFragment;
 import org.smartregister.uniceftunisia.presenter.AppChildRegisterPresenter;
@@ -27,14 +26,9 @@ import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.lang.ref.WeakReference;
 
-public class ChildRegisterActivity extends BaseChildRegisterActivity implements NavDrawerActivity, NavigationMenuContract {
+public class ChildRegisterActivity extends BaseChildRegisterActivity implements NavDrawerActivity {
 
     private NavigationMenu navigationMenu;
-
-    @Override
-    public NavigationMenu getNavigationMenu() {
-        return navigationMenu;
-    }
 
     @Override
     protected void attachBaseContext(android.content.Context base) {
@@ -96,13 +90,6 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
     }
 
     @Override
-    public void closeDrawer() {
-        if (navigationMenu != null) {
-            NavigationMenu.closeDrawer();
-        }
-    }
-
-    @Override
     public void onPause() {
         EventBus.getDefault().unregister(this);
         super.onPause();
@@ -112,7 +99,7 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
     public void startFormActivity(JSONObject jsonForm) {
         if (jsonForm.has(AppConstants.KEY.ENCOUNTER_TYPE) && jsonForm.optString(AppConstants.KEY.ENCOUNTER_TYPE).equals(
                 AppConstants.KEY.BIRTH_REGISTRATION)) {
-            JsonFormUtils.addChildRegLocHierarchyQuestions(jsonForm);
+            ChildJsonFormUtils.addRegistrationFormLocationHierarchyQuestions(jsonForm);
         }
 
         Form form = new Form();
@@ -124,7 +111,7 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
         intent.putExtra(Constants.INTENT_KEY.JSON, jsonForm.toString());
         intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
         intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION,  true);
-        startActivityForResult(intent, JsonFormUtils.REQUEST_CODE_GET_JSON);
+        startActivityForResult(intent, ChildJsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 
 

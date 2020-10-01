@@ -24,7 +24,7 @@ public class ExpandedListAdapter<K, L, T> extends BaseExpandableListAdapter {
 
     private final Context context;
     private LinkedHashMap<K, List<ItemData<L, T>>> map = new LinkedHashMap<>();
-    private List<K> headers = new ArrayList<>();
+    private final List<K> headers = new ArrayList<>();
     private final int headerLayout;
     private final int childLayout;
     private boolean isChildSelectable = true;

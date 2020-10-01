@@ -13,13 +13,13 @@ import org.smartregister.uniceftunisia.util.AppConstants;
 
 import timber.log.Timber;
 
+import static org.smartregister.uniceftunisia.fragment.AppJsonFormFragment.getFormFragment;
+
 /**
  * Created by Ephraim Kigamba - ekigamba@ona.io on 2019-07-11
  */
 
 public class AppStockJsonFormActivity extends StockJsonFormActivity {
-
-    private AppJsonFormFragment AppJsonFormFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +28,9 @@ public class AppStockJsonFormActivity extends StockJsonFormActivity {
 
     @Override
     public void initializeFormFragment() {
-        AppJsonFormFragment = AppJsonFormFragment.getFormFragment(JsonFormConstants.FIRST_STEP_NAME);
+        AppJsonFormFragment appJsonFormFragment = getFormFragment(JsonFormConstants.FIRST_STEP_NAME);
         getSupportFragmentManager().beginTransaction()
-                .add(com.vijay.jsonwizard.R.id.container, AppJsonFormFragment).commit();
+                .add(com.vijay.jsonwizard.R.id.container, appJsonFormFragment).commit();
     }
 
     @Override
