@@ -6,7 +6,7 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$androidToolsBuildGradle"
+        classpath "com.android.tools.build:gradle:4.0.1"
         classpath 'gradle.plugin.org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.10.2'
         classpath 'io.fabric.tools:gradle:1.31.2'
     }
@@ -22,6 +22,11 @@ apply plugin: 'kotlin-android-extensions'
 
 jacoco {
     toolVersion = jacocoVersion
+}
+
+Properties properties = new Properties()
+if (project.rootProject.file("local.properties").exists()) {
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
 }
 
 android {
@@ -43,32 +48,9 @@ android {
         buildConfigField "long", "BUILD_TIMESTAMP", System.currentTimeMillis() + "L"
         buildConfigField "boolean", "IS_SYNC_SETTINGS", "false"
         buildConfigField "long", "EVENT_VERSION", System.currentTimeMillis() + "L"
-        buildConfigField "String", "OAUTH_CLIENT_ID", '"opensrp-trusted-client"'
-        buildConfigField "String", "OAUTH_CLIENT_SECRET", '"O@aTHS#cr3t"'
+
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         javaCompileOptions.annotationProcessorOptions.includeCompileClasspath true
-
-        if (project.rootProject.file("local.properties").exists()) {
-
-            Properties properties = new Properties()
-            properties.load(project.rootProject.file("local.properties").newDataInputStream())
-
-            if (properties != null && properties.containsKey("oauth.client.id")) {
-
-                buildConfigField "String", "OAUTH_CLIENT_ID", properties["oauth.client.id"]
-
-            } else {
-                project.logger.error("oauth.client.id variable is not set in your local.properties")
-            }
-
-            if (properties != null && properties.containsKey("oauth.client.secret")) {
-
-                buildConfigField "String", "OAUTH_CLIENT_SECRET", properties["oauth.client.secret"]
-
-            } else {
-                project.logger.error("oauth.client.secret variable is not set in your local.properties")
-            }
-        }
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -77,6 +59,7 @@ android {
         }
         vectorDrawables.useSupportLibrary = true
     }
+
     dexOptions {
         javaMaxHeapSize "4g"
     }
@@ -100,7 +83,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rule.pro'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
-            buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
+            buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '11'
             buildConfigField "int", "VACCINE_SYNC_TIME", '0'
             buildConfigField "int", "DATABASE_VERSION", '11'
             buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
@@ -115,15 +98,17 @@ android {
             buildConfigField "String[]", "LOCATION_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
             buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
+            buildConfigField "String", "OAUTH_CLIENT_ID", properties["oauth.client.id.release"]
+            buildConfigField "String", "OAUTH_CLIENT_SECRET", properties["oauth.client.secret.release"]
         }
 
         debug {
 
             versionNameSuffix "-debug"
-
+            resValue "string", 'opensrp_url', '"https://unicef-tunisia-stage.smartregister.org/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
-            buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
+            buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '12'
             buildConfigField "int", "VACCINE_SYNC_TIME", '0'
             buildConfigField "int", "DATABASE_VERSION", '11'
             buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
@@ -139,20 +124,22 @@ android {
             buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
             testCoverageEnabled true
+            buildConfigField "String", "OAUTH_CLIENT_ID", properties["oauth.client.id.debug"]
+            buildConfigField "String", "OAUTH_CLIENT_SECRET", properties["oauth.client.secret.debug"]
         }
 
         preview {
-            versionNameSuffix "-preview"
             minifyEnabled false
             zipAlignEnabled true
             debuggable true
             signingConfig signingConfigs.debug
-
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rule.pro'
-            resValue "string", 'opensrp_url', '"https://unicef-tunisia-stage.smartregister.org/opensrp/"'
+
+            versionNameSuffix "-preview"
+            resValue "string", 'opensrp_url', '"https://unicef-tunisia-preview.smartregister.org/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '10'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
-            buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
+            buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '13'
             buildConfigField "int", "VACCINE_SYNC_TIME", '0'
             buildConfigField "int", "DATABASE_VERSION", '11'
             buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
@@ -167,6 +154,8 @@ android {
             buildConfigField "String[]", "LOCATION_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
             buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
+            buildConfigField "String", "OAUTH_CLIENT_ID", properties["oauth.client.id.preview"]
+            buildConfigField "String", "OAUTH_CLIENT_SECRET", properties["oauth.client.secret.preview"]
         }
     }
 
@@ -213,9 +202,10 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.google.guava', module: 'guava'
+        exclude group: 'io.ona.rdt-capture', module: 'lib'
     }
 
-    implementation('org.smartregister:opensrp-client-core:2.2.2-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-core:2.2.3-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -256,12 +246,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
         exclude group: 'com.android.support', module: 'cardview-v7'
     }
-    implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') {
-        transitive = true
-    }
-    implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') {
-        transitive = true
-    }
     implementation 'androidx.appcompat:appcompat:1.0.0'
     annotationProcessor 'com.jakewharton:butterknife:10.2.1'
     implementation 'net.zetetic:android-database-sqlcipher:4.1.3@aar'
@@ -280,7 +264,6 @@ dependencies {
     implementation 'id.zelory:compressor:2.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation group: 'org.yaml', name: 'snakeyaml', version: '1.24'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
