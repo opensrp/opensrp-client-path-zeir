@@ -1,6 +1,7 @@
 package org.smartregister.uniceftunisia.repository;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import net.sqlcipher.database.SQLiteDatabase;
@@ -15,10 +16,7 @@ import org.smartregister.growthmonitoring.repository.HeightZScoreRepository;
 import org.smartregister.growthmonitoring.repository.WeightForHeightRepository;
 import org.smartregister.growthmonitoring.repository.WeightRepository;
 import org.smartregister.growthmonitoring.repository.WeightZScoreRepository;
-import org.smartregister.immunization.repository.RecurringServiceRecordRepository;
-import org.smartregister.immunization.repository.RecurringServiceTypeRepository;
 import org.smartregister.immunization.repository.VaccineRepository;
-import org.smartregister.immunization.util.IMDatabaseUtils;
 import org.smartregister.reporting.ReportingLibrary;
 import org.smartregister.reporting.repository.DailyIndicatorCountRepository;
 import org.smartregister.reporting.repository.IndicatorQueryRepository;
@@ -26,6 +24,10 @@ import org.smartregister.reporting.repository.IndicatorRepository;
 import org.smartregister.repository.AlertRepository;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Hia2ReportRepository;
+import org.smartregister.repository.LocationRepository;
+import org.smartregister.repository.LocationTagRepository;
+import org.smartregister.repository.PlanDefinitionRepository;
+import org.smartregister.repository.PlanDefinitionSearchRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.repository.SettingsRepository;
 import org.smartregister.repository.UniqueIdRepository;
@@ -43,22 +45,16 @@ public class UnicefTunisiaRepository extends Repository {
     private SQLiteDatabase readableDatabase;
     private SQLiteDatabase writableDatabase;
 
-    private Context context;
-    private String appVersionCodePref = AppConstants.Pref.APP_VERSION_CODE;
-
     public UnicefTunisiaRepository(@NonNull Context context, @NonNull org.smartregister.Context openSRPContext) {
         super(context, AllConstants.DATABASE_NAME, BuildConfig.DATABASE_VERSION, openSRPContext.session(),
                 UnicefTunisiaApplication.createCommonFtsObject(context), openSRPContext.sharedRepositoriesArray());
-        this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase database) {
         super.onCreate(database);
-        EventClientRepository
-                .createTable(database, EventClientRepository.Table.client, EventClientRepository.client_column.values());
-        EventClientRepository
-                .createTable(database, EventClientRepository.Table.event, EventClientRepository.event_column.values());
+        EventClientRepository.createTable(database, EventClientRepository.Table.client, EventClientRepository.client_column.values());
+        EventClientRepository.createTable(database, EventClientRepository.Table.event, EventClientRepository.event_column.values());
         ConfigurableViewsRepository.createTable(database);
         UniqueIdRepository.createTable(database);
 
@@ -70,17 +66,21 @@ public class UnicefTunisiaRepository extends Repository {
 
         ClientRegisterTypeRepository.createTable(database);
         ChildAlertUpdatedRepository.createTable(database);
+
         //reporting
         IndicatorRepository.createTable(database);
         IndicatorQueryRepository.createTable(database);
         DailyIndicatorCountRepository.createTable(database);
         MonthlyTalliesRepository.createTable(database);
 
+        LocationRepository.createTable(database);
+        LocationTagRepository.createTable(database);
+
         EventClientRepository.createTable(database, Hia2ReportRepository.Table.hia2_report, Hia2ReportRepository.report_column.values());
 
         runLegacyUpgrades(database);
 
-        onUpgrade(database, 10, BuildConfig.DATABASE_VERSION);
+        onUpgrade(database, 11, BuildConfig.DATABASE_VERSION);
 
         // initialize from yml file
         ReportingLibrary reportingLibraryInstance = ReportingLibrary.getInstance();
@@ -116,20 +116,18 @@ public class UnicefTunisiaRepository extends Repository {
                 case 4:
                     upgradeToVersion4(db);
                     break;
-                case 5:
-                    upgradeToVersion5(db);
-                    break;
                 case 6:
                     upgradeToVersion6(db);
                     break;
                 case 7:
                     upgradeToVersion7OutOfArea(db);
                     break;
-                case 8:
-                    upgradeToVersion8AddServiceGroupColumn(db);
-                    break;
                 case 9:
                     ChildDbMigrations.addShowBcg2ReminderAndBcgScarColumnsToEcChildDetails(db);
+                    break;
+                case 12:
+                    PlanDefinitionRepository.createTable(db);
+                    PlanDefinitionSearchRepository.createTable(db);
                     break;
                 default:
                     break;
@@ -206,32 +204,16 @@ public class UnicefTunisiaRepository extends Repository {
         upgradeToVersion2(database);
         upgradeToVersion3(database);
         upgradeToVersion4(database);
-        upgradeToVersion5(database);
         upgradeToVersion6(database);
         upgradeToVersion7OutOfArea(database);
-        upgradeToVersion7EventWeightHeightVaccineRecurringChange(database);
-        upgradeToVersion7VaccineRecurringServiceRecordChange(database);
-        upgradeToVersion7WeightHeightVaccineRecurringServiceChange(database);
+        upgradeToVersion7UpgradeTables(database);
         upgradeToVersion7RemoveUnnecessaryTables(database);
-    }
-
-    /**
-     * Version 16 added service_group column
-     *
-     * @param database SQLiteDatabase
-     */
-    private void upgradeToVersion8AddServiceGroupColumn(@NonNull SQLiteDatabase database) {
-        try {
-            database.execSQL(RecurringServiceTypeRepository.ADD_SERVICE_GROUP_COLUMN);
-        } catch (Exception e) {
-            Timber.e(e, "upgradeToVersion8AddServiceGroupColumn");
-        }
     }
 
     /**
      * Version 2 added some columns to the ec_child table
      *
-     * @param database
+     * @param database database
      */
     private void upgradeToVersion2(@NonNull SQLiteDatabase database) {
         try {
@@ -276,19 +258,6 @@ public class UnicefTunisiaRepository extends Repository {
         }
     }
 
-    private void upgradeToVersion5(@NonNull SQLiteDatabase db) {
-        try {
-            RecurringServiceTypeRepository.createTable(db);
-            RecurringServiceRecordRepository.createTable(db);
-
-            RecurringServiceTypeRepository recurringServiceTypeRepository = UnicefTunisiaApplication.getInstance()
-                    .recurringServiceTypeRepository();
-            IMDatabaseUtils.populateRecurringServices(context, db, recurringServiceTypeRepository);
-        } catch (Exception e) {
-            Timber.e(e, "upgradeToVersion5");
-        }
-    }
-
     private void upgradeToVersion6(@NonNull SQLiteDatabase db) {
         try {
             WeightZScoreRepository.createTable(db);
@@ -316,57 +285,31 @@ public class UnicefTunisiaRepository extends Repository {
         }
     }
 
-    private void upgradeToVersion7EventWeightHeightVaccineRecurringChange(@NonNull SQLiteDatabase db) {
+    private void upgradeToVersion7UpgradeTables(@NonNull SQLiteDatabase db) {
         try {
             Column[] columns = {EventClientRepository.event_column.formSubmissionId};
             EventClientRepository.createIndex(db, EventClientRepository.Table.event, columns);
 
             db.execSQL(WeightRepository.ALTER_ADD_CREATED_AT_COLUMN);
+            db.execSQL(WeightRepository.UPDATE_TABLE_ADD_CHILD_LOCATION_ID_COL);
+            db.execSQL(WeightRepository.UPDATE_TABLE_ADD_TEAM_COL);
+            db.execSQL(WeightRepository.UPDATE_TABLE_ADD_TEAM_ID_COL);
             WeightRepository.migrateCreatedAt(db);
 
             db.execSQL(HeightRepository.ALTER_ADD_CREATED_AT_COLUMN);
+            db.execSQL(HeightRepository.UPDATE_TABLE_ADD_CHILD_LOCATION_ID_COL);
+            db.execSQL(HeightRepository.UPDATE_TABLE_ADD_TEAM_COL);
+            db.execSQL(HeightRepository.UPDATE_TABLE_ADD_TEAM_ID_COL);
             HeightRepository.migrateCreatedAt(db);
 
             db.execSQL(VaccineRepository.ALTER_ADD_CREATED_AT_COLUMN);
+            db.execSQL(VaccineRepository.UPDATE_TABLE_ADD_CHILD_LOCATION_ID_COL);
+            db.execSQL(VaccineRepository.UPDATE_TABLE_ADD_TEAM_COL);
+            db.execSQL(VaccineRepository.UPDATE_TABLE_ADD_TEAM_ID_COL);
             VaccineRepository.migrateCreatedAt(db);
 
-            db.execSQL(RecurringServiceRecordRepository.ALTER_ADD_CREATED_AT_COLUMN);
-            RecurringServiceRecordRepository.migrateCreatedAt(db);
-
         } catch (Exception e) {
-            Timber.e(e, "upgradeToVersion7EventWeightHeightVaccineRecurringChange");
-        }
-    }
-
-    private void upgradeToVersion7VaccineRecurringServiceRecordChange(@NonNull SQLiteDatabase db) {
-        try {
-            db.execSQL(VaccineRepository.UPDATE_TABLE_ADD_TEAM_ID_COL);
-            db.execSQL(VaccineRepository.UPDATE_TABLE_ADD_TEAM_COL);
-
-            db.execSQL(RecurringServiceRecordRepository.UPDATE_TABLE_ADD_TEAM_ID_COL);
-            db.execSQL(RecurringServiceRecordRepository.UPDATE_TABLE_ADD_TEAM_COL);
-        } catch (Exception e) {
-            Timber.e(e, "upgradeToVersion7VaccineRecurringServiceRecordChange");
-        }
-    }
-
-    private void upgradeToVersion7WeightHeightVaccineRecurringServiceChange(@NonNull SQLiteDatabase db) {
-        try {
-
-            db.execSQL(WeightRepository.UPDATE_TABLE_ADD_TEAM_ID_COL);
-            db.execSQL(WeightRepository.UPDATE_TABLE_ADD_TEAM_COL);
-
-            db.execSQL(HeightRepository.UPDATE_TABLE_ADD_TEAM_ID_COL);
-            db.execSQL(HeightRepository.UPDATE_TABLE_ADD_TEAM_COL);
-
-            db.execSQL(VaccineRepository.UPDATE_TABLE_ADD_CHILD_LOCATION_ID_COL);
-
-            db.execSQL(WeightRepository.UPDATE_TABLE_ADD_CHILD_LOCATION_ID_COL);
-            db.execSQL(HeightRepository.UPDATE_TABLE_ADD_CHILD_LOCATION_ID_COL);
-
-            db.execSQL(RecurringServiceRecordRepository.UPDATE_TABLE_ADD_CHILD_LOCATION_ID_COL);
-        } catch (Exception e) {
-            Timber.e(e, "upgradeToVersion7WeightHeightVaccineRecurringServiceChange");
+            Timber.e(e, "upgradeToVersion7UpgradeTables");
         }
     }
 
@@ -381,13 +324,13 @@ public class UnicefTunisiaRepository extends Repository {
             if (DatabaseMigrationUtils.isColumnExists(db, EventClientRepository.Table.event.name(), "locationId"))
                 DatabaseMigrationUtils.recreateSyncTableWithExistingColumnsOnly(db, EventClientRepository.Table.event);
 
-
         } catch (Exception e) {
             Timber.e(e, "upgradeToVersion7RemoveUnnecessaryTables");
         }
     }
 
     private boolean checkIfAppUpdated() {
+        String appVersionCodePref = AppConstants.Pref.APP_VERSION_CODE;
         String savedAppVersion = ReportingLibrary.getInstance().getContext().allSharedPreferences().getPreference(appVersionCodePref);
         if (savedAppVersion.isEmpty()) {
             return true;

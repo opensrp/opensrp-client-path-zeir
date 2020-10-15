@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import org.apache.commons.lang3.tuple.Triple;
+import org.joda.time.DateTime;
 import org.smartregister.AllConstants;
 import org.smartregister.child.activity.BaseChildImmunizationActivity;
 import org.smartregister.child.domain.RegisterClickables;
@@ -14,6 +15,7 @@ import org.smartregister.child.toolbar.LocationSwitcherToolbar;
 import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.Utils;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.immunization.domain.VaccineSchedule;
 import org.smartregister.immunization.job.VaccineSchedulesUpdateJob;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.util.AppUtils;
@@ -39,7 +41,7 @@ public class ChildImmunizationActivity extends BaseChildImmunizationActivity {
         VaccineUtils.refreshImmunizationSchedules(childDetails.getCaseId());
         LocationSwitcherToolbar myToolbar = (LocationSwitcherToolbar) this.getToolbar();
         if (myToolbar != null) {
-            myToolbar.setNavigationOnClickListener(v -> finish());
+            myToolbar.setOnLocationChangeListener(v -> finish());
         }
     }
 
@@ -130,18 +132,16 @@ public class ChildImmunizationActivity extends BaseChildImmunizationActivity {
                 calendar.set(Calendar.HOUR_OF_DAY, 1);
                 long hoursSince1AM = (System.currentTimeMillis() - calendar.getTimeInMillis()) / TimeUnit.HOURS.toMillis(1);
                 if (VaccineSchedulesUpdateJob.isLastTimeRunLongerThan(hoursSince1AM) && !UnicefTunisiaApplication.getInstance().alertUpdatedRepository().findOne(childDetails.entityId())) {
-                    super.updateScheduleDate();
+                    String dobString = Utils.getValue(this.childDetails.getColumnmaps(), "dob", false);
+                    DateTime dateTime = Utils.dobStringToDateTime(dobString);
+                    if (dateTime != null) {
+                        VaccineSchedule.updateOfflineAlerts(this.childDetails.entityId(), dateTime, "child");
+                    }
                     UnicefTunisiaApplication.getInstance().alertUpdatedRepository().saveOrUpdate(childDetails.entityId());
                 }
             }
         } catch (Exception e) {
             Timber.e(e);
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getServiceGroupCanvasLL().setVisibility(View.VISIBLE);
     }
 }

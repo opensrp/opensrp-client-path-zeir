@@ -43,6 +43,7 @@ import static org.smartregister.uniceftunisia.util.AppConstants.KEY.SECOND_PHONE
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.SEROLOGY_RESULTS;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.SHOW_BCG2_REMINDER;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.SHOW_BCG_SCAR;
+import static org.smartregister.uniceftunisia.util.AppConstants.KEY.SMS_RECIPIENT;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.VILLAGE;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.ZEIR_ID;
 import static org.smartregister.uniceftunisia.util.TableUtil.getAllClientColumn;
@@ -104,6 +105,7 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 getChildDetailsColumn(PLACE_OF_BIRTH),
                 getChildDetailsColumn(GA_AT_BIRTH),
                 getChildDetailsColumn(FATHER_RELATIONAL_ID),
+                getChildDetailsColumn(SMS_RECIPIENT),
                 "mother.first_name                     as " + AppConstants.KEY.MOTHER_FIRST_NAME,
                 "mother.last_name                      as " + AppConstants.KEY.MOTHER_LAST_NAME,
                 "mother.dob                            as " + MOTHER_DOB,

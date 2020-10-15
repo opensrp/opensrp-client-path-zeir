@@ -342,132 +342,6 @@
         }
       },
       {
-        "key": "father_last_name",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person",
-        "openmrs_entity_id": "last_name",
-        "entity_id": "father",
-        "type": "edit_text",
-        "hint": "{{child_enrollment.step1.father_last_name.hint}}",
-        "edit_type": "name",
-        "v_required": {
-          "value": "false",
-          "err": "{{child_enrollment.step1.father_last_name.v_required.err}}"
-        },
-        "v_regex": {
-          "value": "[A-Za-z\\s\\.\\-]*",
-          "err": "{{child_enrollment.step1.father_last_name.v_regex.err}}"
-        }
-      },
-      {
-        "key": "father_first_name",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person",
-        "openmrs_entity_id": "first_name",
-        "entity_id": "father",
-        "type": "edit_text",
-        "hint": "{{child_enrollment.step1.father_first_name.hint}}",
-        "edit_type": "name",
-        "v_required": {
-          "value": "false",
-          "err": "{{child_enrollment.step1.father_first_name.v_required.err}}"
-        },
-        "v_regex": {
-          "value": "[A-Za-z\\s\\.\\-]*",
-          "err": "{{child_enrollment.step1.father_first_name.v_regex.err}}"
-        }
-      },
-      {
-        "key": "father_dob",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person",
-        "openmrs_entity_id": "birthdate",
-        "entity_id": "father",
-        "type": "date_picker",
-        "hint": "{{child_enrollment.step1.father_dob.hint}}",
-        "expanded": false,
-        "duration": {
-          "label": "{{child_enrollment.step1.father_dob.duration.label}}"
-        },
-        "default": "01-01-1960",
-        "max_date": "today-10y",
-        "v_required": {
-          "value": "false",
-          "err": "{{child_enrollment.step1.father_dob.v_required.err}}"
-        }
-      },
-      {
-        "key": "father_nationality",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "father_nationality",
-        "entity_id": "father",
-        "type": "spinner",
-        "hint": "{{child_enrollment.step1.father_nationality.hint}}",
-        "options": [
-          {
-            "key": "tunisian",
-            "text": "{{child_enrollment.step1.father_nationality.options.tunisian.text}}",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          },
-          {
-            "key": "other",
-            "text": "{{child_enrollment.step1.father_nationality.options.other.text}}",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          },
-          {
-            "key": "unknown",
-            "text": "{{child_enrollment.step1.father_nationality.options.unknown.text}}",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          }
-        ],
-        "v_required": {
-          "value": "false",
-          "err": "{{child_enrollment.step1.father_nationality.v_required.err}}"
-        }
-      },
-      {
-        "key": "father_nationality_other",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "father_nationality_other",
-        "type": "edit_text",
-        "hint": "{{child_enrollment.step1.father_nationality_other.hint}}",
-        "entity_id": "father",
-        "edit_type": "name",
-        "v_regex": {
-          "value": "[A-Za-z\\s\\.\\-]*",
-          "err": "{{child_enrollment.step1.father_nationality_other.v_regex.err}}"
-        },
-        "v_required": {
-          "value": true,
-          "err": "{{child_enrollment.step1.father_nationality_other.v_required.err}}"
-        },
-        "relevance": {
-          "rules-engine": {
-            "ex-rules": {
-              "rules-file": "child_register_registration_relevance_rules.yml"
-            }
-          }
-        }
-      },
-      {
-        "key": "father_phone",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "father_phone",
-        "entity_id": "father",
-        "type": "edit_text",
-        "hint": "{{child_enrollment.step1.father_phone.hint}}",
-        "v_regex": {
-          "value": "([0-9]{8})|\\s*",
-          "err": "{{child_enrollment.step1.father_phone.v_regex.err}}"
-        }
-      },
-      {
         "key": "mother_guardian_last_name",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person",
@@ -611,44 +485,6 @@
         "v_regex": {
           "value": "([0-9]{8})|\\s*",
           "err": "{{child_enrollment.step1.second_phone_number.v_regex.err}}"
-        }
-      },
-      {
-        "key": "sms_recipient",
-        "openmrs_entity_parent": "",
-        "openmrs_entity": "person_attribute",
-        "openmrs_entity_id": "sms_recipient",
-        "type": "spinner",
-        "hint": "{{child_enrollment.step1.sms_recipient.hint}}",
-        "options": [
-          {
-            "key": "father",
-            "text": "{{child_enrollment.step1.sms_recipient.options.father.text}}",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          },
-          {
-            "key": "mother",
-            "text": "{{child_enrollment.step1.sms_recipient.options.mother.text}}",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          },
-          {
-            "key": "both",
-            "text": "{{child_enrollment.step1.sms_recipient.options.both.text}}",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          },
-          {
-            "key": "none",
-            "text": "{{child_enrollment.step1.sms_recipient.options.none.text}}",
-            "openmrs_entity": "",
-            "openmrs_entity_id": ""
-          }
-        ],
-        "v_required": {
-          "value": true,
-          "err": "{{child_enrollment.step1.sms_recipient.v_required.err}}"
         }
       },
       {
@@ -861,6 +697,221 @@
               "rules-file": "child_register_registration_relevance_rules.yml"
             }
           }
+        }
+      },
+      {
+        "key": "include_father_details",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "include_father_details",
+        "type": "check_box",
+        "label": "",
+        "options": [
+          {
+            "key": "include_father_details",
+            "text": "{{child_enrollment.step1.include_father_details.options.record_father_details.text}}",
+            "text_size": "24px",
+            "value": "false"
+          }
+        ]
+      },
+      {
+        "key": "father_last_name",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "last_name",
+        "entity_id": "father",
+        "type": "edit_text",
+        "hint": "{{child_enrollment.step1.father_last_name.hint}}",
+        "edit_type": "name",
+        "v_required": {
+          "value": "true",
+          "err": "{{child_enrollment.step1.father_last_name.v_required.err}}"
+        },
+        "v_regex": {
+          "value": "[A-Za-z\\s\\.\\-]*",
+          "err": "{{child_enrollment.step1.father_last_name.v_regex.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "father_first_name",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "first_name",
+        "entity_id": "father",
+        "type": "edit_text",
+        "hint": "{{child_enrollment.step1.father_first_name.hint}}",
+        "edit_type": "name",
+        "v_required": {
+          "value": "true",
+          "err": "{{child_enrollment.step1.father_first_name.v_required.err}}"
+        },
+        "v_regex": {
+          "value": "[A-Za-z\\s\\.\\-]*",
+          "err": "{{child_enrollment.step1.father_first_name.v_regex.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "father_dob",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person",
+        "openmrs_entity_id": "birthdate",
+        "entity_id": "father",
+        "type": "date_picker",
+        "hint": "{{child_enrollment.step1.father_dob.hint}}",
+        "expanded": false,
+        "duration": {
+          "label": "{{child_enrollment.step1.father_dob.duration.label}}"
+        },
+        "default": "01-01-1960",
+        "max_date": "today-10y",
+        "v_required": {
+          "value": "true",
+          "err": "{{child_enrollment.step1.father_dob.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "father_nationality",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "father_nationality",
+        "entity_id": "father",
+        "type": "spinner",
+        "hint": "{{child_enrollment.step1.father_nationality.hint}}",
+        "options": [
+          {
+            "key": "tunisian",
+            "text": "{{child_enrollment.step1.father_nationality.options.tunisian.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "other",
+            "text": "{{child_enrollment.step1.father_nationality.options.other.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "unknown",
+            "text": "{{child_enrollment.step1.father_nationality.options.unknown.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{child_enrollment.step1.father_nationality.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "father_nationality_other",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "father_nationality_other",
+        "type": "edit_text",
+        "hint": "{{child_enrollment.step1.father_nationality_other.hint}}",
+        "entity_id": "father",
+        "edit_type": "name",
+        "v_regex": {
+          "value": "[A-Za-z\\s\\.\\-]*",
+          "err": "{{child_enrollment.step1.father_nationality_other.v_regex.err}}"
+        },
+        "v_required": {
+          "value": true,
+          "err": "{{child_enrollment.step1.father_nationality_other.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "father_phone",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "father_phone",
+        "entity_id": "father",
+        "type": "edit_text",
+        "hint": "{{child_enrollment.step1.father_phone.hint}}",
+        "v_regex": {
+          "value": "([0-9]{8})|\\s*",
+          "err": "{{child_enrollment.step1.father_phone.v_regex.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "sms_recipient",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "sms_recipient",
+        "type": "spinner",
+        "hint": "{{child_enrollment.step1.sms_recipient.hint}}",
+        "options": [
+          {
+            "key": "father",
+            "text": "{{child_enrollment.step1.sms_recipient.options.father.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "mother",
+            "text": "{{child_enrollment.step1.sms_recipient.options.mother.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "both",
+            "text": "{{child_enrollment.step1.sms_recipient.options.both.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "none",
+            "text": "{{child_enrollment.step1.sms_recipient.options.none.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{child_enrollment.step1.sms_recipient.v_required.err}}"
         }
       },
       {

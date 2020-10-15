@@ -22,6 +22,7 @@ import org.smartregister.util.FormUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import timber.log.Timber;
@@ -105,8 +106,8 @@ public class AppJsonFormUtils extends ChildJsonFormUtils {
             } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.SECOND_PHONE_NUMBER)) {
                 String secondPhone = Utils.getValue(childDetails, "mother_second_phone_number", true);
                 jsonObject.put(ChildJsonFormUtils.VALUE, secondPhone);
-            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase("Sex")) {
-                jsonObject.put(ChildJsonFormUtils.VALUE, childDetails.get(ChildJsonFormUtils.GENDER));
+            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase("Sex") && childDetails.containsKey(ChildJsonFormUtils.GENDER)) {
+                jsonObject.put(ChildJsonFormUtils.VALUE, childDetails.get(ChildJsonFormUtils.GENDER).toLowerCase(Locale.getDefault()));
             } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.BIRTH_WEIGHT)) {
                 jsonObject.put(ChildJsonFormUtils.VALUE, childDetails.get(AppConstants.KEY.BIRTH_WEIGHT.toLowerCase()));
             } else {

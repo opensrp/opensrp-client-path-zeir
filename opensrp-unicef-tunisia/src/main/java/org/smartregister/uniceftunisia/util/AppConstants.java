@@ -83,6 +83,7 @@ public class AppConstants {
         public static final String CHILD_REG = "child_reg";
         public static final String GA_AT_BIRTH = "ga_at_birth";
         public static final String PLACE_OF_BIRTH = "place_of_birth";
+        public static final String SMS_RECIPIENT = "sms_recipient";
     }
 
     public static final class DrawerMenu {

@@ -1,11 +1,4 @@
 ---
-name: step1_father_nationality_other
-description: father_nationality_other
-priority: 1
-condition: "step1_father_nationality == 'other'"
-actions:
-  - "isRelevant = true"
----
 name: step1_mother_nationality_other
 description: mother_nationality_other
 priority: 1
@@ -31,5 +24,47 @@ name: step1_mother_rubella
 description: mother_rubella
 priority: 1
 condition: "step1_serology_results == 'negative'"
+actions:
+  - "isRelevant = true"
+---
+name: step1_father_first_name
+description: step1_father_first_name
+priority: 1
+condition: "step1_include_father_details.contains('include_father_details')"
+actions:
+  - "isRelevant = true"
+---
+name: step1_father_last_name
+description: step1_father_last_name
+priority: 1
+condition: "step1_include_father_details.contains('include_father_details')"
+actions:
+  - "isRelevant = true"
+---
+name: step1_father_dob
+description: step1_father_dob
+priority: 1
+condition: "step1_include_father_details.contains('include_father_details')"
+actions:
+  - "isRelevant = true"
+---
+name: step1_father_nationality
+description: step1_father_nationality
+priority: 1
+condition: "step1_include_father_details.contains('include_father_details')"
+actions:
+  - "isRelevant = true"
+---
+name: step1_father_nationality_other
+description: father_nationality_other
+priority: 1
+condition: "step1_father_nationality == 'other'"
+actions:
+  - "isRelevant = true"
+---
+name: step1_father_phone
+description: step1_father_phone
+priority: 1
+condition: "step1_include_father_details.contains('include_father_details')"
 actions:
   - "isRelevant = true"

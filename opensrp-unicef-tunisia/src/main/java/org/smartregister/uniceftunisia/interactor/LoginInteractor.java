@@ -61,7 +61,7 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
         RecurringIndicatorGeneratingJob.scheduleJob(RecurringIndicatorGeneratingJob.TAG,
                 TimeUnit.HOURS.toMinutes(6), getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
 
-        ArchiveClientsJob.scheduleDaily();
+//        ArchiveClientsJob.scheduleDaily();
 
         // Schedule daily jobs
         AppVaccineUpdateJob.scheduleEverydayAt(AppVaccineUpdateJob.TAG, 1, 20);

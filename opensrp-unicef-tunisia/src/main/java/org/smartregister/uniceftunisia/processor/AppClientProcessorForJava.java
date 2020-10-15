@@ -2,18 +2,21 @@ package org.smartregister.uniceftunisia.processor;
 
 import android.content.ContentValues;
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+
+import net.sqlcipher.database.SQLiteDatabase;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joda.time.DateTime;
 import org.smartregister.child.util.ChildDbUtils;
 import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
+import org.smartregister.child.util.DBConstants;
 import org.smartregister.child.util.MoveToMyCatchmentUtils;
 import org.smartregister.child.util.Utils;
 import org.smartregister.clientandeventmodel.DateUtil;
@@ -22,6 +25,7 @@ import org.smartregister.domain.Client;
 import org.smartregister.domain.Event;
 import org.smartregister.domain.db.EventClient;
 import org.smartregister.domain.jsonmapping.ClientClassification;
+import org.smartregister.domain.jsonmapping.ClientField;
 import org.smartregister.domain.jsonmapping.Column;
 import org.smartregister.domain.jsonmapping.Table;
 import org.smartregister.growthmonitoring.domain.Height;
@@ -30,19 +34,14 @@ import org.smartregister.growthmonitoring.repository.HeightRepository;
 import org.smartregister.growthmonitoring.repository.WeightRepository;
 import org.smartregister.growthmonitoring.service.intent.HeightIntentService;
 import org.smartregister.growthmonitoring.service.intent.WeightIntentService;
-import org.smartregister.immunization.domain.ServiceRecord;
-import org.smartregister.immunization.domain.ServiceSchedule;
-import org.smartregister.immunization.domain.ServiceType;
 import org.smartregister.immunization.domain.Vaccine;
 import org.smartregister.immunization.domain.VaccineSchedule;
-import org.smartregister.immunization.repository.RecurringServiceRecordRepository;
-import org.smartregister.immunization.repository.RecurringServiceTypeRepository;
 import org.smartregister.immunization.repository.VaccineRepository;
-import org.smartregister.immunization.service.intent.RecurringIntentService;
 import org.smartregister.immunization.service.intent.VaccineIntentService;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.MiniClientProcessorForJava;
+import org.smartregister.sync.helper.ECSyncHelper;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppExecutors;
@@ -91,10 +90,9 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         Table vaccineTable = assetJsonToJava("ec_client_vaccine.json", Table.class);
         Table weightTable = assetJsonToJava("ec_client_weight.json", Table.class);
         Table heightTable = assetJsonToJava("ec_client_height.json", Table.class);
-        Table serviceTable = assetJsonToJava("ec_client_service.json", Table.class);
 
         if (!eventClients.isEmpty()) {
-            List<Event> unsyncEvents = new ArrayList<>();
+            List<Event> eventsToRemove = new ArrayList<>();
             for (EventClient eventClient : eventClients) {
                 Event event = eventClient.getEvent();
                 if (event == null) {
@@ -102,9 +100,11 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 }
 
                 String eventType = event.getEventType();
-                if (eventType == null) {
+
+                if (eventType == null || clientClassification == null) {
                     continue;
                 }
+
                 switch (eventType) {
                     case VaccineIntentService.EVENT_TYPE:
                     case VaccineIntentService.EVENT_TYPE_OUT_OF_CATCHMENT:
@@ -114,45 +114,38 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                     case WeightIntentService.EVENT_TYPE_OUT_OF_CATCHMENT:
                         processWeightEvent(weightTable, heightTable, eventClient, eventType);
                         break;
-
-                    case RecurringIntentService.EVENT_TYPE:
-                        if (serviceTable == null) {
-                            continue;
-                        }
-                        processService(eventClient, serviceTable);
-                        break;
                     case ChildJsonFormUtils.BCG_SCAR_EVENT:
                         processBCGScarEvent(eventClient);
                         break;
                     case MoveToMyCatchmentUtils.MOVE_TO_CATCHMENT_EVENT:
-                        unsyncEvents.add(event);
+                        eventsToRemove.add(event);
                         break;
                     case Constants.EventType.DEATH:
                         if (processDeathEvent(eventClient)) {
-                            unsyncEvents.add(event);
+                            getApplication().registerTypeRepository().removeAll(event.getBaseEntityId());
+                            eventsToRemove.add(event);
                         }
                         break;
                     case Constants.EventType.ARCHIVE_CHILD_RECORD:
-                        if (eventClient.getClient() != null && clientClassification != null) {
+                        if (eventClient.getClient() != null) {
                             getApplication().registerTypeRepository().removeAll(event.getBaseEntityId());
                             processEventClient(clientClassification, eventClient, event);
                         }
                         break;
                     case Constants.EventType.DYNAMIC_VACCINES:
-                        if (clientClassification != null) {
-                            processEventClient(clientClassification, eventClient, event);
-                        }
+                        processEventClient(clientClassification, eventClient, event);
+                        break;
                     case Constants.EventType.FATHER_REGISTRATION:
                     case Constants.EventType.BITRH_REGISTRATION:
                     case Constants.EventType.UPDATE_BITRH_REGISTRATION:
                     case Constants.EventType.NEW_WOMAN_REGISTRATION:
                     case Constants.EventType.UPDATE_FATHER_DETAILS:
                     case Constants.EventType.UPDATE_MOTHER_DETAILS:
-                        if (eventType.equals(Constants.EventType.BITRH_REGISTRATION) && eventClient.getClient() != null) {
-                            getApplication().registerTypeRepository().add(AppConstants.RegisterType.CHILD, event.getBaseEntityId());
-                        }
-                        if (clientClassification == null) {
+                        if (eventClient.getClient() == null) {
                             continue;
+                        }
+                        if (eventType.equals(Constants.EventType.BITRH_REGISTRATION)) {
+                            getApplication().registerTypeRepository().add(AppConstants.RegisterType.CHILD, event.getBaseEntityId());
                         }
                         processChildRegistrationAndRelatedEvents(clientClassification, eventClient, event);
                         break;
@@ -171,7 +164,53 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
             Runnable runnable = () -> updateClientAlerts(clientsForAlertUpdates);
 
             appExecutors.diskIO().execute(runnable);
+            // Unsync events that are should not be in this device
+            unSync(eventsToRemove);
         }
+    }
+
+    private void unSync(List<Event> events) {
+        try {
+            ClientField clientField = assetJsonToJava("ec_client_fields.json", ClientField.class);
+            if (events == null || events.isEmpty() || clientField == null) {
+                return;
+            }
+
+            for (Event event : events) {
+                unSync(clientField.bindobjects, event);
+            }
+
+        } catch (Exception e) {
+            Timber.e(e, e.toString());
+        }
+    }
+
+    private void unSync(List<Table> bindObjects, Event event) {
+        try {
+            String baseEntityId = event.getBaseEntityId();
+            String providerId = event.getProviderId();
+
+            if (providerId.equals(UnicefTunisiaApplication.getInstance()
+                    .context().allSharedPreferences().fetchRegisteredANM())) {
+
+                ECSyncHelper.getInstance(getContext()).deleteClient(baseEntityId);
+
+                for (Table bindObject : bindObjects) {
+                    String tableName = bindObject.name;
+                    deleteCase(tableName, baseEntityId);
+                    removeSearchRecord(tableName, baseEntityId);
+                }
+            }
+        } catch (Exception e) {
+            Timber.e(e, e.toString());
+        }
+    }
+
+
+    public void removeSearchRecord(String bindTable, String baseEntityId) {
+        SQLiteDatabase db = UnicefTunisiaApplication.getInstance().getRepository().getWritableDatabase();
+        String query = DBConstants.KEY.OBJECT_ID + " = ?";
+        db.delete(bindTable + "_search", query, new String[]{baseEntityId});
     }
 
     private void processEventClient(@NonNull ClientClassification clientClassification, @NonNull EventClient eventClient, @NonNull Event event) {
@@ -184,13 +223,13 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
             }
         }
     }
+
     private void updateClientAlerts(@NonNull HashMap<String, DateTime> clientsForAlertUpdates) {
         HashMap<String, DateTime> stringDateTimeHashMap = SerializationUtils.clone(clientsForAlertUpdates);
         for (String baseEntityId : stringDateTimeHashMap.keySet()) {
             DateTime birthDateTime = clientsForAlertUpdates.get(baseEntityId);
             if (birthDateTime != null) {
                 VaccineSchedule.updateOfflineAlerts(baseEntityId, birthDateTime, "child");
-                ServiceSchedule.updateOfflineAlerts(baseEntityId, birthDateTime);
             }
         }
         clientsForAlertUpdates.clear();
@@ -200,7 +239,6 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         if (eventClient.getEvent().getEntityType().equals(AppConstants.EntityType.CHILD)) {
             return AppUtils.updateChildDeath(eventClient);
         }
-
         return false;
     }
 
@@ -234,18 +272,16 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
             return;
         }
 
-        processWeight(eventClient, weightTable,
-                eventType.equals(WeightIntentService.EVENT_TYPE_OUT_OF_CATCHMENT));
-        processHeight(eventClient, heightTable,
-                eventType.equals(HeightIntentService.EVENT_TYPE_OUT_OF_CATCHMENT));
+        processWeight(eventClient, weightTable, eventType.equals(WeightIntentService.EVENT_TYPE_OUT_OF_CATCHMENT));
+        processHeight(eventClient, heightTable, eventType.equals(HeightIntentService.EVENT_TYPE_OUT_OF_CATCHMENT));
     }
 
     private void processVaccinationEvent(Table vaccineTable, EventClient eventClient, Event event, String eventType) {
-        if (vaccineTable == null) {
+        Client client = eventClient.getClient();
+        if (vaccineTable == null || client == null) {
             return;
         }
 
-        Client client = eventClient.getClient();
         if (!childExists(client.getBaseEntityId())) {
             List<String> createCase = new ArrayList<>();
             createCase.add(Utils.metadata().childRegister.tableName);
@@ -412,85 +448,6 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         }
     }
 
-    private void processService(EventClient service, Table serviceTable) {
-        try {
-            if (service == null || service.getEvent() == null || serviceTable == null) {
-                return;
-            }
-
-            Timber.i("Starting processService table: %s", serviceTable.name);
-
-            ContentValues contentValues = processCaseModel(service, serviceTable);
-
-            // save the values to db
-            if (contentValues != null && contentValues.size() > 0) {
-                String name = getServiceTypeName(contentValues);
-
-                String eventDateStr = contentValues.getAsString(RecurringServiceRecordRepository.DATE);
-                Date date = getDate(eventDateStr);
-
-                String value = null;
-
-                if (StringUtils.containsIgnoreCase(name, "ITN")) {
-                    SimpleDateFormat simpleDateFormat = this.simpleDateFormat;
-                    String itnDateString = contentValues.getAsString("itn_date");
-                    if (StringUtils.isNotBlank(itnDateString)) {
-                        date = simpleDateFormat.parse(itnDateString);
-                    }
-
-                    value = getServiceValue(contentValues);
-
-                }
-
-                List<ServiceType> serviceTypeList = getServiceTypes(name);
-                if (serviceTypeList == null || serviceTypeList.isEmpty() || date == null) {
-                    return;
-                }
-                
-                recordServiceRecord(service, contentValues, name, date, value, serviceTypeList);
-                Timber.i("Ending processService table: %s", serviceTable.name);
-            }
-
-        } catch (Exception e) {
-            Timber.e(e, "Process Service Error");
-        }
-    }
-
-    @NotNull
-    private String getServiceValue(ContentValues contentValues) {
-        String value;
-        value = RecurringIntentService.ITN_PROVIDED;
-        if (contentValues.getAsString("itn_has_net") != null) {
-            value = RecurringIntentService.CHILD_HAS_NET;
-        }
-        return value;
-    }
-
-    @Nullable
-    private String getServiceTypeName(ContentValues contentValues) {
-        String name = contentValues.getAsString(RecurringServiceTypeRepository.NAME);
-        if (StringUtils.isNotBlank(name)) {
-            name = name.replaceAll("_", " ").replace("dose", "").trim();
-        }
-        return name;
-    }
-
-    private void recordServiceRecord(EventClient service, ContentValues contentValues, String name, Date date, String value, List<ServiceType> serviceTypeList) {
-        RecurringServiceRecordRepository recurringServiceRecordRepository = getApplication()
-                .recurringServiceRecordRepository();
-        ServiceRecord serviceObj = getServiceRecord(service, contentValues, name, date, value, serviceTypeList);
-        String createdAtString = contentValues.getAsString(RecurringServiceRecordRepository.CREATED_AT);
-        Date createdAt = getDate(createdAtString);
-        serviceObj.setCreatedAt(createdAt);
-        recurringServiceRecordRepository.add(serviceObj);
-    }
-
-    private List<ServiceType> getServiceTypes(String name) {
-        RecurringServiceTypeRepository recurringServiceTypeRepository = getApplication()
-                .recurringServiceTypeRepository();
-        return recurringServiceTypeRepository.searchByName(name);
-    }
-
     private void processBCGScarEvent(EventClient bcgScarEventClient) {
         if (bcgScarEventClient == null || bcgScarEventClient.getEvent() == null) {
             return;
@@ -565,23 +522,6 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         return null;
     }
 
-    @NotNull
-    private ServiceRecord getServiceRecord(EventClient service, ContentValues contentValues, String name, Date date,
-                                           String value, List<ServiceType> serviceTypeList) {
-        ServiceRecord serviceObj = new ServiceRecord();
-        serviceObj.setBaseEntityId(contentValues.getAsString(RecurringServiceRecordRepository.BASE_ENTITY_ID));
-        serviceObj.setName(name);
-        serviceObj.setDate(date);
-        serviceObj.setAnmId(contentValues.getAsString(RecurringServiceRecordRepository.ANMID));
-        serviceObj.setLocationId(contentValues.getAsString(RecurringServiceRecordRepository.LOCATION_ID));
-        serviceObj.setSyncStatus(RecurringServiceRecordRepository.TYPE_Synced);
-        serviceObj.setFormSubmissionId(service.getEvent().getFormSubmissionId());
-        serviceObj.setEventId(service.getEvent().getEventId()); //FIXME hard coded id
-        serviceObj.setValue(value);
-        serviceObj.setRecurringServiceId(serviceTypeList.get(0).getId());
-        return serviceObj;
-    }
-
     @Override
     public void updateFTSsearch(String tableName, String entityId, ContentValues contentValues) {
 
@@ -602,7 +542,6 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 DateTime birthDateTime = Utils.dobStringToDateTime(dobString);
                 if (birthDateTime != null) {
                     VaccineSchedule.updateOfflineAlerts(entityId, birthDateTime, "child");
-                    ServiceSchedule.updateOfflineAlerts(entityId, birthDateTime);
                 }
             }
         }

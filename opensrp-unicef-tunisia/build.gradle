@@ -85,7 +85,7 @@ android {
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '11'
             buildConfigField "int", "VACCINE_SYNC_TIME", '0'
-            buildConfigField "int", "DATABASE_VERSION", '11'
+            buildConfigField "int", "DATABASE_VERSION", '12'
             buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
             buildConfigField "boolean", "TIME_CHECK", "true"
             buildConfigField "int", "DATA_SYNC_DURATION_MINUTES", '15'
@@ -110,7 +110,7 @@ android {
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '12'
             buildConfigField "int", "VACCINE_SYNC_TIME", '0'
-            buildConfigField "int", "DATABASE_VERSION", '11'
+            buildConfigField "int", "DATABASE_VERSION", '12'
             buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
             buildConfigField "boolean", "TIME_CHECK", "true"
             buildConfigField "int", "DATA_SYNC_DURATION_MINUTES", '15'
@@ -141,7 +141,7 @@ android {
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '13'
             buildConfigField "int", "VACCINE_SYNC_TIME", '0'
-            buildConfigField "int", "DATABASE_VERSION", '11'
+            buildConfigField "int", "DATABASE_VERSION", '12'
             buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
             buildConfigField "boolean", "TIME_CHECK", "true"
             buildConfigField "int", "DATA_SYNC_DURATION_MINUTES", '15'
@@ -195,7 +195,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
 //    implementation(project(':opensrp-child')) {
-    implementation('org.smartregister:opensrp-client-child:0.5.0-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-child:0.5.1-LOCAL4-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-growth-monitoring'
