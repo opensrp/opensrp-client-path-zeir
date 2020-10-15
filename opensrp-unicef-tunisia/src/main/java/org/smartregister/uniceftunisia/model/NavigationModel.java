@@ -3,9 +3,6 @@ package org.smartregister.uniceftunisia.model;
 import org.smartregister.uniceftunisia.contract.NavigationContract;
 import org.smartregister.util.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import timber.log.Timber;
 
 public class NavigationModel implements NavigationContract.Model {

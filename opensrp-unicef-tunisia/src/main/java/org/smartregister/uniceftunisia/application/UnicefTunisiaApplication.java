@@ -3,10 +3,11 @@ package org.smartregister.uniceftunisia.application;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import androidx.annotation.VisibleForTesting;
-import androidx.appcompat.app.AppCompatDelegate;
 import android.util.DisplayMetrics;
 import android.util.Pair;
+
+import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
@@ -33,8 +34,6 @@ import org.smartregister.immunization.db.VaccineRepo;
 import org.smartregister.immunization.domain.VaccineSchedule;
 import org.smartregister.immunization.domain.jsonmapping.Vaccine;
 import org.smartregister.immunization.domain.jsonmapping.VaccineGroup;
-import org.smartregister.immunization.repository.RecurringServiceRecordRepository;
-import org.smartregister.immunization.repository.RecurringServiceTypeRepository;
 import org.smartregister.immunization.repository.VaccineRepository;
 import org.smartregister.immunization.util.VaccinateActionUtils;
 import org.smartregister.immunization.util.VaccinatorUtils;
@@ -404,14 +403,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
             eventClientRepository = new EventClientRepository();
         }
         return eventClientRepository;
-    }
-
-    public RecurringServiceTypeRepository recurringServiceTypeRepository() {
-        return ImmunizationLibrary.getInstance().recurringServiceTypeRepository();
-    }
-
-    public RecurringServiceRecordRepository recurringServiceRecordRepository() {
-        return ImmunizationLibrary.getInstance().recurringServiceRecordRepository();
     }
 
     public boolean isLastModified() {

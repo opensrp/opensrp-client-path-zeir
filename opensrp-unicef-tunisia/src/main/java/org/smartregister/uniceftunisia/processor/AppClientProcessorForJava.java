@@ -112,7 +112,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                         break;
                     case WeightIntentService.EVENT_TYPE:
                     case WeightIntentService.EVENT_TYPE_OUT_OF_CATCHMENT:
-                        processWeightEvent(weightTable, heightTable, eventClient, eventType);
+                        processWeightAndHeightEvent(weightTable, heightTable, eventClient, eventType);
                         break;
                     case ChildJsonFormUtils.BCG_SCAR_EVENT:
                         processBCGScarEvent(eventClient);
@@ -259,7 +259,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         if (miniClientProcessorForJava != null) {
             List<Event> processorUnsyncEvents = unsyncEventsPerProcessor.get(miniClientProcessorForJava);
             if (processorUnsyncEvents == null) {
-                processorUnsyncEvents = new ArrayList<Event>();
+                processorUnsyncEvents = new ArrayList<>();
                 unsyncEventsPerProcessor.put(miniClientProcessorForJava, processorUnsyncEvents);
             }
 
@@ -267,7 +267,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         }
     }
 
-    private void processWeightEvent(Table weightTable, Table heightTable, EventClient eventClient, String eventType) {
+    private void processWeightAndHeightEvent(Table weightTable, Table heightTable, EventClient eventClient, String eventType) {
         if (weightTable == null || heightTable == null) {
             return;
         }

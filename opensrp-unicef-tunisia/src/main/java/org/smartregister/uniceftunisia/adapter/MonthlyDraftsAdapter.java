@@ -2,12 +2,13 @@ package org.smartregister.uniceftunisia.adapter;
 
 import android.app.Activity;
 import android.graphics.Typeface;
-import androidx.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.domain.MonthlyTally;
@@ -15,7 +16,6 @@ import org.smartregister.uniceftunisia.repository.MonthlyTalliesRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 

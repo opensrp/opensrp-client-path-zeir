@@ -2,9 +2,10 @@ package org.smartregister.uniceftunisia.repository;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.text.TextUtils;
 
 import net.sqlcipher.SQLException;
 import net.sqlcipher.database.SQLiteDatabase;

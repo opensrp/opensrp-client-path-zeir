@@ -2,12 +2,13 @@ package org.smartregister.uniceftunisia.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.core.view.GravityCompat;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.core.view.GravityCompat;
 
 import org.apache.commons.lang3.tuple.Triple;
 import org.smartregister.child.activity.BaseActivity;
