@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">TUNeVACC</string>
+    <string name="app_name">TUNeVACC</string>
     <string name="tunisia_app_login_title" translatable="false">Carte électronique de vaccination Tunisienne\nبطـــــاقة التلقيـــــح الإلكترونيــــة التونسية</string>
     <string name="action_settings" translatable="false">Settings</string>
     <string name="sync" translatable="false">Sync</string>

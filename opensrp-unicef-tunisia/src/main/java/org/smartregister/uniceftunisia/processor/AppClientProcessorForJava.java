@@ -6,6 +6,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
+import net.sqlcipher.Cursor;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import org.apache.commons.lang3.SerializationUtils;
@@ -46,6 +47,7 @@ import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppExecutors;
 import org.smartregister.uniceftunisia.util.AppUtils;
+import org.smartregister.uniceftunisia.util.VaccineUtils;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -188,9 +190,8 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
     private void unSync(List<Table> bindObjects, Event event) {
         try {
             String baseEntityId = event.getBaseEntityId();
-            String providerId = event.getProviderId();
 
-            if (providerId.equals(UnicefTunisiaApplication.getInstance()
+            if (event.getProviderId().equals(UnicefTunisiaApplication.getInstance()
                     .context().allSharedPreferences().fetchRegisteredANM())) {
 
                 ECSyncHelper.getInstance(getContext()).deleteClient(baseEntityId);
@@ -206,11 +207,30 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         }
     }
 
-
     public void removeSearchRecord(String bindTable, String baseEntityId) {
+        String ftsSearchTable = bindTable + "_search";
         SQLiteDatabase db = UnicefTunisiaApplication.getInstance().getRepository().getWritableDatabase();
-        String query = DBConstants.KEY.OBJECT_ID + " = ?";
-        db.delete(bindTable + "_search", query, new String[]{baseEntityId});
+        if (tableExists(db, ftsSearchTable)) {
+            String query = DBConstants.KEY.OBJECT_ID + " = ?";
+            db.delete(ftsSearchTable, query, new String[]{baseEntityId});
+        }
+    }
+
+    boolean tableExists(SQLiteDatabase db, String tableName) {
+        if (tableName == null || db == null || !db.isOpen()) {
+            return false;
+        }
+        Cursor cursor = db.rawQuery(
+                "SELECT COUNT(*) FROM sqlite_master WHERE type = ? AND name = ?",
+                new String[]{"table", tableName}
+        );
+        if (!cursor.moveToFirst()) {
+            cursor.close();
+            return false;
+        }
+        int count = cursor.getInt(0);
+        cursor.close();
+        return count > 0;
     }
 
     private void processEventClient(@NonNull ClientClassification clientClassification, @NonNull EventClient eventClient, @NonNull Event event) {
@@ -229,6 +249,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         for (String baseEntityId : stringDateTimeHashMap.keySet()) {
             DateTime birthDateTime = clientsForAlertUpdates.get(baseEntityId);
             if (birthDateTime != null) {
+                VaccineUtils.refreshImmunizationSchedules(baseEntityId);
                 VaccineSchedule.updateOfflineAlerts(baseEntityId, birthDateTime, "child");
             }
         }
@@ -541,6 +562,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
             if (StringUtils.isNotBlank(dobString)) {
                 DateTime birthDateTime = Utils.dobStringToDateTime(dobString);
                 if (birthDateTime != null) {
+                    VaccineUtils.refreshImmunizationSchedules(entityId);
                     VaccineSchedule.updateOfflineAlerts(entityId, birthDateTime, "child");
                 }
             }

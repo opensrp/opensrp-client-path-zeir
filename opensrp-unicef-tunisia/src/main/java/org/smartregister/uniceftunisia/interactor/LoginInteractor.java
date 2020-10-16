@@ -4,7 +4,6 @@ import org.smartregister.child.job.ArchiveClientsJob;
 import org.smartregister.growthmonitoring.job.HeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.WeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.ZScoreRefreshIntentServiceJob;
-import org.smartregister.immunization.job.RecurringServiceJob;
 import org.smartregister.immunization.job.VaccineServiceJob;
 import org.smartregister.job.ImageUploadServiceJob;
 import org.smartregister.job.PullUniqueIdsServiceJob;
@@ -28,10 +27,6 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
 
         VaccineServiceJob
                 .scheduleJob(VaccineServiceJob.TAG, TimeUnit.MINUTES.toMinutes(BuildConfig.DATA_SYNC_DURATION_MINUTES),
-                        getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
-
-        RecurringServiceJob
-                .scheduleJob(RecurringServiceJob.TAG, TimeUnit.MINUTES.toMinutes(BuildConfig.DATA_SYNC_DURATION_MINUTES),
                         getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
 
         WeightIntentServiceJob
@@ -63,13 +58,11 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
 
 //        ArchiveClientsJob.scheduleDaily();
 
-        // Schedule daily jobs
         AppVaccineUpdateJob.scheduleEverydayAt(AppVaccineUpdateJob.TAG, 1, 20);
     }
 
     @Override
     protected void scheduleJobsImmediately() {
-        //        schedule jobs
         SyncServiceJob.scheduleJobImmediately(SyncServiceJob.TAG);
         PullUniqueIdsServiceJob.scheduleJobImmediately(PullUniqueIdsServiceJob.TAG); //need these asap!
         ZScoreRefreshIntentServiceJob.scheduleJobImmediately(ZScoreRefreshIntentServiceJob.TAG);

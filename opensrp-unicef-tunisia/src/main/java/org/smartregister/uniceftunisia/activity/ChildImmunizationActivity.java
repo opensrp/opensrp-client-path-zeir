@@ -131,10 +131,11 @@ public class ChildImmunizationActivity extends BaseChildImmunizationActivity {
                 calendar.set(Calendar.HOUR_OF_DAY, 1);
                 long hoursSince1AM = (System.currentTimeMillis() - calendar.getTimeInMillis()) / TimeUnit.HOURS.toMillis(1);
                 if (VaccineSchedulesUpdateJob.isLastTimeRunLongerThan(hoursSince1AM) && !UnicefTunisiaApplication.getInstance().alertUpdatedRepository().findOne(childDetails.entityId())) {
-                    String dobString = Utils.getValue(this.childDetails.getColumnmaps(), "dob", false);
+                    String dobString = Utils.getValue(childDetails.getColumnmaps(), "dob", false);
                     DateTime dateTime = Utils.dobStringToDateTime(dobString);
                     if (dateTime != null) {
-                        VaccineSchedule.updateOfflineAlerts(this.childDetails.entityId(), dateTime, "child");
+                        VaccineUtils.refreshImmunizationSchedules(childDetails.getCaseId());
+                        VaccineSchedule.updateOfflineAlerts(childDetails.entityId(), dateTime, "child");
                     }
                     UnicefTunisiaApplication.getInstance().alertUpdatedRepository().saveOrUpdate(childDetails.entityId());
                 }

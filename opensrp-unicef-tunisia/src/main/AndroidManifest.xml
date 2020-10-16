@@ -107,7 +107,6 @@
         </provider>
 
         <service android:name="org.smartregister.immunization.service.intent.VaccineIntentService" />
-        <service android:name="org.smartregister.immunization.service.intent.VaccineSchedulesUpdateIntentService" />
         <service android:name="org.smartregister.growthmonitoring.service.intent.ZScoreRefreshIntentService" />
         <service android:name="org.smartregister.growthmonitoring.service.intent.WeightIntentService" />
         <service android:name="org.smartregister.growthmonitoring.service.intent.HeightIntentService" />
@@ -118,6 +117,7 @@
         <service android:name="org.smartregister.sync.intent.SettingsSyncIntentService" />
         <service android:name="org.smartregister.sync.intent.SyncIntentService" />
         <service android:name=".service.intent.ArchiveChildrenAgedAboveFiveIntentService" />
+        <service android:name=".service.intent.AppVaccineScheduleUpdateIntentService" />
 
         <uses-library
             android:name="org.apache.http.legacy"

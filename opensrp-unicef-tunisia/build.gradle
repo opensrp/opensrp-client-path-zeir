@@ -39,7 +39,7 @@ android {
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
         versionCode 1
-        versionName "0.1.0"
+        versionName "0.1.1"
         multiDexEnabled true
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
         buildConfigField "boolean", "TIME_CHECK", "false"
@@ -79,8 +79,9 @@ android {
         release {
             minifyEnabled false
             zipAlignEnabled true
-
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rule.pro'
+            versionNameSuffix "-release"
+            resValue "string", 'opensrp_url', '"https://unicef-tunisia.smartregister.org/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '11'
@@ -195,7 +196,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
 //    implementation(project(':opensrp-child')) {
-    implementation('org.smartregister:opensrp-client-child:0.5.1-LOCAL4-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-child:0.5.1-ALPHA2-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-growth-monitoring'

@@ -59,7 +59,6 @@ import org.smartregister.uniceftunisia.repository.AppChildRegisterQueryProvider;
 import org.smartregister.uniceftunisia.repository.ChildAlertUpdatedRepository;
 import org.smartregister.uniceftunisia.repository.ClientRegisterTypeRepository;
 import org.smartregister.uniceftunisia.repository.DailyTalliesRepository;
-import org.smartregister.uniceftunisia.repository.HIA2IndicatorsRepository;
 import org.smartregister.uniceftunisia.repository.MonthlyTalliesRepository;
 import org.smartregister.uniceftunisia.repository.UnicefTunisiaRepository;
 import org.smartregister.uniceftunisia.util.AppConstants;
@@ -86,7 +85,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     private ClientProcessorForJava clientProcessorForJava;
 
     private EventClientRepository eventClientRepository;
-    private HIA2IndicatorsRepository hia2IndicatorsRepository;
     private DailyTalliesRepository dailyTalliesRepository;
     private MonthlyTalliesRepository monthlyTalliesRepository;
     private Hia2ReportRepository hia2ReportRepository;
@@ -116,48 +114,50 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     }
 
     private static String[] getFtsTables() {
-        return new String[]{DBConstants.RegisterTable.CLIENT, DBConstants.RegisterTable.CHILD_DETAILS};
+        return new String[]{DBConstants.RegisterTable.CLIENT, DBConstants.RegisterTable.MOTHER_DETAILS, DBConstants.RegisterTable.FATHER_DETAILS, DBConstants.RegisterTable.CHILD_DETAILS};
     }
 
     private static String[] getFtsSearchFields(String tableName) {
-        if (tableName.equalsIgnoreCase(DBConstants.RegisterTable.CLIENT)) {
-            return new String[]{
-                    DBConstants.KEY.ZEIR_ID,
-                    DBConstants.KEY.FIRST_NAME,
-                    DBConstants.KEY.LAST_NAME
-            };
-        } else if (tableName.equalsIgnoreCase(DBConstants.RegisterTable.CHILD_DETAILS)) {
-            return new String[]{DBConstants.KEY.LOST_TO_FOLLOW_UP, DBConstants.KEY.INACTIVE};
+        switch (tableName) {
+            case DBConstants.RegisterTable.CLIENT:
+                return new String[]{
+                        DBConstants.KEY.ZEIR_ID,
+                        DBConstants.KEY.FIRST_NAME,
+                        DBConstants.KEY.LAST_NAME
+                };
+            case DBConstants.RegisterTable.CHILD_DETAILS:
+                return new String[]{DBConstants.KEY.LOST_TO_FOLLOW_UP, DBConstants.KEY.INACTIVE};
+            case DBConstants.RegisterTable.MOTHER_DETAILS:
+                return new String[]{AppConstants.KEY.MOTHER_GUARDIAN_NUMBER,};
+            case DBConstants.RegisterTable.FATHER_DETAILS:
+                return new String[]{AppConstants.KEY.FATHER_PHONE,};
+            default:
+                return null;
         }
-        return null;
     }
 
     private static String[] getFtsSortFields(String tableName, android.content.Context context) {
-        if (tableName.equals(AppConstants.TABLE_NAME.ALL_CLIENTS)) {
-            List<String> names = new ArrayList<>();
-            names.add(AppConstants.KEY.FIRST_NAME);
-            names.add(AppConstants.KEY.LAST_NAME);
-            names.add(AppConstants.KEY.DOB);
-            names.add(AppConstants.KEY.ZEIR_ID);
-            names.add(AppConstants.KEY.LAST_INTERACTED_WITH);
-            names.add(AppConstants.KEY.DOD);
-            names.add(AppConstants.KEY.DATE_REMOVED);
-            return names.toArray(new String[0]);
-        } else if (tableName.equals(DBConstants.RegisterTable.CHILD_DETAILS)) {
-            List<VaccineGroup> vaccineList = VaccinatorUtils.getVaccineGroupsFromVaccineConfigFile(context, VaccinatorUtils.vaccines_file);
-            List<String> names = new ArrayList<>();
-            names.add(DBConstants.KEY.INACTIVE);
-            names.add(DBConstants.KEY.RELATIONAL_ID);
-            names.add(DBConstants.KEY.LOST_TO_FOLLOW_UP);
+        switch (tableName) {
+            case AppConstants.TABLE_NAME.ALL_CLIENTS:
+                return Arrays.asList(AppConstants.KEY.FIRST_NAME, AppConstants.KEY.LAST_NAME,
+                        AppConstants.KEY.DOB, AppConstants.KEY.ZEIR_ID, AppConstants.KEY.LAST_INTERACTED_WITH,
+                        AppConstants.KEY.DOD, AppConstants.KEY.DATE_REMOVED).toArray(new String[0]);
+            case DBConstants.RegisterTable.CHILD_DETAILS:
+                List<VaccineGroup> vaccineList = VaccinatorUtils.getVaccineGroupsFromVaccineConfigFile(context, VaccinatorUtils.vaccines_file);
+                List<String> names = new ArrayList<>();
+                names.add(DBConstants.KEY.INACTIVE);
+                names.add(DBConstants.KEY.RELATIONAL_ID);
+                names.add(DBConstants.KEY.LOST_TO_FOLLOW_UP);
 
-            for (VaccineGroup vaccineGroup : vaccineList) {
-                populateAlertColumnNames(vaccineGroup.vaccines, names);
-            }
+                for (VaccineGroup vaccineGroup : vaccineList) {
+                    populateAlertColumnNames(vaccineGroup.vaccines, names);
+                }
 
-            return names.toArray(new String[0]);
+                return names.toArray(new String[0]);
 
+            default:
+                return null;
         }
-        return null;
     }
 
     private static void populateAlertColumnNames(List<Vaccine> vaccines, List<String> names) {
@@ -174,10 +174,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
 
                 }
                 populateAlertColumnNames(vaccineList, names);
-
-
             } else {
-
                 names.add("alerts." + VaccinateActionUtils.addHyphen(vaccine.getName()));
             }
     }
@@ -194,13 +191,10 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
                     Vaccine vaccineClone = new Vaccine();
                     vaccineClone.setName(individualVaccine.trim());
                     vaccineList.add(vaccineClone);
-
                 }
                 populateAlertScheduleMap(vaccineList, map);
 
-
             } else {
-
                 // TODO: This needs to be fixed because it is a configuration & not a hardcoded string
                 map.put(vaccine.name, Pair.create(DBConstants.RegisterTable.CHILD_DETAILS, false));
             }
@@ -446,13 +440,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
             dailyTalliesRepository = new DailyTalliesRepository();
         }
         return dailyTalliesRepository;
-    }
-
-    public HIA2IndicatorsRepository hIA2IndicatorsRepository() {
-        if (hia2IndicatorsRepository == null) {
-            hia2IndicatorsRepository = new HIA2IndicatorsRepository();
-        }
-        return hia2IndicatorsRepository;
     }
 
     public MonthlyTalliesRepository monthlyTalliesRepository() {
