@@ -31,5 +31,6 @@
     <dimen name="report_indicator_form_margin">24dp</dimen>
     <dimen name="text_user_initial_size">18sp</dimen>
     <dimen name="user_initials_textview_size">40dp</dimen>
+    <dimen name="tab_padding">24dp</dimen>
 
 </resources>

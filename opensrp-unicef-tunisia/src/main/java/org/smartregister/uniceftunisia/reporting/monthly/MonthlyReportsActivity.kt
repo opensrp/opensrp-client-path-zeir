@@ -14,7 +14,7 @@ import org.smartregister.view.activity.MultiLanguageActivity
 class MonthlyReportsActivity : MultiLanguageActivity() {
     private val monthlyReportsViewModel by viewModels<MonthlyReportsViewModel>
     { ViewModelUtil.createFor(MonthlyReportsViewModel(MonthlyReportsRepository())) }
-    private var mPagerAdapterMonthly: MonthlyReportsPagerAdapter? = null
+    private lateinit var reportsPagerAdapter: MonthlyReportsPagerAdapter
     lateinit var reportGrouping: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +22,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
         setContentView(R.layout.activity_monthly_reports)
         reportGrouping = intent.getStringExtra(AppConstants.IntentKey.REPORT_GROUPING)
                 ?: ReportGroup.MONTHLY_REPORTS.name
-        mPagerAdapterMonthly = MonthlyReportsPagerAdapter(this, supportFragmentManager)
+        reportsPagerAdapter = MonthlyReportsPagerAdapter(this, supportFragmentManager)
 
         monthlyReportsViewModel.apply {
             draftedMonths.observe(this@MonthlyReportsActivity, {
@@ -36,8 +36,12 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
             setOnClickListener { onBackPressed() }
             text = getLoggedInUserInitials()
         }
-        containerViewPager.apply { adapter = mPagerAdapterMonthly }
-        reportFragmentTabLayout.apply { setupWithViewPager(containerViewPager) }
+        containerViewPager.apply { adapter = reportsPagerAdapter }
+
+        reportFragmentTabLayout.apply {
+            setupWithViewPager(containerViewPager)
+            tabRippleColor = null
+        }
         titleTextView.apply {
             text = ReportGroupingModel(this@MonthlyReportsActivity).reportGroupings.first().displayName
         }

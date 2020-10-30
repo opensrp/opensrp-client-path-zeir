@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_monthly_sent_reports.*
+import kotlinx.android.synthetic.main.fragment_monthly_drafted_reports.*
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.domain.MonthlyTally
 import org.smartregister.uniceftunisia.reporting.*
@@ -36,7 +36,7 @@ class MonthlyDraftedReportsFragment : Fragment(), AdapterView.OnItemClickListene
     { ViewModelUtil.createFor(MonthlyReportsViewModel(MonthlyReportsRepository())) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-            inflater.inflate(R.layout.fragment_monthly_sent_reports, container, false)
+            inflater.inflate(R.layout.fragment_monthly_drafted_reports, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         monthlyReportsViewModel.run {
@@ -52,12 +52,15 @@ class MonthlyDraftedReportsFragment : Fragment(), AdapterView.OnItemClickListene
             })
 
             draftedMonths.observe(viewLifecycleOwner, {
-                noDraftReportsLayout.visibility = View.GONE
-                draftedReportsRecyclerView.apply {
-                    visibility = View.VISIBLE
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = DraftedReportsRecyclerAdapter(it, this@MonthlyDraftedReportsFragment)
-                    addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+                if (it.isEmpty()) noDraftReportsLayout.visibility = View.VISIBLE
+                else {
+                    noDraftReportsLayout.visibility = View.GONE
+                    draftedReportsRecyclerView.apply {
+                        visibility = View.VISIBLE
+                        layoutManager = LinearLayoutManager(context)
+                        adapter = DraftedReportsRecyclerAdapter(it, this@MonthlyDraftedReportsFragment)
+                        addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+                    }
                 }
             })
 

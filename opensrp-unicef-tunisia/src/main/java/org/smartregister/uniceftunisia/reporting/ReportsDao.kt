@@ -58,8 +58,8 @@ object ReportsDao : AbstractDao() {
                    edited,
                    date_sent,
                    indicator_grouping,
-                   created_at
-                  -- updated_at
+                   created_at,
+                   updated_at
             FROM monthly_tallies
             WHERE month = '$yearMonth'
               AND date_sent IS NULL
@@ -76,10 +76,10 @@ object ReportsDao : AbstractDao() {
                         value = getCursorValue(cursor, "value")!!
                         month = dateFormatter().parse(getCursorValue(cursor, "month")!!)
                         isEdited = getCursorIntValue(cursor, "edited")!! != 0
-                        dateSent = if (getCursorValue(cursor, "date_sent") == null) null else getCursorValueAsDate(cursor, "date_sent")
+                        dateSent = if (getCursorValue(cursor, "date_sent") == null) null else Date(getCursorLongValue(cursor, "date_sent")!!)
                         this.grouping = getCursorValue(cursor, "indicator_grouping")!!
                         createdAt = getCursorValueAsDate(cursor, "created_at")!!
-//                        updatedAt = getCursorValueAsDate(cursor, "updated_at")!!
+                        updatedAt = Date(getCursorLongValue(cursor, "updated_at")!!)
                         indicatorTally = Tally().also {
                             id = this.id
                             value = this.value

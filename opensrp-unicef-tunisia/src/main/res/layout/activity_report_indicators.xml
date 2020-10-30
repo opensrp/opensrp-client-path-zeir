@@ -92,6 +92,7 @@
 
     <Button
         android:id="@+id/confirmButton"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -99,7 +100,7 @@
         android:layout_marginTop="@dimen/report_indicator_form_margin"
         android:layout_marginEnd="@dimen/report_indicator_form_margin"
         android:layout_marginBottom="@dimen/report_indicator_form_margin"
-        android:background="@color/confirm_button_color"
+        android:background="@drawable/report_btn_bg"
         android:text="@string/confirm_button_label"
         android:textColor="@color/white" />
 

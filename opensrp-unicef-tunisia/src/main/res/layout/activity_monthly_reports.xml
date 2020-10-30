@@ -23,7 +23,7 @@
             <TextView
                 android:id="@+id/nameInitialsTextView"
                 android:layout_width="@dimen/user_initials_textview_size"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/user_initials_textview_size"
                 android:layout_centerInParent="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
@@ -37,7 +37,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <TextView
                 android:id="@+id/titleTextView"
@@ -59,23 +58,28 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/reportFragmentTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E6E6E6"
+        android:paddingTop="@dimen/tab_padding"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/tab_indicator_color"
+        app:tabIndicatorHeight="4dp"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
+        app:tabPaddingBottom="@dimen/tab_padding"
+        app:tabRippleColor="@null"
+        app:tabSelectedTextColor="#404040"
+        app:tabTextAppearance="@style/CustomFontTextViewStyle.tabIndicator" />
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/containerViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/reportFragmentTabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/tab_indicator_color"
-            app:tabIndicatorHeight="4dp"
-            app:tabMaxWidth="0dp"
-            app:tabPaddingBottom="8dp"
-            app:tabPaddingTop="8dp"
-            app:tabTextAppearance="@style/CustomFontTextViewStyle.tabIndicator" />
     </androidx.viewpager.widget.ViewPager>
 
 </LinearLayout>

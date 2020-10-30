@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:divider="@color/smart_register_client_divider_color"
             android:dividerHeight="@dimen/smart_register_client_divider_height"
-            android:visibility="invisible" />
+            android:visibility="gone" />
 
         <RelativeLayout
             android:id="@+id/noDraftReportsLayout"

@@ -26,4 +26,5 @@ class MonthlyReportsPagerAdapter(private val monthlyReportsActivity: MonthlyRepo
         0 -> monthlyReportsActivity.getString(R.string.hia2_draft_monthly_with_count, 0)
         else -> monthlyReportsActivity.getString(R.string.hia2_sent_monthly)
     }
+
 }
