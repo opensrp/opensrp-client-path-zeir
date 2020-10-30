@@ -44,22 +44,9 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
     }
 
     private fun getLoggedInUserInitials(): String {
-
         val allSharedPreferences = Context.getInstance().allSharedPreferences()
-        val preferredName = allSharedPreferences.getANMPreferredName(allSharedPreferences.fetchRegisteredANM())
-        return preferredName.split(" ").take(2).map { it.first() }.joinToString("")
-        /*if (!TextUtils.isEmpty(preferredName)) {
-            val initialsArray = preferredName.split(" ").toTypedArray()
-            var initials = ""
-            if (initialsArray.size > 0) {
-                initials = initialsArray[0].substring(0, 1)
-                if (initialsArray.size > 1) {
-                    initials = initials + initialsArray[1].substring(0, 1)
-                }
-            }
-            return initials.toUpperCase()
-        }
-   */
+        return allSharedPreferences.getANMPreferredName(allSharedPreferences.fetchRegisteredANM())
+                .split(" ").take(2).map { it.first() }.joinToString("")
     }
 
     override fun onResume() {
