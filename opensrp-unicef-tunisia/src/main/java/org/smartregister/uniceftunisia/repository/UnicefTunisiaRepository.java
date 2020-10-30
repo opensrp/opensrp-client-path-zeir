@@ -57,13 +57,11 @@ public class UnicefTunisiaRepository extends Repository {
         EventClientRepository.createTable(database, EventClientRepository.Table.event, EventClientRepository.event_column.values());
         ConfigurableViewsRepository.createTable(database);
         UniqueIdRepository.createTable(database);
-
         SettingsRepository.onUpgrade(database);
         WeightRepository.createTable(database);
         HeightRepository.createTable(database);
         VaccineRepository.createTable(database);
         WeightForHeightRepository.createTable(database);
-
         ClientRegisterTypeRepository.createTable(database);
         ChildAlertUpdatedRepository.createTable(database);
 
@@ -72,11 +70,10 @@ public class UnicefTunisiaRepository extends Repository {
         IndicatorQueryRepository.createTable(database);
         DailyIndicatorCountRepository.createTable(database);
         MonthlyTalliesRepository.createTable(database);
+        EventClientRepository.createTable(database, Hia2ReportRepository.Table.hia2_report, Hia2ReportRepository.report_column.values());
 
         LocationRepository.createTable(database);
         LocationTagRepository.createTable(database);
-
-        EventClientRepository.createTable(database, Hia2ReportRepository.Table.hia2_report, Hia2ReportRepository.report_column.values());
 
         runLegacyUpgrades(database);
 
@@ -85,17 +82,14 @@ public class UnicefTunisiaRepository extends Repository {
         // initialize from yml file
         ReportingLibrary reportingLibraryInstance = ReportingLibrary.getInstance();
         // Check if indicator data initialised
-        String indicatorDataInitialisedPref = AppConstants.Pref.INDICATOR_DATA_INITIALISED;
         boolean indicatorDataInitialised = Boolean.parseBoolean(reportingLibraryInstance.getContext()
-                .allSharedPreferences().getPreference(indicatorDataInitialisedPref));
+                .allSharedPreferences().getPreference(AppConstants.Pref.INDICATOR_DATA_INITIALISED));
         boolean isUpdated = checkIfAppUpdated();
         if (!indicatorDataInitialised || isUpdated) {
             Timber.d("Initialising indicator repositories!!");
-            //Reinstate when reporting work begins
-//            String indicatorsConfigFile = AppConstants.File.INDICATOR_CONFIG_FILE;
-//            reportingLibraryInstance.initIndicatorData(indicatorsConfigFile, database); // This will persist the data in the DB
-//            reportingLibraryInstance.getContext().allSharedPreferences().savePreference(indicatorDataInitialisedPref, "true");
-//            reportingLibraryInstance.getContext().allSharedPreferences().savePreference(appVersionCodePref, String.valueOf(BuildConfig.VERSION_CODE));
+            reportingLibraryInstance.initIndicatorData(AppConstants.File.INDICATOR_CONFIG_FILE, database); // This will persist the data in the DB
+            reportingLibraryInstance.getContext().allSharedPreferences().savePreference(AppConstants.Pref.INDICATOR_DATA_INITIALISED, "true");
+            reportingLibraryInstance.getContext().allSharedPreferences().savePreference(AppConstants.Pref.APP_VERSION_CODE, String.valueOf(BuildConfig.VERSION_CODE));
         }
     }
 
@@ -185,7 +179,6 @@ public class UnicefTunisiaRepository extends Repository {
             Timber.e(e);
             return null;
         }
-
     }
 
     @Override

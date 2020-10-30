@@ -12,6 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <include layout="@layout/custom_nav_view_base"/>
+    <include layout="@layout/navigation_drawer_view"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

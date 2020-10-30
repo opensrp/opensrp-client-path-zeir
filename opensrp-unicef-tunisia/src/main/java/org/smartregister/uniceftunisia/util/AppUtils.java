@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -110,16 +109,6 @@ public class AppUtils extends Utils {
         return selectedLocation;
     }
 
-
-    public static void startReportJob(Context context) {
-        String reportJobExecutionTime = UnicefTunisiaApplication.getInstance().context().allSharedPreferences().getPreference("report_job_execution_time");
-        if (StringUtils.isBlank(reportJobExecutionTime) || timeBetweenLastExecutionAndNow(30, reportJobExecutionTime)) {
-            UnicefTunisiaApplication.getInstance().context().allSharedPreferences().savePreference("report_job_execution_time", String.valueOf(System.currentTimeMillis()));
-            Toast.makeText(context, "Reporting Job Has Started, It will take some time", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(context, "Reporting Job Has Already Been Started, Try again in 30 mins", Toast.LENGTH_LONG).show();
-        }
-    }
 
     public static boolean timeBetweenLastExecutionAndNow(int i, String reportJobExecutionTime) {
         try {

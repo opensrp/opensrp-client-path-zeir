@@ -64,12 +64,12 @@ public class AppConstants {
         public static final String IS_VACCINE_GROUP = "is_vaccine_group";
         public static final String OPTIONS = "options";
         public static final String MOTHER_NATIONALITY = "mother_nationality";
-        public static final String FIRST_BIRTH= "first_birth";
-        public static final String RUBELLA_SEROLOGY= "rubella_serology";
-        public static final String SEROLOGY_RESULTS= "serology_results";
-        public static final String MOTHER_RUBELLA= "mother_rubella";
+        public static final String FIRST_BIRTH = "first_birth";
+        public static final String RUBELLA_SEROLOGY = "rubella_serology";
+        public static final String SEROLOGY_RESULTS = "serology_results";
+        public static final String MOTHER_RUBELLA = "mother_rubella";
         public static final String FATHER_NATIONALITY = "father_nationality";
-        public static final String FATHER_RELATIONAL_ID= "father_relational_id";
+        public static final String FATHER_RELATIONAL_ID = "father_relational_id";
         public static final String MOTHER_NATIONALITY_OTHER = "mother_nationality_other";
         public static final String FATHER_NATIONALITY_OTHER = "father_nationality_other";
         public static final String MOTHER_GUARDIAN_NUMBER = "mother_guardian_number";
@@ -78,8 +78,8 @@ public class AppConstants {
         public static final String PROTECTED_AT_BIRTH = "protected_at_birth";
         public static final String SHOW_BCG_SCAR = "show_bcg_scar";
         public static final String SHOW_BCG2_REMINDER = "show_bcg2_reminder";
-        public static final String BIRTH_REGISTRATION_NUMBER  = "birth_registration_number";
-        public static final String ID  = "id";
+        public static final String BIRTH_REGISTRATION_NUMBER = "birth_registration_number";
+        public static final String ID = "id";
         public static final String CHILD_REG = "child_reg";
         public static final String GA_AT_BIRTH = "ga_at_birth";
         public static final String PLACE_OF_BIRTH = "place_of_birth";
@@ -167,7 +167,7 @@ public class AppConstants {
     }
 
     public interface File {
-        String INDICATOR_CONFIG_FILE = "config/indicator-definitions.yml";
+        String INDICATOR_CONFIG_FILE = "configs/indicator-definitions.yml";
     }
 
     public interface ConditionalVaccines {

@@ -114,5 +114,37 @@
     <string name="serology_results">Serology test result</string>
     <string name="maximum_extra_vaccines_reached">You can only record a maximum of 10 vaccines</string>
     <string name="sms_recipient">Vaccines  SMS reminder recipient</string>
+    <string name="monthly_immunization_growth_monitoring_reports">Immunization and Growth Monitoring Monthly Reports</string>
+
+    <!-- Report Strings -->
+    <string name="coverage_reports">Coverage Reports</string>
+
+    <!-- Report indicators -->
+    <string name="at_birth_vaccines_bcg_0_24hrs">Children who received BCG within 24 hrs of birth</string>
+    <string name="at_birth_vaccines_bcg_2_59days">Children aged 2–59 days who received the BCG Vaccine</string>
+    <string name="at_birth_vaccines_hep_b_0_0_24hrs">Children aged 0–24hrs who received Hep B 0 vaccine</string>
+    <string name="at_birth_vaccines_hep_b_0_2_59days">Children aged 2–59 days who received Hep B 0 vaccine</string>
+
+    <!-- Months -->
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
+    <string name="title_activity_report_tallies">ReportTalliesActivity</string>
+
+    <!-- Strings used for reporting -->
+    <string name="report_indicators_summary">Report Indicators Summary</string>
+    <string name="report_indicators_form">Report Indicators Form</string>
+    <string name="month_year_draft">%1$s Draft</string>
+    <string name="error_saving_draft_reports">Error occurred while  saving drafts. Try again later</string>
+    <string name="started_on">Started %1$s</string>
 
 </resources>

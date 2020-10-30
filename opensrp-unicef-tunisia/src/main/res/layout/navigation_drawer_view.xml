@@ -73,7 +73,7 @@
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="48dp" />
+                        android:textSize="48sp" />
 
                 </RelativeLayout>
 

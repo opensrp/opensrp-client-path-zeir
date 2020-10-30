@@ -27,5 +27,9 @@
 
     <dimen name="login_horizontal_margin">16dp</dimen>
     <dimen name="login_mid_section_horizontal_margin">32dp</dimen>
+    <dimen name="toolbar_buttons_padding">8dp</dimen>
+    <dimen name="report_indicator_form_margin">24dp</dimen>
+    <dimen name="text_user_initial_size">18sp</dimen>
+    <dimen name="user_initials_textview_size">40dp</dimen>
 
 </resources>

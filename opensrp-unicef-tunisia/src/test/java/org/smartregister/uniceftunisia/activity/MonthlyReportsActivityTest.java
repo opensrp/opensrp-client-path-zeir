@@ -13,15 +13,16 @@ import org.robolectric.Robolectric;
 import org.robolectric.util.ReflectionHelpers;
 import org.smartregister.uniceftunisia.BaseRobolectricTest;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
+import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsActivity;
 import org.smartregister.uniceftunisia.repository.DailyTalliesRepository;
 import org.smartregister.uniceftunisia.repository.MonthlyTalliesRepository;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class HIA2ReportsActivityTest extends BaseRobolectricTest {
+public class MonthlyReportsActivityTest extends BaseRobolectricTest {
 
-    private HIA2ReportsActivity hia2ReportsActivity;
+    private MonthlyReportsActivity monthlyReportsActivity;
 
     @Mock
     private SQLiteDatabase database;
@@ -37,12 +38,12 @@ public class HIA2ReportsActivityTest extends BaseRobolectricTest {
         Mockito.doReturn(database).when(monthlyTalliesRepository).getReadableDatabase();
         Mockito.doReturn(database).when(monthlyTalliesRepository).getWritableDatabase();
         setupMonthlyRepository();
-        hia2ReportsActivity = Robolectric.setupActivity(HIA2ReportsActivity.class);
+        monthlyReportsActivity = Robolectric.setupActivity(MonthlyReportsActivity.class);
     }
 
     @Test
     public void testThaActivityStarted() {
-        Assert.assertNotNull(hia2ReportsActivity);
+        Assert.assertNotNull(monthlyReportsActivity);
     }
 
     private void setupMonthlyRepository() {

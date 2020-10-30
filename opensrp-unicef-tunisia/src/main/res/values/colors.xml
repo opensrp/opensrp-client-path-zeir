@@ -13,4 +13,8 @@
     <color name="login_text_color">#666666</color>
     <color name="dark_grey">#585858</color>
     <color name="tunisia_app_color">#ff0000</color>
+    <color name="report_toolbar_background">#494949</color>
+    <color name="tab_indicator_color">#389CC8</color>
+    <color name="confirm_button_color">#267ea5</color>
+    <color name="verticle_separator_line_color">#777777</color>
 </resources>

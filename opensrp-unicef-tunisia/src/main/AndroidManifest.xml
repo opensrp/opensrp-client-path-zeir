@@ -20,7 +20,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
-        android:name="org.smartregister.uniceftunisia.application.UnicefTunisiaApplication"
+        android:name=".application.UnicefTunisiaApplication"
         android:allowBackup="false"
         android:icon="@drawable/logo_pnv"
         android:label="@string/app_name"
@@ -29,16 +29,24 @@
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup,android:icon,android:label,android:theme">
         <activity
-            android:name="org.smartregister.uniceftunisia.activity.ReportRegisterActivity"
-            android:theme="@style/ChildTheme.NoActionBar" />
+            android:name=".reporting.monthly.indicator.ReportIndicatorsActivity"
+            android:label="@string/title_activity_report_tallies"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="org.smartregister.uniceftunisia.activity.ChildImmunizationActivity"
+            android:name=".reporting.register.ReportRegisterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChildTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activity.ChildImmunizationActivity"
             android:label="@string/title_activity_child_immunization"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="org.smartregister.uniceftunisia.activity.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Login"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
@@ -49,12 +57,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.smartregister.uniceftunisia.activity.ChildRegisterActivity"
+            android:name=".activity.ChildRegisterActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/ChildTheme.NoActionBar" />
         <activity
-            android:name="org.smartregister.uniceftunisia.activity.ChildFormActivity"
+            android:name=".activity.ChildFormActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/ChildTheme.NoActionBar"
@@ -66,27 +74,22 @@
             android:theme="@style/ChildTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="org.smartregister.uniceftunisia.activity.ChildDetailTabbedActivity"
+            android:name=".activity.ChildDetailTabbedActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ChildTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="org.smartregister.uniceftunisia.activity.ChildProfileActivity"
+            android:name=".activity.ChildProfileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ChildTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="org.smartregister.uniceftunisia.activity.HIA2ReportsActivity"
+            android:name=".reporting.monthly.MonthlyReportsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ChildTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="org.smartregister.uniceftunisia.activity.ReportSummaryActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/ChildTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity
-            android:name="org.smartregister.uniceftunisia.activity.AppStockJsonFormActivity"
+            android:name=".activity.AppStockJsonFormActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ChildTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />

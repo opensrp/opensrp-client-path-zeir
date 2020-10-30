@@ -1,0 +1,24 @@
+indicators:
+  - key: "at_birth_vaccines"
+    isMultiResult: true
+    grouping: "child"
+    description: "Number of children aged 0-24hrs who received the BCG Vaccine"
+    indicatorQuery: "SELECT vaccines.name,
+                              CASE
+                                  WHEN round(julianday('now') - julianday(ec_client.dob)) >= 2 AND
+                                       round(julianday('now') - julianday(ec_client.dob)) <= 59 THEN '2_59days'
+                                  WHEN round(julianday('now') - julianday(ec_client.dob)) <= 1 THEN '0_24hrs'
+                                  ELSE 'Null'
+                                  END age,
+                              count(*)
+                       FROM vaccines
+                                INNER JOIN ec_client
+                                           ON vaccines.base_entity_id = ec_client.base_entity_id
+                       WHERE ec_client.is_closed != 1
+                          AND strftime('%Y-%m-%d', '%s') = date(vaccines.date/1000, 'unixepoch', 'localtime')
+                       GROUP BY vaccines.name, age"
+    expectedIndicators:
+      - "at_birth_vaccines_bcg_0_24hrs"
+      - "at_birth_vaccines_bcg_2_59days"
+      - "at_birth_vaccines_hep_b_0_0_24hrs"
+      - "at_birth_vaccines_hep_b_0_2_59days"

@@ -75,10 +75,6 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
     @Override
     protected void onResumption() {
         super.onResumption();
-        createDrawer();
-    }
-
-    private void createDrawer() {
         WeakReference<ChildRegisterActivity> weakReference = new WeakReference<>(this);
         navigationMenu = NavigationMenu.getInstance(weakReference.get());
     }
@@ -129,6 +125,6 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
         if (clients != null) {
             clients.setTitle(getString(R.string.header_children));
         }
-        bottomNavigationView.getMenu().removeItem(org.smartregister.R.id.action_library);
+        bottomNavigationView.getMenu().removeItem(R.id.action_library);
     }
 }

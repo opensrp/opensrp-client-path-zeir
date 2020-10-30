@@ -80,21 +80,18 @@ import timber.log.Timber;
 
 public class UnicefTunisiaApplication extends DrishtiApplication implements TimeChangedBroadcastReceiver.OnTimeChangedListener {
 
+    private static List<VaccineGroup> vaccineGroups;
     private static CommonFtsObject commonFtsObject;
     private static JsonSpecHelper jsonSpecHelper;
+    private boolean lastModified;
     private ClientProcessorForJava clientProcessorForJava;
-
     private EventClientRepository eventClientRepository;
     private DailyTalliesRepository dailyTalliesRepository;
     private MonthlyTalliesRepository monthlyTalliesRepository;
     private Hia2ReportRepository hia2ReportRepository;
-
-    private boolean lastModified;
     private ECSyncHelper ecSyncHelper;
-
     private ClientRegisterTypeRepository registerTypeRepository;
     private ChildAlertUpdatedRepository childAlertUpdatedRepository;
-    private static List<VaccineGroup> vaccineGroups;
 
     public static JsonSpecHelper getJsonSpecHelper() {
         return jsonSpecHelper;
@@ -213,6 +210,13 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
 
     public static synchronized UnicefTunisiaApplication getInstance() {
         return (UnicefTunisiaApplication) mInstance;
+    }
+
+    public static List<VaccineGroup> getVaccineGroups(android.content.Context context) {
+        if (vaccineGroups == null) {
+            vaccineGroups = VaccinatorUtils.getVaccineGroupsFromVaccineConfigFile(context, VaccinatorUtils.vaccines_file);
+        }
+        return vaccineGroups;
     }
 
     @Override
@@ -455,15 +459,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
             hia2ReportRepository = new Hia2ReportRepository();
         }
         return hia2ReportRepository;
-    }
-
-    public static List<VaccineGroup> getVaccineGroups(android.content.Context context) {
-        if (vaccineGroups == null) {
-
-            vaccineGroups = VaccinatorUtils.getVaccineGroupsFromVaccineConfigFile(context, VaccinatorUtils.vaccines_file);
-        }
-
-        return vaccineGroups;
     }
 
     @VisibleForTesting

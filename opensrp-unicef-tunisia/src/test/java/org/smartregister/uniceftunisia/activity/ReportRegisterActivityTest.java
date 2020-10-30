@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.robolectric.Robolectric;
 import org.smartregister.uniceftunisia.BaseRobolectricTest;
 import org.smartregister.uniceftunisia.R;
+import org.smartregister.uniceftunisia.reporting.register.ReportRegisterActivity;
 
 public class ReportRegisterActivityTest extends BaseRobolectricTest {
 
@@ -21,7 +22,7 @@ public class ReportRegisterActivityTest extends BaseRobolectricTest {
     @Test
     public void testThatActivityStartedCorrectly() {
         Assert.assertEquals(R.layout.activity_report_register, reportRegisterActivity.getContentView());
-        ListView listView = reportRegisterActivity.findViewById(R.id.lv_reportRegister_groupings);
+        ListView listView = reportRegisterActivity.findViewById(R.id.reportRegisterListView);
         listView.performClick();
         Assert.assertNotNull(listView);
 
