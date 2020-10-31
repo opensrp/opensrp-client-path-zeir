@@ -18,6 +18,7 @@ import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepositor
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.INDICATOR_GROUPING
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.MONTH
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.PROVIDER_ID
+import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.UPDATED_AT
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.VALUE
 import java.util.*
 
@@ -38,13 +39,12 @@ class MonthlyReportsRepository : BaseRepository() {
         const val DATE_SENT = "date_sent"
         const val INDICATOR_GROUPING = "indicator_grouping"
         const val CREATED_AT = "created_at"
-    }
-
-    fun createTable() {
+        const val UPDATED_AT = "updated_at"
     }
 
     fun fetchUnDraftedMonths() = ReportsDao.getDistinctReportMonths()
             .subtract(fetchDraftedMonths().map { it.first.convertToNamedMonth(true) })
+            .subtract(ReportsDao.getSentReportMonths().map { it.first.convertToNamedMonth(true) })
             .toList()
 
     fun fetchDraftedMonths() = ReportsDao.getDraftedMonths()
@@ -74,19 +74,21 @@ class MonthlyReportsRepository : BaseRepository() {
                 }
             } else null
 
-    fun saveMonthlyDraft(monthlyTallies: Map<String, MonthlyTally>?, yearMonth: String?): Boolean {
+    fun saveMonthlyDraft(monthlyTallies: Map<String, MonthlyTally>?, yearMonth: String?, sync: Boolean): Boolean {
         if (!monthlyTallies.isNullOrEmpty() && !yearMonth.isNullOrBlank()) {
-            monthlyTallies.values.forEach {
+            monthlyTallies.values.forEach { tally ->
                 writableDatabase.transaction(exclusive = true) {
+                    val currentTime = Calendar.getInstance().timeInMillis
                     val contentValues = contentValuesOf(
-                            Pair(INDICATOR_CODE, it.indicator),
-                            Pair(INDICATOR_GROUPING, it.grouping),
-                            Pair(VALUE, it.value),
-                            Pair(CREATED_AT, Calendar.getInstance().timeInMillis),
-                            Pair(PROVIDER_ID, it.providerId),
+                            Pair(INDICATOR_CODE, tally.indicator),
+                            Pair(INDICATOR_GROUPING, tally.grouping),
+                            Pair(VALUE, tally.value),
+                            Pair(CREATED_AT, if (sync && tally.createdAt != null) tally.createdAt.time else currentTime),
+                            Pair(UPDATED_AT, if (sync && tally.updatedAt != null) tally.updatedAt.time else currentTime),
+                            Pair(PROVIDER_ID, tally.providerId),
                             Pair(EDITED, 1),
                             Pair(MONTH, yearMonth),
-                            Pair(DATE_SENT, null)
+                            Pair(DATE_SENT, if (sync) currentTime else null)
                     )
                     writableDatabase.insertWithOnConflict(Constants.TABLE_NAME, null, contentValues, SQLiteDatabase.CONFLICT_REPLACE)
                 }

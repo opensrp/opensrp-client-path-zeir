@@ -15,6 +15,7 @@ import org.smartregister.child.ChildLibrary;
 import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.Utils;
+import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.domain.form.FormLocation;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.util.AssetHandler;
@@ -171,11 +172,15 @@ public class AppJsonFormUtils extends ChildJsonFormUtils {
 
         //Update father details if it exists or create a new one
         if (form.has(Constants.KEY.FATHER) && childDetails.containsKey(AppConstants.KEY.FATHER_RELATIONAL_ID)
-                && childDetails.get(AppConstants.KEY.FATHER_RELATIONAL_ID) != null){
+                && childDetails.get(AppConstants.KEY.FATHER_RELATIONAL_ID) != null) {
             form.getJSONObject(Constants.KEY.FATHER).put(ENCOUNTER_TYPE, Constants.EventType.UPDATE_FATHER_DETAILS);
         }
-        if (form.has(Constants.KEY.MOTHER)){
+        if (form.has(Constants.KEY.MOTHER)) {
             form.getJSONObject(Constants.KEY.MOTHER).put(ENCOUNTER_TYPE, Constants.EventType.UPDATE_MOTHER_DETAILS);
         }
+    }
+
+    public static void tagEventMetadata(Event event) {
+        tagSyncMetadata(event);
     }
 }

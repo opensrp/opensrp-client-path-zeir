@@ -84,6 +84,8 @@ public class AppConstants {
         public static final String GA_AT_BIRTH = "ga_at_birth";
         public static final String PLACE_OF_BIRTH = "place_of_birth";
         public static final String SMS_RECIPIENT = "sms_recipient";
+        public static final String YEAR_MONTH = "year_month";
+        public static final String MONTHLY_TALLIES = "monthly_tallies";
     }
 
     public static final class DrawerMenu {
@@ -108,6 +110,7 @@ public class AppConstants {
         public static final String CHILD_REGISTRATION = "Birth Registration";
         public static final String UPDATE_CHILD_REGISTRATION = "Update Birth Registration";
         public static final String OUT_OF_CATCHMENT = "Out of Area Service";
+        public static final String MONTHLY_REPORT = "monthly_report";
     }
 
     public interface JsonForm {

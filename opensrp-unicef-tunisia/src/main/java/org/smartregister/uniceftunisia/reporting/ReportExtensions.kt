@@ -1,14 +1,18 @@
 package org.smartregister.uniceftunisia.reporting
 
 import android.content.Context
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
 /**
  * String constants
  */
 const val MONTHLY_TALLIES = "monthly_tallies"
+const val MONTHLY_REPORT = "monthly_report"
 const val YEAR_MONTH = "year_month"
 const val SHOW_DATA = "show_data"
 
@@ -34,7 +38,6 @@ object ViewModelUtil {
  *      Example October 2020 will be converted to 2020-10
  *      and 20119-01 will be converted to January 2019
  */
-
 fun String.convertToNamedMonth(hasHyphen: Boolean = false): String {
     val yearAndMonth = this.split(if (hasHyphen) "-" else " ")
     val months = listOf("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
@@ -66,5 +69,17 @@ fun String.translateString(context: Context): String {
         }
     }
     return this
-
 }
+
+/**
+ * Activity context extensions to display toast messages
+ */
+fun Context.showToast(resourceId: Int, duration: Int = Toast.LENGTH_LONG) =
+        Toast.makeText(this, getString(resourceId), duration).show()
+
+
+/**
+ * Activity context extensions to display SnackBar messages
+ */
+fun View.showSnackBar(resourceId: Int, duration: Int = Snackbar.LENGTH_LONG) =
+        Snackbar.make(this, this.context.getString(resourceId), duration).show()

@@ -6,6 +6,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
+import com.google.gson.reflect.TypeToken;
+
 import net.sqlcipher.Cursor;
 import net.sqlcipher.database.SQLiteDatabase;
 
@@ -14,6 +16,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.jetbrains.annotations.Nullable;
 import org.joda.time.DateTime;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.smartregister.AllConstants;
+import org.smartregister.CoreLibrary;
 import org.smartregister.child.util.ChildDbUtils;
 import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
@@ -44,11 +51,15 @@ import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.MiniClientProcessorForJava;
 import org.smartregister.sync.helper.ECSyncHelper;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
+import org.smartregister.uniceftunisia.domain.MonthlyTally;
+import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppExecutors;
+import org.smartregister.uniceftunisia.util.AppJsonFormUtils;
 import org.smartregister.uniceftunisia.util.AppUtils;
 import org.smartregister.uniceftunisia.util.VaccineUtils;
 
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -58,6 +69,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import timber.log.Timber;
 
@@ -68,6 +80,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
     private final HashMap<MiniClientProcessorForJava, List<Event>> unsyncEventsPerProcessor = new HashMap<>();
     private final AppExecutors appExecutors = new AppExecutors();
     private final HashMap<String, DateTime> clientsForAlertUpdates = new HashMap<>();
+    private MonthlyReportsRepository monthlyReportsRepository;
 
     public AppClientProcessorForJava(Context context) {
         super(context);
@@ -108,6 +121,11 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 }
 
                 switch (eventType) {
+                    case AppConstants.EventType.MONTHLY_REPORT:
+                        processMonthlyReportEvent(event);
+                        CoreLibrary.getInstance().context().getEventClientRepository()
+                                .markEventAsProcessed(eventClient.getEvent().getFormSubmissionId());
+                        break;
                     case VaccineIntentService.EVENT_TYPE:
                     case VaccineIntentService.EVENT_TYPE_OUT_OF_CATCHMENT:
                         processVaccinationEvent(vaccineTable, eventClient, event, eventType);
@@ -168,6 +186,31 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
             appExecutors.diskIO().execute(runnable);
             // Unsync events that are should not be in this device
             unSync(eventsToRemove);
+        }
+    }
+
+    private void processMonthlyReportEvent(Event event) {
+        if (monthlyReportsRepository == null)
+            monthlyReportsRepository = new MonthlyReportsRepository();
+
+        String monthlyReportString = event.getDetails().get(AppConstants.EventType.MONTHLY_REPORT);
+        if (StringUtils.isNotBlank(monthlyReportString)) {
+            try {
+                JSONObject monthlyReportJson = new JSONObject(monthlyReportString);
+                Type typeToken = new TypeToken<Map<String, MonthlyTally>>() {
+                }.getType();
+
+                String yearMonth = monthlyReportJson.getString(AppConstants.KEY.YEAR_MONTH);
+                JSONArray monthlyTalliesJsonArray = new JSONArray(monthlyReportJson.getString(AppConstants.KEY.MONTHLY_TALLIES));
+                for (int index = 0; index < monthlyTalliesJsonArray.length(); index++) {
+                    JSONObject monthlyTally = monthlyTalliesJsonArray.getJSONObject(index);
+                    JSONObject parsedJson = new JSONObject().put(monthlyTally.getString(AllConstants.INDICATOR), monthlyTally);
+                    Map<String, ? extends MonthlyTally> talliesMap = AppJsonFormUtils.gson.fromJson(parsedJson.toString(), typeToken);
+                    monthlyReportsRepository.saveMonthlyDraft(talliesMap, yearMonth, true);
+                }
+            } catch (JSONException e) {
+                Timber.e(e);
+            }
         }
     }
 

@@ -113,4 +113,25 @@ object ReportsDao : AbstractDao() {
         }
         return readData(sql, dataMap).toList().filterNotNull()
     }
+
+    fun getSentReportMonths(grouping: String= "child"): List<Pair<String, Date>> {
+        val sql = """
+            SELECT month, created_at
+            FROM monthly_tallies
+            WHERE date_sent IS NOT NULL
+              AND edited = 1
+              AND indicator_grouping = '$grouping'
+            GROUP BY month;
+
+        """.trimIndent()
+        val dataMap = DataMap { cursor: Cursor? ->
+            return@DataMap if (cursor != null && cursor.count > 0)
+                Pair(
+                        getCursorValue(cursor, "month")!!,
+                        getCursorValueAsDate(cursor, "created_at")!!
+                )
+            else null
+        }
+        return readData(sql, dataMap).toList().filterNotNull()
+    }
 }

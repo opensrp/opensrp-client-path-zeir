@@ -145,6 +145,9 @@
     <string name="report_indicators_form">Report Indicators Form</string>
     <string name="month_year_draft">%1$s Draft</string>
     <string name="error_saving_draft_reports">Error occurred while  saving drafts. Try again later</string>
+    <string name="error_sending_draft_reports">Error occurred while  sending  report. Try again later</string>
     <string name="started_on">Started %1$s</string>
+    <string name="monthly_draft_saved">Monthly draft report saved</string>
+    <string name="monthly_draft_submitted">Monthly report sent</string>
 
 </resources>
