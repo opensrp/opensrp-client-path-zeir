@@ -4,20 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_monthly_sent_reports.*
 import org.smartregister.uniceftunisia.R
 
-class MonthlySentReportsFragment : Fragment() {
+class SentReportsFragment : Fragment() {
 
-    private lateinit var expandableListView: ExpandableListView
-   
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.report_expandable_list_view, container, false)
+            inflater.inflate(R.layout.fragment_monthly_sent_reports, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        expandableListView = view.findViewById<ExpandableListView>(R.id.expandable_list_view).apply {
+       sentReportsExpandableListView.apply {
             setBackgroundColor(ContextCompat.getColor(context, R.color.white))
         }
     }

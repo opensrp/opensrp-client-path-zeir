@@ -149,5 +149,6 @@
     <string name="started_on">Started %1$s</string>
     <string name="monthly_draft_saved">Monthly draft report saved</string>
     <string name="monthly_draft_submitted">Monthly report sent</string>
+    <string name="confirm_send_draft_reports">Confirm Send Draft Report</string>
 
 </resources>

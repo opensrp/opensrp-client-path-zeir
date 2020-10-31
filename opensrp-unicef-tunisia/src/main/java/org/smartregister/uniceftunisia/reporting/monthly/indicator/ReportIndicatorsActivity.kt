@@ -3,6 +3,7 @@ package org.smartregister.uniceftunisia.reporting.monthly.indicator
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -19,18 +20,23 @@ import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication
 import org.smartregister.uniceftunisia.domain.MonthlyTally
 import org.smartregister.uniceftunisia.reporting.*
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
+import org.smartregister.uniceftunisia.reporting.monthly.draft.ConfirmSendDraftDialog
 import org.smartregister.uniceftunisia.util.AppJsonFormUtils
 import org.smartregister.uniceftunisia.util.AppUtils
 import org.smartregister.util.JsonFormUtils.ENCOUNTER_LOCATION
 import timber.log.Timber
 import java.util.*
 
-class ReportIndicatorsActivity : MultiLanguageActivity() {
+class ReportIndicatorsActivity : MultiLanguageActivity(), View.OnClickListener {
 
     private val reportIndicatorsViewModel by viewModels<ReportIndicatorsViewModel>
     { ViewModelUtil.createFor(ReportIndicatorsViewModel(MonthlyReportsRepository())) }
 
     lateinit var navController: NavController
+
+    private var translatedYearMonth: String? = null
+
+    private lateinit var confirmSendDraftDialog: ConfirmSendDraftDialog
 
     @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,39 +63,45 @@ class ReportIndicatorsActivity : MultiLanguageActivity() {
             getStringExtra(YEAR_MONTH)?.let {
                 yearMonth = it
                 reportIndicatorsViewModel.yearMonth.value = it
+
             }
         }
 
-        intent.getStringExtra(YEAR_MONTH)
-
         //Setup UI
-        yearMonthTextView.text = getString(R.string.month_year_draft, yearMonth?.convertToNamedMonth(hasHyphen = true)?.translateString(this))
+        translatedYearMonth = yearMonth?.convertToNamedMonth(hasHyphen = true)?.translateString(this)
+
+        confirmSendDraftDialog = ConfirmSendDraftDialog().apply {
+            onClickListener = this@ReportIndicatorsActivity
+            arguments = bundleOf(Pair(ConfirmSendDraftDialog.Constants.MONTH, translatedYearMonth))
+        }
+
+        yearMonthTextView.text = getString(R.string.month_year_draft, translatedYearMonth)
 
         backButton.setOnClickListener { finish() }
 
-        saveFormButton.setOnClickListener {
-            submitMonthlyDraft(sync = false)
-        }
+        saveFormButton.setOnClickListener { submitMonthlyDraft(sync = false) }
 
-        confirmButton.setOnClickListener {
-            submitMonthlyDraft(sync = true)
-        }
+        confirmButton.setOnClickListener(this)
     }
 
     private fun submitMonthlyDraft(sync: Boolean = false) {
         lifecycleScope.launch {
             if (sync) {
-                val syncedEvent = createAndProcessMonthlyReportEvent()
-                if (syncedEvent) {
-                    this@ReportIndicatorsActivity.showToast(R.string.monthly_draft_submitted)
-                    finish()
-                } else reportIndicatorsScrollView.showSnackBar(R.string.error_sending_draft_reports)
+                when (createAndProcessMonthlyReportEvent()) {
+                    true -> {
+                        reportIndicatorsScrollView.showSnackBar(R.string.monthly_draft_submitted)
+                        finish()
+                    }
+                    else -> reportIndicatorsScrollView.showSnackBar(R.string.error_sending_draft_reports)
+                }
             } else {
-                val saveMonthlyDraft = reportIndicatorsViewModel.saveMonthlyDraft()
-                if (saveMonthlyDraft) {
-                    this@ReportIndicatorsActivity.showToast(R.string.monthly_draft_saved)
-                    finish()
-                } else reportIndicatorsScrollView.showSnackBar(R.string.error_saving_draft_reports)
+                when (reportIndicatorsViewModel.saveMonthlyDraft()) {
+                    true -> {
+                        reportIndicatorsScrollView.showSnackBar(R.string.monthly_draft_saved)
+                        finish()
+                    }
+                    else -> reportIndicatorsScrollView.showSnackBar(R.string.error_saving_draft_reports)
+                }
             }
         }
     }
@@ -124,6 +136,17 @@ class ReportIndicatorsActivity : MultiLanguageActivity() {
         } catch (throwable: Throwable) {
             Timber.e(throwable)
             false
+        }
+    }
+
+    override fun onClick(view: View) {
+        when (view.id) {
+            R.id.sendDraftReportsButton -> {
+                submitMonthlyDraft(sync = true)
+            }
+            R.id.confirmButton -> {
+                confirmSendDraftDialog.show(supportFragmentManager, ConfirmSendDraftDialog::class.simpleName)
+            }
         }
     }
 }

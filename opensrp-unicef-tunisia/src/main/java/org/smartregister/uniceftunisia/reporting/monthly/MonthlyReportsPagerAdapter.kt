@@ -5,8 +5,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import org.smartregister.uniceftunisia.R
-import org.smartregister.uniceftunisia.reporting.monthly.draft.MonthlyDraftedReportsFragment
-import org.smartregister.uniceftunisia.reporting.monthly.sent.MonthlySentReportsFragment
+import org.smartregister.uniceftunisia.reporting.monthly.draft.DraftedReportsFragment
+import org.smartregister.uniceftunisia.reporting.monthly.sent.SentReportsFragment
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -16,8 +16,8 @@ class MonthlyReportsPagerAdapter(private val monthlyReportsActivity: MonthlyRepo
         FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment = when (position) {
-        0 -> MonthlyDraftedReportsFragment()
-        else -> MonthlySentReportsFragment()
+        0 -> DraftedReportsFragment()
+        else -> SentReportsFragment()
     }
 
     override fun getCount() = 2

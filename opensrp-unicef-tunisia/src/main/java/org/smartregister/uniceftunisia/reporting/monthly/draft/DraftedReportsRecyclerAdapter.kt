@@ -12,8 +12,14 @@ import org.smartregister.uniceftunisia.reporting.convertToNamedMonth
 import org.smartregister.uniceftunisia.reporting.translateString
 import java.util.*
 
-class DraftedReportsRecyclerAdapter(private val draftedMonths: List<Pair<String, Date>>, val onClickListener: View.OnClickListener) :
+class DraftedReportsRecyclerAdapter(val onClickListener: View.OnClickListener) :
         RecyclerView.Adapter<DraftedReportsRecyclerAdapter.DraftedMonthsViewHolder>() {
+
+    var draftedMonths: List<Pair<String, Date>> = arrayListOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DraftedMonthsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_monthly_draft_item, parent, false)

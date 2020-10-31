@@ -3,10 +3,7 @@ package org.smartregister.uniceftunisia.reporting.monthly.draft
 import android.content.Intent
 import android.os.Bundle
 import android.util.TypedValue
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.AdapterView
 import android.widget.BaseAdapter
 import android.widget.ListView
@@ -29,7 +26,7 @@ import org.smartregister.view.customcontrols.FontVariant
 import java.io.Serializable
 import java.util.*
 
-class MonthlyDraftedReportsFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickListener {
+class DraftedReportsFragment : Fragment(), AdapterView.OnItemClickListener, View.OnClickListener {
 
     private lateinit var alertDialog: AlertDialog
     private val monthlyReportsViewModel by activityViewModels<MonthlyReportsViewModel>
@@ -38,7 +35,11 @@ class MonthlyDraftedReportsFragment : Fragment(), AdapterView.OnItemClickListene
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
             inflater.inflate(R.layout.fragment_monthly_drafted_reports, container, false)
 
+    private val draftedReportsRecyclerAdapter = DraftedReportsRecyclerAdapter(this)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        draftedReportsRecyclerView.adapter = draftedReportsRecyclerAdapter
+
         monthlyReportsViewModel.run {
             unDraftedMonths.observe(viewLifecycleOwner, { dates ->
                 startNewReportButton.apply {
@@ -52,13 +53,13 @@ class MonthlyDraftedReportsFragment : Fragment(), AdapterView.OnItemClickListene
             })
 
             draftedMonths.observe(viewLifecycleOwner, {
+                draftedReportsRecyclerAdapter.draftedMonths = it
                 if (it.isEmpty()) noDraftReportsLayout.visibility = View.VISIBLE
                 else {
                     noDraftReportsLayout.visibility = View.GONE
                     draftedReportsRecyclerView.apply {
                         visibility = View.VISIBLE
                         layoutManager = LinearLayoutManager(context)
-                        adapter = DraftedReportsRecyclerAdapter(it, this@MonthlyDraftedReportsFragment)
                         addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
                     }
                 }
@@ -106,12 +107,13 @@ class MonthlyDraftedReportsFragment : Fragment(), AdapterView.OnItemClickListene
 
             findViewById<ListView>(R.id.datesListView).apply {
                 adapter = baseAdapter
-                onItemClickListener = this@MonthlyDraftedReportsFragment
+                onItemClickListener = this@DraftedReportsFragment
             }
             createAlertDialog(this)
         }
 
         alertDialog.show()
+        alertDialog.window?.setLayout(600,  WindowManager.LayoutParams.WRAP_CONTENT)
     }
 
     private fun createAlertDialog(view: View) {
