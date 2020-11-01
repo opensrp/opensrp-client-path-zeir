@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ExpandableListView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ExpandableListView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/sentReportsExpandableListView"
     style="@style/Widget.AppCompat.ListView"
     android:layout_width="match_parent"

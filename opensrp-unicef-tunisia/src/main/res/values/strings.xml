@@ -150,5 +150,9 @@
     <string name="monthly_draft_saved">Monthly draft report saved</string>
     <string name="monthly_draft_submitted">Monthly report sent</string>
     <string name="confirm_send_draft_reports">Confirm Send Draft Report</string>
+    <string name="sent_report_details">Sent %1$s by %2$s</string>
+    <string name="monthly_draft_reports">Draft Reports (%1$d)</string>
+    <string name="monthly_sent_reports">Sent Reports</string>
+    <string name="monthly_sent_reports_with_year">Sent Reports > %1$s</string>
 
 </resources>

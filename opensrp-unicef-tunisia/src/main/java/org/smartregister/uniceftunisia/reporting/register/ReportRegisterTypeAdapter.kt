@@ -18,11 +18,12 @@ class ReportRegisterTypeAdapter(context: Context, val layout: Int, private val r
 
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val currentView = convertView
-                ?: LayoutInflater.from(context).inflate(R.layout.report_grouping_list_item, parent, false)
-        return currentView.apply {
-            findViewById<TextView>(R.id.reportTypeTextView).text = getItem(position)
-            tag = getItem(position)
-        }
+        return convertView
+                ?: LayoutInflater.from(context).inflate(R.layout.report_grouping_list_item,
+                        parent, false)
+                        .apply {
+                            findViewById<TextView>(R.id.reportTypeTextView).text = getItem(position)
+                            tag = getItem(position)
+                        }
     }
 }

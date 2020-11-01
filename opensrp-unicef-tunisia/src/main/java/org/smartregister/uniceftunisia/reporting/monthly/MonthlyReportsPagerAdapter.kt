@@ -23,8 +23,8 @@ class MonthlyReportsPagerAdapter(private val monthlyReportsActivity: MonthlyRepo
     override fun getCount() = 2
 
     override fun getPageTitle(position: Int): CharSequence? = when (position) {
-        0 -> monthlyReportsActivity.getString(R.string.hia2_draft_monthly_with_count, 0)
-        else -> monthlyReportsActivity.getString(R.string.hia2_sent_monthly)
+        0 -> monthlyReportsActivity.getString(R.string.monthly_draft_reports, 0)
+        else -> monthlyReportsActivity.getString(R.string.monthly_sent_reports)
     }
 
 }

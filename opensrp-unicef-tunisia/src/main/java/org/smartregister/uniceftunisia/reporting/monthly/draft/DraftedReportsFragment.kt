@@ -138,7 +138,7 @@ class DraftedReportsFragment : Fragment(), AdapterView.OnItemClickListener, View
     override fun onItemClick(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
         val yearMonth = view.tag as String
         if (view.tag is String && yearMonth.isNotEmpty()) {
-            monthlyReportsViewModel.fetchMonthlyDraftedReportTallies(yearMonth.convertToNamedMonth())
+            monthlyReportsViewModel.fetchDraftedReportTalliesByMonth(yearMonth.convertToNamedMonth())
             alertDialog.dismiss()
         }
     }
@@ -147,7 +147,7 @@ class DraftedReportsFragment : Fragment(), AdapterView.OnItemClickListener, View
     override fun onClick(view: View) {
         if (view.tag is Pair<*, *>) {
             val (yearMonth) = view.tag as Pair<String, Date>
-            monthlyReportsViewModel.fetchMonthlyDraftedReportTallies(yearMonth)
+            monthlyReportsViewModel.fetchDraftedReportTalliesByMonth(yearMonth)
         }
     }
 }

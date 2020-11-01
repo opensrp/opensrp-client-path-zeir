@@ -27,7 +27,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
         monthlyReportsViewModel.apply {
             draftedMonths.observe(this@MonthlyReportsActivity, {
                 reportFragmentTabLayout.getTabAt(0)?.text =
-                        getString(R.string.hia2_draft_monthly_with_count, it.size)
+                        getString(R.string.monthly_draft_reports, it.size)
             })
         }
 
@@ -58,6 +58,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
         monthlyReportsViewModel.apply {
             fetchDraftedMonths()
             fetchUnDraftedMonths()
+            fetchAllSentReportMonths()
         }
     }
 }

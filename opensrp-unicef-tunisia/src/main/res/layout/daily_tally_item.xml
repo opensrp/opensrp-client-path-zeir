@@ -10,7 +10,7 @@
         android:layout_marginBottom="5dp">
 
         <ImageView
-            android:id="@+id/daily_tallies_img"
+            android:id="@+id/sentReportImageView"
             android:layout_width="@dimen/sent_monthly_pic_dim"
             android:layout_height="@dimen/sent_monthly_pic_dim"
             android:layout_alignParentStart="true"
@@ -25,14 +25,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/daily_tallies_img"
+            android:layout_toEndOf="@id/sentReportImageView"
             android:orientation="vertical"
             android:textAlignment="viewStart"
             android:paddingStart="20dp"
             android:paddingEnd="0dp">
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/tv_sentMonthlyItem_title"
+                android:id="@+id/dateReportSentTextView"
                 style="@style/CustomFontTextViewStyle.ClientList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:textSize="22sp" />
 
             <org.smartregister.view.customcontrols.CustomFontTextView
-                android:id="@+id/tv_sentMonthlyItem_details"
+                android:id="@+id/sentReportDetailsTextView"
                 style="@style/CustomFontTextViewStyle.ClientList.Light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

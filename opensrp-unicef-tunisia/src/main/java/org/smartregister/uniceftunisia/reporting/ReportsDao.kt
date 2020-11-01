@@ -48,7 +48,7 @@ object ReportsDao : AbstractDao() {
      * This method returns a list of [MonthlyTally] drafted for the [yearMonth]. The [yearMonth] must
      * be in the format YYYY-MM. [grouping] is optional and defaults to 'child'
      */
-    fun getMonthlyDraftedReportTallies(yearMonth: String, grouping: String = "child"): List<MonthlyTally> {
+    fun getReportsByMonth(yearMonth: String, grouping: String = "child", drafted: Boolean = true): List<MonthlyTally> {
         val sql = """
             SELECT _id,
                    indicator_code,
@@ -62,38 +62,38 @@ object ReportsDao : AbstractDao() {
                    updated_at
             FROM monthly_tallies
             WHERE month = '$yearMonth'
-              AND date_sent IS NULL
+              AND date_sent IS ${if (drafted) "" else "NOT"} NULL
               AND indicator_grouping = '$grouping';
         """.trimIndent()
 
-        val dataMap = DataMap { cursor: Cursor? ->
-            cursor?.run {
-                return@DataMap if (cursor.count > 0) {
-                    MonthlyTally().apply {
-                        id = getCursorLongValue(cursor, "_id")!!
-                        indicator = getCursorValue(cursor, "indicator_code")!!
-                        providerId = getCursorValue(cursor, "provider_id")!!
-                        value = getCursorValue(cursor, "value")!!
-                        month = dateFormatter().parse(getCursorValue(cursor, "month")!!)
-                        isEdited = getCursorIntValue(cursor, "edited")!! != 0
-                        dateSent = if (getCursorValue(cursor, "date_sent") == null) null else Date(getCursorLongValue(cursor, "date_sent")!!)
-                        this.grouping = getCursorValue(cursor, "indicator_grouping")!!
-                        createdAt = getCursorValueAsDate(cursor, "created_at")!!
-                        updatedAt = Date(getCursorLongValue(cursor, "updated_at")!!)
-                        indicatorTally = Tally().also {
-                            id = this.id
-                            value = this.value
-                            indicator = this.indicator
-                        }
-                    }
-                } else null
-            }
-        }
-
-        return readData(sql, dataMap).toList().filterNotNull()
+        return readData(sql, extractMonthlyTally()).toList().filterNotNull()
     }
 
-    fun getDraftedMonths(grouping: String= "child"): List<Pair<String, Date>> {
+    private fun extractMonthlyTally(): DataMap<MonthlyTally?> = DataMap { cursor: Cursor? ->
+        cursor?.run {
+            return@DataMap if (cursor.count > 0) {
+                MonthlyTally().apply {
+                    id = getCursorLongValue(cursor, "_id")!!
+                    indicator = getCursorValue(cursor, "indicator_code")!!
+                    providerId = getCursorValue(cursor, "provider_id")!!
+                    value = getCursorValue(cursor, "value")!!
+                    month = dateFormatter().parse(getCursorValue(cursor, "month")!!)
+                    isEdited = getCursorIntValue(cursor, "edited")!! != 0
+                    dateSent = if (getCursorValue(cursor, "date_sent") == null) null else Date(getCursorLongValue(cursor, "date_sent")!!)
+                    grouping = getCursorValue(cursor, "indicator_grouping")!!
+                    createdAt = getCursorValueAsDate(cursor, "created_at")!!
+                    updatedAt = Date(getCursorLongValue(cursor, "updated_at")!!)
+                    indicatorTally = Tally().also {
+                        id = id
+                        value = value
+                        indicator = indicator
+                    }
+                }
+            } else null
+        }
+    }
+
+    fun getDraftedMonths(grouping: String = "child"): List<Pair<String, Date>> {
         val sql = """
             SELECT month, created_at
             FROM monthly_tallies
@@ -114,7 +114,10 @@ object ReportsDao : AbstractDao() {
         return readData(sql, dataMap).toList().filterNotNull()
     }
 
-    fun getSentReportMonths(grouping: String= "child"): List<Pair<String, Date>> {
+    /**
+     * Return all the months that have reports that have been sent for the given [grouping]
+     */
+    fun getSentReportMonths(grouping: String = "child"): List<Pair<String, Date>> {
         val sql = """
             SELECT month, created_at
             FROM monthly_tallies
@@ -133,5 +136,30 @@ object ReportsDao : AbstractDao() {
             else null
         }
         return readData(sql, dataMap).toList().filterNotNull()
+    }
+
+    /**
+     * Return all the sent monthly report tallies for the provided [grouping]
+     */
+    fun getAllSentReportMonths(grouping: String = "child"): List<MonthlyTally> {
+        val sql = """
+            SELECT _id,
+                   indicator_code,
+                   provider_id,
+                   value,
+                   month,
+                   edited,
+                   date_sent,
+                   indicator_grouping,
+                   created_at,
+                   updated_at
+            FROM monthly_tallies
+            WHERE date_sent IS NOT NULL
+              AND indicator_grouping = '$grouping'
+            GROUP BY month
+            ORDER BY month DESC;
+        """.trimIndent()
+
+        return readData(sql, extractMonthlyTally()).toList().filterNotNull()
     }
 }

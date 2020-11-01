@@ -49,8 +49,8 @@ class MonthlyReportsRepository : BaseRepository() {
 
     fun fetchDraftedMonths() = ReportsDao.getDraftedMonths()
 
-    fun fetchMonthlyDraftedReportTallies(yearMonth: String, grouping: String = "child"): List<MonthlyTally> {
-        val draftReports = ReportsDao.getMonthlyDraftedReportTallies(yearMonth = yearMonth)
+    fun fetchDraftedReportTalliesByMonth(yearMonth: String, grouping: String = "child"): List<MonthlyTally> {
+        val draftReports = ReportsDao.getReportsByMonth(yearMonth = yearMonth)
         if (draftReports.isNotEmpty()) return draftReports
 
         val monthlyTallies = arrayListOf<MonthlyTally>()
@@ -97,4 +97,16 @@ class MonthlyReportsRepository : BaseRepository() {
         }
         return false
     }
+
+    /**
+     * Fetch all sent report months reports and group them by Year
+     */
+    fun fetchSentReportMonths(): Map<String, List<MonthlyTally>> =
+            ReportsDao.getAllSentReportMonths().groupBy { dateFormatter("yyyy").format(it.month) }
+
+    /**
+     * Fetch all sent report tallies for the [yearMonth]
+     */
+    fun fetchSentReportTalliesByMonth(yearMonth: String) =
+            ReportsDao.getReportsByMonth(yearMonth = yearMonth, drafted = false)
 }
