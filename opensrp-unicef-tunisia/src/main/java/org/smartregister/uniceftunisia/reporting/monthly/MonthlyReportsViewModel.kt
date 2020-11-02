@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.smartregister.uniceftunisia.domain.MonthlyTally
+import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import java.util.*
 
 class MonthlyReportsViewModel(private val monthlyReportsRepository: MonthlyReportsRepository) : ViewModel() {

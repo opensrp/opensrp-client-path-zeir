@@ -54,12 +54,10 @@ import org.smartregister.uniceftunisia.activity.ChildRegisterActivity;
 import org.smartregister.uniceftunisia.activity.LoginActivity;
 import org.smartregister.uniceftunisia.job.AppJobCreator;
 import org.smartregister.uniceftunisia.processor.AppClientProcessorForJava;
-import org.smartregister.uniceftunisia.processor.TripleResultProcessor;
+import org.smartregister.uniceftunisia.reporting.ReportIndicatorsProcessor;
 import org.smartregister.uniceftunisia.repository.AppChildRegisterQueryProvider;
 import org.smartregister.uniceftunisia.repository.ChildAlertUpdatedRepository;
 import org.smartregister.uniceftunisia.repository.ClientRegisterTypeRepository;
-import org.smartregister.uniceftunisia.repository.DailyTalliesRepository;
-import org.smartregister.uniceftunisia.repository.MonthlyTalliesRepository;
 import org.smartregister.uniceftunisia.repository.UnicefTunisiaRepository;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppUtils;
@@ -86,8 +84,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     private boolean lastModified;
     private ClientProcessorForJava clientProcessorForJava;
     private EventClientRepository eventClientRepository;
-    private DailyTalliesRepository dailyTalliesRepository;
-    private MonthlyTalliesRepository monthlyTalliesRepository;
     private Hia2ReportRepository hia2ReportRepository;
     private ECSyncHelper ecSyncHelper;
     private ClientRegisterTypeRepository registerTypeRepository;
@@ -258,7 +254,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         ChildLibrary.getInstance().getProperties().setProperty(ChildAppProperties.KEY.FEATURE_SCAN_QR_ENABLED, "true");
 
         ReportingLibrary.init(context, getRepository(), null, BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
-        ReportingLibrary.getInstance().addMultiResultProcessor(new TripleResultProcessor());
+        ReportingLibrary.getInstance().addMultiResultProcessor(new ReportIndicatorsProcessor());
 
         Fabric.with(this, new Crashlytics.Builder().core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build()).build());
 
@@ -439,20 +435,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         ImmunizationLibrary.getInstance().setVaccines(vaccines);
     }
 
-    public DailyTalliesRepository dailyTalliesRepository() {
-        if (dailyTalliesRepository == null) {
-            dailyTalliesRepository = new DailyTalliesRepository();
-        }
-        return dailyTalliesRepository;
-    }
-
-    public MonthlyTalliesRepository monthlyTalliesRepository() {
-        if (monthlyTalliesRepository == null) {
-            monthlyTalliesRepository = new MonthlyTalliesRepository();
-        }
-
-        return monthlyTalliesRepository;
-    }
 
     public Hia2ReportRepository hia2ReportRepository() {
         if (hia2ReportRepository == null) {

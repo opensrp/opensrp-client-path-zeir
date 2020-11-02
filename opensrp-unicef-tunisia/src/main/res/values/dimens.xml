@@ -32,5 +32,7 @@
     <dimen name="text_user_initial_size">18sp</dimen>
     <dimen name="user_initials_textview_size">40dp</dimen>
     <dimen name="tab_padding">24dp</dimen>
+    <dimen name="indicator_summary_header_size">22sp</dimen>
+    <dimen name="indicator_text_size">16sp</dimen>
 
 </resources>

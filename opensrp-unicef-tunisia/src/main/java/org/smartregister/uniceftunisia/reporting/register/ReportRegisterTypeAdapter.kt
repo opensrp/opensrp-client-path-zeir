@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.TextView
+import kotlinx.android.synthetic.main.report_type_list_item.view.*
 import org.smartregister.uniceftunisia.R
 
 class ReportRegisterTypeAdapter(context: Context, val layout: Int, private val reportTypes: List<String>) :
@@ -19,10 +19,10 @@ class ReportRegisterTypeAdapter(context: Context, val layout: Int, private val r
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return convertView
-                ?: LayoutInflater.from(context).inflate(R.layout.report_grouping_list_item,
+                ?: LayoutInflater.from(context).inflate(R.layout.report_type_list_item,
                         parent, false)
                         .apply {
-                            findViewById<TextView>(R.id.reportTypeTextView).text = getItem(position)
+                            reportTypeTextView.text = getItem(position)
                             tag = getItem(position)
                         }
     }

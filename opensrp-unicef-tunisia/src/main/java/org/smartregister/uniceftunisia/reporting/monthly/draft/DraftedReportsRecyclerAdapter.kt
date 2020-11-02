@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.fragment_monthly_draft_item.*
+import kotlinx.android.synthetic.main.fragment_monthly_report_draft_item.*
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.reporting.ReportsDao.dateFormatter
 import org.smartregister.uniceftunisia.reporting.convertToNamedMonth
@@ -22,7 +22,7 @@ class DraftedReportsRecyclerAdapter(val onClickListener: View.OnClickListener) :
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DraftedMonthsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_monthly_draft_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_monthly_report_draft_item, parent, false)
         return DraftedMonthsViewHolder(view)
     }
 

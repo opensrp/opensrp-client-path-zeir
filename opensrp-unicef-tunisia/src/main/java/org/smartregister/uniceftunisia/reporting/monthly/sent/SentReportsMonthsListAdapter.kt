@@ -4,14 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
-import android.widget.TextView
+import kotlinx.android.synthetic.main.sent_monthly_report_header_item.view.*
+import kotlinx.android.synthetic.main.sent_monthly_report_item.view.*
 import org.smartregister.uniceftunisia.R
-import org.smartregister.uniceftunisia.domain.MonthlyTally
 import org.smartregister.uniceftunisia.reporting.ReportsDao.dateFormatter
 import org.smartregister.uniceftunisia.reporting.convertToNamedMonth
+import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import org.smartregister.uniceftunisia.reporting.translateString
 
-class SentReportsExpandableListAdapter() : BaseExpandableListAdapter() {
+class SentReportsMonthsListAdapter : BaseExpandableListAdapter() {
 
     var sentReportYearHeaders: List<String> = arrayListOf()
 
@@ -41,7 +42,7 @@ class SentReportsExpandableListAdapter() : BaseExpandableListAdapter() {
                     ?: LayoutInflater.from(parent.context).inflate(R.layout.sent_monthly_report_header_item,
                             parent, false).apply {
                         val group = getGroup(groupPosition)
-                        findViewById<TextView>(R.id.sentReportGroupHeaderTextView).text = group
+                        sentReportGroupHeaderTextView.text = group
                         tag = group
                     }
 
@@ -49,15 +50,16 @@ class SentReportsExpandableListAdapter() : BaseExpandableListAdapter() {
             convertView
                     ?: LayoutInflater.from(parent.context).inflate(R.layout.sent_monthly_report_item,
                             parent, false).apply {
-                        with(getChild(groupPosition, childPosition)) {
+                        val monthlyTally = getChild(groupPosition, childPosition)
+                        with(monthlyTally) {
                             tag = this
                             val translatedYearMonth = dateFormatter("yyyy-MM")
                                     .format(month)
                                     .convertToNamedMonth(hasHyphen = true).translateString(context)
-                            findViewById<TextView>(R.id.dateReportSentTextView).text = translatedYearMonth
+                            dateReportSentTextView.text = translatedYearMonth
                             val sentReportDetails = context.getString(R.string.sent_report_details,
                                     dateFormatter("dd/MM/YYYY").format(dateSent), providerId)
-                            findViewById<TextView>(R.id.sentReportDetailsTextView).text = sentReportDetails
+                            sentReportDetailsTextView.text = sentReportDetails
                         }
                     }
 

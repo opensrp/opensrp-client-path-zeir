@@ -31,7 +31,7 @@ class ReportRegisterActivity : BaseActivity(), ReportRegisterContract.View, Adap
         navigationMenu = NavigationMenu.getInstance(this)
         reportRegisterListView.apply {
             val context = this@ReportRegisterActivity
-            adapter = ReportRegisterTypeAdapter(context, R.layout.report_grouping_list_item,
+            adapter = ReportRegisterTypeAdapter(context, R.layout.report_type_list_item,
                     ReportGroupingModel(context).reportGroupings.map { it.displayName })
             onItemClickListener = context
             divider = ColorDrawable(ContextCompat.getColor(context, R.color.light_grey))

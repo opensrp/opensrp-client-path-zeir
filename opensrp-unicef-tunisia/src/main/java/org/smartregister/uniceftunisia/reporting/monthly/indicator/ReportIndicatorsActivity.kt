@@ -17,9 +17,9 @@ import org.json.JSONArray
 import org.json.JSONObject
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication
-import org.smartregister.uniceftunisia.domain.MonthlyTally
 import org.smartregister.uniceftunisia.reporting.*
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
+import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import org.smartregister.uniceftunisia.reporting.monthly.draft.ConfirmSendDraftDialog
 import org.smartregister.uniceftunisia.util.AppJsonFormUtils
 import org.smartregister.uniceftunisia.util.AppUtils
@@ -30,7 +30,7 @@ import java.util.*
 class ReportIndicatorsActivity : MultiLanguageActivity(), View.OnClickListener {
 
     private val reportIndicatorsViewModel by viewModels<ReportIndicatorsViewModel>
-    { ViewModelUtil.createFor(ReportIndicatorsViewModel(MonthlyReportsRepository())) }
+    { ReportingUtils.createFor(ReportIndicatorsViewModel(MonthlyReportsRepository.getInstance())) }
 
     lateinit var navController: NavController
 
@@ -42,14 +42,18 @@ class ReportIndicatorsActivity : MultiLanguageActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_report_indicators)
-        setSupportActionBar(findViewById(R.id.reportIndicatorsToolbar))
+        setSupportActionBar(reportIndicatorsToolbar)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.reportIndicatorsNavController) as NavHostFragment
         navController = navHostFragment.navController
 
-        var yearMonth: String? = null
-
         with(intent) {
             val serializableExtra = getSerializableExtra(MONTHLY_TALLIES)
+
+            getStringExtra(YEAR_MONTH)?.let {
+                reportIndicatorsViewModel.yearMonth.value = it
+                translatedYearMonth = it.convertToNamedMonth(hasHyphen = true).translateString(this@ReportIndicatorsActivity)
+            }
+
             if (serializableExtra is Map<*, *>)
                 reportIndicatorsViewModel.monthlyTalliesMap.value = (serializableExtra as Map<String, MonthlyTally>).toMutableMap()
 
@@ -60,22 +64,17 @@ class ReportIndicatorsActivity : MultiLanguageActivity(), View.OnClickListener {
                 saveFormButton.visibility = View.GONE
                 verticalDivider.visibility = View.GONE
             }
-            getStringExtra(YEAR_MONTH)?.let {
-                yearMonth = it
-                reportIndicatorsViewModel.yearMonth.value = it
-
-            }
         }
 
         //Setup UI
-        translatedYearMonth = yearMonth?.convertToNamedMonth(hasHyphen = true)?.translateString(this)
-
         confirmSendDraftDialog = ConfirmSendDraftDialog().apply {
             onClickListener = this@ReportIndicatorsActivity
             arguments = bundleOf(Pair(ConfirmSendDraftDialog.Constants.MONTH, translatedYearMonth))
         }
 
-        yearMonthTextView.text = getString(R.string.month_year_draft, translatedYearMonth)
+        yearMonthTextView.text = if (intent.getBooleanExtra(SHOW_DATA, false))
+            getString(R.string.monthly_sent_reports_with_year, translatedYearMonth) else
+            getString(R.string.month_year_draft, translatedYearMonth)
 
         backButton.setOnClickListener { finish() }
 
@@ -141,12 +140,8 @@ class ReportIndicatorsActivity : MultiLanguageActivity(), View.OnClickListener {
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.sendDraftReportsButton -> {
-                submitMonthlyDraft(sync = true)
-            }
-            R.id.confirmButton -> {
-                confirmSendDraftDialog.show(supportFragmentManager, ConfirmSendDraftDialog::class.simpleName)
-            }
+            R.id.sendDraftReportsButton -> submitMonthlyDraft(sync = true)
+            R.id.confirmButton -> confirmSendDraftDialog.show(supportFragmentManager, ConfirmSendDraftDialog::class.simpleName)
         }
     }
 }

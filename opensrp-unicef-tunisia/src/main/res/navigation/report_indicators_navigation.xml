@@ -6,12 +6,12 @@
     app:startDestination="@id/reportIndicatorsFormFragment">
     <fragment
         android:id="@+id/reportIndicatorsSummaryFragment"
-        android:name="org.smartregister.uniceftunisia.reporting.monthly.indicator.ReportIndicatorsSummaryFragment"
+        android:name="org.smartregister.uniceftunisia.reporting.monthly.indicator.summary.ReportIndicatorsSummaryFragment"
         android:label="@string/report_indicators_summary"
         tools:layout="@layout/fragment_report_indicators_summary" />
     <fragment
         android:id="@+id/reportIndicatorsFormFragment"
-        android:name="org.smartregister.uniceftunisia.reporting.monthly.indicator.ReportIndicatorsFormFragment"
+        android:name="org.smartregister.uniceftunisia.reporting.monthly.indicator.form.ReportIndicatorsFormFragment"
         android:label="@string/report_indicators_form"
         tools:layout="@layout/fragment_report_indicators_form" />
     <dialog

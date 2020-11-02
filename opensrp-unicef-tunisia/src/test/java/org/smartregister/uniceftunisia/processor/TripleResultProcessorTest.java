@@ -8,6 +8,7 @@ import org.junit.rules.ExpectedException;
 import org.smartregister.reporting.domain.CompositeIndicatorTally;
 import org.smartregister.reporting.domain.IndicatorTally;
 import org.smartregister.reporting.exception.MultiResultProcessorException;
+import org.smartregister.uniceftunisia.reporting.ReportIndicatorsProcessor;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,14 +22,14 @@ import static org.junit.Assert.assertFalse;
  */
 public class TripleResultProcessorTest {
 
-    private TripleResultProcessor tripleResultProcessor;
+    private ReportIndicatorsProcessor tripleResultProcessor;
 
     @Rule
     public ExpectedException thrownException = ExpectedException.none();
 
     @Before
     public void setUp() {
-        tripleResultProcessor = new TripleResultProcessor();
+        tripleResultProcessor = new ReportIndicatorsProcessor();
     }
 
     @Test

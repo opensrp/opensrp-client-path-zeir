@@ -33,6 +33,7 @@ import org.smartregister.repository.SettingsRepository;
 import org.smartregister.repository.UniqueIdRepository;
 import org.smartregister.uniceftunisia.BuildConfig;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
+import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.util.DatabaseMigrationUtils;
 
@@ -69,8 +70,7 @@ public class UnicefTunisiaRepository extends Repository {
         IndicatorRepository.createTable(database);
         IndicatorQueryRepository.createTable(database);
         DailyIndicatorCountRepository.createTable(database);
-        MonthlyTalliesRepository.createTable(database);
-        EventClientRepository.createTable(database, Hia2ReportRepository.Table.hia2_report, Hia2ReportRepository.report_column.values());
+        MonthlyReportsRepository.getInstance().createTable(database);
 
         LocationRepository.createTable(database);
         LocationTagRepository.createTable(database);

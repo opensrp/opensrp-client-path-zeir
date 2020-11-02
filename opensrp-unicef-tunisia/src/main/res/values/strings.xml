@@ -138,9 +138,9 @@
     <string name="october">October</string>
     <string name="november">November</string>
     <string name="december">December</string>
-    <string name="title_activity_report_tallies">ReportTalliesActivity</string>
 
     <!-- Strings used for reporting -->
+    <string name="title_activity_report_tallies">ReportTalliesActivity</string>
     <string name="report_indicators_summary">Report Indicators Summary</string>
     <string name="report_indicators_form">Report Indicators Form</string>
     <string name="month_year_draft">%1$s Draft</string>
@@ -153,6 +153,15 @@
     <string name="sent_report_details">Sent %1$s by %2$s</string>
     <string name="monthly_draft_reports">Draft Reports (%1$d)</string>
     <string name="monthly_sent_reports">Sent Reports</string>
-    <string name="monthly_sent_reports_with_year">Sent Reports > %1$s</string>
+    <string name="monthly_sent_reports_with_year">Sent Reports  &gt; %1$s</string>
+
+    <!-- Report grouping titles -->
+    <string name="report_group_header_vaccination_activity">Vaccination Activity at different ages</string>
+    <string name="report_group_header_vaccine_utilization">Vaccine utilization report</string>
+    <string name="report_group_header_tetanus_protected">Children protected against Tetanus at Birth:  at the point of receiving Penta 1</string>
+    <string name="report_group_header_rubella_vaccine">Rubella Vaccination for woman giving birth for the first time</string>
+    <string name="report_group_header_adequate_growth_measurement">Children with an adequate number of growth measurements</string>
+    <string name="report_group_header_previous_under_nutrition">Children with at least 1 previous episode of undernutrition</string>
+    <string name="report_group_header_diagnosed_malnourished">Children diagnosed as malnourished according to the weighing of the day</string>
 
 </resources>

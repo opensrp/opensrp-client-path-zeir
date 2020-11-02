@@ -156,10 +156,6 @@ public class AppConstants {
         String OPD = "opd";
     }
 
-    public interface MultiResultProcessor {
-        String GROUPING_SEPARATOR = "_";
-    }
-
     public interface IntentKey {
         String REPORT_GROUPING = "report-grouping";
     }

@@ -7,13 +7,13 @@ import org.smartregister.Context
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.reporting.ReportGroup
 import org.smartregister.uniceftunisia.reporting.ReportGroupingModel
-import org.smartregister.uniceftunisia.reporting.ViewModelUtil
+import org.smartregister.uniceftunisia.reporting.ReportingUtils
 import org.smartregister.uniceftunisia.util.AppConstants
 import org.smartregister.view.activity.MultiLanguageActivity
 
 class MonthlyReportsActivity : MultiLanguageActivity() {
     private val monthlyReportsViewModel by viewModels<MonthlyReportsViewModel>
-    { ViewModelUtil.createFor(MonthlyReportsViewModel(MonthlyReportsRepository())) }
+    { ReportingUtils.createFor(MonthlyReportsViewModel(MonthlyReportsRepository.getInstance())) }
     private lateinit var reportsPagerAdapter: MonthlyReportsPagerAdapter
     lateinit var reportGrouping: String
 

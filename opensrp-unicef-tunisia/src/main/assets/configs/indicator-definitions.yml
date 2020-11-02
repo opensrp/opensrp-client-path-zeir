@@ -1,7 +1,7 @@
 indicators:
   - key: "at_birth_vaccines"
     isMultiResult: true
-    grouping: "child"
+    grouping: "report_group_header_vaccination_activity"
     description: "Number of children aged 0-24hrs who received the BCG Vaccine"
     indicatorQuery: "SELECT vaccines.name,
                               CASE

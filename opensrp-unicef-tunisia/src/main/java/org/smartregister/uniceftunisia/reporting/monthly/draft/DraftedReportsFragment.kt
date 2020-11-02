@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_monthly_drafted_reports.*
 import org.smartregister.uniceftunisia.R
-import org.smartregister.uniceftunisia.domain.MonthlyTally
 import org.smartregister.uniceftunisia.reporting.*
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsViewModel
@@ -30,7 +29,7 @@ class DraftedReportsFragment : Fragment(), AdapterView.OnItemClickListener, View
 
     private lateinit var alertDialog: AlertDialog
     private val monthlyReportsViewModel by activityViewModels<MonthlyReportsViewModel>
-    { ViewModelUtil.createFor(MonthlyReportsViewModel(MonthlyReportsRepository())) }
+    { ReportingUtils.createFor(MonthlyReportsViewModel(MonthlyReportsRepository.getInstance())) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
             inflater.inflate(R.layout.fragment_monthly_drafted_reports, container, false)
@@ -67,23 +66,19 @@ class DraftedReportsFragment : Fragment(), AdapterView.OnItemClickListener, View
 
             draftedReportTallies.observe(viewLifecycleOwner, {
                 val (yearMonth, monthlyTallies) = it
-                launchReportIndicatorsActivity(yearMonth = yearMonth, monthlyTallies = monthlyTallies)
+                startActivity(Intent(activity, ReportIndicatorsActivity::class.java).apply {
+                    putExtras(Bundle().apply {
+                        putExtra(MONTHLY_TALLIES, monthlyTallies.associateBy { it.indicator } as Serializable)
+                        putExtra(YEAR_MONTH, yearMonth)
+                        putExtra(SHOW_DATA, false)
+                    })
+                })
             })
         }
     }
 
-    private fun launchReportIndicatorsActivity(showData: Boolean = false, yearMonth: String, monthlyTallies: List<MonthlyTally>) {
-        startActivity(Intent(activity, ReportIndicatorsActivity::class.java).apply {
-            putExtras(Bundle().apply {
-                putExtra(MONTHLY_TALLIES, monthlyTallies.associateBy { it.indicator } as Serializable)
-                putExtra(YEAR_MONTH, yearMonth)
-                putExtra(SHOW_DATA, showData)
-            })
-        })
-    }
-
     private fun showAvailableReportDatesDialog(dates: List<String>) {
-        LayoutInflater.from(context).inflate(R.layout.month_results, null).run {
+        LayoutInflater.from(context).inflate(R.layout.report_months_available, null).run {
             val baseAdapter: BaseAdapter = object : BaseAdapter() {
                 override fun getCount() = dates.size
 

@@ -6,6 +6,17 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.reflect.TypeToken
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
+import org.smartregister.AllConstants
+import org.smartregister.domain.Event
+import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
+import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
+import org.smartregister.uniceftunisia.util.AppConstants
+import org.smartregister.uniceftunisia.util.AppJsonFormUtils
+import timber.log.Timber
 import java.util.*
 
 /**
@@ -19,7 +30,10 @@ const val SHOW_DATA = "show_data"
 /**
  * Utility method for creating ViewModel Factory
  */
-object ViewModelUtil {
+@Suppress("UNCHECKED_CAST")
+object ReportingUtils {
+
+    @JvmStatic
     fun <T : ViewModel> createFor(viewModel: T): ViewModelProvider.Factory {
         return object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -27,6 +41,25 @@ object ViewModelUtil {
                     return viewModel as T
                 }
                 throw IllegalArgumentException("unexpected viewModel class $modelClass")
+            }
+        }
+    }
+
+    @JvmStatic
+    fun processMonthlyReportEvent(event: Event) {
+        event.details[AppConstants.EventType.MONTHLY_REPORT]?.let { monthlyReportString ->
+            try {
+                val monthlyReportJson = JSONObject(monthlyReportString)
+                val typeToken = object : TypeToken<Map<String, MonthlyTally>>() {}.type
+                val yearMonth = monthlyReportJson.getString(AppConstants.KEY.YEAR_MONTH)
+                val monthlyTalliesJsonArray = JSONArray(monthlyReportJson.getString(AppConstants.KEY.MONTHLY_TALLIES))
+                (0 until monthlyTalliesJsonArray.length())
+                        .map { monthlyTalliesJsonArray.getJSONObject(it) }
+                        .map { JSONObject().put(it.getString(AllConstants.INDICATOR), it) }
+                        .map { AppJsonFormUtils.gson.fromJson<Map<String, MonthlyTally>>(it.toString(), typeToken) }
+                        .forEach { MonthlyReportsRepository.getInstance().saveMonthlyDraft(it, yearMonth, true) }
+            } catch (e: JSONException) {
+                Timber.e(e)
             }
         }
     }
