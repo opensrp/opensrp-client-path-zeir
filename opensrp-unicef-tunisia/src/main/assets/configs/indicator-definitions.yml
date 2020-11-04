@@ -53,7 +53,7 @@ indicators:
     isMultiResult: true
     grouping: "report_group_header_vaccination_activity"
     description: "Grouped query for number of children aged 0-59months who received ipv_1, pcv_1 and penta_1 vaccines"
-    indicatorQuery: "SELECT 'penta1'                       as penta1,
+    indicatorQuery: "SELECT 'penta1'                                                                                         as penta1,
                             CASE
                                 WHEN round(julianday('now') - julianday(ec_client.dob)) >= (2 * 30.436875) AND
                                      round(julianday('now') - julianday(ec_client.dob)) <= (6 * 30.436875) THEN '2_6mnths'
@@ -66,17 +66,19 @@ indicators:
                                 WHEN round(julianday('now') - julianday(ec_client.dob)) >= (24 * 30.436875) AND
                                      round(julianday('now') - julianday(ec_client.dob)) <= (59 * 30.436875) THEN '24_59mnths'
                                 ELSE 'Null'
-                                END                            age,
-                            (SELECT count(*)
-                             FROM vaccines
-                             WHERE vaccines.name = 'ipv_1'
-                                OR vaccines.name = 'penta_1'
-                                OR vaccines.name = 'pcv_1') as count
+                                END                                                                                             age,
+                            (SELECT count(base_entity_id)
+                             FROM (SELECT DISTINCT vaccines.base_entity_id
+                                   FROM vaccines
+                                            INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
+                                   WHERE ec_client.is_closed != 1
+                                     AND (vaccines.name = 'ipv_1' OR vaccines.name = 'penta_1' OR vaccines.name = 'pcv_1')
+                                     AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))) as count
                      FROM vaccines
                               INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
                      WHERE ec_client.is_closed != 1
-                        AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')
-                     GROUP BY age;"
+                       AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')
+                     GROUP BY age"
     expectedIndicators:
       - "penta1_grp_penta1_2_6mnths"
       - "penta1_grp_penta1_7_11mnths"
@@ -88,7 +90,7 @@ indicators:
     isMultiResult: true
     grouping: "report_group_header_vaccination_activity"
     description: "Grouped query for number of children aged 0-59months who received ipv_2 and penta_2 vaccines"
-    indicatorQuery: "SELECT 'penta2'                          as penta2,
+    indicatorQuery: "SELECT 'penta2'                                                                                         as penta2,
                             CASE
                                 WHEN round(julianday('now') - julianday(ec_client.dob)) >= (2 * 30.436875) AND
                                      round(julianday('now') - julianday(ec_client.dob)) <= (6 * 30.436875) THEN '2_6mnths'
@@ -101,11 +103,14 @@ indicators:
                                 WHEN round(julianday('now') - julianday(ec_client.dob)) >= (24 * 30.436875) AND
                                      round(julianday('now') - julianday(ec_client.dob)) <= (59 * 30.436875) THEN '24_59mnths'
                                 ELSE 'Null'
-                                END                              age,
-                            (SELECT count(*)
-                             FROM vaccines
-                             WHERE vaccines.name = 'ipv_2'
-                                OR vaccines.name = 'penta_2') as count
+                                END                                                                                             age,
+                            (SELECT count(base_entity_id)
+                             FROM (SELECT DISTINCT vaccines.base_entity_id
+                                   FROM vaccines
+                                            INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
+                                   WHERE ec_client.is_closed != 1
+                                     AND (vaccines.name = 'ipv_2' OR vaccines.name = 'penta_2')
+                                     AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))) as count
                      FROM vaccines
                               INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
                      WHERE ec_client.is_closed != 1
@@ -122,7 +127,7 @@ indicators:
     isMultiResult: true
     grouping: "report_group_header_vaccination_activity"
     description: "Grouped query for number of children aged 0-59months who received ipv_1 and penta_3 vaccines"
-    indicatorQuery: "SELECT 'penta3'                          as penta3,
+    indicatorQuery: "SELECT 'penta3'                                                                                         as penta3,
                             CASE
                                 WHEN round(julianday('now') - julianday(ec_client.dob)) >= (2 * 30.436875) AND
                                      round(julianday('now') - julianday(ec_client.dob)) <= (6 * 30.436875) THEN '2_6mnths'
@@ -135,11 +140,14 @@ indicators:
                                 WHEN round(julianday('now') - julianday(ec_client.dob)) >= (24 * 30.436875) AND
                                      round(julianday('now') - julianday(ec_client.dob)) <= (59 * 30.436875) THEN '24_59mnths'
                                 ELSE 'Null'
-                                END                              age,
-                            (SELECT count(*)
-                             FROM vaccines
-                             WHERE vaccines.name = 'opv_1'
-                                OR vaccines.name = 'penta_3') as count
+                                END                                                                                             age,
+                            (SELECT count(base_entity_id)
+                             FROM (SELECT DISTINCT vaccines.base_entity_id
+                                   FROM vaccines
+                                            INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
+                                   WHERE ec_client.is_closed != 1
+                                     AND (vaccines.name = 'opv_1' OR vaccines.name = 'penta_3')
+                                     AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))) as count
                      FROM vaccines
                               INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
                      WHERE ec_client.is_closed != 1
@@ -155,98 +163,110 @@ indicators:
   - key: "bcg_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received BCG vaccine at the facility"
-    indicatorQuery: "SELECT count(1)
-                     FROM vaccines
-                              INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
-                     WHERE ec_client.is_closed != 1
-                       AND vaccines.name = 'bcg'
-                       AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (SELECT DISTINCT vaccines.base_entity_id
+                           FROM vaccines
+                                    INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
+                           WHERE ec_client.is_closed != 1
+                             AND vaccines.name = 'bcg'
+                             AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
   - key: "hepb_0_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received Hep B 0 vaccine at the facility"
-    indicatorQuery: "SELECT count(1)
-                     FROM vaccines
-                              INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
-                     WHERE ec_client.is_closed != 1
-                       AND vaccines.name = 'hep_b_0'
-                       AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (SELECT DISTINCT vaccines.base_entity_id
+                           FROM vaccines
+                                    INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
+                           WHERE ec_client.is_closed != 1
+                             AND vaccines.name = 'hep_b_0'
+                             AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
   - key: "penta1_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received Penta1, IPV1 and PCV1 vaccines"
-    indicatorQuery: "SELECT DISTINCT count(1)
-                     FROM vaccines
-                              INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
-                     WHERE ec_client.is_closed != 1
-                       AND (vaccines.name = 'ipv_1' OR vaccines.name = 'penta_1' OR vaccines.name ='pcv_1')
-                       AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (SELECT DISTINCT vaccines.base_entity_id
+                           FROM ec_client
+                                    INNER JOIN vaccines ON ec_client.base_entity_id = vaccines.base_entity_id
+                           WHERE ec_client.is_closed != 1
+                             AND (vaccines.name = 'ipv_1' OR vaccines.name = 'penta_1' OR vaccines.name = 'pcv_1')
+                             AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))
+"
 
   - key: "penta2_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received Penta2 and IPV2 vaccines"
-    indicatorQuery: "SELECT DISTINCT count(1)
-                     FROM vaccines
-                              INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
-                     WHERE ec_client.is_closed != 1
-                       AND (vaccines.name = 'penta_2' OR vaccines.name ='ipv_2')
-                       AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (SELECT DISTINCT vaccines.base_entity_id
+                           FROM ec_client
+                                    INNER JOIN vaccines ON ec_client.base_entity_id = vaccines.base_entity_id
+                           WHERE ec_client.is_closed != 1
+                             AND (vaccines.name = 'penta_2' OR vaccines.name = 'ipv_2')
+                             AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
+
   - key: "pcv2_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received  PCV2  vaccines"
-    indicatorQuery: "SELECT DISTINCT count(1)
-                     FROM vaccines
-                              INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
-                     WHERE ec_client.is_closed != 1
-                       AND (vaccines.name = 'pcv_2')
-                       AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (SELECT DISTINCT vaccines.base_entity_id
+                           FROM vaccines
+                                    INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
+                           WHERE ec_client.is_closed != 1
+                             AND vaccines.name = 'pcv_2'
+                             AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
   - key: "penta3_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received Penta 3 and OPV1  vaccines"
-    indicatorQuery: "SELECT DISTINCT count(1)
-                     FROM vaccines
-                              INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
-                     WHERE ec_client.is_closed != 1
-                       AND (vaccines.name = 'penta_3' OR vaccines.name ='opv_1')
-                       AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (SELECT DISTINCT vaccines.base_entity_id
+                           FROM ec_client
+                                    INNER JOIN vaccines ON ec_client.base_entity_id = vaccines.base_entity_id
+                           WHERE ec_client.is_closed != 1
+                             AND (vaccines.name = 'penta_3' OR vaccines.name = 'opv_1')
+                             AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
   - key: "pcv3_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received  PCV3 vaccines"
-    indicatorQuery: "SELECT DISTINCT count(1)
-                     FROM vaccines
-                              INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
-                     WHERE ec_client.is_closed != 1
-                       AND (vaccines.name = 'pcv_3')
-                       AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (SELECT DISTINCT vaccines.base_entity_id
+                           FROM vaccines
+                                    INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
+                           WHERE ec_client.is_closed != 1
+                             AND vaccines.name = 'pcv_3'
+                             AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
   - key: "mr1_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received  MR1vaccine"
-    indicatorQuery: "SELECT DISTINCT count(1)
-                     FROM vaccines
-                              INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
-                     WHERE ec_client.is_closed != 1
-                       AND (vaccines.name = 'mr_1')
-                       AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (SELECT DISTINCT vaccines.base_entity_id
+                           FROM vaccines
+                                    INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
+                           WHERE ec_client.is_closed != 1
+                             AND vaccines.name = 'mr_1'
+                             AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
   - key: "mr2_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received  MR2 vaccine"
-    indicatorQuery: "SELECT DISTINCT count(1)
-                     FROM vaccines
-                              INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
-                     WHERE ec_client.is_closed != 1
-                       AND (vaccines.name = 'mr_2')
-                       AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (SELECT DISTINCT vaccines.base_entity_id
+                           FROM vaccines
+                                    INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
+                           WHERE ec_client.is_closed != 1
+                             AND vaccines.name = 'mr_2'
+                             AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
   - key: "dtp4_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received DTP4 vaccine"
-    indicatorQuery: "SELECT DISTINCT count(1)
-                     FROM vaccines
-                              INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
-                     WHERE ec_client.is_closed != 1
-                       AND (vaccines.name = 'dtp_4')
-                       AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (SELECT DISTINCT vaccines.base_entity_id
+                           FROM vaccines
+                                    INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
+                           WHERE ec_client.is_closed != 1
+                             AND vaccines.name = 'dtp_4'
+                             AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"

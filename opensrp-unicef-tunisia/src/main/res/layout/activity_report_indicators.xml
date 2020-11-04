@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/reportIndicatorsRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/report_view_background_color"
     android:orientation="vertical"
     tools:context=".reporting.monthly.indicator.ReportIndicatorsActivity">
 
@@ -86,22 +88,8 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/report_indicator_form_margin"
         android:layout_weight="1"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:navGraph="@navigation/report_indicators_navigation" />
-
-    <Button
-        android:id="@+id/confirmButton"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="@dimen/report_indicator_form_margin"
-        android:layout_marginTop="@dimen/report_indicator_form_margin"
-        android:layout_marginEnd="@dimen/report_indicator_form_margin"
-        android:layout_marginBottom="@dimen/report_indicator_form_margin"
-        android:background="@drawable/report_btn_bg"
-        android:text="@string/confirm_button_label"
-        android:textColor="@color/white" />
-
+        app:navGraph="@navigation/navigation_report_indicator" />
 </LinearLayout>

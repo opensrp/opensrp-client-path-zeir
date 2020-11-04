@@ -1,35 +1,27 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/report_summary_background_color"
-    android:scrollbars="vertical">
+    android:background="@color/report_view_background_color"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/submittedByTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="24dp"
         android:text="@string/submitted_by_"
         android:textColor="@color/black"
-        android:textSize="@dimen/indicator_summary_header_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="@dimen/indicator_summary_header_size" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/reportIndicatorsCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/submittedByTextView">
+        android:layout_margin="24dp"
+        android:background="@color/white">
 
         <ExpandableListView
             android:id="@+id/indicatorsExpandableListView"
@@ -44,4 +36,4 @@
             android:fadingEdge="none"
             android:groupIndicator="@null" />
     </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

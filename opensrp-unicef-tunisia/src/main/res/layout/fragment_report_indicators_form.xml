@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/reportIndicatorsScrollView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".reporting.monthly.indicator.summary.ReportIndicatorsSummaryFragment">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/reportIndicatorsLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/report_indicator_form_margin"
+        android:layout_height="match_parent"
         android:layout_marginStart="@dimen/report_indicator_form_margin"
         android:layout_marginTop="@dimen/report_indicator_form_margin"
-        android:orientation="vertical" />
-</ScrollView>
+        android:layout_marginEnd="@dimen/report_indicator_form_margin"
+        android:layout_marginBottom="@dimen/report_indicator_form_margin"
+        android:orientation="vertical"
+        android:scrollbars="vertical"
+        tools:context=".reporting.monthly.indicator.summary.ReportIndicatorsSummaryFragment" />
+</androidx.core.widget.NestedScrollView>

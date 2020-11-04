@@ -56,7 +56,9 @@ class ReportIndicatorsSummaryFragment : Fragment(), ExpandableListView.OnGroupCl
     }
 
     override fun onGroupClick(parent: ExpandableListView, view: View, groupPosition: Int, id: Long): Boolean {
-        return when (parent.expandGroup(groupPosition)) {
+        val expandGroup = parent.expandGroup(groupPosition)
+        toggleIndicatorLabels(expandGroup)
+        return when (expandGroup) {
             true -> {
                 collapsibleImageView.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.expand_less))
                 true
@@ -64,6 +66,21 @@ class ReportIndicatorsSummaryFragment : Fragment(), ExpandableListView.OnGroupCl
             else -> {
                 collapsibleImageView.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.expand_more))
                 false
+            }
+        }
+    }
+
+    private fun toggleIndicatorLabels(expandGroup: Boolean) {
+        when (expandGroup) {
+            true -> {
+                indicatorLabelTextView.visibility = View.VISIBLE
+                valueLabelTextView.visibility = View.VISIBLE
+                labelSeparatorLineView.visibility = View.VISIBLE
+            }
+            else -> {
+                indicatorLabelTextView.visibility = View.GONE
+                valueLabelTextView.visibility = View.GONE
+                labelSeparatorLineView.visibility = View.GONE
             }
         }
     }
