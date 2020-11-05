@@ -54,7 +54,7 @@ object ReportsDao : AbstractDao() {
                    provider_id,
                    value,
                    month,
-                   edited,
+                   entered_manually,
                    date_sent,
                    indicator_grouping,
                    created_at,
@@ -71,16 +71,16 @@ object ReportsDao : AbstractDao() {
         cursor?.run {
             return@DataMap if (cursor.count > 0) {
                 MonthlyTally(
-                        id = getCursorLongValue(cursor, "_id")!!,
                         indicator = getCursorValue(cursor, "indicator_code")!!,
-                        providerId = getCursorValue(cursor, "provider_id")!!,
+                        id = getCursorLongValue(cursor, "_id")!!,
                         value = getCursorValue(cursor, "value")!!,
-                        month = dateFormatter().parse(getCursorValue(cursor, "month")!!)!!,
-                        isEdited = getCursorIntValue(cursor, "edited")!! != 0,
                         dateSent = if (getCursorValue(cursor, "date_sent") == null) null else Date(getCursorLongValue(cursor, "date_sent")!!),
+                        month = dateFormatter().parse(getCursorValue(cursor, "month")!!)!!,
+                        providerId = getCursorValue(cursor, "provider_id")!!,
+                        updatedAt = Date(getCursorLongValue(cursor, "updated_at")!!),
                         grouping = getCursorValue(cursor, "indicator_grouping")!!,
-                        createdAt = getCursorValueAsDate(cursor, "created_at")!!,
-                        updatedAt = Date(getCursorLongValue(cursor, "updated_at")!!)
+                        enteredManually = getCursorIntValue(cursor, "entered_manually") == 1,
+                        createdAt = getCursorValueAsDate(cursor, "created_at")!!
                 )
             } else null
         }
@@ -94,7 +94,6 @@ object ReportsDao : AbstractDao() {
             SELECT month, created_at
             FROM monthly_tallies
             WHERE date_sent IS NULL
-              AND edited = 1
             GROUP BY month;
 
         """.trimIndent()
@@ -117,7 +116,6 @@ object ReportsDao : AbstractDao() {
             SELECT month, created_at
             FROM monthly_tallies
             WHERE date_sent IS NOT NULL
-              AND edited = 1
             GROUP BY month;
 
         """.trimIndent()
@@ -142,7 +140,6 @@ object ReportsDao : AbstractDao() {
                    provider_id,
                    value,
                    month,
-                   edited,
                    date_sent,
                    indicator_grouping,
                    created_at,

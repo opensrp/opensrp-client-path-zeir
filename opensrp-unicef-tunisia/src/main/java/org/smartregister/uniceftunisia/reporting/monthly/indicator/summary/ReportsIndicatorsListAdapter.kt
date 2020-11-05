@@ -25,9 +25,9 @@ class ReportsIndicatorsListAdapter : BaseExpandableListAdapter() {
 
     override fun getChildrenCount(groupPosition: Int) = reportIndicators.getValue(getGroup(groupPosition)).size
 
-    override fun getGroup(groupPosition: Int) = reportGroupHeaders[groupPosition]
+    override fun getGroup(groupPosition: Int): String = reportGroupHeaders[groupPosition]
 
-    override fun getChild(groupPosition: Int, childPosition: Int) =
+    override fun getChild(groupPosition: Int, childPosition: Int): MonthlyTally =
             reportIndicators.getValue(getGroup(groupPosition))[childPosition]
 
     override fun getGroupId(groupPosition: Int) = groupPosition.toLong()

@@ -12,7 +12,7 @@ import org.smartregister.uniceftunisia.reporting.ReportsDao.dateFormatter
 import org.smartregister.uniceftunisia.reporting.convertToNamedMonth
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.CREATED_AT
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.DATE_SENT
-import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.EDITED
+import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.ENTERED_MANUALLY
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.INDICATOR_CODE
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.INDICATOR_GROUPING
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.MONTH
@@ -21,6 +21,7 @@ import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepositor
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.VALUE
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import java.util.*
+import net.sqlcipher.database.SQLiteDatabase as SQLiteCipherDatabase
 
 /**
  * This the repository class that extends [BaseRepository] and has all the implementation code that
@@ -30,7 +31,8 @@ import java.util.*
  */
 class MonthlyReportsRepository private constructor() : BaseRepository() {
 
-    private val username = UnicefTunisiaApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM()
+    val providerId: String = UnicefTunisiaApplication.getInstance().context()
+            .allSharedPreferences().fetchRegisteredANM()
 
     private val supportedReportGroups = setOf(
             "report_group_header_vaccination_activity",
@@ -51,7 +53,7 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
         const val INDICATOR_CODE = "indicator_code"
         const val VALUE = "value"
         const val MONTH = "month"
-        const val EDITED = "edited"
+        const val ENTERED_MANUALLY = "entered_manually"
         const val DATE_SENT = "date_sent"
         const val INDICATOR_GROUPING = "indicator_grouping"
         const val CREATED_AT = "created_at"
@@ -67,7 +69,7 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
                 provider_id        VARCHAR   NOT NULL,
                 value              VARCHAR   NOT NULL,
                 month              VARCHAR   NOT NULL,
-                edited             INTEGER   NOT NULL DEFAULT 0,
+                entered_manually             INTEGER   NOT NULL DEFAULT 0,
                 indicator_grouping TEXT,
                 date_sent          DATETIME  NULL,
                 created_at         DATETIME  NULL,
@@ -88,7 +90,7 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
                 "CREATE UNIQUE INDEX monthly_tallies_indicator_code_month_index ON monthly_tallies (indicator_code, month);"
     }
 
-    fun createTable(database: net.sqlcipher.database.SQLiteDatabase) {
+    fun createTable(database: SQLiteCipherDatabase) {
         database.run {
             execSQL(TableQueries.CREATE_TABLE_SQL)
             execSQL(TableQueries.CREATE_PROVIDER_ID_INDEX_SQL)
@@ -128,10 +130,10 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
             if (dailyTallies.isNotEmpty()) {
                 MonthlyTally(
                         indicator = dailyTallies[0].indicatorCode,
-                        grouping = dailyTallies[0].grouping,
+                        value = dailyTallies.map { it.floatCount.toInt() }.reduce { sum, element -> sum + element }.toString(),
+                        providerId = providerId,
                         updatedAt = Calendar.getInstance().time,
-                        providerId = username,
-                        value = dailyTallies.map { it.floatCount.toInt() }.reduce { sum, element -> sum + element }.toString()
+                        grouping = dailyTallies[0].grouping
                 )
             } else null
 
@@ -147,7 +149,7 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
                             Pair(CREATED_AT, if (sync && tally.createdAt != null) tally.createdAt!!.time else currentTime),
                             Pair(UPDATED_AT, if (sync && tally.updatedAt != null) tally.updatedAt!!.time else currentTime),
                             Pair(PROVIDER_ID, tally.providerId),
-                            Pair(EDITED, 1),
+                            Pair(ENTERED_MANUALLY, if (tally.enteredManually) 1 else 0),
                             Pair(MONTH, yearMonth),
                             Pair(DATE_SENT, if (sync) currentTime else null)
                     )

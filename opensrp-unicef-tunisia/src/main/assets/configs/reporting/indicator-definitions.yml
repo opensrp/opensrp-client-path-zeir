@@ -270,3 +270,31 @@ indicators:
                            WHERE ec_client.is_closed != 1
                              AND vaccines.name = 'dtp_4'
                              AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
+
+  - key: "vaccine_doses_administered"
+    grouping: "report_group_header_vaccine_utilization"
+    description: "Number of doses administered for each vaccine BCG,  OPV,  DTP,  MR,  Hep B,  Penta,  IPV, PCV, Rubella"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (SELECT DISTINCT base_entity_id
+                           FROM (
+                                    SELECT DISTINCT vaccines.base_entity_id
+                                    FROM vaccines
+                                             INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
+                                    WHERE ec_client.is_closed != 1
+                                      AND (vaccines.name = 'bcg' OR vaccines.name = 'opv_1' OR vaccines.name = 'opv_2'
+                                        OR vaccines.name = 'dtp_4' OR vaccines.name = 'mr_1' OR vaccines.name = 'mr_2'
+                                        OR vaccines.name = 'hep_b_0' OR vaccines.name = 'penta_1' OR vaccines.name = 'penta_2'
+                                        OR vaccines.name = 'penta_3' OR vaccines.name = 'ipv_1' OR vaccines.name = 'ipv_2'
+                                        OR vaccines.name = 'pcv_1' OR vaccines.name = 'pcv_2' OR vaccines.name = 'pcv_3'
+                                        OR vaccines.name = 'pcv_4')
+                                      AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')
+
+                                    UNION ALL
+                                    SELECT DISTINCT ec_child_details.base_entity_id
+                                    FROM ec_child_details
+                                             INNER JOIN ec_mother_details
+                                                        ON ec_child_details.relational_id = ec_mother_details.base_entity_id
+                                    WHERE date_removed IS NULL
+                                      AND ec_mother_details.mother_rubella = 'yes'
+                                      AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
+                                ))"

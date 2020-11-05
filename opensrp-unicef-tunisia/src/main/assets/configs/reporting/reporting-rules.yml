@@ -1,0 +1,14 @@
+---
+name: total_doses
+description: Total Doses
+priority: 1
+condition: "true"
+actions:
+  - "total_doses = doses_per_vial * vials_used"
+---
+name: use_rate
+description: The usage of the vacines computed per vaccine (see above vaccines)
+priority: 1
+condition: "total_doses != 0"
+actions:
+  - "use_rate = (vaccine_doses_administered / total_doses) * 100"

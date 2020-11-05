@@ -35,7 +35,7 @@ class SentReportsFragment : Fragment(), ExpandableListView.OnChildClickListener 
                     if (it.isNotEmpty()) {
                         sentReportYearHeaders = it.keys.toList()
                         sentReports = it
-                        sentReportsExpandableListView.expandGroup(0, true)
+                        sentReportsExpandableListView.expandGroup(0, false)
                     }
                 }
             })

@@ -68,7 +68,7 @@ class DraftedReportsFragment : Fragment(), AdapterView.OnItemClickListener, View
                 val (yearMonth, monthlyTallies) = it
                 startActivity(Intent(activity, ReportIndicatorsActivity::class.java).apply {
                     putExtras(Bundle().apply {
-                        putExtra(MONTHLY_TALLIES, monthlyTallies.associateBy { it.indicator } as Serializable)
+                        putExtra(MONTHLY_TALLIES, monthlyTallies.associateBy { monthlyTally -> monthlyTally.indicator } as Serializable)
                         putExtra(YEAR_MONTH, yearMonth)
                         putExtra(SHOW_DATA, false)
                     })
@@ -108,7 +108,7 @@ class DraftedReportsFragment : Fragment(), AdapterView.OnItemClickListener, View
         }
 
         alertDialog.show()
-        alertDialog.window?.setLayout(600,  WindowManager.LayoutParams.WRAP_CONTENT)
+        alertDialog.window?.setLayout(600, WindowManager.LayoutParams.WRAP_CONTENT)
     }
 
     private fun createAlertDialog(view: View) {

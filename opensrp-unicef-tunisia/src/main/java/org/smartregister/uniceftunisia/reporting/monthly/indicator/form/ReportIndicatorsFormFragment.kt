@@ -17,6 +17,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.fragment_report_indicators_form.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,6 +35,7 @@ import org.smartregister.uniceftunisia.reporting.monthly.indicator.ReportIndicat
 import org.smartregister.uniceftunisia.util.AppJsonFormUtils
 import org.smartregister.uniceftunisia.util.AppUtils
 import org.smartregister.util.JsonFormUtils
+import org.smartregister.util.Utils
 import timber.log.Timber
 import java.util.*
 
@@ -41,17 +44,42 @@ import java.util.*
  */
 class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
 
-    private lateinit var confirmSendDraftDialog: ConfirmSendDraftDialog
-
     private val reportIndicatorsViewModel by activityViewModels<ReportIndicatorsViewModel>
     { ReportingUtils.createFor(ReportIndicatorsViewModel(MonthlyReportsRepository.getInstance())) }
+
+    private lateinit var confirmSendDraftDialog: ConfirmSendDraftDialog
+
+    private lateinit var reportingRulesEngine: ReportingRulesEngine
+
+    private val extendedIndicatorTallies by lazy {
+        getExtendedIndicatorTallies().associateBy { it.indicator }.toMutableMap()
+    }
+
+    private fun getExtendedIndicatorTallies(): List<MonthlyTally> {
+        val typeToken = object : TypeToken<List<MonthlyTally>>() {}.type
+        val assetFileInputStream = Utils.readAssetContents(requireContext(),
+                "configs/reporting/extended-indicators.json")
+        return Gson().fromJson(assetFileInputStream, typeToken)
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.fragment_report_indicators_form, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        reportIndicatorsViewModel.monthlyTalliesMap.value?.let { loadIndicatorsForm(it) }
+        reportIndicatorsViewModel.monthlyTalliesMap.value?.let { monthlyTallies ->
+            extendedIndicatorTallies.forEach { tallyEntry ->
+                tallyEntry.apply {
+                    value.providerId = MonthlyReportsRepository.getInstance().providerId
+                    value.month = ReportsDao.dateFormatter().parse(reportIndicatorsViewModel.yearMonth.value!!)!!
+                    value.value = "0"
+                }
+                includeExtendedTallies(monthlyTallies, tallyEntry)
+            }
+            reportingRulesEngine = ReportingRulesEngine(monthlyTallies = monthlyTallies, context = requireContext())
+            loadIndicatorsForm(monthlyTallies)
+        }
+
         //Setup UI
         confirmSendDraftDialog = ConfirmSendDraftDialog().apply {
             onClickListener = this@ReportIndicatorsFormFragment
@@ -62,39 +90,57 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    private fun includeExtendedTallies(monthlyTallies: MutableMap<String, MonthlyTally>, tallyEntry: Map.Entry<String, MonthlyTally>) {
+        if (!monthlyTallies.containsKey(tallyEntry.key)) {
+            monthlyTallies[tallyEntry.key] = tallyEntry.value
+        } else if (monthlyTallies.containsKey(tallyEntry.key)
+                && monthlyTallies[tallyEntry.key]?.dependentCalculations?.isEmpty()!!
+                && !tallyEntry.value.dependentCalculations.isNullOrEmpty()) {
+            monthlyTallies[tallyEntry.key]?.dependentCalculations = tallyEntry.value.dependentCalculations
+        }
+    }
+
     /**
      * Group indicators and create form
      */
     private fun loadIndicatorsForm(monthlyTallies: Map<String, MonthlyTally>) {
-
-        val groupedTallies: Map<String, List<MonthlyTally>> = monthlyTallies.values.groupBy { it.grouping }
+        val groupedTallies = monthlyTallies.values.groupBy { it.grouping }
 
         groupedTallies.forEach { entry ->
+
+            //Create report group header
             val reportHeaderTextView = TextView(requireContext()).apply {
                 text = requireContext().getString(entry.key.getResourceId(requireContext()))
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 setPadding(0, 20, 0, 28)
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f)
             }
-
-            //Create report group header
             reportIndicatorsLayout.addView(reportHeaderTextView)
 
             //Create text inputs for each indicator
-            entry.value.forEach {
+            entry.value.forEach { monthlyTally ->
                 val textInputEditText = TextInputEditText(requireContext()).apply {
-                    tag = it.indicator
-                    hint = getString(it.indicator.getResourceId(requireContext()))
-                    isFocusable = false
-                    setText(it.value.toString())
+                    tag = monthlyTally.indicator
+                    hint = getString(monthlyTally.indicator.getResourceId(requireContext()))
+                    isFocusable = monthlyTally.enteredManually
+                    setText(monthlyTally.value)
                     setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
                     addTextChangedListener(object : TextWatcher {
                         override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) =
                                 Unit
 
                         override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
-                            reportIndicatorsViewModel.monthlyTalliesMap.value?.set(it.indicator,
-                                    it.apply { value = charSequence.toString() })
+                            if (charSequence.isNullOrEmpty()) {
+                                error = getString(R.string.error_field_required)
+                            } else {
+                                error = null
+                                reportIndicatorsViewModel.monthlyTalliesMap.value?.run {
+                                    this[monthlyTally.indicator] = monthlyTally.apply { value = charSequence.toString() }
+                                    if (!monthlyTally.dependentCalculations.isNullOrEmpty()) {
+                                        reportingRulesEngine.fireRules(monthlyTally, this, this@ReportIndicatorsFormFragment::updateCalculatedField)
+                                    }
+                                }
+                            }
                         }
 
                         override fun afterTextChanged(editable: Editable?) = Unit
@@ -122,6 +168,13 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
                                 ConfirmSendDraftDialog::class.simpleName)
                     }
                 })
+    }
+
+    private fun updateCalculatedField(calculationField: String, calculatedValue: String) {
+        reportIndicatorsLayout.findViewWithTag<TextInputEditText>(calculationField)?.apply {
+            if (text.toString() != calculatedValue) setText(calculatedValue)
+            return
+        }
     }
 
     private fun syncMonthlyReportsToServer() {

@@ -165,6 +165,14 @@
     <string name="mr2_total">Total number of children of all ages who received MR2 vaccine</string>
     <string name="dtp4_total">Total number of children of all ages who received DTP4 vaccine</string>
 
+    <!--    Vaccine utilization report-->
+    <string name="vaccine_doses_administered">Vaccine doses administered </string>
+    <string name="vaccine_doses_administered_dt15to49">Vaccine doses administered - dT 15 to 49 years old</string>
+    <string name="vials_used">Vaccine vials used</string>
+    <string name="doses_per_vial">Doses per via used</string>
+    <string name="total_doses">Total Doses</string>
+    <string name="use_rate">Use rate (%)</string>
+
     <!-- Months -->
     <string name="january">January</string>
     <string name="february">February</string>

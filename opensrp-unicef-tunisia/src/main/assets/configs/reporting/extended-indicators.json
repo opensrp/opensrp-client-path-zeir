@@ -1,0 +1,42 @@
+[
+  {
+    "indicator": "vaccine_doses_administered",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate"
+    ]
+  },
+  {
+    "indicator": "vaccine_doses_administered_dt15to49",
+    "grouping": "report_group_header_vaccine_utilization",
+    "enteredManually": true
+  },
+  {
+    "indicator": "vials_used",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "doses_per_vial",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "total_doses",
+    "grouping": "report_group_header_vaccine_utilization",
+    "enteredManually": true,
+    "dependentCalculations": [
+      "use_rate"
+    ]
+  },
+  {
+    "indicator": "use_rate",
+    "grouping": "report_group_header_vaccine_utilization"
+  }
+]

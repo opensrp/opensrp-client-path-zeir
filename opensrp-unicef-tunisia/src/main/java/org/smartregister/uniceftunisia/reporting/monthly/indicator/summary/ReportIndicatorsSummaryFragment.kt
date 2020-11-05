@@ -50,7 +50,6 @@ class ReportIndicatorsSummaryFragment : Fragment(), ExpandableListView.OnGroupCl
                 submittedByTextView.text = submittedBy
                 reportGroupHeaders = groupedTallies.keys.toList()
                 reportIndicators = groupedTallies
-                indicatorsExpandableListView.expandGroup(0, true)
             }
         }
     }

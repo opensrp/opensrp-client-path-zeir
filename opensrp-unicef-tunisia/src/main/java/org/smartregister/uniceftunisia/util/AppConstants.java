@@ -166,7 +166,7 @@ public class AppConstants {
     }
 
     public interface File {
-        String INDICATOR_CONFIG_FILE = "configs/indicator-definitions.yml";
+        String INDICATOR_CONFIG_FILE = "configs/reporting/indicator-definitions.yml";
     }
 
     public interface ConditionalVaccines {
