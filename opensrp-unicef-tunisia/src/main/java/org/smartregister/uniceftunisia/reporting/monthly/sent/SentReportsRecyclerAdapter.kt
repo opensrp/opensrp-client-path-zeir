@@ -26,7 +26,7 @@ class SentReportsRecyclerAdapter(val onClickListener: View.OnClickListener) :
     private val expansionsCollection = ExpansionLayoutCollection()
 
     init {
-        expansionsCollection.openOnlyOne(true)
+        expansionsCollection.openOnlyOne(false)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SentReportsRecyclerHolder {
@@ -36,7 +36,7 @@ class SentReportsRecyclerAdapter(val onClickListener: View.OnClickListener) :
 
     override fun onBindViewHolder(holderSentReports: SentReportsRecyclerHolder, position: Int) {
         holderSentReports.bindViews(sentReports[position])
-        expansionsCollection.add(holderSentReports.sentReportsExpansionLayout)
+        expansionsCollection.add(holderSentReports.sentReportsExpansionLayout.apply { collapse(false) })
     }
 
     override fun getItemCount() = sentReports.size

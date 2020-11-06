@@ -35,7 +35,6 @@ object ReportsDao : AbstractDao() {
                                      strftime('%Y', day) y
                      FROM indicator_daily_tally
                  )
-            ORDER BY y DESC
         """.trimIndent()
 
         val dataMap = DataMap { cursor: Cursor? -> getCursorValue(cursor, "dates") }

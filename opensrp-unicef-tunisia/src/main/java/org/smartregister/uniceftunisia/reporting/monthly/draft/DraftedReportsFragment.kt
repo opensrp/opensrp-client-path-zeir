@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_monthly_drafted_reports.*
 import org.smartregister.uniceftunisia.R
+import org.smartregister.uniceftunisia.reporting.ReportsDao
 import org.smartregister.uniceftunisia.reporting.common.*
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsViewModel
@@ -51,9 +52,11 @@ class DraftedReportsFragment : Fragment(), AdapterView.OnItemClickListener, View
                 }
             })
 
-            draftedMonths.observe(viewLifecycleOwner, {
-                draftedReportsRecyclerAdapter.draftedMonths = it
-                if (it.isEmpty()) noDraftReportsLayout.visibility = View.VISIBLE
+            draftedMonths.observe(viewLifecycleOwner, { monthlyTallyPairs: List<Pair<String, Date>> ->
+                draftedReportsRecyclerAdapter.draftedMonths = monthlyTallyPairs
+                        .sortedWith(compareBy { ReportsDao.dateFormatter().format(it.second) })
+                        .asReversed()
+                if (monthlyTallyPairs.isEmpty()) noDraftReportsLayout.visibility = View.VISIBLE
                 else {
                     noDraftReportsLayout.visibility = View.GONE
                     draftedReportsRecyclerView.apply {
