@@ -1,5 +1,6 @@
 package org.smartregister.uniceftunisia.reporting.monthly.indicator.summary
 
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import kotlinx.android.synthetic.main.report_indicator_summary_list_item.view.*
 import kotlinx.android.synthetic.main.report_indicators_expansion_panel_item.*
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.reporting.common.getResourceId
+import org.smartregister.uniceftunisia.reporting.common.sortIndicators
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 
 class ReportIndicatorsRecyclerAdapter : RecyclerView.Adapter<ReportIndicatorsRecyclerAdapter.SentReportsRecyclerHolder>() {
@@ -45,6 +47,7 @@ class ReportIndicatorsRecyclerAdapter : RecyclerView.Adapter<ReportIndicatorsRec
 
             //Set report group header
             reportIndicatorTextView.apply {
+                typeface = Typeface.DEFAULT_BOLD
                 text = context.getString(reportGroup.getResourceId(containerView.context))
             }
 
@@ -56,8 +59,7 @@ class ReportIndicatorsRecyclerAdapter : RecyclerView.Adapter<ReportIndicatorsRec
                             value = containerView.context.getString(R.string.value)
                     )
             )
-            val sortedTallies = topLabel.plus(tallies).sortedBy { it.indicator }
-            sortedTallies.forEach {
+            topLabel.plus(tallies.sortIndicators()).forEach {
                 val view = LayoutInflater.from(containerView.context).inflate(R.layout.report_indicator_summary_list_item,
                         reportIndicatorsContainer, false).apply {
                     tag = it

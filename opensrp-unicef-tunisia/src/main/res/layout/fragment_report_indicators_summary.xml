@@ -5,7 +5,7 @@
     android:background="@color/report_view_background_color"
     android:orientation="vertical">
 
-    <TextView
+    <com.vijay.jsonwizard.views.CustomTextView
         android:id="@+id/submittedByTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,6 +13,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:text="@string/submitted_by_"
+        android:textStyle="normal|bold"
         android:textColor="@color/black"
         android:textSize="@dimen/indicator_summary_header_size" />
 

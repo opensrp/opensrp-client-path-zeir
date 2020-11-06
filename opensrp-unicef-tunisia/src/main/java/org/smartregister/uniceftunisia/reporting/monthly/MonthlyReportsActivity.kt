@@ -45,7 +45,6 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
             currentItem = intent.getIntExtra(Constants.SELECT_TAB, 0)
         }
 
-
         reportFragmentTabLayout.apply {
             setupWithViewPager(containerViewPager)
             tabRippleColor = null

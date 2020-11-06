@@ -1,14 +1,14 @@
 ---
-name: total_doses
+name: index_50_total_doses
 description: Total Doses
 priority: 1
 condition: "true"
 actions:
-  - "total_doses = doses_per_vial * vials_used"
+  - "index_50_total_doses = index_49_doses_per_vial * index_48_vials_used"
 ---
-name: use_rate
+name: index_51_use_rate
 description: The usage of the vacines computed per vaccine (see above vaccines)
 priority: 1
-condition: "total_doses != 0"
+condition: "index_50_total_doses != 0"
 actions:
-  - "use_rate = (vaccine_doses_administered / total_doses) * 100"
+  - "index_51_use_rate = (index_46_vaccine_doses_administered / index_50_total_doses) * 100"

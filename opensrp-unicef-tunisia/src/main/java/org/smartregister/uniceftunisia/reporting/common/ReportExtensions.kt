@@ -138,3 +138,6 @@ fun <T> LiveData<T>.reObserve(lifecycleOwner: LifecycleOwner, observer: Observer
     removeObserver(observer)
     observe(lifecycleOwner, observer)
 }
+
+fun List<MonthlyTally>.sortIndicators() = this.sortedBy { it.indicator.substringAfter("index_")
+        .split("_").first().toInt() }

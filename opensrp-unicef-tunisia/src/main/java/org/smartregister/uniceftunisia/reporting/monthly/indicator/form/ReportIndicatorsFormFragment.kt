@@ -3,6 +3,7 @@ package org.smartregister.uniceftunisia.reporting.monthly.indicator.form
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -122,12 +123,12 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
             reportIndicatorsLayout.addView(reportHeaderTextView)
 
             //Create text inputs for each indicator
-            val sortedTallies = entry.value.sortedBy { it.indicator }
-            sortedTallies.forEach { monthlyTally ->
+            entry.value.sortIndicators().forEach { monthlyTally ->
                 val textInputEditText = TextInputEditText(requireContext()).apply {
                     tag = monthlyTally.indicator
                     hint = getString(monthlyTally.indicator.getResourceId(requireContext()))
                     isFocusable = monthlyTally.enteredManually
+                    inputType = InputType.TYPE_CLASS_NUMBER
                     setText(monthlyTally.value)
                     setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
                     addTextChangedListener(object : TextWatcher {
@@ -135,14 +136,20 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
                                 Unit
 
                         override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
-                            if (charSequence.isNullOrEmpty()) {
-                                error = getString(R.string.error_field_required)
-                            } else {
-                                error = null
-                                reportIndicatorsViewModel.monthlyTalliesMap.value?.run {
-                                    this[monthlyTally.indicator] = monthlyTally.apply { value = charSequence.toString() }
-                                    if (!monthlyTally.dependentCalculations.isNullOrEmpty()) {
-                                        reportingRulesEngine.fireRules(monthlyTally, this, this@ReportIndicatorsFormFragment::updateCalculatedField)
+                            when {
+                                charSequence.toString().count { it == '.' } > 2 -> {
+                                    error = getString(R.string.error_enter_valid_number)
+                                }
+                                charSequence.isNullOrEmpty() -> {
+                                    error = getString(R.string.error_field_required)
+                                }
+                                else -> {
+                                    error = null
+                                    reportIndicatorsViewModel.monthlyTalliesMap.value?.run {
+                                        this[monthlyTally.indicator] = monthlyTally.apply { value = charSequence.toString() }
+                                        if (!monthlyTally.dependentCalculations.isNullOrEmpty()) {
+                                            reportingRulesEngine.fireRules(monthlyTally, this, this@ReportIndicatorsFormFragment::updateCalculatedField)
+                                        }
                                     }
                                 }
                             }

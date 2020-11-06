@@ -10,6 +10,7 @@ import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import org.smartregister.util.Utils
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.math.RoundingMode
 
 class ReportingRulesEngine(monthlyTallies: MutableMap<String, MonthlyTally>, rulesFilePath: String = "configs/reporting/reporting-rules.yml", context: Context) {
 
@@ -27,7 +28,8 @@ class ReportingRulesEngine(monthlyTallies: MutableMap<String, MonthlyTally>, rul
             this[monthlyTally.indicator]?.dependentCalculations?.forEach { calculationField ->
                 val calculatedValue: String = when {
                     facts.asMap()[calculationField] is String -> facts.asMap()[calculationField] as String
-                    else -> facts.get<Number>(calculationField).toString()
+                    facts.asMap()[calculationField] is Boolean ->  "0"
+                    else -> facts.get<Number>(calculationField).toDouble().toBigDecimal().setScale(1, RoundingMode.UP).toString()
                 }
                 this[calculationField]?.value = calculatedValue
                 fieldValueHandler(calculationField, calculatedValue)

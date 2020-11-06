@@ -1,5 +1,6 @@
 package org.smartregister.uniceftunisia.reporting.monthly.indicator.summary
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -50,6 +51,7 @@ class ReportIndicatorsSummaryFragment : Fragment() {
                 val submittedBy = requireContext().getString(R.string.submitted_by_,
                         ReportsDao.dateFormatter("dd/MM/YYYY").format(firstMonthlyTally.dateSent!!), firstMonthlyTally.providerId)
                 submittedByTextView.text = submittedBy
+                submittedByTextView.typeface = Typeface.DEFAULT_BOLD
                 reportIndicators = groupedTallies.toList()
             }
         }

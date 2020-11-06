@@ -75,7 +75,8 @@ class ReportIndicatorsActivity : MultiLanguageActivity() {
 
     private fun navigateToMonthlyReports(selectTab: Int = 0) {
         startActivity(Intent(this@ReportIndicatorsActivity, MonthlyReportsActivity::class.java).apply {
-            putExtra(MonthlyReportsActivity.Constants.SELECT_TAB, selectTab)
+            if (intent.getBooleanExtra(SHOW_DATA, false))
+                putExtra(MonthlyReportsActivity.Constants.SELECT_TAB, selectTab)
         })
         finish()
     }
