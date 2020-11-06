@@ -8,8 +8,8 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.fragment_monthly_report_draft_item.*
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.reporting.ReportsDao.dateFormatter
-import org.smartregister.uniceftunisia.reporting.convertToNamedMonth
-import org.smartregister.uniceftunisia.reporting.translateString
+import org.smartregister.uniceftunisia.reporting.common.convertToNamedMonth
+import org.smartregister.uniceftunisia.reporting.common.translateString
 import java.util.*
 
 class DraftedReportsRecyclerAdapter(val onClickListener: View.OnClickListener) :

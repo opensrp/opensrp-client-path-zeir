@@ -1,10 +1,10 @@
-package org.smartregister.uniceftunisia.reporting
+package org.smartregister.uniceftunisia.reporting.common
 
 import android.content.Context
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
+import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.reflect.TypeToken
 import org.json.JSONArray
@@ -116,3 +116,25 @@ fun Context.showToast(resourceId: Int, duration: Int = Toast.LENGTH_LONG) =
  */
 fun View.showSnackBar(resourceId: Int, duration: Int = Snackbar.LENGTH_LONG) =
         Snackbar.make(this, this.context.getString(resourceId), duration).show()
+
+/**
+ * LiveData Extension to observer data once for the [observer] subscribed to the given [lifecycleOwner]
+ * */
+
+fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
+    observe(lifecycleOwner, object : Observer<T> {
+        override fun onChanged(t: T) {
+            observer.onChanged(t)
+            removeObserver(this)
+        }
+    })
+}
+
+/**
+ * LiveData Extension to remove [observer] subscribed to the [lifecycleOwner] before re-observing data
+ * */
+
+fun <T> LiveData<T>.reObserve(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
+    removeObserver(observer)
+    observe(lifecycleOwner, observer)
+}

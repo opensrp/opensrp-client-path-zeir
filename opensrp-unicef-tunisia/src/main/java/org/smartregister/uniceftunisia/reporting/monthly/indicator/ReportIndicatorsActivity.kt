@@ -1,5 +1,6 @@
 package org.smartregister.uniceftunisia.reporting.monthly.indicator
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -10,7 +11,8 @@ import com.vijay.jsonwizard.activities.MultiLanguageActivity
 import kotlinx.android.synthetic.main.activity_report_indicators.*
 import kotlinx.coroutines.launch
 import org.smartregister.uniceftunisia.R
-import org.smartregister.uniceftunisia.reporting.*
+import org.smartregister.uniceftunisia.reporting.common.*
+import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsActivity
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 
@@ -54,7 +56,7 @@ class ReportIndicatorsActivity : MultiLanguageActivity() {
             getString(R.string.monthly_sent_reports_with_year, translatedYearMonth) else
             getString(R.string.month_year_draft, translatedYearMonth)
 
-        backButton.setOnClickListener { finish() }
+        backButton.setOnClickListener { navigateToMonthlyReports(1) }
 
         saveFormButton.setOnClickListener { submitMonthlyDraft() }
     }
@@ -64,10 +66,17 @@ class ReportIndicatorsActivity : MultiLanguageActivity() {
             when (reportIndicatorsViewModel.saveMonthlyDraft()) {
                 true -> {
                     reportIndicatorsRootLayout.showSnackBar(R.string.monthly_draft_saved)
-                    finish()
+                    navigateToMonthlyReports()
                 }
                 else -> reportIndicatorsRootLayout.showSnackBar(R.string.error_saving_draft_reports)
             }
         }
+    }
+
+    private fun navigateToMonthlyReports(selectTab: Int = 0) {
+        startActivity(Intent(this@ReportIndicatorsActivity, MonthlyReportsActivity::class.java).apply {
+            putExtra(MonthlyReportsActivity.Constants.SELECT_TAB, selectTab)
+        })
+        finish()
     }
 }

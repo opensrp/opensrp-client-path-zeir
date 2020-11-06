@@ -45,7 +45,7 @@ import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.MiniClientProcessorForJava;
 import org.smartregister.sync.helper.ECSyncHelper;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
-import org.smartregister.uniceftunisia.reporting.ReportingUtils;
+import org.smartregister.uniceftunisia.reporting.common.ReportingUtils;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppExecutors;
 import org.smartregister.uniceftunisia.util.AppUtils;

@@ -1,5 +1,6 @@
 package org.smartregister.uniceftunisia.reporting.monthly.indicator.form
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -27,7 +28,10 @@ import org.json.JSONArray
 import org.json.JSONObject
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication
-import org.smartregister.uniceftunisia.reporting.*
+import org.smartregister.uniceftunisia.reporting.ReportingRulesEngine
+import org.smartregister.uniceftunisia.reporting.ReportsDao
+import org.smartregister.uniceftunisia.reporting.common.*
+import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsActivity
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import org.smartregister.uniceftunisia.reporting.monthly.draft.ConfirmSendDraftDialog
@@ -118,7 +122,8 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
             reportIndicatorsLayout.addView(reportHeaderTextView)
 
             //Create text inputs for each indicator
-            entry.value.forEach { monthlyTally ->
+            val sortedTallies = entry.value.sortedBy { it.indicator }
+            sortedTallies.forEach { monthlyTally ->
                 val textInputEditText = TextInputEditText(requireContext()).apply {
                     tag = monthlyTally.indicator
                     hint = getString(monthlyTally.indicator.getResourceId(requireContext()))
@@ -182,7 +187,10 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
             when (createAndProcessMonthlyReportEvent()) {
                 true -> {
                     reportIndicatorsScrollView.showSnackBar(R.string.monthly_draft_submitted)
-                    requireActivity().onBackPressed()
+                    requireActivity().run {
+                        startActivity(Intent(requireActivity(), MonthlyReportsActivity::class.java))
+                        finish()
+                    }
                 }
                 else -> reportIndicatorsScrollView.showSnackBar(R.string.error_sending_draft_reports)
             }

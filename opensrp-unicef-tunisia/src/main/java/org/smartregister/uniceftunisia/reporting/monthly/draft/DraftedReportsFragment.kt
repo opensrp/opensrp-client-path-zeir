@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_monthly_drafted_reports.*
 import org.smartregister.uniceftunisia.R
-import org.smartregister.uniceftunisia.reporting.*
+import org.smartregister.uniceftunisia.reporting.common.*
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsViewModel
 import org.smartregister.uniceftunisia.reporting.monthly.indicator.ReportIndicatorsActivity
@@ -31,10 +31,10 @@ class DraftedReportsFragment : Fragment(), AdapterView.OnItemClickListener, View
     private val monthlyReportsViewModel by activityViewModels<MonthlyReportsViewModel>
     { ReportingUtils.createFor(MonthlyReportsViewModel(MonthlyReportsRepository.getInstance())) }
 
+    private val draftedReportsRecyclerAdapter = DraftedReportsRecyclerAdapter(this)
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
             inflater.inflate(R.layout.fragment_monthly_drafted_reports, container, false)
-
-    private val draftedReportsRecyclerAdapter = DraftedReportsRecyclerAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         draftedReportsRecyclerView.adapter = draftedReportsRecyclerAdapter
@@ -66,13 +66,14 @@ class DraftedReportsFragment : Fragment(), AdapterView.OnItemClickListener, View
 
             draftedReportTallies.observe(viewLifecycleOwner, {
                 val (yearMonth, monthlyTallies) = it
-                startActivity(Intent(activity, ReportIndicatorsActivity::class.java).apply {
+                startActivity(Intent(requireActivity(), ReportIndicatorsActivity::class.java).apply {
                     putExtras(Bundle().apply {
                         putExtra(MONTHLY_TALLIES, monthlyTallies.associateBy { monthlyTally -> monthlyTally.indicator } as Serializable)
                         putExtra(YEAR_MONTH, yearMonth)
                         putExtra(SHOW_DATA, false)
                     })
                 })
+                requireActivity().finish()
             })
         }
     }

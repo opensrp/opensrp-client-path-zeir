@@ -1,4 +1,4 @@
-package org.smartregister.uniceftunisia.reporting
+package org.smartregister.uniceftunisia.reporting.common
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

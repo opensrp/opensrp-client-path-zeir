@@ -7,11 +7,16 @@ import org.smartregister.Context
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.reporting.ReportGroup
 import org.smartregister.uniceftunisia.reporting.ReportGroupingModel
-import org.smartregister.uniceftunisia.reporting.ReportingUtils
+import org.smartregister.uniceftunisia.reporting.common.ReportingUtils
 import org.smartregister.uniceftunisia.util.AppConstants
 import org.smartregister.view.activity.MultiLanguageActivity
 
 class MonthlyReportsActivity : MultiLanguageActivity() {
+
+    object Constants {
+        const val SELECT_TAB = "select_tab"
+    }
+
     private val monthlyReportsViewModel by viewModels<MonthlyReportsViewModel>
     { ReportingUtils.createFor(MonthlyReportsViewModel(MonthlyReportsRepository.getInstance())) }
     private lateinit var reportsPagerAdapter: MonthlyReportsPagerAdapter
@@ -26,8 +31,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
 
         monthlyReportsViewModel.apply {
             draftedMonths.observe(this@MonthlyReportsActivity, {
-                reportFragmentTabLayout.getTabAt(0)?.text =
-                        getString(R.string.monthly_draft_reports, it.size)
+                reportFragmentTabLayout.getTabAt(0)?.text = getString(R.string.monthly_draft_reports, it.size)
             })
         }
 
@@ -36,7 +40,11 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
             setOnClickListener { onBackPressed() }
             text = getLoggedInUserInitials()
         }
-        containerViewPager.apply { adapter = reportsPagerAdapter }
+        containerViewPager.apply {
+            adapter = reportsPagerAdapter
+            currentItem = intent.getIntExtra(Constants.SELECT_TAB, 0)
+        }
+
 
         reportFragmentTabLayout.apply {
             setupWithViewPager(containerViewPager)

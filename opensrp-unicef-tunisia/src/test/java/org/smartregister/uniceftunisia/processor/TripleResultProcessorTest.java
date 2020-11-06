@@ -8,7 +8,7 @@ import org.junit.rules.ExpectedException;
 import org.smartregister.reporting.domain.CompositeIndicatorTally;
 import org.smartregister.reporting.domain.IndicatorTally;
 import org.smartregister.reporting.exception.MultiResultProcessorException;
-import org.smartregister.uniceftunisia.reporting.ReportIndicatorsProcessor;
+import org.smartregister.uniceftunisia.reporting.common.ReportIndicatorsProcessor;
 
 import java.util.ArrayList;
 import java.util.Date;

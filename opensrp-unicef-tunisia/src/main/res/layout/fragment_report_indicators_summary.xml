@@ -16,8 +16,8 @@
         android:textColor="@color/black"
         android:textSize="@dimen/indicator_summary_header_size" />
 
-    <ExpandableListView
-        android:id="@+id/indicatorsExpandableListView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/indicatorsRecyclerView"
         style="@style/Widget.AppCompat.ListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,6 +29,5 @@
         android:childDivider="@color/list_view_divider_black"
         android:clipToPadding="false"
         android:divider="@color/list_view_divider_black"
-        android:fadingEdge="none"
-        android:groupIndicator="@null" />
+        android:fadingEdge="none" />
 </LinearLayout>

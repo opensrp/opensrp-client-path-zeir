@@ -293,6 +293,7 @@ dependencies {
     implementation 'org.jeasy:easy-rules-mvel:3.3.0'
     implementation group: 'org.yaml', name: 'snakeyaml', version: '1.24'
     implementation group: 'io.fabric.sdk.android', name: 'fabric', version: '1.4.8'
+    implementation 'com.github.florent37:expansionpanel:1.2.4'
 
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 

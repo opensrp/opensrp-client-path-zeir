@@ -9,7 +9,7 @@ import org.smartregister.repository.BaseRepository
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication
 import org.smartregister.uniceftunisia.reporting.ReportsDao
 import org.smartregister.uniceftunisia.reporting.ReportsDao.dateFormatter
-import org.smartregister.uniceftunisia.reporting.convertToNamedMonth
+import org.smartregister.uniceftunisia.reporting.common.convertToNamedMonth
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.CREATED_AT
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.DATE_SENT
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.ENTERED_MANUALLY

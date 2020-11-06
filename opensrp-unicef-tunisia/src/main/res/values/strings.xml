@@ -212,5 +212,6 @@
     <string name="report_group_header_adequate_growth_measurement">Children with an adequate number of growth measurements</string>
     <string name="report_group_header_previous_under_nutrition">Children with at least 1 previous episode of undernutrition</string>
     <string name="report_group_header_diagnosed_malnourished">Children diagnosed as malnourished according to the weighing of the day</string>
+    <string name="year">Year</string>
 
 </resources>

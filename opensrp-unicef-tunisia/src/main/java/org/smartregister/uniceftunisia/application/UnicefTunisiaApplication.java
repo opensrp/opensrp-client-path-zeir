@@ -54,7 +54,7 @@ import org.smartregister.uniceftunisia.activity.ChildRegisterActivity;
 import org.smartregister.uniceftunisia.activity.LoginActivity;
 import org.smartregister.uniceftunisia.job.AppJobCreator;
 import org.smartregister.uniceftunisia.processor.AppClientProcessorForJava;
-import org.smartregister.uniceftunisia.reporting.ReportIndicatorsProcessor;
+import org.smartregister.uniceftunisia.reporting.common.ReportIndicatorsProcessor;
 import org.smartregister.uniceftunisia.repository.AppChildRegisterQueryProvider;
 import org.smartregister.uniceftunisia.repository.ChildAlertUpdatedRepository;
 import org.smartregister.uniceftunisia.repository.ClientRegisterTypeRepository;

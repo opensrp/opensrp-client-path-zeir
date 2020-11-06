@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ExpandableListView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_report_indicators_summary.*
-import kotlinx.android.synthetic.main.report_indicator_summary_header_item.*
 import org.smartregister.uniceftunisia.R
-import org.smartregister.uniceftunisia.reporting.ReportingUtils
 import org.smartregister.uniceftunisia.reporting.ReportsDao
+import org.smartregister.uniceftunisia.reporting.common.ReportingUtils
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import org.smartregister.uniceftunisia.reporting.monthly.indicator.ReportIndicatorsViewModel
@@ -20,9 +20,9 @@ import org.smartregister.uniceftunisia.reporting.monthly.indicator.ReportIndicat
 /**
  * A [Fragment] subclass used to display list of report indicators
  */
-class ReportIndicatorsSummaryFragment : Fragment(), ExpandableListView.OnGroupClickListener {
+class ReportIndicatorsSummaryFragment : Fragment() {
 
-    private val reportsIndicatorsListAdapter = ReportsIndicatorsListAdapter()
+    private val reportIndicatorsRecyclerAdapter = ReportIndicatorsRecyclerAdapter()
 
     private val reportIndicatorsViewModel by activityViewModels<ReportIndicatorsViewModel>()
     { ReportingUtils.createFor(ReportIndicatorsViewModel(MonthlyReportsRepository.getInstance())) }
@@ -33,53 +33,24 @@ class ReportIndicatorsSummaryFragment : Fragment(), ExpandableListView.OnGroupCl
     ): View = inflater.inflate(R.layout.fragment_report_indicators_summary, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        indicatorsExpandableListView.apply {
-            setAdapter(reportsIndicatorsListAdapter)
-            setOnGroupClickListener(this@ReportIndicatorsSummaryFragment)
+        indicatorsRecyclerView.apply {
+            adapter = reportIndicatorsRecyclerAdapter
+            layoutManager = LinearLayoutManager(context)
+            setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
         reportIndicatorsViewModel.monthlyTalliesMap.value?.let { displayIndicators(it) }
     }
 
     private fun displayIndicators(monthlyTallies: Map<String, MonthlyTally>) {
         val groupedTallies: Map<String, List<MonthlyTally>> = monthlyTallies.values.groupBy { it.grouping }
-        reportsIndicatorsListAdapter.apply {
+        reportIndicatorsRecyclerAdapter.apply {
             if (groupedTallies.isNotEmpty()) {
                 val firstMonthlyTally: MonthlyTally = groupedTallies.values.first()[0]
                 val submittedBy = requireContext().getString(R.string.submitted_by_,
-                        ReportsDao.dateFormatter("dd/MM/YYYY").format(firstMonthlyTally.dateSent), firstMonthlyTally.providerId)
+                        ReportsDao.dateFormatter("dd/MM/YYYY").format(firstMonthlyTally.dateSent!!), firstMonthlyTally.providerId)
                 submittedByTextView.text = submittedBy
-                reportGroupHeaders = groupedTallies.keys.toList()
-                reportIndicators = groupedTallies
-            }
-        }
-    }
-
-    override fun onGroupClick(parent: ExpandableListView, view: View, groupPosition: Int, id: Long): Boolean {
-        val expandGroup = parent.expandGroup(groupPosition)
-        toggleIndicatorLabels(expandGroup)
-        return when (expandGroup) {
-            true -> {
-                collapsibleImageView.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.expand_less))
-                true
-            }
-            else -> {
-                collapsibleImageView.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.expand_more))
-                false
-            }
-        }
-    }
-
-    private fun toggleIndicatorLabels(expandGroup: Boolean) {
-        when (expandGroup) {
-            true -> {
-                indicatorLabelTextView.visibility = View.VISIBLE
-                valueLabelTextView.visibility = View.VISIBLE
-                labelSeparatorLineView.visibility = View.VISIBLE
-            }
-            else -> {
-                indicatorLabelTextView.visibility = View.GONE
-                valueLabelTextView.visibility = View.GONE
-                labelSeparatorLineView.visibility = View.GONE
+                reportIndicators = groupedTallies.toList()
             }
         }
     }
