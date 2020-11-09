@@ -25,7 +25,7 @@ class ReportIndicatorsRecyclerAdapter : RecyclerView.Adapter<ReportIndicatorsRec
     private val expansionsCollection = ExpansionLayoutCollection()
 
     init {
-        expansionsCollection.openOnlyOne(true)
+        expansionsCollection.openOnlyOne(false)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SentReportsRecyclerHolder {
@@ -55,10 +55,11 @@ class ReportIndicatorsRecyclerAdapter : RecyclerView.Adapter<ReportIndicatorsRec
             val topLabel = listOf(
                     MonthlyTally(
                             grouping = reportGroup,
-                            indicator = containerView.context.getString(R.string.indicator),
+                            indicator = "indicator",
                             value = containerView.context.getString(R.string.value)
                     )
             )
+            reportIndicatorsContainer.removeAllViews()
             topLabel.plus(tallies.sortIndicators()).forEach {
                 val view = LayoutInflater.from(containerView.context).inflate(R.layout.report_indicator_summary_list_item,
                         reportIndicatorsContainer, false).apply {

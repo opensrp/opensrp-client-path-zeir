@@ -52,9 +52,6 @@
     <string name="please_wait_message">Please wait</string>
     <string name="reports">Reports</string>
 
-    <string name="indicator">Indicator</string>
-    <string name="value">Value</string>
-
     <string name="str_page_info">Page {0} of {1}</string>
     <string name="dismiss_lookup">Confirm</string>
     <string name="fill_form_error_msg">Please register at least one service before saving</string>
@@ -178,6 +175,25 @@
     <string name="index_54_PAB_dt_and_assisted_delivery">Children protected at birth by dT and assisted delivery</string>
     <string name="index_55_PAB_total">Total number of children protected at birth</string>
 
+    <!--Rubella Vaccination for woman giving birth for the first time -->
+    <string name="index_56_total_child_births">Total child births</string>
+    <string name="index_57_number_first_birth">Number of women who are primapara (delivering for the first time) in the facility this month</string>
+    <string name="index_58_percentage_first_birth">% primapara births (woman giving birth for the first time)</string>
+    <string name="index_59_number_rubella_serology">Number of primapara women(delivering for the first time) who got a serology test in the facility this month</string>
+    <string name="index_60_percentage_number_rubella_serology">% of primapara mother who undertook a rubella serology test</string>
+    <string name="index_61_negative_serology_results">Number of primapara women(delivering for the first time) who got a serology test that got a negative result in the facility this month</string>
+    <string name="index_62_percentage_serology_results">% of mothers who took the Rubella serology test had a negative result</string>
+    <string name="index_63_women_vaccinated_rubella">Number of women vaccinated against Rubella</string>
+
+    <!--Children with an adequate number of growth measurements-->
+    <string name="index_64_right_measures_6months">Children with the right measurements at 6 months</string>
+    <string name="index_65_percentage_right_measures_6months">% of children with right measurements at 6 months</string>
+    <string name="index_66_right_measures_12months">Children with the right measurements at 12 months</string>
+    <string name="index_67_percentage_right_measures_12months">% of children with right measurements at 12 months</string>
+    <string name="index_68_right_measures_18months">Children with the right measurements at 18 months</string>
+    <string name="index_69_percentage_right_measures_18months">% of children with right measurements at 18 months</string>
+
+
     <!--End of report indicators-->
 
     <!-- Months -->
@@ -221,5 +237,7 @@
     <string name="coverage_reports">Coverage Reports</string>
     <string name="year">Year</string>
     <string name="error_enter_valid_number">Please enter a valid number</string>
+    <string name="indicator">Indicator</string>
+    <string name="value">Value</string>
 
 </resources>

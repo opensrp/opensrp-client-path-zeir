@@ -294,7 +294,7 @@ indicators:
                                     FROM ec_child_details
                                              INNER JOIN ec_mother_details
                                                         ON ec_child_details.relational_id = ec_mother_details.base_entity_id
-                                    WHERE date_removed IS NULL
+                                    WHERE ec_child_details.date_removed IS NULL
                                       AND ec_mother_details.mother_rubella = 'yes' COLLATE NOCASE
                                       AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
                                 ))"
@@ -308,7 +308,7 @@ indicators:
                               FROM ec_child_details
                                        INNER JOIN ec_mother_details
                                                   ON ec_child_details.relational_id = ec_mother_details.base_entity_id
-                              WHERE date_removed IS NULL
+                              WHERE ec_child_details.date_removed IS NULL
                                 AND ec_mother_details.protected_at_birth = 'yes' COLLATE NOCASE
                                 AND ec_child_details.place_of_birth IS NOT 'hospital' COLLATE NOCASE
                                 AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
@@ -323,7 +323,7 @@ indicators:
                               FROM ec_child_details
                                        INNER JOIN ec_mother_details
                                                   ON ec_child_details.relational_id = ec_mother_details.base_entity_id
-                              WHERE date_removed IS NULL
+                              WHERE ec_child_details.date_removed IS NULL
                                 AND ec_mother_details.protected_at_birth = 'no' COLLATE NOCASE
                                 AND ec_child_details.place_of_birth IS 'hospital' COLLATE NOCASE
                                 AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
@@ -338,8 +338,73 @@ indicators:
                               FROM ec_child_details
                                        INNER JOIN ec_mother_details
                                                   ON ec_child_details.relational_id = ec_mother_details.base_entity_id
-                              WHERE date_removed IS NULL
+                              WHERE ec_child_details.date_removed IS NULL
                                 AND ec_mother_details.protected_at_birth = 'yes' COLLATE NOCASE
                                 AND ec_child_details.place_of_birth IS 'hospital' COLLATE NOCASE
                                 AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
                           )"
+
+  - key: "index_56_total_child_births"
+    grouping: "report_group_header_rubella_vaccine"
+    description: "Number of total births in the facility"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (
+                              SELECT DISTINCT ec_child_details.base_entity_id
+                              FROM ec_child_details
+                              WHERE ec_child_details.is_closed != '1'
+                                AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_child_details.event_date)
+                          );"
+
+  - key: "index_57_number_first_birth"
+    grouping: "report_group_header_rubella_vaccine"
+    description: "Number of women giving birth for the first time in this month"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (
+                              SELECT DISTINCT ec_mother_details.base_entity_id
+                              FROM ec_mother_details
+                              WHERE ec_mother_details.date_removed IS NULL
+                                AND ec_mother_details.first_birth = 'yes' COLLATE NOCASE
+                                AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
+                          );"
+
+  - key: "index_59_number_rubella_serology"
+    grouping: "report_group_header_rubella_vaccine"
+    description: "Number of primapara women who got a Rubella serology test in the facility this month"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (
+                              SELECT DISTINCT ec_mother_details.base_entity_id
+                              FROM ec_mother_details
+                              WHERE ec_mother_details.date_removed IS NULL
+                                AND ec_mother_details.first_birth = 'yes' COLLATE NOCASE
+                                AND ec_mother_details.rubella_serology = 'yes' COLLATE NOCASE
+                                AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
+                          );"
+
+  - key: "index_61_negative_serology_results"
+    grouping: "report_group_header_rubella_vaccine"
+    description: "Number of primapara women that got a serology test with negative results"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (
+                              SELECT DISTINCT ec_mother_details.base_entity_id
+                              FROM ec_mother_details
+                              WHERE ec_mother_details.date_removed IS NULL
+                                AND ec_mother_details.first_birth = 'yes' COLLATE NOCASE
+                                AND ec_mother_details.rubella_serology = 'yes' COLLATE NOCASE
+                                AND ec_mother_details.serology_results = 'negative' COLLATE NOCASE
+                                AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
+                          );"
+
+  - key: "index_63_women_vaccinated_rubella"
+    grouping: "report_group_header_rubella_vaccine"
+    description: "Number of women who had a negative serology test that were vaccinated against Rubella ({mother_rubella} =''yes''"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (
+                              SELECT DISTINCT ec_mother_details.base_entity_id
+                              FROM ec_mother_details
+                              WHERE ec_mother_details.date_removed IS NULL
+                                AND ec_mother_details.mother_rubella = 'yes' COLLATE NOCASE
+                                AND ec_mother_details.first_birth = 'yes' COLLATE NOCASE
+                                AND ec_mother_details.rubella_serology = 'yes' COLLATE NOCASE
+                                AND ec_mother_details.serology_results = 'negative' COLLATE NOCASE
+                                AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
+                          );"

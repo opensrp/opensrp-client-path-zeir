@@ -62,5 +62,47 @@
   {
     "indicator": "index_55_PAB_total",
     "grouping": "report_group_header_tetanus_protected"
+  },
+  {
+    "indicator": "index_56_total_child_births",
+    "grouping": "report_group_header_rubella_vaccine",
+    "dependentCalculations": [
+      "index_58_percentage_first_birth"
+    ]
+  },
+  {
+    "indicator": "index_57_number_first_birth",
+    "grouping": "report_group_header_rubella_vaccine",
+    "dependentCalculations": [
+      "index_58_percentage_first_birth",
+      "index_60_percentage_number_rubella_serology"
+    ]
+  },
+  {
+    "indicator": "index_58_percentage_first_birth",
+    "grouping": "report_group_header_rubella_vaccine"
+  },
+  {
+    "indicator": "index_59_number_rubella_serology",
+    "grouping": "report_group_header_rubella_vaccine",
+    "dependentCalculations": [
+      "index_60_percentage_number_rubella_serology",
+      "index_62_percentage_serology_results"
+    ]
+  },
+  {
+    "indicator": "index_60_percentage_number_rubella_serology",
+    "grouping": "report_group_header_rubella_vaccine"
+  },
+  {
+    "indicator": "index_61_negative_serology_results",
+    "grouping": "report_group_header_rubella_vaccine",
+    "dependentCalculations": [
+      "index_62_percentage_serology_results"
+    ]
+  },
+  {
+    "indicator": "index_62_percentage_serology_results",
+    "grouping": "report_group_header_rubella_vaccine"
   }
 ]

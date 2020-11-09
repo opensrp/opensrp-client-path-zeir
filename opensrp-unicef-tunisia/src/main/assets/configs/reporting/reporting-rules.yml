@@ -19,3 +19,24 @@ priority: 1
 condition: "true"
 actions:
   - "index_55_PAB_total = new Integer(index_52_PAB_mother_dt) + new Integer(index_53_PAB_assisted_delivery) + new Integer(index_54_PAB_dt_and_assisted_delivery)"
+---
+name: index_58_percentage_first_birth
+description: Percentage of women giving birth for the first time ({first_birth} =''yes''
+priority: 1
+condition: "index_56_total_child_births != 0"
+actions:
+  - "index_58_percentage_first_birth = (index_57_number_first_birth / index_56_total_child_births) * 100"
+---
+name: index_60_percentage_number_rubella_serology
+description: Percentage of primapara mother who undertook a rubella serology test
+priority: 1
+condition: "index_57_number_first_birth != 0"
+actions:
+  - "index_60_percentage_number_rubella_serology = (index_59_number_rubella_serology / index_57_number_first_birth) * 100"
+---
+name: index_62_percentage_serology_results
+description: Percentage of women who took the serology test that have negative results ({serology_results} = ''negative''
+priority: 1
+condition: "index_59_number_rubella_serology != 0"
+actions:
+  - "index_62_percentage_serology_results = (index_61_negative_serology_results / index_59_number_rubella_serology) * 100"
