@@ -295,6 +295,51 @@ indicators:
                                              INNER JOIN ec_mother_details
                                                         ON ec_child_details.relational_id = ec_mother_details.base_entity_id
                                     WHERE date_removed IS NULL
-                                      AND ec_mother_details.mother_rubella = 'yes'
+                                      AND ec_mother_details.mother_rubella = 'yes' COLLATE NOCASE
                                       AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
                                 ))"
+
+  - key: "index_52_PAB_mother_dt"
+    grouping: "report_group_header_tetanus_protected"
+    description: "Month to month visual of the number of  children that are protected against tetanus at birth, through the tetanus vaccine received by the mother during pregnancy (mother dT) only."
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (
+                              SELECT DISTINCT ec_child_details.base_entity_id
+                              FROM ec_child_details
+                                       INNER JOIN ec_mother_details
+                                                  ON ec_child_details.relational_id = ec_mother_details.base_entity_id
+                              WHERE date_removed IS NULL
+                                AND ec_mother_details.protected_at_birth = 'yes' COLLATE NOCASE
+                                AND ec_child_details.place_of_birth IS NOT 'hospital' COLLATE NOCASE
+                                AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
+                          )"
+
+  - key: "index_53_PAB_assisted_delivery"
+    grouping: "report_group_header_tetanus_protected"
+    description: "Month to month visual of the number of  children that are protected against tetanus through assisted delivery only "
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (
+                              SELECT DISTINCT ec_child_details.base_entity_id
+                              FROM ec_child_details
+                                       INNER JOIN ec_mother_details
+                                                  ON ec_child_details.relational_id = ec_mother_details.base_entity_id
+                              WHERE date_removed IS NULL
+                                AND ec_mother_details.protected_at_birth = 'no' COLLATE NOCASE
+                                AND ec_child_details.place_of_birth IS 'hospital' COLLATE NOCASE
+                                AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
+                          )"
+
+  - key: "index_54_PAB_dt_and_assisted_delivery"
+    grouping: "report_group_header_tetanus_protected"
+    description: "Month to month visual of the number of  children that are protected against tetanus at birth, through the tetanus vaccine received by the mother during pregnancy (mother dT) and assisted delivery"
+    indicatorQuery: "SELECT count(base_entity_id)
+                     FROM (
+                              SELECT DISTINCT ec_child_details.base_entity_id
+                              FROM ec_child_details
+                                       INNER JOIN ec_mother_details
+                                                  ON ec_child_details.relational_id = ec_mother_details.base_entity_id
+                              WHERE date_removed IS NULL
+                                AND ec_mother_details.protected_at_birth = 'yes' COLLATE NOCASE
+                                AND ec_child_details.place_of_birth IS 'hospital' COLLATE NOCASE
+                                AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
+                          )"

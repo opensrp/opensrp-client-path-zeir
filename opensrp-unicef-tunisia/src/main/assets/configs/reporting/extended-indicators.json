@@ -37,5 +37,30 @@
   {
     "indicator": "index_51_use_rate",
     "grouping": "report_group_header_vaccine_utilization"
+  },
+  {
+    "indicator": "index_52_PAB_mother_dt",
+    "grouping": "report_group_header_tetanus_protected",
+    "dependentCalculations": [
+      "index_55_PAB_total"
+    ]
+  },
+  {
+    "indicator": "index_53_PAB_assisted_delivery",
+    "grouping": "report_group_header_tetanus_protected",
+    "dependentCalculations": [
+      "index_55_PAB_total"
+    ]
+  },
+  {
+    "indicator": "index_54_PAB_dt_and_assisted_delivery",
+    "grouping": "report_group_header_tetanus_protected",
+    "dependentCalculations": [
+      "index_55_PAB_total"
+    ]
+  },
+  {
+    "indicator": "index_55_PAB_total",
+    "grouping": "report_group_header_tetanus_protected"
   }
 ]

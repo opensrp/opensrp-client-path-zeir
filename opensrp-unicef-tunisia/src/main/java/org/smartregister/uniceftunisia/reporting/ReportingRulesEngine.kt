@@ -29,7 +29,7 @@ class ReportingRulesEngine(monthlyTallies: MutableMap<String, MonthlyTally>, rul
                 val calculatedValue: String = when {
                     facts.asMap()[calculationField] is String -> facts.asMap()[calculationField] as String
                     facts.asMap()[calculationField] is Boolean ->  "0"
-                    else -> facts.get<Number>(calculationField).toDouble().toBigDecimal().setScale(1, RoundingMode.UP).toString()
+                    else -> facts.get<Number>(calculationField).toDouble().toBigDecimal().setScale(0, RoundingMode.UP).toString()
                 }
                 this[calculationField]?.value = calculatedValue
                 fieldValueHandler(calculationField, calculatedValue)

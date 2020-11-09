@@ -126,27 +126,29 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
             entry.value.sortIndicators().forEach { monthlyTally ->
                 val textInputEditText = TextInputEditText(requireContext()).apply {
                     tag = monthlyTally.indicator
-                    hint = getString(monthlyTally.indicator.getResourceId(requireContext()))
+                    hint = monthlyTally.indicator.getResourceId(requireContext()).let { if (it > 0) getString(it) else monthlyTally.indicator }
                     isFocusable = monthlyTally.enteredManually
                     inputType = InputType.TYPE_CLASS_NUMBER
-                    setText(monthlyTally.value)
                     setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
                     addTextChangedListener(object : TextWatcher {
                         override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) =
                                 Unit
 
-                        override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+                        override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) =
+                                Unit
+
+                        override fun afterTextChanged(editable: Editable?) {
                             when {
-                                charSequence.toString().count { it == '.' } > 2 -> {
+                                editable.toString().count { it == '.' } > 2 -> {
                                     error = getString(R.string.error_enter_valid_number)
                                 }
-                                charSequence.isNullOrEmpty() -> {
+                                editable.isNullOrEmpty() -> {
                                     error = getString(R.string.error_field_required)
                                 }
                                 else -> {
                                     error = null
                                     reportIndicatorsViewModel.monthlyTalliesMap.value?.run {
-                                        this[monthlyTally.indicator] = monthlyTally.apply { value = charSequence.toString() }
+                                        this[monthlyTally.indicator] = monthlyTally.apply { value = editable.toString() }
                                         if (!monthlyTally.dependentCalculations.isNullOrEmpty()) {
                                             reportingRulesEngine.fireRules(monthlyTally, this, this@ReportIndicatorsFormFragment::updateCalculatedField)
                                         }
@@ -154,9 +156,8 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
                                 }
                             }
                         }
-
-                        override fun afterTextChanged(editable: Editable?) = Unit
                     })
+                    setText(monthlyTally.value)
                 }
                 reportIndicatorsLayout.addView(
                         TextInputLayout(requireContext()).apply { addView(textInputEditText) })

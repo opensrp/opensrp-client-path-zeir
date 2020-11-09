@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.*
-import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.reflect.TypeToken
 import org.json.JSONArray
@@ -17,7 +16,6 @@ import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import org.smartregister.uniceftunisia.util.AppConstants
 import org.smartregister.uniceftunisia.util.AppJsonFormUtils
 import timber.log.Timber
-import java.util.*
 
 /**
  * String constants
@@ -83,10 +81,13 @@ fun String.convertToNamedMonth(hasHyphen: Boolean = false): String {
 /**
  * Return a formatted string identifier
  */
-fun String.getResourceId(context: Context): Int =
-        context.resources.getIdentifier(this.toLowerCase(Locale.getDefault())
-                .replace(" ", "_").replace("/", ""),
-                "string", context.packageName)
+fun String.getResourceId(context: Context): Int = try {
+    context.resources.getIdentifier(this.replace(" ", "_").replace("/", ""), "string", context.packageName)
+} catch (throwable: Throwable) {
+    Timber.e("String Resource for $this is not found. Specify it on strings.xml file.$throwable")
+    0
+}
+
 
 /**
  * Translate string if string used to get translated value for year month
@@ -139,5 +140,7 @@ fun <T> LiveData<T>.reObserve(lifecycleOwner: LifecycleOwner, observer: Observer
     observe(lifecycleOwner, observer)
 }
 
-fun List<MonthlyTally>.sortIndicators() = this.sortedBy { it.indicator.substringAfter("index_")
-        .split("_").first().toInt() }
+fun List<MonthlyTally>.sortIndicators() = this.sortedBy {
+    it.indicator.substringAfter("index_")
+            .split("_").first().toInt()
+}

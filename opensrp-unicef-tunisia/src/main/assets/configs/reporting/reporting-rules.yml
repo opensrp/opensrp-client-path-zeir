@@ -12,3 +12,10 @@ priority: 1
 condition: "index_50_total_doses != 0"
 actions:
   - "index_51_use_rate = (index_46_vaccine_doses_administered / index_50_total_doses) * 100"
+---
+name: index_55_PAB_total
+description: Month to month visual of the total number of children that are protected against tetanus
+priority: 1
+condition: "true"
+actions:
+  - "index_55_PAB_total = new Integer(index_52_PAB_mother_dt) + new Integer(index_53_PAB_assisted_delivery) + new Integer(index_54_PAB_dt_and_assisted_delivery)"

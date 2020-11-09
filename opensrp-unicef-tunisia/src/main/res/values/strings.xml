@@ -172,6 +172,12 @@
     <string name="index_50_total_doses">Total Doses</string>
     <string name="index_51_use_rate">Use rate (%)</string>
 
+    <!-- Children protected against Tetanus at Birth:  at the point of receiving Penta 1 -->
+    <string name="index_52_PAB_mother_dt">Children protected at birth by dT only</string>
+    <string name="index_53_PAB_assisted_delivery">Children protected at birth by assisted delivery only</string>
+    <string name="index_54_PAB_dt_and_assisted_delivery">Children protected at birth by dT and assisted delivery</string>
+    <string name="index_55_PAB_total">Total number of children protected at birth</string>
+
     <!--End of report indicators-->
 
     <!-- Months -->
