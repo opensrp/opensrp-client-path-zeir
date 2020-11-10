@@ -24,6 +24,7 @@ const val MONTHLY_TALLIES = "monthly_tallies"
 const val MONTHLY_REPORT = "monthly_report"
 const val YEAR_MONTH = "year_month"
 const val SHOW_DATA = "show_data"
+const val INDEX = "index_"
 
 /**
  * Utility method for creating ViewModel Factory
@@ -140,7 +141,6 @@ fun <T> LiveData<T>.reObserve(lifecycleOwner: LifecycleOwner, observer: Observer
     observe(lifecycleOwner, observer)
 }
 
-fun List<MonthlyTally>.sortIndicators() = this.sortedBy {
-    it.indicator.substringAfter("index_")
-            .split("_").first().toInt()
-}
+fun List<MonthlyTally>.sortIndicators() = this
+        .filter { it.indicator.startsWith(INDEX) && it.indicator.substringAfter(INDEX).split("_").size >= 2 }
+        .sortedBy { it.indicator.substringAfter(INDEX).split("_").first().toInt() }

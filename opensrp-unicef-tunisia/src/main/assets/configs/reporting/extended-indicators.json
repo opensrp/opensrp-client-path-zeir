@@ -104,5 +104,38 @@
   {
     "indicator": "index_62_percentage_serology_results",
     "grouping": "report_group_header_rubella_vaccine"
+  },
+  {
+    "indicator": "index_64_right_measures_6months",
+    "grouping": "report_group_header_adequate_growth_measurement",
+    "dependentCalculations": [
+      "index_65_percentage_right_measures_6months"
+    ]
+  },
+  {
+    "indicator": "index_65_percentage_right_measures_6months",
+    "grouping": "report_group_header_adequate_growth_measurement"
+  },
+  {
+    "indicator": "index_66_right_measures_12months",
+    "grouping": "report_group_header_adequate_growth_measurement",
+    "dependentCalculations": [
+      "index_67_percentage_right_measures_12months"
+    ]
+  },
+  {
+    "indicator": "index_67_percentage_right_measures_12months",
+    "grouping": "report_group_header_adequate_growth_measurement"
+  },
+  {
+    "indicator": "index_68_right_measures_18months",
+    "grouping": "report_group_header_adequate_growth_measurement",
+    "dependentCalculations": [
+      "index_69_percentage_right_measures_18months"
+    ]
+  },
+  {
+    "indicator": "index_69_percentage_right_measures_18months",
+    "grouping": "report_group_header_adequate_growth_measurement"
   }
 ]

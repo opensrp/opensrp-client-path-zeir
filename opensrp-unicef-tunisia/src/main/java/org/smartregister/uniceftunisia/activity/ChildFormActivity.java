@@ -36,7 +36,7 @@ public class ChildFormActivity extends BaseChildFormActivity {
 
     protected void initializeFormFragmentCore() {
         AppChildFormFragment childFormFragment = getFormFragment(JsonFormConstants.FIRST_STEP_NAME);
-        getSupportFragmentManager().beginTransaction().add(R.id.containerViewPager, childFormFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, childFormFragment).commit();
     }
 
     protected static String getMainConditionString(Map<String, String> entityMap) {

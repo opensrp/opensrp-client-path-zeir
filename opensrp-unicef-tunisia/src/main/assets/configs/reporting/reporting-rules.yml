@@ -40,3 +40,24 @@ priority: 1
 condition: "index_59_number_rubella_serology != 0"
 actions:
   - "index_62_percentage_serology_results = (index_61_negative_serology_results / index_59_number_rubella_serology) * 100"
+---
+name: index_65_percentage_right_measures_6months
+description: Percentage of women who took the serology test that have negative results ({serology_results} = ''negative''
+priority: 1
+condition: "measures_grp_children_6mnths != 0"
+actions:
+  - "index_65_percentage_right_measures_6months = (index_64_right_measures_6months / measures_grp_children_6mnths) * 100"
+---
+name: index_67_percentage_right_measures_12months
+description: Percentage of women who took the serology test that have negative results ({serology_results} = ''negative''
+priority: 1
+condition: "measures_grp_children_12mnths != 0"
+actions:
+  - "index_67_percentage_right_measures_12months = (index_66_right_measures_12months / measures_grp_children_12mnths) * 100"
+---
+name: index_69_percentage_right_measures_18months
+description: Percentage of women who took the serology test that have negative results ({serology_results} = ''negative''
+priority: 1
+condition: "measures_grp_children_18mnths != 0"
+actions:
+  - "index_69_percentage_right_measures_18months = (index_68_right_measures_18months / measures_grp_children_18mnths) * 100"
