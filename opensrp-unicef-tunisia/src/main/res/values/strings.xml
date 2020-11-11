@@ -202,7 +202,33 @@
     <string name="index_75_percentage_malnutrition_episode_18months">% of children under nutrition at 18 months</string>
 
     <!-- Children diagnosed as malnourished according to the weighing of the day-->
+    <string name="index_76_mid_mal_grp_children_6mnths">-1 and -2 Zscore at 6 months</string>
+    <string name="index_77_percentage_mid_mal_6mnths">(%) -1 and -2 Zscore at 6 months</string>
+    <string name="index_78_mid_mal_grp_children_12mnths">-1 and -2 Zscore at 12 months</string>
+    <string name="index_79_percentage_mid_mal_12mnths">(%) -1 and -2 Zscore at 12 months</string>
+    <string name="index_80_mid_mal_grp_children_18mnths">-1 and -2 Zscore at 18 months</string>
+    <string name="index_81_percentage_mid_mal_18mnths">(%) -1 and -2 Zscore at 18 months</string>
 
+    <string name="index_82_mod_mal_grp_children_6mnths">Between -2 and -3 Z-score at 6 months</string>
+    <string name="index_83_percentage_mod_mal_6mnths">(%) between -2 and -3 Z-score at 6 months</string>
+    <string name="index_84_mod_mal_grp_children_12mnths">Between -2 and -3 Z-score at 12 months</string>
+    <string name="index_85_percentage_mod_mal_12mnths">(%) between -2 and -3 Z-score at 12 months</string>
+    <string name="index_86_mod_mal_grp_children_18mnths">Between -2 and -3 Z-score at 18 months</string>
+    <string name="index_87_percentage_mod_mal_18mnths">(%) between -2 and -3 Z-score at 18 months</string>
+
+    <string name="index_88_sev_mal_grp_children_6mnths">Below -3 Z-score at 6 months</string>
+    <string name="index_89_percentage_sev_mal_6mnths">% below -3 Z-score at 6 months</string>
+    <string name="index_90_sev_mal_grp_children_12mnths">Below -3 Z-score at 12 months</string>
+    <string name="index_91_percentage_sev_mal_12mnths">% -3 Z-score at 12 months</string>
+    <string name="index_92_sev_mal_grp_children_18mnths">Below -3 Z-score at 18 months</string>
+    <string name="index_93_percentage_sev_mal_18mnths">% below -3 Z-score at 18 months</string>
+
+    <string name="index_94_obese_grp_children_6mnths">Above +2 Z-score at 6 months</string>
+    <string name="index_95_percentage_obese_grp_6mnths">% above +2 Z-score at 6 months</string>
+    <string name="index_96_obese_grp_children_12mnths">Above +2 Z-score at 12 months</string>
+    <string name="index_97_percentage_obese_grp_12mnths">% above +2 Z-score at 12 months</string>
+    <string name="index_98_obese_grp_children_18mnths">Above +2 Z-score at 18 months</string>
+    <string name="index_99_percentage_obese_grp_18mnths">% above +2 Z-score at 18 months</string>
 
     <!--End of report indicators-->
 

@@ -63,14 +63,14 @@ actions:
   - "index_69_percentage_right_measures_18months = (index_68_right_measures_18months / measures_grp_children_18mnths) * 100"
 ---
 name: index_71_percentage_malnutrition_episode_6months
-description: Percentage ofchildren 6 months of age with at least 1 ‘previous episode of weight-for-age z-score of -2 or below ( undernutrition).
+description: Percentage of children 6 months of age with at least 1 ‘previous episode of weight-for-age z-score of -2 or below ( undernutrition).
 priority: 1
 condition: "malnutrition_episode_percent_grp_children_6mnths != 0"
 actions:
   - "index_71_percentage_malnutrition_episode_6months = (index_70_malnutrition_episode_6months / malnutrition_episode_percent_grp_children_6mnths) * 100"
 ---
 name: index_73_percentage_malnutrition_episode_12months
-description: Percentage ofchildren with at least 1 ‘previous episode of undernutrition (moderate or severe malnutrition) at 12 months.
+description: Percentage of children with at least 1 ‘previous episode of undernutrition (moderate or severe malnutrition) at 12 months.
 priority: 1
 condition: "malnutrition_episode_percent_grp_children_12mnths != 0"
 actions:
@@ -82,3 +82,87 @@ priority: 1
 condition: "malnutrition_episode_percent_grp_children_18mnths != 0"
 actions:
   - "index_75_percentage_malnutrition_episode_18months = (index_74_malnutrition_episode_18months / malnutrition_episode_percent_grp_children_18mnths) * 100"
+---
+name: index_77_percentage_mid_mal_6mnths
+description: Percentage of children with mild malnutrition at 6 months
+priority: 1
+condition: "weight_height_count_grp_children_6mnths != 0"
+actions:
+  - "index_77_percentage_mid_mal_6mnths = (index_76_mid_mal_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
+---
+name: index_79_percentage_mid_mal_12mnths
+description: Percentage of children with mild malnutrition at 12 months
+priority: 1
+condition: "weight_height_count_grp_children_12mnths != 0"
+actions:
+  - "index_79_percentage_mid_mal_12mnths = (index_78_mid_mal_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
+---
+name: index_81_percentage_mid_mal_18mnths
+description: Percentage of children with mild malnutrition at 18 months
+priority: 1
+condition: "weight_height_count_grp_children_18mnths != 0"
+actions:
+  - "index_81_percentage_mid_mal_18mnths = (index_80_mid_mal_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"
+---
+name: index_83_percentage_mod_mal_6mnths
+description: Percentage of chilldren with moderate malnutrition at 6 months
+priority: 1
+condition: "weight_height_count_grp_children_6mnths != 0"
+actions:
+  - "index_83_percentage_mod_mal_6mnths = (index_82_mod_mal_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
+---
+name: index_85_percentage_mod_mal_12mnths
+description: Percentage of chilldren with moderate malnutrition at 12 months
+priority: 1
+condition: "weight_height_count_grp_children_12mnths != 0"
+actions:
+  - "index_85_percentage_mod_mal_12mnths = (index_84_mod_mal_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
+---
+name: index_87_percentage_mod_mal_18mnths
+description: Percentage of chilldren with moderate malnutrition at 18 months
+priority: 1
+condition: "weight_height_count_grp_children_18mnths != 0"
+actions:
+  - "index_87_percentage_mod_mal_18mnths = (index_86_mod_mal_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"
+---
+name: index_89_percentage_sev_mal_6mnths
+description: Percentage of children with severe malnutrition at 6 months
+priority: 1
+condition: "weight_height_count_grp_children_6mnths != 0"
+actions:
+  - "index_89_percentage_sev_mal_6mnths = (index_88_sev_mal_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
+---
+name: index_91_percentage_sev_mal_12mnths
+description: Percentage of children with severe malnutrition at 12 months
+priority: 1
+condition: "weight_height_count_grp_children_12mnths != 0"
+actions:
+  - "index_91_percentage_sev_mal_12mnths = (index_90_sev_mal_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
+---
+name: index_93_percentage_sev_mal_18mnths
+description: Percentage of children with severe malnutrition at 18 months
+priority: 1
+condition: "weight_height_count_grp_children_18mnths != 0"
+actions:
+  - "index_93_percentage_sev_mal_18mnths = (index_92_sev_mal_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"
+---
+name: index_95_percentage_obese_grp_6mnths
+description: Percentage of obese children at 6 months
+priority: 1
+condition: "weight_height_count_grp_children_6mnths != 0"
+actions:
+  - "index_95_percentage_obese_grp_6mnths = (index_94_obese_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
+---
+name: index_97_percentage_obese_grp_12mnths
+description: Percentage of obese children at 12 months
+priority: 1
+condition: "weight_height_count_grp_children_12mnths != 0"
+actions:
+  - "index_97_percentage_obese_grp_12mnths = (index_96_obese_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
+---
+name: index_99_percentage_obese_grp_18mnths
+description: Percentage of obese children at 18 months
+priority: 1
+condition: "weight_height_count_grp_children_18mnths != 0"
+actions:
+  - "index_99_percentage_obese_grp_18mnths = (index_98_obese_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"

@@ -549,3 +549,134 @@ indicators:
       - "malnutrition_episode_percent_grp_children_6mnths"
       - "malnutrition_episode_percent_grp_children_12mnths"
       - "malnutrition_episode_percent_grp_children_18mnths"
+
+  - key: "mid_mal_grp"
+    grouping: "report_group_header_diagnosed_malnourished"
+    description: "number of children with mild malnutrition at 6,12 and 18 months"
+    indicatorQuery: "SELECT 'children' as children,
+                            CASE
+                                WHEN strftime('%Y%m', date(ec_client.dob, '+6 month')) - strftime('%Y%m', date('now')) = 0 THEN '6mnths'
+                                WHEN strftime('%Y%m', date(ec_client.dob, '+12 month')) - strftime('%Y%m', date('now')) = 0 THEN '12mnths'
+                                WHEN strftime('%Y%m', date(ec_client.dob, '+18 month')) - strftime('%Y%m', date('now')) = 0 THEN '18mnths'
+                                ELSE 'Null'
+                                END       age,
+                            (
+                                SELECT count(weights.base_entity_id)
+                                FROM weights
+                                WHERE weights.base_entity_id = ec_child_details.base_entity_id
+                                  AND weights.z_score > -2
+                                  AND weights.z_score <= 1
+                            )          as count
+                     FROM ec_child_details
+                              INNER JOIN ec_client ON ec_client.base_entity_id = ec_child_details.base_entity_id
+                     WHERE ec_child_details.is_closed != 1
+                       AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_child_details.event_date)
+                     GROUP BY age;"
+    expectedIndicators:
+      - "index_76_mid_mal_grp_children_6mnths"
+      - "index_78_mid_mal_grp_children_12mnths"
+      - "index_80_mid_mal_grp_children_18mnths"
+
+  - key: "mod_mal_grp"
+    grouping: "report_group_header_diagnosed_malnourished"
+    description: "number of children with moderate malnutrition at 6,12 and 18 months"
+    indicatorQuery: "SELECT 'children' as children,
+                              CASE
+                                  WHEN strftime('%Y%m', date(ec_client.dob, '+6 month')) - strftime('%Y%m', date('now')) = 0 THEN '6mnths'
+                                  WHEN strftime('%Y%m', date(ec_client.dob, '+12 month')) - strftime('%Y%m', date('now')) = 0 THEN '12mnths'
+                                  WHEN strftime('%Y%m', date(ec_client.dob, '+18 month')) - strftime('%Y%m', date('now')) = 0 THEN '18mnths'
+                                  ELSE 'Null'
+                                  END       age,
+                              (
+                                  SELECT count(weights.base_entity_id)
+                                  FROM weights
+                                  WHERE weights.base_entity_id = ec_child_details.base_entity_id
+                                    AND weights.z_score > -3
+                                    AND weights.z_score <= -2
+                              )          as count
+                       FROM ec_child_details
+                                INNER JOIN ec_client ON ec_client.base_entity_id = ec_child_details.base_entity_id
+                       WHERE ec_child_details.is_closed != 1
+                         AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_child_details.event_date)
+                       GROUP BY age;"
+    expectedIndicators:
+      - "index_82_mod_mal_grp_children_6mnths"
+      - "index_84_mod_mal_grp_children_12mnths"
+      - "index_86_mod_mal_grp_children_18mnths"
+
+  - key: "sev_mal_grp"
+    grouping: "report_group_header_diagnosed_malnourished"
+    description: "number of children with severe malnutrition at 6,12 and 18 months"
+    indicatorQuery: "SELECT 'children' as children,
+                                CASE
+                                    WHEN strftime('%Y%m', date(ec_client.dob, '+6 month')) - strftime('%Y%m', date('now')) = 0 THEN '6mnths'
+                                    WHEN strftime('%Y%m', date(ec_client.dob, '+12 month')) - strftime('%Y%m', date('now')) = 0 THEN '12mnths'
+                                    WHEN strftime('%Y%m', date(ec_client.dob, '+18 month')) - strftime('%Y%m', date('now')) = 0 THEN '18mnths'
+                                    ELSE 'Null'
+                                    END       age,
+                                (
+                                    SELECT count(weights.base_entity_id)
+                                    FROM weights
+                                    WHERE weights.base_entity_id = ec_child_details.base_entity_id
+                                      AND weights.z_score <= -3
+                                )          as count
+                         FROM ec_child_details
+                                  INNER JOIN ec_client ON ec_client.base_entity_id = ec_child_details.base_entity_id
+                         WHERE ec_child_details.is_closed != 1
+                           AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_child_details.event_date)
+                         GROUP BY age;"
+    expectedIndicators:
+      - "index_88_sev_mal_grp_children_6mnths"
+      - "index_90_sev_mal_grp_children_12mnths"
+      - "index_92_sev_mal_grp_children_18mnths"
+
+  - key: "obese_grp"
+    grouping: "report_group_header_diagnosed_malnourished"
+    description: "number of children who are obese at 6,12 and 18 months"
+    indicatorQuery: "SELECT 'children' as children,
+                                CASE
+                                    WHEN strftime('%Y%m', date(ec_client.dob, '+6 month')) - strftime('%Y%m', date('now')) = 0 THEN '6mnths'
+                                    WHEN strftime('%Y%m', date(ec_client.dob, '+12 month')) - strftime('%Y%m', date('now')) = 0 THEN '12mnths'
+                                    WHEN strftime('%Y%m', date(ec_client.dob, '+18 month')) - strftime('%Y%m', date('now')) = 0 THEN '18mnths'
+                                    ELSE 'Null'
+                                    END       age,
+                                (
+                                    SELECT count(weights.base_entity_id)
+                                    FROM weights
+                                    WHERE weights.base_entity_id = ec_child_details.base_entity_id
+                                      AND weights.z_score >= 2
+                                )          as count
+                         FROM ec_child_details
+                                  INNER JOIN ec_client ON ec_client.base_entity_id = ec_child_details.base_entity_id
+                         WHERE ec_child_details.is_closed != 1
+                           AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_child_details.event_date)
+                         GROUP BY age;"
+    expectedIndicators:
+      - "index_94_obese_grp_children_6mnths"
+      - "index_96_obese_grp_children_12mnths"
+      - "index_98_obese_grp_children_18mnths"
+
+  - key: "weight_height_count_grp"
+    grouping: "report_group_header_diagnosed_malnourished"
+    description: "number of children with weight and height recorded at 6,12 and 18 months"
+    indicatorQuery: "SELECT 'children' as children,
+                              CASE
+                                  WHEN strftime('%Y%m', date(ec_client.dob, '+6 month')) - strftime('%Y%m', date('now')) = 0 THEN '6mnths'
+                                  WHEN strftime('%Y%m', date(ec_client.dob, '+12 month')) - strftime('%Y%m', date('now')) = 0 THEN '12mnths'
+                                  WHEN strftime('%Y%m', date(ec_client.dob, '+18 month')) - strftime('%Y%m', date('now')) = 0 THEN '18mnths'
+                                  ELSE 'Null'
+                                  END       age,
+                              (
+                                  SELECT count(weights.base_entity_id)
+                                  FROM weights
+                                  WHERE weights.base_entity_id = ec_child_details.base_entity_id
+                              )          as count
+                       FROM ec_child_details
+                                INNER JOIN ec_client ON ec_client.base_entity_id = ec_child_details.base_entity_id
+                       WHERE ec_child_details.is_closed != 1
+                         AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_child_details.event_date)
+                       GROUP BY age;"
+    expectedIndicators:
+      - "weight_height_count_grp_children_6mnths"
+      - "weight_height_count_grp_children_12mnths"
+      - "weight_height_count_grp_children_18mnths"

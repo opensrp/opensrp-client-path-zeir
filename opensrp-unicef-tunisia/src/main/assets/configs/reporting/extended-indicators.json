@@ -170,5 +170,137 @@
   {
     "indicator": "index_75_percentage_malnutrition_episode_18months",
     "grouping": "report_group_header_previous_under_nutrition"
+  },
+  {
+    "indicator": "index_76_mid_mal_grp_children_6mnths",
+    "grouping": "report_group_header_diagnosed_malnourished",
+    "dependentCalculations": [
+      "index_77_percentage_mid_mal_6mnths"
+    ]
+  },
+  {
+    "indicator": "index_77_percentage_mid_mal_6mnths",
+    "grouping": "report_group_header_diagnosed_malnourished"
+  },
+  {
+    "indicator": "index_78_mid_mal_grp_children_12mnths",
+    "grouping": "report_group_header_diagnosed_malnourished",
+    "dependentCalculations": [
+      "index_79_percentage_mid_mal_12mnths"
+    ]
+  },
+  {
+    "indicator": "index_79_percentage_mid_mal_12mnths",
+    "grouping": "report_group_header_diagnosed_malnourished"
+  },
+  {
+    "indicator": "index_80_mid_mal_grp_children_18mnths",
+    "grouping": "report_group_header_diagnosed_malnourished",
+    "dependentCalculations": [
+      "index_81_percentage_mid_mal_18mnths"
+    ]
+  },
+  {
+    "indicator": "index_81_percentage_mid_mal_18mnths",
+    "grouping": "report_group_header_diagnosed_malnourished"
+  },
+  {
+    "indicator": "index_82_mod_mal_grp_children_6mnths",
+    "grouping": "report_group_header_diagnosed_malnourished",
+    "dependentCalculations": [
+      "index_83_percentage_mod_mal_6mnths"
+    ]
+  },
+  {
+    "indicator": "index_83_percentage_mod_mal_6mnths",
+    "grouping": "report_group_header_diagnosed_malnourished"
+  },
+  {
+    "indicator": "index_84_mod_mal_grp_children_12mnths",
+    "grouping": "report_group_header_diagnosed_malnourished",
+    "dependentCalculations": [
+      "index_85_percentage_mod_mal_12mnths"
+    ]
+  },
+  {
+    "indicator": "index_85_percentage_mod_mal_12mnths",
+    "grouping": "report_group_header_diagnosed_malnourished"
+  },
+  {
+    "indicator": "index_86_mod_mal_grp_children_18mnths",
+    "grouping": "report_group_header_diagnosed_malnourished",
+    "dependentCalculations": [
+      "index_85_percentage_mod_mal_12mnths"
+    ]
+  },
+  {
+    "indicator": "index_87_percentage_mod_mal_18mnths",
+    "grouping": "report_group_header_diagnosed_malnourished"
+  },
+  {
+    "indicator": "index_88_sev_mal_grp_children_6mnths",
+    "grouping": "report_group_header_diagnosed_malnourished",
+    "dependentCalculations": [
+      "index_89_percentage_sev_mal_6mnths"
+    ]
+  },
+  {
+    "indicator": "index_89_percentage_sev_mal_6mnths",
+    "grouping": "report_group_header_diagnosed_malnourished"
+  },
+  {
+    "indicator": "index_90_sev_mal_grp_children_12mnths",
+    "grouping": "report_group_header_diagnosed_malnourished",
+    "dependentCalculations": [
+      "index_89_percentage_sev_mal_6mnths"
+    ]
+  },
+  {
+    "indicator": "index_91_percentage_sev_mal_12mnths",
+    "grouping": "report_group_header_diagnosed_malnourished"
+  },
+  {
+    "indicator": "index_92_sev_mal_grp_children_18mnths",
+    "grouping": "report_group_header_diagnosed_malnourished",
+    "dependentCalculations": [
+      "index_93_percentage_sev_mal_18mnths"
+    ]
+  },
+  {
+    "indicator": "index_93_percentage_sev_mal_18mnths",
+    "grouping": "report_group_header_diagnosed_malnourished"
+  },
+  {
+    "indicator": "index_94_obese_grp_children_6mnths",
+    "grouping": "report_group_header_diagnosed_malnourished",
+    "dependentCalculations": [
+      "index_95_percentage_obese_grp_6mnths"
+    ]
+  },
+  {
+    "indicator": "index_95_percentage_obese_grp_6mnths",
+    "grouping": "report_group_header_diagnosed_malnourished"
+  },
+  {
+    "indicator": "index_96_obese_grp_children_12mnths",
+    "grouping": "report_group_header_diagnosed_malnourished",
+    "dependentCalculations": [
+      "index_97_percentage_obese_grp_12mnths"
+    ]
+  },
+  {
+    "indicator": "index_97_percentage_obese_grp_12mnths",
+    "grouping": "report_group_header_diagnosed_malnourished"
+  },
+  {
+    "indicator": "index_98_obese_grp_children_18mnths",
+    "grouping": "report_group_header_diagnosed_malnourished",
+    "dependentCalculations": [
+      "index_97_percentage_obese_grp_12mnths"
+    ]
+  },
+  {
+    "indicator": "index_99_percentage_obese_grp_18mnths",
+    "grouping": "report_group_header_diagnosed_malnourished"
   }
 ]
