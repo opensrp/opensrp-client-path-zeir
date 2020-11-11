@@ -193,6 +193,17 @@
     <string name="index_68_right_measures_18months">Children with the right measurements at 18 months</string>
     <string name="index_69_percentage_right_measures_18months">% of children with right measurements at 18 months</string>
 
+    <!--Children with at least 1 previous episode of undernutrition-->
+    <string name="index_70_malnutrition_episode_6months">Children with at least 1 previous episode of undernutrition at 6 months</string>
+    <string name="index_71_percentage_malnutrition_episode_6months">% of children under nutrition at 6 months</string>
+    <string name="index_72_malnutrition_episode_12months">Children with at least 1 previous episode of undernutrition at 12 months</string>
+    <string name="index_73_percentage_malnutrition_episode_12months">% of children under nutrition at 12 months</string>
+    <string name="index_74_malnutrition_episode_18months">Children with at least 1 previous episode of undernutrition at 18 months</string>
+    <string name="index_75_percentage_malnutrition_episode_18months">% of children under nutrition at 18 months</string>
+
+    <!-- Children diagnosed as malnourished according to the weighing of the day-->
+
+
     <!--End of report indicators-->
 
     <!-- Months -->

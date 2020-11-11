@@ -137,5 +137,38 @@
   {
     "indicator": "index_69_percentage_right_measures_18months",
     "grouping": "report_group_header_adequate_growth_measurement"
+  },
+  {
+    "indicator": "index_70_malnutrition_episode_6months",
+    "grouping": "report_group_header_previous_under_nutrition",
+    "dependentCalculations": [
+      "index_71_percentage_malnutrition_episode_6months"
+    ]
+  },
+  {
+    "indicator": "index_71_percentage_malnutrition_episode_6months",
+    "grouping": "report_group_header_previous_under_nutrition"
+  },
+  {
+    "indicator": "index_72_malnutrition_episode_12months",
+    "grouping": "report_group_header_previous_under_nutrition",
+    "dependentCalculations": [
+      "index_73_percentage_malnutrition_episode_12months"
+    ]
+  },
+  {
+    "indicator": "index_73_percentage_malnutrition_episode_12months",
+    "grouping": "report_group_header_previous_under_nutrition"
+  },
+  {
+    "indicator": "index_74_malnutrition_episode_18months",
+    "grouping": "report_group_header_previous_under_nutrition",
+    "dependentCalculations": [
+      "index_75_percentage_malnutrition_episode_18months"
+    ]
+  },
+  {
+    "indicator": "index_75_percentage_malnutrition_episode_18months",
+    "grouping": "report_group_header_previous_under_nutrition"
   }
 ]

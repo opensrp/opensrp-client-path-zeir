@@ -128,6 +128,10 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
                     tag = monthlyTally.indicator
                     hint = monthlyTally.indicator.getResourceId(requireContext()).let { if (it > 0) getString(it) else monthlyTally.indicator }
                     isFocusable = monthlyTally.enteredManually
+                    if (monthlyTally.enteredManually) {
+                        setHintTextColor(ContextCompat.getColor(context, R.color.primary))
+                        setTextColor(ContextCompat.getColor(context, R.color.primary))
+                    }
                     inputType = InputType.TYPE_CLASS_NUMBER
                     setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
                     addTextChangedListener(object : TextWatcher {
