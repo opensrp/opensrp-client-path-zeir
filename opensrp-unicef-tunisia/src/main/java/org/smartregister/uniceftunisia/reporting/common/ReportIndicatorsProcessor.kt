@@ -39,15 +39,9 @@ class ReportIndicatorsProcessor : MultiResultProcessor {
                 if (compositeTally.size == 3) {
                     indicatorCode = "${compositeIndicatorTally.indicatorCode}_${compositeTally[0]}_${compositeTally[1]}"
                     count = when (val indicatorValue = compositeTally[2]) {
-                        is Int -> {
-                            indicatorValue
-                        }
-                        is Double -> {
-                            indicatorValue.toInt()
-                        }
-                        else -> {
-                            throw MultiResultProcessorException(indicatorValue, compositeIndicatorTally)
-                        }
+                        is Int -> indicatorValue
+                        is Double -> indicatorValue.toInt()
+                        else -> throw MultiResultProcessorException(indicatorValue, compositeIndicatorTally)
                     }
                     tallies.add(this)
                 }
