@@ -151,4 +151,17 @@ object ReportsDao : AbstractDao() {
 
         return readData(sql, extractMonthlyTally()).toList().filterNotNull()
     }
+
+    fun getIndicatorPosition(indicator: String): Double {
+        val sql = """
+            SELECT position
+            FROM indicator_position
+            WHERE indicator = '$indicator'
+        """.trimIndent()
+        val result = readData(sql) { cursor: Cursor? ->
+            if (cursor != null) getCursorValue(cursor, "position")!!.toDouble()
+            else -1.0
+        }
+        return if (result.isEmpty()) -1.0 else result.first()
+    }
 }

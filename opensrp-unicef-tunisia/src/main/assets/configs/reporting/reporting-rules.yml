@@ -1,168 +1,168 @@
 ---
-name: index_50_total_doses
+name: total_doses
 description: Total Doses
 priority: 1
 condition: "true"
 actions:
-  - "index_50_total_doses = index_49_doses_per_vial * index_48_vials_used"
+  - "total_doses = doses_per_vial * vials_used"
 ---
-name: index_51_use_rate
+name: use_rate
 description: The usage of the vacines computed per vaccine (see above vaccines)
 priority: 1
-condition: "index_50_total_doses != 0"
+condition: "total_doses != 0"
 actions:
-  - "index_51_use_rate = (index_46_vaccine_doses_administered / index_50_total_doses) * 100"
+  - "use_rate = (vaccine_doses_administered / total_doses) * 100"
 ---
-name: index_55_PAB_total
+name: pab_total
 description: Month to month visual of the total number of children that are protected against tetanus
 priority: 1
 condition: "true"
 actions:
-  - "index_55_PAB_total = new Integer(index_52_PAB_mother_dt) + new Integer(index_53_PAB_assisted_delivery) + new Integer(index_54_PAB_dt_and_assisted_delivery)"
+  - "pab_total = new Integer(pab_mother_dt) + new Integer(pab_assisted_delivery) + new Integer(pab_dt_and_assisted_delivery)"
 ---
-name: index_58_percentage_first_birth
+name: percentage_first_birth
 description: Percentage of women giving birth for the first time ({first_birth} =''yes''
 priority: 1
-condition: "index_56_total_child_births != 0"
+condition: "total_child_births != 0"
 actions:
-  - "index_58_percentage_first_birth = (index_57_number_first_birth / index_56_total_child_births) * 100"
+  - "percentage_first_birth = (number_first_birth / total_child_births) * 100"
 ---
-name: index_60_percentage_number_rubella_serology
+name: percentage_number_rubella_serology
 description: Percentage of primapara mother who undertook a rubella serology test
 priority: 1
-condition: "index_57_number_first_birth != 0"
+condition: "number_first_birth != 0"
 actions:
-  - "index_60_percentage_number_rubella_serology = (index_59_number_rubella_serology / index_57_number_first_birth) * 100"
+  - "percentage_number_rubella_serology = (number_rubella_serology / number_first_birth) * 100"
 ---
-name: index_62_percentage_serology_results
+name: percentage_serology_results
 description: Percentage of women who took the serology test that have negative results ({serology_results} = ''negative''
 priority: 1
-condition: "index_59_number_rubella_serology != 0"
+condition: "number_rubella_serology != 0"
 actions:
-  - "index_62_percentage_serology_results = (index_61_negative_serology_results / index_59_number_rubella_serology) * 100"
+  - "percentage_serology_results = (negative_serology_results / number_rubella_serology) * 100"
 ---
-name: index_65_percentage_right_measures_6months
+name: percentage_right_measures_6months
 description: Percentage of women who took the serology test that have negative results ({serology_results} = ''negative''
 priority: 1
 condition: "measures_grp_children_6mnths != 0"
 actions:
-  - "index_65_percentage_right_measures_6months = (index_64_right_measures_6months / measures_grp_children_6mnths) * 100"
+  - "percentage_right_measures_6months = (right_measures_6months / measures_grp_children_6mnths) * 100"
 ---
-name: index_67_percentage_right_measures_12months
+name: percentage_right_measures_12months
 description: Percentage of women who took the serology test that have negative results ({serology_results} = ''negative''
 priority: 1
 condition: "measures_grp_children_12mnths != 0"
 actions:
-  - "index_67_percentage_right_measures_12months = (index_66_right_measures_12months / measures_grp_children_12mnths) * 100"
+  - "percentage_right_measures_12months = (right_measures_12months / measures_grp_children_12mnths) * 100"
 ---
-name: index_69_percentage_right_measures_18months
+name: percentage_right_measures_18months
 description: Percentage of women who took the serology test that have negative results ({serology_results} = ''negative''
 priority: 1
 condition: "measures_grp_children_18mnths != 0"
 actions:
-  - "index_69_percentage_right_measures_18months = (index_68_right_measures_18months / measures_grp_children_18mnths) * 100"
+  - "percentage_right_measures_18months = (right_measures_18months / measures_grp_children_18mnths) * 100"
 ---
-name: index_71_percentage_malnutrition_episode_6months
+name: percentage_malnutrition_episode_6months
 description: Percentage of children 6 months of age with at least 1 ‘previous episode of weight-for-age z-score of -2 or below ( undernutrition).
 priority: 1
 condition: "malnutrition_episode_percent_grp_children_6mnths != 0"
 actions:
-  - "index_71_percentage_malnutrition_episode_6months = (index_70_malnutrition_episode_6months / malnutrition_episode_percent_grp_children_6mnths) * 100"
+  - "percentage_malnutrition_episode_6months = (malnutrition_episode_6months / malnutrition_episode_percent_grp_children_6mnths) * 100"
 ---
-name: index_73_percentage_malnutrition_episode_12months
+name: percentage_malnutrition_episode_12months
 description: Percentage of children with at least 1 ‘previous episode of undernutrition (moderate or severe malnutrition) at 12 months.
 priority: 1
 condition: "malnutrition_episode_percent_grp_children_12mnths != 0"
 actions:
-  - "index_73_percentage_malnutrition_episode_12months = (index_72_malnutrition_episode_12months / malnutrition_episode_percent_grp_children_12mnths) * 100"
+  - "percentage_malnutrition_episode_12months = (malnutrition_episode_12months / malnutrition_episode_percent_grp_children_12mnths) * 100"
 ---
-name: index_75_percentage_malnutrition_episode_18months
+name: percentage_malnutrition_episode_18months
 description: Percentage of children with at least 1 ‘previous episode of undernutrition (moderate or severe malnutrition) at 18 months.
 priority: 1
 condition: "malnutrition_episode_percent_grp_children_18mnths != 0"
 actions:
-  - "index_75_percentage_malnutrition_episode_18months = (index_74_malnutrition_episode_18months / malnutrition_episode_percent_grp_children_18mnths) * 100"
+  - "percentage_malnutrition_episode_18months = (malnutrition_episode_18months / malnutrition_episode_percent_grp_children_18mnths) * 100"
 ---
-name: index_77_percentage_mid_mal_6mnths
+name: percentage_mid_mal_6mnths
 description: Percentage of children with mild malnutrition at 6 months
 priority: 1
 condition: "weight_height_count_grp_children_6mnths != 0"
 actions:
-  - "index_77_percentage_mid_mal_6mnths = (index_76_mid_mal_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
+  - "percentage_mid_mal_6mnths = (mid_mal_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
 ---
-name: index_79_percentage_mid_mal_12mnths
+name: percentage_mid_mal_12mnths
 description: Percentage of children with mild malnutrition at 12 months
 priority: 1
 condition: "weight_height_count_grp_children_12mnths != 0"
 actions:
-  - "index_79_percentage_mid_mal_12mnths = (index_78_mid_mal_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
+  - "percentage_mid_mal_12mnths = (mid_mal_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
 ---
-name: index_81_percentage_mid_mal_18mnths
+name: percentage_mid_mal_18mnths
 description: Percentage of children with mild malnutrition at 18 months
 priority: 1
 condition: "weight_height_count_grp_children_18mnths != 0"
 actions:
-  - "index_81_percentage_mid_mal_18mnths = (index_80_mid_mal_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"
+  - "percentage_mid_mal_18mnths = (mid_mal_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"
 ---
-name: index_83_percentage_mod_mal_6mnths
+name: percentage_mod_mal_6mnths
 description: Percentage of chilldren with moderate malnutrition at 6 months
 priority: 1
 condition: "weight_height_count_grp_children_6mnths != 0"
 actions:
-  - "index_83_percentage_mod_mal_6mnths = (index_82_mod_mal_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
+  - "percentage_mod_mal_6mnths = (mod_mal_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
 ---
-name: index_85_percentage_mod_mal_12mnths
+name: percentage_mod_mal_12mnths
 description: Percentage of chilldren with moderate malnutrition at 12 months
 priority: 1
 condition: "weight_height_count_grp_children_12mnths != 0"
 actions:
-  - "index_85_percentage_mod_mal_12mnths = (index_84_mod_mal_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
+  - "percentage_mod_mal_12mnths = (mod_mal_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
 ---
-name: index_87_percentage_mod_mal_18mnths
+name: percentage_mod_mal_18mnths
 description: Percentage of chilldren with moderate malnutrition at 18 months
 priority: 1
 condition: "weight_height_count_grp_children_18mnths != 0"
 actions:
-  - "index_87_percentage_mod_mal_18mnths = (index_86_mod_mal_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"
+  - "percentage_mod_mal_18mnths = (mod_mal_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"
 ---
-name: index_89_percentage_sev_mal_6mnths
+name: percentage_sev_mal_6mnths
 description: Percentage of children with severe malnutrition at 6 months
 priority: 1
 condition: "weight_height_count_grp_children_6mnths != 0"
 actions:
-  - "index_89_percentage_sev_mal_6mnths = (index_88_sev_mal_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
+  - "percentage_sev_mal_6mnths = (sev_mal_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
 ---
-name: index_91_percentage_sev_mal_12mnths
+name: percentage_sev_mal_12mnths
 description: Percentage of children with severe malnutrition at 12 months
 priority: 1
 condition: "weight_height_count_grp_children_12mnths != 0"
 actions:
-  - "index_91_percentage_sev_mal_12mnths = (index_90_sev_mal_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
+  - "percentage_sev_mal_12mnths = (sev_mal_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
 ---
-name: index_93_percentage_sev_mal_18mnths
+name: percentage_sev_mal_18mnths
 description: Percentage of children with severe malnutrition at 18 months
 priority: 1
 condition: "weight_height_count_grp_children_18mnths != 0"
 actions:
-  - "index_93_percentage_sev_mal_18mnths = (index_92_sev_mal_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"
+  - "percentage_sev_mal_18mnths = (sev_mal_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"
 ---
-name: index_95_percentage_obese_grp_6mnths
+name: percentage_obese_grp_6mnths
 description: Percentage of obese children at 6 months
 priority: 1
 condition: "weight_height_count_grp_children_6mnths != 0"
 actions:
-  - "index_95_percentage_obese_grp_6mnths = (index_94_obese_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
+  - "percentage_obese_grp_6mnths = (obese_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
 ---
-name: index_97_percentage_obese_grp_12mnths
+name: percentage_obese_grp_12mnths
 description: Percentage of obese children at 12 months
 priority: 1
 condition: "weight_height_count_grp_children_12mnths != 0"
 actions:
-  - "index_97_percentage_obese_grp_12mnths = (index_96_obese_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
+  - "percentage_obese_grp_12mnths = (obese_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
 ---
-name: index_99_percentage_obese_grp_18mnths
+name: percentage_obese_grp_18mnths
 description: Percentage of obese children at 18 months
 priority: 1
 condition: "weight_height_count_grp_children_18mnths != 0"
 actions:
-  - "index_99_percentage_obese_grp_18mnths = (index_98_obese_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"
+  - "percentage_obese_grp_18mnths = (obese_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"

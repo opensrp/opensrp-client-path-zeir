@@ -9,6 +9,9 @@ import com.github.florent37.expansionpanel.viewgroup.ExpansionLayoutCollection
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.report_indicator_summary_list_item.view.*
 import kotlinx.android.synthetic.main.report_indicators_expansion_panel_item.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.reporting.common.getResourceId
 import org.smartregister.uniceftunisia.reporting.common.sortIndicators
@@ -43,31 +46,35 @@ class ReportIndicatorsRecyclerAdapter : RecyclerView.Adapter<ReportIndicatorsRec
     inner class SentReportsRecyclerHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bindViews(monthlyTallies: Pair<String, List<MonthlyTally>>) {
-            val (reportGroup, tallies) = monthlyTallies
+            CoroutineScope(Dispatchers.Main).launch {
+                val (reportGroup, tallies) = monthlyTallies
 
-            //Set report group header
-            reportIndicatorTextView.apply {
-                typeface = Typeface.DEFAULT_BOLD
-                text = context.getString(reportGroup.getResourceId(containerView.context))
-            }
-
-            //Set display tallies
-            val topLabel = listOf(
-                    MonthlyTally(
-                            grouping = reportGroup,
-                            indicator = "indicator",
-                            value = containerView.context.getString(R.string.value)
-                    )
-            )
-            reportIndicatorsContainer.removeAllViews()
-            topLabel.plus(tallies.sortIndicators()).forEach {
-                val view = LayoutInflater.from(containerView.context).inflate(R.layout.report_indicator_summary_list_item,
-                        reportIndicatorsContainer, false).apply {
-                    tag = it
-                    indicatorTextView.text = context.getString(it.indicator.getResourceId(context))
-                    valueTextView.text = it.value
+                //Set report group header
+                reportIndicatorTextView.apply {
+                    typeface = Typeface.DEFAULT_BOLD
+                    text = context.getString(reportGroup.getResourceId(containerView.context))
                 }
-                reportIndicatorsContainer.addView(view)
+
+                //Set display tallies
+                val topLabel = listOf(
+                        MonthlyTally(
+                                grouping = reportGroup,
+                                indicator = "indicator",
+                                value = containerView.context.getString(R.string.value)
+                        )
+                )
+                reportIndicatorsContainer.removeAllViews()
+
+                val sortedIndicators = tallies.sortIndicators()
+                topLabel.plus(sortedIndicators).forEach {
+                    val view = LayoutInflater.from(containerView.context).inflate(R.layout.report_indicator_summary_list_item,
+                            reportIndicatorsContainer, false).apply {
+                        tag = it
+                        indicatorTextView.text = context.getString(it.indicator.getResourceId(context))
+                        valueTextView.text = it.value
+                    }
+                    reportIndicatorsContainer.addView(view)
+                }
             }
         }
     }

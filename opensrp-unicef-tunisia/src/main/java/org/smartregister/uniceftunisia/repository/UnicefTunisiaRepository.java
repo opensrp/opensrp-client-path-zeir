@@ -33,6 +33,7 @@ import org.smartregister.repository.SettingsRepository;
 import org.smartregister.repository.UniqueIdRepository;
 import org.smartregister.uniceftunisia.BuildConfig;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
+import org.smartregister.uniceftunisia.reporting.indicatorposition.IndicatorPositionRepository;
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.util.DatabaseMigrationUtils;
@@ -71,6 +72,7 @@ public class UnicefTunisiaRepository extends Repository {
         IndicatorQueryRepository.createTable(database);
         DailyIndicatorCountRepository.createTable(database);
         MonthlyReportsRepository.getInstance().createTable(database);
+        IndicatorPositionRepository.getInstance().createTable(database);
 
         LocationRepository.createTable(database);
         LocationTagRepository.createTable(database);
@@ -133,6 +135,7 @@ public class UnicefTunisiaRepository extends Repository {
 
         IndicatorQueryRepository.performMigrations(db);
 
+        IndicatorPositionRepository.getInstance().populateIndicatorPosition(db, oldVersion, newVersion);
     }
 
     @Override

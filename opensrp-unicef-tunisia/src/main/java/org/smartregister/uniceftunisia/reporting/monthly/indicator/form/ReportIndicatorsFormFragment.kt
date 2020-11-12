@@ -111,64 +111,74 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
     private fun loadIndicatorsForm(monthlyTallies: Map<String, MonthlyTally>) {
         val groupedTallies = monthlyTallies.values.groupBy { it.grouping }
 
-        groupedTallies.forEach { entry ->
+        lifecycleScope.launch(Dispatchers.Main) {
+            groupedTallies.forEach { tallyEntry ->
 
-            //Create report group header
-            val reportHeaderTextView = TextView(requireContext()).apply {
-                text = requireContext().getString(entry.key.getResourceId(requireContext()))
-                setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                setPadding(0, 20, 0, 28)
-                setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f)
+                //Create report group header
+                val reportHeaderTextView = TextView(requireContext()).apply {
+                    text = requireContext().getString(tallyEntry.key.getResourceId(requireContext()))
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                    setPadding(0, 20, 0, 28)
+                    setTextSize(TypedValue.COMPLEX_UNIT_SP, 24f)
+                }
+                reportIndicatorsLayout.addView(reportHeaderTextView)
+
+                //Create text inputs for each indicator
+                createIndicatorInputFields(tallyEntry)
             }
-            reportIndicatorsLayout.addView(reportHeaderTextView)
+            //Add confirm Button At the end of the text input fields
+            createConfirmButton()
+        }
+    }
 
-            //Create text inputs for each indicator
-            entry.value.sortIndicators().forEach { monthlyTally ->
-                val textInputEditText = TextInputEditText(requireContext()).apply {
-                    tag = monthlyTally.indicator
-                    hint = monthlyTally.indicator.getResourceId(requireContext()).let { if (it > 0) getString(it) else monthlyTally.indicator }
-                    isFocusable = monthlyTally.enteredManually
-                    if (monthlyTally.enteredManually) {
-                        setHintTextColor(ContextCompat.getColor(context, R.color.primary))
-                        setTextColor(ContextCompat.getColor(context, R.color.primary))
-                    }
-                    inputType = InputType.TYPE_CLASS_NUMBER
-                    setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
-                    addTextChangedListener(object : TextWatcher {
-                        override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) =
-                                Unit
+    private suspend fun createIndicatorInputFields(tallyEntry: Map.Entry<String, List<MonthlyTally>>) {
+        val sortedIndicators = tallyEntry.value.sortIndicators()
+        sortedIndicators.forEach { monthlyTally ->
+            val textInputEditText = TextInputEditText(requireContext()).apply {
+                tag = monthlyTally.indicator
+                hint = monthlyTally.indicator.getResourceId(requireContext()).let { if (it > 0) getString(it) else monthlyTally.indicator }
+                isFocusable = monthlyTally.enteredManually
+                if (monthlyTally.enteredManually) {
+                    setHintTextColor(ContextCompat.getColor(context, R.color.primary))
+                    setTextColor(ContextCompat.getColor(context, R.color.primary))
+                }
+                inputType = InputType.TYPE_CLASS_NUMBER
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
+                addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) =
+                            Unit
 
-                        override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) =
-                                Unit
+                    override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) =
+                            Unit
 
-                        override fun afterTextChanged(editable: Editable?) {
-                            when {
-                                editable.toString().count { it == '.' } > 2 -> {
-                                    error = getString(R.string.error_enter_valid_number)
-                                }
-                                editable.isNullOrEmpty() -> {
-                                    error = getString(R.string.error_field_required)
-                                }
-                                else -> {
-                                    error = null
-                                    reportIndicatorsViewModel.monthlyTalliesMap.value?.run {
-                                        this[monthlyTally.indicator] = monthlyTally.apply { value = editable.toString() }
-                                        if (!monthlyTally.dependentCalculations.isNullOrEmpty()) {
-                                            reportingRulesEngine.fireRules(monthlyTally, this, this@ReportIndicatorsFormFragment::updateCalculatedField)
-                                        }
+                    override fun afterTextChanged(editable: Editable?) {
+                        when {
+                            editable.toString().count { it == '.' } > 2 -> {
+                                error = getString(R.string.error_enter_valid_number)
+                            }
+                            editable.isNullOrEmpty() -> {
+                                error = getString(R.string.error_field_required)
+                            }
+                            else -> {
+                                error = null
+                                reportIndicatorsViewModel.monthlyTalliesMap.value?.run {
+                                    this[monthlyTally.indicator] = monthlyTally.apply { value = editable.toString() }
+                                    if (!monthlyTally.dependentCalculations.isNullOrEmpty()) {
+                                        reportingRulesEngine.fireRules(monthlyTally, this, this@ReportIndicatorsFormFragment::updateCalculatedField)
                                     }
                                 }
                             }
                         }
-                    })
-                    setText(monthlyTally.value)
-                }
-                reportIndicatorsLayout.addView(
-                        TextInputLayout(requireContext()).apply { addView(textInputEditText) })
+                    }
+                })
+                setText(monthlyTally.value)
             }
+            reportIndicatorsLayout.addView(
+                    TextInputLayout(requireContext()).apply { addView(textInputEditText) })
         }
+    }
 
-        //Add confirm Button At the end of the text input fields
+    private fun createConfirmButton() {
         reportIndicatorsLayout.addView(
                 Button(requireContext()).apply {
                     val linearLayoutParams = LinearLayout.LayoutParams(

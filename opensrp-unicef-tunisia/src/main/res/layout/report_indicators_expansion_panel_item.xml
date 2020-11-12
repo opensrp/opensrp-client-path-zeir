@@ -8,6 +8,8 @@
     <com.github.florent37.expansionpanel.ExpansionHeader
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/expansion_panel_header_padding"
+        android:paddingBottom="@dimen/expansion_panel_header_padding"
         app:expansion_headerIndicator="@id/headerIndicator"
         app:expansion_layout="@id/reportIndicatorsExpansionLayout"
         app:expansion_toggleOnClick="true">

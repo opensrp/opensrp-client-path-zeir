@@ -28,26 +28,26 @@ indicators:
                        AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')
                      GROUP BY vaccines.name, age"
     expectedIndicators:
-      - "index_1_at_birth_vaccines_bcg"
-      - "index_2_at_birth_vaccines_bcg_2_59days"
-      - "index_4_at_birth_vaccines_hep_b_0_0_24hrs"
-      - "index_5_at_birth_vaccines_hep_b_0_2_59days"
-      - "index_19_at_birth_vaccines_pcv_2_2_6mnths"
-      - "index_20_at_birth_vaccines_pcv_2_7_11mnths"
-      - "index_21_at_birth_vaccines_pcv_2_12_17mnths"
-      - "index_22_at_birth_vaccines_pcv_2_18_23mnths"
-      - "index_23_at_birth_vaccines_pcv_2_24_59mnths"
-      - "index_31_at_birth_vaccines_pcv_3_7_11mnths"
-      - "index_32_at_birth_vaccines_pcv_3_12_17mnths"
-      - "index_33_at_birth_vaccines_pcv_3_18_23mnths"
-      - "index_34_at_birth_vaccines_pcv_3_24_59mnths"
-      - "index_36_at_birth_vaccines_mr_1_12_17mnths"
-      - "index_37_at_birth_vaccines_mr_1_18_23mnths"
-      - "index_38_at_birth_vaccines_mr_1_24_59mnths"
-      - "index_40_at_birth_vaccines_mr_2_18_23mnths"
-      - "index_41_at_birth_vaccines_mr_2_24_59mnths"
-      - "index_43_at_birth_vaccines_dtp_4_18_23mnths"
-      - "index_44_at_birth_vaccines_dtp_4_24_59mnths"
+      - "at_birth_vaccines_bcg"
+      - "at_birth_vaccines_bcg_2_59days"
+      - "at_birth_vaccines_hep_b_0_0_24hrs"
+      - "at_birth_vaccines_hep_b_0_2_59days"
+      - "at_birth_vaccines_pcv_2_2_6mnths"
+      - "at_birth_vaccines_pcv_2_7_11mnths"
+      - "at_birth_vaccines_pcv_2_12_17mnths"
+      - "at_birth_vaccines_pcv_2_18_23mnths"
+      - "at_birth_vaccines_pcv_2_24_59mnths"
+      - "at_birth_vaccines_pcv_3_7_11mnths"
+      - "at_birth_vaccines_pcv_3_12_17mnths"
+      - "at_birth_vaccines_pcv_3_18_23mnths"
+      - "at_birth_vaccines_pcv_3_24_59mnths"
+      - "at_birth_vaccines_mr_1_12_17mnths"
+      - "at_birth_vaccines_mr_1_18_23mnths"
+      - "at_birth_vaccines_mr_1_24_59mnths"
+      - "at_birth_vaccines_mr_2_18_23mnths"
+      - "at_birth_vaccines_mr_2_24_59mnths"
+      - "at_birth_vaccines_dtp_4_18_23mnths"
+      - "at_birth_vaccines_dtp_4_24_59mnths"
 
   - key: "penta1_grp"
     isMultiResult: true
@@ -80,11 +80,11 @@ indicators:
                        AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')
                      GROUP BY age"
     expectedIndicators:
-      - "index_7_penta1_grp_penta1_2_6mnths"
-      - "index_8_penta1_grp_penta1_7_11mnths"
-      - "index_9_penta1_grp_penta1_12_17mnths"
-      - "index_10_penta1_grp_penta1_18_23mnths"
-      - "index_11_penta1_grp_penta1_24_59mnths"
+      - "penta1_grp_penta1_2_6mnths"
+      - "penta1_grp_penta1_7_11mnths"
+      - "penta1_grp_penta1_12_17mnths"
+      - "penta1_grp_penta1_18_23mnths"
+      - "penta1_grp_penta1_24_59mnths"
 
   - key: "penta2_grp"
     isMultiResult: true
@@ -117,11 +117,11 @@ indicators:
                        AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')
                      GROUP BY age;"
     expectedIndicators:
-      - "index_13_penta2_grp_penta2_2_6mnths"
-      - "index_14_penta2_grp_penta2_7_11mnths"
-      - "index_15_penta2_grp_penta2_12_17mnths"
-      - "index_16_penta2_grp_penta2_18_23mnths"
-      - "index_17_penta2_grp_penta2_24_59mnths"
+      - "penta2_grp_penta2_2_6mnths"
+      - "penta2_grp_penta2_7_11mnths"
+      - "penta2_grp_penta2_12_17mnths"
+      - "penta2_grp_penta2_18_23mnths"
+      - "penta2_grp_penta2_24_59mnths"
 
   - key: "penta3_grp"
     isMultiResult: true
@@ -154,13 +154,13 @@ indicators:
                        AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime')
                      GROUP BY age;"
     expectedIndicators:
-      - "index_25_penta3_grp_penta3_2_6mnths"
-      - "index_26_penta3_grp_penta3_7_11mnths"
-      - "index_27_penta3_grp_penta3_12_17mnths"
-      - "index_28_penta3_grp_penta3_18_23mnths"
-      - "index_29_penta3_grp_penta3_24_59mnths"
+      - "penta3_grp_penta3_2_6mnths"
+      - "penta3_grp_penta3_7_11mnths"
+      - "penta3_grp_penta3_12_17mnths"
+      - "penta3_grp_penta3_18_23mnths"
+      - "penta3_grp_penta3_24_59mnths"
 
-  - key: "index_3_bcg_total"
+  - key: "bcg_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received BCG vaccine at the facility"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -171,7 +171,7 @@ indicators:
                              AND vaccines.name = 'bcg'
                              AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
-  - key: "index_6_hepb_0_total"
+  - key: "hepb_0_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received Hep B 0 vaccine at the facility"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -182,7 +182,7 @@ indicators:
                              AND vaccines.name = 'hep_b_0'
                              AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
-  - key: "index_12_penta1_total"
+  - key: "penta1_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received Penta1, IPV1 and PCV1 vaccines"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -194,7 +194,7 @@ indicators:
                              AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))
 "
 
-  - key: "index_18_penta2_total"
+  - key: "penta2_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received Penta2 and IPV2 vaccines"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -205,7 +205,7 @@ indicators:
                              AND (vaccines.name = 'penta_2' OR vaccines.name = 'ipv_2')
                              AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
-  - key: "index_24_pcv2_total"
+  - key: "pcv2_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received  PCV2  vaccines"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -216,7 +216,7 @@ indicators:
                              AND vaccines.name = 'pcv_2'
                              AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
-  - key: "index_30_penta3_total"
+  - key: "penta3_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received Penta 3 and OPV1  vaccines"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -227,7 +227,7 @@ indicators:
                              AND (vaccines.name = 'penta_3' OR vaccines.name = 'opv_1')
                              AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
-  - key: "index_35_pcv3_total"
+  - key: "pcv3_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received  PCV3 vaccines"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -238,7 +238,7 @@ indicators:
                              AND vaccines.name = 'pcv_3'
                              AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
-  - key: "index_39_mr1_total"
+  - key: "mr1_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received  MR1vaccine"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -249,7 +249,7 @@ indicators:
                              AND vaccines.name = 'mr_1'
                              AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
-  - key: "index_42_mr2_total"
+  - key: "mr2_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received  MR2 vaccine"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -260,7 +260,7 @@ indicators:
                              AND vaccines.name = 'mr_2'
                              AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
-  - key: "index_45_dtp4_total"
+  - key: "dtp4_total"
     grouping: "report_group_header_vaccination_activity"
     description: "Total number of children of all ages who received DTP4 vaccine"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -271,7 +271,7 @@ indicators:
                              AND vaccines.name = 'dtp_4'
                              AND strftime('%Y-%m-%d', '%s') = date(vaccines.date / 1000, 'unixepoch', 'localtime'))"
 
-  - key: "index_46_vaccine_doses_administered"
+  - key: "vaccine_doses_administered"
     grouping: "report_group_header_vaccine_utilization"
     description: "Number of doses administered for each vaccine BCG,  OPV,  DTP,  MR,  Hep B,  Penta,  IPV, PCV, Rubella"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -299,7 +299,7 @@ indicators:
                                       AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
                                 ))"
 
-  - key: "index_52_PAB_mother_dt"
+  - key: "pab_mother_dt"
     grouping: "report_group_header_tetanus_protected"
     description: "Month to month visual of the number of  children that are protected against tetanus at birth, through the tetanus vaccine received by the mother during pregnancy (mother dT) only."
     indicatorQuery: "SELECT count(base_entity_id)
@@ -314,7 +314,7 @@ indicators:
                                 AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
                           )"
 
-  - key: "index_53_PAB_assisted_delivery"
+  - key: "pab_assisted_delivery"
     grouping: "report_group_header_tetanus_protected"
     description: "Month to month visual of the number of  children that are protected against tetanus through assisted delivery only "
     indicatorQuery: "SELECT count(base_entity_id)
@@ -329,7 +329,7 @@ indicators:
                                 AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
                           )"
 
-  - key: "index_54_PAB_dt_and_assisted_delivery"
+  - key: "pab_dt_and_assisted_delivery"
     grouping: "report_group_header_tetanus_protected"
     description: "Month to month visual of the number of  children that are protected against tetanus at birth, through the tetanus vaccine received by the mother during pregnancy (mother dT) and assisted delivery"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -344,7 +344,7 @@ indicators:
                                 AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
                           )"
 
-  - key: "index_56_total_child_births"
+  - key: "total_child_births"
     grouping: "report_group_header_rubella_vaccine"
     description: "Number of total births in the facility"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -355,7 +355,7 @@ indicators:
                                 AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_child_details.event_date)
                           );"
 
-  - key: "index_57_number_first_birth"
+  - key: "number_first_birth"
     grouping: "report_group_header_rubella_vaccine"
     description: "Number of women giving birth for the first time in this month"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -367,7 +367,7 @@ indicators:
                                 AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
                           );"
 
-  - key: "index_59_number_rubella_serology"
+  - key: "number_rubella_serology"
     grouping: "report_group_header_rubella_vaccine"
     description: "Number of primapara women who got a Rubella serology test in the facility this month"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -380,7 +380,7 @@ indicators:
                                 AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
                           );"
 
-  - key: "index_61_negative_serology_results"
+  - key: "negative_serology_results"
     grouping: "report_group_header_rubella_vaccine"
     description: "Number of primapara women that got a serology test with negative results"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -394,7 +394,7 @@ indicators:
                                 AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
                           );"
 
-  - key: "index_63_women_vaccinated_rubella"
+  - key: "women_vaccinated_rubella"
     grouping: "report_group_header_rubella_vaccine"
     description: "Number of women who had a negative serology test that were vaccinated against Rubella ({mother_rubella} =''yes''"
     indicatorQuery: "SELECT count(base_entity_id)
@@ -409,7 +409,7 @@ indicators:
                                 AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_mother_details.date)
                           );"
 
-  - key: "index_64_right_measures_6months"
+  - key: "right_measures_6months"
     grouping: "report_group_header_adequate_growth_measurement"
     description: "number of children age 6 months with at least 3 measurements on the curve"
     indicatorQuery: "SELECT count(ec_child_details.base_entity_id)
@@ -424,7 +424,7 @@ indicators:
                        AND strftime('%Y%m', date(ec_client.dob, '+6 month')) - strftime('%Y%m', date('now')) = 0
                        AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_child_details.event_date)"
 
-  - key: "index_66_right_measures_12months"
+  - key: "right_measures_12months"
     grouping: "report_group_header_adequate_growth_measurement"
     description: "number of children age 12 months with at least 4 measurements on the curve"
     indicatorQuery: "SELECT count(ec_child_details.base_entity_id)
@@ -439,7 +439,7 @@ indicators:
                        AND strftime('%Y%m', date(ec_client.dob, '+12 month')) - strftime('%Y%m', date('now')) = 0
                        AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_child_details.event_date)"
 
-  - key: "index_68_right_measures_18months"
+  - key: "right_measures_18months"
     grouping: "report_group_header_adequate_growth_measurement"
     description: "number of children age 18 months with at least 5 measurements on the curve"
     indicatorQuery: "SELECT count(ec_child_details.base_entity_id)
@@ -476,7 +476,7 @@ indicators:
       - "measures_grp_children_12mnths"
       - "measures_grp_children_18mnths"
 
-  - key: "index_70_malnutrition_episode_6months"
+  - key: "malnutrition_episode_6months"
     grouping: "report_group_header_previous_under_nutrition"
     description: "Number of children 6 months of age with at least 1 ‘previous episode of weight-for-age z-score of -2 or below ( undernutrition) "
     indicatorQuery: "SELECT count(ec_child_details.base_entity_id)
@@ -492,7 +492,7 @@ indicators:
                        AND strftime('%Y%m', date(ec_client.dob, '+6 month')) - strftime('%Y%m', date('now')) = 0
                        AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_child_details.event_date)"
 
-  - key: "index_72_malnutrition_episode_12months"
+  - key: "malnutrition_episode_12months"
     grouping: "report_group_header_previous_under_nutrition"
     description: "Number of children with at least 1 ‘previous episode of undernutrition (moderate or severe malnutrition) at 12 months."
     indicatorQuery: "SELECT count(ec_child_details.base_entity_id)
@@ -508,7 +508,7 @@ indicators:
                        AND strftime('%Y%m', date(ec_client.dob, '+12 month')) - strftime('%Y%m', date('now')) = 0
                        AND strftime('%Y-%m-%d', '%s') = strftime('%Y-%m-%d', ec_child_details.event_date)"
 
-  - key: "index_74_malnutrition_episode_18months"
+  - key: "malnutrition_episode_18months"
     grouping: "report_group_header_previous_under_nutrition"
     description: "Number of children with at least 1 ‘previous episode of undernutrition (moderate or severe malnutrition) at 18 months."
     indicatorQuery: "SELECT count(ec_child_details.base_entity_id)
@@ -574,9 +574,9 @@ indicators:
                      WHERE ec_child_details.is_closed != 1
                      GROUP BY age;"
     expectedIndicators:
-      - "index_76_mid_mal_grp_children_6mnths"
-      - "index_78_mid_mal_grp_children_12mnths"
-      - "index_80_mid_mal_grp_children_18mnths"
+      - "mid_mal_grp_children_6mnths"
+      - "mid_mal_grp_children_12mnths"
+      - "mid_mal_grp_children_18mnths"
 
   - key: "mod_mal_grp"
     isMultiResult: true
@@ -602,9 +602,9 @@ indicators:
                        WHERE ec_child_details.is_closed != 1
                        GROUP BY age;"
     expectedIndicators:
-      - "index_82_mod_mal_grp_children_6mnths"
-      - "index_84_mod_mal_grp_children_12mnths"
-      - "index_86_mod_mal_grp_children_18mnths"
+      - "mod_mal_grp_children_6mnths"
+      - "mod_mal_grp_children_12mnths"
+      - "mod_mal_grp_children_18mnths"
 
   - key: "sev_mal_grp"
     isMultiResult: true
@@ -629,9 +629,9 @@ indicators:
                          WHERE ec_child_details.is_closed != 1
                          GROUP BY age;"
     expectedIndicators:
-      - "index_88_sev_mal_grp_children_6mnths"
-      - "index_90_sev_mal_grp_children_12mnths"
-      - "index_92_sev_mal_grp_children_18mnths"
+      - "sev_mal_grp_children_6mnths"
+      - "sev_mal_grp_children_12mnths"
+      - "sev_mal_grp_children_18mnths"
 
   - key: "obese_grp"
     isMultiResult: true
@@ -656,9 +656,9 @@ indicators:
                          WHERE ec_child_details.is_closed != 1
                          GROUP BY age;"
     expectedIndicators:
-      - "index_94_obese_grp_children_6mnths"
-      - "index_96_obese_grp_children_12mnths"
-      - "index_98_obese_grp_children_18mnths"
+      - "obese_grp_children_6mnths"
+      - "obese_grp_children_12mnths"
+      - "obese_grp_children_18mnths"
 
   - key: "weight_height_count_grp"
     isMultiResult: true

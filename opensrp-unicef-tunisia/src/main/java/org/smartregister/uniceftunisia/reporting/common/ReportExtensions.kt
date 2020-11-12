@@ -6,11 +6,14 @@ import android.widget.Toast
 import androidx.lifecycle.*
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import org.smartregister.AllConstants
 import org.smartregister.domain.Event
+import org.smartregister.uniceftunisia.reporting.ReportsDao
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import org.smartregister.uniceftunisia.util.AppConstants
@@ -141,6 +144,15 @@ fun <T> LiveData<T>.reObserve(lifecycleOwner: LifecycleOwner, observer: Observer
     observe(lifecycleOwner, observer)
 }
 
-fun List<MonthlyTally>.sortIndicators() = this
-        .filter { it.indicator.startsWith(INDEX) && it.indicator.substringAfter(INDEX).split("_").size >= 2 }
-        .sortedBy { it.indicator.substringAfter(INDEX).split("_").first().toInt() }
+/**
+ * This method creates pair of indicator against its position then sorts them. The indicator positions
+ * are defined in "configs/reporting/indicator-positions.json" file
+ */
+suspend fun List<MonthlyTally>.sortIndicators(): List<MonthlyTally> {
+    return withContext(Dispatchers.IO) {
+        this@sortIndicators.map { Pair(ReportsDao.getIndicatorPosition(it.indicator), it) }
+                .filter { talliesPair -> talliesPair.first != -1.0 }
+                .sortedBy { talliesPair -> talliesPair.first }
+                .map { talliesPair -> talliesPair.second }
+    }
+}

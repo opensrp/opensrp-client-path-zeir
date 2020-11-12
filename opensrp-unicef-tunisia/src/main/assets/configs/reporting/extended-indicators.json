@@ -1,306 +1,306 @@
 [
   {
-    "indicator": "index_46_vaccine_doses_administered",
+    "indicator": "vaccine_doses_administered",
     "grouping": "report_group_header_vaccine_utilization",
     "dependentCalculations": [
-      "index_51_use_rate"
+      "use_rate"
     ]
   },
   {
-    "indicator": "index_47_vaccine_doses_administered_dt15to49",
+    "indicator": "vaccine_doses_administered_dt15to49",
     "grouping": "report_group_header_vaccine_utilization",
     "enteredManually": true
   },
   {
-    "indicator": "index_48_vials_used",
+    "indicator": "vials_used",
     "grouping": "report_group_header_vaccine_utilization",
     "dependentCalculations": [
-      "index_50_total_doses"
+      "total_doses"
     ],
     "enteredManually": true
   },
   {
-    "indicator": "index_49_doses_per_vial",
+    "indicator": "doses_per_vial",
     "grouping": "report_group_header_vaccine_utilization",
     "dependentCalculations": [
-      "index_50_total_doses"
+      "total_doses"
     ],
     "enteredManually": true
   },
   {
-    "indicator": "index_50_total_doses",
+    "indicator": "total_doses",
     "grouping": "report_group_header_vaccine_utilization",
     "dependentCalculations": [
-      "index_51_use_rate"
+      "use_rate"
     ]
   },
   {
-    "indicator": "index_51_use_rate",
+    "indicator": "use_rate",
     "grouping": "report_group_header_vaccine_utilization"
   },
   {
-    "indicator": "index_52_PAB_mother_dt",
+    "indicator": "pab_mother_dt",
     "grouping": "report_group_header_tetanus_protected",
     "dependentCalculations": [
-      "index_55_PAB_total"
+      "pab_total"
     ]
   },
   {
-    "indicator": "index_53_PAB_assisted_delivery",
+    "indicator": "pab_assisted_delivery",
     "grouping": "report_group_header_tetanus_protected",
     "dependentCalculations": [
-      "index_55_PAB_total"
+      "pab_total"
     ]
   },
   {
-    "indicator": "index_54_PAB_dt_and_assisted_delivery",
+    "indicator": "pab_dt_and_assisted_delivery",
     "grouping": "report_group_header_tetanus_protected",
     "dependentCalculations": [
-      "index_55_PAB_total"
+      "pab_total"
     ]
   },
   {
-    "indicator": "index_55_PAB_total",
+    "indicator": "pab_total",
     "grouping": "report_group_header_tetanus_protected"
   },
   {
-    "indicator": "index_56_total_child_births",
+    "indicator": "total_child_births",
     "grouping": "report_group_header_rubella_vaccine",
     "dependentCalculations": [
-      "index_58_percentage_first_birth"
+      "percentage_first_birth"
     ]
   },
   {
-    "indicator": "index_57_number_first_birth",
+    "indicator": "number_first_birth",
     "grouping": "report_group_header_rubella_vaccine",
     "dependentCalculations": [
-      "index_58_percentage_first_birth",
-      "index_60_percentage_number_rubella_serology"
+      "percentage_first_birth",
+      "percentage_number_rubella_serology"
     ]
   },
   {
-    "indicator": "index_58_percentage_first_birth",
+    "indicator": "percentage_first_birth",
     "grouping": "report_group_header_rubella_vaccine"
   },
   {
-    "indicator": "index_59_number_rubella_serology",
+    "indicator": "number_rubella_serology",
     "grouping": "report_group_header_rubella_vaccine",
     "dependentCalculations": [
-      "index_60_percentage_number_rubella_serology",
-      "index_62_percentage_serology_results"
+      "percentage_number_rubella_serology",
+      "percentage_serology_results"
     ]
   },
   {
-    "indicator": "index_60_percentage_number_rubella_serology",
+    "indicator": "percentage_number_rubella_serology",
     "grouping": "report_group_header_rubella_vaccine"
   },
   {
-    "indicator": "index_61_negative_serology_results",
+    "indicator": "negative_serology_results",
     "grouping": "report_group_header_rubella_vaccine",
     "dependentCalculations": [
-      "index_62_percentage_serology_results"
+      "percentage_serology_results"
     ]
   },
   {
-    "indicator": "index_62_percentage_serology_results",
+    "indicator": "percentage_serology_results",
     "grouping": "report_group_header_rubella_vaccine"
   },
   {
-    "indicator": "index_64_right_measures_6months",
+    "indicator": "right_measures_6months",
     "grouping": "report_group_header_adequate_growth_measurement",
     "dependentCalculations": [
-      "index_65_percentage_right_measures_6months"
+      "percentage_right_measures_6months"
     ]
   },
   {
-    "indicator": "index_65_percentage_right_measures_6months",
+    "indicator": "percentage_right_measures_6months",
     "grouping": "report_group_header_adequate_growth_measurement"
   },
   {
-    "indicator": "index_66_right_measures_12months",
+    "indicator": "right_measures_12months",
     "grouping": "report_group_header_adequate_growth_measurement",
     "dependentCalculations": [
-      "index_67_percentage_right_measures_12months"
+      "percentage_right_measures_12months"
     ]
   },
   {
-    "indicator": "index_67_percentage_right_measures_12months",
+    "indicator": "percentage_right_measures_12months",
     "grouping": "report_group_header_adequate_growth_measurement"
   },
   {
-    "indicator": "index_68_right_measures_18months",
+    "indicator": "right_measures_18months",
     "grouping": "report_group_header_adequate_growth_measurement",
     "dependentCalculations": [
-      "index_69_percentage_right_measures_18months"
+      "percentage_right_measures_18months"
     ]
   },
   {
-    "indicator": "index_69_percentage_right_measures_18months",
+    "indicator": "percentage_right_measures_18months",
     "grouping": "report_group_header_adequate_growth_measurement"
   },
   {
-    "indicator": "index_70_malnutrition_episode_6months",
+    "indicator": "malnutrition_episode_6months",
     "grouping": "report_group_header_previous_under_nutrition",
     "dependentCalculations": [
-      "index_71_percentage_malnutrition_episode_6months"
+      "percentage_malnutrition_episode_6months"
     ]
   },
   {
-    "indicator": "index_71_percentage_malnutrition_episode_6months",
+    "indicator": "percentage_malnutrition_episode_6months",
     "grouping": "report_group_header_previous_under_nutrition"
   },
   {
-    "indicator": "index_72_malnutrition_episode_12months",
+    "indicator": "malnutrition_episode_12months",
     "grouping": "report_group_header_previous_under_nutrition",
     "dependentCalculations": [
-      "index_73_percentage_malnutrition_episode_12months"
+      "percentage_malnutrition_episode_12months"
     ]
   },
   {
-    "indicator": "index_73_percentage_malnutrition_episode_12months",
+    "indicator": "percentage_malnutrition_episode_12months",
     "grouping": "report_group_header_previous_under_nutrition"
   },
   {
-    "indicator": "index_74_malnutrition_episode_18months",
+    "indicator": "malnutrition_episode_18months",
     "grouping": "report_group_header_previous_under_nutrition",
     "dependentCalculations": [
-      "index_75_percentage_malnutrition_episode_18months"
+      "percentage_malnutrition_episode_18months"
     ]
   },
   {
-    "indicator": "index_75_percentage_malnutrition_episode_18months",
+    "indicator": "percentage_malnutrition_episode_18months",
     "grouping": "report_group_header_previous_under_nutrition"
   },
   {
-    "indicator": "index_76_mid_mal_grp_children_6mnths",
+    "indicator": "mid_mal_grp_children_6mnths",
     "grouping": "report_group_header_diagnosed_malnourished",
     "dependentCalculations": [
-      "index_77_percentage_mid_mal_6mnths"
+      "percentage_mid_mal_6mnths"
     ]
   },
   {
-    "indicator": "index_77_percentage_mid_mal_6mnths",
+    "indicator": "percentage_mid_mal_6mnths",
     "grouping": "report_group_header_diagnosed_malnourished"
   },
   {
-    "indicator": "index_78_mid_mal_grp_children_12mnths",
+    "indicator": "mid_mal_grp_children_12mnths",
     "grouping": "report_group_header_diagnosed_malnourished",
     "dependentCalculations": [
-      "index_79_percentage_mid_mal_12mnths"
+      "percentage_mid_mal_12mnths"
     ]
   },
   {
-    "indicator": "index_79_percentage_mid_mal_12mnths",
+    "indicator": "percentage_mid_mal_12mnths",
     "grouping": "report_group_header_diagnosed_malnourished"
   },
   {
-    "indicator": "index_80_mid_mal_grp_children_18mnths",
+    "indicator": "mid_mal_grp_children_18mnths",
     "grouping": "report_group_header_diagnosed_malnourished",
     "dependentCalculations": [
-      "index_81_percentage_mid_mal_18mnths"
+      "percentage_mid_mal_18mnths"
     ]
   },
   {
-    "indicator": "index_81_percentage_mid_mal_18mnths",
+    "indicator": "percentage_mid_mal_18mnths",
     "grouping": "report_group_header_diagnosed_malnourished"
   },
   {
-    "indicator": "index_82_mod_mal_grp_children_6mnths",
+    "indicator": "mod_mal_grp_children_6mnths",
     "grouping": "report_group_header_diagnosed_malnourished",
     "dependentCalculations": [
-      "index_83_percentage_mod_mal_6mnths"
+      "percentage_mod_mal_6mnths"
     ]
   },
   {
-    "indicator": "index_83_percentage_mod_mal_6mnths",
+    "indicator": "percentage_mod_mal_6mnths",
     "grouping": "report_group_header_diagnosed_malnourished"
   },
   {
-    "indicator": "index_84_mod_mal_grp_children_12mnths",
+    "indicator": "mod_mal_grp_children_12mnths",
     "grouping": "report_group_header_diagnosed_malnourished",
     "dependentCalculations": [
-      "index_85_percentage_mod_mal_12mnths"
+      "percentage_mod_mal_12mnths"
     ]
   },
   {
-    "indicator": "index_85_percentage_mod_mal_12mnths",
+    "indicator": "percentage_mod_mal_12mnths",
     "grouping": "report_group_header_diagnosed_malnourished"
   },
   {
-    "indicator": "index_86_mod_mal_grp_children_18mnths",
+    "indicator": "mod_mal_grp_children_18mnths",
     "grouping": "report_group_header_diagnosed_malnourished",
     "dependentCalculations": [
-      "index_85_percentage_mod_mal_12mnths"
+      "percentage_mod_mal_12mnths"
     ]
   },
   {
-    "indicator": "index_87_percentage_mod_mal_18mnths",
+    "indicator": "percentage_mod_mal_18mnths",
     "grouping": "report_group_header_diagnosed_malnourished"
   },
   {
-    "indicator": "index_88_sev_mal_grp_children_6mnths",
+    "indicator": "sev_mal_grp_children_6mnths",
     "grouping": "report_group_header_diagnosed_malnourished",
     "dependentCalculations": [
-      "index_89_percentage_sev_mal_6mnths"
+      "percentage_sev_mal_6mnths"
     ]
   },
   {
-    "indicator": "index_89_percentage_sev_mal_6mnths",
+    "indicator": "percentage_sev_mal_6mnths",
     "grouping": "report_group_header_diagnosed_malnourished"
   },
   {
-    "indicator": "index_90_sev_mal_grp_children_12mnths",
+    "indicator": "sev_mal_grp_children_12mnths",
     "grouping": "report_group_header_diagnosed_malnourished",
     "dependentCalculations": [
-      "index_89_percentage_sev_mal_6mnths"
+      "percentage_sev_mal_6mnths"
     ]
   },
   {
-    "indicator": "index_91_percentage_sev_mal_12mnths",
+    "indicator": "percentage_sev_mal_12mnths",
     "grouping": "report_group_header_diagnosed_malnourished"
   },
   {
-    "indicator": "index_92_sev_mal_grp_children_18mnths",
+    "indicator": "sev_mal_grp_children_18mnths",
     "grouping": "report_group_header_diagnosed_malnourished",
     "dependentCalculations": [
-      "index_93_percentage_sev_mal_18mnths"
+      "percentage_sev_mal_18mnths"
     ]
   },
   {
-    "indicator": "index_93_percentage_sev_mal_18mnths",
+    "indicator": "percentage_sev_mal_18mnths",
     "grouping": "report_group_header_diagnosed_malnourished"
   },
   {
-    "indicator": "index_94_obese_grp_children_6mnths",
+    "indicator": "obese_grp_children_6mnths",
     "grouping": "report_group_header_diagnosed_malnourished",
     "dependentCalculations": [
-      "index_95_percentage_obese_grp_6mnths"
+      "percentage_obese_grp_6mnths"
     ]
   },
   {
-    "indicator": "index_95_percentage_obese_grp_6mnths",
+    "indicator": "percentage_obese_grp_6mnths",
     "grouping": "report_group_header_diagnosed_malnourished"
   },
   {
-    "indicator": "index_96_obese_grp_children_12mnths",
+    "indicator": "obese_grp_children_12mnths",
     "grouping": "report_group_header_diagnosed_malnourished",
     "dependentCalculations": [
-      "index_97_percentage_obese_grp_12mnths"
+      "percentage_obese_grp_12mnths"
     ]
   },
   {
-    "indicator": "index_97_percentage_obese_grp_12mnths",
+    "indicator": "percentage_obese_grp_12mnths",
     "grouping": "report_group_header_diagnosed_malnourished"
   },
   {
-    "indicator": "index_98_obese_grp_children_18mnths",
+    "indicator": "obese_grp_children_18mnths",
     "grouping": "report_group_header_diagnosed_malnourished",
     "dependentCalculations": [
-      "index_97_percentage_obese_grp_12mnths"
+      "percentage_obese_grp_12mnths"
     ]
   },
   {
-    "indicator": "index_99_percentage_obese_grp_18mnths",
+    "indicator": "percentage_obese_grp_18mnths",
     "grouping": "report_group_header_diagnosed_malnourished"
   }
 ]

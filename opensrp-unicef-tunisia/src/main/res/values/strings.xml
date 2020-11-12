@@ -114,121 +114,122 @@
     <string name="monthly_immunization_growth_monitoring_reports">Immunization and Growth Monitoring Monthly Reports</string>
 
     <!-- Report indicators -->
+
     <!-- Vaccination Activity at different ages-->
-    <string name="index_1_at_birth_vaccines_bcg">Children who received BCG within 24 hrs of birth</string>
-    <string name="index_2_at_birth_vaccines_bcg_2_59days">Children aged 2–59 days who received the BCG Vaccine</string>
-    <string name="index_3_bcg_total">Total number of children of all ages who received BCG vaccine at the facility</string>
-    <string name="index_4_at_birth_vaccines_hep_b_0_0_24hrs">Children aged 0–24hrs who received Hep B 0 vaccine</string>
-    <string name="index_5_at_birth_vaccines_hep_b_0_2_59days">Children aged 2–59 days who received Hep B 0 vaccine</string>
-    <string name="index_6_hepb_0_total">Total number of children of all ages who received Hep B 0 vaccine at the facility</string>
-    <string name="index_7_penta1_grp_penta1_2_6mnths">Children aged 2–6 months who received Penta1, IPV1 and PCV1 vaccine</string>
-    <string name="index_8_penta1_grp_penta1_7_11mnths">Children aged 7–11 months who received Penta1, IPV1 and PCV1 vaccines</string>
-    <string name="index_9_penta1_grp_penta1_12_17mnths">Children aged 12–17 months who received Penta1, IPV1 and PCV1 vaccines</string>
-    <string name="index_10_penta1_grp_penta1_18_23mnths">Children aged 18 -23months who received Penta1, IPV1 and PCV1 vaccines</string>
-    <string name="index_11_penta1_grp_penta1_24_59mnths">Children aged 24 -59 months who received Penta1, IPV1 and PCV1 vaccine</string>
-    <string name="index_12_penta1_total">Total number of children of all ages who received Penta1, IPV1 and PCV1 vaccines</string>
-    <string name="index_13_penta2_grp_penta2_2_6mnths">Children aged 2–6 months who received Penta2 and IPV2 vaccines</string>
-    <string name="index_14_penta2_grp_penta2_7_11mnths">Children aged 7–11 months who received Penta2 and IPV2 vaccines</string>
-    <string name="index_15_penta2_grp_penta2_12_17mnths">Children aged 12–17 months who received Penta2 and IPV2 vaccines</string>
-    <string name="index_16_penta2_grp_penta2_18_23mnths">Children aged 18 -23months who received Penta2 and IPV2 vaccines</string>
-    <string name="index_17_penta2_grp_penta2_24_59mnths">Children aged 24 -59 months who received Penta2 and IPV2 vaccine</string>
-    <string name="index_18_penta2_total">Total number of children of all ages who received Penta2 and IPV2 vaccines</string>
-    <string name="index_19_at_birth_vaccines_pcv_2_2_6mnths">Children aged 2–6 months who received PCV2 vaccine</string>
-    <string name="index_20_at_birth_vaccines_pcv_2_7_11mnths">Children aged 7–11 months who received PCV2 vaccine</string>
-    <string name="index_21_at_birth_vaccines_pcv_2_12_17mnths">Children aged 12–17 months who received PCV2 vaccine</string>
-    <string name="index_22_at_birth_vaccines_pcv_2_18_23mnths">Children aged 18 -23months who received PCV2 vaccine</string>
-    <string name="index_23_at_birth_vaccines_pcv_2_24_59mnths">Children aged 24 -59 months who received PCV2 vaccine</string>
-    <string name="index_24_pcv2_total">Total number of children of all ages who received  PCV2  vaccine</string>
-    <string name="index_25_penta3_grp_penta3_2_6mnths">Children aged 2–6 months who received Penta 3 and OPV1 vaccines</string>
-    <string name="index_26_penta3_grp_penta3_7_11mnths">Children aged 7–11 months who received Penta 3 and OPV1 vaccines</string>
-    <string name="index_27_penta3_grp_penta3_12_17mnths">Children aged 12–17 months who received Penta 3 and OPV1 vaccines</string>
-    <string name="index_28_penta3_grp_penta3_18_23mnths">Children aged 18 -23months who received Penta 3 and OPV1 vaccines</string>
-    <string name="index_29_penta3_grp_penta3_24_59mnths">Children aged 24 -59 months who received Penta 3 and OPV1 vaccine</string>
-    <string name="index_30_penta3_total">Total number of children of all ages who received Penta 3 and OPV1  vaccines</string>
-    <string name="index_31_at_birth_vaccines_pcv_3_7_11mnths">Children aged 7–11 months who received PCV3 vaccine</string>
-    <string name="index_32_at_birth_vaccines_pcv_3_12_17mnths">Children aged 12–17 months who received PCV3 vaccine</string>
-    <string name="index_33_at_birth_vaccines_pcv_3_18_23mnths">Children aged 18 -23months who received PCV3 vaccine</string>
-    <string name="index_34_at_birth_vaccines_pcv_3_24_59mnths">Children aged 24 -59 months who received PCV3 vaccine</string>
-    <string name="index_35_pcv3_total">Total number of children of all ages who received  PCV3 vaccine</string>
-    <string name="index_36_at_birth_vaccines_mr_1_12_17mnths">Children aged 12–17 months who received MR1 vaccine</string>
-    <string name="index_37_at_birth_vaccines_mr_1_18_23mnths">Children aged 18 -23months who received MR1 vaccine</string>
-    <string name="index_38_at_birth_vaccines_mr_1_24_59mnths">Children aged 24 -59 months who received MR1 vaccine</string>
-    <string name="index_39_mr1_total">Total number of children of all ages who received  MR1vaccine</string>
-    <string name="index_40_at_birth_vaccines_mr_2_18_23mnths">Children aged 18 -23months who received MR2 vaccine</string>
-    <string name="index_41_at_birth_vaccines_mr_2_24_59mnths">Children aged 24 -59 months who received MR2 vaccine</string>
-    <string name="index_42_mr2_total">Total number of children of all ages who received MR2 vaccine</string>
-    <string name="index_43_at_birth_vaccines_dtp_4_18_23mnths">Children aged 18 -23months who received DTP4 vaccine</string>
-    <string name="index_44_at_birth_vaccines_dtp_4_24_59mnths">Children aged 24 -59 months who received DTP4 vaccine</string>
-    <string name="index_45_dtp4_total">Total number of children of all ages who received DTP4 vaccine</string>
+    <string name="at_birth_vaccines_bcg">Children who received BCG within 24 hrs of birth</string>
+    <string name="at_birth_vaccines_bcg_2_59days">Children aged 2–59 days who received the BCG Vaccine</string>
+    <string name="bcg_total">Total number of children of all ages who received BCG vaccine at the facility</string>
+    <string name="at_birth_vaccines_hep_b_0_0_24hrs">Children aged 0–24hrs who received Hep B 0 vaccine</string>
+    <string name="at_birth_vaccines_hep_b_0_2_59days">Children aged 2–59 days who received Hep B 0 vaccine</string>
+    <string name="hepb_0_total">Total number of children of all ages who received Hep B 0 vaccine at the facility</string>
+    <string name="penta1_grp_penta1_2_6mnths">Children aged 2–6 months who received Penta1, IPV1 and PCV1 vaccine</string>
+    <string name="penta1_grp_penta1_7_11mnths">Children aged 7–11 months who received Penta1, IPV1 and PCV1 vaccines</string>
+    <string name="penta1_grp_penta1_12_17mnths">Children aged 12–17 months who received Penta1, IPV1 and PCV1 vaccines</string>
+    <string name="penta1_grp_penta1_18_23mnths">Children aged 18 -23months who received Penta1, IPV1 and PCV1 vaccines</string>
+    <string name="penta1_grp_penta1_24_59mnths">Children aged 24 -59 months who received Penta1, IPV1 and PCV1 vaccine</string>
+    <string name="penta1_total">Total number of children of all ages who received Penta1, IPV1 and PCV1 vaccines</string>
+    <string name="penta2_grp_penta2_2_6mnths">Children aged 2–6 months who received Penta2 and IPV2 vaccines</string>
+    <string name="penta2_grp_penta2_7_11mnths">Children aged 7–11 months who received Penta2 and IPV2 vaccines</string>
+    <string name="penta2_grp_penta2_12_17mnths">Children aged 12–17 months who received Penta2 and IPV2 vaccines</string>
+    <string name="penta2_grp_penta2_18_23mnths">Children aged 18 -23months who received Penta2 and IPV2 vaccines</string>
+    <string name="penta2_grp_penta2_24_59mnths">Children aged 24 -59 months who received Penta2 and IPV2 vaccine</string>
+    <string name="penta2_total">Total number of children of all ages who received Penta2 and IPV2 vaccines</string>
+    <string name="at_birth_vaccines_pcv_2_2_6mnths">Children aged 2–6 months who received PCV2 vaccine</string>
+    <string name="at_birth_vaccines_pcv_2_7_11mnths">Children aged 7–11 months who received PCV2 vaccine</string>
+    <string name="at_birth_vaccines_pcv_2_12_17mnths">Children aged 12–17 months who received PCV2 vaccine</string>
+    <string name="at_birth_vaccines_pcv_2_18_23mnths">Children aged 18 -23months who received PCV2 vaccine</string>
+    <string name="at_birth_vaccines_pcv_2_24_59mnths">Children aged 24 -59 months who received PCV2 vaccine</string>
+    <string name="pcv2_total">Total number of children of all ages who received  PCV2  vaccine</string>
+    <string name="penta3_grp_penta3_2_6mnths">Children aged 2–6 months who received Penta 3 and OPV1 vaccines</string>
+    <string name="penta3_grp_penta3_7_11mnths">Children aged 7–11 months who received Penta 3 and OPV1 vaccines</string>
+    <string name="penta3_grp_penta3_12_17mnths">Children aged 12–17 months who received Penta 3 and OPV1 vaccines</string>
+    <string name="penta3_grp_penta3_18_23mnths">Children aged 18 -23months who received Penta 3 and OPV1 vaccines</string>
+    <string name="penta3_grp_penta3_24_59mnths">Children aged 24 -59 months who received Penta 3 and OPV1 vaccine</string>
+    <string name="penta3_total">Total number of children of all ages who received Penta 3 and OPV1  vaccines</string>
+    <string name="at_birth_vaccines_pcv_3_7_11mnths">Children aged 7–11 months who received PCV3 vaccine</string>
+    <string name="at_birth_vaccines_pcv_3_12_17mnths">Children aged 12–17 months who received PCV3 vaccine</string>
+    <string name="at_birth_vaccines_pcv_3_18_23mnths">Children aged 18 -23months who received PCV3 vaccine</string>
+    <string name="at_birth_vaccines_pcv_3_24_59mnths">Children aged 24 -59 months who received PCV3 vaccine</string>
+    <string name="pcv3_total">Total number of children of all ages who received  PCV3 vaccine</string>
+    <string name="at_birth_vaccines_mr_1_12_17mnths">Children aged 12–17 months who received MR1 vaccine</string>
+    <string name="at_birth_vaccines_mr_1_18_23mnths">Children aged 18 -23months who received MR1 vaccine</string>
+    <string name="at_birth_vaccines_mr_1_24_59mnths">Children aged 24 -59 months who received MR1 vaccine</string>
+    <string name="mr1_total">Total number of children of all ages who received  MR1vaccine</string>
+    <string name="at_birth_vaccines_mr_2_18_23mnths">Children aged 18 -23months who received MR2 vaccine</string>
+    <string name="at_birth_vaccines_mr_2_24_59mnths">Children aged 24 -59 months who received MR2 vaccine</string>
+    <string name="mr2_total">Total number of children of all ages who received MR2 vaccine</string>
+    <string name="at_birth_vaccines_dtp_4_18_23mnths">Children aged 18 -23months who received DTP4 vaccine</string>
+    <string name="at_birth_vaccines_dtp_4_24_59mnths">Children aged 24 -59 months who received DTP4 vaccine</string>
+    <string name="dtp4_total">Total number of children of all ages who received DTP4 vaccine</string>
 
     <!--    Vaccine utilization report-->
-    <string name="index_46_vaccine_doses_administered">Vaccine doses administered </string>
-    <string name="index_47_vaccine_doses_administered_dt15to49">Vaccine doses administered - dT 15 to 49 years old</string>
-    <string name="index_48_vials_used">Vaccine vials used</string>
-    <string name="index_49_doses_per_vial">Doses per via used</string>
-    <string name="index_50_total_doses">Total Doses</string>
-    <string name="index_51_use_rate">Use rate (%)</string>
+    <string name="vaccine_doses_administered">Vaccine doses administered </string>
+    <string name="vaccine_doses_administered_dt15to49">Vaccine doses administered - dT 15 to 49 years old</string>
+    <string name="vials_used">Vaccine vials used</string>
+    <string name="doses_per_vial">Doses per via used</string>
+    <string name="total_doses">Total Doses</string>
+    <string name="use_rate">Use rate (%)</string>
 
     <!-- Children protected against Tetanus at Birth:  at the point of receiving Penta 1 -->
-    <string name="index_52_PAB_mother_dt">Children protected at birth by dT only</string>
-    <string name="index_53_PAB_assisted_delivery">Children protected at birth by assisted delivery only</string>
-    <string name="index_54_PAB_dt_and_assisted_delivery">Children protected at birth by dT and assisted delivery</string>
-    <string name="index_55_PAB_total">Total number of children protected at birth</string>
+    <string name="pab_mother_dt">Children protected at birth by dT only</string>
+    <string name="pab_assisted_delivery">Children protected at birth by assisted delivery only</string>
+    <string name="pab_dt_and_assisted_delivery">Children protected at birth by dT and assisted delivery</string>
+    <string name="pab_total">Total number of children protected at birth</string>
 
     <!--Rubella Vaccination for woman giving birth for the first time -->
-    <string name="index_56_total_child_births">Total child births</string>
-    <string name="index_57_number_first_birth">Number of women who are primapara (delivering for the first time) in the facility this month</string>
-    <string name="index_58_percentage_first_birth">% primapara births (woman giving birth for the first time)</string>
-    <string name="index_59_number_rubella_serology">Number of primapara women(delivering for the first time) who got a serology test in the facility this month</string>
-    <string name="index_60_percentage_number_rubella_serology">% of primapara mother who undertook a rubella serology test</string>
-    <string name="index_61_negative_serology_results">Number of primapara women(delivering for the first time) who got a serology test that got a negative result in the facility this month</string>
-    <string name="index_62_percentage_serology_results">% of mothers who took the Rubella serology test had a negative result</string>
-    <string name="index_63_women_vaccinated_rubella">Number of women vaccinated against Rubella</string>
+    <string name="total_child_births">Total child births</string>
+    <string name="number_first_birth">Number of women who are primapara (delivering for the first time) in the facility this month</string>
+    <string name="percentage_first_birth">% primapara births (woman giving birth for the first time)</string>
+    <string name="number_rubella_serology">Number of primapara women(delivering for the first time) who got a serology test in the facility this month</string>
+    <string name="percentage_number_rubella_serology">% of primapara mother who undertook a rubella serology test</string>
+    <string name="negative_serology_results">Number of primapara women(delivering for the first time) who got a serology test that got a negative result in the facility this month</string>
+    <string name="percentage_serology_results">% of mothers who took the Rubella serology test had a negative result</string>
+    <string name="women_vaccinated_rubella">Number of women vaccinated against Rubella</string>
 
     <!--Children with an adequate number of growth measurements-->
-    <string name="index_64_right_measures_6months">Children with the right measurements at 6 months</string>
-    <string name="index_65_percentage_right_measures_6months">% of children with right measurements at 6 months</string>
-    <string name="index_66_right_measures_12months">Children with the right measurements at 12 months</string>
-    <string name="index_67_percentage_right_measures_12months">% of children with right measurements at 12 months</string>
-    <string name="index_68_right_measures_18months">Children with the right measurements at 18 months</string>
-    <string name="index_69_percentage_right_measures_18months">% of children with right measurements at 18 months</string>
+    <string name="right_measures_6months">Children with the right measurements at 6 months</string>
+    <string name="percentage_right_measures_6months">% of children with right measurements at 6 months</string>
+    <string name="right_measures_12months">Children with the right measurements at 12 months</string>
+    <string name="percentage_right_measures_12months">% of children with right measurements at 12 months</string>
+    <string name="right_measures_18months">Children with the right measurements at 18 months</string>
+    <string name="percentage_right_measures_18months">% of children with right measurements at 18 months</string>
 
     <!--Children with at least 1 previous episode of undernutrition-->
-    <string name="index_70_malnutrition_episode_6months">Children with at least 1 previous episode of undernutrition at 6 months</string>
-    <string name="index_71_percentage_malnutrition_episode_6months">% of children under nutrition at 6 months</string>
-    <string name="index_72_malnutrition_episode_12months">Children with at least 1 previous episode of undernutrition at 12 months</string>
-    <string name="index_73_percentage_malnutrition_episode_12months">% of children under nutrition at 12 months</string>
-    <string name="index_74_malnutrition_episode_18months">Children with at least 1 previous episode of undernutrition at 18 months</string>
-    <string name="index_75_percentage_malnutrition_episode_18months">% of children under nutrition at 18 months</string>
+    <string name="malnutrition_episode_6months">Children with at least 1 previous episode of undernutrition at 6 months</string>
+    <string name="percentage_malnutrition_episode_6months">% of children under nutrition at 6 months</string>
+    <string name="malnutrition_episode_12months">Children with at least 1 previous episode of undernutrition at 12 months</string>
+    <string name="percentage_malnutrition_episode_12months">% of children under nutrition at 12 months</string>
+    <string name="malnutrition_episode_18months">Children with at least 1 previous episode of undernutrition at 18 months</string>
+    <string name="percentage_malnutrition_episode_18months">% of children under nutrition at 18 months</string>
 
     <!-- Children diagnosed as malnourished according to the weighing of the day-->
-    <string name="index_76_mid_mal_grp_children_6mnths">-1 and -2 Zscore at 6 months</string>
-    <string name="index_77_percentage_mid_mal_6mnths">(%) -1 and -2 Zscore at 6 months</string>
-    <string name="index_78_mid_mal_grp_children_12mnths">-1 and -2 Zscore at 12 months</string>
-    <string name="index_79_percentage_mid_mal_12mnths">(%) -1 and -2 Zscore at 12 months</string>
-    <string name="index_80_mid_mal_grp_children_18mnths">-1 and -2 Zscore at 18 months</string>
-    <string name="index_81_percentage_mid_mal_18mnths">(%) -1 and -2 Zscore at 18 months</string>
+    <string name="mid_mal_grp_children_6mnths">-1 and -2 Zscore at 6 months</string>
+    <string name="percentage_mid_mal_6mnths">(%) -1 and -2 Zscore at 6 months</string>
+    <string name="mid_mal_grp_children_12mnths">-1 and -2 Zscore at 12 months</string>
+    <string name="percentage_mid_mal_12mnths">(%) -1 and -2 Zscore at 12 months</string>
+    <string name="mid_mal_grp_children_18mnths">-1 and -2 Zscore at 18 months</string>
+    <string name="percentage_mid_mal_18mnths">(%) -1 and -2 Zscore at 18 months</string>
 
-    <string name="index_82_mod_mal_grp_children_6mnths">Between -2 and -3 Z-score at 6 months</string>
-    <string name="index_83_percentage_mod_mal_6mnths">(%) between -2 and -3 Z-score at 6 months</string>
-    <string name="index_84_mod_mal_grp_children_12mnths">Between -2 and -3 Z-score at 12 months</string>
-    <string name="index_85_percentage_mod_mal_12mnths">(%) between -2 and -3 Z-score at 12 months</string>
-    <string name="index_86_mod_mal_grp_children_18mnths">Between -2 and -3 Z-score at 18 months</string>
-    <string name="index_87_percentage_mod_mal_18mnths">(%) between -2 and -3 Z-score at 18 months</string>
+    <string name="mod_mal_grp_children_6mnths">Between -2 and -3 Z-score at 6 months</string>
+    <string name="percentage_mod_mal_6mnths">(%) between -2 and -3 Z-score at 6 months</string>
+    <string name="mod_mal_grp_children_12mnths">Between -2 and -3 Z-score at 12 months</string>
+    <string name="percentage_mod_mal_12mnths">(%) between -2 and -3 Z-score at 12 months</string>
+    <string name="mod_mal_grp_children_18mnths">Between -2 and -3 Z-score at 18 months</string>
+    <string name="percentage_mod_mal_18mnths">(%) between -2 and -3 Z-score at 18 months</string>
 
-    <string name="index_88_sev_mal_grp_children_6mnths">Below -3 Z-score at 6 months</string>
-    <string name="index_89_percentage_sev_mal_6mnths">% below -3 Z-score at 6 months</string>
-    <string name="index_90_sev_mal_grp_children_12mnths">Below -3 Z-score at 12 months</string>
-    <string name="index_91_percentage_sev_mal_12mnths">% -3 Z-score at 12 months</string>
-    <string name="index_92_sev_mal_grp_children_18mnths">Below -3 Z-score at 18 months</string>
-    <string name="index_93_percentage_sev_mal_18mnths">% below -3 Z-score at 18 months</string>
+    <string name="sev_mal_grp_children_6mnths">Below -3 Z-score at 6 months</string>
+    <string name="percentage_sev_mal_6mnths">% below -3 Z-score at 6 months</string>
+    <string name="sev_mal_grp_children_12mnths">Below -3 Z-score at 12 months</string>
+    <string name="percentage_sev_mal_12mnths">% -3 Z-score at 12 months</string>
+    <string name="sev_mal_grp_children_18mnths">Below -3 Z-score at 18 months</string>
+    <string name="percentage_sev_mal_18mnths">% below -3 Z-score at 18 months</string>
 
-    <string name="index_94_obese_grp_children_6mnths">Above +2 Z-score at 6 months</string>
-    <string name="index_95_percentage_obese_grp_6mnths">% above +2 Z-score at 6 months</string>
-    <string name="index_96_obese_grp_children_12mnths">Above +2 Z-score at 12 months</string>
-    <string name="index_97_percentage_obese_grp_12mnths">% above +2 Z-score at 12 months</string>
-    <string name="index_98_obese_grp_children_18mnths">Above +2 Z-score at 18 months</string>
-    <string name="index_99_percentage_obese_grp_18mnths">% above +2 Z-score at 18 months</string>
+    <string name="obese_grp_children_6mnths">Above +2 Z-score at 6 months</string>
+    <string name="percentage_obese_grp_6mnths">% above +2 Z-score at 6 months</string>
+    <string name="obese_grp_children_12mnths">Above +2 Z-score at 12 months</string>
+    <string name="percentage_obese_grp_12mnths">% above +2 Z-score at 12 months</string>
+    <string name="obese_grp_children_18mnths">Above +2 Z-score at 18 months</string>
+    <string name="percentage_obese_grp_18mnths">% above +2 Z-score at 18 months</string>
 
     <!--End of report indicators-->
 

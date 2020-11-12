@@ -1,0 +1,398 @@
+[
+  {
+    "indicator": "at_birth_vaccines_bcg",
+    "position": 1
+  },
+  {
+    "indicator": "at_birth_vaccines_bcg_2_59days",
+    "position": 2
+  },
+  {
+    "indicator": "bcg_total",
+    "position": 3
+  },
+  {
+    "indicator": "at_birth_vaccines_hep_b_0_0_24hrs",
+    "position": 4
+  },
+  {
+    "indicator": "at_birth_vaccines_hep_b_0_2_59days",
+    "position": 5
+  },
+  {
+    "indicator": "hepb_0_total",
+    "position": 6
+  },
+  {
+    "indicator": "penta1_grp_penta1_2_6mnths",
+    "position": 7
+  },
+  {
+    "indicator": "penta1_grp_penta1_7_11mnths",
+    "position": 8
+  },
+  {
+    "indicator": "penta1_grp_penta1_12_17mnths",
+    "position": 9
+  },
+  {
+    "indicator": "penta1_grp_penta1_18_23mnths",
+    "position": 10
+  },
+  {
+    "indicator": "penta1_grp_penta1_24_59mnths",
+    "position": 11
+  },
+  {
+    "indicator": "penta1_total",
+    "position": 12
+  },
+  {
+    "indicator": "penta2_grp_penta2_2_6mnths",
+    "position": 13
+  },
+  {
+    "indicator": "penta2_grp_penta2_7_11mnths",
+    "position": 14
+  },
+  {
+    "indicator": "penta2_grp_penta2_12_17mnths",
+    "position": 15
+  },
+  {
+    "indicator": "penta2_grp_penta2_18_23mnths",
+    "position": 16
+  },
+  {
+    "indicator": "penta2_grp_penta2_24_59mnths",
+    "position": 17
+  },
+  {
+    "indicator": "penta2_total",
+    "position": 18
+  },
+  {
+    "indicator": "at_birth_vaccines_pcv_2_2_6mnths",
+    "position": 19
+  },
+  {
+    "indicator": "at_birth_vaccines_pcv_2_7_11mnths",
+    "position": 20
+  },
+  {
+    "indicator": "at_birth_vaccines_pcv_2_12_17mnths",
+    "position": 21
+  },
+  {
+    "indicator": "at_birth_vaccines_pcv_2_18_23mnths",
+    "position": 22
+  },
+  {
+    "indicator": "at_birth_vaccines_pcv_2_24_59mnths",
+    "position": 23
+  },
+  {
+    "indicator": "pcv2_total",
+    "position": 24
+  },
+  {
+    "indicator": "penta3_grp_penta3_2_6mnths",
+    "position": 25
+  },
+  {
+    "indicator": "penta3_grp_penta3_7_11mnths",
+    "position": 26
+  },
+  {
+    "indicator": "penta3_grp_penta3_12_17mnths",
+    "position": 27
+  },
+  {
+    "indicator": "penta3_grp_penta3_18_23mnths",
+    "position": 28
+  },
+  {
+    "indicator": "penta3_grp_penta3_24_59mnths",
+    "position": 29
+  },
+  {
+    "indicator": "penta3_total",
+    "position": 30
+  },
+  {
+    "indicator": "at_birth_vaccines_pcv_3_7_11mnths",
+    "position": 31
+  },
+  {
+    "indicator": "at_birth_vaccines_pcv_3_12_17mnths",
+    "position": 32
+  },
+  {
+    "indicator": "at_birth_vaccines_pcv_3_18_23mnths",
+    "position": 33
+  },
+  {
+    "indicator": "at_birth_vaccines_pcv_3_24_59mnths",
+    "position": 34
+  },
+  {
+    "indicator": "pcv3_total",
+    "position": 35
+  },
+  {
+    "indicator": "at_birth_vaccines_mr_1_12_17mnths",
+    "position": 36
+  },
+  {
+    "indicator": "at_birth_vaccines_mr_1_18_23mnths",
+    "position": 37
+  },
+  {
+    "indicator": "at_birth_vaccines_mr_1_24_59mnths",
+    "position": 38
+  },
+  {
+    "indicator": "mr1_total",
+    "position": 39
+  },
+  {
+    "indicator": "at_birth_vaccines_mr_2_18_23mnths",
+    "position": 40
+  },
+  {
+    "indicator": "at_birth_vaccines_mr_2_24_59mnths",
+    "position": 41
+  },
+  {
+    "indicator": "mr2_total",
+    "position": 42
+  },
+  {
+    "indicator": "at_birth_vaccines_dtp_4_18_23mnths",
+    "position": 43
+  },
+  {
+    "indicator": "at_birth_vaccines_dtp_4_24_59mnths",
+    "position": 44
+  },
+  {
+    "indicator": "dtp4_total",
+    "position": 45
+  },
+  {
+    "indicator": "vaccine_doses_administered",
+    "position": 46
+  },
+  {
+    "indicator": "vaccine_doses_administered_dt15to49",
+    "position": 47
+  },
+  {
+    "indicator": "vials_used",
+    "position": 48
+  },
+  {
+    "indicator": "doses_per_vial",
+    "position": 49
+  },
+  {
+    "indicator": "total_doses",
+    "position": 50
+  },
+  {
+    "indicator": "use_rate",
+    "position": 51
+  },
+  {
+    "indicator": "pab_mother_dt",
+    "position": 52
+  },
+  {
+    "indicator": "pab_assisted_delivery",
+    "position": 53
+  },
+  {
+    "indicator": "pab_dt_and_assisted_delivery",
+    "position": 54
+  },
+  {
+    "indicator": "pab_total",
+    "position": 55
+  },
+  {
+    "indicator": "total_child_births",
+    "position": 56
+  },
+  {
+    "indicator": "number_first_birth",
+    "position": 57
+  },
+  {
+    "indicator": "percentage_first_birth",
+    "position": 58
+  },
+  {
+    "indicator": "number_rubella_serology",
+    "position": 59
+  },
+  {
+    "indicator": "percentage_number_rubella_serology",
+    "position": 60
+  },
+  {
+    "indicator": "negative_serology_results",
+    "position": 61
+  },
+  {
+    "indicator": "percentage_serology_results",
+    "position": 62
+  },
+  {
+    "indicator": "women_vaccinated_rubella",
+    "position": 63
+  },
+  {
+    "indicator": "right_measures_6months",
+    "position": 64
+  },
+  {
+    "indicator": "percentage_right_measures_6months",
+    "position": 65
+  },
+  {
+    "indicator": "right_measures_12months",
+    "position": 66
+  },
+  {
+    "indicator": "percentage_right_measures_12months",
+    "position": 67
+  },
+  {
+    "indicator": "right_measures_18months",
+    "position": 68
+  },
+  {
+    "indicator": "percentage_right_measures_18months",
+    "position": 69
+  },
+  {
+    "indicator": "malnutrition_episode_6months",
+    "position": 70
+  },
+  {
+    "indicator": "percentage_malnutrition_episode_6months",
+    "position": 71
+  },
+  {
+    "indicator": "malnutrition_episode_12months",
+    "position": 72
+  },
+  {
+    "indicator": "percentage_malnutrition_episode_12months",
+    "position": 73
+  },
+  {
+    "indicator": "malnutrition_episode_18months",
+    "position": 74
+  },
+  {
+    "indicator": "percentage_malnutrition_episode_18months",
+    "position": 75
+  },
+  {
+    "indicator": "mid_mal_grp_children_6mnths",
+    "position": 76
+  },
+  {
+    "indicator": "percentage_mid_mal_6mnths",
+    "position": 77
+  },
+  {
+    "indicator": "mid_mal_grp_children_12mnths",
+    "position": 78
+  },
+  {
+    "indicator": "percentage_mid_mal_12mnths",
+    "position": 79
+  },
+  {
+    "indicator": "mid_mal_grp_children_18mnths",
+    "position": 80
+  },
+  {
+    "indicator": "percentage_mid_mal_18mnths",
+    "position": 81
+  },
+  {
+    "indicator": "mod_mal_grp_children_6mnths",
+    "position": 82
+  },
+  {
+    "indicator": "percentage_mod_mal_6mnths",
+    "position": 83
+  },
+  {
+    "indicator": "mod_mal_grp_children_12mnths",
+    "position": 84
+  },
+  {
+    "indicator": "percentage_mod_mal_12mnths",
+    "position": 85
+  },
+  {
+    "indicator": "mod_mal_grp_children_18mnths",
+    "position": 86
+  },
+  {
+    "indicator": "percentage_mod_mal_18mnths",
+    "position": 87
+  },
+  {
+    "indicator": "sev_mal_grp_children_6mnths",
+    "position": 88
+  },
+  {
+    "indicator": "percentage_sev_mal_6mnths",
+    "position": 89
+  },
+  {
+    "indicator": "sev_mal_grp_children_12mnths",
+    "position": 90
+  },
+  {
+    "indicator": "percentage_sev_mal_12mnths",
+    "position": 91
+  },
+  {
+    "indicator": "sev_mal_grp_children_18mnths",
+    "position": 92
+  },
+  {
+    "indicator": "percentage_sev_mal_18mnths",
+    "position": 93
+  },
+  {
+    "indicator": "obese_grp_children_6mnths",
+    "position": 94
+  },
+  {
+    "indicator": "percentage_obese_grp_6mnths",
+    "position": 95
+  },
+  {
+    "indicator": "obese_grp_children_12mnths",
+    "position": 96
+  },
+  {
+    "indicator": "percentage_obese_grp_12mnths",
+    "position": 97
+  },
+  {
+    "indicator": "obese_grp_children_18mnths",
+    "position": 98
+  },
+  {
+    "indicator": "percentage_obese_grp_18mnths",
+    "position": 99
+  }
+]

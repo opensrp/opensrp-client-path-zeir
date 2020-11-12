@@ -33,6 +33,7 @@
     <dimen name="user_initials_textview_size">40dp</dimen>
     <dimen name="tab_padding">24dp</dimen>
     <dimen name="indicator_summary_header_size">22sp</dimen>
+    <dimen name="expansion_panel_header_padding">16dp</dimen>
     <dimen name="indicator_text_size">16sp</dimen>
     <dimen name="expansion_panel_header_height">56dp</dimen>
 
