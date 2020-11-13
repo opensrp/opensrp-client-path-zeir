@@ -122,12 +122,14 @@ fun String.translateString(context: Context): String {
 fun Context.showProgressDialog(show: Boolean = true, title: String =
         this.getString(R.string.please_wait_title), message: String = this.getString(R.string.loading)):
         AlertDialog {
+
     val parentLayout = LayoutInflater.from(this).inflate(R.layout.progress_dialog_layout, null, false).apply {
         findViewById<TextView>(R.id.titleTextView).text = title
         findViewById<TextView>(R.id.messageTextView).text = message
     }
+
     val builder: AlertDialog.Builder = AlertDialog.Builder(this).apply {
-        setCancelable(true)
+        setCancelable(false)
         setView(parentLayout)
     }
 
