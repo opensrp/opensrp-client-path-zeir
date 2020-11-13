@@ -1,17 +1,185 @@
+# Vaccine utilization report section
+
+# Calculate grouped vaccines
 ---
-name: total_doses
-description: Total Doses
+name: vaccine_doses_administered_opv
+description: Total count of OPV vaccines
 priority: 1
 condition: "true"
 actions:
-  - "total_doses = doses_per_vial * vials_used"
+  - "vaccine_doses_administered_opv = new Integer(vaccine_doses_administered_vaccine_opv_1) + new Integer(vaccine_doses_administered_vaccine_opv_2)"
 ---
-name: use_rate
-description: The usage of the vacines computed per vaccine (see above vaccines)
+name: vaccine_doses_administered_penta
+description: Total count of Penta vaccines
 priority: 1
-condition: "total_doses != 0"
+condition: "true"
 actions:
-  - "use_rate = (vaccine_doses_administered / total_doses) * 100"
+  - "vaccine_doses_administered_penta = new Integer(vaccine_doses_administered_vaccine_penta_1) + new Integer(vaccine_doses_administered_vaccine_penta_2) +  new Integer(vaccine_doses_administered_vaccine_penta_3) "
+---
+name: vaccine_doses_administered_ipv
+description: Total count of IPV vaccines
+priority: 1
+condition: "true"
+actions:
+  - "vaccine_doses_administered_ipv = new Integer(vaccine_doses_administered_vaccine_ipv_1) + new Integer(vaccine_doses_administered_vaccine_ipv_2)"
+---
+name: vaccine_doses_administered_pcv
+description: Total count of PCV vaccines
+priority: 1
+condition: "true"
+actions:
+  - "vaccine_doses_administered_pcv = new Integer(vaccine_doses_administered_vaccine_pcv_1) + new Integer(vaccine_doses_administered_vaccine_pcv_2) + new Integer(vaccine_doses_administered_vaccine_pcv_3) + new Integer(vaccine_doses_administered_vaccine_pcv_4)"
+---
+name: vaccine_doses_administered_mr
+description: Total count of MR vaccines
+priority: 1
+condition: "true"
+actions:
+  - "vaccine_doses_administered_mr = new Integer(vaccine_doses_administered_vaccine_mr_1) + new Integer(vaccine_doses_administered_vaccine_mr_2)"
+
+---
+# Now use the grouped vaccines to calculate total doses and use rate for each vaccine
+
+name: total_doses_hepb
+description: Vaccine Hep B 0 total doses
+priority: 1
+condition: "true"
+actions:
+  - "total_doses_hepb = doses_per_vial_hepb * vials_used_hepb"
+---
+name: use_rate_hepb
+description: Vaccine Hep B 0 use rate
+priority: 1
+condition: "total_doses_hepb != 0"
+actions:
+  - "use_rate_hepb = (vaccine_doses_administered_vaccine_hep_b_0 / total_doses_hepb) * 100"
+---
+name: total_doses_bcg
+description: Vaccine BCG total doses
+priority: 1
+condition: "true"
+actions:
+  - "total_doses_bcg = doses_per_vial_bcg * vials_used_bcg"
+---
+name: use_rate_bcg
+description: Vaccine BCG use rate
+priority: 1
+condition: "total_doses_bcg != 0"
+actions:
+  - "use_rate_bcg = (vaccine_doses_administered_vaccine_bcg / total_doses_bcg) * 100"
+
+---
+name: total_doses_opv
+description: Vaccine OPV total doses
+priority: 1
+condition: "true"
+actions:
+  - "total_doses_opv = doses_per_vial_opv * vials_used_opv"
+---
+name: use_rate_opv
+description: Vaccine OPV use rate
+priority: 1
+condition: "total_doses_opv != 0"
+actions:
+  - "use_rate_opv = (vaccine_doses_administered_opv / total_doses_opv) * 100"
+---
+name: total_doses_penta
+description: Vaccine Penta total doses
+priority: 1
+condition: "true"
+actions:
+  - "total_doses_penta = doses_per_vial_penta * vials_used_penta"
+---
+name: use_rate_penta
+description: Vaccine Penta use rate
+priority: 1
+condition: "total_doses_penta != 0"
+actions:
+  - "use_rate_penta = (vaccine_doses_administered_penta / total_doses_penta) * 100"
+---
+name: total_doses_ipv
+description: Vaccine IPV total doses
+priority: 1
+condition: "true"
+actions:
+  - "total_doses_ipv = doses_per_vial_ipv * vials_used_ipv"
+---
+name: use_rate_ipv
+description: Vaccine IPV use rate
+priority: 1
+condition: "total_doses_ipv != 0"
+actions:
+  - "use_rate_ipv = (vaccine_doses_administered_ipv / total_doses_ipv) * 100"
+---
+name: total_doses_pcv
+description: Vaccine PCV total doses
+priority: 1
+condition: "true"
+actions:
+  - "total_doses_pcv = doses_per_vial_pcv * vials_used_pcv"
+---
+name: use_rate_pcv
+description: Vaccine PCV use rate
+priority: 1
+condition: "total_doses_pcv != 0"
+actions:
+  - "use_rate_pcv = (vaccine_doses_administered_pcv / total_doses_pcv) * 100"
+---
+name: total_doses_mr
+description: Vaccine MR total doses
+priority: 1
+condition: "true"
+actions:
+  - "total_doses_mr = doses_per_vial_mr * vials_used_mr"
+---
+name: use_rate_mr
+description: Vaccine MR use rate
+priority: 1
+condition: "total_doses_mr != 0"
+actions:
+  - "use_rate_mr = (vaccine_doses_administered_mr / total_doses_mr) * 100"
+---
+name: total_doses_dtp
+description: Vaccine DTP4 total doses
+priority: 1
+condition: "true"
+actions:
+  - "total_doses_dtp = doses_per_vial_dtp * vials_used_dtp"
+---
+name: use_rate_dtp
+description: Vaccine DTP4 use rate
+priority: 1
+condition: "total_doses_dtp != 0"
+actions:
+  - "use_rate_dtp = (vaccine_doses_administered_vaccine_dtp_4 / total_doses_dtp) * 100"
+---
+name: total_doses_rubella
+description: Vaccine Rubella total doses
+priority: 1
+condition: "true"
+actions:
+  - "total_doses_rubella = doses_per_vial_rubella * vials_used_rubella"
+---
+name: use_rate_rubella
+description: Vaccine Rubella use rate
+priority: 1
+condition: "total_doses_rubella != 0"
+actions:
+  - "use_rate_rubella = (vaccine_doses_administered_rubella / total_doses_rubella) * 100"
+---
+name: total_doses_dt15
+description: Total doses for vaccine (dT) administered to 15 to 49 years olds
+priority: 1
+condition: "true"
+actions:
+  - "total_doses_dt15 = doses_per_vial_dt15 * vials_used_dt15"
+---
+name: use_rate_dt15
+description: Use rate for vaccine (dT) administered to 15 to 49 years olds
+priority: 1
+condition: "total_doses_dt15 != 0"
+actions:
+  - "use_rate_dt15 = (vaccine_doses_administered_dt15to49 / total_doses_dt15) * 100"
 ---
 name: pab_total
 description: Month to month visual of the total number of children that are protected against tetanus

@@ -163,12 +163,60 @@
     <string name="dtp4_total">Total number of children of all ages who received DTP4 vaccine</string>
 
     <!--    Vaccine utilization report-->
-    <string name="vaccine_doses_administered">Vaccine doses administered </string>
+    <string name="vaccine_doses_administered_vaccine_hep_b_0">Number of Hep B doses administered</string>
+    <string name="vaccine_doses_administered_vaccine_bcg">Number of BCG doses administered</string>
+    <string name="vaccine_doses_administered_opv">Number of OPV doses administered</string>
+    <string name="vaccine_doses_administered_penta">Number of penta doses administered</string>
+    <string name="vaccine_doses_administered_ipv">Number of  IPV doses administered</string>
+    <string name="vaccine_doses_administered_pcv">Number of PCV doses administered</string>
+    <string name="vaccine_doses_administered_mr">Number of MR doses administered</string>
+    <string name="vaccine_doses_administered_vaccine_dtp_4">Number of dtp doses administered</string>
+    <string name="vaccine_doses_administered_rubella">Number of Rubella doses administered</string>
     <string name="vaccine_doses_administered_dt15to49">Vaccine doses administered - dT 15 to 49 years old</string>
-    <string name="vials_used">Vaccine vials used</string>
-    <string name="doses_per_vial">Doses per via used</string>
-    <string name="total_doses">Total Doses</string>
-    <string name="use_rate">Use rate (%)</string>
+
+    <string name="vials_used_hepb">Number of HEP B vials used </string>
+    <string name="vials_used_bcg">Number of BCG vials used </string>
+    <string name="vials_used_opv">Number of OPV vials used </string>
+    <string name="vials_used_penta">Number of  Penta vials used </string>
+    <string name="vials_used_ipv">Number of IPV vials used </string>
+    <string name="vials_used_pcv">Number of PCV vials used </string>
+    <string name="vials_used_mr">Number of MR vials used </string>
+    <string name="vials_used_dtp">Number of DTP vials used </string>
+    <string name="vials_used_rubella">Number of Rubella vials used </string>
+    <string name="vials_used_dt15">Number of dT 15–49 years vials used </string>
+
+    <string name="doses_per_vial_hepb">Number of Hep B doses per vial</string>
+    <string name="doses_per_vial_bcg">Number of BCG doses per vial</string>
+    <string name="doses_per_vial_opv">Number of OPV doses per vial</string>
+    <string name="doses_per_vial_penta">Number of Penta doses per vial</string>
+    <string name="doses_per_vial_ipv">Number of IPV doses per vial</string>
+    <string name="doses_per_vial_pcv">Number of PCV doses per vial</string>
+    <string name="doses_per_vial_mr">Number of MR doses per vial</string>
+    <string name="doses_per_vial_dtp">Number of DTP doses per vial</string>
+    <string name="doses_per_vial_rubella">Number of  Rubella doses per vial</string>
+    <string name="doses_per_vial_dt15">Number of dT doses per vial</string>
+
+    <string name="total_doses_hepb">Total number of possible Hep B doses</string>
+    <string name="total_doses_bcg">Total number of possible BCG doses</string>
+    <string name="total_doses_opv">Total number of possible OPV doses</string>
+    <string name="total_doses_penta">Total number of possible Penta doses</string>
+    <string name="total_doses_ipv">Total number of possible IPV doses</string>
+    <string name="total_doses_pcv">Total number of possible PCV doses</string>
+    <string name="total_doses_mr">Total number of possible MR doses</string>
+    <string name="total_doses_dtp">Total number of possible DTP doses</string>
+    <string name="total_doses_rubella">Total number of possible Rubella doses</string>
+    <string name="total_doses_dt15">Total number of possible dT doses</string>
+
+    <string name="use_rate_hepb"> Hep B use rate (%)</string>
+    <string name="use_rate_bcg">BCG use rate (%)</string>
+    <string name="use_rate_opv">OPV use rate (%)</string>
+    <string name="use_rate_penta">Penta use rate (%)</string>
+    <string name="use_rate_ipv">IPV use rate (%)</string>
+    <string name="use_rate_pcv">PCV use rate (%)</string>
+    <string name="use_rate_mr">MR use rate (%)</string>
+    <string name="use_rate_dtp">DTP use rate(%)</string>
+    <string name="use_rate_rubella">Rubella use rate (%)</string>
+    <string name="use_rate_dt15">dT use rate (%)</string>
 
     <!-- Children protected against Tetanus at Birth:  at the point of receiving Penta 1 -->
     <string name="pab_mother_dt">Children protected at birth by dT only</string>

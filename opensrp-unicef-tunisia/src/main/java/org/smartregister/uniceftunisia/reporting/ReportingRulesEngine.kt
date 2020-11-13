@@ -21,15 +21,30 @@ class ReportingRulesEngine(monthlyTallies: MutableMap<String, MonthlyTally>, rul
 
     private val rulesEngine: DefaultRulesEngine = DefaultRulesEngine()
 
-    fun fireRules(monthlyTally: MonthlyTally, viewModelData: MutableMap<String, MonthlyTally>, fieldValueHandler: (String, String) -> Unit) {
+    /**
+     * Filter and fire dependent calculation rules for [monthlyTally]. Invoke the callback method [fieldValueHandler]
+     * once calculation is done to update the value of the calculation field. This also updates the [viewModelData]
+     */
+    fun fireRules(monthlyTally: MonthlyTally, viewModelData: MutableMap<String, MonthlyTally>,
+                  fieldValueHandler: (String, String) -> Unit) {
+
         facts.asMap()[monthlyTally.indicator] = monthlyTally.value
-        rulesEngine.fire(reportingRules, facts)
+
         viewModelData.run {
-            this[monthlyTally.indicator]?.dependentCalculations?.forEach { calculationField ->
+            val dependentCalculations = this[monthlyTally.indicator]?.dependentCalculations
+                    ?: emptyList()
+
+            val filteredRules = reportingRules.filter { dependentCalculations.contains(it.name) }
+                    .toSet()
+
+            rulesEngine.fire(Rules(filteredRules), facts)
+
+            dependentCalculations.forEach { calculationField ->
                 val calculatedValue: String = when {
                     facts.asMap()[calculationField] is String -> facts.asMap()[calculationField] as String
-                    facts.asMap()[calculationField] is Boolean ->  "0"
-                    else -> facts.get<Number>(calculationField).toDouble().toBigDecimal().setScale(0, RoundingMode.UP).toString()
+                    facts.asMap()[calculationField] is Boolean -> "0"
+                    else -> facts.get<Number>(calculationField).toDouble()
+                            .toBigDecimal().setScale(0, RoundingMode.UP).toString()
                 }
                 this[calculationField]?.value = calculatedValue
                 fieldValueHandler(calculationField, calculatedValue)

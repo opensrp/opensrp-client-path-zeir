@@ -180,28 +180,204 @@
     "position": 45
   },
   {
-    "indicator": "vaccine_doses_administered",
-    "position": 46
+    "indicator": "vaccine_doses_administered_vaccine_hep_b_0",
+    "position": 46.0
+  },
+  {
+    "indicator": "vaccine_doses_administered_vaccine_bcg",
+    "position": 46.1
+  },
+  {
+    "indicator": "vaccine_doses_administered_opv",
+    "position": 46.2
+  },
+  {
+    "indicator": "vaccine_doses_administered_penta",
+    "position": 46.3
+  },
+  {
+    "indicator": "vaccine_doses_administered_ipv",
+    "position": 46.4
+  },
+  {
+    "indicator": "vaccine_doses_administered_pcv",
+    "position": 46.5
+  },
+  {
+    "indicator": "vaccine_doses_administered_mr",
+    "position": 46.6
+  },
+  {
+    "indicator": "vaccine_doses_administered_vaccine_dtp_4",
+    "position": 46.7
+  },
+  {
+    "indicator": "vaccine_doses_administered_rubella",
+    "position": 46.8
   },
   {
     "indicator": "vaccine_doses_administered_dt15to49",
     "position": 47
   },
   {
-    "indicator": "vials_used",
-    "position": 48
+    "indicator": "vials_used_hepb",
+    "position": 48.0
   },
   {
-    "indicator": "doses_per_vial",
-    "position": 49
+    "indicator": "vials_used_bcg",
+    "position": 48.1
   },
   {
-    "indicator": "total_doses",
-    "position": 50
+    "indicator": "vials_used_opv",
+    "position": 48.2
   },
   {
-    "indicator": "use_rate",
-    "position": 51
+    "indicator": "vials_used_penta",
+    "position": 48.3
+  },
+  {
+    "indicator": "vials_used_ipv",
+    "position": 48.4
+  },
+  {
+    "indicator": "vials_used_pcv",
+    "position": 48.5
+  },
+  {
+    "indicator": "vials_used_mr",
+    "position": 48.6
+  },
+  {
+    "indicator": "vials_used_dtp",
+    "position": 48.7
+  },
+  {
+    "indicator": "vials_used_rubella",
+    "position": 48.8
+  },
+  {
+    "indicator": "vials_used_dt15",
+    "position": 48.9
+  },
+  {
+    "indicator": "doses_per_vial_hepb",
+    "position": 49.0
+  },
+  {
+    "indicator": "doses_per_vial_bcg",
+    "position": 49.1
+  },
+  {
+    "indicator": "doses_per_vial_opv",
+    "position": 49.2
+  },
+  {
+    "indicator": "doses_per_vial_penta",
+    "position": 49.3
+  },
+  {
+    "indicator": "doses_per_vial_ipv",
+    "position": 49.4
+  },
+  {
+    "indicator": "doses_per_vial_pcv",
+    "position": 49.5
+  },
+  {
+    "indicator": "doses_per_vial_mr",
+    "position": 49.6
+  },
+  {
+    "indicator": "doses_per_vial_dtp",
+    "position": 49.7
+  },
+  {
+    "indicator": "doses_per_vial_rubella",
+    "position": 49.8
+  },
+  {
+    "indicator": "doses_per_vial_dt15",
+    "position": 49.9
+  },
+  {
+    "indicator": "total_doses_hepb",
+    "position": 50.0
+  },
+  {
+    "indicator": "total_doses_bcg",
+    "position": 50.1
+  },
+  {
+    "indicator": "total_doses_opv",
+    "position": 50.2
+  },
+  {
+    "indicator": "total_doses_penta",
+    "position": 50.3
+  },
+  {
+    "indicator": "total_doses_ipv",
+    "position": 50.4
+  },
+  {
+    "indicator": "total_doses_pcv",
+    "position": 50.5
+  },
+  {
+    "indicator": "total_doses_mr",
+    "position": 50.6
+  },
+  {
+    "indicator": "total_doses_dtp",
+    "position": 50.7
+  },
+  {
+    "indicator": "total_doses_rubella",
+    "position": 50.8
+  },
+  {
+    "indicator": "total_doses_dt15",
+    "position": 50.9
+  },
+  {
+    "indicator": "use_rate_hepb",
+    "position": 51.0
+  },
+  {
+    "indicator": "use_rate_bcg",
+    "position": 51.1
+  },
+  {
+    "indicator": "use_rate_opv",
+    "position": 51.2
+  },
+  {
+    "indicator": "use_rate_penta",
+    "position": 51.3
+  },
+  {
+    "indicator": "use_rate_ipv",
+    "position": 51.4
+  },
+  {
+    "indicator": "use_rate_pcv",
+    "position": 51.5
+  },
+  {
+    "indicator": "use_rate_mr",
+    "position": 51.6
+  },
+  {
+    "indicator": "use_rate_dtp",
+    "position": 51.7
+  },
+  {
+    "indicator": "use_rate_rubella",
+    "position": 51.8
+  },
+  {
+    "indicator": "use_rate_dt15",
+    "position": 51.9
   },
   {
     "indicator": "pab_mother_dt",

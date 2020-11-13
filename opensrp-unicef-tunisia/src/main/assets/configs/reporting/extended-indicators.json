@@ -1,42 +1,350 @@
 [
+
   {
-    "indicator": "vaccine_doses_administered",
+    "indicator": "vaccine_doses_administered_vaccine_hep_b_0",
     "grouping": "report_group_header_vaccine_utilization",
     "dependentCalculations": [
-      "use_rate"
+      "use_rate_hepb"
     ]
+  },
+  {
+    "indicator": "vials_used_hepb",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_hepb"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "doses_per_vial_hepb",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_hepb"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "total_doses_hepb",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_hepb"
+    ]
+  },
+  {
+    "indicator": "use_rate_hepb",
+    "grouping": "report_group_header_vaccine_utilization"
+  },
+  {
+    "indicator": "vaccine_doses_administered_vaccine_bcg",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_bcg"
+    ]
+  },
+  {
+    "indicator": "vials_used_bcg",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_bcg"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "doses_per_vial_bcg",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_bcg"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "total_doses_bcg",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_bcg"
+    ]
+  },
+  {
+    "indicator": "use_rate_bcg",
+    "grouping": "report_group_header_vaccine_utilization"
+  },
+  {
+    "indicator": "vaccine_doses_administered_opv",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_opv"
+    ]
+  },
+  {
+    "indicator": "vials_used_opv",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_opv"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "doses_per_vial_opv",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_opv"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "total_doses_opv",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_opv"
+    ]
+  },
+  {
+    "indicator": "use_rate_opv",
+    "grouping": "report_group_header_vaccine_utilization"
+  },
+  {
+    "indicator": "vaccine_doses_administered_penta",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_penta"
+    ]
+  },
+  {
+    "indicator": "vials_used_penta",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_penta"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "doses_per_vial_penta",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_penta"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "total_doses_penta",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_penta"
+    ]
+  },
+  {
+    "indicator": "use_rate_penta",
+    "grouping": "report_group_header_vaccine_utilization"
+  },
+  {
+    "indicator": "vaccine_doses_administered_ipv",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_ipv"
+    ]
+  },
+  {
+    "indicator": "vials_used_ipv",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_ipv"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "doses_per_vial_ipv",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_ipv"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "total_doses_ipv",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_ipv"
+    ]
+  },
+  {
+    "indicator": "use_rate_ipv",
+    "grouping": "report_group_header_vaccine_utilization"
+  },
+  {
+    "indicator": "vaccine_doses_administered_pcv",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_pcv"
+    ]
+  },
+  {
+    "indicator": "vials_used_pcv",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_pcv"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "doses_per_vial_pcv",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_pcv"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "total_doses_pcv",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_pcv"
+    ]
+  },
+  {
+    "indicator": "use_rate_pcv",
+    "grouping": "report_group_header_vaccine_utilization"
+  },
+  {
+    "indicator": "vaccine_doses_administered_mr",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_mr"
+    ]
+  },
+  {
+    "indicator": "vials_used_mr",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_mr"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "doses_per_vial_mr",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_mr"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "total_doses_mr",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_mr"
+    ]
+  },
+  {
+    "indicator": "use_rate_mr",
+    "grouping": "report_group_header_vaccine_utilization"
+  },
+  {
+    "indicator": "vaccine_doses_administered_vaccine_dtp_4",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_dtp"
+    ]
+  },
+  {
+    "indicator": "vials_used_dtp",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_dtp"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "doses_per_vial_dtp",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_dtp"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "total_doses_dtp",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_dtp"
+    ]
+  },
+  {
+    "indicator": "use_rate_dtp",
+    "grouping": "report_group_header_vaccine_utilization"
+  },
+  {
+    "indicator": "vaccine_doses_administered_rubella",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_rubella"
+    ]
+  },
+  {
+    "indicator": "vials_used_rubella",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_rubella"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "doses_per_vial_rubella",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_rubella"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "total_doses_rubella",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_rubella"
+    ]
+  },
+  {
+    "indicator": "use_rate_rubella",
+    "grouping": "report_group_header_vaccine_utilization"
+  },
+  {
+    "indicator": "vaccine_doses_administered_dt15to49",
+    "grouping": "report_group_header_vaccine_utilization",
+    "enteredManually": true,
+    "dependentCalculations": [
+      "use_rate_dt15"
+    ]
+  },
+  {
+    "indicator": "vials_used_dt15",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_dt15"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "doses_per_vial_dt15",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "total_doses_dt15"
+    ],
+    "enteredManually": true
+  },
+  {
+    "indicator": "total_doses_dt15",
+    "grouping": "report_group_header_vaccine_utilization",
+    "dependentCalculations": [
+      "use_rate_dt15"
+    ]
+  },
+  {
+    "indicator": "use_rate_dt15",
+    "grouping": "report_group_header_vaccine_utilization"
   },
   {
     "indicator": "vaccine_doses_administered_dt15to49",
     "grouping": "report_group_header_vaccine_utilization",
     "enteredManually": true
-  },
-  {
-    "indicator": "vials_used",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "doses_per_vial",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "total_doses",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate"
-    ]
-  },
-  {
-    "indicator": "use_rate",
-    "grouping": "report_group_header_vaccine_utilization"
   },
   {
     "indicator": "pab_mother_dt",
