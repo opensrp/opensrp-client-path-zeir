@@ -13,7 +13,9 @@
         android:layout_marginTop="@dimen/report_indicator_form_margin"
         android:layout_marginEnd="@dimen/report_indicator_form_margin"
         android:layout_marginBottom="@dimen/report_indicator_form_margin"
+        android:background="@color/white"
         android:orientation="vertical"
+        android:padding="16dp"
         android:scrollbars="vertical"
         tools:context=".reporting.monthly.indicator.summary.ReportIndicatorsSummaryFragment" />
 </androidx.core.widget.NestedScrollView>
