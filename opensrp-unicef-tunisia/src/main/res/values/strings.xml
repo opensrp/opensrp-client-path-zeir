@@ -324,5 +324,7 @@
     <string name="error_enter_valid_number">Please enter a valid number</string>
     <string name="indicator">Indicator</string>
     <string name="value">Value</string>
+    <string name="loading_monthly_reports_message">Generating monthly reports. Please wait…</string>
+    <string name="loading_monthly_reports_title">Loading Reports</string>
 
 </resources>

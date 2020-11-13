@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_report_indicators_summary.*
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.reporting.ReportsDao
 import org.smartregister.uniceftunisia.reporting.common.ReportingUtils
+import org.smartregister.uniceftunisia.reporting.common.showProgressDialog
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import org.smartregister.uniceftunisia.reporting.monthly.indicator.ReportIndicatorsViewModel
@@ -22,6 +24,8 @@ import org.smartregister.uniceftunisia.reporting.monthly.indicator.ReportIndicat
  * A [Fragment] subclass used to display list of report indicators
  */
 class ReportIndicatorsSummaryFragment : Fragment() {
+
+    private lateinit var progressDialog: AlertDialog
 
     private val reportIndicatorsRecyclerAdapter = ReportIndicatorsRecyclerAdapter()
 
@@ -34,6 +38,10 @@ class ReportIndicatorsSummaryFragment : Fragment() {
     ): View = inflater.inflate(R.layout.fragment_report_indicators_summary, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        progressDialog = requireContext().showProgressDialog(
+                show = true,
+                title = getString(R.string.loading_monthly_reports_title),
+                message = getString(R.string.loading_monthly_reports_message))
         indicatorsRecyclerView.apply {
             adapter = reportIndicatorsRecyclerAdapter
             layoutManager = LinearLayoutManager(context)
@@ -55,5 +63,6 @@ class ReportIndicatorsSummaryFragment : Fragment() {
                 reportIndicators = groupedTallies.toList()
             }
         }
+        progressDialog.dismiss()
     }
 }

@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -49,6 +50,7 @@ import java.util.*
  */
 class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
 
+    private lateinit var progressDialog: AlertDialog
     private val reportIndicatorsViewModel by activityViewModels<ReportIndicatorsViewModel>
     { ReportingUtils.createFor(ReportIndicatorsViewModel(MonthlyReportsRepository.getInstance())) }
 
@@ -72,6 +74,10 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
     ): View = inflater.inflate(R.layout.fragment_report_indicators_form, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        progressDialog = requireContext().showProgressDialog(
+                show = true,
+                title = getString(R.string.loading_monthly_reports_title),
+                message = getString(R.string.loading_monthly_reports_message))
         reportIndicatorsViewModel.monthlyTalliesMap.value?.let { monthlyTallies ->
             extendedIndicatorTallies.forEach { tallyEntry ->
                 tallyEntry.apply {
@@ -128,6 +134,7 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
             }
             //Add confirm Button At the end of the text input fields
             createConfirmButton()
+            progressDialog.dismiss()
         }
     }
 
@@ -143,6 +150,8 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
                     setTextColor(ContextCompat.getColor(context, R.color.primary))
                 }
                 inputType = InputType.TYPE_CLASS_NUMBER
+                inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE
+                maxLines = 3
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
                 addTextChangedListener(object : TextWatcher {
                     override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) =

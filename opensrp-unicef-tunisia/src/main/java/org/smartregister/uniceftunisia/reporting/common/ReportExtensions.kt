@@ -1,8 +1,12 @@
 package org.smartregister.uniceftunisia.reporting.common
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
+import android.view.WindowManager
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.*
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.reflect.TypeToken
@@ -13,12 +17,14 @@ import org.json.JSONException
 import org.json.JSONObject
 import org.smartregister.AllConstants
 import org.smartregister.domain.Event
+import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.reporting.ReportsDao
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import org.smartregister.uniceftunisia.util.AppConstants
 import org.smartregister.uniceftunisia.util.AppJsonFormUtils
 import timber.log.Timber
+
 
 /**
  * String constants
@@ -110,11 +116,32 @@ fun String.translateString(context: Context): String {
 }
 
 /**
- * Activity context extensions to display toast messages
+ * Show progress dialog
  */
-fun Context.showToast(resourceId: Int, duration: Int = Toast.LENGTH_LONG) =
-        Toast.makeText(this, getString(resourceId), duration).show()
 
+fun Context.showProgressDialog(show: Boolean = true, title: String =
+        this.getString(R.string.please_wait_title), message: String = this.getString(R.string.loading)):
+        AlertDialog {
+    val parentLayout = LayoutInflater.from(this).inflate(R.layout.progress_dialog_layout, null, false).apply {
+        findViewById<TextView>(R.id.titleTextView).text = title
+        findViewById<TextView>(R.id.messageTextView).text = message
+    }
+    val builder: AlertDialog.Builder = AlertDialog.Builder(this).apply {
+        setCancelable(true)
+        setView(parentLayout)
+    }
+
+    val dialog = builder.create()
+    if (show) dialog.show() else dialog.dismiss()
+    dialog.window?.run {
+        attributes = WindowManager.LayoutParams().apply {
+            copyFrom(attributes)
+            width = LinearLayout.LayoutParams.WRAP_CONTENT
+            height = LinearLayout.LayoutParams.WRAP_CONTENT
+        }
+    }
+    return dialog
+}
 
 /**
  * Activity context extensions to display SnackBar messages
