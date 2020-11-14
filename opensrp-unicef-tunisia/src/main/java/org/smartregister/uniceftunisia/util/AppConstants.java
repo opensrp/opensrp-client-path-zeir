@@ -156,10 +156,6 @@ public class AppConstants {
         String OPD = "opd";
     }
 
-    public interface IntentKey {
-        String REPORT_GROUPING = "report-grouping";
-    }
-
     public interface Pref {
         String APP_VERSION_CODE = "APP_VERSION_CODE";
         String INDICATOR_DATA_INITIALISED = "INDICATOR_DATA_INITIALISED";

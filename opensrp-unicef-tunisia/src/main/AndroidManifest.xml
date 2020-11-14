@@ -89,6 +89,11 @@
             android:theme="@style/ChildTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
+            android:name=".reporting.annual.AnnualReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChildTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
             android:name="com.vijay.jsonwizard.activities.JsonWizardFormActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ChildTheme.NoActionBar"

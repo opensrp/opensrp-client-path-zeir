@@ -7,6 +7,7 @@ import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.reflect.TypeToken
@@ -184,4 +185,12 @@ suspend fun List<MonthlyTally>.sortIndicators(): List<MonthlyTally> {
                 .sortedBy { talliesPair -> talliesPair.first }
                 .map { talliesPair -> talliesPair.second }
     }
+}
+
+fun TextView.leftDrawable(drawable: Int) {
+    compoundDrawablePadding = 8
+    setCompoundDrawablesWithIntrinsicBounds(
+            if (drawable > 0)
+                ContextCompat.getDrawable(context, drawable)
+            else null, null, null, null)
 }

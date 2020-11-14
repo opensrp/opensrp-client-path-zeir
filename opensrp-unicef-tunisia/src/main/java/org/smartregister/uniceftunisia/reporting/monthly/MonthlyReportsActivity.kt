@@ -5,10 +5,8 @@ import androidx.activity.viewModels
 import kotlinx.android.synthetic.main.activity_monthly_reports.*
 import org.smartregister.Context
 import org.smartregister.uniceftunisia.R
-import org.smartregister.uniceftunisia.reporting.ReportGroup
 import org.smartregister.uniceftunisia.reporting.ReportGroupingModel
 import org.smartregister.uniceftunisia.reporting.common.ReportingUtils
-import org.smartregister.uniceftunisia.util.AppConstants
 import org.smartregister.view.activity.MultiLanguageActivity
 
 class MonthlyReportsActivity : MultiLanguageActivity() {
@@ -19,14 +17,12 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
 
     private val monthlyReportsViewModel by viewModels<MonthlyReportsViewModel>
     { ReportingUtils.createFor(MonthlyReportsViewModel(MonthlyReportsRepository.getInstance())) }
+
     private lateinit var reportsPagerAdapter: MonthlyReportsPagerAdapter
-    lateinit var reportGrouping: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_monthly_reports)
-        reportGrouping = intent.getStringExtra(AppConstants.IntentKey.REPORT_GROUPING)
-                ?: ReportGroup.MONTHLY_REPORTS.name
         reportsPagerAdapter = MonthlyReportsPagerAdapter(this, supportFragmentManager)
 
         monthlyReportsViewModel.apply {

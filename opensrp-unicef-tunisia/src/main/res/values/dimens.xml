@@ -35,6 +35,8 @@
     <dimen name="indicator_summary_header_size">22sp</dimen>
     <dimen name="expansion_panel_header_padding">16dp</dimen>
     <dimen name="indicator_text_size">16sp</dimen>
+    <dimen name="report_item_text_size">18sp</dimen>
     <dimen name="expansion_panel_header_height">56dp</dimen>
+    <dimen name="annual_report_view_margin">32dp</dimen>
 
 </resources>

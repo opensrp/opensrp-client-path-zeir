@@ -308,6 +308,7 @@
     <string name="title_activity_report_tallies">ReportTalliesActivity</string>
     <string name="report_indicators_summary">Report Indicators Summary</string>
     <string name="report_indicators_form">Report Indicators Form</string>
+    <string name="annual_report_fragment">Annual Coverage Fragment</string>
     <string name="month_year_draft">%1$s Draft</string>
     <string name="error_saving_draft_reports">Error occurred while  saving drafts. Try again later</string>
     <string name="error_sending_draft_reports">Error occurred while  sending  report. Try again later</string>
@@ -326,5 +327,13 @@
     <string name="value">Value</string>
     <string name="loading_monthly_reports_message">Generating monthly reports. Please wait…</string>
     <string name="loading_monthly_reports_title">Loading Reports</string>
+    <string name="annual_coverage_report">Annual Coverage Report</string>
+    <string name="under_one_target">Under 1 target: %1$s</string>
+    <string name="one_two_years_target">1–2 yrs target: %1$s</string>
+    <string name="year_label">Year:</string>
+    <string name="vaccinated">Vaccinated</string>
+    <string name="coverage">Coverage</string>
+    <string name="current_report_year">%1$s (In Progress)</string>
+    <string name="error_no_target">Error: No target</string>
 
 </resources>

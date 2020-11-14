@@ -313,7 +313,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
     private void attachLanguageSpinner(final Activity activity) {
 
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activityWeakReference.get(), R.array.languages, R.layout.language_spinner_item);
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activityWeakReference.get(), R.array.languages, R.layout.app_spinner_item);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 

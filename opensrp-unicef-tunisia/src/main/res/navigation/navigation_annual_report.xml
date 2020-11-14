@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/navigation_annual_report">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/annualReportFragment">
+    <fragment
+        android:id="@+id/annualReportFragment"
+        android:name="org.smartregister.uniceftunisia.reporting.annual.coverage.AnnualCoverageFragment"
+        android:label="@string/annual_report_fragment"
+        tools:layout="@layout/fragment_annual_report" />
 </navigation>
