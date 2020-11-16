@@ -6,9 +6,10 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
@@ -20,12 +21,14 @@ import org.smartregister.AllConstants
 import org.smartregister.domain.Event
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.reporting.ReportsDao
+import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTarget
+import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTargetType
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import org.smartregister.uniceftunisia.util.AppConstants
 import org.smartregister.uniceftunisia.util.AppJsonFormUtils
 import timber.log.Timber
-
+import java.math.RoundingMode
 
 /**
  * String constants
@@ -34,7 +37,7 @@ const val MONTHLY_TALLIES = "monthly_tallies"
 const val MONTHLY_REPORT = "monthly_report"
 const val YEAR_MONTH = "year_month"
 const val SHOW_DATA = "show_data"
-const val INDEX = "index_"
+const val NO_TARGET = "error_no_target"
 
 /**
  * Utility method for creating ViewModel Factory
@@ -117,6 +120,12 @@ fun String.translateString(context: Context): String {
 }
 
 /**
+ * Activity context extensions to display toast messages
+ */
+fun Context.showToast(resourceId: Int, duration: Int = Toast.LENGTH_LONG) =
+        Toast.makeText(this, getString(resourceId), duration).show()
+
+/**
  * Show progress dialog
  */
 
@@ -153,28 +162,6 @@ fun View.showSnackBar(resourceId: Int, duration: Int = Snackbar.LENGTH_LONG) =
         Snackbar.make(this, this.context.getString(resourceId), duration).show()
 
 /**
- * LiveData Extension to observer data once for the [observer] subscribed to the given [lifecycleOwner]
- * */
-
-fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
-    observe(lifecycleOwner, object : Observer<T> {
-        override fun onChanged(t: T) {
-            observer.onChanged(t)
-            removeObserver(this)
-        }
-    })
-}
-
-/**
- * LiveData Extension to remove [observer] subscribed to the [lifecycleOwner] before re-observing data
- * */
-
-fun <T> LiveData<T>.reObserve(lifecycleOwner: LifecycleOwner, observer: Observer<T>) {
-    removeObserver(observer)
-    observe(lifecycleOwner, observer)
-}
-
-/**
  * This method creates pair of indicator against its position then sorts them. The indicator positions
  * are defined in "configs/reporting/indicator-positions.json" file
  */
@@ -187,10 +174,13 @@ suspend fun List<MonthlyTally>.sortIndicators(): List<MonthlyTally> {
     }
 }
 
-fun TextView.leftDrawable(drawable: Int) {
-    compoundDrawablePadding = 8
-    setCompoundDrawablesWithIntrinsicBounds(
-            if (drawable > 0)
-                ContextCompat.getDrawable(context, drawable)
-            else null, null, null, null)
+/**
+ * Find saved [CoverageTarget] for the given [targetType]
+ */
+fun List<CoverageTarget>.findTarget(targetType: CoverageTargetType): String {
+    val coverageTarget: CoverageTarget? = this.find { target -> target.targetType == targetType }
+    return (if (coverageTarget != null && coverageTarget.target > 0)
+        coverageTarget.target else null)?.toString() ?: ""
 }
+
+fun Double.toWholeNumber() = this.toBigDecimal().setScale(0, RoundingMode.UP)

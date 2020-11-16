@@ -8,7 +8,9 @@ import kotlinx.coroutines.withContext
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 
-class ReportIndicatorsViewModel(private val monthlyReportsRepository: MonthlyReportsRepository) : ViewModel() {
+class ReportIndicatorsViewModel : ViewModel() {
+
+    private val monthlyReportsRepository = MonthlyReportsRepository.getInstance()
 
     val monthlyTalliesMap = MutableLiveData<MutableMap<String, MonthlyTally>>()
 

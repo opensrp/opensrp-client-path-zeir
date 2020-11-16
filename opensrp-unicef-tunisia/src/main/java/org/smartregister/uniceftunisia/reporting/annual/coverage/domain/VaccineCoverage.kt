@@ -1,4 +1,4 @@
-package org.smartregister.uniceftunisia.reporting.annual.coverage
+package org.smartregister.uniceftunisia.reporting.annual.coverage.domain
 
 import org.smartregister.uniceftunisia.reporting.ReportsDao
 import java.util.*

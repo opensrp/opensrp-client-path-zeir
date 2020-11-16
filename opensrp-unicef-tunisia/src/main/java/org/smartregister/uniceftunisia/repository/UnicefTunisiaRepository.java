@@ -33,6 +33,7 @@ import org.smartregister.repository.SettingsRepository;
 import org.smartregister.repository.UniqueIdRepository;
 import org.smartregister.uniceftunisia.BuildConfig;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
+import org.smartregister.uniceftunisia.reporting.annual.coverage.VaccineCoverageTargetRepository;
 import org.smartregister.uniceftunisia.reporting.indicatorposition.IndicatorPositionRepository;
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository;
 import org.smartregister.uniceftunisia.util.AppConstants;
@@ -73,6 +74,7 @@ public class UnicefTunisiaRepository extends Repository {
         DailyIndicatorCountRepository.createTable(database);
         MonthlyReportsRepository.getInstance().createTable(database);
         IndicatorPositionRepository.getInstance().createTable(database);
+        VaccineCoverageTargetRepository.getInstance().createTable(database);
 
         LocationRepository.createTable(database);
         LocationTagRepository.createTable(database);

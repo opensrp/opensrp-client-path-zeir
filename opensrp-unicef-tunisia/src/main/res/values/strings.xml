@@ -335,5 +335,12 @@
     <string name="coverage">Coverage</string>
     <string name="current_report_year">%1$s (In Progress)</string>
     <string name="error_no_target">Error: No target</string>
+    <string name="not_defined">Not defined</string>
+    <string name="set_under_one_target">Set under 1 year target population - %1$d</string>
+    <string name="set_one_two_year_target">Set 1–2 year target population -  %1$d</string>
+    <string name="under_one_target_population">Under 1 target population</string>
+    <string name="one_two_years_target_population"> 1–2 year target population</string>
+    <string name="specify_target_error">Please specify  population target</string>
+    <string name="error_saving_target">Error saving population target</string>
 
 </resources>

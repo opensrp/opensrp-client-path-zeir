@@ -1,18 +1,16 @@
 package org.smartregister.uniceftunisia.reporting.annual
 
 import org.smartregister.repository.BaseRepository
-import org.smartregister.uniceftunisia.reporting.annual.coverage.VaccineCoverage
+import org.smartregister.uniceftunisia.reporting.ReportsDao
 
 class AnnualReportRepository : BaseRepository() {
-    fun getVaccineCoverage(): List<VaccineCoverage>? {
-        return listOf(
-                VaccineCoverage("BCG", "100", "100%"),
-                VaccineCoverage("OPV 0", "20", "100%"),
-                VaccineCoverage("OPV 1", "98", "90%"),
-                VaccineCoverage("OPV 3", "20", "24%"),
-                VaccineCoverage("Penta 1", "34", "Error: No target")
-        )
+    object VaccineByTarget {
+        val UNDER_ONE = setOf("bcg", "hep_b_0", "penta_1", "penta_2", "penta_3",
+                "ipv_1", "ipv_2", "opv_1", "pcv_1", "pcv_2", "pcv_3", "mr_1")
+        val YEAR_ONE_AND_TWO = setOf("mr_2", "dtp_4", "opv_2")
     }
+
+    fun getVaccineCoverage(year: Int) = ReportsDao.getTargetVaccineCounts(year)
 
     companion object {
         @Volatile

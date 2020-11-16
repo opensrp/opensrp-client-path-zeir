@@ -15,6 +15,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/annual_report_view_margin"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/year_label"
             android:textColor="@color/black_text_color"
             android:textSize="18sp"
@@ -27,10 +29,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/yearLabel"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.531" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/underOneTargetTextView"
@@ -38,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="@dimen/annual_report_view_margin"
-            android:drawablePadding="8dp"
+            android:padding="4dp"
             android:text="@string/under_one_target"
             android:textColor="@color/black_text_color"
             android:textSize="18sp"
@@ -54,7 +57,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="@dimen/annual_report_view_margin"
             android:layout_marginBottom="16dp"
-            android:drawablePadding="8dp"
+            android:padding="4dp"
             android:text="@string/one_two_years_target"
             android:textColor="@color/black_text_color"
             android:textSize="18sp"

@@ -8,8 +8,9 @@ import kotlinx.coroutines.launch
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import java.util.*
 
-class MonthlyReportsViewModel(private val monthlyReportsRepository: MonthlyReportsRepository) : ViewModel() {
+class MonthlyReportsViewModel : ViewModel() {
 
+    private val monthlyReportsRepository = MonthlyReportsRepository.getInstance()
     val unDraftedMonths = MutableLiveData<List<String>>()
 
     val draftedMonths = MutableLiveData<List<Pair<String, Date>>>()

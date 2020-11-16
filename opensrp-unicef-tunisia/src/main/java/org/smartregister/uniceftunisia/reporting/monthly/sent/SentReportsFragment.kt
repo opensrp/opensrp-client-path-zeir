@@ -17,7 +17,6 @@ import org.smartregister.uniceftunisia.reporting.common.MONTHLY_TALLIES
 import org.smartregister.uniceftunisia.reporting.common.ReportingUtils
 import org.smartregister.uniceftunisia.reporting.common.SHOW_DATA
 import org.smartregister.uniceftunisia.reporting.common.YEAR_MONTH
-import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsViewModel
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import org.smartregister.uniceftunisia.reporting.monthly.indicator.ReportIndicatorsActivity
@@ -28,7 +27,7 @@ class SentReportsFragment : Fragment(), View.OnClickListener {
     private val sentReportsRecyclerAdapter = SentReportsRecyclerAdapter(this)
 
     private val monthlyReportsViewModel by activityViewModels<MonthlyReportsViewModel>
-    { ReportingUtils.createFor(MonthlyReportsViewModel(MonthlyReportsRepository.getInstance())) }
+    { ReportingUtils.createFor(MonthlyReportsViewModel()) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_monthly_sent_reports, container, false)

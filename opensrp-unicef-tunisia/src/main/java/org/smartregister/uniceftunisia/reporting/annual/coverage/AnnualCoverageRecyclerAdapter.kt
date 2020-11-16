@@ -9,6 +9,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.annual_report_list_item.*
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.reporting.ReportsDao
+import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.VaccineCoverage
 import java.util.*
 
 class AnnualCoverageRecyclerAdapter :

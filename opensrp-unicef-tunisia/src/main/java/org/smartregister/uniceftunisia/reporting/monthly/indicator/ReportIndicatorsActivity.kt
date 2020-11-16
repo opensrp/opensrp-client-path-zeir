@@ -13,13 +13,12 @@ import kotlinx.coroutines.launch
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.reporting.common.*
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsActivity
-import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 
 class ReportIndicatorsActivity : MultiLanguageActivity() {
 
     private val reportIndicatorsViewModel by viewModels<ReportIndicatorsViewModel>
-    { ReportingUtils.createFor(ReportIndicatorsViewModel(MonthlyReportsRepository.getInstance())) }
+    { ReportingUtils.createFor(ReportIndicatorsViewModel()) }
 
     lateinit var navController: NavController
 

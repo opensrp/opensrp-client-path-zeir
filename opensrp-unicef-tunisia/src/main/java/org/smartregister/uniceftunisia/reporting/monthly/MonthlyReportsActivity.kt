@@ -16,7 +16,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
     }
 
     private val monthlyReportsViewModel by viewModels<MonthlyReportsViewModel>
-    { ReportingUtils.createFor(MonthlyReportsViewModel(MonthlyReportsRepository.getInstance())) }
+    { ReportingUtils.createFor(MonthlyReportsViewModel()) }
 
     private lateinit var reportsPagerAdapter: MonthlyReportsPagerAdapter
 

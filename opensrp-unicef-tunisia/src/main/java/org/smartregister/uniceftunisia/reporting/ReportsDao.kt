@@ -1,13 +1,26 @@
 package org.smartregister.uniceftunisia.reporting
 
+import android.content.Context
 import android.database.Cursor
 import org.smartregister.dao.AbstractDao
 import org.smartregister.dao.AbstractDao.DataMap
+import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication
+import org.smartregister.uniceftunisia.reporting.annual.AnnualReportRepository
+import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTarget
+import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTargetType
+import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.VaccineCoverage
+import org.smartregister.uniceftunisia.reporting.common.NO_TARGET
+import org.smartregister.uniceftunisia.reporting.common.findTarget
+import org.smartregister.uniceftunisia.reporting.common.getResourceId
+import org.smartregister.uniceftunisia.reporting.common.toWholeNumber
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import java.text.SimpleDateFormat
 import java.util.*
+import org.smartregister.uniceftunisia.reporting.annual.coverage.VaccineCoverageTargetRepository.ColumnNames as CoverageTableColumns
 
 object ReportsDao : AbstractDao() {
+
+    val context: Context = UnicefTunisiaApplication.getInstance().applicationContext
 
     fun dateFormatter(pattern: String = "yyyy-MM") = SimpleDateFormat(pattern, Locale.ENGLISH)
 
@@ -164,4 +177,72 @@ object ReportsDao : AbstractDao() {
         }
         return if (result.isEmpty()) -1.0 else result.first()
     }
+
+    fun getCoverageTarget(year: Int): List<CoverageTarget> {
+        val sql = """
+            SELECT * 
+            FROM annual_coverage_target
+            WHERE year = '$year'
+        """.trimIndent()
+        val result = readData(sql) { cursor: Cursor? ->
+            if (cursor != null && cursor.count > 0) {
+                CoverageTarget(
+                        targetType = CoverageTargetType.valueOf(getCursorValue(cursor, CoverageTableColumns.TARGET_TYPE)!!),
+                        year = getCursorIntValue(cursor, CoverageTableColumns.YEAR)!!,
+                        target = getCursorIntValue(cursor, CoverageTableColumns.TARGET) ?: 0,
+                )
+            } else null
+
+        }
+        return result.toList().filterNotNull()
+    }
+
+    /**
+     * Returns computed vaccine coverage for the [year]
+     */
+    fun getTargetVaccineCounts(year: Int): List<VaccineCoverage> {
+        val underOneTarget = getCoverageTarget(year).findTarget(CoverageTargetType.UNDER_ONE_TARGET)
+        val yearOneAndTwoTarget = getCoverageTarget(year).findTarget(CoverageTargetType.ONE_TWO_YEAR_TARGET)
+        val sql = """
+            SELECT vaccines.name,
+                   count(*) as vaccine_count,
+                   strftime('%Y', date(vaccines.date / 1000, 'unixepoch', 'localtime')) as year
+            FROM vaccines
+                     INNER JOIN ec_client ON vaccines.base_entity_id = ec_client.base_entity_id
+            WHERE strftime('%Y', date(vaccines.date / 1000, 'unixepoch', 'localtime')) = '$year'
+            group by vaccines.name;
+        """.trimIndent()
+        val result = readData(sql) { cursor: Cursor? ->
+            if (cursor != null && cursor.count > 0) {
+                val vaccineCount = getCursorIntValue(cursor, "vaccine_count") ?: 0
+                val vaccine = getCursorValue(cursor, "name")!!
+                val coverage = vaccine.getCoverage(underOneTarget, yearOneAndTwoTarget, vaccineCount)
+                VaccineCoverage(
+                        year = getCursorValue(cursor, "year")!!,
+                        vaccine = vaccine,
+                        vaccinated = vaccineCount.toString(),
+                        coverage = if (coverage == NO_TARGET)
+                            context.getString(coverage.getResourceId(context))
+                        else coverage
+                )
+            } else null
+
+        }
+        return result.toList().filterNotNull()
+    }
+
+    private fun String.getCoverage(underOneTarget: String, yearOneAndTwoTarget: String, vaccineCount: Int) =
+            if (underOneTarget.isEmpty() || yearOneAndTwoTarget.isEmpty()) NO_TARGET else {
+                when (this) {
+                    in AnnualReportRepository.VaccineByTarget.UNDER_ONE -> {
+                        val underOneCoverage = (vaccineCount / underOneTarget.toDouble()) * 100
+                        "${underOneCoverage.toWholeNumber()}%"
+                    }
+                    in AnnualReportRepository.VaccineByTarget.YEAR_ONE_AND_TWO -> {
+                        val yearOneTwoPercentage = (vaccineCount / yearOneAndTwoTarget.toDouble()) * 100
+                        "${yearOneTwoPercentage.toWholeNumber()}%"
+                    }
+                    else -> NO_TARGET
+                }
+            }
 }

@@ -16,7 +16,6 @@ import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.reporting.ReportsDao
 import org.smartregister.uniceftunisia.reporting.common.ReportingUtils
 import org.smartregister.uniceftunisia.reporting.common.showProgressDialog
-import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import org.smartregister.uniceftunisia.reporting.monthly.indicator.ReportIndicatorsViewModel
 
@@ -30,7 +29,7 @@ class ReportIndicatorsSummaryFragment : Fragment() {
     private val reportIndicatorsRecyclerAdapter = ReportIndicatorsRecyclerAdapter()
 
     private val reportIndicatorsViewModel by activityViewModels<ReportIndicatorsViewModel>()
-    { ReportingUtils.createFor(ReportIndicatorsViewModel(MonthlyReportsRepository.getInstance())) }
+    { ReportingUtils.createFor(ReportIndicatorsViewModel()) }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,

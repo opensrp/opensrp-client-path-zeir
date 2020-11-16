@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.fragment_monthly_drafted_reports.*
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.reporting.ReportsDao
 import org.smartregister.uniceftunisia.reporting.common.*
-import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsViewModel
 import org.smartregister.uniceftunisia.reporting.monthly.indicator.ReportIndicatorsActivity
 import org.smartregister.view.customcontrols.CustomFontTextView
@@ -30,7 +29,7 @@ class DraftedReportsFragment : Fragment(), AdapterView.OnItemClickListener, View
 
     private lateinit var alertDialog: AlertDialog
     private val monthlyReportsViewModel by activityViewModels<MonthlyReportsViewModel>
-    { ReportingUtils.createFor(MonthlyReportsViewModel(MonthlyReportsRepository.getInstance())) }
+    { ReportingUtils.createFor(MonthlyReportsViewModel()) }
 
     private val draftedReportsRecyclerAdapter = DraftedReportsRecyclerAdapter(this)
 

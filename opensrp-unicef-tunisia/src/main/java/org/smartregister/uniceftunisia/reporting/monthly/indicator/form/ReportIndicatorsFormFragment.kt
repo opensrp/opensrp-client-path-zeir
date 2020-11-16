@@ -53,7 +53,7 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
     private lateinit var progressDialog: AlertDialog
 
     private val reportIndicatorsViewModel by activityViewModels<ReportIndicatorsViewModel>
-    { ReportingUtils.createFor(ReportIndicatorsViewModel(MonthlyReportsRepository.getInstance())) }
+    { ReportingUtils.createFor(ReportIndicatorsViewModel()) }
 
     private lateinit var confirmSendDraftDialog: ConfirmSendDraftDialog
 
