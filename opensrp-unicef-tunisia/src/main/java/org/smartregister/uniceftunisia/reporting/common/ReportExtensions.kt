@@ -87,13 +87,10 @@ object ReportingUtils {
     fun processAnnualVaccineReportEvent(event: Event) {
         event.details[ANNUAL_VACCINE_REPORT]?.let { vaccineCoverage ->
             try {
-                val vaccineCoverageJson = JSONObject(vaccineCoverage)
                 val typeToken = object : TypeToken<List<AnnualVaccineReport>>() {}.type
-                val vaccineReportsJsonArray = JSONArray(vaccineCoverageJson.getString(ANNUAL_VACCINE_REPORT))
-                (0 until vaccineReportsJsonArray.length())
-                        .map { index: Int -> vaccineReportsJsonArray.getJSONObject(index) }
-                        .map { AppJsonFormUtils.gson.fromJson<List<AnnualVaccineReport>>(it.toString(), typeToken) }
-                        .forEach { AnnualReportRepository.getInstance().saveAnnualVaccineReport(it) }
+                val vaccineReportsJsonArray = JSONArray(JSONObject(vaccineCoverage).getString(VACCINE_COVERAGES))
+                val annualVaccineReports = AppJsonFormUtils.gson.fromJson<List<AnnualVaccineReport>>(vaccineReportsJsonArray.toString(), typeToken)
+                AnnualReportRepository.getInstance().saveAnnualVaccineReport(annualVaccineReports)
             } catch (e: JSONException) {
                 Timber.e(e)
             }
