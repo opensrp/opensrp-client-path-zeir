@@ -295,6 +295,12 @@
     <string name="november">November</string>
     <string name="december">December</string>
 
+    <!--Overridden vaccines -->
+    <string name="hep_b_0">HEP B 0</string>
+    <string name="ipv_1">IPV 1</string>
+    <string name="ipv_2">IPV 2</string>
+    <string name="dtp_4">DTP 4</string>
+
     <!-- Report grouping titles -->
     <string name="report_group_header_vaccination_activity">Vaccination Activity at different ages</string>
     <string name="report_group_header_vaccine_utilization">Vaccine utilization report</string>

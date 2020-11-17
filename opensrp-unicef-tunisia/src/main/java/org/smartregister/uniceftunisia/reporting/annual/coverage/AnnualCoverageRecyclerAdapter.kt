@@ -8,9 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.annual_report_list_item.*
 import org.smartregister.uniceftunisia.R
-import org.smartregister.uniceftunisia.reporting.ReportsDao
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.VaccineCoverage
-import java.util.*
 
 class AnnualCoverageRecyclerAdapter :
         RecyclerView.Adapter<AnnualCoverageRecyclerAdapter.VaccineCoverageViewHolder>() {
@@ -39,10 +37,7 @@ class AnnualCoverageRecyclerAdapter :
                 vaccinatedNumberTextView.text = vaccinated
                 coverageTextView.apply {
                     text = coverage
-                    if (year != ReportsDao.dateFormatter("yyyy").format(Date()))
-                        setTextColor(ContextCompat.getColor(context, R.color.primary))
-                    if (coverage == context.getString(R.string.error_no_target))
-                        setTextColor(ContextCompat.getColor(context, R.color.cso_error_red))
+                    setTextColor(ContextCompat.getColor(context, coverageColorResource))
                 }
             }
         }
