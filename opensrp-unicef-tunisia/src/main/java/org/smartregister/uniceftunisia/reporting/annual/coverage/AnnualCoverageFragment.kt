@@ -57,7 +57,7 @@ class AnnualCoverageFragment : Fragment() {
                     .distinct()
                     .asReversed()
 
-            adapter = ReportYearsAdapter(reportYears)
+            adapter = ReportYearsAdapter(if (reportYears.isEmpty()) listOf(dateFormatter("yyyy").format(Date())) else reportYears)
             onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
                     (view.tag as String).toInt().let {
@@ -73,18 +73,13 @@ class AnnualCoverageFragment : Fragment() {
         underOneTargetTextView.apply {
             text = getString(R.string.under_one_target, getString(R.string.not_defined))
             formatText()
-            setOnClickListener { editCoverageTarget() }
+            setOnClickListener { coverageTargetDialog.launchDialog() }
         }
         oneTwoYearsTargetTextView.apply {
             text = getString(R.string.one_two_years_target, getString(R.string.not_defined))
             formatText()
-            setOnClickListener { editCoverageTarget() }
+            setOnClickListener { coverageTargetDialog.launchDialog() }
         }
-    }
-
-    private fun editCoverageTarget() {
-        viewModel.selectedYear.value?.let { viewModel.getYearCoverageTargets(it) }
-        coverageTargetDialog.launchDialog()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -105,6 +100,7 @@ class AnnualCoverageFragment : Fragment() {
                 coverageTargetDialog.updateTargets(targets)
                 underOneTargetTextView.updateTargetLabel(targets, UNDER_ONE_TARGET, R.string.under_one_target)
                 oneTwoYearsTargetTextView.updateTargetLabel(targets, ONE_TWO_YEAR_TARGET, R.string.one_two_years_target)
+                if (targets.isEmpty()) coverageTargetDialog.launchDialog()
             })
         }
     }
@@ -171,7 +167,7 @@ class AnnualCoverageFragment : Fragment() {
                                     getVaccineCoverageReports(selectedYear.value!!)
                                 }
                                 dialog.dismiss()
-                              
+
                             } else requireContext().showToast(R.string.error_saving_target)
                         }
                     }
