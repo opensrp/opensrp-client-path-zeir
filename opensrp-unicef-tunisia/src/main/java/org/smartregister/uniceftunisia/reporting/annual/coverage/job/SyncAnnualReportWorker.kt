@@ -5,6 +5,7 @@ import androidx.work.*
 import org.json.JSONArray
 import org.json.JSONObject
 import org.smartregister.repository.AllSharedPreferences
+import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.AnnualVaccineReport
 import org.smartregister.uniceftunisia.reporting.annual.coverage.repository.AnnualReportRepository
@@ -16,7 +17,7 @@ import org.smartregister.util.JsonFormUtils
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class SyncAnnualReportWorker(context: Context, workerParams: WorkerParameters) :
+class SyncAnnualReportWorker(val context: Context, workerParams: WorkerParameters) :
         Worker(context, workerParams) {
 
     private val annualReportRepository = AnnualReportRepository.getInstance()
@@ -27,14 +28,16 @@ class SyncAnnualReportWorker(context: Context, workerParams: WorkerParameters) :
         val annualVaccineReports = mutableListOf<AnnualVaccineReport>()
         val reportYears = annualReportRepository.getReportYears()
         reportYears.forEach { reportYear ->
-            val currentAnnualReports = annualReportRepository.getVaccineCoverage(reportYear.toInt()).map {
-                AnnualVaccineReport(
-                        vaccine = it.name,
-                        year = it.year.toInt(),
-                        target = it.target,
-                        coverage = it.coverage.toInt()
-                )
-            }
+            val currentAnnualReports = annualReportRepository.getVaccineCoverage(reportYear.toInt())
+                    .filter { it.coverage != context.getString(R.string.error_no_target) }
+                    .map {
+                        AnnualVaccineReport(
+                                vaccine = it.name,
+                                year = it.year.toInt(),
+                                target = it.target,
+                                coverage = it.coverage.replace("%", "").toInt()
+                        )
+                    }
             annualVaccineReports.addAll(currentAnnualReports)
         }
         if (annualVaccineReports.isNotEmpty()) createAnnualCoverageReportEvent(annualVaccineReports)
