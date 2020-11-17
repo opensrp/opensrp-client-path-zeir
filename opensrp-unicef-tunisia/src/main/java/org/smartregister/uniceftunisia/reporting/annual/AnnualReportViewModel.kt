@@ -5,10 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.smartregister.uniceftunisia.reporting.ReportsDao
-import org.smartregister.uniceftunisia.reporting.annual.coverage.VaccineCoverageTargetRepository
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTarget
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.VaccineCoverage
+import org.smartregister.uniceftunisia.reporting.annual.coverage.repository.AnnualReportRepository
+import org.smartregister.uniceftunisia.reporting.annual.coverage.repository.VaccineCoverageTargetRepository
 import java.util.*
 
 class AnnualReportViewModel : ViewModel() {
@@ -24,6 +26,10 @@ class AnnualReportViewModel : ViewModel() {
         }
     }
 
+    suspend fun getReportYears() = withContext(viewModelScope.coroutineContext + Dispatchers.IO) {
+        annualReportRepository.getReportYears()
+    }
+
     fun getVaccineCoverageReports(year: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             vaccineCoverageReports.postValue(annualReportRepository.getVaccineCoverage(year))
@@ -34,9 +40,5 @@ class AnnualReportViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             yearTargets.postValue(vaccineCoverageTargetRepository.getCoverageTarget(year))
         }
-    }
-
-    suspend fun saveCoverageTarget(coverageTargets: List<CoverageTarget>): Boolean {
-        return vaccineCoverageTargetRepository.saveCoverageTarget(coverageTargets)
     }
 }

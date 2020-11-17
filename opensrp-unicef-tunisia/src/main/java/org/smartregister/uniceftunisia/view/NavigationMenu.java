@@ -356,7 +356,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
                     }
 
                     // save language
-                    LangUtils.saveLanguage(activity.getApplicationContext(), LOCALE.getLanguage());
+                    LangUtils.saveLanguage(activity, LOCALE.getLanguage());
 
                     launchActivity(activity, activity.getClass());
                 }
@@ -365,14 +365,14 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                //Do Nothing
             }
         });
     }
 
     private void launchActivity(Activity fromActivity, Class<?> clazz) {
         Intent intent = new Intent(fromActivity, clazz);
-        fromActivity.getApplicationContext().startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+        fromActivity.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     public void openDrawer() {

@@ -1,4 +1,4 @@
-package org.smartregister.uniceftunisia.reporting.annual.coverage
+package org.smartregister.uniceftunisia.reporting.annual.coverage.repository
 
 import androidx.core.content.contentValuesOf
 import androidx.sqlite.db.transaction
@@ -43,19 +43,17 @@ class VaccineCoverageTargetRepository private constructor() : BaseRepository() {
         execSQL(TableQueries.CREATE_TARGET_TYPE_UNIQUE_INDEX)
     }
 
-    suspend fun saveCoverageTarget(yearTargets: List<CoverageTarget>) = withContext(Dispatchers.IO) {
+    fun saveCoverageTarget(yearTarget: CoverageTarget) {
         val failedInsertionsList = arrayListOf<Long>()
         writableDatabase.transaction(exclusive = true) {
-            yearTargets.forEach {
-                val contentValues = contentValuesOf(
-                        Pair(ColumnNames.TARGET_TYPE, it.targetType.name),
-                        Pair(ColumnNames.YEAR, it.year),
-                        Pair(ColumnNames.TARGET, it.target),
-                )
-                val id = writableDatabase.insertWithOnConflict(Constants.TABLE_NAME, null,
-                        contentValues, SqlCipherSQLite.CONFLICT_REPLACE)
-                if (id == (-1).toLong()) failedInsertionsList.add(id)
-            }
+            val contentValues = contentValuesOf(
+                    Pair(ColumnNames.TARGET_TYPE, yearTarget.targetType.name),
+                    Pair(ColumnNames.YEAR, yearTarget.year),
+                    Pair(ColumnNames.TARGET, yearTarget.target),
+            )
+            val id = writableDatabase.insertWithOnConflict(Constants.TABLE_NAME, null,
+                    contentValues, SqlCipherSQLite.CONFLICT_REPLACE)
+            if (id == (-1).toLong()) failedInsertionsList.add(id)
             failedInsertionsList.isEmpty()
         }
     }

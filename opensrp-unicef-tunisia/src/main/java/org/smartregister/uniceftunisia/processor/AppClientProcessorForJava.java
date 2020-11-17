@@ -45,6 +45,7 @@ import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.MiniClientProcessorForJava;
 import org.smartregister.sync.helper.ECSyncHelper;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
+import org.smartregister.uniceftunisia.reporting.common.ReportExtensionsKt;
 import org.smartregister.uniceftunisia.reporting.common.ReportingUtils;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppExecutors;
@@ -110,8 +111,18 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 }
 
                 switch (eventType) {
-                    case AppConstants.EventType.MONTHLY_REPORT:
-                        processMonthlyReportEvent(event);
+                    case ReportExtensionsKt.MONTHLY_REPORT:
+                        ReportingUtils.processMonthlyReportEvent(event);
+                        CoreLibrary.getInstance().context().getEventClientRepository()
+                                .markEventAsProcessed(eventClient.getEvent().getFormSubmissionId());
+                        break;
+                    case ReportExtensionsKt.ANNUAL_VACCINE_REPORT:
+                        ReportingUtils.processAnnualVaccineReportEvent(event);
+                        CoreLibrary.getInstance().context().getEventClientRepository()
+                                .markEventAsProcessed(eventClient.getEvent().getFormSubmissionId());
+                        break;
+                    case ReportExtensionsKt.VACCINE_COVERAGE_TARGET:
+                        ReportingUtils.processCoverageTarget(event);
                         CoreLibrary.getInstance().context().getEventClientRepository()
                                 .markEventAsProcessed(eventClient.getEvent().getFormSubmissionId());
                         break;
@@ -176,10 +187,6 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
             // Unsync events that are should not be in this device
             unSync(eventsToRemove);
         }
-    }
-
-    private void processMonthlyReportEvent(Event event) {
-        ReportingUtils.processMonthlyReportEvent(event);
     }
 
     private void unSync(List<Event> events) {

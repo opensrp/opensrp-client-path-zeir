@@ -9,5 +9,7 @@ data class VaccineCoverage(
         val vaccinated: String,
         val coverage: String,
         val year: String = ReportsDao.dateFormatter("yyyy").format(Date()),
-        var coverageColorResource: Int = R.color.black_text_color
+        var coverageColorResource: Int = R.color.black_text_color,
+        var name: String = "",
+        var target: Int = 0
 )

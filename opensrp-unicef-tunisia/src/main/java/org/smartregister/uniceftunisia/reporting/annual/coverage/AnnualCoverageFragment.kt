@@ -17,9 +17,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_annual_report.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONArray
+import org.json.JSONObject
+import org.smartregister.child.util.Constants
+import org.smartregister.clientandeventmodel.Obs
+import org.smartregister.repository.AllSharedPreferences
 import org.smartregister.uniceftunisia.R
-import org.smartregister.uniceftunisia.reporting.ReportsDao
+import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication
 import org.smartregister.uniceftunisia.reporting.ReportsDao.dateFormatter
 import org.smartregister.uniceftunisia.reporting.annual.AnnualReportViewModel
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTarget
@@ -28,13 +35,21 @@ import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.Coverage
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTargetType.UNDER_ONE_TARGET
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.VaccineCoverage
 import org.smartregister.uniceftunisia.reporting.common.ReportingUtils
+import org.smartregister.uniceftunisia.reporting.common.VACCINE_COVERAGE_TARGET
 import org.smartregister.uniceftunisia.reporting.common.findTarget
 import org.smartregister.uniceftunisia.reporting.common.showToast
+import org.smartregister.uniceftunisia.util.AppJsonFormUtils
+import org.smartregister.uniceftunisia.util.AppJsonFormUtils.tagEventMetadata
+import org.smartregister.uniceftunisia.util.AppUtils
+import org.smartregister.util.JsonFormUtils
 import java.util.*
+import org.smartregister.uniceftunisia.reporting.annual.coverage.repository.VaccineCoverageTargetRepository.ColumnNames as VaccineCoverageColumns
 
 class AnnualCoverageFragment : Fragment() {
 
     private lateinit var coverageTargetDialog: CoverageTargetDialog
+    private val appInstance: UnicefTunisiaApplication = UnicefTunisiaApplication.getInstance()
+    private val allSharedPreferences: AllSharedPreferences = AppUtils.getAllSharedPreferences()
     private val currentTargets = mutableMapOf<String, CoverageTarget>()
     private val annualCoverageRecyclerAdapter = AnnualCoverageRecyclerAdapter()
     private val viewModel by activityViewModels<AnnualReportViewModel>
@@ -44,41 +59,39 @@ class AnnualCoverageFragment : Fragment() {
             inflater.inflate(R.layout.fragment_annual_report, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        annualCoverageRecyclerView.apply {
-            visibility = View.VISIBLE
-            layoutManager = LinearLayoutManager(context)
-            adapter = annualCoverageRecyclerAdapter
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-        }
-
-        reportYearsSpinner.apply {
-            val reportYears = ReportsDao.getDistinctReportMonths()
-                    .map { dateFormatter("yyyy").format(dateFormatter("MMMM yyyy").parse(it)!!) }
-                    .distinct()
-                    .asReversed()
-
-            adapter = ReportYearsAdapter(if (reportYears.isEmpty()) listOf(dateFormatter("yyyy").format(Date())) else reportYears)
-            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                    (view.tag as String).toInt().let {
-                        viewModel.selectedYear.value = it
-                        viewModel.getYearCoverageTargets(it)
-                    }
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) = Unit
+        lifecycleScope.launch(Dispatchers.Main) {
+            val reportYears = viewModel.getReportYears()
+            annualCoverageRecyclerView.apply {
+                visibility = View.VISIBLE
+                layoutManager = LinearLayoutManager(context)
+                adapter = annualCoverageRecyclerAdapter
+                addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             }
-        }
 
-        underOneTargetTextView.apply {
-            text = getString(R.string.under_one_target, getString(R.string.not_defined))
-            formatText()
-            setOnClickListener { coverageTargetDialog.launchDialog() }
-        }
-        oneTwoYearsTargetTextView.apply {
-            text = getString(R.string.one_two_years_target, getString(R.string.not_defined))
-            formatText()
-            setOnClickListener { coverageTargetDialog.launchDialog() }
+            reportYearsSpinner.apply {
+                adapter = ReportYearsAdapter(if (reportYears.isEmpty()) listOf(dateFormatter("yyyy").format(Date())) else reportYears)
+                onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
+                        (view.tag as String).toInt().let {
+                            viewModel.selectedYear.value = it
+                            viewModel.getYearCoverageTargets(it)
+                        }
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) = Unit
+                }
+            }
+
+            underOneTargetTextView.apply {
+                text = getString(R.string.under_one_target, getString(R.string.not_defined))
+                formatText()
+                setOnClickListener { coverageTargetDialog.launchDialog() }
+            }
+            oneTwoYearsTargetTextView.apply {
+                text = getString(R.string.one_two_years_target, getString(R.string.not_defined))
+                formatText()
+                setOnClickListener { coverageTargetDialog.launchDialog() }
+            }
         }
     }
 
@@ -161,7 +174,7 @@ class AnnualCoverageFragment : Fragment() {
                 findViewById<Button>(R.id.okButton).setOnClickListener {
                     if (underOneTargetEditText.validate() && oneTwoYearsTargetEditText.validate()) {
                         lifecycleScope.launch {
-                            if (viewModel.saveCoverageTarget(currentTargets.values.toList())) {
+                            if (createCoverageTargetEvent()) {
                                 viewModel.run {
                                     getYearCoverageTargets(selectedYear.value!!)
                                     getVaccineCoverageReports(selectedYear.value!!)
@@ -174,6 +187,38 @@ class AnnualCoverageFragment : Fragment() {
                 }
             }
         }
+
+        private suspend fun createCoverageTargetEvent() = withContext(Dispatchers.IO) {
+            val formSubmissionIds = arrayListOf<String>()
+            currentTargets.values.forEach {
+                val baseEvent = AppJsonFormUtils.createEvent(JSONArray(), JSONObject().put(JsonFormUtils.ENCOUNTER_LOCATION, ""),
+                        AppJsonFormUtils.formTag(allSharedPreferences), "", VACCINE_COVERAGE_TARGET, VACCINE_COVERAGE_TARGET)
+                baseEvent.run {
+                    formSubmissionId = UUID.randomUUID().toString()
+                    withObs(it.createEventObs())
+                    tagEventMetadata(this)
+                    appInstance.ecSyncHelper.addEvent(baseEntityId, JSONObject(AppJsonFormUtils.gson.toJson(this)))
+                    formSubmissionIds.add(formSubmissionId)
+                }
+                appInstance.clientProcessor.processClient(appInstance.ecSyncHelper.getEvents(formSubmissionIds))
+                val lastSyncDate = Date(allSharedPreferences.fetchLastUpdatedAtDate(0))
+                allSharedPreferences.saveLastUpdatedAtDate(lastSyncDate.time)
+            }
+            true
+        }
+
+        fun CoverageTarget.createEventObs() = listOf(
+                getObs(VaccineCoverageColumns.TARGET, target.toString()),
+                getObs(VaccineCoverageColumns.TARGET_TYPE, targetType.name),
+                getObs(VaccineCoverageColumns.YEAR, year.toString()),
+        )
+
+        private fun getObs(field: String, value: String) = Obs().withFieldCode(field)
+                .withFormSubmissionField(field)
+                .withFieldDataType(Constants.KEY.TEXT)
+                .withFieldType(Constants.KEY.CONCEPT)
+                .withValue(value)
+                .withsaveObsAsArray(false)
 
         private fun EditText.addTextChangeListener(coverageTargetType: CoverageTargetType) {
             addTextChangedListener {

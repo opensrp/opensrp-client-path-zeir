@@ -19,25 +19,32 @@ import org.json.JSONException
 import org.json.JSONObject
 import org.smartregister.AllConstants
 import org.smartregister.domain.Event
+import org.smartregister.domain.Obs
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.reporting.ReportsDao
+import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.AnnualVaccineReport
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTarget
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTargetType
+import org.smartregister.uniceftunisia.reporting.annual.coverage.repository.AnnualReportRepository
+import org.smartregister.uniceftunisia.reporting.annual.coverage.repository.VaccineCoverageTargetRepository
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
-import org.smartregister.uniceftunisia.util.AppConstants
 import org.smartregister.uniceftunisia.util.AppJsonFormUtils
 import timber.log.Timber
+import java.math.BigDecimal
 import java.math.RoundingMode
+import org.smartregister.uniceftunisia.reporting.annual.coverage.repository.VaccineCoverageTargetRepository.ColumnNames as VaccineCoverageColumn
 
 /**
  * String constants
  */
 const val MONTHLY_TALLIES = "monthly_tallies"
 const val MONTHLY_REPORT = "monthly_report"
+const val ANNUAL_VACCINE_REPORT = "annual_vaccine_report"
+const val VACCINE_COVERAGES = "vaccine_coverages"
 const val YEAR_MONTH = "year_month"
 const val SHOW_DATA = "show_data"
-const val NO_TARGET = "error_no_target"
+const val VACCINE_COVERAGE_TARGET = "vaccine_coverage_target"
 
 /**
  * Utility method for creating ViewModel Factory
@@ -59,12 +66,12 @@ object ReportingUtils {
 
     @JvmStatic
     fun processMonthlyReportEvent(event: Event) {
-        event.details[AppConstants.EventType.MONTHLY_REPORT]?.let { monthlyReportString ->
+        event.details[MONTHLY_REPORT]?.let { monthlyReportString ->
             try {
                 val monthlyReportJson = JSONObject(monthlyReportString)
                 val typeToken = object : TypeToken<Map<String, MonthlyTally>>() {}.type
-                val yearMonth = monthlyReportJson.getString(AppConstants.KEY.YEAR_MONTH)
-                val monthlyTalliesJsonArray = JSONArray(monthlyReportJson.getString(AppConstants.KEY.MONTHLY_TALLIES))
+                val yearMonth = monthlyReportJson.getString(YEAR_MONTH)
+                val monthlyTalliesJsonArray = JSONArray(monthlyReportJson.getString(MONTHLY_TALLIES))
                 (0 until monthlyTalliesJsonArray.length())
                         .map { monthlyTalliesJsonArray.getJSONObject(it) }
                         .map { JSONObject().put(it.getString(AllConstants.INDICATOR), it) }
@@ -72,6 +79,47 @@ object ReportingUtils {
                         .forEach { MonthlyReportsRepository.getInstance().saveMonthlyDraft(it, yearMonth, true) }
             } catch (e: JSONException) {
                 Timber.e(e)
+            }
+        }
+    }
+
+    @JvmStatic
+    fun processAnnualVaccineReportEvent(event: Event) {
+        event.details[ANNUAL_VACCINE_REPORT]?.let { vaccineCoverage ->
+            try {
+                val vaccineCoverageJson = JSONObject(vaccineCoverage)
+                val typeToken = object : TypeToken<List<AnnualVaccineReport>>() {}.type
+                val vaccineReportsJsonArray = JSONArray(vaccineCoverageJson.getString(ANNUAL_VACCINE_REPORT))
+                (0 until vaccineReportsJsonArray.length())
+                        .map { index: Int -> vaccineReportsJsonArray.getJSONObject(index) }
+                        .map { AppJsonFormUtils.gson.fromJson<List<AnnualVaccineReport>>(it.toString(), typeToken) }
+                        .forEach { AnnualReportRepository.getInstance().saveAnnualVaccineReport(it) }
+            } catch (e: JSONException) {
+                Timber.e(e)
+            }
+        }
+    }
+
+    @JvmStatic
+    fun processCoverageTarget(event: Event) {
+        val eventObsMap: Map<String, Obs> = event.obs.associateBy { it.formSubmissionField }
+        val containsRequiredObs = eventObsMap.keys.containsAll(
+                setOf(
+                        VaccineCoverageColumn.TARGET,
+                        VaccineCoverageColumn.TARGET_TYPE,
+                        VaccineCoverageColumn.YEAR
+                ))
+        if (eventObsMap.size == 3 && containsRequiredObs) {
+            with(eventObsMap) {
+                val targetType = CoverageTargetType.valueOf(getValue(VaccineCoverageColumn.TARGET_TYPE).value.toString())
+                val target = getValue(VaccineCoverageColumn.TARGET).value.toString().toInt()
+                val year = getValue(VaccineCoverageColumn.YEAR).value.toString().toInt()
+                val coverageTarget = CoverageTarget(
+                        targetType = targetType,
+                        target = target,
+                        year = year
+                )
+                VaccineCoverageTargetRepository.getInstance().saveCoverageTarget(coverageTarget)
             }
         }
     }
@@ -183,4 +231,4 @@ fun List<CoverageTarget>.findTarget(targetType: CoverageTargetType): String {
         coverageTarget.target else null)?.toString() ?: ""
 }
 
-fun Double.toWholeNumber() = this.toBigDecimal().setScale(0, RoundingMode.UP)
+fun Double.toWholeNumber(): BigDecimal = this.toBigDecimal().setScale(0, RoundingMode.UP)

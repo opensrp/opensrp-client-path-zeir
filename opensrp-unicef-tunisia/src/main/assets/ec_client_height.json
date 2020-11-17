@@ -35,8 +35,8 @@
     {
       "column_name": "z_score",
       "json_mapping": {
-        "field": "obs.fieldCode",
-        "concept": ""
+        "field": "obs.formSubmissionField",
+        "concept": "Z_Score_Height_Age"
       }
     },
     {

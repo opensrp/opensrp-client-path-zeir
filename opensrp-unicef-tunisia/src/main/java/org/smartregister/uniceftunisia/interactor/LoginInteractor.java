@@ -12,6 +12,7 @@ import org.smartregister.login.interactor.BaseLoginInteractor;
 import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
 import org.smartregister.uniceftunisia.BuildConfig;
 import org.smartregister.uniceftunisia.job.AppVaccineUpdateJob;
+import org.smartregister.uniceftunisia.reporting.annual.coverage.job.SyncAnnualReportWorker;
 import org.smartregister.view.contract.BaseLoginContract;
 
 import java.util.concurrent.TimeUnit;
@@ -59,6 +60,8 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
 //        ArchiveClientsJob.scheduleDaily();
 
         AppVaccineUpdateJob.scheduleEverydayAt(AppVaccineUpdateJob.TAG, 1, 20);
+
+        SyncAnnualReportWorker.scheduleMonthly();
     }
 
     @Override

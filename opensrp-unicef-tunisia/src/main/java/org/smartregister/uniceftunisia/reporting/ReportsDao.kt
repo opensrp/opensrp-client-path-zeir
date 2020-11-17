@@ -9,7 +9,7 @@ import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.VaccineC
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import java.text.SimpleDateFormat
 import java.util.*
-import org.smartregister.uniceftunisia.reporting.annual.coverage.VaccineCoverageTargetRepository.ColumnNames as CoverageTableColumns
+import org.smartregister.uniceftunisia.reporting.annual.coverage.repository.VaccineCoverageTargetRepository.ColumnNames as CoverageTableColumns
 
 object ReportsDao : AbstractDao() {
 
