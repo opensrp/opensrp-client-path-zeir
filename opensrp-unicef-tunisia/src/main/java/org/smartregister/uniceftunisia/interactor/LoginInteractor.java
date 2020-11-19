@@ -55,7 +55,9 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
         RecurringIndicatorGeneratingJob.scheduleJob(RecurringIndicatorGeneratingJob.TAG,
                 TimeUnit.HOURS.toMinutes(6), getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
 
-        ArchiveClientsJob.scheduleDaily();
+        //Schedule job to run at least once daily
+        ArchiveClientsJob.scheduleJob(ArchiveClientsJob.TAG, TimeUnit.MINUTES.toMinutes(1440),
+                getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
 
         AppVaccineUpdateJob.scheduleEverydayAt(AppVaccineUpdateJob.TAG, 1, 20);
 
@@ -69,6 +71,6 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
         PullUniqueIdsServiceJob.scheduleJobImmediately(PullUniqueIdsServiceJob.TAG);
         ZScoreRefreshIntentServiceJob.scheduleJobImmediately(ZScoreRefreshIntentServiceJob.TAG);
         ImageUploadServiceJob.scheduleJobImmediately(ImageUploadServiceJob.TAG);
-        ArchiveClientsJob.runAtOnce();
+        ArchiveClientsJob.scheduleJobImmediately(ArchiveClientsJob.TAG);
     }
 }

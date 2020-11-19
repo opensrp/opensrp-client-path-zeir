@@ -15,10 +15,10 @@ public class ChildRegisterFragmentPresenter extends BaseChildRegisterFragmentPre
 
     @Override
     public String getMainCondition() {
-        return String.format("((%s is null AND %s == '0') OR %s == '0')",
+        return String.format("(%s IS NULL AND %s is null AND %s IS NOT '1')",
+                Utils.metadata().getRegisterQueryProvider().getDemographicTable() + "." + Constants.KEY.DOD,
                 Utils.metadata().getRegisterQueryProvider().getDemographicTable() + "." + Constants.KEY.DATE_REMOVED,
-                Utils.metadata().getRegisterQueryProvider().getDemographicTable() + "." + Constants.KEY.IS_CLOSED,
-                Utils.metadata().getRegisterQueryProvider().getChildDetailsTable() + "." + Constants.KEY.IS_CLOSED);
+                Utils.metadata().getRegisterQueryProvider().getDemographicTable() + "." + Constants.KEY.IS_CLOSED);
     }
 
     @Override

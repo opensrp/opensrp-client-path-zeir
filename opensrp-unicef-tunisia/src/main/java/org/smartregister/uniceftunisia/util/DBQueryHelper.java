@@ -27,10 +27,10 @@ public class DBQueryHelper {
         final String TRUE = "'true'";
 
         String childDetailsTable = Utils.metadata().getRegisterQueryProvider().getChildDetailsTable();
-        String mainCondition = " ( " + Constants.KEY.DOD + " is NULL OR " + Constants.KEY.DOD + " = '' ) " +
+        StringBuilder mainCondition = new StringBuilder(" ( " + AppConstants.TABLE_NAME.ALL_CLIENTS + "." + AppConstants.KEY.DATE_REMOVED + " is NULL OR " + AppConstants.TABLE_NAME.ALL_CLIENTS + "." + AppConstants.KEY.DATE_REMOVED + " = '' ) " +
                 AND + " ( " + childDetailsTable + "." + Constants.CHILD_STATUS.INACTIVE + IS_NULL_OR + childDetailsTable + "." + Constants.CHILD_STATUS.INACTIVE + " != " + TRUE + " ) " +
                 AND + " ( " + childDetailsTable + "." + Constants.CHILD_STATUS.LOST_TO_FOLLOW_UP + IS_NULL_OR + childDetailsTable + "." + Constants.CHILD_STATUS.LOST_TO_FOLLOW_UP + " != " + TRUE + " ) " +
-                AND + " ( ";
+                AND + " ( ");
         List<VaccineRepo.Vaccine> vaccines = ImmunizationLibrary.getVaccineCacheMap().get(Constants.CHILD_TYPE).vaccineRepo;
 
         vaccines.remove(VaccineRepo.Vaccine.bcg2);
@@ -41,9 +41,9 @@ public class DBQueryHelper {
         for (int i = 0; i < vaccines.size(); i++) {
             VaccineRepo.Vaccine vaccine = vaccines.get(i);
             if (i == vaccines.size() - 1) {
-                mainCondition += " " + VaccinateActionUtils.addHyphen(vaccine.display()) + " = " + URGENT + " ";
+                mainCondition.append(" ").append(VaccinateActionUtils.addHyphen(vaccine.display())).append(" = ").append(URGENT).append(" ");
             } else {
-                mainCondition += " " + VaccinateActionUtils.addHyphen(vaccine.display()) + " = " + URGENT + OR;
+                mainCondition.append(" ").append(VaccinateActionUtils.addHyphen(vaccine.display())).append(" = ").append(URGENT).append(OR);
             }
         }
 
@@ -51,17 +51,17 @@ public class DBQueryHelper {
             return mainCondition + " ) ";
         }
 
-        mainCondition += OR;
+        mainCondition.append(OR);
         for (int i = 0; i < vaccines.size(); i++) {
             VaccineRepo.Vaccine vaccine = vaccines.get(i);
             if (i == vaccines.size() - 1) {
-                mainCondition += " " + VaccinateActionUtils.addHyphen(vaccine.display()) + " = " + NORMAL + " ";
+                mainCondition.append(" ").append(VaccinateActionUtils.addHyphen(vaccine.display())).append(" = ").append(NORMAL).append(" ");
             } else {
-                mainCondition += " " + VaccinateActionUtils.addHyphen(vaccine.display()) + " = " + NORMAL + OR;
+                mainCondition.append(" ").append(VaccinateActionUtils.addHyphen(vaccine.display())).append(" = ").append(NORMAL).append(OR);
             }
         }
 
-        return mainCondition + " ) ";
+        return mainCondition + " ) COLLATE NOCASE";
     }
 
     public static String getSortQuery() {

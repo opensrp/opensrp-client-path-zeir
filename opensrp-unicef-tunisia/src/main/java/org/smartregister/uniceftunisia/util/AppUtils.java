@@ -1,9 +1,6 @@
 package org.smartregister.uniceftunisia.util;
 
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 
 import androidx.annotation.NonNull;
 
@@ -21,7 +18,6 @@ import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import timber.log.Timber;
@@ -31,7 +27,6 @@ public class AppUtils extends Utils {
     public static final ArrayList<String> ALLOWED_LEVELS;
     public static final String FACILITY = "Facility";
     public static final String DEFAULT_LOCATION_LEVEL = "Health Facility";
-    private static final String PREFERENCES_FILE = "lang_prefs";
 
     static {
         ALLOWED_LEVELS = new ArrayList<>();
@@ -40,41 +35,31 @@ public class AppUtils extends Utils {
     }
 
     public static String getLanguage() {
-       return AppUtils.getAllSharedPreferences().fetchLanguagePreference();
+        return AppUtils.getAllSharedPreferences().fetchLanguagePreference();
     }
 
-    public static Context setAppLocale(Context context, String language) {
-        Context newContext = context;
-        Locale locale = new Locale(language);
-        Locale.setDefault(locale);
-
-        Resources res = newContext.getResources();
-        Configuration config = new Configuration(res.getConfiguration());
-        config.setLocale(locale);
-        newContext = newContext.createConfigurationContext(config);
-        return newContext;
-    }
-
-    public static boolean updateChildDeath(@NonNull EventClient eventClient) {
+    public static void updateChildDeath(@NonNull EventClient eventClient) {
         Client client = eventClient.getClient();
         ContentValues values = new ContentValues();
 
         if (client.getDeathdate() == null) {
             Timber.e(new Exception(), "Death event for %s cannot be processed because deathdate is NULL : %s"
                     , client.getFirstName() + " " + client.getLastName(), new Gson().toJson(eventClient));
-            return false;
+            return;
         }
 
-        values.put(Constants.KEY.DOD, Utils.convertDateFormat(client.getDeathdate()));
+        values.put(Constants.KEY.IS_CLOSED, 1);
         values.put(Constants.KEY.DATE_REMOVED, Utils.convertDateFormat(client.getDeathdate().toDate(), Utils.DB_DF));
-        String tableName = Utils.metadata().childRegister.tableName;
+        updateChildTables(client, values, AppConstants.TABLE_NAME.CHILD_DETAILS);
+        updateChildTables(client, values, AppConstants.TABLE_NAME.ALL_CLIENTS);
+    }
+
+    private static void updateChildTables(Client client, ContentValues values, String tableName) {
         AllCommonsRepository allCommonsRepository = UnicefTunisiaApplication.getInstance().context().allCommonsRepositoryobjects(tableName);
         if (allCommonsRepository != null) {
             allCommonsRepository.update(tableName, values, client.getBaseEntityId());
             allCommonsRepository.updateSearch(client.getBaseEntityId());
         }
-
-        return true;
     }
 
     @NonNull

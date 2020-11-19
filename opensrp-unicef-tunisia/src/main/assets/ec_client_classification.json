@@ -67,6 +67,14 @@
             "creates_case": [
               "ec_dynamic_vaccines"
             ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "Death",
+            "closes_case": [
+              "ec_client",
+              "ec_child_details"
+            ]
           }
         ]
       }

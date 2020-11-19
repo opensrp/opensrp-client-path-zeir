@@ -2,9 +2,6 @@ package org.smartregister.uniceftunisia.util;
 
 public class AppConstants {
 
-    public static final String REACTION_VACCINE = "Reaction_Vaccine";
-
-
     public interface Locale {
         String ARABIC_LOCALE = "ar";
     }
@@ -15,6 +12,8 @@ public class AppConstants {
     }
 
     public static final class KEY {
+        public static final String REACTION_VACCINE = "Reaction_Vaccine";
+        public static final String MAX_SELECTABLE = "maxSelectable";
         public static final String CHILD = "child";
         public static final String MOTHER_FIRST_NAME = "mother_first_name";
         public static final String FATHER_FIRST_NAME = "father_first_name";
@@ -90,9 +89,7 @@ public class AppConstants {
         public static final String GA_AT_BIRTH = "ga_at_birth";
         public static final String PLACE_OF_BIRTH = "place_of_birth";
         public static final String SMS_RECIPIENT = "sms_recipient";
-        public static final String YEAR_MONTH = "year_month";
-        public static final String MONTHLY_TALLIES = "monthly_tallies";
-        public static final String LOCALE = "locale";
+        public static final String OBJECT_ID = "object_id";
     }
 
     public static final class DrawerMenu {

@@ -34,8 +34,8 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
         String key = (String) parent.getTag(R.id.key);
         try {
 
-            if (key.equals(AppConstants.REACTION_VACCINE)) {
-                MaterialSpinner spinnerReactionVaccine = (MaterialSpinner) ((ChildFormActivity) Objects.requireNonNull(formFragment.getActivity())).getFormDataView(JsonFormConstants.STEP1 + ":" + AppConstants.REACTION_VACCINE);
+            if (key.equals(AppConstants.KEY.REACTION_VACCINE)) {
+                MaterialSpinner spinnerReactionVaccine = (MaterialSpinner) ((ChildFormActivity) formFragment.requireActivity()).getFormDataView(JsonFormConstants.STEP1 + ":" + AppConstants.KEY.REACTION_VACCINE);
                 int selectedItemPos = spinnerReactionVaccine.getSelectedItemPosition();
                 AppChildFormFragment.OnReactionVaccineSelected onReactionVaccineSelected = formFragment.getOnReactionVaccineSelected();
                 if (selectedItemPos > 0) {

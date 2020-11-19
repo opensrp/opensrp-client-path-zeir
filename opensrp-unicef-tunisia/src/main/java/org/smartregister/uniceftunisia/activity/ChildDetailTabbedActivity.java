@@ -1,5 +1,6 @@
 package org.smartregister.uniceftunisia.activity;
 
+import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import org.smartregister.child.activity.BaseChildDetailTabbedActivity;
 import org.smartregister.child.fragment.StatusEditDialogFragment;
 import org.smartregister.child.task.LoadAsyncTask;
 import org.smartregister.child.util.ChildDbUtils;
+import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.fragment.ChildRegistrationDataFragment;
@@ -44,6 +46,7 @@ import timber.log.Timber;
  */
 public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
     private final static List<String> nonEditableFields = Arrays.asList("Sex", "zeir_id", "mother_rubella", "protected_at_birth");
+    private List<Map.Entry<String, String>> extraChildVaccines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +71,14 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        overflow.findItem(org.smartregister.child.R.id.register_card).setVisible(false);
-        overflow.findItem(org.smartregister.child.R.id.write_to_card).setVisible(false);
-        overflow.findItem(org.smartregister.child.R.id.recurring_services_data).setVisible(false);
-        overflow.findItem(org.smartregister.child.R.id.record_dynamic_vaccines).setVisible(true);
+        overflow.findItem(R.id.register_card).setVisible(false);
+        overflow.findItem(R.id.write_to_card).setVisible(false);
+        overflow.findItem(R.id.recurring_services_data).setVisible(false);
+        overflow.findItem(R.id.record_dynamic_vaccines).setVisible(true);
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         detailsMap = ChildDbUtils.fetchChildDetails(getChildDetails().entityId());
@@ -137,7 +141,8 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
             case R.id.report_adverse_event:
                 return launchAdverseEventForm();
             case R.id.record_dynamic_vaccines:
-                if (getExtraChildVaccines().size() < 10) {
+                extraChildVaccines = getExtraChildVaccines();
+                if (extraChildVaccines.size() < 10) {
                     launchDynamicVaccinesForm(AppConstants.JsonForm.DYNAMIC_VACCINES, Constants.KEY.PRIVATE_SECTOR_VACCINE);
                 } else {
                     Utils.showToast(this, getString(R.string.maximum_extra_vaccines_reached));
@@ -147,6 +152,31 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void launchDynamicVaccinesForm(String dynamicVaccinesForm, String multiSelectFieldName) {
+        String locationId = Utils.getAllSharedPreferences().fetchDefaultLocalityId(Utils.getAllSharedPreferences().fetchRegisteredANM());
+        try {
+            JSONObject form = FormUtils.getInstance(getContext()).getFormJson(dynamicVaccinesForm);
+            form.put(Constants.KEY.ENTITY_ID, childDetails.getCaseId());
+            if (form.has(ChildJsonFormUtils.METADATA)) {
+                form.getJSONObject(ChildJsonFormUtils.METADATA).put(ChildJsonFormUtils.ENCOUNTER_LOCATION, locationId );
+            }
+            JSONObject stepOne = form.getJSONObject(ChildJsonFormUtils.STEP1);
+            JSONArray jsonArray = stepOne.getJSONArray(ChildJsonFormUtils.FIELDS);
+
+           //Limit the size of multi select widget field size to the number of extra vaccines
+            JSONObject multiSelectField = ChildJsonFormUtils.getFieldJSONObject(jsonArray, multiSelectFieldName);
+            multiSelectField.put(AppConstants.KEY.MAX_SELECTABLE, 10 - extraChildVaccines.size());
+
+            form.put(Constants.KEY.DYNAMIC_FIELD, multiSelectFieldName);
+            form.put(Constants.KEY.ENTITY_ID, childDetails.entityId());
+
+            startFormActivity(form.toString());
+        } catch (Exception e) {
+            Timber.e(e);
         }
     }
 

@@ -3,6 +3,7 @@ package org.smartregister.uniceftunisia.fragment;
 import android.annotation.SuppressLint;
 import android.view.View;
 
+import org.apache.commons.lang3.StringUtils;
 import org.smartregister.child.domain.RegisterClickables;
 import org.smartregister.child.fragment.BaseChildRegisterFragment;
 import org.smartregister.child.util.Constants;

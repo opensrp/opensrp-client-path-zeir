@@ -133,7 +133,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
                 List<VaccineGroup> vaccineList = VaccinatorUtils.getVaccineGroupsFromVaccineConfigFile(context, VaccinatorUtils.vaccines_file);
                 List<String> names = new ArrayList<>();
                 names.add(DBConstants.KEY.INACTIVE);
-                names.add(DBConstants.KEY.RELATIONAL_ID);
+                names.add(AppConstants.KEY.RELATIONAL_ID);
                 names.add(DBConstants.KEY.LOST_TO_FOLLOW_UP);
 
                 for (VaccineGroup vaccineGroup : vaccineList) {
@@ -402,10 +402,10 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
 
     @VisibleForTesting
     protected void fixHardcodedVaccineConfiguration() {
-        VaccineRepo.Vaccine[] vaccines = ImmunizationLibrary.getInstance().getVaccines();
+        VaccineRepo.Vaccine[] vaccines = ImmunizationLibrary.getInstance().getVaccines(AppConstants.KEY.CHILD);
 
         HashMap<String, VaccineDuplicate> replacementVaccines = new HashMap<>();
-        replacementVaccines.put("BCG 2", new VaccineDuplicate("BCG 2", VaccineRepo.Vaccine.bcg, 1825, 0, 15, "child"));
+        replacementVaccines.put("BCG 2", new VaccineDuplicate("BCG 2", VaccineRepo.Vaccine.bcg, 1825, 0, 15, AppConstants.KEY.CHILD));
 
         for (VaccineRepo.Vaccine vaccine : vaccines) {
             if (replacementVaccines.containsKey(vaccine.display())) {
@@ -418,7 +418,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
             }
         }
 
-        ImmunizationLibrary.getInstance().setVaccines(vaccines);
+        ImmunizationLibrary.getInstance().setVaccines(vaccines, AppConstants.KEY.CHILD);
     }
 
 

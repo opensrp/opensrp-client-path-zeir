@@ -32,7 +32,7 @@ public class RemoteLocalCursor {
         try {
             id = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.ID_LOWER_CASE));
             relationalId = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.RELATIONALID));
-            motherBaseEntityId = cursor.getString(cursor.getColumnIndex(DBConstants.KEY.RELATIONAL_ID));
+            motherBaseEntityId = cursor.getString(cursor.getColumnIndex(AppConstants.KEY.RELATIONAL_ID));
             if (columnNames.contains(AppConstants.KEY.FATHER_BASE_ENTITY_ID)) {
                 fatherBaseEntityId = cursor.getString(cursor.getColumnIndex(AppConstants.KEY.FATHER_BASE_ENTITY_ID));
             } else if (columnNames.contains(AppConstants.KEY.FATHER_RELATIONAL_ID)) {

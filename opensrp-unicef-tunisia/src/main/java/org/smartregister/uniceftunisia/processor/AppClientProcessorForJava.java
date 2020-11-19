@@ -140,16 +140,14 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                     case MoveToMyCatchmentUtils.MOVE_TO_CATCHMENT_EVENT:
                         eventsToRemove.add(event);
                         break;
-                    case Constants.EventType.DEATH:
-                        if (processDeathEvent(eventClient)) {
-                            getApplication().registerTypeRepository().removeAll(event.getBaseEntityId());
-                            eventsToRemove.add(event);
-                        }
-                        break;
                     case Constants.EventType.ARCHIVE_CHILD_RECORD:
+                    case Constants.EventType.DEATH:
                         if (eventClient.getClient() != null) {
-                            getApplication().registerTypeRepository().removeAll(event.getBaseEntityId());
                             processEventClient(clientClassification, eventClient, event);
+                            if(eventType.equalsIgnoreCase(Constants.EventType.DEATH) &&
+                                    eventClient.getEvent().getEntityType().equals(AppConstants.EntityType.CHILD)) {
+                                    AppUtils.updateChildDeath(eventClient);
+                            }
                         }
                         break;
                     case Constants.EventType.DYNAMIC_VACCINES:
@@ -229,7 +227,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         String ftsSearchTable = bindTable + "_search";
         SQLiteDatabase db = UnicefTunisiaApplication.getInstance().getRepository().getWritableDatabase();
         if (tableExists(db, ftsSearchTable)) {
-            String query = DBConstants.KEY.OBJECT_ID + " = ?";
+            String query = AppConstants.KEY.OBJECT_ID + " = ?";
             db.delete(ftsSearchTable, query, new String[]{baseEntityId});
         }
     }
@@ -272,13 +270,6 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
             }
         }
         clientsForAlertUpdates.clear();
-    }
-
-    private boolean processDeathEvent(@NonNull EventClient eventClient) {
-        if (eventClient.getEvent().getEntityType().equals(AppConstants.EntityType.CHILD)) {
-            return AppUtils.updateChildDeath(eventClient);
-        }
-        return false;
     }
 
     private void processChildRegistrationAndRelatedEvents(@NonNull ClientClassification clientClassification, @NonNull EventClient eventClient, @NonNull Event event) {
