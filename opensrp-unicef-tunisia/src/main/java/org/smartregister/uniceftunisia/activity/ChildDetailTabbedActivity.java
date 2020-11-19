@@ -25,7 +25,6 @@ import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.fragment.ChildRegistrationDataFragment;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppJsonFormUtils;
-import org.smartregister.uniceftunisia.util.AppUtils;
 import org.smartregister.uniceftunisia.util.VaccineUtils;
 import org.smartregister.util.FormUtils;
 import org.smartregister.util.JsonFormUtils;
@@ -40,8 +39,6 @@ import java.util.Map;
 
 import timber.log.Timber;
 
-import static org.smartregister.uniceftunisia.util.AppUtils.setAppLocale;
-
 /**
  * Created by ndegwamartin on 06/03/2019.
  */
@@ -52,13 +49,6 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getChildUnderFiveFragment().showRecurringServices(false);
-    }
-
-    @Override
-    protected void attachBaseContext(android.content.Context base) {
-        // get language from prefs
-        String lang = AppUtils.getLanguage(base.getApplicationContext());
-        super.attachBaseContext(setAppLocale(base, lang));
     }
 
     @Override

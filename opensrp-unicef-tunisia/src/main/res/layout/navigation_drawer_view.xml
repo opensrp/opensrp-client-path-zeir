@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.navigation.NavigationView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_gravity="start"
@@ -34,8 +35,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="end|top"
                 android:background="@null"
-                android:gravity="right"
-                android:src="@drawable/ic_action_clear" />
+                android:gravity="end"
+                android:src="@drawable/ic_action_clear"
+                tools:ignore="ContentDescription" />
 
 
             <LinearLayout
@@ -43,17 +45,16 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/cancel_button"
                 android:gravity="center"
-                android:orientation="vertical"
-              >
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
                     android:gravity="center_horizontal"
                     android:text="@string/app_name"
                     android:textColor="@color/white"
                     android:textSize="30sp"
-                    android:layout_marginBottom="20dp"
                     android:visibility="visible"
                     app:srcCompat="@mipmap/ic_launcher" />
 
@@ -83,7 +84,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center_horizontal"
-                    android:text="John Doe"
                     android:textColor="@android:color/white"
                     android:textSize="28sp" />
 
@@ -118,232 +118,222 @@
             android:layout_marginBottom="10dp"
             android:background="#DFDFDF" />
 
-        <RelativeLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/divider">
+            android:layout_height="match_parent"
+            android:layout_below="@id/divider"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/custom_navigation_icon_size"
-                        android:layout_height="@dimen/custom_navigation_icon_size"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:paddingTop="5dp"
-                        android:src="@drawable/ic_action_global" />
-
-
-                    <Spinner
-                        android:id="@+id/language_spinner"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:textSize="@dimen/table_contents_text_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/enrollment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:visibility="gone"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/custom_navigation_icon_size"
-                        android:layout_height="@dimen/custom_navigation_icon_size"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:paddingTop="5dp"
-                        android:src="@drawable/ic_action_add" />
-
-                    <org.smartregister.view.customcontrols.CustomFontTextView
-                        style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:text="@string/side_nav_add"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/table_contents_text_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/out_of_area_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <ImageView
-                        android:layout_width="@dimen/custom_navigation_icon_size"
-                        android:layout_height="@dimen/custom_navigation_icon_size"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:src="@drawable/ic_action_out_of_catchment" />
-
-                    <org.smartregister.view.customcontrols.CustomFontTextView
-                        style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:text="@string/side_nav_out_of_catchment"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/table_contents_text_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/sync_menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/custom_navigation_icon_size"
-                        android:layout_height="@dimen/custom_navigation_icon_size"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:src="@drawable/ic_action_sync" />
-
-                    <org.smartregister.view.customcontrols.CustomFontTextView
-                        android:id="@+id/sync_text_view"
-                        style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:text="@string/sync"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/table_contents_text_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/register_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:layout_width="@dimen/custom_navigation_icon_size"
+                    android:layout_height="@dimen/custom_navigation_icon_size"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
                     android:layout_marginTop="5dp"
-                    android:background="@color/colorPrimary"
-                    android:orientation="horizontal">
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:src="@drawable/ic_action_global"
+                    tools:ignore="ContentDescription" />
 
-                    <ImageView
-                        android:layout_width="@dimen/register_link_width"
-                        android:layout_height="@dimen/register_link_height"
-                        android:padding="8dp"
-                        android:tint="@color/white"
-                        android:src="@mipmap/sidemenu_children" />
 
-                    <org.smartregister.view.customcontrols.CustomFontTextView
-                        style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:text="@string/nav_register"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/label_text_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/report_view"
-                    android:layout_width="match_parent"
+                <Spinner
+                    android:id="@+id/language_spinner"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:src="@drawable/ic_daily_tallies" />
-
-                    <org.smartregister.view.customcontrols.CustomFontTextView
-                        style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:text="@string/reports"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/table_contents_text_size" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/scan_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:layout_width="@dimen/custom_navigation_icon_size"
-                        android:layout_height="@dimen/custom_navigation_icon_size"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:src="@mipmap/ic_card_white" />
-
-                    <org.smartregister.view.customcontrols.CustomFontTextView
-                        style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:text="@string/reset_card"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/table_contents_text_size" />
-                </LinearLayout>
-
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/table_contents_text_size" />
             </LinearLayout>
 
-        </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/enrollment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="@dimen/custom_navigation_icon_size"
+                    android:layout_height="@dimen/custom_navigation_icon_size"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:src="@drawable/ic_action_add"
+                    tools:ignore="ContentDescription" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/side_nav_add"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/table_contents_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/out_of_area_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="@dimen/custom_navigation_icon_size"
+                    android:layout_height="@dimen/custom_navigation_icon_size"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/ic_action_out_of_catchment"
+                    tools:ignore="ContentDescription" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/side_nav_out_of_catchment"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/table_contents_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sync_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/custom_navigation_icon_size"
+                    android:layout_height="@dimen/custom_navigation_icon_size"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/ic_action_sync"
+                    tools:ignore="ContentDescription" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    android:id="@+id/sync_text_view"
+                    style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/sync"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/table_contents_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/register_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorPrimary"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/register_link_width"
+                    android:layout_height="@dimen/register_link_height"
+                    android:padding="8dp"
+                    android:src="@mipmap/sidemenu_children"
+                    app:tint="@color/white"
+                    tools:ignore="ContentDescription" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/nav_register"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/label_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/report_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/ic_daily_tallies"
+                    tools:ignore="ContentDescription" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/reports"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/table_contents_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/scan_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="@dimen/custom_navigation_icon_size"
+                    android:layout_height="@dimen/custom_navigation_icon_size"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@mipmap/ic_card_white"
+                    tools:ignore="ContentDescription" />
+
+                <org.smartregister.view.customcontrols.CustomFontTextView
+                    style="@style/CustomFontTextViewStyle.ClientList.Light.twoline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/reset_card"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/table_contents_text_size" />
+            </LinearLayout>
+
+        </LinearLayout>
 
 
     </RelativeLayout>

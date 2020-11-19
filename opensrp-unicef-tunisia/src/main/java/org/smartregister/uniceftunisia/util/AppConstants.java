@@ -4,8 +4,14 @@ public class AppConstants {
 
     public static final String REACTION_VACCINE = "Reaction_Vaccine";
 
-    public interface LOCALE {
+
+    public interface Locale {
         String ARABIC_LOCALE = "ar";
+    }
+    public interface Languages{
+        String ENGLISH = "English";
+        String FRENCH = "Français";
+        String ARABIC = "عربى";
     }
 
     public static final class KEY {
@@ -86,6 +92,7 @@ public class AppConstants {
         public static final String SMS_RECIPIENT = "sms_recipient";
         public static final String YEAR_MONTH = "year_month";
         public static final String MONTHLY_TALLIES = "monthly_tallies";
+        public static final String LOCALE = "locale";
     }
 
     public static final class DrawerMenu {

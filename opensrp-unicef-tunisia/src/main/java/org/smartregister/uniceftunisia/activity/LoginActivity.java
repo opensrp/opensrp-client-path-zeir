@@ -10,7 +10,6 @@ import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.uniceftunisia.presenter.LoginPresenter;
 import org.smartregister.uniceftunisia.util.AppConstants;
-import org.smartregister.uniceftunisia.util.AppUtils;
 import org.smartregister.view.activity.BaseLoginActivity;
 import org.smartregister.view.contract.BaseLoginContract;
 
@@ -56,13 +55,6 @@ public class LoginActivity extends BaseLoginActivity implements BaseLoginContrac
         }
 
         finish();
-    }
-
-    @Override
-    protected void attachBaseContext(android.content.Context base) {
-        // get language from prefs
-        String lang = AppUtils.getLanguage(base.getApplicationContext());
-        super.attachBaseContext(AppUtils.setAppLocale(base, lang));
     }
 
     private void processWeightForHeightZScoreCSV() {

@@ -44,12 +44,16 @@ import org.smartregister.uniceftunisia.contract.NavigationContract;
 import org.smartregister.uniceftunisia.presenter.NavigationPresenter;
 import org.smartregister.uniceftunisia.reporting.register.ReportRegisterActivity;
 import org.smartregister.uniceftunisia.util.AppConstants;
+import org.smartregister.uniceftunisia.util.AppConstants.Languages;
+import org.smartregister.uniceftunisia.util.AppUtils;
 import org.smartregister.util.FormUtils;
 import org.smartregister.util.LangUtils;
 
 import java.lang.ref.WeakReference;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import timber.log.Timber;
@@ -58,7 +62,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
     private static NavigationMenu instance;
     private static WeakReference<Activity> activityWeakReference;
-    private static String[] langArray;
+    private static final Locale ARABIC_LOCALE = new Locale(AppConstants.Locale.ARABIC_LOCALE);
     private LinearLayout syncMenuItem;
     private LinearLayout outOfAreaMenu;
     private LinearLayout registerView;
@@ -80,7 +84,6 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             if (instance == null) {
                 instance = new NavigationMenu();
-                langArray = activity.getResources().getStringArray(R.array.languages);
             }
             instance.init(activity);
             SyncStatusBroadcastReceiver.getInstance().addSyncStatusListener(instance);
@@ -110,7 +113,6 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             attachCloseDrawer();
             goToRegister();
             attachLanguageSpinner(activity);
-
         } catch (Exception e) {
             Timber.e(e.toString());
         }
@@ -312,55 +314,34 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
     }
 
     private void attachLanguageSpinner(final Activity activity) {
+        String[] languages = {Languages.ENGLISH, Languages.FRENCH, Languages.ARABIC};
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity, R.layout.app_spinner_item, languages);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        List<String> languageArrayList = Arrays.asList(languages);
+        String language = getLanguage(AppUtils.getLanguage());
 
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activityWeakReference.get(), R.array.languages, R.layout.app_spinner_item);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        languageSpinner.setAdapter(adapter);
-        languageSpinner.setOnItemSelectedListener(null);
-        String langPref = LangUtils.getLanguage(activity.getApplicationContext());
-        for (int i = 0; i < langArray.length; i++) {
-
-            if (langPref != null && langArray[i].toLowerCase().startsWith(langPref)) {
-                languageSpinner.setSelection(i);
-                break;
-            } else {
-                languageSpinner.setSelection(0);
-            }
-        }
-
+        languageSpinner.setAdapter(arrayAdapter);
+        languageSpinner.setSelection(languageArrayList.indexOf(language));
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            int count = 0;
-
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (count >= 1) {
-
-                    Timber.d("Selected %s", adapter.getItem(i));
-
-                    String lang = adapter.getItem(i).toString().toLowerCase();
-                    Locale LOCALE;
-                    switch (lang) {
-                        case "français":
-                            LOCALE = Locale.FRENCH;
-                            break;
-                        case "عربى":
-                        case "العربية":
-                            LOCALE = new Locale(AppConstants.LOCALE.ARABIC_LOCALE);
-                            languageSpinner.setSelection(i);
-                            break;
-                        default:
-                            LOCALE = Locale.ENGLISH;
-                            break;
-                    }
-
-                    // save language
-                    LangUtils.saveLanguage(activity, LOCALE.getLanguage());
-
-                    launchActivity(activity, activity.getClass());
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                String language = (String) arrayAdapter.getItem(position);
+                String locale;
+                switch (language) {
+                    case Languages.ENGLISH:
+                        locale = "en";
+                        break;
+                    case Languages.FRENCH:
+                        locale = "fr";
+                        break;
+                    case Languages.ARABIC:
+                        locale = "ar";
+                        break;
+                    default:
+                        locale = "en";
+                        Timber.i("No language selected");
                 }
-                count++;
+                refreshActivity(locale, activity);
             }
 
             @Override
@@ -370,9 +351,25 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         });
     }
 
-    private void launchActivity(Activity fromActivity, Class<?> clazz) {
-        Intent intent = new Intent(fromActivity, clazz);
-        fromActivity.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+    public String getLanguage(String locale) {
+        switch (locale) {
+            case "fr":
+                return Languages.FRENCH;
+            case "ar":
+                return Languages.ARABIC;
+            default:
+                return Languages.ENGLISH;
+        }
+    }
+
+    private void refreshActivity(String localeName, Activity activity) {
+        String currentLanguage = AppUtils.getLanguage();
+        if (!localeName.equals(currentLanguage)) {
+            LangUtils.saveLanguage(activity, localeName);
+            Intent intent = activity.getIntent();
+            activity.finish();
+            activity.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY));
+        }
     }
 
     public void openDrawer() {

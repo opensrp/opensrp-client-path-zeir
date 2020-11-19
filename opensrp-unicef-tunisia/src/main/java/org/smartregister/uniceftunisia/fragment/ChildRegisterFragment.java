@@ -1,5 +1,6 @@
 package org.smartregister.uniceftunisia.fragment;
 
+import android.annotation.SuppressLint;
 import android.view.View;
 
 import org.smartregister.child.domain.RegisterClickables;
@@ -36,6 +37,7 @@ public class ChildRegisterFragment extends BaseChildRegisterFragment {
         return presenter().getDefaultSortQuery();
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onViewClicked(View view) {
         super.onViewClicked(view);
@@ -101,5 +103,11 @@ public class ChildRegisterFragment extends BaseChildRegisterFragment {
     @Override
     public void onClick(View view) {
         onViewClicked(view);
+    }
+
+    @Override
+    public void setupSearchView(View view) {
+        super.setupSearchView(view);
+        searchView.setHint(getContext().getString(R.string.search_hint));
     }
 }

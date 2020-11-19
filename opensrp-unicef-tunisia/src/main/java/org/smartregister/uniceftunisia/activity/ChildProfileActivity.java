@@ -5,16 +5,9 @@ import android.os.Bundle;
 import androidx.viewpager.widget.ViewPager;
 
 import org.smartregister.child.util.Utils;
-import org.smartregister.uniceftunisia.util.AppUtils;
 import org.smartregister.view.activity.BaseProfileActivity;
 
 public class ChildProfileActivity extends BaseProfileActivity {
-    @Override
-    protected void attachBaseContext(android.content.Context base) {
-        // get language from prefs
-        String lang = AppUtils.getLanguage(base.getApplicationContext());
-        super.attachBaseContext(AppUtils.setAppLocale(base, lang));
-    }
 
     @Override
     public void onCreate(Bundle savedInstance) {

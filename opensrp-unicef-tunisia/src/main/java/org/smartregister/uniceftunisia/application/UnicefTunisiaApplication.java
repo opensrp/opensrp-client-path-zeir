@@ -1,9 +1,6 @@
 package org.smartregister.uniceftunisia.application;
 
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.util.DisplayMetrics;
 import android.util.Pair;
 
 import androidx.annotation.VisibleForTesting;
@@ -41,7 +38,6 @@ import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.reporting.ReportingLibrary;
 import org.smartregister.repository.EventClientRepository;
-import org.smartregister.repository.Hia2ReportRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.DrishtiSyncScheduler;
@@ -69,7 +65,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -84,7 +79,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     private boolean lastModified;
     private ClientProcessorForJava clientProcessorForJava;
     private EventClientRepository eventClientRepository;
-    private Hia2ReportRepository hia2ReportRepository;
     private ECSyncHelper ecSyncHelper;
     private ClientRegisterTypeRepository registerTypeRepository;
     private ChildAlertUpdatedRepository childAlertUpdatedRepository;
@@ -220,14 +214,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         super.onCreate();
         mInstance = this;
         context = Context.getInstance();
-
-        String lang = AppUtils.getLanguage(getApplicationContext());
-        Locale locale = new Locale(lang);
-        Resources res = getApplicationContext().getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = locale;
-        res.updateConfiguration(conf, dm);
 
         context.updateApplicationContext(getApplicationContext());
         context.updateCommonFtsObject(createCommonFtsObject(context.applicationContext()));
@@ -435,13 +421,6 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
         ImmunizationLibrary.getInstance().setVaccines(vaccines);
     }
 
-
-    public Hia2ReportRepository hia2ReportRepository() {
-        if (hia2ReportRepository == null) {
-            hia2ReportRepository = new Hia2ReportRepository();
-        }
-        return hia2ReportRepository;
-    }
 
     @VisibleForTesting
     public void setVaccineGroups(List<VaccineGroup> vaccines) {

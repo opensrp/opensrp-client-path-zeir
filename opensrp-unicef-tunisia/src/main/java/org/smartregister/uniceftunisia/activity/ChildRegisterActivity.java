@@ -20,7 +20,6 @@ import org.smartregister.uniceftunisia.fragment.AdvancedSearchFragment;
 import org.smartregister.uniceftunisia.fragment.ChildRegisterFragment;
 import org.smartregister.uniceftunisia.presenter.AppChildRegisterPresenter;
 import org.smartregister.uniceftunisia.util.AppConstants;
-import org.smartregister.uniceftunisia.util.AppUtils;
 import org.smartregister.uniceftunisia.view.NavDrawerActivity;
 import org.smartregister.uniceftunisia.view.NavigationMenu;
 import org.smartregister.view.fragment.BaseRegisterFragment;
@@ -30,13 +29,6 @@ import java.lang.ref.WeakReference;
 public class ChildRegisterActivity extends BaseChildRegisterActivity implements NavDrawerActivity {
 
     private NavigationMenu navigationMenu;
-
-    @Override
-    protected void attachBaseContext(android.content.Context base) {
-        // get language from prefs
-        String lang = AppUtils.getLanguage(base.getApplicationContext());
-        super.attachBaseContext(AppUtils.setAppLocale(base, lang));
-    }
 
     @Override
     protected Fragment[] getOtherFragments() {

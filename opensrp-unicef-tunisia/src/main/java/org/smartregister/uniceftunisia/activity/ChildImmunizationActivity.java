@@ -18,7 +18,6 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.immunization.domain.VaccineSchedule;
 import org.smartregister.immunization.job.VaccineSchedulesUpdateJob;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
-import org.smartregister.uniceftunisia.util.AppUtils;
 import org.smartregister.uniceftunisia.util.VaccineUtils;
 
 import java.util.Calendar;
@@ -28,12 +27,6 @@ import java.util.concurrent.TimeUnit;
 import timber.log.Timber;
 
 public class ChildImmunizationActivity extends BaseChildImmunizationActivity {
-    @Override
-    protected void attachBaseContext(Context base) {
-        // get language from prefs
-        String lang = AppUtils.getLanguage(base.getApplicationContext());
-        super.attachBaseContext(AppUtils.setAppLocale(base, lang));
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

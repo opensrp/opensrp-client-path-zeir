@@ -14,6 +14,7 @@ import org.smartregister.immunization.job.VaccineServiceJob;
 import org.smartregister.job.ExtendedSyncServiceJob;
 import org.smartregister.job.ImageUploadServiceJob;
 import org.smartregister.job.PullUniqueIdsServiceJob;
+import org.smartregister.job.SyncAllLocationsServiceJob;
 import org.smartregister.job.SyncServiceJob;
 import org.smartregister.job.SyncSettingsServiceJob;
 import org.smartregister.job.ValidateSyncDataServiceJob;
@@ -55,6 +56,8 @@ public class AppJobCreator implements JobCreator {
                 return new ImageUploadServiceJob();
             case ArchiveClientsJob.TAG:
                 return new ArchiveClientsJob(ArchiveChildrenAgedAboveFiveIntentService.class);
+            case SyncAllLocationsServiceJob.TAG:
+                return new SyncAllLocationsServiceJob();
             default:
                 Timber.w("%s is not declared in Job Creator", tag);
                 return null;

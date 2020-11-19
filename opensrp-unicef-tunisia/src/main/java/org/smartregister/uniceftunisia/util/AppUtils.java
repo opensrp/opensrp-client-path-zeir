@@ -2,7 +2,6 @@ package org.smartregister.uniceftunisia.util;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 
@@ -32,7 +31,6 @@ public class AppUtils extends Utils {
     public static final ArrayList<String> ALLOWED_LEVELS;
     public static final String FACILITY = "Facility";
     public static final String DEFAULT_LOCATION_LEVEL = "Health Facility";
-    public static final String LANGUAGE = "language";
     private static final String PREFERENCES_FILE = "lang_prefs";
 
     static {
@@ -41,9 +39,8 @@ public class AppUtils extends Utils {
         ALLOWED_LEVELS.add(FACILITY);
     }
 
-    public static String getLanguage(Context ctx) {
-        SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
-        return sharedPref.getString(LANGUAGE, "en");
+    public static String getLanguage() {
+       return AppUtils.getAllSharedPreferences().fetchLanguagePreference();
     }
 
     public static Context setAppLocale(Context context, String language) {
@@ -81,15 +78,6 @@ public class AppUtils extends Utils {
     }
 
     @NonNull
-    public static Locale getLocale(Context context) {
-        if (context == null) {
-            return Locale.getDefault();
-        } else {
-            return context.getResources().getConfiguration().locale;
-        }
-    }
-
-    @NonNull
     public static ArrayList<String> getLocationLevels() {
         return new ArrayList<>(Arrays.asList(BuildConfig.LOCATION_LEVELS));
     }
@@ -120,17 +108,6 @@ public class AppUtils extends Utils {
             Timber.e(e);
             return false;
         }
-    }
-
-    public static boolean getSyncStatus() {
-        String synComplete = UnicefTunisiaApplication.getInstance().context().allSharedPreferences().getPreference("syncComplete");
-        boolean isSyncComplete = false;
-        if (StringUtils.isBlank(synComplete)) {
-            UnicefTunisiaApplication.getInstance().context().allSharedPreferences().savePreference("syncComplete", String.valueOf(false));
-        } else {
-            isSyncComplete = Boolean.parseBoolean(synComplete);
-        }
-        return isSyncComplete;
     }
 
     public static void updateSyncStatus(boolean isComplete) {
