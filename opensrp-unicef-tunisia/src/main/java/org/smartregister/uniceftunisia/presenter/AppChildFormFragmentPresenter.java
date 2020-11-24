@@ -15,8 +15,6 @@ import org.smartregister.uniceftunisia.activity.ChildFormActivity;
 import org.smartregister.uniceftunisia.fragment.AppChildFormFragment;
 import org.smartregister.uniceftunisia.util.AppConstants;
 
-import java.util.Objects;
-
 import timber.log.Timber;
 
 public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {

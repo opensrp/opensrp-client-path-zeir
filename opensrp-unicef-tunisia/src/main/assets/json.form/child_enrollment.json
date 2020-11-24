@@ -927,6 +927,20 @@
         "openmrs_entity": "person_attribute",
         "openmrs_entity_id": "inactive",
         "type": "hidden"
+      },
+      {
+        "key": "card_status",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "card_status",
+        "type": "hidden"
+      },
+      {
+        "key": "card_status_date",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "card_status_date",
+        "type": "hidden"
       }
     ]
   },

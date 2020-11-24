@@ -11,13 +11,13 @@ import com.vijay.jsonwizard.domain.Form;
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 import org.smartregister.child.activity.BaseChildRegisterActivity;
-import org.smartregister.child.model.BaseChildRegisterModel;
 import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.Utils;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.fragment.AdvancedSearchFragment;
 import org.smartregister.uniceftunisia.fragment.ChildRegisterFragment;
+import org.smartregister.uniceftunisia.model.AppChildRegisterModel;
 import org.smartregister.uniceftunisia.presenter.AppChildRegisterPresenter;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.view.NavDrawerActivity;
@@ -55,7 +55,7 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
 
     @Override
     protected void initializePresenter() {
-        presenter = new AppChildRegisterPresenter(this, new BaseChildRegisterModel());
+        presenter = new AppChildRegisterPresenter(this, new AppChildRegisterModel());
     }
 
     @Override

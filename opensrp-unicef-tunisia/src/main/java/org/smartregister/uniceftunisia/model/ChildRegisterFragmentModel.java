@@ -10,7 +10,7 @@ import org.smartregister.domain.Response;
 public class ChildRegisterFragmentModel extends BaseChildRegisterFragmentModel {
     @Override
     public AdvancedMatrixCursor createMatrixCursor(Response<String> response) {
-        //Just overriddenn
+        //Just overridden
         return null;
     }
 

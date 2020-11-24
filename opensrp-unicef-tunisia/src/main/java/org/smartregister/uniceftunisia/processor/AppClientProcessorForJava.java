@@ -18,7 +18,6 @@ import org.smartregister.CoreLibrary;
 import org.smartregister.child.util.ChildDbUtils;
 import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
-import org.smartregister.child.util.DBConstants;
 import org.smartregister.child.util.MoveToMyCatchmentUtils;
 import org.smartregister.child.util.Utils;
 import org.smartregister.clientandeventmodel.DateUtil;
@@ -266,7 +265,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
             DateTime birthDateTime = clientsForAlertUpdates.get(baseEntityId);
             if (birthDateTime != null) {
                 VaccineUtils.refreshImmunizationSchedules(baseEntityId);
-                VaccineSchedule.updateOfflineAlerts(baseEntityId, birthDateTime, "child");
+                VaccineSchedule.updateOfflineAlerts(baseEntityId, birthDateTime, AppConstants.KEY.CHILD);
             }
         }
         clientsForAlertUpdates.clear();
@@ -582,7 +581,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
 
     @Override
     public String[] getOpenmrsGenIds() {
-        return new String[]{"zeir_id"};
+        return new String[]{AppConstants.KEY.ZEIR_ID};
     }
 
     private void scheduleUpdatingClientAlerts(@NonNull String baseEntityId, @NonNull DateTime dateTime) {

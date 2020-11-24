@@ -90,6 +90,10 @@ public class AppConstants {
         public static final String PLACE_OF_BIRTH = "place_of_birth";
         public static final String SMS_RECIPIENT = "sms_recipient";
         public static final String OBJECT_ID = "object_id";
+        public static final String CARD_STATUS = "card_status";
+        public static final String CARD_STATUS_DATE = "card_status_date";
+        public static final String REGISTRATION_LOCATION_ID = "registration_location_id";
+        public static final String REGISTRATION_LOCATION_NAME = "registration_location_name";
     }
 
     public static final class DrawerMenu {

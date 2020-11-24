@@ -360,6 +360,20 @@
           "json_mapping": {
             "field": "attributes.dateRemoved"
           }
+        },
+        {
+          "column_name": "card_status",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.card_status"
+          }
+        },
+        {
+          "column_name": "card_status_date",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.card_status_date"
+          }
         }
       ]
     },

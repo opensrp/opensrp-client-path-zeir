@@ -7,6 +7,8 @@ import org.smartregister.uniceftunisia.util.AppConstants;
 
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.BASE_ENTITY_ID;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.BIRTH_REGISTRATION_NUMBER;
+import static org.smartregister.uniceftunisia.util.AppConstants.KEY.CARD_STATUS;
+import static org.smartregister.uniceftunisia.util.AppConstants.KEY.CARD_STATUS_DATE;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.CHILD_REG;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.DOB;
 import static org.smartregister.uniceftunisia.util.AppConstants.KEY.FATHER_DOB;
@@ -106,6 +108,8 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 getChildDetailsColumn(GA_AT_BIRTH),
                 getChildDetailsColumn(FATHER_RELATIONAL_ID),
                 getChildDetailsColumn(SMS_RECIPIENT),
+                getChildDetailsColumn(CARD_STATUS),
+                getChildDetailsColumn(CARD_STATUS_DATE),
                 "mother.first_name                     as " + AppConstants.KEY.MOTHER_FIRST_NAME,
                 "mother.last_name                      as " + AppConstants.KEY.MOTHER_LAST_NAME,
                 "mother.dob                            as " + MOTHER_DOB,

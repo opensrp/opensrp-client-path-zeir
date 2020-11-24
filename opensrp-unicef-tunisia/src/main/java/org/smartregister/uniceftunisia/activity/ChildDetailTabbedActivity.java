@@ -12,6 +12,7 @@ import com.vijay.jsonwizard.activities.JsonWizardFormActivity;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,10 +20,13 @@ import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.child.activity.BaseChildDetailTabbedActivity;
 import org.smartregister.child.fragment.StatusEditDialogFragment;
+import org.smartregister.child.presenter.BaseChildDetailsPresenter;
 import org.smartregister.child.task.LoadAsyncTask;
 import org.smartregister.child.util.ChildDbUtils;
 import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
+import org.smartregister.clientandeventmodel.DateUtil;
+import org.smartregister.job.SyncServiceJob;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.fragment.ChildRegistrationDataFragment;
 import org.smartregister.uniceftunisia.util.AppConstants;
@@ -75,6 +79,19 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
         overflow.findItem(R.id.write_to_card).setVisible(false);
         overflow.findItem(R.id.recurring_services_data).setVisible(false);
         overflow.findItem(R.id.record_dynamic_vaccines).setVisible(true);
+
+        MenuItem lostCardMenu = overflow.findItem(R.id.report_lost_card);
+        lostCardMenu.setVisible(true);
+
+        String cardStatus = childDetails.getDetails().get(AppConstants.KEY.CARD_STATUS);
+        String cardStatusDate = childDetails.getDetails().get(AppConstants.KEY.CARD_STATUS_DATE);
+
+        if (BaseChildDetailsPresenter.CardStatus.needs_card.name().equalsIgnoreCase(cardStatus) &&
+                StringUtils.isNotBlank(cardStatusDate)) {
+            lostCardMenu.setEnabled(false);
+            lostCardMenu.setTitle(getString(R.string.card_ordered_with_date, new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+                    .format(DateUtil.getDateFromString(cardStatusDate))));
+        }
         return true;
     }
 
@@ -162,12 +179,12 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
             JSONObject form = FormUtils.getInstance(getContext()).getFormJson(dynamicVaccinesForm);
             form.put(Constants.KEY.ENTITY_ID, childDetails.getCaseId());
             if (form.has(ChildJsonFormUtils.METADATA)) {
-                form.getJSONObject(ChildJsonFormUtils.METADATA).put(ChildJsonFormUtils.ENCOUNTER_LOCATION, locationId );
+                form.getJSONObject(ChildJsonFormUtils.METADATA).put(ChildJsonFormUtils.ENCOUNTER_LOCATION, locationId);
             }
             JSONObject stepOne = form.getJSONObject(ChildJsonFormUtils.STEP1);
             JSONArray jsonArray = stepOne.getJSONArray(ChildJsonFormUtils.FIELDS);
 
-           //Limit the size of multi select widget field size to the number of extra vaccines
+            //Limit the size of multi select widget field size to the number of extra vaccines
             JSONObject multiSelectField = ChildJsonFormUtils.getFieldJSONObject(jsonArray, multiSelectFieldName);
             multiSelectField.put(AppConstants.KEY.MAX_SELECTABLE, 10 - extraChildVaccines.size());
 
@@ -267,6 +284,12 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
             Timber.e(e);
         }
         return "";
+    }
+
+    @Override
+    public void notifyLostCardReported(String orderDate) {
+        super.notifyLostCardReported(orderDate);
+        SyncServiceJob.scheduleJobImmediately(SyncServiceJob.TAG);
     }
 
     @Override
