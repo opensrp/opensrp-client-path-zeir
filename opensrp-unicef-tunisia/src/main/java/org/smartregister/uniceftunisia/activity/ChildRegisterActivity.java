@@ -43,7 +43,7 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == AllConstants.BARCODE.BARCODE_REQUEST_CODE && resultCode == RESULT_OK && isAdvancedSearch) {
+        if (requestCode == AllConstants.BARCODE.BARCODE_REQUEST_CODE && resultCode == RESULT_OK) {
             Barcode barcode = data.getParcelableExtra(AllConstants.BARCODE.BARCODE_KEY);
             ((AppChildRegisterPresenter) presenter).updateChildCardStatus(barcode.displayValue);
         }

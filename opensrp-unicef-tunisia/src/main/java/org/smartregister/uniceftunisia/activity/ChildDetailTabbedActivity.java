@@ -20,13 +20,11 @@ import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.child.activity.BaseChildDetailTabbedActivity;
 import org.smartregister.child.fragment.StatusEditDialogFragment;
-import org.smartregister.child.presenter.BaseChildDetailsPresenter;
 import org.smartregister.child.presenter.BaseChildDetailsPresenter.CardStatus;
 import org.smartregister.child.task.LoadAsyncTask;
 import org.smartregister.child.util.ChildDbUtils;
 import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
-import org.smartregister.clientandeventmodel.DateUtil;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.fragment.ChildRegistrationDataFragment;
 import org.smartregister.uniceftunisia.util.AppConstants;
@@ -45,6 +43,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import timber.log.Timber;
+
+import static org.smartregister.clientandeventmodel.DateUtil.getDateFromString;
 
 /**
  * Created by ndegwamartin on 06/03/2019.
@@ -90,8 +90,8 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
         if (CardStatus.needs_card.name().equalsIgnoreCase(cardStatus) &&
                 StringUtils.isNotBlank(cardStatusDate)) {
             lostCardMenu.setEnabled(false);
-            lostCardMenu.setTitle(getString(R.string.card_ordered_with_date, new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
-                    .format(DateUtil.getDateFromString(cardStatusDate))));
+            lostCardMenu.setTitle(getString(org.smartregister.child.R.string.card_ordered_with_date,
+                    ddMmYyyyDateFormat.format(getDateFromString(cardStatusDate))));
         }
         return true;
     }
