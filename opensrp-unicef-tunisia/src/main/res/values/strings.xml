@@ -349,4 +349,6 @@
     <string name="specify_target_error">Please specify  population target</string>
     <string name="error_saving_target">Error saving population target</string>
 
+    <!-- Card support strings -->
+    <string name="opensrp_id">IDV NUMBER</string>
 </resources>

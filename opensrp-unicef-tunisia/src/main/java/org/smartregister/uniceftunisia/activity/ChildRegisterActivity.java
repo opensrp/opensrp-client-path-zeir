@@ -5,11 +5,13 @@ import android.view.MenuItem;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.vision.barcode.Barcode;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
+import org.smartregister.AllConstants;
 import org.smartregister.child.activity.BaseChildRegisterActivity;
 import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
@@ -29,17 +31,22 @@ import java.lang.ref.WeakReference;
 public class ChildRegisterActivity extends BaseChildRegisterActivity implements NavDrawerActivity {
 
     private NavigationMenu navigationMenu;
+    private Fragment[] fragments;
 
     @Override
     protected Fragment[] getOtherFragments() {
         ADVANCED_SEARCH_POSITION = 1;
-        Fragment[] fragments = new Fragment[1];
+        fragments = new Fragment[1];
         fragments[ADVANCED_SEARCH_POSITION - 1] = new WeakReference<>(new AdvancedSearchFragment()).get();
         return fragments;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == AllConstants.BARCODE.BARCODE_REQUEST_CODE && resultCode == RESULT_OK && isAdvancedSearch) {
+            Barcode barcode = data.getParcelableExtra(AllConstants.BARCODE.BARCODE_KEY);
+            ((AppChildRegisterPresenter) presenter).updateChildCardStatus(barcode.displayValue);
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -99,10 +106,19 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
         Intent intent = new Intent(this, Utils.metadata().childFormActivity);
         intent.putExtra(Constants.INTENT_KEY.JSON, jsonForm.toString());
         intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
-        intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION,  true);
+        intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
         startActivityForResult(intent, ChildJsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 
+    @Override
+    protected void updateSearchItems(String barcodeSearchTerm) {
+        advancedSearchFormData.put(AppConstants.KEY.ZEIR_ID, barcodeSearchTerm);
+        Fragment fragment = fragments[ADVANCED_SEARCH_POSITION - 1];
+        if (fragment instanceof AdvancedSearchFragment) {
+            AdvancedSearchFragment advancedSearchFragment = (AdvancedSearchFragment) fragment;
+            advancedSearchFragment.searchByOpenSRPId(barcodeSearchTerm);
+        }
+    }
 
     @Override
     public void finishActivity() {

@@ -21,16 +21,17 @@ import org.smartregister.AllConstants;
 import org.smartregister.child.activity.BaseChildDetailTabbedActivity;
 import org.smartregister.child.fragment.StatusEditDialogFragment;
 import org.smartregister.child.presenter.BaseChildDetailsPresenter;
+import org.smartregister.child.presenter.BaseChildDetailsPresenter.CardStatus;
 import org.smartregister.child.task.LoadAsyncTask;
 import org.smartregister.child.util.ChildDbUtils;
 import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
 import org.smartregister.clientandeventmodel.DateUtil;
-import org.smartregister.job.SyncServiceJob;
 import org.smartregister.uniceftunisia.R;
 import org.smartregister.uniceftunisia.fragment.ChildRegistrationDataFragment;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.AppJsonFormUtils;
+import org.smartregister.uniceftunisia.util.AppUtils;
 import org.smartregister.uniceftunisia.util.VaccineUtils;
 import org.smartregister.util.FormUtils;
 import org.smartregister.util.JsonFormUtils;
@@ -86,7 +87,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
         String cardStatus = childDetails.getDetails().get(AppConstants.KEY.CARD_STATUS);
         String cardStatusDate = childDetails.getDetails().get(AppConstants.KEY.CARD_STATUS_DATE);
 
-        if (BaseChildDetailsPresenter.CardStatus.needs_card.name().equalsIgnoreCase(cardStatus) &&
+        if (CardStatus.needs_card.name().equalsIgnoreCase(cardStatus) &&
                 StringUtils.isNotBlank(cardStatusDate)) {
             lostCardMenu.setEnabled(false);
             lostCardMenu.setTitle(getString(R.string.card_ordered_with_date, new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
@@ -289,7 +290,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
     @Override
     public void notifyLostCardReported(String orderDate) {
         super.notifyLostCardReported(orderDate);
-        SyncServiceJob.scheduleJobImmediately(SyncServiceJob.TAG);
+        AppUtils.createClientCardReceivedEvent(childDetails.getCaseId(), CardStatus.needs_card, orderDate);
     }
 
     @Override

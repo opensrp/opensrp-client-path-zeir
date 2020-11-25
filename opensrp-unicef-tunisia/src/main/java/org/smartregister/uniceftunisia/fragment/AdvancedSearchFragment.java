@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.vijay.jsonwizard.customviews.RadioButton;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.child.fragment.BaseAdvancedSearchFragment;
@@ -14,10 +15,10 @@ import org.smartregister.child.presenter.BaseChildAdvancedSearchPresenter;
 import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.DBConstants;
 import org.smartregister.uniceftunisia.R;
+import org.smartregister.uniceftunisia.activity.ChildRegisterActivity;
 import org.smartregister.uniceftunisia.presenter.AdvancedSearchPresenter;
 import org.smartregister.uniceftunisia.util.AppConstants;
 import org.smartregister.uniceftunisia.util.DBQueryHelper;
-import org.smartregister.util.Utils;
 import org.smartregister.view.activity.BaseRegisterActivity;
 
 import java.util.HashMap;
@@ -35,22 +36,21 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
     private AdvancedSearchPresenter presenter;
     private MaterialEditText firstName;
     private MaterialEditText lastName;
-    private MaterialEditText openSrpId;
     private MaterialEditText motherGuardianFirstName;
     private MaterialEditText motherGuardianLastName;
     private MaterialEditText motherGuardianPhoneNumber;
     private MaterialEditText childRegistrationNumber;
     private MaterialEditText childUniqueGovtId;
     private MaterialEditText cardId;
+    private RadioButton myCatchmentRadioButton;
+    private RadioButton outAndInMyCatchmentRadio;
 
     @Override
     protected BaseChildAdvancedSearchPresenter getPresenter() {
-
         if (presenter == null && getActivity() != null) {
             String viewConfigurationIdentifier = ((BaseRegisterActivity) getActivity()).getViewIdentifiers().get(0);
             presenter = new AdvancedSearchPresenter(this, viewConfigurationIdentifier);
         }
-
         return presenter;
     }
 
@@ -78,53 +78,55 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         cardLayoutSupport.setVisibility(View.VISIBLE);
         cardLayoutSupport.setEnabled(false);
 
-        cardId = view.findViewById(org.smartregister.child.R.id.card_id);
+        cardId = view.findViewById(R.id.card_id);
         cardId.addTextChangedListener(advancedSearchTextwatcher);
         cardId.setEnabled(false);
 
         Button scanCardQRCodeView = view.findViewById(R.id.scanCardButton);
         scanCardQRCodeView.setText(R.string.scan_qr_code);
         scanCardQRCodeView.setVisibility(View.VISIBLE);
-        scanCardQRCodeView.setEnabled(false);
-        scanCardQRCodeView.setOnClickListener(view1 -> {
-            if (getActivity() == null) {
-                return;
+        scanCardQRCodeView.setEnabled(true);
+        scanCardQRCodeView.setOnClickListener(button -> {
+            if (getActivity() != null) {
+                ChildRegisterActivity childRegisterActivity = (ChildRegisterActivity) getActivity();
+                childRegisterActivity.setAdvancedSearch(true);
+                childRegisterActivity.startQrCodeScanner();
             }
-            Utils.showShortToast(getActivity(), "Implement card support");
         });
     }
 
     @Override
     public void populateSearchableFields(View view) {
 
+        myCatchmentRadioButton = view.findViewById(R.id.my_catchment);
+        outAndInMyCatchmentRadio = view.findViewById(R.id.out_and_inside);
+
         TextView dobRange = view.findViewById(R.id.date_of_birth_range_label);
         dobRange.setText(R.string.dob_range);
 
-        firstName = view.findViewById(org.smartregister.child.R.id.first_name);
+        firstName = view.findViewById(R.id.first_name);
         firstName.addTextChangedListener(advancedSearchTextwatcher);
         firstName.setHint(R.string.child_first_name);
         firstName.setFloatingLabelText(getString(R.string.child_first_name));
 
-        lastName = view.findViewById(org.smartregister.child.R.id.last_name);
+        lastName = view.findViewById(R.id.last_name);
         lastName.addTextChangedListener(advancedSearchTextwatcher);
         lastName.setHint(R.string.child_last_name);
         lastName.setFloatingLabelText(getString(R.string.child_last_name));
 
-        openSrpId = view.findViewById(org.smartregister.child.R.id.opensrp_id);
-        openSrpId.addTextChangedListener(advancedSearchTextwatcher);
-        openSrpId.setVisibility(View.GONE);
+        view.findViewById(R.id.opensrp_id).setVisibility(View.GONE);
 
-        motherGuardianFirstName = view.findViewById(org.smartregister.child.R.id.mother_guardian_first_name);
+        motherGuardianFirstName = view.findViewById(R.id.mother_guardian_first_name);
         motherGuardianFirstName.addTextChangedListener(advancedSearchTextwatcher);
         motherGuardianFirstName.setHint(R.string.mother_caregiver_first_name);
         motherGuardianFirstName.setFloatingLabelText(getString(R.string.mother_caregiver_first_name));
 
-        motherGuardianLastName = view.findViewById(org.smartregister.child.R.id.mother_guardian_last_name);
+        motherGuardianLastName = view.findViewById(R.id.mother_guardian_last_name);
         motherGuardianLastName.addTextChangedListener(advancedSearchTextwatcher);
         motherGuardianLastName.setHint(R.string.mother_caregiver_last_name);
         motherGuardianLastName.setFloatingLabelText(getString(R.string.mother_caregiver_last_name));
 
-        motherGuardianPhoneNumber = view.findViewById(org.smartregister.child.R.id.mother_guardian_phone_number);
+        motherGuardianPhoneNumber = view.findViewById(R.id.mother_guardian_phone_number);
         motherGuardianPhoneNumber.addTextChangedListener(advancedSearchTextwatcher);
         motherGuardianPhoneNumber.setHint(R.string.mother_caregiver_phone);
         motherGuardianPhoneNumber.setFloatingLabelText(getString(R.string.mother_caregiver_phone));
@@ -137,12 +139,11 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         childUniqueGovtId.setInputType(InputType.TYPE_CLASS_NUMBER);
         childRegistrationNumber.addTextChangedListener(advancedSearchTextwatcher);
 
-        advancedFormSearchableFields.put(AppConstants.KEY.CARD_ID, cardId);
+        advancedFormSearchableFields.put(AppConstants.KEY.ZEIR_ID, cardId);
         advancedFormSearchableFields.put(AppConstants.KEY.BIRTH_REGISTRATION_NUMBER, childRegistrationNumber);
         advancedFormSearchableFields.put(AppConstants.KEY.CHILD_REG, childUniqueGovtId);
         advancedFormSearchableFields.put(DBConstants.KEY.FIRST_NAME, firstName);
         advancedFormSearchableFields.put(DBConstants.KEY.LAST_NAME, lastName);
-        advancedFormSearchableFields.put(DBConstants.KEY.ZEIR_ID, openSrpId);
         advancedFormSearchableFields.put(DBConstants.KEY.MOTHER_FIRST_NAME, motherGuardianFirstName);
         advancedFormSearchableFields.put(DBConstants.KEY.MOTHER_LAST_NAME, motherGuardianLastName);
         advancedFormSearchableFields.put(Constants.KEY.MOTHER_GUARDIAN_NUMBER, motherGuardianPhoneNumber);
@@ -173,8 +174,7 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
             motherGuardianFirstName.setText(searchFormData.get(DBConstants.KEY.MOTHER_FIRST_NAME));
             motherGuardianLastName.setText(searchFormData.get(DBConstants.KEY.MOTHER_LAST_NAME));
             motherGuardianPhoneNumber.setText(searchFormData.get(Constants.KEY.MOTHER_GUARDIAN_NUMBER));
-            openSrpId.setText(searchFormData.get(DBConstants.KEY.ZEIR_ID));
-            cardId.setText(searchFormData.get(AppConstants.KEY.CARD_ID));
+            cardId.setText(searchFormData.get(AppConstants.KEY.ZEIR_ID));
             childRegistrationNumber.setText(searchFormData.get(AppConstants.KEY.BIRTH_REGISTRATION_NUMBER));
             childUniqueGovtId.setText(searchFormData.get(AppConstants.KEY.CHILD_REG));
         }
@@ -188,10 +188,9 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         fields.put(DBConstants.KEY.MOTHER_FIRST_NAME, motherGuardianFirstName.getText().toString());
         fields.put(DBConstants.KEY.MOTHER_LAST_NAME, motherGuardianLastName.getText().toString());
         fields.put(Constants.KEY.MOTHER_GUARDIAN_NUMBER, motherGuardianPhoneNumber.getText().toString());
-        fields.put(DBConstants.KEY.ZEIR_ID, openSrpId.getText().toString());
         fields.put(START_DATE, startDate.getText().toString());
         fields.put(END_DATE, endDate.getText().toString());
-        fields.put(AppConstants.KEY.CARD_ID, cardId.getText().toString());
+        fields.put(AppConstants.KEY.ZEIR_ID, cardId.getText().toString());
         fields.put(AppConstants.KEY.BIRTH_REGISTRATION_NUMBER, childRegistrationNumber.getText().toString());
         fields.put(AppConstants.KEY.CHILD_REG, childUniqueGovtId.getText().toString());
         return fields;
@@ -203,7 +202,6 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         cardId.setText("");
         childRegistrationNumber.setText("");
         childUniqueGovtId.setText("");
-        openSrpId.setText("");
         firstName.setText("");
         lastName.setText("");
         motherGuardianFirstName.setText("");
@@ -226,7 +224,6 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         String motherGuardianFirstNameString = motherGuardianFirstName.getText().toString();
         String motherGuardianLastNameString = motherGuardianLastName.getText().toString();
         String motherGuardianPhoneNumberString = motherGuardianPhoneNumber.getText().toString();
-        String zeir = openSrpId.getText().toString();
 
         if (StringUtils.isNotBlank(motherGuardianFirstNameString)) {
             searchParams.put(DBConstants.KEY.MOTHER_FIRST_NAME, motherGuardianFirstNameString);
@@ -246,10 +243,6 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
 
         if (!TextUtils.isEmpty(lastName)) {
             searchParams.put(DBConstants.KEY.LAST_NAME, lastName);
-        }
-
-        if (!TextUtils.isEmpty(zeir)) {
-            searchParams.put(DBConstants.KEY.ZEIR_ID, zeir);
         }
 
         //Inactive
@@ -287,20 +280,31 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
 
         String cardId = this.cardId.getText().toString();
         if (!TextUtils.isEmpty(cardId)) {
-            searchParams.put(AppConstants.KEY.CARD_ID, cardId);
+            searchParams.put(AppConstants.KEY.ZEIR_ID, cardId);
         }
-        
+
         String childUniqueId = this.childUniqueGovtId.getText().toString();
         if (!TextUtils.isEmpty(childUniqueId)) {
             searchParams.put(AppConstants.KEY.CHILD_REG, childUniqueId);
-        }  
+        }
 
         String childRegNumber = this.childRegistrationNumber.getText().toString();
         if (!TextUtils.isEmpty(childRegNumber)) {
             searchParams.put(AppConstants.KEY.BIRTH_REGISTRATION_NUMBER, childRegNumber);
-        }        
-        
+        }
         return searchParams;
+    }
+
+    public void searchByOpenSRPId(String barcodeSearchTerm) {
+        boolean searchLocally = myCatchmentRadioButton.isChecked();
+
+        if (outAndInMyCatchmentRadio.isChecked()) {
+            searchLocally = false;
+        }
+
+        Map<String, String> searchParamsMap = new HashMap<>();
+        searchParamsMap.put(AppConstants.KEY.ZEIR_ID, barcodeSearchTerm);
+        presenter.search(searchParamsMap, searchLocally);
     }
 }
 

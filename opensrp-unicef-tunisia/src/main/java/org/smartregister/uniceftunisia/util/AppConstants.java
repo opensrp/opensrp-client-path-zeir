@@ -119,6 +119,7 @@ public class AppConstants {
         public static final String UPDATE_CHILD_REGISTRATION = "Update Birth Registration";
         public static final String OUT_OF_CATCHMENT = "Out of Area Service";
         public static final String MONTHLY_REPORT = "monthly_report";
+        public static final String CARD_STATUS_UPDATE = "card_status_update";
     }
 
     public interface JsonForm {

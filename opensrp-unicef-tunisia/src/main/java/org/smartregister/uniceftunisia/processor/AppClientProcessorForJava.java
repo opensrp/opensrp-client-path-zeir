@@ -22,6 +22,7 @@ import org.smartregister.child.util.MoveToMyCatchmentUtils;
 import org.smartregister.child.util.Utils;
 import org.smartregister.clientandeventmodel.DateUtil;
 import org.smartregister.commonregistry.AllCommonsRepository;
+import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.domain.Client;
 import org.smartregister.domain.Event;
 import org.smartregister.domain.db.EventClient;
@@ -60,6 +61,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import timber.log.Timber;
 
@@ -110,6 +112,9 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 }
 
                 switch (eventType) {
+                    case AppConstants.EventType.CARD_STATUS_UPDATE:
+                        processCardStatusUpdateEvent(event);
+                        break;
                     case ReportExtensionsKt.MONTHLY_REPORT:
                         ReportingUtils.processMonthlyReportEvent(event);
                         CoreLibrary.getInstance().context().getEventClientRepository()
@@ -143,9 +148,9 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                     case Constants.EventType.DEATH:
                         if (eventClient.getClient() != null) {
                             processEventClient(clientClassification, eventClient, event);
-                            if(eventType.equalsIgnoreCase(Constants.EventType.DEATH) &&
+                            if (eventType.equalsIgnoreCase(Constants.EventType.DEATH) &&
                                     eventClient.getEvent().getEntityType().equals(AppConstants.EntityType.CHILD)) {
-                                    AppUtils.updateChildDeath(eventClient);
+                                AppUtils.updateChildDeath(eventClient);
                             }
                         }
                         break;
@@ -183,6 +188,21 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
             appExecutors.diskIO().execute(runnable);
             // Unsync events that are should not be in this device
             unSync(eventsToRemove);
+        }
+    }
+
+    private void processCardStatusUpdateEvent(Event event) {
+        if (event != null && StringUtils.isNotBlank(event.getBaseEntityId())) {
+            Map<String, String> eventDetails = event.getDetails();
+            String cardStatus = eventDetails.get(AppConstants.KEY.CARD_STATUS);
+            String cardStatusDate = eventDetails.get(AppConstants.KEY.CARD_STATUS_DATE);
+            if (StringUtils.isNotBlank(cardStatus) && StringUtils.isNotBlank(cardStatusDate)) {
+                CommonRepository commonrepository = getApplication().context().commonrepository(AppConstants.TABLE_NAME.CHILD_DETAILS);
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(AppConstants.KEY.CARD_STATUS, cardStatus);
+                contentValues.put(AppConstants.KEY.CARD_STATUS_DATE, cardStatusDate);
+                commonrepository.updateColumn(AppConstants.TABLE_NAME.CHILD_DETAILS, contentValues, event.getBaseEntityId());
+            }
         }
     }
 

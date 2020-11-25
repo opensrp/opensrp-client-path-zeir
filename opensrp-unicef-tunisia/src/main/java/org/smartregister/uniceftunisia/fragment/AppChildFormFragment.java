@@ -14,6 +14,7 @@ import org.smartregister.uniceftunisia.util.AppConstants;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class AppChildFormFragment extends ChildFormFragment {
 
@@ -58,6 +59,15 @@ public class AppChildFormFragment extends ChildFormFragment {
                 put("mother_guardian_last_name", AppConstants.KEY.LAST_NAME);
                 put("mother_guardian_first_name", AppConstants.KEY.FIRST_NAME);
                 put("mother_guardian_date_birth", AppConstants.KEY.DOB);
+            }
+        };
+    }
+
+    @Override
+    protected @NotNull HashSet<String> getNonHumanizedFields() {
+        return new HashSet<String>() {
+            {
+                add("mother_nationality_other");
             }
         };
     }

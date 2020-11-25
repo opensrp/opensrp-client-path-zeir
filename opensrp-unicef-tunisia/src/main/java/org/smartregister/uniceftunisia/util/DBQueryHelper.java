@@ -16,7 +16,7 @@ import java.util.List;
 public class DBQueryHelper {
 
     public static String getHomeRegisterCondition() {
-        return AppConstants.TABLE_NAME.ALL_CLIENTS + "." + Constants.KEY.DATE_REMOVED + " IS NULL ";
+        return "(ec_client.dod IS NULL AND ec_client.date_removed is null AND ec_client.is_closed IS NOT '1' AND ec_child_details.is_closed IS NOT '1')";
     }
 
     public static String getFilterSelectionCondition(boolean urgentOnly) {
@@ -27,7 +27,7 @@ public class DBQueryHelper {
         final String TRUE = "'true'";
 
         String childDetailsTable = Utils.metadata().getRegisterQueryProvider().getChildDetailsTable();
-        StringBuilder mainCondition = new StringBuilder(" ( " + AppConstants.TABLE_NAME.ALL_CLIENTS + "." + AppConstants.KEY.DATE_REMOVED + " is NULL OR " + AppConstants.TABLE_NAME.ALL_CLIENTS + "." + AppConstants.KEY.DATE_REMOVED + " = '' ) " +
+        StringBuilder mainCondition = new StringBuilder(getHomeRegisterCondition() +
                 AND + " ( " + childDetailsTable + "." + Constants.CHILD_STATUS.INACTIVE + IS_NULL_OR + childDetailsTable + "." + Constants.CHILD_STATUS.INACTIVE + " != " + TRUE + " ) " +
                 AND + " ( " + childDetailsTable + "." + Constants.CHILD_STATUS.LOST_TO_FOLLOW_UP + IS_NULL_OR + childDetailsTable + "." + Constants.CHILD_STATUS.LOST_TO_FOLLOW_UP + " != " + TRUE + " ) " +
                 AND + " ( ");
@@ -41,7 +41,11 @@ public class DBQueryHelper {
         for (int i = 0; i < vaccines.size(); i++) {
             VaccineRepo.Vaccine vaccine = vaccines.get(i);
             if (i == vaccines.size() - 1) {
-                mainCondition.append(" ").append(VaccinateActionUtils.addHyphen(vaccine.display())).append(" = ").append(URGENT).append(" ");
+                mainCondition.append(" ");
+                mainCondition.append(VaccinateActionUtils.addHyphen(vaccine.display()));
+                mainCondition.append(" = ");
+                mainCondition.append(URGENT);
+                mainCondition.append(" ");
             } else {
                 mainCondition.append(" ").append(VaccinateActionUtils.addHyphen(vaccine.display())).append(" = ").append(URGENT).append(OR);
             }
