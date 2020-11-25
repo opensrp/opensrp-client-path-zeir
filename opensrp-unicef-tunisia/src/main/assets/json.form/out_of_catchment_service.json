@@ -54,8 +54,10 @@
         "openmrs_entity_parent": "",
         "openmrs_entity": "",
         "openmrs_entity_id": "",
-        "type": "edit_text",
+        "type": "barcode",
+        "barcode_type": "qrcode",
         "hint": "{{out_of_catchment_service.step1.opensrp_id.hint}}",
+        "scanButtonText": "{{out_of_catchment_service.step1.opensrp_id.scanButtonText}}",
         "value": "",
         "v_required": {
           "value": "true",
