@@ -34,7 +34,7 @@ ext.getLocalProperty = { key ->
         println(key + ": " + properties[key])
         return properties[key]
     } else {
-        return "dummy_key"
+        return "\"sample_property_value\""
     }
 }
 

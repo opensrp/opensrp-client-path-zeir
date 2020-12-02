@@ -139,42 +139,42 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
 
     private suspend fun createIndicatorInputFields(tallyEntry: Map.Entry<String, List<MonthlyTally>>) {
         val sortedIndicators = tallyEntry.value.sortIndicators()
-        sortedIndicators.forEach { monthlyTally ->
-            val textInputEditText = TextInputEditText(requireContext()).apply {
-                tag = monthlyTally.indicator
-                hint = monthlyTally.indicator.getResourceId(requireContext()).let { if (it > 0) getString(it) else monthlyTally.indicator }
-                inputType = InputType.TYPE_CLASS_NUMBER
-                inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE
-                maxLines = 3
-                markAsManualEntry(monthlyTally)
-                setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
-                addTextChangedListener(object : TextWatcher {
-                    override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) =
-                            Unit
-
-                    override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) =
-                            Unit
-
-                    override fun afterTextChanged(editable: Editable?) {
-                        when {
-                            editable.toString().count { it == '.' } > 2 -> {
-                                error = getString(R.string.error_enter_valid_number)
-                            }
-                            editable.isNullOrEmpty() -> {
-                                error = getString(R.string.error_field_required)
-                            }
-                            else -> {
-                                error = null
-                                executeRules(monthlyTally, editable)
-                            }
-                        }
-                    }
-                })
-                setText(monthlyTally.value)
-            }
-            reportIndicatorsLayout.addView(
-                    TextInputLayout(requireContext()).apply { addView(textInputEditText) })
+        sortedIndicators.forEach {
+            reportIndicatorsLayout.addView(TextInputLayout(requireContext()).apply { addView(createEditText(it)) })
         }
+    }
+
+    private fun createEditText(monthlyTally: MonthlyTally) = TextInputEditText(requireContext()).apply {
+        tag = monthlyTally.indicator
+        hint = monthlyTally.indicator.getResourceId(requireContext()).let { if (it > 0) getString(it) else monthlyTally.indicator }
+        inputType = InputType.TYPE_CLASS_NUMBER
+        inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE
+        maxLines = 3
+        markAsManualEntry(monthlyTally)
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
+        addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) =
+                    Unit
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) =
+                    Unit
+
+            override fun afterTextChanged(editable: Editable?) {
+                when {
+                    editable.toString().count { it == '.' } > 2 -> {
+                        error = getString(R.string.error_enter_valid_number)
+                    }
+                    editable.isNullOrEmpty() -> {
+                        error = getString(R.string.error_field_required)
+                    }
+                    else -> {
+                        error = null
+                        executeRules(monthlyTally, editable)
+                    }
+                }
+            }
+        })
+        setText(monthlyTally.value)
     }
 
     private fun TextInputEditText.markAsManualEntry(monthlyTally: MonthlyTally) {
