@@ -29,6 +29,15 @@ if (project.rootProject.file("local.properties").exists()) {
     properties.load(project.rootProject.file("local.properties").newDataInputStream())
 }
 
+ext.getLocalProperty = { key ->
+    if (properties != null && properties.containsKey(key)) {
+        println(key + ": " + properties[key])
+        return properties[key]
+    } else {
+        return "dummy_key"
+    }
+}
+
 android {
     useLibrary 'org.apache.http.legacy'
     compileSdkVersion androidCompileSdkVersion
@@ -103,8 +112,8 @@ android {
             buildConfigField "String[]", "LOCATION_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
             buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
-            buildConfigField "String", "OAUTH_CLIENT_ID", properties["oauth.client.id.release"]
-            buildConfigField "String", "OAUTH_CLIENT_SECRET", properties["oauth.client.secret.release"]
+            buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.release")
+            buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.release")
         }
 
         debug {
@@ -129,8 +138,8 @@ android {
             buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
             testCoverageEnabled true
-            buildConfigField "String", "OAUTH_CLIENT_ID", properties["oauth.client.id.debug"]
-            buildConfigField "String", "OAUTH_CLIENT_SECRET", properties["oauth.client.secret.debug"]
+            buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.debug")
+            buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.debug")
         }
 
         preview {
@@ -159,8 +168,8 @@ android {
             buildConfigField "String[]", "LOCATION_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
             buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Region", "District", "Delegation", "Health Facility"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
-            buildConfigField "String", "OAUTH_CLIENT_ID", properties["oauth.client.id.preview"]
-            buildConfigField "String", "OAUTH_CLIENT_SECRET", properties["oauth.client.secret.preview"]
+            buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.preview")
+            buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.preview")
         }
     }
 
