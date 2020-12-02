@@ -87,14 +87,15 @@ public class AppUtilsTest {
     @Test
     public void testUpdateChildDeath() {
         Mockito.when(unicefTunisiaApplication.context()).thenReturn(context);
-        Mockito.when(context.allCommonsRepositoryobjects("childTable")).thenReturn(allCommonsRepository);
+        Mockito.when(context.allCommonsRepositoryobjects(AppConstants.TABLE_NAME.CHILD_DETAILS)).thenReturn(allCommonsRepository);
+        Mockito.when(context.allCommonsRepositoryobjects(AppConstants.TABLE_NAME.ALL_CLIENTS)).thenReturn(allCommonsRepository);
         Client client = new Client("123");
         client.setDeathdate(new DateTime());
         EventClient eventClient = new EventClient(new Event(), client);
         AppUtils.updateChildDeath(eventClient);
 
-        Mockito.verify(allCommonsRepository).update((String) argumentCaptorUpdateChildTable.capture(), (ContentValues) argumentCaptorUpdateChildTable.capture(), (String) argumentCaptorUpdateChildTable.capture());
-        Mockito.verify(allCommonsRepository).updateSearch((String) argumentCaptorUpdateChildFtsTable.capture());
+        Mockito.verify(allCommonsRepository, Mockito.atMost(2)).update((String) argumentCaptorUpdateChildTable.capture(), (ContentValues) argumentCaptorUpdateChildTable.capture(), (String) argumentCaptorUpdateChildTable.capture());
+        Mockito.verify(allCommonsRepository, Mockito.atMost(2)).updateSearch((String) argumentCaptorUpdateChildFtsTable.capture());
         Assert.assertNotNull(argumentCaptorUpdateChildTable.getAllValues().get(0));
         Assert.assertEquals(client.getBaseEntityId(), argumentCaptorUpdateChildTable.getAllValues().get(2));
         Assert.assertEquals(client.getBaseEntityId(), argumentCaptorUpdateChildFtsTable.getValue());

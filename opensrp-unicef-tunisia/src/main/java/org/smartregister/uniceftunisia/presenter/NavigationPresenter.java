@@ -66,7 +66,7 @@ public class NavigationPresenter implements NavigationContract.Presenter {
     public String getLoggedInUserInitials() {
 
         try {
-            AllSharedPreferences allSharedPreferences = Context.getInstance().allSharedPreferences();
+            AllSharedPreferences allSharedPreferences = getAllSharedPreferences();
             String preferredName = allSharedPreferences.getANMPreferredName(allSharedPreferences.fetchRegisteredANM());
             if (!TextUtils.isEmpty(preferredName)) {
                 String[] initialsArray = preferredName.split(" ");
@@ -80,10 +80,15 @@ public class NavigationPresenter implements NavigationContract.Presenter {
                 return initials.toUpperCase();
             }
 
-        } catch (StringIndexOutOfBoundsException  exception) {
+        } catch (StringIndexOutOfBoundsException exception) {
             Timber.e(exception, "Error fetching initials");
         }
 
         return null;
+    }
+
+
+    public AllSharedPreferences getAllSharedPreferences() {
+        return Context.getInstance().allSharedPreferences();
     }
 }

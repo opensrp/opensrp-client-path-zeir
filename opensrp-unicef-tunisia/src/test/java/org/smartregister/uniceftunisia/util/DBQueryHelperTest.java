@@ -65,16 +65,22 @@ public class DBQueryHelperTest extends BaseUnitTest {
         vaccineCacheMap.put(Constants.CHILD_TYPE, vaccineCache);
         ReflectionHelpers.setStaticField(ImmunizationLibrary.class, "vaccineCacheMap", vaccineCacheMap);
 
-        String expectedUrgentTrue = " ( dod is NULL OR dod = '' )  AND  ( ec_child_details.inactive IS NULL OR ec_child_details.inactive != 'true' )  AND  ( ec_child_details.lost_to_follow_up IS NULL OR ec_child_details.lost_to_follow_up != 'true' )  AND  (  HepB = 'urgent' OR  PENTA_1 = 'urgent'";
-        String expectedUrgentFalse = expectedUrgentTrue + "  OR  HepB = 'normal' OR  PENTA_1 = 'normal'  ) ";
-        Assert.assertEquals(expectedUrgentTrue + "  ) ", DBQueryHelper.getFilterSelectionCondition(true));
+        String expectedUrgentTrue = "(ec_client.dod IS NULL AND ec_client.date_removed is null AND ec_client.is_closed IS NOT '1' " +
+                "AND ec_child_details.is_closed IS NOT '1') AND  ( ec_child_details.inactive IS NULL OR ec_child_details.inactive != 'true' )  " +
+                "AND  ( ec_child_details.lost_to_follow_up IS NULL OR ec_child_details.lost_to_follow_up != 'true' )  AND  (  HepB = 'urgent' OR  PENTA_1 = 'urgent'  ) ";
+        Assert.assertEquals(expectedUrgentTrue, DBQueryHelper.getFilterSelectionCondition(true));
 
+        String expectedUrgentFalse = "(ec_client.dod IS NULL AND ec_client.date_removed is null AND ec_client.is_closed IS NOT '1' " +
+                "AND ec_child_details.is_closed IS NOT '1') AND  ( ec_child_details.inactive IS NULL OR ec_child_details.inactive != 'true' )  " +
+                "AND  ( ec_child_details.lost_to_follow_up IS NULL OR ec_child_details.lost_to_follow_up != 'true' )  " +
+                "AND  (  HepB = 'urgent' OR  PENTA_1 = 'urgent'  OR  HepB = 'normal' OR  PENTA_1 = 'normal'  ) COLLATE NOCASE";
         Assert.assertEquals(expectedUrgentFalse, DBQueryHelper.getFilterSelectionCondition(false));
     }
 
     @Test
     public void testGetHomeRegisterCondition() {
-        Assert.assertEquals(AppConstants.TABLE_NAME.ALL_CLIENTS + "." + Constants.KEY.DATE_REMOVED + " IS NULL ", DBQueryHelper.getHomeRegisterCondition());
+        Assert.assertEquals("(ec_client.dod IS NULL AND ec_client.date_removed is null AND ec_client.is_closed IS NOT '1' AND ec_child_details.is_closed IS NOT '1')",
+                DBQueryHelper.getHomeRegisterCondition());
     }
 
     @After

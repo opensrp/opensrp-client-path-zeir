@@ -33,15 +33,12 @@ import org.smartregister.growthmonitoring.repository.HeightRepository;
 import org.smartregister.growthmonitoring.repository.WeightRepository;
 import org.smartregister.immunization.ImmunizationLibrary;
 import org.smartregister.immunization.domain.ServiceRecord;
-import org.smartregister.immunization.domain.ServiceType;
 import org.smartregister.immunization.repository.RecurringServiceRecordRepository;
 import org.smartregister.immunization.repository.RecurringServiceTypeRepository;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication;
 import org.smartregister.view.activity.BaseProfileActivity;
-
-import java.util.Arrays;
 
 public class AppClientProcessorForJavaTest {
 

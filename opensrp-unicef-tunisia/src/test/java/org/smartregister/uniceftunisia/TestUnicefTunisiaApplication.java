@@ -1,5 +1,11 @@
 package org.smartregister.uniceftunisia;
 
+import android.util.Log;
+
+import androidx.work.Configuration;
+import androidx.work.testing.SynchronousExecutor;
+import androidx.work.testing.WorkManagerTestInitHelper;
+
 import com.google.common.collect.Lists;
 
 import org.smartregister.immunization.domain.jsonmapping.Vaccine;
@@ -13,6 +19,12 @@ public class TestUnicefTunisiaApplication extends UnicefTunisiaApplication {
 
     @Override
     public void onCreate() {
+
+        final Configuration config = new Configuration.Builder()
+                .setMinimumLoggingLevel(Log.DEBUG)
+                .setExecutor(new SynchronousExecutor())
+                .build();
+        WorkManagerTestInitHelper.initializeTestWorkManager(getApplicationContext(), config);
 
         Vaccine vaccine;
         Vaccine vaccine2;
