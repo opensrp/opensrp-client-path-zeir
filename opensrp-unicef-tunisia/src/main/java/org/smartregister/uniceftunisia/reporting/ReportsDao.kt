@@ -10,6 +10,8 @@ import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import java.text.SimpleDateFormat
 import java.util.*
 import org.smartregister.uniceftunisia.reporting.annual.coverage.repository.VaccineCoverageTargetRepository.ColumnNames as CoverageTableColumns
+import org.smartregister.uniceftunisia.reporting.indicatorposition.IndicatorPositionRepository.ColumnNames as IndicatorPositionTableColumns
+import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames as MonthlyRepositoryTableColumns
 
 object ReportsDao : AbstractDao() {
 
@@ -71,22 +73,20 @@ object ReportsDao : AbstractDao() {
     }
 
     private fun extractMonthlyTally(): DataMap<MonthlyTally?> = DataMap { cursor: Cursor? ->
-        cursor?.run {
-            return@DataMap if (cursor.count > 0) {
-                MonthlyTally(
-                        indicator = getCursorValue(cursor, "indicator_code")!!,
-                        id = getCursorLongValue(cursor, "_id")!!,
-                        value = getCursorValue(cursor, "value")!!,
-                        dateSent = if (getCursorValue(cursor, "date_sent") == null) null else Date(getCursorLongValue(cursor, "date_sent")!!),
-                        month = dateFormatter().parse(getCursorValue(cursor, "month")!!)!!,
-                        providerId = getCursorValue(cursor, "provider_id")!!,
-                        updatedAt = Date(getCursorLongValue(cursor, "updated_at")!!),
-                        grouping = getCursorValue(cursor, "indicator_grouping")!!,
-                        enteredManually = getCursorIntValue(cursor, "entered_manually") == 1,
-                        createdAt = getCursorValueAsDate(cursor, "created_at")!!
-                )
-            } else null
-        }
+        if (cursor == null) null
+        else MonthlyTally(
+                indicator = getCursorValue(cursor, MonthlyRepositoryTableColumns.INDICATOR_CODE)!!,
+                id = getCursorLongValue(cursor, MonthlyRepositoryTableColumns.ID)!!,
+                value = getCursorValue(cursor, MonthlyRepositoryTableColumns.VALUE)!!,
+                dateSent = if (getCursorValue(cursor, MonthlyRepositoryTableColumns.DATE_SENT) == null)
+                    null else Date(getCursorLongValue(cursor, MonthlyRepositoryTableColumns.DATE_SENT)!!),
+                month = dateFormatter().parse(getCursorValue(cursor, MonthlyRepositoryTableColumns.MONTH)!!)!!,
+                providerId = getCursorValue(cursor, MonthlyRepositoryTableColumns.PROVIDER_ID)!!,
+                updatedAt = Date(getCursorLongValue(cursor, MonthlyRepositoryTableColumns.UPDATED_AT)!!),
+                grouping = getCursorValue(cursor, MonthlyRepositoryTableColumns.INDICATOR_GROUPING)!!,
+                enteredManually = getCursorIntValue(cursor, MonthlyRepositoryTableColumns.ENTERED_MANUALLY) == 1,
+                createdAt = getCursorValueAsDate(cursor, MonthlyRepositoryTableColumns.CREATED_AT)!!
+        )
     }
 
     /**
@@ -101,10 +101,10 @@ object ReportsDao : AbstractDao() {
 
         """.trimIndent()
         val dataMap = DataMap { cursor: Cursor? ->
-            return@DataMap if (cursor != null && cursor.count > 0)
+            if (cursor != null && cursor.count > 0)
                 Pair(
-                        getCursorValue(cursor, "month")!!,
-                        getCursorValueAsDate(cursor, "created_at")!!
+                        getCursorValue(cursor, MonthlyRepositoryTableColumns.MONTH)!!,
+                        getCursorValueAsDate(cursor, MonthlyRepositoryTableColumns.CREATED_AT)!!
                 )
             else null
         }
@@ -123,10 +123,10 @@ object ReportsDao : AbstractDao() {
 
         """.trimIndent()
         val dataMap = DataMap { cursor: Cursor? ->
-            return@DataMap if (cursor != null && cursor.count > 0)
+            if (cursor != null && cursor.count > 0)
                 Pair(
-                        getCursorValue(cursor, "month")!!,
-                        getCursorValueAsDate(cursor, "created_at")!!
+                        getCursorValue(cursor, MonthlyRepositoryTableColumns.MONTH)!!,
+                        getCursorValueAsDate(cursor, MonthlyRepositoryTableColumns.CREATED_AT)!!
                 )
             else null
         }
@@ -163,7 +163,7 @@ object ReportsDao : AbstractDao() {
             WHERE indicator = '$indicator'
         """.trimIndent()
         val result = readData(sql) { cursor: Cursor? ->
-            if (cursor != null) getCursorValue(cursor, "position")!!.toDouble()
+            if (cursor != null) getCursorValue(cursor, IndicatorPositionTableColumns.POSITION)!!.toDouble()
             else -1.0
         }
         return if (result.isEmpty()) -1.0 else result.first()

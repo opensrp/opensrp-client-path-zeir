@@ -27,6 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
+import org.json.JSONException
 import org.json.JSONObject
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication
@@ -112,9 +113,6 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    /**
-     * Group indicators and create form
-     */
     private fun loadIndicatorsForm(monthlyTallies: Map<String, MonthlyTally>) {
         val groupedTallies = monthlyTallies.values.groupBy { it.grouping }
 
@@ -145,14 +143,10 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
             val textInputEditText = TextInputEditText(requireContext()).apply {
                 tag = monthlyTally.indicator
                 hint = monthlyTally.indicator.getResourceId(requireContext()).let { if (it > 0) getString(it) else monthlyTally.indicator }
-                isFocusable = monthlyTally.enteredManually
-                if (monthlyTally.enteredManually) {
-                    setHintTextColor(ContextCompat.getColor(context, R.color.primary))
-                    setTextColor(ContextCompat.getColor(context, R.color.primary))
-                }
                 inputType = InputType.TYPE_CLASS_NUMBER
                 inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE
                 maxLines = 3
+                markAsManualEntry(monthlyTally)
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
                 addTextChangedListener(object : TextWatcher {
                     override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) =
@@ -171,12 +165,7 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
                             }
                             else -> {
                                 error = null
-                                reportIndicatorsViewModel.monthlyTalliesMap.value?.run {
-                                    this[monthlyTally.indicator] = monthlyTally.apply { value = editable.toString() }
-                                    if (!monthlyTally.dependentCalculations.isNullOrEmpty()) {
-                                        reportingRulesEngine.fireRules(monthlyTally, this, this@ReportIndicatorsFormFragment::updateCalculatedField)
-                                    }
-                                }
+                                executeRules(monthlyTally, editable)
                             }
                         }
                     }
@@ -185,6 +174,22 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
             }
             reportIndicatorsLayout.addView(
                     TextInputLayout(requireContext()).apply { addView(textInputEditText) })
+        }
+    }
+
+    private fun TextInputEditText.markAsManualEntry(monthlyTally: MonthlyTally) {
+        isFocusable = monthlyTally.enteredManually
+        if (monthlyTally.enteredManually) {
+            setHintTextColor(ContextCompat.getColor(context, R.color.primary))
+            setTextColor(ContextCompat.getColor(context, R.color.primary))
+        }
+    }
+
+    private fun executeRules(monthlyTally: MonthlyTally, editable: Editable) {
+        val currentTalliesMap: MutableMap<String, MonthlyTally>? = reportIndicatorsViewModel.monthlyTalliesMap.value
+        currentTalliesMap?.get(monthlyTally.indicator)?.apply { value = editable.toString() }
+        if (!monthlyTally.dependentCalculations.isNullOrEmpty()) {
+            reportingRulesEngine.fireRules(monthlyTally, currentTalliesMap!!, this::updateCalculatedField)
         }
     }
 
@@ -256,8 +261,8 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
                 }
                 true
             }
-        } catch (throwable: Throwable) {
-            Timber.e(throwable)
+        } catch (jsonException: JSONException) {
+            Timber.e(jsonException)
             false
         }
     }

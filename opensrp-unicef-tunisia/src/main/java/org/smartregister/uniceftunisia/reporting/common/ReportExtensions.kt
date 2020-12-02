@@ -1,6 +1,7 @@
 package org.smartregister.uniceftunisia.reporting.common
 
 import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
@@ -142,8 +143,8 @@ fun String.convertToNamedMonth(hasHyphen: Boolean = false): String {
  */
 fun String.getResourceId(context: Context): Int = try {
     context.resources.getIdentifier(this.replace(" ", "_").replace("/", ""), "string", context.packageName)
-} catch (throwable: Throwable) {
-    Timber.e("String Resource for $this is not found. Specify it on strings.xml file.$throwable")
+} catch (exception: Resources.NotFoundException) {
+    Timber.e("String Resource for $this is not found. Specify it on strings.xml file.$exception")
     0
 }
 

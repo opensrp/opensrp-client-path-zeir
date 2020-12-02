@@ -29,7 +29,7 @@ class IndicatorPositionRepository private constructor() : BaseRepository() {
         const val INDICATOR_POSITION_PREF = "indicator_positions_pref"
     }
 
-    private object ColumnNames {
+    object ColumnNames {
         const val INDICATOR = "indicator"
         const val POSITION = "position"
     }

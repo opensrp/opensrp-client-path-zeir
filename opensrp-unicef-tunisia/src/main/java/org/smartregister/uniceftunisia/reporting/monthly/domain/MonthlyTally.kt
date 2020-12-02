@@ -4,7 +4,7 @@ import org.codehaus.jackson.annotate.JsonProperty
 import java.io.Serializable
 import java.util.*
 
-open class MonthlyTally(
+data class MonthlyTally(
         val indicator: String,
 
         @JsonProperty

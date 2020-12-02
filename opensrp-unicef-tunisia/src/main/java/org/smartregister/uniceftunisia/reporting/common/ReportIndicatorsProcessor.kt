@@ -33,20 +33,23 @@ class ReportIndicatorsProcessor : MultiResultProcessor {
         val tallies = ArrayList<IndicatorTally>()
 
         compositeTallies.forEach { compositeTally ->
-            IndicatorTally().apply {
+            val tally = IndicatorTally().apply {
                 createdAt = compositeIndicatorTally.createdAt
                 grouping = compositeIndicatorTally.grouping
                 if (compositeTally.size == 3) {
                     indicatorCode = "${compositeIndicatorTally.indicatorCode}_${compositeTally[0]}_${compositeTally[1]}"
-                    count = when (val indicatorValue = compositeTally[2]) {
-                        is Int -> indicatorValue
-                        is Double -> indicatorValue.toInt()
-                        else -> throw MultiResultProcessorException(indicatorValue, compositeIndicatorTally)
-                    }
-                    tallies.add(this)
+                    count = getCount(compositeTally, compositeIndicatorTally)
                 }
             }
+            tallies.add(tally)
         }
         return tallies
     }
+
+    private fun getCount(compositeTally: List<Any>, compositeIndicatorTally: CompositeIndicatorTally) =
+            when (val indicatorValue = compositeTally[2]) {
+                is Int -> indicatorValue
+                is Double -> indicatorValue.toInt()
+                else -> throw MultiResultProcessorException(indicatorValue, compositeIndicatorTally)
+            }
 }

@@ -44,11 +44,12 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
             "report_group_header_diagnosed_malnourished"
     )
 
-    private object Constants {
+    object Constants {
         const val TABLE_NAME = "monthly_tallies"
     }
 
-    private object ColumnNames {
+    object ColumnNames {
+        const val ID = "_id"
         const val PROVIDER_ID = "provider_id"
         const val INDICATOR_CODE = "indicator_code"
         const val VALUE = "value"
@@ -114,29 +115,35 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
         val draftReports = ReportsDao.getReportsByMonth(yearMonth = yearMonth)
         if (draftReports.isNotEmpty()) return draftReports
 
-        val monthlyTallies = arrayListOf<MonthlyTally>()
+        val allTallies = arrayListOf<MonthlyTally>()
         supportedReportGroups.forEach { reportHeader ->
-            ReportingLibrary.getInstance().dailyIndicatorCountRepository()
-                    .findTalliesInMonth(dateFormatter().parse(yearMonth)!!, reportHeader).run {
-                        values.forEach { currentList ->
-                            if (currentList.isNotEmpty())
-                                computeDailyTallies(currentList)?.let { monthlyTallies.add(it) }
-                        }
-                    }
+            val monthTallies = ReportingLibrary.getInstance().dailyIndicatorCountRepository()
+                    .findTalliesInMonth(dateFormatter().parse(yearMonth)!!, reportHeader)
+            allTallies.addAll(processMonthlyTallies(monthTallies))
+        }
+        return allTallies
+    }
+
+    private fun processMonthlyTallies(talliesInMonth: MutableMap<String, MutableList<IndicatorTally>>): ArrayList<MonthlyTally> {
+        val monthlyTallies = arrayListOf<MonthlyTally>()
+        talliesInMonth.values.forEach { currentList ->
+            if (currentList.isNotEmpty())
+                computeMonthlyTally(currentList)?.let { monthlyTallies.add(it) }
         }
         return monthlyTallies
     }
 
-    private fun computeDailyTallies(dailyTallies: List<IndicatorTally>) =
-            if (dailyTallies.isNotEmpty()) {
-                MonthlyTally(
-                        indicator = dailyTallies[0].indicatorCode,
-                        value = dailyTallies.map { it.floatCount.toInt() }.reduce { sum, element -> sum + element }.toString(),
-                        providerId = providerId,
-                        updatedAt = Calendar.getInstance().time,
-                        grouping = dailyTallies[0].grouping
-                )
-            } else null
+    private fun computeMonthlyTally(dailyTallies: List<IndicatorTally>): MonthlyTally? {
+        return if (dailyTallies.isNotEmpty()) {
+            MonthlyTally(
+                    indicator = dailyTallies[0].indicatorCode,
+                    value = dailyTallies.map { it.floatCount.toInt() }.reduce { sum, element -> sum + element }.toString(),
+                    providerId = providerId,
+                    updatedAt = Calendar.getInstance().time,
+                    grouping = dailyTallies[0].grouping
+            )
+        } else null
+    }
 
     fun saveMonthlyDraft(monthlyTallies: Map<String, MonthlyTally>?, yearMonth: String?, sync: Boolean): Boolean {
         if (!monthlyTallies.isNullOrEmpty() && !yearMonth.isNullOrBlank()) {

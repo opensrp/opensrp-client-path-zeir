@@ -88,7 +88,6 @@ class AnnualReportRepository : BaseRepository() {
 
     private fun computeVaccineCoverages(coverageTargetType: CoverageTargetType, year: Int): MutableList<VaccineCoverage> {
         val vaccineCountsMap: Map<String, VaccineCount> = ReportsDao.getTargetVaccineCounts(year).associateBy { it.name }
-        val vaccineCoverages = mutableListOf<VaccineCoverage>()
 
         val vaccineSet = when (coverageTargetType) {
             CoverageTargetType.UNDER_ONE_TARGET -> VaccineTarget.underOne
@@ -99,37 +98,36 @@ class AnnualReportRepository : BaseRepository() {
             CoverageTargetType.UNDER_ONE_TARGET -> ReportsDao.getCoverageTarget(year).findTarget(CoverageTargetType.UNDER_ONE_TARGET)
             CoverageTargetType.ONE_TWO_YEAR_TARGET -> ReportsDao.getCoverageTarget(year).findTarget(CoverageTargetType.ONE_TWO_YEAR_TARGET)
         }
+        return getVaccineCoverages(vaccineSet, vaccineCountsMap, target, year)
+    }
 
+    private fun getVaccineCoverages(vaccineSet: Set<String>, vaccineCountsMap: Map<String, VaccineCount>,
+                                    vaccineTarget: String, year: Int): MutableList<VaccineCoverage> {
+        val vaccineCoverages = mutableListOf<VaccineCoverage>()
         vaccineSet.forEach {
-            val vaccineCoverage: VaccineCoverage
             val vaccine = VaccinatorUtils.getTranslatedVaccineName(context, it)
             val translatedVaccineName =
                     if (vaccine == it) context.getString(it.getResourceId(context)) else vaccine
             val errorNoTarget = context.getString(R.string.error_no_target)
+            val targetEmpty = vaccineTarget.isEmpty()
+            var vaccinated = "0"
+            var coverage = if (targetEmpty) errorNoTarget else 0.toString().plus("%")
 
             if (vaccineCountsMap.containsKey(it)) {
                 val vaccineCount = vaccineCountsMap.getValue(it)
-
-                val underOneCoverage = if (target.isEmpty()) 0 else ((vaccineCount.count / target.toDouble()) * 100).toWholeNumber()
-                        .toString().plus("%")
-                vaccineCoverage = VaccineCoverage(
-                        vaccine = translatedVaccineName,
-                        vaccinated = vaccineCount.count.toString(),
-                        coverage = "${if (target.isEmpty()) errorNoTarget else underOneCoverage}",
-                        year = year.toString()
-                )
-            } else {
-                vaccineCoverage = VaccineCoverage(
-                        vaccine = translatedVaccineName.toUpperCase(Locale.getDefault()),
-                        vaccinated = 0.toString(),
-                        coverage = if (target.isEmpty()) errorNoTarget else 0.toString().plus("%"),
-                        year = year.toString()
-                )
+                vaccinated = vaccineCount.count.toString()
+                coverage = if (targetEmpty) errorNoTarget
+                else ((vaccineCount.count / vaccineTarget.toDouble()) * 100).toWholeNumber().toString().plus("%")
             }
 
-            vaccineCoverage.apply {
+            val vaccineCoverage = VaccineCoverage(
+                    vaccine = translatedVaccineName.toUpperCase(Locale.getDefault()),
+                    vaccinated = vaccinated,
+                    coverage = coverage,
+                    year = year.toString()
+            ).apply {
                 name = it
-                this.target = if (target.isEmpty()) 0 else target.toInt()
+                target = if (targetEmpty) 0 else vaccineTarget.toInt()
                 if (year.toString() != ReportsDao.dateFormatter("yyyy").format(Date()))
                     coverageColorResource = R.color.primary
                 if (coverage == context.getString(R.string.error_no_target))
