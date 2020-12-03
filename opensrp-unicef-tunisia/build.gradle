@@ -6,7 +6,7 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.0.1"
+        classpath "com.android.tools.build:gradle:4.0.2"
         classpath 'gradle.plugin.org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.10.2'
         classpath 'io.fabric.tools:gradle:1.31.2'
     }
@@ -223,7 +223,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
 //    implementation(project(':opensrp-child')) {
-    implementation('org.smartregister:opensrp-client-child:0.5.4-ALPHA1-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-child:0.6.1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-growth-monitoring'
@@ -246,7 +246,7 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-reporting'
     }
 
-    implementation('org.smartregister:opensrp-client-growth-monitoring:1.1.23-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-growth-monitoring:2.0.1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
