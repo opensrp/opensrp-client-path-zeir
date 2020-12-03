@@ -22,7 +22,7 @@ class MonthlyReportsPagerAdapter(private val monthlyReportsActivity: MonthlyRepo
 
     override fun getCount() = 2
 
-    override fun getPageTitle(position: Int): CharSequence? = when (position) {
+    override fun getPageTitle(position: Int) = when (position) {
         0 -> monthlyReportsActivity.getString(R.string.monthly_draft_reports, 0)
         else -> monthlyReportsActivity.getString(R.string.monthly_sent_reports)
     }

@@ -15,7 +15,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
         const val SELECT_TAB = "select_tab"
     }
 
-    private val monthlyReportsViewModel by viewModels<MonthlyReportsViewModel>
+    val monthlyReportsViewModel by viewModels<MonthlyReportsViewModel>
     { ReportingUtils.createFor(MonthlyReportsViewModel()) }
 
     private lateinit var reportsPagerAdapter: MonthlyReportsPagerAdapter
