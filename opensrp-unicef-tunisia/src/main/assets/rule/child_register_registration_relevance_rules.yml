@@ -68,3 +68,10 @@ priority: 1
 condition: "step1_include_father_details.contains('include_father_details')"
 actions:
   - "isRelevant = true"
+---
+name: step1_sms_language
+description: sms_language
+priority: 1
+condition: "step1_sms_recipient == 'father' || step1_sms_recipient == 'mother' || step1_sms_recipient == 'both' "
+actions:
+  - "isRelevant = true"

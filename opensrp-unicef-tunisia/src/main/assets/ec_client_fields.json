@@ -244,6 +244,20 @@
           }
         },
         {
+          "column_name": "sms_recipient",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.sms_recipient"
+          }
+        },
+        {
+          "column_name": "sms_language",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.sms_language"
+          }
+        },
+        {
           "column_name": "date",
           "type": "Event",
           "json_mapping": {

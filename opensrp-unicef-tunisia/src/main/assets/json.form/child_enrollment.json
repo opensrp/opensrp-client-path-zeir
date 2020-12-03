@@ -915,6 +915,40 @@
         }
       },
       {
+        "key": "sms_language",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "sms_language",
+        "type": "spinner",
+        "entity_id": "mother",
+        "hint": "{{child_enrollment.step1.sms_language.hint}}",
+        "options": [
+          {
+            "key": "french",
+            "text": "{{child_enrollment.step1.sms_language.options.french.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          },
+          {
+            "key": "arabic",
+            "text": "{{child_enrollment.step1.sms_language.options.arabic.text}}",
+            "openmrs_entity": "",
+            "openmrs_entity_id": ""
+          }
+        ],
+        "v_required": {
+          "value": true,
+          "err": "{{child_enrollment.step1.sms_language.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
         "key": "lost_to_follow_up",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person_attribute",
