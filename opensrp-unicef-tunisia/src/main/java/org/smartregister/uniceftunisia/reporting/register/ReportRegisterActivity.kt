@@ -23,7 +23,7 @@ class ReportRegisterActivity : BaseActivity(), ReportRegisterContract.View, Adap
 
     private lateinit var reportRegisterPresenter: ReportRegisterPresenter
 
-    private lateinit var navigationMenu: NavigationMenu
+    lateinit var navigationMenu: NavigationMenu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,23 +51,19 @@ class ReportRegisterActivity : BaseActivity(), ReportRegisterContract.View, Adap
                 }
             }
         }
-        backButton.apply {
-            setOnClickListener {
-                navigationMenu.openDrawer()
-            }
-        }
+        backButton.apply { setOnClickListener { navigationMenu.openDrawer() } }
     }
 
     public override fun getContentView() = R.layout.activity_report_register
 
-    override fun getDrawerLayoutId() = navigationMenu.drawer.id
+    public override fun getDrawerLayoutId() = navigationMenu.drawer.id
 
     override fun getToolbarId() = LocationSwitcherToolbar.TOOLBAR_ID
 
     @Suppress("UNCHECKED_CAST")
-    override fun onBackActivity(): Class<ChildRegisterActivity>? {
+    public override fun onBackActivity(): Class<ChildRegisterActivity> {
         navigationMenu.drawer
-        return ChildLibrary.getInstance().metadata().childRegisterActivity as Class<ChildRegisterActivity>?
+        return ChildLibrary.getInstance().metadata().childRegisterActivity as Class<ChildRegisterActivity>
     }
 
     override fun onUniqueIdFetched(triple: Triple<String, Map<String, String>, String>, s: String) = Unit
