@@ -9,7 +9,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.sent_monthly_report_list_item.view.*
 import kotlinx.android.synthetic.main.sent_reports_expansion_panel_item.*
 import org.smartregister.uniceftunisia.R
-import org.smartregister.uniceftunisia.reporting.ReportsDao.dateFormatter
+import org.smartregister.uniceftunisia.reporting.common.ReportingUtils.dateFormatter
 import org.smartregister.uniceftunisia.reporting.common.convertToNamedMonth
 import org.smartregister.uniceftunisia.reporting.common.translateString
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally

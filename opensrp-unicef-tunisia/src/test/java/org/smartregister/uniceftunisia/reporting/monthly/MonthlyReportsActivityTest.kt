@@ -14,13 +14,14 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.android.controller.ActivityController
 import org.smartregister.Context
 import org.smartregister.uniceftunisia.R
-import org.smartregister.uniceftunisia.reporting.ReportsDao
+import org.smartregister.uniceftunisia.reporting.common.ReportingUtils.dateFormatter
 
 @RunWith(RobolectricTestRunner::class)
 class MonthlyReportsActivityTest {
 
     private lateinit var tabLayout: TabLayout
-    private val monthlyReportsActivityController: ActivityController<MonthlyReportsActivity> = Robolectric.buildActivity(MonthlyReportsActivity::class.java)
+    private val monthlyReportsActivityController: ActivityController<MonthlyReportsActivity> =
+            Robolectric.buildActivity(MonthlyReportsActivity::class.java)
 
     private lateinit var monthlyReportsActivity: MonthlyReportsActivity
 
@@ -65,7 +66,8 @@ class MonthlyReportsActivityTest {
     @Test
     fun `Should update tab title when there are drafts`() {
         monthlyReportsActivityController.resume()
-        monthlyReportsActivity.monthlyReportsViewModel.draftedMonths.value = listOf(Pair("January 2020", ReportsDao.dateFormatter("yyyy-MM-dd").parse("2020-01-01")))
+        monthlyReportsActivity.monthlyReportsViewModel.draftedMonths.value =
+                listOf(Pair("January 2020", dateFormatter("yyyy-MM-dd").parse("2020-01-01")))
         val tabOne = tabLayout.getTabAt(0)
         assertNotNull(tabOne)
         assertEquals(tabOne?.text, monthlyReportsActivity.getString(R.string.monthly_draft_reports, 1))

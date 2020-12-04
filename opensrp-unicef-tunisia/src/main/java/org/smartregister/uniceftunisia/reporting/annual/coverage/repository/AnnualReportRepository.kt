@@ -13,6 +13,7 @@ import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.AnnualVa
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTargetType
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.VaccineCount
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.VaccineCoverage
+import org.smartregister.uniceftunisia.reporting.common.ReportingUtils.dateFormatter
 import org.smartregister.uniceftunisia.reporting.common.findTarget
 import org.smartregister.uniceftunisia.reporting.common.getResourceId
 import org.smartregister.uniceftunisia.reporting.common.toWholeNumber
@@ -128,7 +129,7 @@ class AnnualReportRepository : BaseRepository() {
             ).apply {
                 name = it
                 target = if (targetEmpty) 0 else vaccineTarget.toInt()
-                if (year.toString() != ReportsDao.dateFormatter("yyyy").format(Date()))
+                if (year.toString() != dateFormatter("yyyy").format(Date()))
                     coverageColorResource = R.color.primary
                 if (coverage == context.getString(R.string.error_no_target))
                     coverageColorResource = R.color.cso_error_red
@@ -140,7 +141,7 @@ class AnnualReportRepository : BaseRepository() {
     }
 
     fun getReportYears() = ReportsDao.getDistinctReportMonths()
-            .map { ReportsDao.dateFormatter("yyyy").format(ReportsDao.dateFormatter("MMMM yyyy").parse(it)!!) }
+            .map { dateFormatter("yyyy").format(dateFormatter("MMMM yyyy").parse(it)!!) }
             .distinct()
             .asReversed()
 

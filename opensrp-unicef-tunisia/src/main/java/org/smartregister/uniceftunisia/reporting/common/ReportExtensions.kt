@@ -34,6 +34,8 @@ import org.smartregister.uniceftunisia.util.AppJsonFormUtils
 import timber.log.Timber
 import java.math.BigDecimal
 import java.math.RoundingMode
+import java.text.SimpleDateFormat
+import java.util.*
 import org.smartregister.uniceftunisia.reporting.annual.coverage.repository.VaccineCoverageTargetRepository.ColumnNames as VaccineCoverageColumn
 
 /**
@@ -121,6 +123,8 @@ object ReportingUtils {
             }
         }
     }
+
+    fun dateFormatter(pattern: String = "yyyy-MM") = SimpleDateFormat(pattern, Locale.ENGLISH)
 }
 
 /**

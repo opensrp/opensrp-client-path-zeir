@@ -3,12 +3,14 @@ package org.smartregister.uniceftunisia.reporting.monthly
 import android.database.sqlite.SQLiteDatabase
 import androidx.core.content.contentValuesOf
 import androidx.sqlite.db.transaction
+import org.jetbrains.annotations.TestOnly
 import org.smartregister.reporting.ReportingLibrary
 import org.smartregister.reporting.domain.IndicatorTally
+import org.smartregister.reporting.repository.DailyIndicatorCountRepository
 import org.smartregister.repository.BaseRepository
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication
 import org.smartregister.uniceftunisia.reporting.ReportsDao
-import org.smartregister.uniceftunisia.reporting.ReportsDao.dateFormatter
+import org.smartregister.uniceftunisia.reporting.common.ReportingUtils.dateFormatter
 import org.smartregister.uniceftunisia.reporting.common.convertToNamedMonth
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.CREATED_AT
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository.ColumnNames.DATE_SENT
@@ -31,10 +33,7 @@ import net.sqlcipher.database.SQLiteDatabase as SQLiteCipherDatabase
  */
 class MonthlyReportsRepository private constructor() : BaseRepository() {
 
-    val providerId: String = UnicefTunisiaApplication.getInstance().context()
-            .allSharedPreferences().fetchRegisteredANM()
-
-    private val supportedReportGroups = setOf(
+    private var supportedReportGroups = setOf(
             "report_group_header_vaccination_activity",
             "report_group_header_vaccine_utilization",
             "report_group_header_tetanus_protected",
@@ -117,12 +116,15 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
 
         val allTallies = arrayListOf<MonthlyTally>()
         supportedReportGroups.forEach { reportHeader ->
-            val monthTallies = ReportingLibrary.getInstance().dailyIndicatorCountRepository()
-                    .findTalliesInMonth(dateFormatter().parse(yearMonth)!!, reportHeader)
+            val monthTallies = getDailyIndicatorCountRepository().findTalliesInMonth(dateFormatter()
+                    .parse(yearMonth)!!, reportHeader)
             allTallies.addAll(processMonthlyTallies(monthTallies))
         }
         return allTallies
     }
+
+    fun getDailyIndicatorCountRepository(): DailyIndicatorCountRepository =
+            ReportingLibrary.getInstance().dailyIndicatorCountRepository()
 
     private fun processMonthlyTallies(talliesInMonth: MutableMap<String, MutableList<IndicatorTally>>): ArrayList<MonthlyTally> {
         val monthlyTallies = arrayListOf<MonthlyTally>()
@@ -138,12 +140,15 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
             MonthlyTally(
                     indicator = dailyTallies[0].indicatorCode,
                     value = dailyTallies.map { it.floatCount.toInt() }.reduce { sum, element -> sum + element }.toString(),
-                    providerId = providerId,
+                    providerId = getProviderId(),
                     updatedAt = Calendar.getInstance().time,
                     grouping = dailyTallies[0].grouping
             )
         } else null
     }
+
+    fun getProviderId(): String = UnicefTunisiaApplication.getInstance().context()
+            .allSharedPreferences().fetchRegisteredANM()
 
     fun saveMonthlyDraft(monthlyTallies: Map<String, MonthlyTally>?, yearMonth: String?, sync: Boolean): Boolean {
         if (!monthlyTallies.isNullOrEmpty() && !yearMonth.isNullOrBlank()) {
@@ -189,5 +194,10 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
         fun getInstance(): MonthlyReportsRepository = instance ?: synchronized(this) {
             MonthlyReportsRepository().also { instance = it }
         }
+    }
+
+    @TestOnly
+    internal fun updateSupportedReportGroups(supportedReportGroups: Set<String>) {
+        this.supportedReportGroups = supportedReportGroups
     }
 }

@@ -32,8 +32,8 @@ import org.json.JSONObject
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication
 import org.smartregister.uniceftunisia.reporting.ReportingRulesEngine
-import org.smartregister.uniceftunisia.reporting.ReportsDao
 import org.smartregister.uniceftunisia.reporting.common.*
+import org.smartregister.uniceftunisia.reporting.common.ReportingUtils.dateFormatter
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsActivity
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
@@ -83,8 +83,8 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
         reportIndicatorsViewModel.monthlyTalliesMap.value?.let { monthlyTallies ->
             extendedIndicatorTallies.forEach { tallyEntry ->
                 tallyEntry.apply {
-                    value.providerId = MonthlyReportsRepository.getInstance().providerId
-                    value.month = ReportsDao.dateFormatter().parse(reportIndicatorsViewModel.yearMonth.value!!)!!
+                    value.providerId = MonthlyReportsRepository.getInstance().getProviderId()
+                    value.month = dateFormatter().parse(reportIndicatorsViewModel.yearMonth.value!!)!!
                     value.value = "0"
                 }
                 includeExtendedTallies(monthlyTallies, tallyEntry)

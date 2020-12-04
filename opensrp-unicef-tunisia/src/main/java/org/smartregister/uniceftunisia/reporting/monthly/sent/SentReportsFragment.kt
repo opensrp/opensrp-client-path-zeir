@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_monthly_sent_reports.*
 import org.smartregister.uniceftunisia.R
-import org.smartregister.uniceftunisia.reporting.ReportsDao
 import org.smartregister.uniceftunisia.reporting.common.MONTHLY_TALLIES
 import org.smartregister.uniceftunisia.reporting.common.ReportingUtils
+import org.smartregister.uniceftunisia.reporting.common.ReportingUtils.dateFormatter
 import org.smartregister.uniceftunisia.reporting.common.SHOW_DATA
 import org.smartregister.uniceftunisia.reporting.common.YEAR_MONTH
 import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsViewModel
@@ -64,7 +64,7 @@ class SentReportsFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View) {
         if (view.tag is MonthlyTally) {
             val monthlyTally = view.tag as MonthlyTally
-            monthlyReportsViewModel.fetchSentReportTalliesByMonth(ReportsDao.dateFormatter().format(monthlyTally.month))
+            monthlyReportsViewModel.fetchSentReportTalliesByMonth(dateFormatter().format(monthlyTally.month))
         }
     }
 }

@@ -323,7 +323,7 @@ public class UnicefTunisiaApplication extends DrishtiApplication implements Time
     public Repository getRepository() {
         try {
             if (repository == null) {
-                repository = new UnicefTunisiaRepository(getInstance().getApplicationContext(), context);
+                repository = new UnicefTunisiaRepository(getApplicationContext(), context);
             }
         } catch (UnsatisfiedLinkError e) {
             Timber.e(e, "UnicefTunisiaApplication --> getRepository");

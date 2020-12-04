@@ -9,7 +9,7 @@ import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.dialog_fragment_send_monthly.*
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication
-import org.smartregister.uniceftunisia.reporting.ReportsDao
+import org.smartregister.uniceftunisia.reporting.common.ReportingUtils.dateFormatter
 import java.util.*
 
 class ConfirmSendDraftDialog : DialogFragment() {
@@ -36,7 +36,7 @@ class ConfirmSendDraftDialog : DialogFragment() {
 
         sendMonthlyDraftTextView.apply {
             text = String.format(getString(R.string.send_report_warning), arguments?.getString(Constants.MONTH),
-                    ReportsDao.dateFormatter("dd/MM/yyyy").format(Date()), provider)
+                    dateFormatter("dd/MM/yyyy").format(Date()), provider)
         }
 
         cancelSendReportsButton.setOnClickListener { dismiss() }

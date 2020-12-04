@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_report_indicators_summary.*
 import org.smartregister.uniceftunisia.R
-import org.smartregister.uniceftunisia.reporting.ReportsDao
 import org.smartregister.uniceftunisia.reporting.common.ReportingUtils
+import org.smartregister.uniceftunisia.reporting.common.ReportingUtils.dateFormatter
 import org.smartregister.uniceftunisia.reporting.common.showProgressDialog
 import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 import org.smartregister.uniceftunisia.reporting.monthly.indicator.ReportIndicatorsViewModel
@@ -56,7 +56,7 @@ class ReportIndicatorsSummaryFragment : Fragment() {
             if (groupedTallies.isNotEmpty()) {
                 val firstMonthlyTally: MonthlyTally = groupedTallies.values.first()[0]
                 val submittedBy = requireContext().getString(R.string.submitted_by_,
-                        ReportsDao.dateFormatter("dd/MM/YYYY").format(firstMonthlyTally.dateSent!!), firstMonthlyTally.providerId)
+                        dateFormatter("dd/MM/YYYY").format(firstMonthlyTally.dateSent!!), firstMonthlyTally.providerId)
                 submittedByTextView.text = submittedBy
                 submittedByTextView.typeface = Typeface.DEFAULT_BOLD
                 reportIndicators = groupedTallies.toList()

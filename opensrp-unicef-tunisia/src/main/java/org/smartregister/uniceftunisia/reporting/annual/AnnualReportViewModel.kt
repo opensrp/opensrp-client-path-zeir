@@ -6,11 +6,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.smartregister.uniceftunisia.reporting.ReportsDao
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTarget
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.VaccineCoverage
 import org.smartregister.uniceftunisia.reporting.annual.coverage.repository.AnnualReportRepository
 import org.smartregister.uniceftunisia.reporting.annual.coverage.repository.VaccineCoverageTargetRepository
+import org.smartregister.uniceftunisia.reporting.common.ReportingUtils.dateFormatter
 import java.util.*
 
 class AnnualReportViewModel : ViewModel() {
@@ -22,7 +22,7 @@ class AnnualReportViewModel : ViewModel() {
 
     val selectedYear by lazy {
         MutableLiveData<Int>().apply {
-            postValue(ReportsDao.dateFormatter("yyyy").format(Date()).toInt())
+            postValue(dateFormatter("yyyy").format(Date()).toInt())
         }
     }
 

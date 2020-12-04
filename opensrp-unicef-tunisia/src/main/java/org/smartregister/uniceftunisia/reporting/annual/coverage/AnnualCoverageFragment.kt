@@ -27,7 +27,6 @@ import org.smartregister.clientandeventmodel.Obs
 import org.smartregister.repository.AllSharedPreferences
 import org.smartregister.uniceftunisia.R
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication
-import org.smartregister.uniceftunisia.reporting.ReportsDao.dateFormatter
 import org.smartregister.uniceftunisia.reporting.annual.AnnualReportViewModel
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTarget
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTargetType
@@ -35,6 +34,7 @@ import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.Coverage
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTargetType.UNDER_ONE_TARGET
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.VaccineCoverage
 import org.smartregister.uniceftunisia.reporting.common.ReportingUtils
+import org.smartregister.uniceftunisia.reporting.common.ReportingUtils.dateFormatter
 import org.smartregister.uniceftunisia.reporting.common.VACCINE_COVERAGE_TARGET
 import org.smartregister.uniceftunisia.reporting.common.findTarget
 import org.smartregister.uniceftunisia.reporting.common.showToast
