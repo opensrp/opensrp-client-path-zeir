@@ -1,8 +1,10 @@
 package org.smartregister.uniceftunisia.reporting
 
 import android.database.Cursor
+import org.jetbrains.annotations.TestOnly
 import org.smartregister.dao.AbstractDao
 import org.smartregister.dao.AbstractDao.DataMap
+import org.smartregister.repository.Repository
 import org.smartregister.uniceftunisia.reporting.ReportsDao.SqlQueries.DISTINCT_REPORT_MONTHS_SQL
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTarget
 import org.smartregister.uniceftunisia.reporting.annual.coverage.domain.CoverageTargetType
@@ -17,7 +19,6 @@ import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsRepositor
 object ReportsDao : AbstractDao() {
 
     object SqlQueries {
-
         const val ALL_SENT_REPORT_MONTHS_SQL = """
             SELECT _id,
                    indicator_code,
@@ -90,7 +91,7 @@ object ReportsDao : AbstractDao() {
         """
 
         fun coverageTargetSql(year: Int) = """
-            SELECT * 
+            SELECT target_type, year, target
             FROM annual_coverage_target
             WHERE year = '$year'
         """
@@ -212,5 +213,10 @@ object ReportsDao : AbstractDao() {
 
         }
         return result.toList().filterNotNull()
+    }
+
+    @TestOnly
+    internal fun updateRepository(repository: Repository) {
+        setRepository(repository)
     }
 }
