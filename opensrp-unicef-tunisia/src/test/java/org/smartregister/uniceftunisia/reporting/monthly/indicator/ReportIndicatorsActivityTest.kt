@@ -25,6 +25,7 @@ import java.io.Serializable
 @RunWith(RobolectricTestRunner::class)
 @Config(application = TestUnicefTunisiaApplication::class)
 class ReportIndicatorsActivityTest {
+
     private lateinit var activityController: ActivityController<ReportIndicatorsActivity>
     private lateinit var reportIndicatorsActivity: ReportIndicatorsActivity
 
@@ -36,13 +37,12 @@ class ReportIndicatorsActivityTest {
             putExtra(MONTHLY_TALLIES, getSentMonthlyTallies().associateBy { it.indicator } as Serializable)
         }
         activityController = Robolectric.buildActivity(ReportIndicatorsActivity::class.java, intent)
-
+        reportIndicatorsActivity = activityController.get()
     }
 
     @Test
     fun `Should start activity successfully`() {
         activityController.create()
-        reportIndicatorsActivity = activityController.get()
         assertEquals("December 2020 Draft", reportIndicatorsActivity.findViewById<TextView>(R.id.yearMonthTextView).text)
         assertEquals(3, reportIndicatorsActivity.reportIndicatorsViewModel.monthlyTalliesMap.value!!.size)
     }
@@ -50,11 +50,18 @@ class ReportIndicatorsActivityTest {
     @Test
     fun `Should finish activity when back button is clicked`() {
         activityController.create()
-        reportIndicatorsActivity = activityController.get()
         reportIndicatorsActivity.findViewById<ImageButton>(R.id.backButton).performClick()
         val startedIntent: Intent = shadowOf(reportIndicatorsActivity).nextStartedActivity
         val shadowIntent = shadowOf(startedIntent)
         assertEquals(MonthlyReportsActivity::class.java, shadowIntent.intentClass)
         assertTrue(reportIndicatorsActivity.isFinishing)
+    }
+
+    @Test
+    fun `Should navigate to form fragment`() {
+        activityController.create().resume()
+        val label = reportIndicatorsActivity.navController.currentBackStackEntry?.destination?.label
+        assertEquals("Report Indicators Form", label)
+        assertEquals(reportIndicatorsActivity.navController.currentDestination?.id, R.id.reportIndicatorsFormFragment)
     }
 }
