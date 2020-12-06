@@ -2,6 +2,7 @@ package org.smartregister.uniceftunisia.reporting.monthly
 
 import android.widget.TextView
 import com.google.android.material.tabs.TabLayout
+import io.mockk.mockkObject
 import io.mockk.unmockkAll
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -12,11 +13,15 @@ import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.android.controller.ActivityController
+import org.robolectric.annotation.Config
 import org.smartregister.Context
 import org.smartregister.uniceftunisia.R
+import org.smartregister.uniceftunisia.TestUnicefTunisiaApplication
+import org.smartregister.uniceftunisia.reporting.ReportsDao
 import org.smartregister.uniceftunisia.reporting.common.ReportingUtils.dateFormatter
 
 @RunWith(RobolectricTestRunner::class)
+@Config(application = TestUnicefTunisiaApplication::class)
 class MonthlyReportsActivityTest {
 
     private lateinit var tabLayout: TabLayout
@@ -28,6 +33,7 @@ class MonthlyReportsActivityTest {
     @Before
     fun `Before every test`() {
         //Set current user
+        mockkObject(ReportsDao)
         Context.getInstance().allSharedPreferences().updateANMUserName("demo")
         Context.getInstance().allSharedPreferences().updateANMPreferredName("demo", "Health Worker")
         monthlyReportsActivity = monthlyReportsActivityController.get()
@@ -38,6 +44,7 @@ class MonthlyReportsActivityTest {
     @After
     fun `After every test`() {
         unmockkAll()
+        monthlyReportsActivityController.pause().stop().destroy();
     }
 
     @Test

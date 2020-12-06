@@ -12,7 +12,9 @@ import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.controller.ActivityController
+import org.robolectric.annotation.Config
 import org.smartregister.uniceftunisia.R
+import org.smartregister.uniceftunisia.TestUnicefTunisiaApplication
 import org.smartregister.uniceftunisia.reporting.ReportingTestDataProvider.getSentMonthlyTallies
 import org.smartregister.uniceftunisia.reporting.common.MONTHLY_TALLIES
 import org.smartregister.uniceftunisia.reporting.common.SHOW_DATA
@@ -21,6 +23,7 @@ import org.smartregister.uniceftunisia.reporting.monthly.MonthlyReportsActivity
 import java.io.Serializable
 
 @RunWith(RobolectricTestRunner::class)
+@Config(application = TestUnicefTunisiaApplication::class)
 class ReportIndicatorsActivityTest {
     private lateinit var activityController: ActivityController<ReportIndicatorsActivity>
     private lateinit var reportIndicatorsActivity: ReportIndicatorsActivity

@@ -3,21 +3,31 @@ package org.smartregister.uniceftunisia.reporting.register
 import android.view.View
 import android.widget.ImageView
 import android.widget.ListView
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 import org.smartregister.uniceftunisia.R
+import org.smartregister.uniceftunisia.TestUnicefTunisiaApplication
 import org.smartregister.uniceftunisia.activity.ChildRegisterActivity
 import org.smartregister.uniceftunisia.application.UnicefTunisiaApplication
 
 @RunWith(RobolectricTestRunner::class)
+@Config(application = TestUnicefTunisiaApplication::class)
 class ReportRegisterActivityTest {
 
-    private val reportRegisterActivity: ReportRegisterActivity = Robolectric.buildActivity(ReportRegisterActivity::class.java)
-            .create().resume().get()
+    private val controller = Robolectric.buildActivity(ReportRegisterActivity::class.java)
+    private lateinit var reportRegisterActivity: ReportRegisterActivity
+
+    @Before
+    fun `Before every test`() {
+        reportRegisterActivity = controller.create().resume().get()
+    }
 
     @Test
     fun `Should launch activity and populate list view`() {
@@ -48,5 +58,10 @@ class ReportRegisterActivityTest {
         assertEquals(reportSyncImageView.visibility, View.GONE)
         val syncCompletePreference = UnicefTunisiaApplication.getInstance().context().allSharedPreferences().getPreference("syncComplete")
         assertEquals("false", syncCompletePreference)
+    }
+
+    @After
+    fun `After every test`() {
+        controller.pause().stop().destroy()
     }
 }
