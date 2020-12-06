@@ -22,7 +22,7 @@ class IndicatorPositionRepository private constructor() : BaseRepository() {
 
     private val application = UnicefTunisiaApplication.getInstance()
 
-    private val sharePreference = Utils.getAllSharedPreferences()
+    private val allSharedPreferences = Utils.getAllSharedPreferences()
 
     private object Constants {
         const val TABLE_NAME = "indicator_position"
@@ -47,11 +47,10 @@ class IndicatorPositionRepository private constructor() : BaseRepository() {
         """
     }
 
-
     fun createTable(database: SQLiteCipherDatabase) = database.execSQL(TableQueries.CREATE_TABLE_SQL)
 
     fun populateIndicatorPosition(database: SQLiteCipherDatabase, oldVersion: Int, newVersion: Int) {
-        val indicatorPositionPref = sharePreference.getPreference(Constants.INDICATOR_POSITION_PREF)
+        val indicatorPositionPref = allSharedPreferences.getPreference(Constants.INDICATOR_POSITION_PREF)
         if (!indicatorPositionPref.isNullOrEmpty() && newVersion > oldVersion
                 && newVersion > indicatorPositionPref.toInt()) {
             database.run {
@@ -66,7 +65,7 @@ class IndicatorPositionRepository private constructor() : BaseRepository() {
                 object : TypeToken<List<IndicatorPosition>>() {}.type)
         CoroutineScope(Dispatchers.IO).launch {
             if (saveIndicatorPositions(database, indicatorIndices))
-                sharePreference.savePreference(Constants.INDICATOR_POSITION_PREF, newVersion.toString())
+                allSharedPreferences.savePreference(Constants.INDICATOR_POSITION_PREF, newVersion.toString())
         }
     }
 

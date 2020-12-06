@@ -17,7 +17,7 @@ import org.smartregister.uniceftunisia.reporting.monthly.domain.MonthlyTally
 
 class ReportIndicatorsActivity : MultiLanguageActivity() {
 
-    private val reportIndicatorsViewModel by viewModels<ReportIndicatorsViewModel>
+    val reportIndicatorsViewModel by viewModels<ReportIndicatorsViewModel>
     { ReportingUtils.createFor(ReportIndicatorsViewModel()) }
 
     lateinit var navController: NavController
