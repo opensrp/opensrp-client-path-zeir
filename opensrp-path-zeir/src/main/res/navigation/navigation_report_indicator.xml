@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/reportIndicatorsFormFragment">
+    <fragment
+        android:id="@+id/reportIndicatorsSummaryFragment"
+        android:name="org.smartregister.pathzeir.reporting.monthly.indicator.summary.ReportIndicatorsSummaryFragment"
+        android:label="@string/report_indicators_summary"
+        tools:layout="@layout/fragment_report_indicators_summary" />
+    <fragment
+        android:id="@+id/reportIndicatorsFormFragment"
+        android:name="org.smartregister.pathzeir.reporting.monthly.indicator.form.ReportIndicatorsFormFragment"
+        android:label="@string/report_indicators_form"
+        tools:layout="@layout/fragment_report_indicators_form" />
+    <dialog
+        android:id="@+id/confirmSendDraftReportsDialog"
+        android:name="org.smartregister.pathzeir.reporting.monthly.draft.ConfirmSendDraftDialog"
+        android:label="@string/confirm_send_draft_reports"
+        tools:layout="@layout/dialog_fragment_send_monthly" />
+
+</navigation>

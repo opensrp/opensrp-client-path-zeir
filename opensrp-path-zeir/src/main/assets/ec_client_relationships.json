@@ -1,0 +1,7 @@
+[
+  {
+    "client_relationship": "mother",
+    "field": "entity_id",
+    "comment": "Mother relational id"
+  }
+]
