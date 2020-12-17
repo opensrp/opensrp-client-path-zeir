@@ -58,7 +58,8 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
         } catch (JSONException e) {
             Timber.e(e, "Encounter type missing");
         }
-        if (AppConstants.EventType.CHILD_REGISTRATION.equalsIgnoreCase(encounterType)) {
+        if (encounterType != null && (encounterType.equalsIgnoreCase(AppConstants.EventType.CHILD_REGISTRATION)
+                || encounterType.equalsIgnoreCase(AppConstants.EventType.UPDATE_CHILD_REGISTRATION))) {
             List<LocationTag> tags = getDistrictTags();
             String districtId = (tags != null && tags.size() > 0) ? tags.get(0).getLocationId() : "";
             populateLocationSpinner(districtId, HOME_FACILITY);

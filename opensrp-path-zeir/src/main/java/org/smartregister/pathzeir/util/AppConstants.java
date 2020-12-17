@@ -67,6 +67,7 @@ public class AppConstants {
         public static final String CHW_PHONE_NUMBER = "chw_phone_number";
         public static final String SUB_TYPE = "sub_type";
         public static final String LOCATION = "location";
+        public static final String RESIDENTIAL_AREA = "residential_area";
     }
 
     public static final class FormTitleUtil {

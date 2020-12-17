@@ -33,6 +33,7 @@ import static org.smartregister.pathzeir.util.AppConstants.KEY.REGISTRATION_DATE
 import static org.smartregister.pathzeir.util.AppConstants.KEY.RELATIONALID;
 import static org.smartregister.pathzeir.util.AppConstants.KEY.RELATIONAL_ID;
 import static org.smartregister.pathzeir.util.AppConstants.KEY.RESIDENTIAL_ADDRESS;
+import static org.smartregister.pathzeir.util.AppConstants.KEY.RESIDENTIAL_AREA;
 import static org.smartregister.pathzeir.util.AppConstants.KEY.ZEIR_ID;
 import static org.smartregister.pathzeir.util.TableUtil.getAllClientColumn;
 import static org.smartregister.pathzeir.util.TableUtil.getChildDetailsColumn;
@@ -80,6 +81,7 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 getChildDetailsColumn(INACTIVE),
                 getChildDetailsColumn(LOST_TO_FOLLOW_UP),
                 getChildDetailsColumn(PHYSICAL_LANDMARK),
+                getChildDetailsColumn(RESIDENTIAL_AREA),
                 "mother.first_name                     as " + MOTHER_FIRST_NAME,
                 "mother.last_name                      as " + MOTHER_LAST_NAME,
                 "mother.dob                            as " + MOTHER_DOB,

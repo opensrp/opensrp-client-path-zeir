@@ -350,4 +350,5 @@
     <string name="dropout_reports">Dropout Reports</string>
     <string name="hia2_reports">HIA 2 Reports</string>
     <string name="birth_health_facility">Health facility of birth</string>
+    <string name="update_birth_registration">Update Birth Registration</string>
 </resources>
