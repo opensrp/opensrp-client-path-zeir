@@ -36,6 +36,7 @@ import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.Utils;
 import org.smartregister.client.utils.domain.Form;
 import org.smartregister.domain.FetchStatus;
+import org.smartregister.pathzeir.reporting.dropuout.DropoutReportsActivity;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.reporting.service.IndicatorGeneratorIntentService;
 import org.smartregister.pathzeir.R;
@@ -64,6 +65,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
     private LinearLayout outOfAreaMenu;
     private LinearLayout registerView;
     private LinearLayout reportView;
+    private LinearLayout droputReportsView;
     private TextView loggedInUserTextView;
     private TextView userInitialsTextView;
     private TextView syncTextView;
@@ -121,6 +123,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         outOfAreaMenu = activity.findViewById(R.id.out_of_area_menu);
         registerView = activity.findViewById(R.id.register_view);
         reportView = activity.findViewById(R.id.report_view);
+        droputReportsView = activity.findViewById(R.id.dropout_reports);
         loggedInUserTextView = activity.findViewById(R.id.logged_in_user_text_view);
         userInitialsTextView = activity.findViewById(R.id.user_initials_text_view);
         syncTextView = activity.findViewById(R.id.sync_text_view);
@@ -198,6 +201,16 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
                 return;
             }
             Intent intent = new Intent(activityWeakReference.get(), ReportRegisterActivity.class);
+            activityWeakReference.get().startActivity(intent);
+            drawer.closeDrawer(GravityCompat.START);
+        });
+
+        droputReportsView.setOnClickListener(v-> {
+            if (activityWeakReference.get() instanceof DropoutReportsActivity) {
+                drawer.closeDrawer(GravityCompat.START);
+                return;
+            }
+            Intent intent = new Intent(activityWeakReference.get(), DropoutReportsActivity.class);
             activityWeakReference.get().startActivity(intent);
             drawer.closeDrawer(GravityCompat.START);
         });

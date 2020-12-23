@@ -351,4 +351,17 @@
     <string name="hia2_reports">HIA 2 Reports</string>
     <string name="birth_health_facility">Health facility of birth</string>
     <string name="update_birth_registration">Update Birth Registration</string>
+
+    <string name="bcg_measles_cumulative">BCG &#8211; Measles Cumulative</string>
+    <string name="bcg_measles_cumulative_dropout_report">BCG &#8211; Measles Cumulative Dropout Report</string>
+    <string name="bcg_measles_cohort">BCG &#8211; Measles Cohort</string>
+    <string name="bcg_measles_cohort_dropout_report">BCG &#8211; Measles Cohort Dropout Report</string>
+    <string name="penta_cumulative">Penta Cumulative</string>
+    <string name="penta_cumulative_dropout_report">Penta Cumulative Dropout Report</string>
+    <string name="penta_cohort">Penta Cohort</string>
+    <string name="penta_cohort_dropout_report">Penta Cohort Dropout Report</string>
+    <string name="measles_cumulative">Measles Cumulative</string>
+    <string name="measles_cumulative_dropout_report">Measles Cumulative Dropout Report</string>
+    <string name="cumulative_dropout">Cumulative Dropout (YTD): </string>
+    <string name="pls_set_cso_target">Please set the CSO Target first.</string>
 </resources>
