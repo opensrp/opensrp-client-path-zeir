@@ -51,7 +51,17 @@
             android:theme="@style/ChildTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".reporting.coverage.CohortCoverageReportActivity"
+            android:name=".reporting.coverage.cohort.CohortCoverageReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChildTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".reporting.coverage.cso.AnnualCoverageReportCsoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChildTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".reporting.coverage.cso.FacilityCumulativeCoverageReportActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ChildTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />

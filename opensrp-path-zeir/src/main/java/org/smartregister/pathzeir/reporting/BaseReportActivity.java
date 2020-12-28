@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -68,7 +69,8 @@ public abstract class BaseReportActivity extends BaseActivity implements Coverag
     @Override
     public void onResume() {
         super.onResume();
-//        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 //        LinearLayout hia2 = (LinearLayout) drawer.findViewById(getParentNav());
 //        hia2.setBackgroundColor(getResources().getColor(R.color.tintcolor));
 

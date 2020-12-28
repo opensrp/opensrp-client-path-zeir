@@ -398,4 +398,12 @@
     <string name="annual_coverage_report_cso">Annual Coverage Report - CSO</string>
     <string name="annual_coverage_report_zeir">Annual Coverage Report - ZEIR</string>
     <string name="facility_cumulative_coverage_report">Facility Cumulative Coverage Report</string>
+
+    <string name="total_vaccine">Total\n%1$s</string>
+    <string name="total_cum">Cum.\n%1$s</string>
+    <string name="total_dropout">Drop\nOut</string>
+    <string name="total_dropout_percentage">Drop\nOut %</string>
+    <string name="total_dropout_penta">Drop\nOut (1–3)</string>
+    <string name="total_cum_dropout">Cum\nDrop\nOut</string>
+    <string name="total_cum_dropout_percentage">Cum\nDrop\nOut %</string>
 </resources>

@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".reporting.coverage.cohort.CohortCoverageReportActivity">
+    tools:context=".reporting.coverage.cso.AnnualCoverageReportCsoActivity">
 
-    <include layout="@layout/toolbar_cohort_coverage_report" />
+    <include layout="@layout/toolbar_annual_coverage_report_cso" />
 
     <FrameLayout
         android:id="@+id/frameLayout"

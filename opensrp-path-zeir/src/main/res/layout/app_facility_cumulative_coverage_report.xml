@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".reporting.coverage.cohort.CohortCoverageReportActivity">
+    tools:context=".reporting.coverage.cso.FacilityCumulativeCoverageReportActivity">
 
-    <include layout="@layout/toolbar_cohort_coverage_report" />
+    <include layout="@layout/toolbar_facility_cumulative_coreage_report" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -17,7 +17,7 @@
         android:background="@color/white"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/report_padded_list_view" />
+        <include layout="@layout/facility_cumulative_report" />
     </FrameLayout>
 
     <include layout="@layout/notification_base" />

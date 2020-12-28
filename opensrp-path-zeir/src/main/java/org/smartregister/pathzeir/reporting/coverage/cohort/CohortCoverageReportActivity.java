@@ -1,4 +1,4 @@
-package org.smartregister.pathzeir.reporting.coverage;
+package org.smartregister.pathzeir.reporting.coverage.cohort;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -16,6 +16,7 @@ import org.smartregister.immunization.db.VaccineRepo;
 import org.smartregister.pathzeir.R;
 import org.smartregister.pathzeir.application.ZeirApplication;
 import org.smartregister.pathzeir.reporting.BaseReportActivity;
+import org.smartregister.pathzeir.reporting.coverage.CoverageReportsActivity;
 import org.smartregister.pathzeir.reporting.dropuout.domain.Cohort;
 import org.smartregister.pathzeir.reporting.dropuout.domain.CohortIndicator;
 import org.smartregister.pathzeir.reporting.dropuout.domain.CoverageHolder;
@@ -48,9 +49,9 @@ public class CohortCoverageReportActivity extends BaseReportActivity {
 
         LocationSwitcherToolbar toolbar = (LocationSwitcherToolbar) getToolbar();
         toolbar.setNavigationOnClickListener(v -> {
-            Intent intent = new Intent(CohortCoverageReportActivity.this, CoverageReportsActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+//            Intent intent = new Intent(CohortCoverageReportActivity.this, CoverageReportsActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(intent);
             finish();
         });
 
