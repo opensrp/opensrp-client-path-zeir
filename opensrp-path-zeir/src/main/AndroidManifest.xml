@@ -104,6 +104,31 @@
             android:screenOrientation="portrait"
             android:theme="@style/ChildTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".reporting.dropuout.BcgMeaslesCohortDropoutReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChildTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".reporting.dropuout.PentaCumulativeDropoutReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChildTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".reporting.dropuout.PentaCohortDropoutReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChildTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".reporting.dropuout.MeaslesCumulativeDropoutReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChildTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".reporting.dropuout.BcgMeaslesCumulativeDropoutReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChildTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -128,9 +153,12 @@
         <service android:name="org.smartregister.sync.intent.SyncIntentService" />
         <service android:name=".service.intent.ArchiveChildrenAgedAboveFiveIntentService" />
         <service android:name=".service.intent.AppVaccineScheduleUpdateIntentService" />
+        <service android:name=".reporting.dropuout.intent.CoverageDropoutIntentService" />
         <service
             android:name="org.smartregister.immunization.service.intent.RecurringIntentService"
             android:exported="false" />
+
+        <receiver android:name=".reporting.dropuout.receiver.CoverageDropoutBroadcastReceiver" />
 
         <uses-library
             android:name="org.apache.http.legacy"

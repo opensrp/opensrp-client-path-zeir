@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.smartregister.child.presenter.BaseChildDetailsPresenter.CardStatus;
@@ -16,6 +17,8 @@ import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.domain.Client;
 import org.smartregister.domain.db.EventClient;
+import org.smartregister.immunization.db.VaccineRepo;
+import org.smartregister.immunization.repository.VaccineRepository;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.pathzeir.BuildConfig;
 import org.smartregister.pathzeir.application.ZeirApplication;
@@ -25,6 +28,7 @@ import org.smartregister.util.JsonFormUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
@@ -135,5 +139,81 @@ public class AppUtils extends Utils {
         } catch (Exception e) {
             Timber.e(e);
         }
+    }
+
+    public static boolean isSameMonthAndYear(Date date1, Date date2) {
+        if (date1 != null && date2 != null) {
+            DateTime dateTime1 = new DateTime(date1);
+            DateTime dateTime2 = new DateTime(date2);
+
+            return dateTime1.getMonthOfYear() == dateTime2.getMonthOfYear() && dateTime1.getYear() == dateTime2.getYear();
+        }
+        return false;
+    }
+
+    public static Date getCohortEndDate(String vaccine, Date startDate) {
+
+        if (StringUtils.isBlank(vaccine) || startDate == null) {
+            return null;
+        }
+
+        Calendar endDateCalendar = Calendar.getInstance();
+        endDateCalendar.setTime(startDate);
+
+        final String opv0 = VaccineRepository.addHyphen(VaccineRepo.Vaccine.opv0.display().toLowerCase());
+
+        final String rota1 = VaccineRepository.addHyphen(VaccineRepo.Vaccine.rota1.display().toLowerCase());
+        final String rota2 = VaccineRepository.addHyphen(VaccineRepo.Vaccine.rota2.display().toLowerCase());
+
+        final String measles2 = VaccineRepository.addHyphen(VaccineRepo.Vaccine.measles2.display().toLowerCase());
+        final String mr2 = VaccineRepository.addHyphen(VaccineRepo.Vaccine.mr2.display().toLowerCase());
+
+        if (vaccine.equals(opv0)) {
+            endDateCalendar.add(Calendar.DATE, 13);
+        } else if (vaccine.equals(rota1) || vaccine.equals(rota2)) {
+            endDateCalendar.add(Calendar.MONTH, 8);
+        } else if (vaccine.equals(measles2) || vaccine.equals(mr2)) {
+            endDateCalendar.add(Calendar.YEAR, 2);
+        } else {
+            endDateCalendar.add(Calendar.YEAR, 1);
+        }
+
+        return endDateCalendar.getTime();
+    }
+
+    public static Date getLastDayOfMonth(Date month) {
+        if (month == null) {
+            return null;
+        }
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(month);
+        c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
+        return c.getTime();
+    }
+
+    public static boolean isSameYear(Date date1, Date date2) {
+        if (date1 != null && date2 != null) {
+            DateTime dateTime1 = new DateTime(date1);
+            DateTime dateTime2 = new DateTime(date2);
+
+            return dateTime1.getYear() == dateTime2.getYear();
+        }
+        return false;
+    }
+
+    public static Date getCohortEndDate(VaccineRepo.Vaccine vaccine, Date startDate) {
+        if (vaccine == null || startDate == null) {
+            return null;
+        }
+        String vaccineName = VaccineRepository.addHyphen(vaccine.display().toLowerCase());
+        return getCohortEndDate(vaccineName, startDate);
+
+    }
+
+    public static int yearFromDate(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.YEAR);
     }
 }

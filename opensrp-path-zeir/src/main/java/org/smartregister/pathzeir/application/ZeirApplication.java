@@ -47,6 +47,13 @@ import org.smartregister.pathzeir.activity.LoginActivity;
 import org.smartregister.pathzeir.job.AppJobCreator;
 import org.smartregister.pathzeir.processor.AppClientProcessorForJava;
 import org.smartregister.pathzeir.reporting.common.ReportIndicatorsProcessor;
+import org.smartregister.pathzeir.reporting.dropuout.receiver.CoverageDropoutBroadcastReceiver;
+import org.smartregister.pathzeir.reporting.dropuout.repository.CohortIndicatorRepository;
+import org.smartregister.pathzeir.reporting.dropuout.repository.CohortPatientRepository;
+import org.smartregister.pathzeir.reporting.dropuout.repository.CohortRepository;
+import org.smartregister.pathzeir.reporting.dropuout.repository.CumulativeIndicatorRepository;
+import org.smartregister.pathzeir.reporting.dropuout.repository.CumulativePatientRepository;
+import org.smartregister.pathzeir.reporting.dropuout.repository.CumulativeRepository;
 import org.smartregister.pathzeir.repository.AppChildRegisterQueryProvider;
 import org.smartregister.pathzeir.repository.ChildAlertUpdatedRepository;
 import org.smartregister.pathzeir.repository.ClientRegisterTypeRepository;
@@ -87,6 +94,12 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
     private ClientRegisterTypeRepository registerTypeRepository;
     private ChildAlertUpdatedRepository childAlertUpdatedRepository;
     private RecurringServiceTypeRepository recurringServiceRepository;
+    private CohortRepository cohortRepository;
+    private CohortPatientRepository cohortPatientRepository;
+    private CohortIndicatorRepository cohortIndicatorRepository;
+    private CumulativeRepository cumulativeRepository;
+    private CumulativePatientRepository cumulativePatientRepository;
+    private CumulativeIndicatorRepository cumulativeIndicatorRepository;
 
     public static JsonSpecHelper getJsonSpecHelper() {
         return jsonSpecHelper;
@@ -235,6 +248,7 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
         fixHardcodedVaccineConfiguration();
 
         ConfigurableViewsLibrary.init(context);
+        CoverageDropoutBroadcastReceiver.init(this);
 
         ChildLibrary.init(context, getRepository(), getMetadata(), BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
         ChildLibrary childLibrary = ChildLibrary.getInstance();
@@ -452,5 +466,48 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
     public RecurringServiceRecordRepository getRecurringServiceRecordRepository() {
         return ImmunizationLibrary.getInstance().recurringServiceRecordRepository();
     }
+
+    public CohortRepository cohortRepository() {
+        if (cohortRepository == null) {
+            cohortRepository = new CohortRepository();
+        }
+        return cohortRepository;
+    }
+
+    public CohortPatientRepository cohortPatientRepository() {
+        if (cohortPatientRepository == null) {
+            cohortPatientRepository = new CohortPatientRepository();
+        }
+        return cohortPatientRepository;
+    }
+
+    public CohortIndicatorRepository cohortIndicatorRepository() {
+        if (cohortIndicatorRepository == null) {
+            cohortIndicatorRepository = new CohortIndicatorRepository();
+        }
+        return cohortIndicatorRepository;
+    }
+
+    public CumulativeRepository cumulativeRepository() {
+        if (cumulativeRepository == null) {
+            cumulativeRepository = new CumulativeRepository();
+        }
+        return cumulativeRepository;
+    }
+
+    public CumulativePatientRepository cumulativePatientRepository() {
+        if (cumulativePatientRepository == null) {
+            cumulativePatientRepository = new CumulativePatientRepository();
+        }
+        return cumulativePatientRepository;
+    }
+
+    public CumulativeIndicatorRepository cumulativeIndicatorRepository() {
+        if (cumulativeIndicatorRepository == null) {
+            cumulativeIndicatorRepository = new CumulativeIndicatorRepository();
+        }
+        return cumulativeIndicatorRepository;
+    }
+
 }
 

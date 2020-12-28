@@ -1,6 +1,7 @@
 package org.smartregister.pathzeir.repository;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -24,6 +25,12 @@ import org.smartregister.pathzeir.BuildConfig;
 import org.smartregister.pathzeir.application.ZeirApplication;
 import org.smartregister.pathzeir.reporting.annual.coverage.repository.AnnualReportRepository;
 import org.smartregister.pathzeir.reporting.annual.coverage.repository.VaccineCoverageTargetRepository;
+import org.smartregister.pathzeir.reporting.dropuout.repository.CohortIndicatorRepository;
+import org.smartregister.pathzeir.reporting.dropuout.repository.CohortPatientRepository;
+import org.smartregister.pathzeir.reporting.dropuout.repository.CohortRepository;
+import org.smartregister.pathzeir.reporting.dropuout.repository.CumulativeIndicatorRepository;
+import org.smartregister.pathzeir.reporting.dropuout.repository.CumulativePatientRepository;
+import org.smartregister.pathzeir.reporting.dropuout.repository.CumulativeRepository;
 import org.smartregister.pathzeir.reporting.indicatorposition.IndicatorPositionRepository;
 import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository;
 import org.smartregister.pathzeir.util.AppConstants;
@@ -44,6 +51,8 @@ import org.smartregister.repository.UniqueIdRepository;
 import org.smartregister.util.DatabaseMigrationUtils;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import timber.log.Timber;
 
@@ -214,6 +223,8 @@ public class ZeirRepository extends Repository {
         upgradeToVersion7OutOfArea(database);
         upgradeToVersion7UpgradeTables(database);
         upgradeToVersion7RemoveUnnecessaryTables(database);
+        // FIXME: Call it from the appropriate place
+        upgradeToVersion10(database);
     }
 
     /**
@@ -361,4 +372,32 @@ public class ZeirRepository extends Repository {
             return (BuildConfig.VERSION_CODE > savedVersion);
         }
     }
+
+    private void upgradeToVersion10(SQLiteDatabase database) {
+        try {
+
+            CohortRepository.createTable(database);
+            CohortIndicatorRepository.createTable(database);
+            CohortPatientRepository.createTable(database);
+
+            CumulativeRepository.createTable(database);
+            CumulativeIndicatorRepository.createTable(database);
+            CumulativePatientRepository.createTable(database);
+
+//            dumpHIA2IndicatorsCSV(database);
+
+        } catch (Exception e) {
+            Timber.e("upgradeToVersion10 %s", e.getMessage());
+        }
+    }
+
+    /*private void dumpHIA2IndicatorsCSV(SQLiteDatabase db) {
+        List<Map<String, String>> csvData = org.smartregister.util.Utils.populateTableFromCSV(
+                context,
+                HIA2IndicatorsRepository.INDICATORS_CSV_FILE,
+                HIA2IndicatorsRepository.CSV_COLUMN_MAPPING);
+        HIA2IndicatorsRepository hIA2IndicatorsRepository = VaccinatorApplication.getInstance()
+                .hIA2IndicatorsRepository();
+        hIA2IndicatorsRepository.save(db, csvData);
+    }*/
 }
