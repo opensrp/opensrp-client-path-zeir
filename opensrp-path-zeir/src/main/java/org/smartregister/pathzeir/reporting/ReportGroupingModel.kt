@@ -16,6 +16,12 @@ enum class DropoutReportGroup {
     MEASLES_CUMULATIVE
 }
 
+enum class CoverageReportGroup {
+    COHORT_COVERAGE_REPORT,
+    ANNUAL_REPORT_CSO,
+    ANNUAL_REPORT_ZEIR
+}
+
 class ReportGroupingModel(private val context: Context) {
     val reportGroupings: List<ReportGrouping>
         get() = listOf(
@@ -54,4 +60,25 @@ class DropoutReportGroupingModel(private val context: Context) {
             var displayNameCohort : String?,
             val reportGroupCumulative: DropoutReportGroup,
             var reportGroupCohort: DropoutReportGroup?,)
+}
+
+class CoverageReportGroupingModel(private val context: Context) {
+    val reportGroupings: List<CoverageReportGrouping>
+        get() = listOf(
+                CoverageReportGrouping(
+                        displayName = context.getString(R.string.cohort_coverage_report),
+                        reportGroup = CoverageReportGroup.COHORT_COVERAGE_REPORT
+                ),
+                CoverageReportGrouping(
+                        displayName = context.getString(R.string.annual_coverage_report_cso),
+                        reportGroup = CoverageReportGroup.ANNUAL_REPORT_CSO
+                ),
+                CoverageReportGrouping(
+                        displayName = context.getString(R.string.annual_coverage_report_zeir),
+                        reportGroup = CoverageReportGroup.ANNUAL_REPORT_ZEIR
+                ),
+        )
+
+    data class CoverageReportGrouping(val displayName: String, val reportGroup: CoverageReportGroup)
+
 }

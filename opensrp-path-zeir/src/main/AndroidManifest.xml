@@ -46,6 +46,16 @@
             android:theme="@style/ChildTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
+            android:name=".reporting.coverage.CoverageReportsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChildTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".reporting.coverage.CohortCoverageReportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChildTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
             android:name="org.smartregister.pathzeir.activity.ChildImmunizationActivity"
             android:label="@string/title_activity_child_immunization"
             android:screenOrientation="portrait"
