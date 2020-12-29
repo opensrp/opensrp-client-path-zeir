@@ -46,6 +46,16 @@
             android:theme="@style/ChildTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
+            android:name=".reporting.stock.ZeirStockActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChildTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name="org.smartregister.stock.activity.StockControlActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChildTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
             android:name=".reporting.coverage.CoverageReportsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ChildTheme.NoActionBar"
@@ -179,6 +189,7 @@
         <service android:name=".service.intent.ArchiveChildrenAgedAboveFiveIntentService" />
         <service android:name=".service.intent.AppVaccineScheduleUpdateIntentService" />
         <service android:name=".reporting.dropuout.intent.CoverageDropoutIntentService" />
+        <service android:name="org.smartregister.stock.sync.StockSyncIntentService" />
         <service
             android:name="org.smartregister.immunization.service.intent.RecurringIntentService"
             android:exported="false" />

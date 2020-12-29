@@ -19,7 +19,9 @@ import org.smartregister.growthmonitoring.repository.WeightRepository;
 import org.smartregister.growthmonitoring.repository.WeightZScoreRepository;
 import org.smartregister.immunization.repository.RecurringServiceRecordRepository;
 import org.smartregister.immunization.repository.RecurringServiceTypeRepository;
+import org.smartregister.immunization.repository.VaccineNameRepository;
 import org.smartregister.immunization.repository.VaccineRepository;
+import org.smartregister.immunization.repository.VaccineTypeRepository;
 import org.smartregister.immunization.util.IMDatabaseUtils;
 import org.smartregister.pathzeir.BuildConfig;
 import org.smartregister.pathzeir.application.ZeirApplication;
@@ -48,6 +50,10 @@ import org.smartregister.repository.PlanDefinitionSearchRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.repository.SettingsRepository;
 import org.smartregister.repository.UniqueIdRepository;
+import org.smartregister.stock.StockLibrary;
+import org.smartregister.stock.repository.StockRepository;
+import org.smartregister.stock.repository.StockTypeRepository;
+import org.smartregister.stock.util.StockUtils;
 import org.smartregister.util.DatabaseMigrationUtils;
 
 import java.util.ArrayList;
@@ -223,8 +229,10 @@ public class ZeirRepository extends Repository {
         upgradeToVersion7OutOfArea(database);
         upgradeToVersion7UpgradeTables(database);
         upgradeToVersion7RemoveUnnecessaryTables(database);
-        // FIXME: Call it from the appropriate place
+        // FIXME: These methods are copied from old ZEIR App (PAthRepository). Review and call these from the appropriate place
+        upgradeToVersion7Stock(database);
         upgradeToVersion10(database);
+        upgradeToVersion11Stock(database);
     }
 
     /**
@@ -388,6 +396,29 @@ public class ZeirRepository extends Repository {
 
         } catch (Exception e) {
             Timber.e("upgradeToVersion10 %s", e.getMessage());
+        }
+    }
+
+    private void upgradeToVersion11Stock(SQLiteDatabase db) {
+        try {
+            db.execSQL("DROP TABLE IF EXISTS " + VaccineTypeRepository.VACCINE_Types_TABLE_NAME);
+            StockTypeRepository.createTable(db);
+            StockUtils.populateStockTypesFromAssets(context, StockLibrary.getInstance().getStockTypeRepository(), db);
+            StockRepository.migrateFromOldStockRepository(db, "Stocks");
+
+        } catch (Exception e) {
+            Timber.e("upgradeToVersion11Stock %s", e.getMessage());
+        }
+    }
+
+    private void upgradeToVersion7Stock(SQLiteDatabase db) {
+        try {
+//            db.execSQL("DROP TABLE IF EXISTS  ");
+            StockRepository.createTable(db);
+            VaccineNameRepository.createTable(db);
+            VaccineTypeRepository.createTable(db);
+        } catch (Exception e) {
+            Timber.e("upgradeToVersion7Stock %s", e.getMessage());
         }
     }
 

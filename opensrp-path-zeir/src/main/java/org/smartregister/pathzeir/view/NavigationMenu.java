@@ -38,6 +38,7 @@ import org.smartregister.client.utils.domain.Form;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.pathzeir.reporting.coverage.CoverageReportsActivity;
 import org.smartregister.pathzeir.reporting.dropuout.DropoutReportsActivity;
+import org.smartregister.pathzeir.reporting.stock.ZeirStockActivity;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.reporting.service.IndicatorGeneratorIntentService;
 import org.smartregister.pathzeir.R;
@@ -68,6 +69,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
     private LinearLayout reportView;
     private LinearLayout droputReportsView;
     private LinearLayout coverageReportsView;
+    private LinearLayout stockControlView;
     private TextView loggedInUserTextView;
     private TextView userInitialsTextView;
     private TextView syncTextView;
@@ -127,6 +129,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         reportView = activity.findViewById(R.id.report_view);
         droputReportsView = activity.findViewById(R.id.dropout_reports);
         coverageReportsView = activity.findViewById(R.id.coverage_reports);
+        stockControlView = activity.findViewById(R.id.stock_control);
         loggedInUserTextView = activity.findViewById(R.id.logged_in_user_text_view);
         userInitialsTextView = activity.findViewById(R.id.user_initials_text_view);
         syncTextView = activity.findViewById(R.id.sync_text_view);
@@ -224,6 +227,16 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
                 return;
             }
             Intent intent = new Intent(activityWeakReference.get(), CoverageReportsActivity.class);
+            activityWeakReference.get().startActivity(intent);
+            drawer.closeDrawer(GravityCompat.START);
+        });
+
+        stockControlView.setOnClickListener(v-> {
+            if (activityWeakReference.get() instanceof ZeirStockActivity) {
+                drawer.closeDrawer(GravityCompat.START);
+                return;
+            }
+            Intent intent = new Intent(activityWeakReference.get(), ZeirStockActivity.class);
             activityWeakReference.get().startActivity(intent);
             drawer.closeDrawer(GravityCompat.START);
         });

@@ -54,6 +54,7 @@ import org.smartregister.pathzeir.reporting.dropuout.repository.CohortRepository
 import org.smartregister.pathzeir.reporting.dropuout.repository.CumulativeIndicatorRepository;
 import org.smartregister.pathzeir.reporting.dropuout.repository.CumulativePatientRepository;
 import org.smartregister.pathzeir.reporting.dropuout.repository.CumulativeRepository;
+import org.smartregister.pathzeir.reporting.stock.repository.ZeirStockHelperRepository;
 import org.smartregister.pathzeir.repository.AppChildRegisterQueryProvider;
 import org.smartregister.pathzeir.repository.ChildAlertUpdatedRepository;
 import org.smartregister.pathzeir.repository.ClientRegisterTypeRepository;
@@ -65,6 +66,7 @@ import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.reporting.ReportingLibrary;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Repository;
+import org.smartregister.stock.StockLibrary;
 import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.DrishtiSyncScheduler;
 import org.smartregister.sync.helper.ECSyncHelper;
@@ -273,6 +275,7 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
         JobManager.create(this).addJobCreator(new AppJobCreator());
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
+        StockLibrary.init(context, getRepository(), new ZeirStockHelperRepository(getRepository()));
     }
 
     private ChildMetadata getMetadata() {

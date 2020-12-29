@@ -20,6 +20,7 @@ import org.smartregister.job.SyncServiceJob;
 import org.smartregister.job.SyncSettingsServiceJob;
 import org.smartregister.job.ValidateSyncDataServiceJob;
 import org.smartregister.pathzeir.reporting.dropuout.job.DropoutIntentServiceJob;
+import org.smartregister.pathzeir.reporting.stock.job.StockSyncIntentServiceJob;
 import org.smartregister.pathzeir.service.intent.ArchiveChildrenAgedAboveFiveIntentService;
 import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
 import org.smartregister.sync.intent.SyncIntentService;
@@ -64,6 +65,8 @@ public class AppJobCreator implements JobCreator {
                 return new RecurringServiceJob();
             case DropoutIntentServiceJob.TAG:
                 return new DropoutIntentServiceJob();
+            case StockSyncIntentServiceJob.TAG:
+                return new StockSyncIntentServiceJob();
             default:
                 Timber.w("%s is not declared in Job Creator", tag);
                 return null;

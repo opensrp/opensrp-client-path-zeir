@@ -15,6 +15,7 @@ import org.smartregister.pathzeir.BuildConfig;
 import org.smartregister.pathzeir.job.AppVaccineUpdateJob;
 import org.smartregister.pathzeir.reporting.annual.coverage.job.SyncAnnualReportWorker;
 import org.smartregister.pathzeir.reporting.dropuout.job.DropoutIntentServiceJob;
+import org.smartregister.pathzeir.reporting.stock.job.StockSyncIntentServiceJob;
 import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
 import org.smartregister.view.contract.BaseLoginContract;
 
@@ -64,6 +65,8 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
         AppVaccineUpdateJob.scheduleEverydayAt(AppVaccineUpdateJob.TAG, 1, 20);
         DropoutIntentServiceJob.scheduleJob(DropoutIntentServiceJob.TAG, TimeUnit.MINUTES.toMinutes(1440),
                 getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
+        StockSyncIntentServiceJob.scheduleJob(StockSyncIntentServiceJob .TAG, TimeUnit.MINUTES.toMinutes(1440),
+                getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
 
         SyncAnnualReportWorker.scheduleMonthly();
 
@@ -82,5 +85,6 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
         ArchiveClientsJob.scheduleJobImmediately(ArchiveClientsJob.TAG);
         RecurringServiceJob.scheduleJobImmediately(RecurringServiceJob.TAG);
         DropoutIntentServiceJob.scheduleJobImmediately(DropoutIntentServiceJob.TAG);
+        StockSyncIntentServiceJob.scheduleJobImmediately(StockSyncIntentServiceJob.TAG);
     }
 }
