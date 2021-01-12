@@ -49,6 +49,8 @@ public class ChildRegisterFragment extends BaseChildRegisterFragment {
                     Constants.RECORD_ACTION.GROWTH.equals(view.getTag(R.id.record_action)));
             registerClickables.setRecordAll(
                     Constants.RECORD_ACTION.VACCINATION.equals(view.getTag(R.id.record_action)));
+            registerClickables.setNextAppointmentDate(view.getTag(R.id.next_appointment_date) != null ? String
+                    .valueOf(view.getTag(R.id.next_appointment_date)) : "");
         }
 
         CommonPersonObjectClient client = null;
