@@ -367,6 +367,37 @@
         }
       },
       {
+        "name": "PCV 3",
+        "type": "PCV",
+        "openmrs_date": {
+          "parent_entity": "162342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "entity": "concept",
+          "entity_id": "1410AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        "openmrs_calculate": {
+          "parent_entity": "162342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "entity": "concept",
+          "entity_id": "1418AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "calculation": 3
+        },
+        "schedule": {
+          "due": [
+            {
+              "reference": "prerequisite",
+              "prerequisite": "PCV 2",
+              "offset": "+28d",
+              "window": "+10d"
+            }
+          ],
+          "expiry": [
+            {
+              "reference": "dob",
+              "offset": "+5y"
+            }
+          ]
+        }
+      },
+      {
         "name": "Penta 3",
         "type": "Penta",
         "openmrs_date": {
@@ -398,25 +429,24 @@
         }
       },
       {
-        "name": "PCV 3",
-        "type": "PCV",
+        "name": "IPV",
+        "type": "IPV",
         "openmrs_date": {
-          "parent_entity": "162342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "parent_entity": "",
           "entity": "concept",
-          "entity_id": "1410AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          "entity_id": "ipv"
         },
         "openmrs_calculate": {
-          "parent_entity": "162342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "parent_entity": "",
           "entity": "concept",
-          "entity_id": "1418AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-          "calculation": 3
+          "entity_id": "ipv_calculation",
+          "calculation": 0
         },
         "schedule": {
           "due": [
             {
-              "reference": "prerequisite",
-              "prerequisite": "PCV 2",
-              "offset": "+28d",
+              "reference": "dob",
+              "offset": "+98d",
               "window": "+10d"
             }
           ],
