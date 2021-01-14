@@ -269,6 +269,8 @@ public class ZeirRepository extends Repository {
             db.execSQL(WeightRepository.FORMSUBMISSION_INDEX);
             db.execSQL(HeightRepository.UPDATE_TABLE_ADD_FORMSUBMISSION_ID_COL);
             db.execSQL(HeightRepository.FORMSUBMISSION_INDEX);
+            db.execSQL(VaccineRepository.UPDATE_TABLE_ADD_IS_VOIDED_COL);
+            db.execSQL(VaccineRepository.UPDATE_TABLE_ADD_IS_VOIDED_COL_INDEX);
         } catch (Exception e) {
             Timber.e(e, "upgradeToVersion3");
         }
