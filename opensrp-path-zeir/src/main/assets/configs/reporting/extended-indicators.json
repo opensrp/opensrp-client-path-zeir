@@ -1,614 +1,157 @@
 [
-
   {
-    "indicator": "vaccine_doses_administered_vaccine_hep_b_0",
-    "grouping": "report_group_header_vaccine_utilization",
+    "indicator": "CHN1_005",
+    "grouping": "report_group_header_under_5_attendance",
     "dependentCalculations": [
-      "use_rate_hepb"
+      "CHN1_011"
     ]
   },
   {
-    "indicator": "vials_used_hepb",
-    "grouping": "report_group_header_vaccine_utilization",
+    "indicator": "CHN1_010",
+    "grouping": "report_group_header_under_5_attendance",
     "dependentCalculations": [
-      "total_doses_hepb"
-    ],
+      "CHN1_011"
+    ]
+  },
+  {
+    "indicator": "CHN1_011",
+    "grouping": "report_group_header_under_5_attendance",
+    "enteredManually": false,
+    "dependentCalculations": [
+      "CHN1_025"
+    ]
+  },
+  {
+    "indicator": "CHN1_015",
+    "grouping": "report_group_header_under_5_attendance",
+    "dependentCalculations": [
+      "CHN1_021"
+    ]
+  },
+  {
+    "indicator": "CHN1_020",
+    "grouping": "report_group_header_under_5_attendance",
+    "dependentCalculations": [
+      "CHN1_021"
+    ]
+  },
+  {
+    "indicator": "CHN1_021",
+    "grouping": "report_group_header_under_5_attendance",
+    "enteredManually": false,
+    "dependentCalculations": [
+      "CHN1_025"
+    ]
+  },
+  {
+    "indicator": "CHN1_025",
+    "grouping": "report_group_header_under_5_attendance",
+    "enteredManually": false
+  },
+  {
+    "indicator": "CHN2_005",
+    "grouping": "report_group_header_growth_nutrition",
+    "dependentCalculations": [
+      "CHN2_015"
+    ]
+  },
+  {
+    "indicator": "CHN2_010",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false,
+    "dependentCalculations": [
+      "CHN2_015"
+    ]
+  },
+  {
+    "indicator": "CHN2_015",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false
+  },
+  {
+    "indicator": "CHN2_020",
+    "grouping": "report_group_header_growth_nutrition",
+    "dependentCalculations": [
+      "CHN2_030"
+    ]
+  },
+  {
+    "indicator": "CHN2_025",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false,
+    "dependentCalculations": [
+      "CHN2_030"
+    ]
+  },
+  {
+    "indicator": "CHN2_030",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false
+  },
+  {
+    "indicator": "CHN2_035",
+    "grouping": "report_group_header_growth_nutrition",
+    "dependentCalculations": [
+      "CHN2_041"
+    ]
+  },
+  {
+    "indicator": "CHN2_040",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false,
+    "dependentCalculations": [
+      "CHN2_041"
+    ]
+  },
+  {
+    "indicator": "CHN2_041",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false
+  },
+  {
+    "indicator": "CHN2_045",
+    "grouping": "report_group_header_growth_nutrition",
+    "dependentCalculations": [
+      "CHN2_051"
+    ]
+  },
+  {
+    "indicator": "CHN2_050",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false,
+    "dependentCalculations": [
+      "CHN2_051"
+    ]
+  },
+  {
+    "indicator": "CHN2_051",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false
+  },
+  {
+    "indicator": "CHN2_055",
+    "grouping": "report_group_header_growth_nutrition",
+    "dependentCalculations": [
+      "CHN2_061"
+    ]
+  },
+  {
+    "indicator": "CHN2_060",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false,
+    "dependentCalculations": [
+      "CHN2_061"
+    ]
+  },
+  {
+    "indicator": "CHN2_061",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false
+  },
+  {
+    "indicator": "CHN3_090",
+    "grouping": "report_group_header_immunisation",
     "enteredManually": true
-  },
-  {
-    "indicator": "doses_per_vial_hepb",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_hepb"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "total_doses_hepb",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_hepb"
-    ]
-  },
-  {
-    "indicator": "use_rate_hepb",
-    "grouping": "report_group_header_vaccine_utilization"
-  },
-  {
-    "indicator": "vaccine_doses_administered_vaccine_bcg",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_bcg"
-    ]
-  },
-  {
-    "indicator": "vials_used_bcg",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_bcg"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "doses_per_vial_bcg",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_bcg"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "total_doses_bcg",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_bcg"
-    ]
-  },
-  {
-    "indicator": "use_rate_bcg",
-    "grouping": "report_group_header_vaccine_utilization"
-  },
-  {
-    "indicator": "vaccine_doses_administered_opv",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_opv"
-    ]
-  },
-  {
-    "indicator": "vials_used_opv",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_opv"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "doses_per_vial_opv",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_opv"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "total_doses_opv",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_opv"
-    ]
-  },
-  {
-    "indicator": "use_rate_opv",
-    "grouping": "report_group_header_vaccine_utilization"
-  },
-  {
-    "indicator": "vaccine_doses_administered_penta",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_penta"
-    ]
-  },
-  {
-    "indicator": "vials_used_penta",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_penta"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "doses_per_vial_penta",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_penta"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "total_doses_penta",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_penta"
-    ]
-  },
-  {
-    "indicator": "use_rate_penta",
-    "grouping": "report_group_header_vaccine_utilization"
-  },
-  {
-    "indicator": "vaccine_doses_administered_ipv",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_ipv"
-    ]
-  },
-  {
-    "indicator": "vials_used_ipv",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_ipv"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "doses_per_vial_ipv",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_ipv"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "total_doses_ipv",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_ipv"
-    ]
-  },
-  {
-    "indicator": "use_rate_ipv",
-    "grouping": "report_group_header_vaccine_utilization"
-  },
-  {
-    "indicator": "vaccine_doses_administered_pcv",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_pcv"
-    ]
-  },
-  {
-    "indicator": "vials_used_pcv",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_pcv"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "doses_per_vial_pcv",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_pcv"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "total_doses_pcv",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_pcv"
-    ]
-  },
-  {
-    "indicator": "use_rate_pcv",
-    "grouping": "report_group_header_vaccine_utilization"
-  },
-  {
-    "indicator": "vaccine_doses_administered_mr",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_mr"
-    ]
-  },
-  {
-    "indicator": "vials_used_mr",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_mr"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "doses_per_vial_mr",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_mr"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "total_doses_mr",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_mr"
-    ]
-  },
-  {
-    "indicator": "use_rate_mr",
-    "grouping": "report_group_header_vaccine_utilization"
-  },
-  {
-    "indicator": "vaccine_doses_administered_vaccine_dtp_4",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_dtp"
-    ]
-  },
-  {
-    "indicator": "vials_used_dtp",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_dtp"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "doses_per_vial_dtp",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_dtp"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "total_doses_dtp",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_dtp"
-    ]
-  },
-  {
-    "indicator": "use_rate_dtp",
-    "grouping": "report_group_header_vaccine_utilization"
-  },
-  {
-    "indicator": "vaccine_doses_administered_rubella",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_rubella"
-    ]
-  },
-  {
-    "indicator": "vials_used_rubella",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_rubella"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "doses_per_vial_rubella",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_rubella"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "total_doses_rubella",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_rubella"
-    ]
-  },
-  {
-    "indicator": "use_rate_rubella",
-    "grouping": "report_group_header_vaccine_utilization"
-  },
-  {
-    "indicator": "vaccine_doses_administered_dt15to49",
-    "grouping": "report_group_header_vaccine_utilization",
-    "enteredManually": true,
-    "dependentCalculations": [
-      "use_rate_dt15"
-    ]
-  },
-  {
-    "indicator": "vials_used_dt15",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_dt15"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "doses_per_vial_dt15",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "total_doses_dt15"
-    ],
-    "enteredManually": true
-  },
-  {
-    "indicator": "total_doses_dt15",
-    "grouping": "report_group_header_vaccine_utilization",
-    "dependentCalculations": [
-      "use_rate_dt15"
-    ]
-  },
-  {
-    "indicator": "use_rate_dt15",
-    "grouping": "report_group_header_vaccine_utilization"
-  },
-  {
-    "indicator": "vaccine_doses_administered_dt15to49",
-    "grouping": "report_group_header_vaccine_utilization",
-    "enteredManually": true
-  },
-  {
-    "indicator": "pab_mother_dt",
-    "grouping": "report_group_header_tetanus_protected",
-    "dependentCalculations": [
-      "pab_total"
-    ]
-  },
-  {
-    "indicator": "pab_assisted_delivery",
-    "grouping": "report_group_header_tetanus_protected",
-    "dependentCalculations": [
-      "pab_total"
-    ]
-  },
-  {
-    "indicator": "pab_dt_and_assisted_delivery",
-    "grouping": "report_group_header_tetanus_protected",
-    "dependentCalculations": [
-      "pab_total"
-    ]
-  },
-  {
-    "indicator": "pab_total",
-    "grouping": "report_group_header_tetanus_protected"
-  },
-  {
-    "indicator": "total_child_births",
-    "grouping": "report_group_header_rubella_vaccine",
-    "dependentCalculations": [
-      "percentage_first_birth"
-    ]
-  },
-  {
-    "indicator": "number_first_birth",
-    "grouping": "report_group_header_rubella_vaccine",
-    "dependentCalculations": [
-      "percentage_first_birth",
-      "percentage_number_rubella_serology"
-    ]
-  },
-  {
-    "indicator": "percentage_first_birth",
-    "grouping": "report_group_header_rubella_vaccine"
-  },
-  {
-    "indicator": "number_rubella_serology",
-    "grouping": "report_group_header_rubella_vaccine",
-    "dependentCalculations": [
-      "percentage_number_rubella_serology",
-      "percentage_serology_results"
-    ]
-  },
-  {
-    "indicator": "percentage_number_rubella_serology",
-    "grouping": "report_group_header_rubella_vaccine"
-  },
-  {
-    "indicator": "negative_serology_results",
-    "grouping": "report_group_header_rubella_vaccine",
-    "dependentCalculations": [
-      "percentage_serology_results"
-    ]
-  },
-  {
-    "indicator": "percentage_serology_results",
-    "grouping": "report_group_header_rubella_vaccine"
-  },
-  {
-    "indicator": "right_measures_6months",
-    "grouping": "report_group_header_adequate_growth_measurement",
-    "dependentCalculations": [
-      "percentage_right_measures_6months"
-    ]
-  },
-  {
-    "indicator": "percentage_right_measures_6months",
-    "grouping": "report_group_header_adequate_growth_measurement"
-  },
-  {
-    "indicator": "right_measures_12months",
-    "grouping": "report_group_header_adequate_growth_measurement",
-    "dependentCalculations": [
-      "percentage_right_measures_12months"
-    ]
-  },
-  {
-    "indicator": "percentage_right_measures_12months",
-    "grouping": "report_group_header_adequate_growth_measurement"
-  },
-  {
-    "indicator": "right_measures_18months",
-    "grouping": "report_group_header_adequate_growth_measurement",
-    "dependentCalculations": [
-      "percentage_right_measures_18months"
-    ]
-  },
-  {
-    "indicator": "percentage_right_measures_18months",
-    "grouping": "report_group_header_adequate_growth_measurement"
-  },
-  {
-    "indicator": "malnutrition_episode_6months",
-    "grouping": "report_group_header_previous_under_nutrition",
-    "dependentCalculations": [
-      "percentage_malnutrition_episode_6months"
-    ]
-  },
-  {
-    "indicator": "percentage_malnutrition_episode_6months",
-    "grouping": "report_group_header_previous_under_nutrition"
-  },
-  {
-    "indicator": "malnutrition_episode_12months",
-    "grouping": "report_group_header_previous_under_nutrition",
-    "dependentCalculations": [
-      "percentage_malnutrition_episode_12months"
-    ]
-  },
-  {
-    "indicator": "percentage_malnutrition_episode_12months",
-    "grouping": "report_group_header_previous_under_nutrition"
-  },
-  {
-    "indicator": "malnutrition_episode_18months",
-    "grouping": "report_group_header_previous_under_nutrition",
-    "dependentCalculations": [
-      "percentage_malnutrition_episode_18months"
-    ]
-  },
-  {
-    "indicator": "percentage_malnutrition_episode_18months",
-    "grouping": "report_group_header_previous_under_nutrition"
-  },
-  {
-    "indicator": "mid_mal_grp_children_6mnths",
-    "grouping": "report_group_header_diagnosed_malnourished",
-    "dependentCalculations": [
-      "percentage_mid_mal_6mnths"
-    ]
-  },
-  {
-    "indicator": "percentage_mid_mal_6mnths",
-    "grouping": "report_group_header_diagnosed_malnourished"
-  },
-  {
-    "indicator": "mid_mal_grp_children_12mnths",
-    "grouping": "report_group_header_diagnosed_malnourished",
-    "dependentCalculations": [
-      "percentage_mid_mal_12mnths"
-    ]
-  },
-  {
-    "indicator": "percentage_mid_mal_12mnths",
-    "grouping": "report_group_header_diagnosed_malnourished"
-  },
-  {
-    "indicator": "mid_mal_grp_children_18mnths",
-    "grouping": "report_group_header_diagnosed_malnourished",
-    "dependentCalculations": [
-      "percentage_mid_mal_18mnths"
-    ]
-  },
-  {
-    "indicator": "percentage_mid_mal_18mnths",
-    "grouping": "report_group_header_diagnosed_malnourished"
-  },
-  {
-    "indicator": "mod_mal_grp_children_6mnths",
-    "grouping": "report_group_header_diagnosed_malnourished",
-    "dependentCalculations": [
-      "percentage_mod_mal_6mnths"
-    ]
-  },
-  {
-    "indicator": "percentage_mod_mal_6mnths",
-    "grouping": "report_group_header_diagnosed_malnourished"
-  },
-  {
-    "indicator": "mod_mal_grp_children_12mnths",
-    "grouping": "report_group_header_diagnosed_malnourished",
-    "dependentCalculations": [
-      "percentage_mod_mal_12mnths"
-    ]
-  },
-  {
-    "indicator": "percentage_mod_mal_12mnths",
-    "grouping": "report_group_header_diagnosed_malnourished"
-  },
-  {
-    "indicator": "mod_mal_grp_children_18mnths",
-    "grouping": "report_group_header_diagnosed_malnourished",
-    "dependentCalculations": [
-      "percentage_mod_mal_12mnths"
-    ]
-  },
-  {
-    "indicator": "percentage_mod_mal_18mnths",
-    "grouping": "report_group_header_diagnosed_malnourished"
-  },
-  {
-    "indicator": "sev_mal_grp_children_6mnths",
-    "grouping": "report_group_header_diagnosed_malnourished",
-    "dependentCalculations": [
-      "percentage_sev_mal_6mnths"
-    ]
-  },
-  {
-    "indicator": "percentage_sev_mal_6mnths",
-    "grouping": "report_group_header_diagnosed_malnourished"
-  },
-  {
-    "indicator": "sev_mal_grp_children_12mnths",
-    "grouping": "report_group_header_diagnosed_malnourished",
-    "dependentCalculations": [
-      "percentage_sev_mal_6mnths"
-    ]
-  },
-  {
-    "indicator": "percentage_sev_mal_12mnths",
-    "grouping": "report_group_header_diagnosed_malnourished"
-  },
-  {
-    "indicator": "sev_mal_grp_children_18mnths",
-    "grouping": "report_group_header_diagnosed_malnourished",
-    "dependentCalculations": [
-      "percentage_sev_mal_18mnths"
-    ]
-  },
-  {
-    "indicator": "percentage_sev_mal_18mnths",
-    "grouping": "report_group_header_diagnosed_malnourished"
-  },
-  {
-    "indicator": "obese_grp_children_6mnths",
-    "grouping": "report_group_header_diagnosed_malnourished",
-    "dependentCalculations": [
-      "percentage_obese_grp_6mnths"
-    ]
-  },
-  {
-    "indicator": "percentage_obese_grp_6mnths",
-    "grouping": "report_group_header_diagnosed_malnourished"
-  },
-  {
-    "indicator": "obese_grp_children_12mnths",
-    "grouping": "report_group_header_diagnosed_malnourished",
-    "dependentCalculations": [
-      "percentage_obese_grp_12mnths"
-    ]
-  },
-  {
-    "indicator": "percentage_obese_grp_12mnths",
-    "grouping": "report_group_header_diagnosed_malnourished"
-  },
-  {
-    "indicator": "obese_grp_children_18mnths",
-    "grouping": "report_group_header_diagnosed_malnourished",
-    "dependentCalculations": [
-      "percentage_obese_grp_12mnths"
-    ]
-  },
-  {
-    "indicator": "percentage_obese_grp_18mnths",
-    "grouping": "report_group_header_diagnosed_malnourished"
   }
+
 ]

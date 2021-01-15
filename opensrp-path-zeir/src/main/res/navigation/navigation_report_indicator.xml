@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/reportIndicatorsFormFragment">
-    <fragment
+      <fragment
         android:id="@+id/reportIndicatorsSummaryFragment"
         android:name="org.smartregister.pathzeir.reporting.monthly.indicator.summary.ReportIndicatorsSummaryFragment"
         android:label="@string/report_indicators_summary"

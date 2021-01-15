@@ -1,4 +1,4 @@
-package org.smartregister.pathzeir.reporting;
+package org.smartregister.pathzeir.reporting.coverage;
 
 import android.content.Context;
 import android.view.LayoutInflater;

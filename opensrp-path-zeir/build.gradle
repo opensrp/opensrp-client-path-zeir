@@ -57,6 +57,7 @@ android {
         buildConfigField "long", "BUILD_TIMESTAMP", System.currentTimeMillis() + "L"
         buildConfigField "boolean", "IS_SYNC_SETTINGS", "false"
         buildConfigField "long", "EVENT_VERSION", System.currentTimeMillis() + "L"
+        buildConfigField "boolean", "USE_HIA2_DIRECTLY", "true"
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         javaCompileOptions.annotationProcessorOptions.includeCompileClasspath true

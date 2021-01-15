@@ -190,6 +190,7 @@
         <service android:name=".service.intent.AppVaccineScheduleUpdateIntentService" />
         <service android:name=".reporting.dropuout.intent.CoverageDropoutIntentService" />
         <service android:name="org.smartregister.stock.sync.StockSyncIntentService" />
+        <service android:name="org.smartregister.pathzeir.reporting.monthly.intent.HIA2IntentService" />
         <service
             android:name="org.smartregister.immunization.service.intent.RecurringIntentService"
             android:exported="false" />

@@ -34,13 +34,10 @@ import net.sqlcipher.database.SQLiteDatabase as SQLiteCipherDatabase
 class MonthlyReportsRepository private constructor() : BaseRepository() {
 
     private var supportedReportGroups = setOf(
-            "report_group_header_vaccination_activity",
-            "report_group_header_vaccine_utilization",
-            "report_group_header_tetanus_protected",
-            "report_group_header_rubella_vaccine",
-            "report_group_header_adequate_growth_measurement",
-            "report_group_header_previous_under_nutrition",
-            "report_group_header_diagnosed_malnourished"
+            "report_group_header_under_5_attendance",
+            "report_group_header_growth_nutrition",
+            "report_group_header_vita_deworming_itns",
+            "report_group_header_immunisation"
     )
 
     object Constants {

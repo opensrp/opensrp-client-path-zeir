@@ -9,13 +9,17 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_report_indicators_summary.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.smartregister.pathzeir.R
 import org.smartregister.pathzeir.reporting.common.ReportingUtils
 import org.smartregister.pathzeir.reporting.common.ReportingUtils.dateFormatter
 import org.smartregister.pathzeir.reporting.common.showProgressDialog
+import org.smartregister.pathzeir.reporting.common.sortIndicators
 import org.smartregister.pathzeir.reporting.monthly.domain.MonthlyTally
 import org.smartregister.pathzeir.reporting.monthly.indicator.ReportIndicatorsViewModel
 
@@ -51,17 +55,20 @@ class ReportIndicatorsSummaryFragment : Fragment() {
     }
 
     private fun displayIndicators(monthlyTallies: Map<String, MonthlyTally>) {
-        val groupedTallies: Map<String, List<MonthlyTally>> = monthlyTallies.values.groupBy { it.grouping }
-        reportIndicatorsRecyclerAdapter.apply {
-            if (groupedTallies.isNotEmpty()) {
-                val firstMonthlyTally: MonthlyTally = groupedTallies.values.first()[0]
-                val submittedBy = requireContext().getString(R.string.submitted_by_,
-                        dateFormatter("dd/MM/YYYY").format(firstMonthlyTally.dateSent!!), firstMonthlyTally.providerId)
-                submittedByTextView.text = submittedBy
-                submittedByTextView.typeface = Typeface.DEFAULT_BOLD
-                reportIndicators = groupedTallies.toList()
+        lifecycleScope.launch(Dispatchers.Main) {
+            val sortedIndicators = monthlyTallies.values.toList().sortIndicators()
+            val groupedTallies: Map<String, List<MonthlyTally>> = sortedIndicators.groupBy { it.grouping }
+            reportIndicatorsRecyclerAdapter.apply {
+                if (groupedTallies.isNotEmpty()) {
+                    val firstMonthlyTally: MonthlyTally = groupedTallies.values.first()[0]
+                    val submittedBy = requireContext().getString(R.string.submitted_by_,
+                            dateFormatter("dd/MM/YYYY").format(firstMonthlyTally.dateSent!!), firstMonthlyTally.providerId)
+                    submittedByTextView.text = submittedBy
+                    submittedByTextView.typeface = Typeface.DEFAULT_BOLD
+                    reportIndicators = groupedTallies.toList()
+                }
             }
+            progressDialog.dismiss()
         }
-        progressDialog.dismiss()
     }
 }

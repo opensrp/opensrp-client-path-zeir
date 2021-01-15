@@ -36,8 +36,10 @@ import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.Utils;
 import org.smartregister.client.utils.domain.Form;
 import org.smartregister.domain.FetchStatus;
+import org.smartregister.pathzeir.BuildConfig;
 import org.smartregister.pathzeir.reporting.coverage.CoverageReportsActivity;
 import org.smartregister.pathzeir.reporting.dropuout.DropoutReportsActivity;
+import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsActivity;
 import org.smartregister.pathzeir.reporting.stock.ZeirStockActivity;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.reporting.service.IndicatorGeneratorIntentService;
@@ -202,13 +204,23 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
     private void goToReport() {
         reportView.setOnClickListener(v -> {
-            if (activityWeakReference.get() instanceof ReportRegisterActivity) {
+            if (BuildConfig.USE_HIA2_DIRECTLY) {
+                if (activityWeakReference.get() instanceof MonthlyReportsActivity) {
+                    drawer.closeDrawer(GravityCompat.START);
+                    return;
+                }
+                Intent intent = new Intent(activityWeakReference.get(), MonthlyReportsActivity.class);
+                activityWeakReference.get().startActivity(intent);
                 drawer.closeDrawer(GravityCompat.START);
-                return;
+            } else {
+                if (activityWeakReference.get() instanceof ReportRegisterActivity) {
+                    drawer.closeDrawer(GravityCompat.START);
+                    return;
+                }
+                Intent intent = new Intent(activityWeakReference.get(), ReportRegisterActivity.class);
+                activityWeakReference.get().startActivity(intent);
+                drawer.closeDrawer(GravityCompat.START);
             }
-            Intent intent = new Intent(activityWeakReference.get(), ReportRegisterActivity.class);
-            activityWeakReference.get().startActivity(intent);
-            drawer.closeDrawer(GravityCompat.START);
         });
 
         droputReportsView.setOnClickListener(v-> {

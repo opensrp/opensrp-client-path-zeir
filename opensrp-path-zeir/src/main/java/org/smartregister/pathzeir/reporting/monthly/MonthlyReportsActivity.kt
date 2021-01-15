@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import kotlinx.android.synthetic.main.activity_monthly_reports.*
 import org.smartregister.Context
+import org.smartregister.pathzeir.BuildConfig
 import org.smartregister.pathzeir.R
 import org.smartregister.pathzeir.reporting.ReportGroupingModel
 import org.smartregister.pathzeir.reporting.common.ReportingUtils
@@ -46,7 +47,10 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
             tabRippleColor = null
         }
         titleTextView.apply {
-            text = ReportGroupingModel(this@MonthlyReportsActivity).reportGroupings.first().displayName
+            if (BuildConfig.USE_HIA2_DIRECTLY)
+                text = getString(R.string.hia2_reports)
+            else
+                text = ReportGroupingModel(this@MonthlyReportsActivity).reportGroupings.first().displayName
         }
     }
 

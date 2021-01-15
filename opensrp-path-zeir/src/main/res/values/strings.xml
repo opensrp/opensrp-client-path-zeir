@@ -406,4 +406,77 @@
     <string name="total_dropout_penta">Drop\nOut (1–3)</string>
     <string name="total_cum_dropout">Cum\nDrop\nOut</string>
     <string name="total_cum_dropout_percentage">Cum\nDrop\nOut %</string>
+
+    <string name="report_group_header_under_5_attendance">Under 5 Clinic Attendance</string>
+    <string name="report_group_header_growth_nutrition">Growth Monitoring and Nutrition</string>
+    <string name="report_group_header_vita_deworming_itns">Vitamin A, Deworming, and ITNs</string>
+    <string name="report_group_header_immunisation">Immunisation</string>
+
+    <string name="CHN1_005">Attendance child health &lt; 12 months (male)</string>
+    <string name="CHN1_010">Attendance child health &lt; 12 months (female)</string>
+    <string name="CHN1_011">Attendance child health &lt; 12 months (total)</string>
+    <string name="CHN1_015">Attendance child health 12–59 months male</string>
+    <string name="CHN1_020">Attendance child health 12–59 months female</string>
+    <string name="CHN1_021">Attendance child health 12–59 months (total)</string>
+    <string name="CHN1_025">Attendance child health total</string>
+    <string name="CHN1_030">Attendance from outside catchment\'s area</string>
+
+    <string name="CHN2_005">Child weighed 0–23 months</string>
+    <string name="CHN2_010">Child weighed 24–59 months</string>
+    <string name="CHN2_015">Total child weighed</string>
+    <string name="CHN2_020">Not gaining weight 0–23 months</string>
+    <string name="CHN2_025">Not gaining weight 24–59 months</string>
+    <string name="CHN2_030">Total not gaining weight age less than five years</string>
+    <string name="CHN2_035">Weight between –2Z &amp; –3Z score 0–23 months</string>
+    <string name="CHN2_040">Weight between –2Z &amp; –3Z score 24–59 months</string>
+    <string name="CHN2_041">Weight between –2Z &amp; –3Z score less than five years</string>
+    <string name="CHN2_045">Weight below –3Z scores 0–23 months</string>
+    <string name="CHN2_050">Weight below –3Z scores 24–59 months</string>
+    <string name="CHN2_051">Total weight below -3Z scores less than five years age</string>
+    <string name="CHN2_055">Weight above 2Z score 0–23 months</string>
+    <string name="CHN2_060">Weight above 2Z score 24–59 months</string>
+    <string name="CHN2_061">Total weight above 2Z less than five years age</string>
+    <string name="CHN2_065">Vitamin A supplement to infant and children 6–11 months</string>
+    <string name="CHN2_070">Vitamin A supplement to infant and children 12–59 months</string>
+    <string name="CHN2_075">Deworming dose 12–59 months</string>
+    <string name="CHN2_080">Children who received insecticide treated nets</string>
+
+    <string name="CHN3_005">BCG dose (&lt; 1 year) at the facility</string>
+    <string name="CHN3_005_O">BCG dose (&lt; 1 year) at outreach</string>
+    <string name="CHN3_010">OPV0 (&lt; 1 year) at facility</string>
+    <string name="CHN3_010_O">OPV0 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_015">OPV1 (&lt; 1 year) at facility</string>
+    <string name="CHN3_015_O">OPV1 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_020">OPV2 (&lt; 1 year) at facility</string>
+    <string name="CHN3_020_O">OPV2 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_025">OPV3 (&lt; 1 year) at facility</string>
+    <string name="CHN3_025_O">OPV3 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_027">IPV (&lt; 1 year) at facility</string>
+    <string name="CHN3_027_O">IPV (&lt; 1 year) at outreach</string>
+    <string name="CHN3_030">OPV4 (&lt; 1 year) at facility</string>
+    <string name="CHN3_030_O">OPV4 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_035">DPT-Hib+HepB 1 (&lt; 1 year) at facility</string>
+    <string name="CHN3_035_O">DPT-Hib+HepB 1 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_040">DPT-Hib+HepB 2 (&lt; 1 year) at facility</string>
+    <string name="CHN3_040_O">DPT-Hib+HepB 2 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_045">DPT-Hib+HepB 3 (&lt; 1 year) at facility</string>
+    <string name="CHN3_045_O">DPT-Hib+HepB 3 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_050">PCV 1 (&lt; 1 year) at facility</string>
+    <string name="CHN3_050_O">PCV 1 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_055">PCV 2 (&lt; 1 year) at facility</string>
+    <string name="CHN3_055_O">PCV 2 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_060">PCV 3 (&lt; 1 year) at facility</string>
+    <string name="CHN3_060_O">PCV 3 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_065">RV 1 (&lt; 1 year) at facility</string>
+    <string name="CHN3_065_O">RV 1 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_070">RV 2 (&lt; 1 year) at facility</string>
+    <string name="CHN3_070_O">RV 2 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_075">Measles/ MR 1 (&lt; 1 year) at facility</string>
+    <string name="CHN3_075_O">Measles/ MR 1 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_080">Fully immunised (&lt; 1 year) at facility</string>
+    <string name="CHN3_080_O">Fully immunised (&lt; 1 year) at outreach</string>
+    <string name="CHN3_085">Measles/ MR 2 (at 18 months) at facility</string>
+    <string name="CHN3_085_O">Measles/ MR 2 (at 18 months) at outreach</string>
+    <string name="CHN3_090">Number of days fridge non-functional</string>
+
 </resources>

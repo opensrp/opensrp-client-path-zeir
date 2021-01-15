@@ -1,6 +1,5 @@
 package org.smartregister.pathzeir.reporting;
 
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Pair;
@@ -12,13 +11,11 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.tuple.Triple;
-import org.opensrp.api.constants.Gender;
 import org.smartregister.child.activity.BaseActivity;
 import org.smartregister.child.domain.NamedObject;
 import org.smartregister.domain.FetchStatus;
@@ -26,6 +23,7 @@ import org.smartregister.immunization.db.VaccineRepo;
 import org.smartregister.immunization.repository.VaccineRepository;
 import org.smartregister.pathzeir.R;
 import org.smartregister.pathzeir.application.ZeirApplication;
+import org.smartregister.pathzeir.reporting.coverage.CoverageSpinnerAdapter;
 import org.smartregister.pathzeir.reporting.dropuout.ExpandedListAdapter;
 import org.smartregister.pathzeir.reporting.dropuout.domain.Cohort;
 import org.smartregister.pathzeir.reporting.dropuout.domain.CohortIndicator;

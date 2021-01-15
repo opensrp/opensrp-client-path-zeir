@@ -52,6 +52,7 @@ import java.util.*
 class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
 
     private lateinit var progressDialog: AlertDialog
+    private lateinit var reportIndicatorsLayout : LinearLayout
 
     private val reportIndicatorsViewModel by activityViewModels<ReportIndicatorsViewModel>
     { ReportingUtils.createFor(ReportIndicatorsViewModel()) }
@@ -76,6 +77,7 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
     ): View = inflater.inflate(R.layout.fragment_report_indicators_form, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        reportIndicatorsLayout = view.findViewById(R.id.reportIndicatorsLayout)
         progressDialog = requireContext().showProgressDialog(
                 show = true,
                 title = getString(R.string.loading_monthly_reports_title),
@@ -114,9 +116,10 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
     }
 
     private fun loadIndicatorsForm(monthlyTallies: Map<String, MonthlyTally>) {
-        val groupedTallies = monthlyTallies.values.groupBy { it.grouping }
-
         lifecycleScope.launch(Dispatchers.Main) {
+            val sortedIndicators = monthlyTallies.values.toList().sortIndicators()
+            val groupedTallies = sortedIndicators.groupBy { it.grouping }
+
             groupedTallies.forEach { tallyEntry ->
 
                 //Create report group header
@@ -137,9 +140,9 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private suspend fun createIndicatorInputFields(tallyEntry: Map.Entry<String, List<MonthlyTally>>) {
-        val sortedIndicators = tallyEntry.value.sortIndicators()
-        sortedIndicators.forEach {
+    private fun createIndicatorInputFields(tallyEntry: Map.Entry<String, List<MonthlyTally>>) {
+//        val sortedIndicators = tallyEntry.value.sortIndicators()
+        tallyEntry.value.forEach {
             reportIndicatorsLayout.addView(TextInputLayout(requireContext()).apply { addView(createEditText(it)) })
         }
     }
