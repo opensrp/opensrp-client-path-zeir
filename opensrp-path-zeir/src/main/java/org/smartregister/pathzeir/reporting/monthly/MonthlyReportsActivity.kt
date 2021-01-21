@@ -28,7 +28,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
 
         monthlyReportsViewModel.apply {
             draftedMonths.observe(this@MonthlyReportsActivity, {
-                reportFragmentTabLayout.getTabAt(0)?.text = getString(R.string.monthly_draft_reports, it.size)
+                reportFragmentTabLayout.getTabAt(1)?.text = getString(R.string.monthly_draft_reports, it.size)
             })
         }
 
@@ -39,7 +39,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
         }
         containerViewPager.apply {
             adapter = reportsPagerAdapter
-            currentItem = intent.getIntExtra(Constants.SELECT_TAB, 0)
+            currentItem = intent.getIntExtra(Constants.SELECT_TAB, 1)
         }
 
         reportFragmentTabLayout.apply {
@@ -66,6 +66,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
             fetchDraftedMonths()
             fetchUnDraftedMonths()
             fetchAllSentReportMonths()
+            fetchAllDailyTalliesDays()
         }
     }
 }

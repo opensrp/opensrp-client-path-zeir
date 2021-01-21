@@ -308,6 +308,7 @@
     <!-- Strings used for reporting -->
     <string name="title_activity_report_tallies">ReportTalliesActivity</string>
     <string name="report_indicators_summary">Report Indicators Summary</string>
+    <string name="report__daily_indicators_summary">Report Daily Indicators Summary</string>
     <string name="report_indicators_form">Report Indicators Form</string>
     <string name="annual_report_fragment">Annual Coverage Fragment</string>
     <string name="month_year_draft">%1$s Draft</string>
@@ -327,6 +328,7 @@
     <string name="indicator">Indicator</string>
     <string name="value">Value</string>
     <string name="loading_monthly_reports_message">Generating monthly reports. Please wait…</string>
+    <string name="loading_daily_reports_message">Generating daily reports. Please wait…</string>
     <string name="loading_monthly_reports_title">Loading Reports</string>
     <string name="annual_coverage_report">Annual Coverage Report</string>
     <string name="under_one_target">Under 1 target: %1$s</string>
@@ -478,5 +480,6 @@
     <string name="CHN3_085">Measles/ MR 2 (at 18 months) at facility</string>
     <string name="CHN3_085_O">Measles/ MR 2 (at 18 months) at outreach</string>
     <string name="CHN3_090">Number of days fridge non-functional</string>
+    <string name="daily_tallies_with_day">Daily Tallies &gt; %1s</string>
 
 </resources>

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.smartregister.pathzeir.reporting.monthly.domain.DailyTally
 import org.smartregister.pathzeir.reporting.monthly.domain.MonthlyTally
 import java.util.*
 
@@ -20,6 +21,10 @@ class MonthlyReportsViewModel : ViewModel() {
     val sentReportMonths = MutableLiveData<Map<String, List<MonthlyTally>>>()
 
     val sentReportTallies = MutableLiveData<Pair<String, List<MonthlyTally>>>()
+
+    val dailyReportDays = MutableLiveData<Map<String, List<DailyTally>>>()
+
+    val dailyTallies = MutableLiveData<Pair<String, List<DailyTally>>>()
 
     fun fetchUnDraftedMonths() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -48,6 +53,18 @@ class MonthlyReportsViewModel : ViewModel() {
     fun fetchSentReportTalliesByMonth(yearMonth: String) {
         viewModelScope.launch(Dispatchers.IO) {
             sentReportTallies.postValue(Pair(yearMonth, monthlyReportsRepository.fetchSentReportTalliesByMonth(yearMonth)))
+        }
+    }
+
+    fun fetchAllDailyTalliesDays() {
+        viewModelScope.launch(Dispatchers.IO) {
+            dailyReportDays.postValue(monthlyReportsRepository.fetchAllDailyReports())
+        }
+    }
+
+    fun fetchDailyTalliesByDay(day: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dailyTallies.postValue(Pair(day, monthlyReportsRepository.fetchDailyTalliesByDay(day)))
         }
     }
 }

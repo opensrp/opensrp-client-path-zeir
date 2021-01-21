@@ -59,7 +59,7 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
 
     private lateinit var confirmSendDraftDialog: ConfirmSendDraftDialog
 
-    private lateinit var reportingRulesEngine: ReportingRulesEngine
+    private lateinit var reportingRulesEngine: ReportingRulesEngine<MonthlyTally>
 
     private val extendedIndicatorTallies by lazy {
         getExtendedIndicatorTallies().associateBy { it.indicator }.toMutableMap()
@@ -91,9 +91,9 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
                 }
                 includeExtendedTallies(monthlyTallies, tallyEntry)
             }
-            reportingRulesEngine = ReportingRulesEngine(monthlyTallies = monthlyTallies, context = requireContext())
+            reportingRulesEngine = ReportingRulesEngine(tallies = monthlyTallies, context = requireContext())
             loadIndicatorsForm(monthlyTallies)
-        }
+        } ?: progressDialog.dismiss()
 
         //Setup UI
         confirmSendDraftDialog = ConfirmSendDraftDialog().apply {

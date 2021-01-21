@@ -17,6 +17,7 @@ import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository.Col
 import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository.ColumnNames.PROVIDER_ID
 import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository.ColumnNames.UPDATED_AT
 import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository.ColumnNames.VALUE
+import org.smartregister.pathzeir.reporting.monthly.domain.DailyTally
 import org.smartregister.pathzeir.reporting.monthly.domain.MonthlyTally
 import org.smartregister.reporting.ReportingLibrary
 import org.smartregister.reporting.domain.IndicatorTally
@@ -55,6 +56,11 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
         const val INDICATOR_GROUPING = "indicator_grouping"
         const val CREATED_AT = "created_at"
         const val UPDATED_AT = "updated_at"
+
+        // Daily Tally
+        const val INDICATOR_VALUE = "indicator_value"
+        const val INDICATOR_IS_VALUE_SET = "indicator_is_value_set"
+        const val DAY = "day"
     }
 
     private object TableQueries {
@@ -183,6 +189,12 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
     fun fetchSentReportTalliesByMonth(yearMonth: String) =
             ReportsDao.getReportsByMonth(yearMonth = yearMonth, drafted = false)
 
+    /**
+     * Fetch all daily for the [day]
+     */
+    fun fetchDailyTalliesByDay(day: String) =
+            ReportsDao.getReportsByDay(day)
+
     companion object {
         @Volatile
         private var instance: MonthlyReportsRepository? = null
@@ -191,6 +203,10 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
         fun getInstance(): MonthlyReportsRepository = instance ?: synchronized(this) {
             MonthlyReportsRepository().also { instance = it }
         }
+    }
+
+    fun fetchAllDailyReports(): Map<String, List<DailyTally>>? {
+        return ReportsDao.getAllDailyTallies().groupBy { dateFormatter("MMMM yyyy").format(it.day) }
     }
 
     @TestOnly
