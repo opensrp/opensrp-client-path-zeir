@@ -56,18 +56,21 @@ class MonthlyReportsActivityTest {
     @Test
     fun `Should set the right title for the activity`() {
         val titleTextView = monthlyReportsActivity.findViewById<TextView>(R.id.titleTextView)
-        assertEquals(monthlyReportsActivity.getString(R.string.monthly_immunization_growth_monitoring_reports), titleTextView.text.toString())
+        assertEquals(monthlyReportsActivity.getString(R.string.hia2_reports), titleTextView.text.toString())
     }
 
     @Test
-    fun `Should contain two tabs with distinct titles`() {
-        assertEquals(2, tabLayout.tabCount)
+    fun `Should contain three tabs with distinct titles`() {
+        assertEquals(3, tabLayout.tabCount)
         val tabOne = tabLayout.getTabAt(0)
         assertNotNull(tabOne)
-        assertEquals(tabOne?.text, monthlyReportsActivity.getString(R.string.monthly_draft_reports, 0))
+        assertEquals(tabOne?.text, monthlyReportsActivity.getString(R.string.hia2_daily_tallies))
         val tabTwo = tabLayout.getTabAt(1)
         assertNotNull(tabTwo)
-        assertEquals(tabTwo?.text, monthlyReportsActivity.getString(R.string.monthly_sent_reports))
+        assertEquals(tabTwo?.text, monthlyReportsActivity.getString(R.string.monthly_draft_reports, 0))
+        val tabThree = tabLayout.getTabAt(2)
+        assertNotNull(tabThree)
+        assertEquals(tabThree?.text, monthlyReportsActivity.getString(R.string.monthly_sent_reports))
     }
 
     @Test
@@ -75,7 +78,7 @@ class MonthlyReportsActivityTest {
         monthlyReportsActivityController.resume()
         monthlyReportsActivity.monthlyReportsViewModel.draftedMonths.value =
                 listOf(Pair("January 2020", dateFormatter("yyyy-MM-dd").parse("2020-01-01")))
-        val tabOne = tabLayout.getTabAt(0)
+        val tabOne = tabLayout.getTabAt(1)
         assertNotNull(tabOne)
         assertEquals(tabOne?.text, monthlyReportsActivity.getString(R.string.monthly_draft_reports, 1))
     }
