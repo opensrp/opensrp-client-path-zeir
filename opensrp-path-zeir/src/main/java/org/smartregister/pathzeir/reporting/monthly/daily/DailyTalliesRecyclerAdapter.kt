@@ -50,6 +50,7 @@ class DailyTalliesRecyclerAdapter(val onClickListener: View.OnClickListener) :
 
             //Set tallies
 
+            sentReportContainer.removeAllViews()
             tallies.forEach {
                 val view = LayoutInflater.from(containerView.context).inflate(R.layout.sent_monthly_report_list_item,
                         sentReportContainer, false).apply {
