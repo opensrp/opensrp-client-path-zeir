@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import org.smartregister.pathzeir.R
+import org.smartregister.pathzeir.reporting.monthly.daily.DailyTalliesFragment
 import org.smartregister.pathzeir.reporting.monthly.draft.DraftedReportsFragment
 import org.smartregister.pathzeir.reporting.monthly.sent.SentReportsFragment
 
@@ -16,14 +17,16 @@ class MonthlyReportsPagerAdapter(private val monthlyReportsActivity: MonthlyRepo
         FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment = when (position) {
-        0 -> DraftedReportsFragment()
+        0 -> DailyTalliesFragment()
+        1 -> DraftedReportsFragment()
         else -> SentReportsFragment()
     }
 
-    override fun getCount() = 2
+    override fun getCount() = 3
 
     override fun getPageTitle(position: Int) = when (position) {
-        0 -> monthlyReportsActivity.getString(R.string.monthly_draft_reports, 0)
+        0 -> monthlyReportsActivity.getString(R.string.hia2_daily_tallies)
+        1 -> monthlyReportsActivity.getString(R.string.monthly_draft_reports, 0)
         else -> monthlyReportsActivity.getString(R.string.monthly_sent_reports)
     }
 

@@ -30,7 +30,7 @@ public class ZeirApplicationTest extends BaseUnitTest {
 
         String[] ftsObjectTables = commonFtsObject.getTables();
         Assert.assertNotNull(ftsObjectTables);
-        Assert.assertEquals(4, ftsObjectTables.length);
+        Assert.assertEquals(3, ftsObjectTables.length);
 
         String scheduleName = commonFtsObject.getAlertScheduleName("bcg");
         Assert.assertNotNull(scheduleName);

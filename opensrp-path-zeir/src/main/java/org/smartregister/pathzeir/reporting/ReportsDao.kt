@@ -9,6 +9,7 @@ import org.smartregister.pathzeir.reporting.annual.coverage.domain.CoverageTarge
 import org.smartregister.pathzeir.reporting.annual.coverage.domain.CoverageTargetType
 import org.smartregister.pathzeir.reporting.annual.coverage.domain.VaccineCount
 import org.smartregister.pathzeir.reporting.common.ReportingUtils.dateFormatter
+import org.smartregister.pathzeir.reporting.monthly.domain.DailyTally
 import org.smartregister.pathzeir.reporting.monthly.domain.MonthlyTally
 import org.smartregister.repository.Repository
 import java.util.*
@@ -19,6 +20,19 @@ import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository.Col
 object ReportsDao : AbstractDao() {
 
     object SqlQueries {
+        const val ALL_DAILY_TALLIES_SQL = """
+            SELECT _id,
+                   indicator_code,
+                   indicator_value,
+                   indicator_grouping,
+                   indicator_is_value_set,
+                   day
+            FROM indicator_daily_tally
+            GROUP BY day
+            ORDER BY day DESC;
+        """
+
+
         const val ALL_SENT_REPORT_MONTHS_SQL = """
             SELECT _id,
                    indicator_code,
@@ -67,6 +81,18 @@ object ReportsDao : AbstractDao() {
                      FROM indicator_daily_tally
                  )
             """
+
+        fun reportsByDaySql(day: String) = """
+                SELECT _id,
+                   indicator_code,
+                   indicator_value,
+                   indicator_grouping,
+                   indicator_is_value_set,
+                   day
+            FROM indicator_daily_tally
+            WHERE day = '$day'
+        """
+
 
         fun reportsByMonthSql(yearMonth: String, drafted: Boolean) = """
               SELECT _id,
@@ -123,6 +149,13 @@ object ReportsDao : AbstractDao() {
             readData(SqlQueries.reportsByMonthSql(yearMonth, drafted), extractMonthlyTally())
                     .toList().filterNotNull()
 
+    /**
+     * This method returns a list of [DailyTally] for the [day] passed
+     */
+    fun getReportsByDay(day: String) =
+            readData(SqlQueries.reportsByDaySql(day), extractDailyyTally())
+                    .toList().filterNotNull()
+
     private fun extractMonthlyTally(): DataMap<MonthlyTally?> = DataMap { cursor: Cursor? ->
         if (cursor == null) null
         else MonthlyTally(
@@ -137,6 +170,19 @@ object ReportsDao : AbstractDao() {
                 grouping = getCursorValue(cursor, MonthlyRepositoryTableColumns.INDICATOR_GROUPING)!!,
                 enteredManually = getCursorIntValue(cursor, MonthlyRepositoryTableColumns.ENTERED_MANUALLY) == 1,
                 createdAt = getCursorValueAsDate(cursor, MonthlyRepositoryTableColumns.CREATED_AT)!!
+        )
+    }
+
+    private fun extractDailyyTally(): DataMap<DailyTally?> = DataMap { cursor: Cursor? ->
+        if (cursor == null) null
+        else DailyTally(
+                indicator = getCursorValue(cursor, MonthlyRepositoryTableColumns.INDICATOR_CODE)!!,
+                id = getCursorLongValue(cursor, MonthlyRepositoryTableColumns.ID)!!,
+                value = getCursorValue(cursor, MonthlyRepositoryTableColumns.INDICATOR_VALUE)!!,
+                day = dateFormatter("yyyy-MM-dd").parse(getCursorValue(cursor, MonthlyRepositoryTableColumns.DAY)!!)!!,
+//                providerId = getCursorValue(cursor, MonthlyRepositoryTableColumns.PROVIDER_ID)!!,
+                grouping = getCursorValue(cursor, MonthlyRepositoryTableColumns.INDICATOR_GROUPING)!!,
+                enteredManually = getCursorIntValue(cursor, MonthlyRepositoryTableColumns.INDICATOR_IS_VALUE_SET) == 1,
         )
     }
 
@@ -213,6 +259,11 @@ object ReportsDao : AbstractDao() {
 
         }
         return result.toList().filterNotNull()
+    }
+
+    fun getAllDailyTallies(): List<DailyTally> {
+        return readData(SqlQueries.ALL_DAILY_TALLIES_SQL, extractDailyyTally()).toList().filterNotNull()
+
     }
 
     @TestOnly

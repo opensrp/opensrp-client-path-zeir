@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import kotlinx.android.synthetic.main.activity_monthly_reports.*
 import org.smartregister.Context
+import org.smartregister.pathzeir.BuildConfig
 import org.smartregister.pathzeir.R
 import org.smartregister.pathzeir.reporting.ReportGroupingModel
 import org.smartregister.pathzeir.reporting.common.ReportingUtils
@@ -27,7 +28,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
 
         monthlyReportsViewModel.apply {
             draftedMonths.observe(this@MonthlyReportsActivity, {
-                reportFragmentTabLayout.getTabAt(0)?.text = getString(R.string.monthly_draft_reports, it.size)
+                reportFragmentTabLayout.getTabAt(1)?.text = getString(R.string.monthly_draft_reports, it.size)
             })
         }
 
@@ -38,7 +39,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
         }
         containerViewPager.apply {
             adapter = reportsPagerAdapter
-            currentItem = intent.getIntExtra(Constants.SELECT_TAB, 0)
+            currentItem = intent.getIntExtra(Constants.SELECT_TAB, 1)
         }
 
         reportFragmentTabLayout.apply {
@@ -46,7 +47,10 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
             tabRippleColor = null
         }
         titleTextView.apply {
-            text = ReportGroupingModel(this@MonthlyReportsActivity).reportGroupings.first().displayName
+            if (BuildConfig.USE_HIA2_DIRECTLY)
+                text = getString(R.string.hia2_reports)
+            else
+                text = ReportGroupingModel(this@MonthlyReportsActivity).reportGroupings.first().displayName
         }
     }
 
@@ -62,6 +66,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
             fetchDraftedMonths()
             fetchUnDraftedMonths()
             fetchAllSentReportMonths()
+            fetchAllDailyTalliesDays()
         }
     }
 }

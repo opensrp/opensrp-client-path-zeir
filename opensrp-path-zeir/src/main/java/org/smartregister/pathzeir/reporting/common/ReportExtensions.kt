@@ -30,6 +30,7 @@ import org.smartregister.pathzeir.reporting.annual.coverage.repository.AnnualRep
 import org.smartregister.pathzeir.reporting.annual.coverage.repository.VaccineCoverageTargetRepository
 import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.pathzeir.reporting.monthly.domain.MonthlyTally
+import org.smartregister.pathzeir.reporting.monthly.domain.Tally
 import org.smartregister.pathzeir.util.AppJsonFormUtils
 import timber.log.Timber
 import java.math.BigDecimal
@@ -41,11 +42,13 @@ import org.smartregister.pathzeir.reporting.annual.coverage.repository.VaccineCo
 /**
  * String constants
  */
+const val DAILY_TALLIES = "daily_tallies"
 const val MONTHLY_TALLIES = "monthly_tallies"
 const val MONTHLY_REPORT = "monthly_report"
 const val ANNUAL_VACCINE_REPORT = "annual_vaccine_report"
 const val VACCINE_COVERAGES = "vaccine_coverages"
 const val YEAR_MONTH = "year_month"
+const val DAY = "day"
 const val SHOW_DATA = "show_data"
 const val VACCINE_COVERAGE_TARGET = "vaccine_coverage_target"
 
@@ -215,7 +218,7 @@ fun View.showSnackBar(resourceId: Int, duration: Int = Snackbar.LENGTH_LONG) =
  * This method creates pair of indicator against its position then sorts them. The indicator positions
  * are defined in "configs/reporting/indicator-positions.json" file
  */
-suspend fun List<MonthlyTally>.sortIndicators(): List<MonthlyTally> {
+suspend fun <T : Tally> List<T>.sortIndicators(): List<T> {
     return withContext(Dispatchers.IO) {
         this@sortIndicators.map { Pair(ReportsDao.getIndicatorPosition(it.indicator), it) }
                 .filter { talliesPair -> talliesPair.first != -1.0 }
@@ -223,6 +226,7 @@ suspend fun List<MonthlyTally>.sortIndicators(): List<MonthlyTally> {
                 .map { talliesPair -> talliesPair.second }
     }
 }
+
 
 /**
  * Find saved [CoverageTarget] for the given [targetType]

@@ -16,10 +16,11 @@ import org.smartregister.pathzeir.R
 import org.smartregister.pathzeir.reporting.common.getResourceId
 import org.smartregister.pathzeir.reporting.common.sortIndicators
 import org.smartregister.pathzeir.reporting.monthly.domain.MonthlyTally
+import org.smartregister.pathzeir.reporting.monthly.domain.Tally
 
 class ReportIndicatorsRecyclerAdapter : RecyclerView.Adapter<ReportIndicatorsRecyclerAdapter.SentReportsRecyclerHolder>() {
 
-    var reportIndicators: List<Pair<String, List<MonthlyTally>>> = arrayListOf()
+    var reportIndicators: List<Pair<String, List<*>>> = arrayListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -36,8 +37,9 @@ class ReportIndicatorsRecyclerAdapter : RecyclerView.Adapter<ReportIndicatorsRec
         return SentReportsRecyclerHolder(view)
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onBindViewHolder(holderSentReports: SentReportsRecyclerHolder, position: Int) {
-        holderSentReports.bindViews(reportIndicators[position])
+        holderSentReports.bindViews(reportIndicators[position] as Pair<String, List<Tally>>)
         expansionsCollection.add(holderSentReports.reportIndicatorsExpansionLayout)
     }
 
@@ -45,7 +47,7 @@ class ReportIndicatorsRecyclerAdapter : RecyclerView.Adapter<ReportIndicatorsRec
 
     inner class SentReportsRecyclerHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-        fun bindViews(monthlyTallies: Pair<String, List<MonthlyTally>>) {
+        fun bindViews(monthlyTallies: Pair<String, List<Tally>>) {
             CoroutineScope(Dispatchers.Main).launch {
                 val (reportGroup, tallies) = monthlyTallies
 

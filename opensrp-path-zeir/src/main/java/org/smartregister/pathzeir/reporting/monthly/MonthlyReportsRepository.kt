@@ -17,6 +17,7 @@ import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository.Col
 import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository.ColumnNames.PROVIDER_ID
 import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository.ColumnNames.UPDATED_AT
 import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository.ColumnNames.VALUE
+import org.smartregister.pathzeir.reporting.monthly.domain.DailyTally
 import org.smartregister.pathzeir.reporting.monthly.domain.MonthlyTally
 import org.smartregister.reporting.ReportingLibrary
 import org.smartregister.reporting.domain.IndicatorTally
@@ -34,13 +35,10 @@ import net.sqlcipher.database.SQLiteDatabase as SQLiteCipherDatabase
 class MonthlyReportsRepository private constructor() : BaseRepository() {
 
     private var supportedReportGroups = setOf(
-            "report_group_header_vaccination_activity",
-            "report_group_header_vaccine_utilization",
-            "report_group_header_tetanus_protected",
-            "report_group_header_rubella_vaccine",
-            "report_group_header_adequate_growth_measurement",
-            "report_group_header_previous_under_nutrition",
-            "report_group_header_diagnosed_malnourished"
+            "report_group_header_under_5_attendance",
+            "report_group_header_growth_nutrition",
+            "report_group_header_vita_deworming_itns",
+            "report_group_header_immunisation"
     )
 
     object Constants {
@@ -58,6 +56,11 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
         const val INDICATOR_GROUPING = "indicator_grouping"
         const val CREATED_AT = "created_at"
         const val UPDATED_AT = "updated_at"
+
+        // Daily Tally
+        const val INDICATOR_VALUE = "indicator_value"
+        const val INDICATOR_IS_VALUE_SET = "indicator_is_value_set"
+        const val DAY = "day"
     }
 
     private object TableQueries {
@@ -186,6 +189,12 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
     fun fetchSentReportTalliesByMonth(yearMonth: String) =
             ReportsDao.getReportsByMonth(yearMonth = yearMonth, drafted = false)
 
+    /**
+     * Fetch all daily for the [day]
+     */
+    fun fetchDailyTalliesByDay(day: String) =
+            ReportsDao.getReportsByDay(day)
+
     companion object {
         @Volatile
         private var instance: MonthlyReportsRepository? = null
@@ -194,6 +203,10 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
         fun getInstance(): MonthlyReportsRepository = instance ?: synchronized(this) {
             MonthlyReportsRepository().also { instance = it }
         }
+    }
+
+    fun fetchAllDailyReports(): Map<String, List<DailyTally>>? {
+        return ReportsDao.getAllDailyTallies().groupBy { dateFormatter("MMMM yyyy").format(it.day) }
     }
 
     @TestOnly

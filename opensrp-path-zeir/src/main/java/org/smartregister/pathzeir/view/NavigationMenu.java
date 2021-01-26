@@ -36,6 +36,11 @@ import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.Utils;
 import org.smartregister.client.utils.domain.Form;
 import org.smartregister.domain.FetchStatus;
+import org.smartregister.pathzeir.BuildConfig;
+import org.smartregister.pathzeir.reporting.coverage.CoverageReportsActivity;
+import org.smartregister.pathzeir.reporting.dropuout.DropoutReportsActivity;
+import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsActivity;
+import org.smartregister.pathzeir.reporting.stock.ZeirStockActivity;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.reporting.service.IndicatorGeneratorIntentService;
 import org.smartregister.pathzeir.R;
@@ -64,6 +69,9 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
     private LinearLayout outOfAreaMenu;
     private LinearLayout registerView;
     private LinearLayout reportView;
+    private LinearLayout droputReportsView;
+    private LinearLayout coverageReportsView;
+    private LinearLayout stockControlView;
     private TextView loggedInUserTextView;
     private TextView userInitialsTextView;
     private TextView syncTextView;
@@ -121,6 +129,9 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         outOfAreaMenu = activity.findViewById(R.id.out_of_area_menu);
         registerView = activity.findViewById(R.id.register_view);
         reportView = activity.findViewById(R.id.report_view);
+        droputReportsView = activity.findViewById(R.id.dropout_reports);
+        coverageReportsView = activity.findViewById(R.id.coverage_reports);
+        stockControlView = activity.findViewById(R.id.stock_control);
         loggedInUserTextView = activity.findViewById(R.id.logged_in_user_text_view);
         userInitialsTextView = activity.findViewById(R.id.user_initials_text_view);
         syncTextView = activity.findViewById(R.id.sync_text_view);
@@ -193,11 +204,51 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
     private void goToReport() {
         reportView.setOnClickListener(v -> {
-            if (activityWeakReference.get() instanceof ReportRegisterActivity) {
+            if (BuildConfig.USE_HIA2_DIRECTLY) {
+                if (activityWeakReference.get() instanceof MonthlyReportsActivity) {
+                    drawer.closeDrawer(GravityCompat.START);
+                    return;
+                }
+                Intent intent = new Intent(activityWeakReference.get(), MonthlyReportsActivity.class);
+                activityWeakReference.get().startActivity(intent);
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                if (activityWeakReference.get() instanceof ReportRegisterActivity) {
+                    drawer.closeDrawer(GravityCompat.START);
+                    return;
+                }
+                Intent intent = new Intent(activityWeakReference.get(), ReportRegisterActivity.class);
+                activityWeakReference.get().startActivity(intent);
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+
+        droputReportsView.setOnClickListener(v-> {
+            if (activityWeakReference.get() instanceof DropoutReportsActivity) {
                 drawer.closeDrawer(GravityCompat.START);
                 return;
             }
-            Intent intent = new Intent(activityWeakReference.get(), ReportRegisterActivity.class);
+            Intent intent = new Intent(activityWeakReference.get(), DropoutReportsActivity.class);
+            activityWeakReference.get().startActivity(intent);
+            drawer.closeDrawer(GravityCompat.START);
+        });
+
+        coverageReportsView.setOnClickListener(v-> {
+            if (activityWeakReference.get() instanceof CoverageReportsActivity) {
+                drawer.closeDrawer(GravityCompat.START);
+                return;
+            }
+            Intent intent = new Intent(activityWeakReference.get(), CoverageReportsActivity.class);
+            activityWeakReference.get().startActivity(intent);
+            drawer.closeDrawer(GravityCompat.START);
+        });
+
+        stockControlView.setOnClickListener(v-> {
+            if (activityWeakReference.get() instanceof ZeirStockActivity) {
+                drawer.closeDrawer(GravityCompat.START);
+                return;
+            }
+            Intent intent = new Intent(activityWeakReference.get(), ZeirStockActivity.class);
             activityWeakReference.get().startActivity(intent);
             drawer.closeDrawer(GravityCompat.START);
         });

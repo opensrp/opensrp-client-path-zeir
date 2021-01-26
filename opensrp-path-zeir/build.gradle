@@ -57,6 +57,7 @@ android {
         buildConfigField "long", "BUILD_TIMESTAMP", System.currentTimeMillis() + "L"
         buildConfigField "boolean", "IS_SYNC_SETTINGS", "false"
         buildConfigField "long", "EVENT_VERSION", System.currentTimeMillis() + "L"
+        buildConfigField "boolean", "USE_HIA2_DIRECTLY", "true"
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         javaCompileOptions.annotationProcessorOptions.includeCompileClasspath true
@@ -238,11 +239,20 @@ dependencies {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-growth-monitoring'
+        exclude group: 'org.smartregister', module: 'opensrp-client-immunization'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-reporting'
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'io.ona.rdt-capture', module: 'lib'
+    }
+
+    implementation('org.smartregister:opensrp-client-immunization:3.0.5-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
     implementation('org.smartregister:opensrp-client-core:4.0.6-SNAPSHOT@aar') {

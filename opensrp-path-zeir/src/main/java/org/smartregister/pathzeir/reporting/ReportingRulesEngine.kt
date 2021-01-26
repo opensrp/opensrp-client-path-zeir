@@ -7,14 +7,14 @@ import org.jeasy.rules.core.DefaultRulesEngine
 import org.jeasy.rules.mvel.MVELRuleFactory
 import org.jeasy.rules.support.YamlRuleDefinitionReader
 import org.smartregister.pathzeir.reporting.common.toWholeNumber
-import org.smartregister.pathzeir.reporting.monthly.domain.MonthlyTally
+import org.smartregister.pathzeir.reporting.monthly.domain.Tally
 import org.smartregister.util.Utils
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-class ReportingRulesEngine(monthlyTallies: MutableMap<String, MonthlyTally>, rulesFilePath: String = "configs/reporting/reporting-rules.yml", context: Context) {
+class ReportingRulesEngine<T : Tally>(tallies: MutableMap<String, T>, rulesFilePath: String = "configs/reporting/reporting-rules.yml", context: Context) {
 
-    private val facts = Facts().apply { asMap().putAll(monthlyTallies.map { Pair(it.key, it.value.value) }) }
+    private val facts = Facts().apply { asMap().putAll(tallies.map { Pair(it.key, it.value.value) }) }
 
     private val reportingRules: Rules = MVELRuleFactory(YamlRuleDefinitionReader())
             .createRules(BufferedReader(InputStreamReader(Utils.getAssetFileInputStream(context, rulesFilePath))))
@@ -25,7 +25,7 @@ class ReportingRulesEngine(monthlyTallies: MutableMap<String, MonthlyTally>, rul
      * Filter and fire dependent calculation rules for [monthlyTally]. Invoke the callback method [fieldValueHandler]
      * once calculation is done to update the value of the calculation field. This also updates the [viewModelData]
      */
-    fun fireRules(monthlyTally: MonthlyTally, viewModelData: MutableMap<String, MonthlyTally>,
+    fun fireRules(monthlyTally: T, viewModelData: MutableMap<String, T>,
                   fieldValueHandler: (String, String) -> Unit) {
 
         facts.asMap()[monthlyTally.indicator] = monthlyTally.value

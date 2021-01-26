@@ -5,13 +5,22 @@ import java.io.Serializable
 import java.util.*
 
 data class MonthlyTally(
-        val indicator: String,
+        override val indicator: String,
 
         @JsonProperty
-        var id: Long = 0,
+        override var id: Long =0,
 
         @JsonProperty
-        var value: String = "0",
+        override var value: String = "0",
+
+        @JsonProperty
+        override val grouping: String,
+
+        @JsonProperty
+        override var enteredManually: Boolean = false,
+
+        @JsonProperty
+        override var providerId: String? = null,
 
         @JsonProperty
         var dateSent: Date? = null,
@@ -20,20 +29,11 @@ data class MonthlyTally(
         var month: Date = Date(),
 
         @JsonProperty
-        var providerId: String? = null,
-
-        @JsonProperty
         var updatedAt: Date? = null,
-
-        @JsonProperty
-        val grouping: String,
 
         @JsonProperty
         var createdAt: Date? = null,
 
         @JsonProperty
-        var enteredManually: Boolean = false,
-
-        @JsonProperty
-        var dependentCalculations: List<String> = emptyList()
-) : Serializable
+        override var dependentCalculations: List<String> = emptyList()
+) : Tally(), Serializable

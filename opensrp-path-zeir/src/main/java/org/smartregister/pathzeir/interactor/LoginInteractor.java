@@ -14,6 +14,9 @@ import org.smartregister.login.interactor.BaseLoginInteractor;
 import org.smartregister.pathzeir.BuildConfig;
 import org.smartregister.pathzeir.job.AppVaccineUpdateJob;
 import org.smartregister.pathzeir.reporting.annual.coverage.job.SyncAnnualReportWorker;
+import org.smartregister.pathzeir.reporting.dropuout.job.DropoutIntentServiceJob;
+import org.smartregister.pathzeir.reporting.monthly.job.HiA2IntentServiceJob;
+import org.smartregister.pathzeir.reporting.stock.job.StockSyncIntentServiceJob;
 import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
 import org.smartregister.view.contract.BaseLoginContract;
 
@@ -61,6 +64,12 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
                 getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
 
         AppVaccineUpdateJob.scheduleEverydayAt(AppVaccineUpdateJob.TAG, 1, 20);
+        DropoutIntentServiceJob.scheduleJob(DropoutIntentServiceJob.TAG, TimeUnit.MINUTES.toMinutes(1440),
+                getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
+        StockSyncIntentServiceJob.scheduleJob(StockSyncIntentServiceJob .TAG, TimeUnit.MINUTES.toMinutes(1440),
+                getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
+        HiA2IntentServiceJob.scheduleJob(HiA2IntentServiceJob .TAG, TimeUnit.MINUTES.toMinutes(1440),
+                getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
 
         SyncAnnualReportWorker.scheduleMonthly();
 
@@ -78,5 +87,8 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
         ImageUploadServiceJob.scheduleJobImmediately(ImageUploadServiceJob.TAG);
         ArchiveClientsJob.scheduleJobImmediately(ArchiveClientsJob.TAG);
         RecurringServiceJob.scheduleJobImmediately(RecurringServiceJob.TAG);
+        DropoutIntentServiceJob.scheduleJobImmediately(DropoutIntentServiceJob.TAG);
+        HiA2IntentServiceJob.scheduleJobImmediately(HiA2IntentServiceJob.TAG);
+        StockSyncIntentServiceJob.scheduleJobImmediately(StockSyncIntentServiceJob.TAG);
     }
 }

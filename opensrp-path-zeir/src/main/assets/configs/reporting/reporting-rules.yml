@@ -1,336 +1,63 @@
-# Vaccine utilization report section
-
-# Calculate grouped vaccines
 ---
-name: vaccine_doses_administered_opv
-description: Total count of OPV vaccines
+name: CHN1_011
+description: Attendance child health <12months (total)
 priority: 1
 condition: "true"
 actions:
-  - "vaccine_doses_administered_opv = new Integer(vaccine_doses_administered_vaccine_opv_1) + new Integer(vaccine_doses_administered_vaccine_opv_2)"
----
-name: vaccine_doses_administered_penta
-description: Total count of Penta vaccines
-priority: 1
-condition: "true"
-actions:
-  - "vaccine_doses_administered_penta = new Integer(vaccine_doses_administered_vaccine_penta_1) + new Integer(vaccine_doses_administered_vaccine_penta_2) +  new Integer(vaccine_doses_administered_vaccine_penta_3) "
----
-name: vaccine_doses_administered_ipv
-description: Total count of IPV vaccines
-priority: 1
-condition: "true"
-actions:
-  - "vaccine_doses_administered_ipv = new Integer(vaccine_doses_administered_vaccine_ipv_1) + new Integer(vaccine_doses_administered_vaccine_ipv_2)"
----
-name: vaccine_doses_administered_pcv
-description: Total count of PCV vaccines
-priority: 1
-condition: "true"
-actions:
-  - "vaccine_doses_administered_pcv = new Integer(vaccine_doses_administered_vaccine_pcv_1) + new Integer(vaccine_doses_administered_vaccine_pcv_2) + new Integer(vaccine_doses_administered_vaccine_pcv_3) + new Integer(vaccine_doses_administered_vaccine_pcv_4)"
----
-name: vaccine_doses_administered_mr
-description: Total count of MR vaccines
-priority: 1
-condition: "true"
-actions:
-  - "vaccine_doses_administered_mr = new Integer(vaccine_doses_administered_vaccine_mr_1) + new Integer(vaccine_doses_administered_vaccine_mr_2)"
+  - "CHN1_011 = new Integer(CHN1_005) + new Integer(CHN1_010)"
 
 ---
-# Now use the grouped vaccines to calculate total doses and use rate for each vaccine
-
-name: total_doses_hepb
-description: Vaccine Hep B 0 total doses
+name: CHN1_021
+description: Attendance child health 12-59 months (total)
 priority: 1
 condition: "true"
 actions:
-  - "total_doses_hepb = doses_per_vial_hepb * vials_used_hepb"
----
-name: use_rate_hepb
-description: Vaccine Hep B 0 use rate
-priority: 1
-condition: "total_doses_hepb != 0"
-actions:
-  - "use_rate_hepb = (vaccine_doses_administered_vaccine_hep_b_0 / total_doses_hepb) * 100"
----
-name: total_doses_bcg
-description: Vaccine BCG total doses
-priority: 1
-condition: "true"
-actions:
-  - "total_doses_bcg = doses_per_vial_bcg * vials_used_bcg"
----
-name: use_rate_bcg
-description: Vaccine BCG use rate
-priority: 1
-condition: "total_doses_bcg != 0"
-actions:
-  - "use_rate_bcg = (vaccine_doses_administered_vaccine_bcg / total_doses_bcg) * 100"
+  - "CHN1_021 = new Integer(CHN1_015) + new Integer(CHN1_020)"
 
 ---
-name: total_doses_opv
-description: Vaccine OPV total doses
+name: CHN1_025
+description: Attendance child health total
 priority: 1
 condition: "true"
 actions:
-  - "total_doses_opv = doses_per_vial_opv * vials_used_opv"
+  - "CHN1_025 = new Integer(CHN1_011) + new Integer(CHN1_021)"
+
 ---
-name: use_rate_opv
-description: Vaccine OPV use rate
-priority: 1
-condition: "total_doses_opv != 0"
-actions:
-  - "use_rate_opv = (vaccine_doses_administered_opv / total_doses_opv) * 100"
----
-name: total_doses_penta
-description: Vaccine Penta total doses
+name: CHN2_015
+description: Total child weighed
 priority: 1
 condition: "true"
 actions:
-  - "total_doses_penta = doses_per_vial_penta * vials_used_penta"
+  - "CHN2_015 = new Integer(CHN2_005) + new Integer(CHN2_010)"
+
 ---
-name: use_rate_penta
-description: Vaccine Penta use rate
-priority: 1
-condition: "total_doses_penta != 0"
-actions:
-  - "use_rate_penta = (vaccine_doses_administered_penta / total_doses_penta) * 100"
----
-name: total_doses_ipv
-description: Vaccine IPV total doses
+name: CHN2_030
+description: Total not gaining weight age < five years
 priority: 1
 condition: "true"
 actions:
-  - "total_doses_ipv = doses_per_vial_ipv * vials_used_ipv"
+  - "CHN2_030 = new Integer(CHN2_020) + new Integer(CHN2_025)"
+
 ---
-name: use_rate_ipv
-description: Vaccine IPV use rate
-priority: 1
-condition: "total_doses_ipv != 0"
-actions:
-  - "use_rate_ipv = (vaccine_doses_administered_ipv / total_doses_ipv) * 100"
----
-name: total_doses_pcv
-description: Vaccine PCV total doses
+name: CHN2_041
+description: Weight between -2Z & -3Z score < five years
 priority: 1
 condition: "true"
 actions:
-  - "total_doses_pcv = doses_per_vial_pcv * vials_used_pcv"
+  - "CHN2_041 = new Integer(CHN2_035) + new Integer(CHN2_040)"
+
 ---
-name: use_rate_pcv
-description: Vaccine PCV use rate
-priority: 1
-condition: "total_doses_pcv != 0"
-actions:
-  - "use_rate_pcv = (vaccine_doses_administered_pcv / total_doses_pcv) * 100"
----
-name: total_doses_mr
-description: Vaccine MR total doses
+name: CHN2_051
+description: Total weight below -3Z scores < five years
 priority: 1
 condition: "true"
 actions:
-  - "total_doses_mr = doses_per_vial_mr * vials_used_mr"
+  - "CHN2_051 = new Integer(CHN2_045) + new Integer(CHN2_050)"
+
 ---
-name: use_rate_mr
-description: Vaccine MR use rate
-priority: 1
-condition: "total_doses_mr != 0"
-actions:
-  - "use_rate_mr = (vaccine_doses_administered_mr / total_doses_mr) * 100"
----
-name: total_doses_dtp
-description: Vaccine DTP4 total doses
+name: CHN2_061
+description: Total weight above 2Z < five years
 priority: 1
 condition: "true"
 actions:
-  - "total_doses_dtp = doses_per_vial_dtp * vials_used_dtp"
----
-name: use_rate_dtp
-description: Vaccine DTP4 use rate
-priority: 1
-condition: "total_doses_dtp != 0"
-actions:
-  - "use_rate_dtp = (vaccine_doses_administered_vaccine_dtp_4 / total_doses_dtp) * 100"
----
-name: total_doses_rubella
-description: Vaccine Rubella total doses
-priority: 1
-condition: "true"
-actions:
-  - "total_doses_rubella = doses_per_vial_rubella * vials_used_rubella"
----
-name: use_rate_rubella
-description: Vaccine Rubella use rate
-priority: 1
-condition: "total_doses_rubella != 0"
-actions:
-  - "use_rate_rubella = (vaccine_doses_administered_rubella / total_doses_rubella) * 100"
----
-name: total_doses_dt15
-description: Total doses for vaccine (dT) administered to 15 to 49 years olds
-priority: 1
-condition: "true"
-actions:
-  - "total_doses_dt15 = doses_per_vial_dt15 * vials_used_dt15"
----
-name: use_rate_dt15
-description: Use rate for vaccine (dT) administered to 15 to 49 years olds
-priority: 1
-condition: "total_doses_dt15 != 0"
-actions:
-  - "use_rate_dt15 = (vaccine_doses_administered_dt15to49 / total_doses_dt15) * 100"
----
-name: pab_total
-description: Month to month visual of the total number of children that are protected against tetanus
-priority: 1
-condition: "true"
-actions:
-  - "pab_total = new Integer(pab_mother_dt) + new Integer(pab_assisted_delivery) + new Integer(pab_dt_and_assisted_delivery)"
----
-name: percentage_first_birth
-description: Percentage of women giving birth for the first time ({first_birth} =''yes''
-priority: 1
-condition: "total_child_births != 0"
-actions:
-  - "percentage_first_birth = (number_first_birth / total_child_births) * 100"
----
-name: percentage_number_rubella_serology
-description: Percentage of primapara mother who undertook a rubella serology test
-priority: 1
-condition: "number_first_birth != 0"
-actions:
-  - "percentage_number_rubella_serology = (number_rubella_serology / number_first_birth) * 100"
----
-name: percentage_serology_results
-description: Percentage of women who took the serology test that have negative results ({serology_results} = ''negative''
-priority: 1
-condition: "number_rubella_serology != 0"
-actions:
-  - "percentage_serology_results = (negative_serology_results / number_rubella_serology) * 100"
----
-name: percentage_right_measures_6months
-description: Percentage of women who took the serology test that have negative results ({serology_results} = ''negative''
-priority: 1
-condition: "measures_grp_children_6mnths != 0"
-actions:
-  - "percentage_right_measures_6months = (right_measures_6months / measures_grp_children_6mnths) * 100"
----
-name: percentage_right_measures_12months
-description: Percentage of women who took the serology test that have negative results ({serology_results} = ''negative''
-priority: 1
-condition: "measures_grp_children_12mnths != 0"
-actions:
-  - "percentage_right_measures_12months = (right_measures_12months / measures_grp_children_12mnths) * 100"
----
-name: percentage_right_measures_18months
-description: Percentage of women who took the serology test that have negative results ({serology_results} = ''negative''
-priority: 1
-condition: "measures_grp_children_18mnths != 0"
-actions:
-  - "percentage_right_measures_18months = (right_measures_18months / measures_grp_children_18mnths) * 100"
----
-name: percentage_malnutrition_episode_6months
-description: Percentage of children 6 months of age with at least 1 ‘previous episode of weight-for-age z-score of -2 or below ( undernutrition).
-priority: 1
-condition: "malnutrition_episode_percent_grp_children_6mnths != 0"
-actions:
-  - "percentage_malnutrition_episode_6months = (malnutrition_episode_6months / malnutrition_episode_percent_grp_children_6mnths) * 100"
----
-name: percentage_malnutrition_episode_12months
-description: Percentage of children with at least 1 ‘previous episode of undernutrition (moderate or severe malnutrition) at 12 months.
-priority: 1
-condition: "malnutrition_episode_percent_grp_children_12mnths != 0"
-actions:
-  - "percentage_malnutrition_episode_12months = (malnutrition_episode_12months / malnutrition_episode_percent_grp_children_12mnths) * 100"
----
-name: percentage_malnutrition_episode_18months
-description: Percentage of children with at least 1 ‘previous episode of undernutrition (moderate or severe malnutrition) at 18 months.
-priority: 1
-condition: "malnutrition_episode_percent_grp_children_18mnths != 0"
-actions:
-  - "percentage_malnutrition_episode_18months = (malnutrition_episode_18months / malnutrition_episode_percent_grp_children_18mnths) * 100"
----
-name: percentage_mid_mal_6mnths
-description: Percentage of children with mild malnutrition at 6 months
-priority: 1
-condition: "weight_height_count_grp_children_6mnths != 0"
-actions:
-  - "percentage_mid_mal_6mnths = (mid_mal_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
----
-name: percentage_mid_mal_12mnths
-description: Percentage of children with mild malnutrition at 12 months
-priority: 1
-condition: "weight_height_count_grp_children_12mnths != 0"
-actions:
-  - "percentage_mid_mal_12mnths = (mid_mal_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
----
-name: percentage_mid_mal_18mnths
-description: Percentage of children with mild malnutrition at 18 months
-priority: 1
-condition: "weight_height_count_grp_children_18mnths != 0"
-actions:
-  - "percentage_mid_mal_18mnths = (mid_mal_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"
----
-name: percentage_mod_mal_6mnths
-description: Percentage of chilldren with moderate malnutrition at 6 months
-priority: 1
-condition: "weight_height_count_grp_children_6mnths != 0"
-actions:
-  - "percentage_mod_mal_6mnths = (mod_mal_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
----
-name: percentage_mod_mal_12mnths
-description: Percentage of chilldren with moderate malnutrition at 12 months
-priority: 1
-condition: "weight_height_count_grp_children_12mnths != 0"
-actions:
-  - "percentage_mod_mal_12mnths = (mod_mal_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
----
-name: percentage_mod_mal_18mnths
-description: Percentage of chilldren with moderate malnutrition at 18 months
-priority: 1
-condition: "weight_height_count_grp_children_18mnths != 0"
-actions:
-  - "percentage_mod_mal_18mnths = (mod_mal_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"
----
-name: percentage_sev_mal_6mnths
-description: Percentage of children with severe malnutrition at 6 months
-priority: 1
-condition: "weight_height_count_grp_children_6mnths != 0"
-actions:
-  - "percentage_sev_mal_6mnths = (sev_mal_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
----
-name: percentage_sev_mal_12mnths
-description: Percentage of children with severe malnutrition at 12 months
-priority: 1
-condition: "weight_height_count_grp_children_12mnths != 0"
-actions:
-  - "percentage_sev_mal_12mnths = (sev_mal_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
----
-name: percentage_sev_mal_18mnths
-description: Percentage of children with severe malnutrition at 18 months
-priority: 1
-condition: "weight_height_count_grp_children_18mnths != 0"
-actions:
-  - "percentage_sev_mal_18mnths = (sev_mal_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"
----
-name: percentage_obese_grp_6mnths
-description: Percentage of obese children at 6 months
-priority: 1
-condition: "weight_height_count_grp_children_6mnths != 0"
-actions:
-  - "percentage_obese_grp_6mnths = (obese_grp_children_6mnths / weight_height_count_grp_children_6mnths) * 100"
----
-name: percentage_obese_grp_12mnths
-description: Percentage of obese children at 12 months
-priority: 1
-condition: "weight_height_count_grp_children_12mnths != 0"
-actions:
-  - "percentage_obese_grp_12mnths = (obese_grp_children_12mnths / weight_height_count_grp_children_12mnths) * 100"
----
-name: percentage_obese_grp_18mnths
-description: Percentage of obese children at 18 months
-priority: 1
-condition: "weight_height_count_grp_children_18mnths != 0"
-actions:
-  - "percentage_obese_grp_18mnths = (obese_grp_children_18mnths / weight_height_count_grp_children_18mnths) * 100"
+  - "CHN2_061 = new Integer(CHN2_055) + new Integer(CHN2_060)"

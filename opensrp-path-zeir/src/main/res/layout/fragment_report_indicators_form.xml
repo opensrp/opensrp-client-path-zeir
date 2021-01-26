@@ -16,6 +16,5 @@
         android:background="@color/white"
         android:orientation="vertical"
         android:padding="16dp"
-        android:scrollbars="vertical"
-        tools:context=".reporting.monthly.indicator.summary.ReportIndicatorsSummaryFragment" />
+        android:scrollbars="vertical" />
 </androidx.core.widget.NestedScrollView>
