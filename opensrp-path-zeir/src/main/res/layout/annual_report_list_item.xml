@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="3">
+
+    <TextView
+        android:id="@+id/vaccineTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1.2"
+        android:text="@string/vaccine"
+        android:textAlignment="textStart"
+        android:textColor="@color/black_text_color"
+        android:textSize="@dimen/report_item_text_size" />
+
+    <TextView
+        android:id="@+id/vaccinatedNumberTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1"
+        android:text="@string/vaccinated"
+        android:textAlignment="textStart"
+        android:textColor="@color/black_text_color"
+        android:textSize="@dimen/report_item_text_size" />
+
+    <TextView
+        android:id="@+id/coverageTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_weight="0.8"
+        android:text="@string/coverage"
+        android:textAlignment="textStart"
+        android:textColor="@color/black_text_color"
+        android:textSize="@dimen/report_item_text_size" />
+</LinearLayout>

@@ -1,0 +1,1586 @@
+{
+  "count": "5",
+  "encounter_type": "AEFI",
+  "validate_on_submit": true,
+  "show_errors_on_submit": true,
+  "entity_id": "",
+  "metadata": {
+    "start": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "start",
+      "openmrs_entity_id": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "end": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "end",
+      "openmrs_entity_id": "163138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "today": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "encounter",
+      "openmrs_entity_id": "encounter_date"
+    },
+    "deviceid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "deviceid",
+      "openmrs_entity_id": "163149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "subscriberid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "subscriberid",
+      "openmrs_entity_id": "163150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "simserial": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "simserial",
+      "openmrs_entity_id": "163151AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "phonenumber": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "phonenumber",
+      "openmrs_entity_id": "163152AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "encounter_location": ""
+  },
+  "step1": {
+    "title": "{{adverse_event.step1.title}}",
+    "next": "step2",
+    "fields": [
+      {
+        "key": "Reaction_Vaccine",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "6042AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "openmrs_data_type": "select one",
+        "type": "spinner",
+        "hint": "{{adverse_event.step1.Reaction_Vaccine.hint}}",
+        "values": [
+          "BCG",
+          "HepB",
+          "OPV",
+          "Penta",
+          "PCV",
+          "Rota",
+          "Measles",
+          "MR",
+          "Yellow Fever"
+        ],
+        "openmrs_choice_ids": {
+          "BCG": "149310AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "HepB": "162269AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "OPV": "129578AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "Penta": "162265AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "PCV": "162266AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "Rota": "162272AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "Measles": "149286AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "MR": "149286AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "Yellow Fever": "149253AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+        },
+        "v_required": {
+          "value": true,
+          "err": "{{adverse_event.step1.Reaction_Vaccine.v_required.err}}"
+        }
+      },
+      {
+        "key": "vaccine_frmwrk",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_frmwrk",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step1.vaccine_frmwrk.label}}",
+        "label_info_text": "{{adverse_event.step1.vaccine_frmwrk.label_info_text}}",
+        "label_info_title": "{{adverse_event.step1.vaccine_frmwrk.label_info_title}}",
+        "options": [
+          {
+            "key": "vaccine_frmwrk_imm",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step1.vaccine_frmwrk.options.vaccine_frmwrk_imm.text}}"
+          },
+          {
+            "key": "vaccine_frmwrk_campaign",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step1.vaccine_frmwrk.options.vaccine_frmwrk_campaign.text}}"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step1.vaccine_frmwrk.v_required.err}}"
+        }
+      },
+      {
+        "key": "vaccine_location",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_location",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step1.vaccine_location.label}}",
+        "options": [
+          {
+            "key": "vaccine_location_hf",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step1.vaccine_location.options.vaccine_location_hf.text}}"
+          },
+          {
+            "key": "vaccine_location_sch",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step1.vaccine_location.options.vaccine_location_sch.text}}"
+          },
+          {
+            "key": "vaccine_location_other",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step1.vaccine_location.options.vaccine_location_other.text}}"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step1.vaccine_location.v_required.err}}"
+        }
+      },
+      {
+        "key": "vaccine_location_other",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_location",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step1.vaccine_location_other.hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step1.vaccine_location_other.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "vaccine_facility",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_location",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step1.vaccine_facility.hint}}",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "vaccine_facility_unknown",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_facility_unknown",
+        "type": "check_box",
+        "label": "{{adverse_event.step1.vaccine_facility_unknown.label}}",
+        "options": [
+          {
+            "key": "vaccine_facility_unknown",
+            "text": "{{adverse_event.step1.vaccine_facility_unknown.options.vaccine_facility_unknown.text}}",
+            "text_size": "18px",
+            "value": "false"
+          }
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "lot_no",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "lot_no",
+        "openmrs_entity_parent": "",
+        "edit_type": "number",
+        "hint": "{{adverse_event.step1.lot_no.hint}}",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "expiry",
+        "type": "date_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "expiry",
+        "openmrs_entity_parent": "",
+        "expanded": false,
+        "hint": "{{adverse_event.step1.expiry.hint}}",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "outlet_no",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "outlet_no",
+        "openmrs_entity_parent": "",
+        "edit_type": "number",
+        "hint": "{{adverse_event.step1.outlet_no.hint}}",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "vaccine_diluents",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_diluents",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step1.vaccine_diluents.hint}}",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "thinner",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "thinner",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step1.thinner.hint}}",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "thinner_lot",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "thinner_lot",
+        "openmrs_entity_parent": "",
+        "edit_type": "number",
+        "hint": "{{adverse_event.step1.thinner_lot.hint}}",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "thinner_man_name",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "thinner_man_name",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step1.thinner_man_name.hint}}",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "thinner_exp",
+        "type": "date_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "thinner_exp",
+        "openmrs_entity_parent": "",
+        "expanded": false,
+        "hint": "{{adverse_event.step1.thinner_exp.hint}}",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "injection",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "injection",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step1.injection.label}}",
+        "options": [
+          {
+            "key": "injection_yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step1.injection.options.injection_yes.text}}"
+          },
+          {
+            "key": "injection_no",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step1.injection.options.injection_no.text}}"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step1.injection.v_required.err}}"
+        }
+      },
+      {
+        "key": "injection_site",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "injection_site",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step1.injection_site.label}}",
+        "options": [
+          {
+            "key": "upper_arm",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step1.injection_site.options.upper_arm.text}}"
+          },
+          {
+            "key": "as_thigh",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step1.injection_site.options.as_thigh.text}}"
+          },
+          {
+            "key": "injection_site_other",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step1.injection_site.options.injection_site_other.text}}"
+          }
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "injection_other",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "injection_other",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step1.injection_other.hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step1.injection_other.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "injection_admin",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "injection_admin",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step1.injection_admin.label}}",
+        "options": [
+          {
+            "key": "injection_im",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step1.injection_admin.options.injection_im.text}}"
+          },
+          {
+            "key": "injection_sc",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step1.injection_admin.options.injection_sc.text}}"
+          },
+          {
+            "key": "injection_id",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step1.injection_admin.options.injection_id.text}}"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step1.injection_admin.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "eafi_symptoms",
+        "type": "check_box",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "eafi_symptoms",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step1.eafi_symptoms.label}}",
+        "options": [
+          {
+            "key": "eafi_symptoms_abscess",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_abscess.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_inflam",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_inflam.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_swelling",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_swelling.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_edema",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_edema.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_hives",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_hives.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_eczema",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_eczema.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_gen_edema",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_gen_edema.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_anaphylic_shock",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_anaphylic_shock.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_collapsus",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_collapsus.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_convulsions",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_convulsions.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_conscience",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_conscience.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_brachial_neuretis",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_brachial_neuretis.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_acute_paralysis",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_acute_paralysis.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_encephalopathy",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_encephalopathy.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_adenite",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_adenite.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_fever",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_fever.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_other",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_other.text}}",
+            "value": false
+          },
+          {
+            "key": "eafi_symptoms_none",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step1.eafi_symptoms.options.eafi_symptoms_none.text}}",
+            "value": false
+          }
+        ],
+        "exclusive": [
+          "eafi_symptoms_none"
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step1.eafi_symptoms.v_required.err}}"
+        }
+      },
+      {
+        "key": "eafi_symptoms_other",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "eafi_symptoms_other",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step1.eafi_symptoms_other.hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step1.eafi_symptoms_other.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "aefi_start_date",
+        "type": "date_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "aefi_start_date",
+        "openmrs_entity_parent": "",
+        "expanded": false,
+        "hint": "{{adverse_event.step1.aefi_start_date.hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step1.aefi_start_date.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "aefi_hrs",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "aefi_hrs",
+        "openmrs_entity_parent": "",
+        "edit_type": "number",
+        "hint": "{{adverse_event.step1.aefi_hrs.hint}}",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "step2": {
+    "title": "{{adverse_event.step2.title}}",
+    "next": "step3",
+    "fields": [
+      {
+        "key": "place_care",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "place_care",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step2.place_care.label}}",
+        "options": [
+          {
+            "key": "home",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step2.place_care.options.home.text}}"
+          },
+          {
+            "key": "hospital",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step2.place_care.options.hospital.text}}"
+          },
+          {
+            "key": "other",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step2.place_care.options.other.text}}"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step2.place_care.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "type_care",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "type_care",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step2.type_care.label}}",
+        "options": [
+          {
+            "key": "treated",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step2.type_care.options.treated.text}}",
+            "value": false
+          },
+          {
+            "key": "hospitalized",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step2.type_care.options.hospitalized.text}}",
+            "value": false
+          },
+          {
+            "key": "reffered",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step2.type_care.options.reffered.text}}",
+            "value": false
+          },
+          {
+            "key": "no_care_given",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step2.type_care.options.no_care_given.text}}",
+            "value": false
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step2.type_care.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "care_home",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "care_home",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step2.care_home.label}}",
+        "options": [
+          {
+            "key": "home _remedies",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step2.care_home.options.home__remedies.text}}"
+          },
+          {
+            "key": "care_home_no",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step2.care_home.options.care_home_no.text}}"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step2.care_home.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "hospitalization_date",
+        "type": "date_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "hospitalization_date",
+        "openmrs_entity_parent": "",
+        "expanded": false,
+        "max_date": "today",
+        "hint": "{{adverse_event.step2.hospitalization_date.hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step2.hospitalization_date.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "discharge",
+        "type": "date_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "discharge",
+        "openmrs_entity_parent": "",
+        "expanded": false,
+        "max_date": "today",
+        "hint": "{{adverse_event.step2.discharge.hint}}",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "hospt_location",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "hospt_location",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step2.hospt_location.hint}}",
+        "v_required": {
+          "value": "false",
+          "err": "{{adverse_event.step2.hospt_location.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "step3": {
+    "title": "{{adverse_event.step3.title}}",
+    "next": "step4",
+    "fields": [
+      {
+        "key": "healing",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "healing",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step3.healing.label}}",
+        "options": [
+          {
+            "key": "healing_yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step3.healing.options.healing_yes.text}}"
+          },
+          {
+            "key": "healing_no",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step3.healing.options.healing_no.text}}"
+          },
+          {
+            "key": "child_died",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step3.healing.options.child_died.text}}"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step3.healing.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "aefi_date_death",
+        "type": "date_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "aefi_date_death",
+        "openmrs_entity_parent": "",
+        "hint": "{{adverse_event.step3.aefi_date_death.hint}}",
+        "expanded": false,
+        "max_date": "today",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step3.aefi_date_death.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "aefi_time_death",
+        "type": "time_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "aefi_time_death",
+        "openmrs_entity_parent": "",
+        "expanded": false,
+        "hint": "{{adverse_event.step3.aefi_time_death.hint}}",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "aefi_autopsy",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "aefi_autopsy",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step3.aefi_autopsy.label}}",
+        "label_info_text": "{{adverse_event.step3.aefi_autopsy.label_info_text}}",
+        "label_info_title": "{{adverse_event.step3.aefi_autopsy.label_info_title}}",
+        "options": [
+          {
+            "key": "autopsy_yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step3.aefi_autopsy.options.autopsy_yes.text}}"
+          },
+          {
+            "key": "autopsy_no",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step3.aefi_autopsy.options.autopsy_no.text}}"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step3.aefi_autopsy.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "aefi_death_reg",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "aefi_death_reg",
+        "openmrs_entity_parent": "",
+        "type": "toaster_notes",
+        "text": "{{adverse_event.step3.aefi_death_reg.text}}",
+        "toaster_info_text": "{{adverse_event.step3.aefi_death_reg.toaster_info_text}}",
+        "toaster_info_title": "{{adverse_event.step3.aefi_death_reg.toaster_info_title}}",
+        "toaster_type": "info",
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "duration_aefi",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "duration_aefi",
+        "openmrs_entity_parent": "",
+        "edit_type": "number",
+        "hint": "{{adverse_event.step3.duration_aefi.hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step3.duration_aefi.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "persistent_aefi",
+        "type": "check_box",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "persistent_aefi",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step3.persistent_aefi.label}}",
+        "options": [
+          {
+            "key": "persistent_abscess",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_abscess.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_inflam",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_inflam.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_swelling",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_swelling.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_edema",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_edema.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_hives",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_hives.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_eczema",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_eczema.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_gen_edema",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_gen_edema.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_anaphylic_shock",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_anaphylic_shock.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_collapsus",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_collapsus.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_convulsions",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_convulsions.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_conscience",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_conscience.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_brachial_neuretis",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_brachial_neuretis.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_acute_paralysis",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_acute_paralysis.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_encephalopathy",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_encephalopathy.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_adenite",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_adenite.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_fever",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_fever.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_other",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_other.text}}",
+            "value": false
+          },
+          {
+            "key": "persistent_none",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step3.persistent_aefi.options.persistent_none.text}}",
+            "value": false
+          }
+        ],
+        "exclusive": [
+          "persistent_none"
+        ],
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "persistent_aefi_date",
+        "type": "date_picker",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "persistent_aefi_date",
+        "openmrs_entity_parent": "",
+        "expanded": false,
+        "hint": "{{adverse_event.step3.persistent_aefi_date.hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step3.persistent_aefi_date.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "step4": {
+    "title": "{{adverse_event.step4.title}}",
+    "next": "step5",
+    "fields": [
+      {
+        "key": "prev_vaccines_aefi",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "prev_vaccines_aefi",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step4.prev_vaccines_aefi.label}}",
+        "label_info_text": "{{adverse_event.step4.prev_vaccines_aefi.label_info_text}}",
+        "label_info_title": "{{adverse_event.step4.prev_vaccines_aefi.label_info_title}}",
+        "options": [
+          {
+            "key": "prev_vaccines_yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step4.prev_vaccines_aefi.options.prev_vaccines_yes.text}}"
+          },
+          {
+            "key": "prev_vaccines_no",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step4.prev_vaccines_aefi.options.prev_vaccines_no.text}}"
+          },
+          {
+            "key": "prev_vaccines_not_known",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step4.prev_vaccines_aefi.options.prev_vaccines_not_known.text}}"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step4.prev_vaccines_aefi.v_required.err}}"
+        }
+      },
+      {
+        "key": "prev_aefi_rxns",
+        "type": "check_box",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "prev_aefi_rxns",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step4.prev_aefi_rxns.label}}",
+        "options": [
+          {
+            "key": "prev_abscess",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_abscess.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_inflam",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_inflam.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_swelling",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_swelling.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_edema",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_edema.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_hives",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_hives.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_eczema",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_eczema.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_gen_edema",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_gen_edema.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_anaphylic_shock",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_anaphylic_shock.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_collapsus",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_collapsus.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_convulsions",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_convulsions.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_conscience",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_conscience.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_brachial_neuretis",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_brachial_neuretis.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_acute_paralysis",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_acute_paralysis.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_encephalopathy",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_encephalopathy.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_adenite",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_adenite.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_fever",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_fever.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_other",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_other.text}}",
+            "value": false
+          },
+          {
+            "key": "prev_none",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step4.prev_aefi_rxns.options.prev_none.text}}",
+            "value": false
+          }
+        ],
+        "exclusive": [
+          "prev_none"
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step4.prev_aefi_rxns.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "prev_aefi_rxns_other",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "prev_aefi_rxns_other",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step4.prev_aefi_rxns_other.hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step4.prev_aefi_rxns_other.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "drug_allergy",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "drug_allergy",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step4.drug_allergy.label}}",
+        "options": [
+          {
+            "key": "allergy_yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step4.drug_allergy.options.allergy_yes.text}}"
+          },
+          {
+            "key": "allergy_no",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step4.drug_allergy.options.allergy_no.text}}"
+          },
+          {
+            "key": "allergy_not_known",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step4.drug_allergy.options.allergy_not_known.text}}"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step4.drug_allergy.v_required.err}}"
+        }
+      },
+      {
+        "key": "drug_allergy_drug",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "drug_allergy_drug",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step4.drug_allergy_drug.hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step4.drug_allergy_drug.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "chronic_illness",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "chronic_illness",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step4.chronic_illness.label}}",
+        "options": [
+          {
+            "key": "chronic_illness_yes",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step4.chronic_illness.options.chronic_illness_yes.text}}"
+          },
+          {
+            "key": "chronic_illness_no",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step4.chronic_illness.options.chronic_illness_no.text}}"
+          },
+          {
+            "key": "chronic_illness_not_known",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step4.chronic_illness.options.chronic_illness_not_known.text}}"
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step4.chronic_illness.v_required.err}}"
+        }
+      },
+      {
+        "key": "illness_details",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "illness_details",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step4.illness_details.hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step4.illness_details.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "step5": {
+    "title": "{{adverse_event.step5.title}}",
+    "fields": [
+      {
+        "key": "investigation",
+        "type": "native_radio",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "investigation",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step5.investigation.label}}",
+        "options": [
+          {
+            "key": "isolated_case",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step5.investigation.options.isolated_case.text}}"
+          },
+          {
+            "key": "several_cases",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step5.investigation.options.several_cases.text}}"
+          },
+          {
+            "key": "same_symptoms",
+            "openmrs_entity": "",
+            "openmrs_entity_id": "",
+            "openmrs_entity_parent": "",
+            "text": "{{adverse_event.step5.investigation.options.same_symptoms.text}}"
+          }
+        ]
+      },
+      {
+        "key": "last_name_agent",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "last_name_agent",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step5.last_name_agent.hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step5.last_name_agent.v_required.err}}"
+        }
+      },
+      {
+        "key": "first_name_agent",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "first_name_agent",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step5.first_name_agent.hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step5.first_name_agent.v_required.err}}"
+        }
+      },
+      {
+        "key": "function_agent",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "function_agent",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step5.function_agent.hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step5.function_agent.v_required.err}}"
+        }
+      },
+      {
+        "key": "vaccine_handling_find",
+        "type": "check_box",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_handling_find",
+        "openmrs_entity_parent": "",
+        "label": "{{adverse_event.step5.vaccine_handling_find.label}}",
+        "options": [
+          {
+            "key": "cold_chain_respect",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step5.vaccine_handling_find.options.cold_chain_respect.text}}",
+            "value": false
+          },
+          {
+            "key": "aseptic_gestures",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step5.vaccine_handling_find.options.aseptic_gestures.text}}",
+            "value": false
+          },
+          {
+            "key": "correct_tech",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step5.vaccine_handling_find.options.correct_tech.text}}",
+            "value": false
+          },
+          {
+            "key": "vaccine_handling_other",
+            "openmrs_choice_id": "",
+            "text": "{{adverse_event.step5.vaccine_handling_find.options.vaccine_handling_other.text}}",
+            "value": false
+          }
+        ],
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step5.vaccine_handling_find.v_required.err}}"
+        }
+      },
+      {
+        "key": "vaccine_handling_find_other",
+        "type": "edit_text",
+        "openmrs_entity": "",
+        "openmrs_entity_id": "vaccine_handling_find_other",
+        "openmrs_entity_parent": "",
+        "edit_type": "name",
+        "hint": "{{adverse_event.step5.vaccine_handling_find_other.hint}}",
+        "v_required": {
+          "value": "true",
+          "err": "{{adverse_event.step5.vaccine_handling_find_other.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "adverse_effects_relevance_rules.yml"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "properties_file_name": "adverse_event"
+}

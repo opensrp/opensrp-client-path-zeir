@@ -1,0 +1,252 @@
+---
+name: step1_vaccine_location_other
+description: vaccine_location_other
+priority: 1
+condition: "step1_vaccine_location == 'vaccine_location_other'"
+actions:
+  - "isRelevant = true"
+---
+name: step1_vaccine_facility
+description: vaccine_facility
+priority: 1
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
+actions:
+  - "isRelevant = true"
+---
+name: step1_vaccine_facility_unknown
+description: vaccine_facility_unknown
+priority: 1
+condition: "step1_vaccine_location == 'vaccine_location_hf'"
+actions:
+  - "isRelevant = true"
+---
+name: step1_lot_no
+description: lot_no
+priority: 1
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
+actions:
+  - "isRelevant = true"
+---
+name: step1_expiry
+description: expiry
+priority: 1
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
+actions:
+  - "isRelevant = true"
+---
+name: step1_outlet_no
+description: outlet_no
+priority: 1
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
+actions:
+  - "isRelevant = true"
+---
+name: step1_vaccine_diluents
+description: vaccine_diluents
+priority: 1
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
+actions:
+  - "isRelevant = true"
+---
+name: step1_thinner
+description: lot_no
+priority: 1
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
+actions:
+  - "isRelevant = true"
+---
+name: step1_thinner_lot
+description: thinner_lot
+priority: 1
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
+actions:
+  - "isRelevant = true"
+---
+name: step1_thinner_man_name
+description: thinner_man_name
+priority: 1
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
+actions:
+  - "isRelevant = true"
+---
+name: step1_thinner_exp
+description: thinner_exp
+priority: 1
+condition: "step1_vaccine_location == 'vaccine_location_hf' && step1_vaccine_facility_unknown.isEmpty()"
+actions:
+  - "isRelevant = true"
+---
+name: step1_injection_site
+description: injection_site
+priority: 1
+condition: "step1_injection == 'injection_yes'"
+actions:
+  - "isRelevant = true"
+---
+name: step1_injection_other
+description: injection_other
+priority: 1
+condition: "step1_injection_site == 'injection_site_other'"
+actions:
+  - "isRelevant = true"
+---
+name: step1_injection_admin
+description: injection_admin
+priority: 1
+condition: "step1_injection == 'injection_yes'"
+actions:
+  - "isRelevant = true"
+---
+name: step1_eafi_symptoms_other
+description: eafi_symptoms_other
+priority: 1
+condition: "!step1_eafi_symptoms.isEmpty() && step1_eafi_symptoms.contains('eafi_symptoms_other')"
+actions:
+  - "isRelevant = true"
+---
+name: step1_aefi_start_date
+description: aefi_start_date
+priority: 1
+condition: "!step1_eafi_symptoms.isEmpty() && !step1_eafi_symptoms.contains('eafi_symptoms_none')"
+actions:
+  - "isRelevant = true"
+---
+name: step1_aefi_hrs
+description: aefi_hrs
+priority: 1
+condition: "!step1_eafi_symptoms.isEmpty() && !step1_eafi_symptoms.contains('eafi_symptoms_none')"
+actions:
+  - "isRelevant = true"
+---
+name: step2_place_care
+description: place_care
+priority: 1
+condition: "!step1_eafi_symptoms.isEmpty() && !step1_eafi_symptoms.contains('eafi_symptoms_none')"
+actions:
+  - "isRelevant = true"
+---
+name: step2_type_care
+description: type_care
+priority: 1
+condition: "!step2_place_care.isEmpty() && step2_place_care == 'hospital'"
+actions:
+  - "isRelevant = true"
+---
+name: step2_care_home
+description: care_home
+priority: 1
+condition: "!step2_place_care.isEmpty() && step2_place_care == 'home'"
+actions:
+  - "isRelevant = true"
+---
+name: step2_hospitalization_date
+description: hospitalization_date
+priority: 1
+condition: "!step2_type_care.isEmpty() && step2_type_care.contains('hospitalized')"
+actions:
+  - "isRelevant = true"
+---
+name: step2_discharge
+description: discharge
+priority: 1
+condition: "!step2_type_care.isEmpty() && step2_type_care.contains('hospitalized')"
+actions:
+  - "isRelevant = true"
+---
+name: step2_hospt_location
+description: hospt_location
+priority: 1
+condition: "!step2_type_care.isEmpty() && step2_type_care.contains('hospitalized')"
+actions:
+  - "isRelevant = true"
+---
+name: step3_healing
+description: healing
+priority: 1
+condition: "!step1_eafi_symptoms.isEmpty() && !step1_eafi_symptoms.contains('eafi_symptoms_none')"
+actions:
+  - "isRelevant = true"
+---
+name: step3_aefi_date_death
+description: aefi_date_death
+priority: 1
+condition: "!step3_healing.isEmpty() && step3_healing == 'child_died'"
+actions:
+  - "isRelevant = true"
+---
+name: step3_aefi_time_death
+description: aefi_time_death
+priority: 1
+condition: "!step3_healing.isEmpty() && step3_healing == 'child_died'"
+actions:
+  - "isRelevant = true"
+---
+name: step3_aefi_autopsy
+description: aefi_autopsy
+priority: 1
+condition: "!step3_healing.isEmpty() && step3_healing == 'child_died'"
+actions:
+  - "isRelevant = true"
+---
+name: step3_aefi_death_reg
+description: aefi_death_reg
+priority: 1
+condition: "!step3_healing.isEmpty() && step3_healing == 'child_died'"
+actions:
+  - "isRelevant = true"
+---
+name: step3_duration_aefi
+description: duration_aefi
+priority: 1
+condition: "!step3_healing.isEmpty() && step3_healing == 'healing_yes'"
+actions:
+  - "isRelevant = true"
+---
+name: step3_persistent_aefi
+description: persistent_aefi
+priority: 1
+condition: "!step3_healing.isEmpty() && step3_healing == 'healing_no'"
+actions:
+  - "isRelevant = true"
+---
+name: step3_persistent_aefi_date
+description: persistent_aefi_date
+priority: 1
+condition: "!step3_persistent_aefi.isEmpty() && !step3_persistent_aefi.contains('persistent_none')"
+actions:
+  - "isRelevant = true"
+---
+name: step4_prev_aefi_rxns
+description: prev_aefi_rxns
+priority: 1
+condition: "!step4_prev_vaccines_aefi.isEmpty() && step4_prev_vaccines_aefi == 'prev_vaccines_yes'"
+actions:
+  - "isRelevant = true"
+---
+name: step4_prev_aefi_rxns_other
+description: prev_aefi_rxns_other
+priority: 1
+condition: "!step4_prev_aefi_rxns.isEmpty() && step4_prev_aefi_rxns.contains('prev_other')"
+actions:
+  - "isRelevant = true"
+---
+name: step4_drug_allergy_drug
+description: drug_allergy_drug
+priority: 1
+condition: "!step4_drug_allergy.isEmpty() && step4_drug_allergy == 'allergy_yes'"
+actions:
+  - "isRelevant = true"
+---
+name: step4_illness_details
+description: illness_details
+priority: 1
+condition: "(!step4_prev_vaccines_aefi.isEmpty() && step4_prev_vaccines_aefi == 'prev_vaccines_yes') || (!step4_drug_allergy.isEmpty() && step4_drug_allergy == 'allergy_yes') || (!step4_chronic_illness.isEmpty() && step4_chronic_illness == 'chronic_illness_yes')"
+actions:
+  - "isRelevant = true"
+---
+name: step5_vaccine_handling_find_other
+description: vaccine_handling_find_other
+priority: 1
+condition: "!step5_vaccine_handling_find.isEmpty() && step5_vaccine_handling_find.contains('vaccine_handling_other')"
+actions:
+  - "isRelevant = true"

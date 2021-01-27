@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/report_view_background_color"
+    android:orientation="vertical">
+
+    <com.vijay.jsonwizard.views.CustomTextView
+        android:id="@+id/submittedByTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:textFontWeight="22"
+        android:layout_marginEnd="24dp"
+        android:text="@string/submitted_by_"
+        android:textStyle="normal|bold"
+        android:textColor="@color/black"
+        android:textSize="@dimen/indicator_summary_header_size" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/indicatorsRecyclerView"
+        style="@style/Widget.AppCompat.ListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/white"
+        android:cacheColorHint="@null"
+        android:childDivider="@color/list_view_divider_black"
+        android:clipToPadding="false"
+        android:divider="@color/list_view_divider_black"
+        android:fadingEdge="none" />
+</LinearLayout>

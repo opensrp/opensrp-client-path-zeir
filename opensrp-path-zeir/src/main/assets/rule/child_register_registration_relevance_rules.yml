@@ -1,0 +1,7 @@
+---
+name: step1_birth_facility_name
+description: birth_facility_name
+priority: 1
+condition: "step1_place_of_birth == 'health_facility'"
+actions:
+  - "isRelevant = true"

@@ -1,0 +1,28 @@
+---
+name: step1_age
+description: Calculated Age
+priority: 1
+condition: "step1_Date_Birth != ''"
+actions:
+  - 'calculation = helper.getDifferenceDays(step1_Date_Birth) / 365.25'
+---
+name: step1_protected_at_birth_calculation
+description: Protected at birth
+priority: 1
+condition: "step1_mother_tdv_doses != ''"
+actions:
+  - "calculation = step1_mother_tdv_doses == '2_plus_tdv_doses' ? 'Yes' : 'No'"
+---
+name: step1_protected_at_birth
+description: Protected at birth display
+priority: 1
+condition: "true"
+actions:
+  - "calculation = step1_protected_at_birth_calculation"
+---
+name: step1_pcv4_required
+description: Calculation of whether or not the child needs a 4th PCV dose, based on their GA at birth and their birth weight.
+priority: 1
+condition: "true"
+actions:
+  - "calculation = step1_ga_at_birth < 37 && step1_Birth_Weight < 2.5 ? '1' : '0'"

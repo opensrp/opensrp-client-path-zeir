@@ -1,0 +1,41 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="login_font_size">10sp</dimen>
+
+    <dimen name="custom_navigation_icon_size">35dp</dimen>
+    <dimen name="table_contents_text_size">22sp</dimen>
+    <dimen name="register_link_width">85dp</dimen>
+    <dimen name="register_link_height">85dp</dimen>
+    <dimen name="divider_margin">27dp</dimen>
+    <dimen name="login_logo_top_padding">256dp</dimen>
+
+
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Material Design TableView dimensions -->
+
+    <dimen name="register_search_bar_min_margin">20dp</dimen>
+
+    <!-- Overriding the default values of the tableView -->
+    <dimen name="default_row_header_width">55dp</dimen>
+    <dimen name="default_column_header_height">40dp</dimen>
+    <dimen name="checkbox_margin_top">10dp</dimen>
+
+    <dimen name="login_logo_height">190dp</dimen>
+
+    <dimen name="login_horizontal_margin">16dp</dimen>
+    <dimen name="login_mid_section_horizontal_margin">32dp</dimen>
+    <dimen name="toolbar_buttons_padding">8dp</dimen>
+    <dimen name="report_indicator_form_margin">24dp</dimen>
+    <dimen name="text_user_initial_size">18sp</dimen>
+    <dimen name="user_initials_textview_size">40dp</dimen>
+    <dimen name="tab_padding">24dp</dimen>
+    <dimen name="indicator_summary_header_size">22sp</dimen>
+    <dimen name="expansion_panel_header_padding">16dp</dimen>
+    <dimen name="indicator_text_size">16sp</dimen>
+    <dimen name="report_item_text_size">18sp</dimen>
+    <dimen name="expansion_panel_header_height">56dp</dimen>
+    <dimen name="annual_report_view_margin">32dp</dimen>
+
+</resources>
