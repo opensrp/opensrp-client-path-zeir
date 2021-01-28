@@ -16,6 +16,7 @@ import org.smartregister.pathzeir.contract.NavigationContract;
 import org.smartregister.pathzeir.interactor.NavigationInteractor;
 import org.smartregister.pathzeir.model.NavigationModel;
 import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.stock.job.SyncStockServiceJob;
 
 import java.lang.ref.WeakReference;
 
@@ -60,6 +61,7 @@ public class NavigationPresenter implements NavigationContract.Presenter {
         HeightIntentServiceJob.scheduleJobImmediately(HeightIntentServiceJob.TAG);
         VaccineServiceJob.scheduleJobImmediately(VaccineServiceJob.TAG);
         SyncAllLocationsServiceJob.scheduleJobImmediately(SyncAllLocationsServiceJob.TAG);
+        SyncStockServiceJob.scheduleJobImmediately(SyncStockServiceJob.TAG);
     }
 
     @Override
