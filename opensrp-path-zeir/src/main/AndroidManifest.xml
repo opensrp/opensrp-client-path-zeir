@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="org.smartregister.pathzeir"
-    tools:ignore="ImpliedTouchscreenHardware,MissingLeanbackLauncher,MissingLeanbackSupport" >
+    tools:ignore="ImpliedTouchscreenHardware,MissingLeanbackLauncher,MissingLeanbackSupport">
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -28,7 +28,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="UnusedAttribute"
-        tools:replace="android:allowBackup,android:icon,android:label,android:theme" >
+        tools:replace="android:allowBackup,android:icon,android:label,android:theme">
         <activity
             android:name="org.smartregister.pathzeir.reporting.monthly.indicator.ReportIndicatorsActivity"
             android:label="@string/title_activity_report_tallies"
@@ -52,8 +52,13 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name="org.smartregister.stock.activity.StockControlActivity"
+            android:label="@string/title_activity_stock_control"
             android:screenOrientation="portrait"
-            android:theme="@style/ChildTheme.NoActionBar"
+            android:theme="@style/AppThemeNoTitle.NoActionBar" />
+        <activity
+            android:name="org.smartregister.stock.activity.StockJsonFormActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".reporting.coverage.CoverageReportsActivity"
@@ -169,7 +174,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/captured_images_path" />
@@ -189,7 +194,9 @@
         <service android:name=".service.intent.ArchiveChildrenAgedAboveFiveIntentService" />
         <service android:name=".service.intent.AppVaccineScheduleUpdateIntentService" />
         <service android:name=".reporting.dropuout.intent.CoverageDropoutIntentService" />
-        <service android:name="org.smartregister.stock.sync.StockSyncIntentService" />
+        <service
+            android:name="org.smartregister.stock.sync.StockSyncIntentService"
+            android:exported="false" />
         <service android:name="org.smartregister.pathzeir.reporting.monthly.intent.HIA2IntentService" />
         <service
             android:name="org.smartregister.immunization.service.intent.RecurringIntentService"
