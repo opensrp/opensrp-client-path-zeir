@@ -44,6 +44,7 @@ public class AdvancedSearchModel extends BaseChildAdvancedSearchModel {
                 AppConstants.KEY.ID_LOWER_CASE,
                 AppConstants.KEY.RELATIONALID,
                 AppConstants.KEY.RELATIONAL_ID,
+                AppConstants.KEY.FATHER_RELATIONAL_ID,
                 AppConstants.KEY.FIRST_NAME,
                 AppConstants.KEY.LAST_NAME,
                 AppConstants.KEY.GENDER,

@@ -482,4 +482,6 @@
     <string name="CHN3_090">Number of days fridge non-functional</string>
     <string name="daily_tallies_with_day">Daily Tallies &gt; %1s</string>
 
+    <string name="card_id_hint">ZEIR ID</string>
+
 </resources>
