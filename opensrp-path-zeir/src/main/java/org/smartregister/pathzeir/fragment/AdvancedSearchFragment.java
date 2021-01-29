@@ -295,6 +295,17 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         return searchParams;
     }
 
+
+
+    /*
+     *  No Need update count from this fragment
+     * The whole functionality is working in
+     * ChildRegisterFragment already
+     */
+    @Override
+    protected void updateDueOverdueCountText() {
+    }
+
     public void searchByOpenSRPId(String barcodeSearchTerm) {
         boolean searchLocally = myCatchmentRadioButton.isChecked();
 
