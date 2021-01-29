@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/reportIndicatorsFormFragment">
+    app:startDestination="@id/reportsIndicatorFragment">
     <fragment
         android:id="@+id/reportIndicatorsDailySummaryFragment"
         android:name="org.smartregister.pathzeir.reporting.monthly.indicator.daily.ReportDailyIndicatorsSummaryFragment"
@@ -24,5 +24,10 @@
         android:name="org.smartregister.pathzeir.reporting.monthly.draft.ConfirmSendDraftDialog"
         android:label="@string/confirm_send_draft_reports"
         tools:layout="@layout/dialog_fragment_send_monthly" />
+    <fragment
+        android:id="@+id/reportsIndicatorFragment"
+        android:name="org.smartregister.pathzeir.reporting.monthly.indicator.ReportIn`dicatorFragment"
+        android:label="fragment_reports_indicator"
+        tools:layout="@layout/fragment_report_indicator" />
 
 </navigation>
