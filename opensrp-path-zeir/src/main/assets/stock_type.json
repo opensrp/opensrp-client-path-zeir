@@ -28,6 +28,13 @@
     "openmrs_quantity_concept_id": ""
   },
   {
+    "quantity": "5",
+    "name": "IPV",
+    "openmrs_parent_entity_id": "",
+    "openmrs_date_concept_id": "",
+    "openmrs_quantity_concept_id": ""
+  },
+  {
     "quantity": "1",
     "name": "Rota",
     "openmrs_parent_entity_id": "",
