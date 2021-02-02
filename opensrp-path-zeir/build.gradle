@@ -236,7 +236,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
 //    implementation(project(':opensrp-child')) {
-    implementation('org.smartregister:opensrp-client-child:0.6.6-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-child:0.6.7-ALPHA1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-growth-monitoring'
@@ -256,7 +256,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
-    implementation('org.smartregister:opensrp-client-core:4.1.6-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-core:4.2.0-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -287,7 +287,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
-    implementation('org.smartregister:opensrp-client-stock:1.2.0-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-stock:1.2.3-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
