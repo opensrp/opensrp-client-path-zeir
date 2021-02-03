@@ -276,6 +276,9 @@
 
     <!--End of report indicators-->
 
+    <string name="card_id_hint">ZEIR ID</string>
+    <string name="zeir_id">ZEIR ID </string>
+
     <!-- Months -->
     <string name="january">January</string>
     <string name="february">February</string>
@@ -481,7 +484,5 @@
     <string name="CHN3_085_O">Measles/ MR 2 (at 18 months) at outreach</string>
     <string name="CHN3_090">Number of days fridge non-functional</string>
     <string name="daily_tallies_with_day">Daily Tallies &gt; %1s</string>
-
-    <string name="card_id_hint">ZEIR ID</string>
 
 </resources>
