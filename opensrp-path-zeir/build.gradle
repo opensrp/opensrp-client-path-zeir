@@ -287,7 +287,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
-    implementation('org.smartregister:opensrp-client-stock:1.2.3-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-stock:1.2.0-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
