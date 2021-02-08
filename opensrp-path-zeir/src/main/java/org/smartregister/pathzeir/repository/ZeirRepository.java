@@ -103,7 +103,7 @@ public class ZeirRepository extends Repository {
 
         runLegacyUpgrades(database);
 
-        onUpgrade(database, 11, BuildConfig.DATABASE_VERSION);
+        onUpgrade(database, 12, BuildConfig.DATABASE_VERSION);
 
         // initialize from yml file
         ReportingLibrary reportingLibraryInstance = ReportingLibrary.getInstance();
@@ -149,6 +149,8 @@ public class ZeirRepository extends Repository {
                     PlanDefinitionRepository.createTable(db);
                     PlanDefinitionSearchRepository.createTable(db);
                     break;
+                case 13:
+                    upgradeToVersion13(db);
                 default:
                     break;
             }
@@ -424,13 +426,9 @@ public class ZeirRepository extends Repository {
         }
     }
 
-    /*private void dumpHIA2IndicatorsCSV(SQLiteDatabase db) {
-        List<Map<String, String>> csvData = org.smartregister.util.Utils.populateTableFromCSV(
-                context,
-                HIA2IndicatorsRepository.INDICATORS_CSV_FILE,
-                HIA2IndicatorsRepository.CSV_COLUMN_MAPPING);
-        HIA2IndicatorsRepository hIA2IndicatorsRepository = VaccinatorApplication.getInstance()
-                .hIA2IndicatorsRepository();
-        hIA2IndicatorsRepository.save(db, csvData);
-    }*/
+    private void upgradeToVersion13(SQLiteDatabase db) { //TODO revisit this
+//        StockRepository.migrateAddInventoryColumns(db);
+//        StockTypeRepository.migrationAdditionalProductProperties(db);
+//        StockTypeRepository.migrationAddServerVersionColumn(db);
+    }
 }

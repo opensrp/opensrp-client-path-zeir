@@ -18,7 +18,6 @@ public class AppConstants {
         public static final String GENDER = "gender";
         public static final String INACTIVE = "inactive";
         public static final String LAST_INTERACTED_WITH = "last_interacted_with";
-        public static final String TITLE = "title";
         public static final String RELATIONALID = "relationalid";
         public static final String RELATIONAL_ID = "relational_id";
         public static final String ID_LOWER_CASE = "_id";
@@ -27,14 +26,9 @@ public class AppConstants {
         public static final String DOD = "dod";//Date Of Death
         public static final String DATE_REMOVED = "date_removed";
         public static final String MOTHER_NRC_NUMBER = "nrc_number";
-        public static final String SECOND_PHONE_NUMBER = "second_phone_number";
         public static final String VIEW_CONFIGURATION_PREFIX = "ViewConfiguration_";
         public static final String HOME_FACILITY = "home_facility";
         public static final String BIRTH_FACILITY_NAME = "birth_facility_name";
-        public static final String APP_ID = "mer_id";
-        public static final String MIDDLE_NAME = "middle_name";
-        public static final String DATE_BIRTH = "Date_Birth";
-        public static final String BIRTH_WEIGHT = "Birth_Weight";
         public static final String MOTHER_DOB = "mother_dob";
         public static final String TODAY = "today";
         public static final String BUTTON_TEXT = "buttonText";
@@ -65,13 +59,7 @@ public class AppConstants {
         public static final String PHYSICAL_LANDMARK = "physical_landmark";
         public static final String CHW_NAME = "chw_name";
         public static final String CHW_PHONE_NUMBER = "chw_phone_number";
-        public static final String SUB_TYPE = "sub_type";
-        public static final String LOCATION = "location";
         public static final String RESIDENTIAL_AREA = "residential_area";
-    }
-
-    public static final class FormTitleUtil {
-        public static final String UPDATE_CHILD_FORM = "Update Child Registration";
     }
 
     public static class CONFIGURATION {

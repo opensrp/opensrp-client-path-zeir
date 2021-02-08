@@ -40,5 +40,12 @@
     "openmrs_parent_entity_id": "",
     "openmrs_date_concept_id": "",
     "openmrs_quantity_concept_id": ""
+  },
+  {
+    "quantity": "1",
+    "name": "IPV",
+    "openmrs_parent_entity_id": "",
+    "openmrs_date_concept_id": "",
+    "openmrs_quantity_concept_id": ""
   }
 ]
