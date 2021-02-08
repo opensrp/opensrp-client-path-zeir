@@ -8,6 +8,7 @@ import org.smartregister.child.widgets.ChildEditTextFactory;
 import org.smartregister.child.widgets.ChildSpinnerFactory;
 import org.smartregister.pathzeir.widget.AdverseEffectDatePickerFactory;
 import org.smartregister.pathzeir.widget.AppMultiSelectListFactory;
+import org.smartregister.pathzeir.widget.ZEIRBarcodeFactory;
 
 public class ChildFormInteractor extends JsonFormInteractor {
 
@@ -29,5 +30,6 @@ public class ChildFormInteractor extends JsonFormInteractor {
         map.put(JsonFormConstants.CHECK_BOX, new ChildCheckboxTextFactory());
         map.put(JsonFormConstants.SPINNER, new ChildSpinnerFactory());
         map.put(JsonFormConstants.MULTI_SELECT_LIST, new AppMultiSelectListFactory());
+        map.put(JsonFormConstants.BARCODE, new ZEIRBarcodeFactory());
     }
 }

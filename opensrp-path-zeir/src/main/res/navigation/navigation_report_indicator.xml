@@ -26,7 +26,7 @@
         tools:layout="@layout/dialog_fragment_send_monthly" />
     <fragment
         android:id="@+id/reportsIndicatorFragment"
-        android:name="org.smartregister.pathzeir.reporting.monthly.indicator.ReportIn`dicatorFragment"
+        android:name="org.smartregister.pathzeir.reporting.monthly.indicator.ReportIndicatorFragment"
         android:label="fragment_reports_indicator"
         tools:layout="@layout/fragment_report_indicator" />
 
