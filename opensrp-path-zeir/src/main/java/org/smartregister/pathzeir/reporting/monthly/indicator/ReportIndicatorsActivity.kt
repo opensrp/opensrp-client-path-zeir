@@ -1,5 +1,6 @@
 package org.smartregister.pathzeir.reporting.monthly.indicator
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -15,6 +16,7 @@ import org.smartregister.pathzeir.reporting.common.*
 import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsActivity
 import org.smartregister.pathzeir.reporting.monthly.domain.DailyTally
 import org.smartregister.pathzeir.reporting.monthly.domain.MonthlyTally
+import org.smartregister.util.LangUtils
 
 class ReportIndicatorsActivity : MultiLanguageActivity() {
 
@@ -24,6 +26,13 @@ class ReportIndicatorsActivity : MultiLanguageActivity() {
     lateinit var navController: NavController
 
     private var translatedYearMonth: String? = null
+
+    override fun attachBaseContext(base: Context?) {
+        val language = LangUtils.getLanguage(base)
+        val newConfiguration = LangUtils.setAppLocale(base, language)
+        super.attachBaseContext(base)
+        applyOverrideConfiguration(newConfiguration)
+    }
 
     @Suppress("UNCHECKED_CAST")
     override fun onCreate(savedInstanceState: Bundle?) {
