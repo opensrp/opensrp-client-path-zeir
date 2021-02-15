@@ -219,54 +219,15 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
 
         Map<String, String> searchParams = new HashMap<>();
 
-        String firstName = this.firstName.getText().toString();
-        String lastName = this.lastName.getText().toString();
-        String motherGuardianFirstNameString = motherGuardianFirstName.getText().toString();
-        String motherGuardianLastNameString = motherGuardianLastName.getText().toString();
-        String motherGuardianPhoneNumberString = motherGuardianPhoneNumber.getText().toString();
+        searchParams.putAll(getFieldValuesParams());
+        searchParams.putAll(getStatusInfoParams());
+        searchParams.putAll(getIdsInfoParams());
 
-        if (StringUtils.isNotBlank(motherGuardianFirstNameString)) {
-            searchParams.put(DBConstants.KEY.MOTHER_FIRST_NAME, motherGuardianFirstNameString);
-        }
+        return searchParams;
+    }
 
-        if (StringUtils.isNotBlank(motherGuardianLastNameString)) {
-            searchParams.put(DBConstants.KEY.MOTHER_LAST_NAME, motherGuardianLastNameString);
-        }
-
-        if (StringUtils.isNotBlank(motherGuardianPhoneNumberString)) {
-            searchParams.put(Constants.KEY.MOTHER_GUARDIAN_NUMBER, motherGuardianPhoneNumberString);
-        }
-
-        if (!TextUtils.isEmpty(firstName)) {
-            searchParams.put(DBConstants.KEY.FIRST_NAME, firstName);
-        }
-
-        if (!TextUtils.isEmpty(lastName)) {
-            searchParams.put(DBConstants.KEY.LAST_NAME, lastName);
-        }
-
-        //Inactive
-        boolean isInactive = inactive.isChecked();
-        if (isInactive) {
-            searchParams.put(INACTIVE, Boolean.toString(true));
-        }
-        //Active
-        boolean isActive = active.isChecked();
-        if (isActive) {
-            searchParams.put(ACTIVE, Boolean.toString(true));
-        }
-
-        //Lost To Follow Up
-        boolean isLostToFollowUp = lostToFollowUp.isChecked();
-        if (isLostToFollowUp) {
-            searchParams.put(LOST_TO_FOLLOW_UP, Boolean.toString(true));
-        }
-
-        if (isActive == isInactive && isActive == isLostToFollowUp) {
-            searchParams.remove(Constants.CHILD_STATUS.INACTIVE);
-            searchParams.remove(Constants.CHILD_STATUS.ACTIVE);
-            searchParams.remove(Constants.CHILD_STATUS.LOST_TO_FOLLOW_UP);
-        }
+    private Map<String, String> getIdsInfoParams() {
+        Map<String, String> searchParams = new HashMap<>();
 
         String startDateString = startDate.getText().toString();
         if (StringUtils.isNotBlank(startDateString)) {
@@ -295,6 +256,65 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         return searchParams;
     }
 
+    private Map<String, String> getStatusInfoParams() {
+        Map<String, String> searchParams = new HashMap<>();
+
+        //Inactive
+        boolean isInactive = inactive.isChecked();
+        if (isInactive) {
+            searchParams.put(INACTIVE, Boolean.toString(true));
+        }
+        //Active
+        boolean isActive = active.isChecked();
+        if (isActive) {
+            searchParams.put(ACTIVE, Boolean.toString(true));
+        }
+
+        //Lost To Follow Up
+        boolean isLostToFollowUp = lostToFollowUp.isChecked();
+        if (isLostToFollowUp) {
+            searchParams.put(LOST_TO_FOLLOW_UP, Boolean.toString(true));
+        }
+
+        if (isActive == isInactive && isActive == isLostToFollowUp) {
+            searchParams.remove(INACTIVE);
+            searchParams.remove(ACTIVE);
+            searchParams.remove(LOST_TO_FOLLOW_UP);
+        }
+
+        return searchParams;
+    }
+
+    private Map<String, String> getFieldValuesParams() {
+        Map<String, String> searchParams = new HashMap<>();
+
+        String firstName = this.firstName.getText().toString();
+        String lastName = this.lastName.getText().toString();
+        String motherGuardianFirstNameString = motherGuardianFirstName.getText().toString();
+        String motherGuardianLastNameString = motherGuardianLastName.getText().toString();
+        String motherGuardianPhoneNumberString = motherGuardianPhoneNumber.getText().toString();
+
+        if (StringUtils.isNotBlank(motherGuardianFirstNameString)) {
+            searchParams.put(DBConstants.KEY.MOTHER_FIRST_NAME, motherGuardianFirstNameString);
+        }
+
+        if (StringUtils.isNotBlank(motherGuardianLastNameString)) {
+            searchParams.put(DBConstants.KEY.MOTHER_LAST_NAME, motherGuardianLastNameString);
+        }
+
+        if (StringUtils.isNotBlank(motherGuardianPhoneNumberString)) {
+            searchParams.put(Constants.KEY.MOTHER_GUARDIAN_NUMBER, motherGuardianPhoneNumberString);
+        }
+
+        if (!TextUtils.isEmpty(firstName)) {
+            searchParams.put(DBConstants.KEY.FIRST_NAME, firstName);
+        }
+
+        if (!TextUtils.isEmpty(lastName)) {
+            searchParams.put(DBConstants.KEY.LAST_NAME, lastName);
+        }
+        return searchParams;
+    }
 
 
     /*
@@ -304,6 +324,11 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
      */
     @Override
     protected void updateDueOverdueCountText() {
+        /*
+         *  No Need update count from this fragment
+         * The whole functionality is working in
+         * ChildRegisterFragment already
+         */
     }
 
     public void searchByOpenSRPId(String barcodeSearchTerm) {

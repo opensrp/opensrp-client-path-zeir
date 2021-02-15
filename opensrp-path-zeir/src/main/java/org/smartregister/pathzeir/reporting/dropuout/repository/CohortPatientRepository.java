@@ -76,19 +76,20 @@ public class CohortPatientRepository extends BaseRepository {
 
 
     public void changeValidVaccines(String validVaccines, Long id) {
+        String validVaccinesString  = validVaccines;
         if (id == null) {
             return;
         }
 
-        if (StringUtils.isBlank(validVaccines)) {
-            validVaccines = "";
+        if (StringUtils.isBlank(validVaccinesString)) {
+            validVaccinesString = "";
         }
 
         try {
             SQLiteDatabase database = getWritableDatabase();
 
             ContentValues valuesToBeUpdated = new ContentValues();
-            valuesToBeUpdated.put(COLUMN_VALID_VACCINES, validVaccines);
+            valuesToBeUpdated.put(COLUMN_VALID_VACCINES, validVaccinesString);
 
             String idSelection = COLUMN_ID + " = ?";
             database.update(TABLE_NAME, valuesToBeUpdated, idSelection,

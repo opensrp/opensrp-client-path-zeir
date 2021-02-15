@@ -21,7 +21,6 @@ import org.smartregister.child.fragment.StatusEditDialogFragment;
 import org.smartregister.child.presenter.BaseChildDetailsPresenter.CardStatus;
 import org.smartregister.child.task.LoadAsyncTask;
 import org.smartregister.child.util.ChildDbUtils;
-import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
 import org.smartregister.client.utils.domain.Form;
 import org.smartregister.pathzeir.R;
@@ -153,6 +152,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
 
     @Override
     public void startFormActivity(String formData) {
+        String formDataString = formData;
         if(StringUtils.isNotBlank(formData)) {
             try {
                 Intent intent;
@@ -170,7 +170,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
                     form.setActionBarBackground(R.color.actionbar);
                     form.setNavigationBackground(R.color.primary_dark);
                     intent = new Intent(this, JsonWizardFormActivity.class);
-                    formData = obtainUpdatedForm(formJson);
+                    formDataString = obtainUpdatedForm(formJson);
                 } else {
                     form.setWizard(false);
                     form.setHideSaveLabel(true);
@@ -179,7 +179,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
                 }
 
                 intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
-                intent.putExtra(JsonFormConstants.JSON_FORM_KEY.JSON, formData);
+                intent.putExtra(JsonFormConstants.JSON_FORM_KEY.JSON, formDataString);
                 intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
                 startActivityForResult(intent, REQUEST_CODE_GET_JSON);
             } catch (JSONException e) {

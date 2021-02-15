@@ -1,6 +1,5 @@
 package org.smartregister.pathzeir.reporting.coverage.zeir;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
@@ -226,16 +225,16 @@ public class AnnualCoverageReportZeirActivity extends BaseReportActivity {
 
     @Override
     public void onUniqueIdFetched(Triple<String, Map<String, String>, String> triple, String s) {
-
+        // override to remove functionality
     }
 
     @Override
     public void onNoUniqueId() {
-
+        // override to remove functionality
     }
 
     @Override
     public void onRegistrationSaved(boolean b) {
-
+        // override to remove functionality
     }
 }

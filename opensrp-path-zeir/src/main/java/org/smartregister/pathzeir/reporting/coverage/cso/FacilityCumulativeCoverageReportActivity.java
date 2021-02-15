@@ -1,6 +1,5 @@
 package org.smartregister.pathzeir.reporting.coverage.cso;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TableRow;
@@ -54,6 +53,14 @@ public class FacilityCumulativeCoverageReportActivity extends BaseReportActivity
 
     private CoverageHolder holder = null;
     private VaccineRepo.Vaccine vaccine = null;
+    private TextView startTotalTextView;
+    private TextView startCumTextView;
+    private TextView endTotalTextView;
+    private TextView endCumTextView;
+    private TextView dropoutTextView;
+    private TextView dropoutPercentageTextView;
+    private TextView cumDropoutTextView;
+    private TextView cumDropoutPercentageTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,34 +168,10 @@ public class FacilityCumulativeCoverageReportActivity extends BaseReportActivity
         List<AxisValue> leftAxisValues = new ArrayList<>();
         List<AxisValue> rightAxisValues = new ArrayList<>();
 
-        for (int i = 0; i < leftPartitions; i++) {
-            float currentMonlthyTarget = csoTargetMonthly * i;
-            AxisValue leftValue = new AxisValue(currentMonlthyTarget);
-            leftValue.setLabel(String.valueOf((int) currentMonlthyTarget));
-            leftAxisValues.add(leftValue);
-
-            if (i < months.length) {
-                AxisValue curValue = new AxisValue((float) i + 0.5f);
-                curValue.setLabel(months[i].toUpperCase());
-                bottomAxisValues.add(curValue);
-
-                topAxisValues.add(new AxisValue((float) i).setLabel(""));
-            }
-
-            if (i >= 1 && i <= 5) {
-                float value = csoTarget * (0.25f * i);
-                AxisValue rightValue = new AxisValue(value);
-                rightValue.setLabel(String.format(getString(R.string.coverage_percentage), 25 * i));
-                rightAxisValues.add(rightValue);
-            }
-        }
+        addAxisValues(csoTarget, csoTargetMonthly, bottomAxisValues, topAxisValues, leftAxisValues, rightAxisValues);
 
         // Lines
-        List<Line> lines = new ArrayList<>();
-        lines.add(generateLine(0.25f, csoTargetMonthly));
-        lines.add(generateLine(0.5f, csoTargetMonthly));
-        lines.add(generateLine(0.75f, csoTargetMonthly));
-        lines.add(generateLine(1f, csoTargetMonthly));
+        List<Line> lines = generateLines(csoTargetMonthly);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM");
         for (CumulativeIndicator cumulativeIndicator : startCumulativeIndicators) {
@@ -207,7 +190,29 @@ public class FacilityCumulativeCoverageReportActivity extends BaseReportActivity
 
         List<PointValue> startValues = new ArrayList<>();
         List<PointValue> endValues = new ArrayList<>();
+        boolean checkCurrentTime = false;
 
+        checkCurrentTime = populateStartAndEndValues(startValues, endValues, startValueMap, endValueMap, isComparison, months);
+
+        lines.add(getBlueLine(startValues));
+
+        if (isComparison) {
+            lines.add(getRedLine(endValues));
+        }
+
+        LineChartData data = getLineChartData(lines, bottomAxisValues, leftAxisValues, topAxisValues, rightAxisValues);
+
+        // Chart
+        LineChartView monitoringChart = getMonitoringChart(data);
+
+        resetViewport(monitoringChart, csoTargetMonthly, leftPartitions);
+
+        updateTableLayout(startValueMap, endValueMap, months, isComparison, checkCurrentTime);
+    }
+
+    private boolean populateStartAndEndValues(List<PointValue> startValues, List<PointValue> endValues,
+                                           Map<String, Long> startValueMap, Map<String, Long> endValueMap,
+                                           boolean isComparison, String[] months) {
         startValues.add(new PointValue(0, 0));
         if (isComparison) {
             endValues.add(new PointValue(0, 0));
@@ -257,35 +262,23 @@ public class FacilityCumulativeCoverageReportActivity extends BaseReportActivity
             }
 
         }
+        return checkCurrentTime;
+    }
 
-        lines.add(new Line(startValues).
-                setColor(getResources().getColor(R.color.cumulative_blue_line)).
-                setHasPoints(true).
-                setHasLabels(false).
-                setShape(ValueShape.CIRCLE).
-                setHasLines(true).
-                setStrokeWidth(2));
-
-        if (isComparison) {
-            lines.add(new Line(endValues).
-                    setColor(getResources().getColor(R.color.cumulative_red_line)).
-                    setHasPoints(true).
-                    setHasLabels(false).
-                    setShape(ValueShape.CIRCLE).
-                    setHasLines(true).
-                    setStrokeWidth(2));
-        }
-
+    private LineChartData getLineChartData(List<Line> lines, List<AxisValue> bottomAxisValues,
+                                           List<AxisValue> leftAxisValues, List<AxisValue> topAxisValues,
+                                           List<AxisValue> rightAxisValues) {
         LineChartData data = new LineChartData();
 
         data.setLines(lines);
-
         data.setAxisXBottom(new Axis(bottomAxisValues).setMaxLabelChars(3).setHasLines(false).setHasTiltedLabels(false).setHasTiltedLabels(false));
         data.setAxisYLeft(new Axis(leftAxisValues).setHasLines(true).setHasTiltedLabels(false));
         data.setAxisXTop(new Axis(topAxisValues).setHasLines(true).setHasTiltedLabels(false));
         data.setAxisYRight(new Axis(rightAxisValues).setMaxLabelChars(5).setHasLines(false).setHasTiltedLabels(false));
+        return data;
+    }
 
-        // Chart
+    private LineChartView getMonitoringChart(LineChartData data) {
         LineChartView monitoringChart = (LineChartView) findViewById(R.id.monitoring_chart);
         monitoringChart.setLineChartData(data);
         monitoringChart.setViewportCalculationEnabled(false);
@@ -293,10 +286,62 @@ public class FacilityCumulativeCoverageReportActivity extends BaseReportActivity
 
         CustomLineChartRenderer customLineChartRenderer = new CustomLineChartRenderer(this, monitoringChart, monitoringChart);
         monitoringChart.setChartRenderer(customLineChartRenderer);
+        return monitoringChart;
+    }
 
-        resetViewport(monitoringChart, csoTargetMonthly, leftPartitions);
+    private Line getRedLine(List<PointValue> endValues) {
+        return new Line(endValues).
+                setColor(getResources().getColor(R.color.cumulative_red_line)).
+                setHasPoints(true).
+                setHasLabels(false).
+                setShape(ValueShape.CIRCLE).
+                setHasLines(true).
+                setStrokeWidth(2);
+    }
 
-        updateTableLayout(startValueMap, endValueMap, months, isComparison, checkCurrentTime);
+    private Line getBlueLine(List<PointValue> startValues) {
+        return new Line(startValues).
+                setColor(getResources().getColor(R.color.cumulative_blue_line)).
+                setHasPoints(true).
+                setHasLabels(false).
+                setShape(ValueShape.CIRCLE).
+                setHasLines(true).
+                setStrokeWidth(2);
+    }
+
+    private List<Line> generateLines(float csoTargetMonthly) {
+        List<Line> lines = new ArrayList<>();
+        lines.add(generateLine(0.25f, csoTargetMonthly));
+        lines.add(generateLine(0.5f, csoTargetMonthly));
+        lines.add(generateLine(0.75f, csoTargetMonthly));
+        lines.add(generateLine(1f, csoTargetMonthly));
+        return lines;
+    }
+
+    private void addAxisValues(float csoTarget, float csoTargetMonthly, List<AxisValue> bottomAxisValues, List<AxisValue> topAxisValues, List<AxisValue> leftAxisValues, List<AxisValue> rightAxisValues) {
+        long leftPartitions = 16;
+        String[] months = new DateFormatSymbols().getShortMonths();
+        for (int i = 0; i < leftPartitions; i++) {
+            float currentMonlthyTarget = csoTargetMonthly * i;
+            AxisValue leftValue = new AxisValue(currentMonlthyTarget);
+            leftValue.setLabel(String.valueOf((int) currentMonlthyTarget));
+            leftAxisValues.add(leftValue);
+
+            if (i < months.length) {
+                AxisValue curValue = new AxisValue((float) i + 0.5f);
+                curValue.setLabel(months[i].toUpperCase());
+                bottomAxisValues.add(curValue);
+
+                topAxisValues.add(new AxisValue((float) i).setLabel(""));
+            }
+
+            if (i >= 1 && i <= 5) {
+                float value = csoTarget * (0.25f * i);
+                AxisValue rightValue = new AxisValue(value);
+                rightValue.setLabel(String.format(getString(R.string.coverage_percentage), 25 * i));
+                rightAxisValues.add(rightValue);
+            }
+        }
     }
 
     private void resetViewport(LineChartView chart, float csoTargetMonthly, long leftPartitions) {
@@ -382,132 +427,143 @@ public class FacilityCumulativeCoverageReportActivity extends BaseReportActivity
                 calendar.add(Calendar.MONTH, 1);
             }
 
-            TextView startTotalTextView = (TextView) startTotalValueRow.getChildAt(i);
-            TextView startCumTextView = (TextView) startCumValueRow.getChildAt(i);
+            startTotalTextView = (TextView) startTotalValueRow.getChildAt(i);
+            startCumTextView = (TextView) startCumValueRow.getChildAt(i);
 
-            TextView endTotalTextView = (TextView) endTotalValueRow.getChildAt(i);
-            TextView endCumTextView = (TextView) endCumValueRow.getChildAt(i);
+            endTotalTextView = (TextView) endTotalValueRow.getChildAt(i);
+            endCumTextView = (TextView) endCumValueRow.getChildAt(i);
 
-            TextView dropoutTextView = (TextView) dropoutValueRow.getChildAt(i);
-            TextView dropoutPercentageTextView = (TextView) dropoutPercentageValueRow.getChildAt(i);
+            dropoutTextView = (TextView) dropoutValueRow.getChildAt(i);
+            dropoutPercentageTextView = (TextView) dropoutPercentageValueRow.getChildAt(i);
 
-            TextView cumDropoutTextView = (TextView) cumDropoutValueRow.getChildAt(i);
-            TextView cumDropoutPercentageTextView = (TextView) cumDropoutPercentageValueRow.getChildAt(i);
+            cumDropoutTextView = (TextView) cumDropoutValueRow.getChildAt(i);
+            cumDropoutPercentageTextView = (TextView) cumDropoutPercentageValueRow.getChildAt(i);
 
 
             startTotalTextView.setTextColor(getResources().getColor(R.color.cumulative_blue_line));
             startCumTextView.setTextColor(getResources().getColor(R.color.cumulative_blue_line));
 
             if (isComparison) {
-                endTotalTextView.setTextColor(getResources().getColor(R.color.cumulative_red_line));
-                endCumTextView.setTextColor(getResources().getColor(R.color.cumulative_red_line));
-
-                dropoutTextView.setTextColor(getResources().getColor(R.color.client_list_grey));
-                dropoutPercentageTextView.setTextColor(getResources().getColor(R.color.client_list_grey));
-
-                cumDropoutTextView.setTextColor(getResources().getColor(R.color.client_list_grey));
-                cumDropoutPercentageTextView.setTextColor(getResources().getColor(R.color.client_list_grey));
+                setColors();
             }
 
             if (i == 0) {
                 if (isComparison) {
-                    VaccineRepo.Vaccine startVaccine = vaccine;
-                    VaccineRepo.Vaccine endVaccine = vaccine;
-                    if (vaccine.equals(VaccineRepo.Vaccine.penta1) || vaccine.equals(VaccineRepo.Vaccine.penta3)) {
-                        startVaccine = VaccineRepo.Vaccine.penta1;
-                        endVaccine = VaccineRepo.Vaccine.penta3;
-                    }
-                    if (vaccine.equals(VaccineRepo.Vaccine.bcg) || vaccine.equals(VaccineRepo.Vaccine.measles1)) {
-                        startVaccine = VaccineRepo.Vaccine.bcg;
-                        endVaccine = VaccineRepo.Vaccine.measles1;
-                    }
-
-                    startTotalTextView.setText(String.format(getString(R.string.total_vaccine), convertToUpperLower(startVaccine.display())));
-                    startCumTextView.setText(String.format(getString(R.string.total_cum), convertToUpperLower(startVaccine.display())));
-
-                    endTotalTextView.setText(String.format(getString(R.string.total_vaccine), convertToUpperLower(endVaccine.display())));
-                    endCumTextView.setText(String.format(getString(R.string.total_cum), convertToUpperLower(endVaccine.display())));
-
-                    dropoutTextView.setText(getString(R.string.total_dropout));
-                    if (startVaccine.equals(VaccineRepo.Vaccine.penta1)) {
-                        dropoutTextView.setText(getString(R.string.total_dropout_penta));
-                    }
-                    dropoutPercentageTextView.setText(getString(R.string.total_dropout_percentage));
-
-                    dropoutTextView.setTextColor(getResources().getColor(R.color.text_black));
-                    dropoutPercentageTextView.setTextColor(getResources().getColor(R.color.text_black));
-
-                    cumDropoutTextView.setText(getString(R.string.total_cum_dropout));
-                    cumDropoutPercentageTextView.setText(getString(R.string.total_cum_dropout_percentage));
-
-                    cumDropoutTextView.setTextColor(getResources().getColor(R.color.text_black));
-                    cumDropoutPercentageTextView.setTextColor(getResources().getColor(R.color.text_black));
+                    setComparisonViews();
                 } else {
                     startTotalTextView.setText(String.format(getString(R.string.total_vaccine), convertToUpperLower(vaccine.display())));
                     startCumTextView.setText(String.format(getString(R.string.total_cum), convertToUpperLower(vaccine.display())));
                 }
             } else {
-
-                // Total
-                Long startValue = startValueMap.get(months[i - 1]);
-                if (startValue == null) {
-                    startValue = 0L;
-                }
-                startTotalTextView.setText(String.valueOf(startValue));
-
-                Long endValue = 0L;
-                if (isComparison) {
-                    endValue = endValueMap.get(months[i - 1]);
-                    if (endValue == null) {
-                        endValue = 0L;
-                    }
-                    endTotalTextView.setText(String.valueOf(endValue));
-                }
-
-                // Cumulative
-                Long cumStartValue = 0L;
-                Long cumEndValue = 0L;
-                for (int j = i; j >= 1; j--) {
-                    Long currentStartValue = startValueMap.get(months[j - 1]);
-                    if (currentStartValue != null) {
-                        cumStartValue += currentStartValue;
-                    }
-
-                    if (isComparison) {
-                        Long currentEndValue = endValueMap.get(months[j - 1]);
-                        if (currentEndValue != null) {
-                            cumEndValue += currentEndValue;
-                        }
-
-                    }
-                }
-                startCumTextView.setText(String.valueOf(cumStartValue));
-
-                if (isComparison) {
-                    endCumTextView.setText(String.valueOf(cumEndValue));
-
-                    Long dropoutValue = startValue - endValue;
-                    Long cumDropoutValue = cumStartValue - cumEndValue;
-
-                    dropoutTextView.setText(String.valueOf(dropoutValue));
-                    cumDropoutTextView.setText(String.valueOf(cumDropoutValue));
-
-                    int dropoutPercentage = 0;
-                    if (dropoutValue > 0 && startValue > 0) {
-                        dropoutPercentage = (int) (dropoutValue * 100.0 / startValue + 0.5);
-                    }
-
-                    dropoutPercentageTextView.setText(String.format(getString(R.string.coverage_percentage), dropoutPercentage));
-
-                    int cumDropoutPercentage = 0;
-                    if (cumDropoutValue > 0 && cumStartValue > 0) {
-                        cumDropoutPercentage = (int) (cumDropoutValue * 100.0 / cumStartValue + 0.5);
-                    }
-
-                    cumDropoutPercentageTextView.setText(String.format(getString(R.string.coverage_percentage), cumDropoutPercentage));
-                }
+                setViews(i, isComparison, startValueMap, endValueMap,  months);
             }
         }
+    }
+
+    private void setViews(int i, boolean isComparison, Map<String, Long> startValueMap, Map<String, Long> endValueMap, String[] months) {
+        // Total
+        Long startValue = startValueMap.get(months[i - 1]);
+        if (startValue == null) {
+            startValue = 0L;
+        }
+        startTotalTextView.setText(String.valueOf(startValue));
+
+        Long endValue = 0L;
+        if (isComparison) {
+            endValue = endValueMap.get(months[i - 1]);
+            if (endValue == null) {
+                endValue = 0L;
+            }
+            endTotalTextView.setText(String.valueOf(endValue));
+        }
+
+        // Cumulative
+        Long cumStartValue = 0L;
+        Long cumEndValue = 0L;
+        for (int j = i; j >= 1; j--) {
+            Long currentStartValue = startValueMap.get(months[j - 1]);
+            if (currentStartValue != null) {
+                cumStartValue += currentStartValue;
+            }
+
+            if (isComparison) {
+                Long currentEndValue = endValueMap.get(months[j - 1]);
+                if (currentEndValue != null) {
+                    cumEndValue += currentEndValue;
+                }
+
+            }
+        }
+        startCumTextView.setText(String.valueOf(cumStartValue));
+
+        if (isComparison) {
+            endCumTextView.setText(String.valueOf(cumEndValue));
+
+            Long dropoutValue = startValue - endValue;
+            Long cumDropoutValue = cumStartValue - cumEndValue;
+
+            dropoutTextView.setText(String.valueOf(dropoutValue));
+            cumDropoutTextView.setText(String.valueOf(cumDropoutValue));
+
+            int dropoutPercentage = 0;
+            if (dropoutValue > 0 && startValue > 0) {
+                dropoutPercentage = (int) (dropoutValue * 100.0 / startValue + 0.5);
+            }
+
+            dropoutPercentageTextView.setText(String.format(getString(R.string.coverage_percentage), dropoutPercentage));
+
+            int cumDropoutPercentage = 0;
+            if (cumDropoutValue > 0 && cumStartValue > 0) {
+                cumDropoutPercentage = (int) (cumDropoutValue * 100.0 / cumStartValue + 0.5);
+            }
+
+            cumDropoutPercentageTextView.setText(String.format(getString(R.string.coverage_percentage), cumDropoutPercentage));
+        }
+    }
+
+    private void setColors() {
+        endTotalTextView.setTextColor(getResources().getColor(R.color.cumulative_red_line));
+        endCumTextView.setTextColor(getResources().getColor(R.color.cumulative_red_line));
+
+        dropoutTextView.setTextColor(getResources().getColor(R.color.client_list_grey));
+        dropoutPercentageTextView.setTextColor(getResources().getColor(R.color.client_list_grey));
+
+        cumDropoutTextView.setTextColor(getResources().getColor(R.color.client_list_grey));
+        cumDropoutPercentageTextView.setTextColor(getResources().getColor(R.color.client_list_grey));
+    }
+
+    private void setComparisonViews() {
+        VaccineRepo.Vaccine startVaccine = vaccine;
+        VaccineRepo.Vaccine endVaccine = vaccine;
+        if (vaccine.equals(VaccineRepo.Vaccine.penta1) || vaccine.equals(VaccineRepo.Vaccine.penta3)) {
+            startVaccine = VaccineRepo.Vaccine.penta1;
+            endVaccine = VaccineRepo.Vaccine.penta3;
+        }
+        if (vaccine.equals(VaccineRepo.Vaccine.bcg) || vaccine.equals(VaccineRepo.Vaccine.measles1)) {
+            startVaccine = VaccineRepo.Vaccine.bcg;
+            endVaccine = VaccineRepo.Vaccine.measles1;
+        }
+
+        startTotalTextView.setText(String.format(getString(R.string.total_vaccine), convertToUpperLower(startVaccine.display())));
+        startCumTextView.setText(String.format(getString(R.string.total_cum), convertToUpperLower(startVaccine.display())));
+
+        endTotalTextView.setText(String.format(getString(R.string.total_vaccine), convertToUpperLower(endVaccine.display())));
+        endCumTextView.setText(String.format(getString(R.string.total_cum), convertToUpperLower(endVaccine.display())));
+
+        dropoutTextView.setText(getString(R.string.total_dropout));
+        if (startVaccine.equals(VaccineRepo.Vaccine.penta1)) {
+            dropoutTextView.setText(getString(R.string.total_dropout_penta));
+        }
+        dropoutPercentageTextView.setText(getString(R.string.total_dropout_percentage));
+
+        dropoutTextView.setTextColor(getResources().getColor(R.color.text_black));
+        dropoutPercentageTextView.setTextColor(getResources().getColor(R.color.text_black));
+
+        cumDropoutTextView.setText(getString(R.string.total_cum_dropout));
+        cumDropoutPercentageTextView.setText(getString(R.string.total_cum_dropout_percentage));
+
+        cumDropoutTextView.setTextColor(getResources().getColor(R.color.text_black));
+        cumDropoutPercentageTextView.setTextColor(getResources().getColor(R.color.text_black));
     }
 
     public String convertToUpperLower(String vaccineName) {
@@ -585,7 +641,7 @@ public class FacilityCumulativeCoverageReportActivity extends BaseReportActivity
 
     @Override
     public void onRegistrationSaved(boolean b) {
-
+        // override to exclude functionality
     }
 
     ////////////////////////////////////////////////////////////////

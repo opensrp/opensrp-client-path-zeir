@@ -119,17 +119,17 @@ public class BcgMeaslesCumulativeDropoutReportActivity extends BaseReportActivit
 
     @Override
     public void onUniqueIdFetched(Triple<String, Map<String, String>, String> triple, String s) {
-
+        // override to remove functionality
     }
 
     @Override
     public void onNoUniqueId() {
-
+        // override to remove functionality
     }
 
     @Override
     public void onRegistrationSaved(boolean b) {
-
+        // override to remove functionality
     }
 }
 

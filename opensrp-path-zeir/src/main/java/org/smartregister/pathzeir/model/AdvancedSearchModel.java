@@ -42,18 +42,18 @@ public class AdvancedSearchModel extends BaseChildAdvancedSearchModel {
 
         String[] columns = new String[]{
                 AppConstants.KEY.ID_LOWER_CASE,
-                AppConstants.KEY.RELATIONALID,
-                AppConstants.KEY.RELATIONAL_ID,
+                RELATIONALID,
+                RELATIONAL_ID,
                 AppConstants.KEY.FATHER_RELATIONAL_ID,
-                AppConstants.KEY.FIRST_NAME,
-                AppConstants.KEY.LAST_NAME,
-                AppConstants.KEY.GENDER,
-                AppConstants.KEY.DOB,
-                AppConstants.KEY.ZEIR_ID,
+                FIRST_NAME,
+                LAST_NAME,
+                GENDER,
+                DOB,
+                ZEIR_ID,
                 AppConstants.KEY.MOTHER_FIRST_NAME,
                 AppConstants.KEY.MOTHER_LAST_NAME,
-                AppConstants.KEY.INACTIVE,
-                AppConstants.KEY.LOST_TO_FOLLOW_UP
+                INACTIVE,
+                LOST_TO_FOLLOW_UP
         };
 
         AdvancedMatrixCursor matrixCursor = new AdvancedMatrixCursor(columns);
@@ -72,7 +72,7 @@ public class AdvancedSearchModel extends BaseChildAdvancedSearchModel {
     @Override
     public String mainSelect(String mainCondition) {
         return "select " + StringUtils.join(getColumns(), ",") + " from " + DBConstants.RegisterTable.CHILD_DETAILS + " " +
-                "join " + DBConstants.RegisterTable.MOTHER_DETAILS + " on " + DBConstants.RegisterTable.CHILD_DETAILS + "." + Constants.KEY.RELATIONAL_ID + " = " + DBConstants.RegisterTable.MOTHER_DETAILS + "." + Constants.KEY.BASE_ENTITY_ID + " " +
+                "join " + DBConstants.RegisterTable.MOTHER_DETAILS + " on " + DBConstants.RegisterTable.CHILD_DETAILS + "." + RELATIONAL_ID + " = " + DBConstants.RegisterTable.MOTHER_DETAILS + "." + Constants.KEY.BASE_ENTITY_ID + " " +
                 "join " + DBConstants.RegisterTable.CLIENT + " on " + DBConstants.RegisterTable.CLIENT + "." + Constants.KEY.BASE_ENTITY_ID + " = " + DBConstants.RegisterTable.CHILD_DETAILS + "." + Constants.KEY.BASE_ENTITY_ID + " " +
                 "join " + DBConstants.RegisterTable.CLIENT + " mother on mother." + Constants.KEY.BASE_ENTITY_ID + " = " + DBConstants.RegisterTable.MOTHER_DETAILS + "." + Constants.KEY.BASE_ENTITY_ID + " where " + mainCondition;
     }

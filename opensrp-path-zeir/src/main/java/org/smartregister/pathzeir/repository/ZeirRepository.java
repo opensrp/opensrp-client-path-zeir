@@ -426,6 +426,7 @@ public class ZeirRepository extends Repository {
         }
     }
 
+    @SuppressWarnings("unused")
     private void upgradeToVersion13(SQLiteDatabase db) { //TODO revisit this
 //        StockRepository.migrateAddInventoryColumns(db);
 //        StockTypeRepository.migrationAdditionalProductProperties(db);

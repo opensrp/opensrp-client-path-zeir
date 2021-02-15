@@ -21,7 +21,6 @@ import static org.smartregister.pathzeir.util.AppConstants.KEY.FIRST_NAME;
 import static org.smartregister.pathzeir.util.AppConstants.KEY.LAST_NAME;
 import static org.smartregister.pathzeir.util.AppConstants.KEY.MOTHER_GUARDIAN_NRC;
 import static org.smartregister.pathzeir.util.AppConstants.KEY.MOTHER_GUARDIAN_NUMBER;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.MOTHER_NRC_NUMBER;
 import static org.smartregister.pathzeir.util.TableUtil.getMotherDetailsColumn;
 
 public class ChildFormActivity extends BaseChildFormActivity {
@@ -83,7 +82,7 @@ public class ChildFormActivity extends BaseChildFormActivity {
     public String lookUpQuery(Map<String, String> entityMap, String tableName) {
         RegisterQueryProvider queryProvider = Utils.metadata().getRegisterQueryProvider();
 
-        String[] lookupColumns = new String[]{queryProvider.getDemographicTable() + "." + MotherLookUpUtils.RELATIONALID, queryProvider.getDemographicTable() + "." + MotherLookUpUtils.DETAILS, Constants.KEY.ZEIR_ID, Constants.KEY.FIRST_NAME, Constants.KEY.LAST_NAME,
+        String[] lookupColumns = new String[]{queryProvider.getDemographicTable() + "." + MotherLookUpUtils.RELATIONALID, queryProvider.getDemographicTable() + "." + MotherLookUpUtils.DETAILS, Constants.KEY.ZEIR_ID, FIRST_NAME, Constants.KEY.LAST_NAME,
                 queryProvider.getDemographicTable() + "." + AllConstants.ChildRegistrationFields.GENDER,
                 queryProvider.getDemographicTable() + "." + Constants.KEY.DOB,
                 queryProvider.getDemographicTable() + "." + Constants.KEY.BASE_ENTITY_ID,

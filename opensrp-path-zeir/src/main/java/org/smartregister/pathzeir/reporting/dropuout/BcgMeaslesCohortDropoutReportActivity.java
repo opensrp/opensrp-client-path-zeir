@@ -1,13 +1,10 @@
 package org.smartregister.pathzeir.reporting.dropuout;
 
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Pair;
-import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 
 import org.apache.commons.lang3.tuple.Triple;
 import org.smartregister.child.domain.NamedObject;
@@ -121,17 +118,17 @@ public class BcgMeaslesCohortDropoutReportActivity extends BaseReportActivity {
 
     @Override
     public void onUniqueIdFetched(Triple<String, Map<String, String>, String> triple, String s) {
-
+        // override to remove functionality
     }
 
     @Override
     public void onNoUniqueId() {
-
+        // override to remove functionality
     }
 
     @Override
     public void onRegistrationSaved(boolean b) {
-
+        // override to remove functionality
     }
 }
 

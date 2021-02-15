@@ -170,12 +170,9 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                     case Constants.EventType.UPDATE_BITRH_REGISTRATION:
                     case Constants.EventType.NEW_WOMAN_REGISTRATION:
                     case Constants.EventType.UPDATE_MOTHER_DETAILS:
-                        if (eventClient.getClient() == null) {
-                            continue;
-                        }
-                        if (eventType.equals(Constants.EventType.BITRH_REGISTRATION)) {
+                        if (eventClient.getClient() == null) continue;
+                        if (eventType.equals(Constants.EventType.BITRH_REGISTRATION))
                             getApplication().registerTypeRepository().add(AppConstants.RegisterType.CHILD, event.getBaseEntityId());
-                        }
                         processChildRegistrationAndRelatedEvents(clientClassification, eventClient, event);
                         break;
                     default:
@@ -191,7 +188,6 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
 
             // Process alerts for clients
             Runnable runnable = () -> updateClientAlerts(clientsForAlertUpdates);
-
             appExecutors.diskIO().execute(runnable);
             // Unsync events that are should not be in this device
             unSync(eventsToRemove);
@@ -364,7 +360,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         }
     }
 
-    boolean tableExists(SQLiteDatabase db, String tableName) {
+    private boolean tableExists(SQLiteDatabase db, String tableName) {
         if (tableName == null || db == null || !db.isOpen()) {
             return false;
         }

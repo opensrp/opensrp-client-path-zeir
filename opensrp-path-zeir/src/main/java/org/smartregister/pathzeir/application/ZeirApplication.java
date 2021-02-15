@@ -95,7 +95,6 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
     private ECSyncHelper ecSyncHelper;
     private ClientRegisterTypeRepository registerTypeRepository;
     private ChildAlertUpdatedRepository childAlertUpdatedRepository;
-    private RecurringServiceTypeRepository recurringServiceRepository;
     private CohortRepository cohortRepository;
     private CohortPatientRepository cohortPatientRepository;
     private CohortIndicatorRepository cohortIndicatorRepository;

@@ -76,7 +76,7 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
             if (key.equals(AppConstants.KEY.REACTION_VACCINE)) {
                 MaterialSpinner spinnerReactionVaccine = (MaterialSpinner) ((ChildFormActivity)
                         formFragment.requireActivity()).getFormDataView(
-                        JsonFormConstants.STEP1 + ":" + AppConstants.KEY.REACTION_VACCINE);
+                        STEP1 + ":" + AppConstants.KEY.REACTION_VACCINE);
                 int selectedItemPos = spinnerReactionVaccine.getSelectedItemPosition();
                 AppChildFormFragment.OnReactionVaccineSelected onReactionVaccineSelected = formFragment.getOnReactionVaccineSelected();
                 if (selectedItemPos > 0) {
@@ -103,7 +103,7 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
         List<Location> locations = getLocationsByParentId(parentLocationId);
         String selectedLocation = getCurrentLocation(spinnerKey);
 
-        MaterialSpinner spinner = (MaterialSpinner) jsonFormView.getFormDataView(JsonFormConstants.STEP1 + ":" + spinnerKey);
+        MaterialSpinner spinner = (MaterialSpinner) jsonFormView.getFormDataView(STEP1 + ":" + spinnerKey);
         if (locations != null && !locations.isEmpty() && StringUtils.isNotBlank(selectedLocation)) {
             Pair<JSONArray, JSONArray> options = populateLocationOptions(locations);
             ArrayAdapter<String> adapter = new ArrayAdapter<>(getView().getContext(), R.layout.native_form_simple_list_item_1,

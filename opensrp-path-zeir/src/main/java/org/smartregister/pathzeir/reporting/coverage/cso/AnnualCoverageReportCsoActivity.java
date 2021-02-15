@@ -274,16 +274,16 @@ public class AnnualCoverageReportCsoActivity extends BaseReportActivity implemen
 
     @Override
     public void onUniqueIdFetched(Triple<String, Map<String, String>, String> triple, String s) {
-
+        //Overridden - not required
     }
 
     @Override
     public void onNoUniqueId() {
-
+        //Overridden - not required
     }
 
     @Override
     public void onRegistrationSaved(boolean b) {
-
+        //Overridden - not required
     }
 }
