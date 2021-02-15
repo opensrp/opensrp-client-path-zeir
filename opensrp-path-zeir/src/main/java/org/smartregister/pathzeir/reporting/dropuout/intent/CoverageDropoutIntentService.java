@@ -51,33 +51,33 @@ import timber.log.Timber;
 public class CoverageDropoutIntentService extends IntentService {
     private static final String TAG = CoverageDropoutIntentService.class.getCanonicalName();
 
-    private static final String DOD_FILTER = " (" + AppConstants.KEY.DOD + " is NULL OR " + AppConstants.KEY.DOD + " = '') ";
+    private static final String DOD_FILTER = " (" + AppConstants.KeyConstants.DOD + " is NULL OR " + AppConstants.KeyConstants.DOD + " = '') ";
 
     private static final String  BIRTH_REGISTRATION_QUERY = "SELECT " +
-            AppConstants.KEY.BASE_ENTITY_ID +
-            ", " + AppConstants.KEY.DOB +
-            ", " + AppConstants.KEY.REGISTRATION_DATE +
-            " FROM " + AppConstants.TABLE_NAME.ALL_CLIENTS +
+            AppConstants.KeyConstants.BASE_ENTITY_ID +
+            ", " + AppConstants.KeyConstants.DOB +
+            ", " + AppConstants.KeyConstants.REGISTRATION_DATE +
+            " FROM " + AppConstants.TableNameConstants.ALL_CLIENTS +
             " WHERE " + DOD_FILTER;
 
     private static final String VACCINE_QUERY = "SELECT " +
             "v." + VaccineRepository.BASE_ENTITY_ID +
-            ", c." + AppConstants.KEY.DOB +
+            ", c." + AppConstants.KeyConstants.DOB +
             ", v." + VaccineRepository.NAME +
             ", v." + VaccineRepository.DATE +
             ", v." + VaccineRepository.UPDATED_AT_COLUMN +
             " FROM " + VaccineRepository.VACCINE_TABLE_NAME + " v  " +
-            " INNER JOIN " + AppConstants.TABLE_NAME.ALL_CLIENTS + " c  " +
-            " ON v." + VaccineRepository.BASE_ENTITY_ID + " = c." + AppConstants.KEY.BASE_ENTITY_ID;
+            " INNER JOIN " + AppConstants.TableNameConstants.ALL_CLIENTS + " c  " +
+            " ON v." + VaccineRepository.BASE_ENTITY_ID + " = c." + AppConstants.KeyConstants.BASE_ENTITY_ID;
 
 
     private static final String TOTAL_ZEIR_QUERY = " SELECT " +
             " COUNT(*) as count, " +
-            " CAST ((julianday('now') - julianday(strftime('%Y-%m-%d', " + AppConstants.KEY.DOB + ")))/(365/12) AS INTEGER)as age, " +
-            " strftime('%Y-%m-%d', " + AppConstants.KEY.REGISTRATION_DATE + ") as " + AppConstants.KEY.REGISTRATION_DATE +
-            " FROM " + AppConstants.TABLE_NAME.ALL_CLIENTS +
+            " CAST ((julianday('now') - julianday(strftime('%Y-%m-%d', " + AppConstants.KeyConstants.DOB + ")))/(365/12) AS INTEGER)as age, " +
+            " strftime('%Y-%m-%d', " + AppConstants.KeyConstants.REGISTRATION_DATE + ") as " + AppConstants.KeyConstants.REGISTRATION_DATE +
+            " FROM " + AppConstants.TableNameConstants.ALL_CLIENTS +
             " WHERE " + DOD_FILTER +
-            " AND age <= ? AND " + AppConstants.KEY.REGISTRATION_DATE + " <  ? ";
+            " AND age <= ? AND " + AppConstants.KeyConstants.REGISTRATION_DATE + " <  ? ";
 
     private static final String COVERAGE_DROPOUT_BIRTH_REGISTRATION_LAST_PROCESSED_DATE = "COVERAGE_DROPOUT_BIRTH_REGISTRATION_LAST_PROCESSED_DATE";
     private static final String COVERAGE_DROPOUT_VACCINATION_LAST_PROCESSED_DATE = "COVERAGE_DROPOUT_VACCINATION_LAST_PROCESSED_DATE";
@@ -131,7 +131,7 @@ public class CoverageDropoutIntentService extends IntentService {
                 return;
             }
 
-            final String dateColumn = AppConstants.KEY.REGISTRATION_DATE;
+            final String dateColumn = AppConstants.KeyConstants.REGISTRATION_DATE;
             final String orderByClause = " ORDER BY " + dateColumn + " ASC ";
 
             SQLiteDatabase db = ZeirApplication.getInstance().getRepository().getWritableDatabase();
@@ -146,9 +146,9 @@ public class CoverageDropoutIntentService extends IntentService {
             }
 
             for (Map<String, String> result : results) {
-                String baseEntityId = result.get(AppConstants.KEY.BASE_ENTITY_ID);
-                String dobString = result.get(AppConstants.KEY.DOB);
-                String updatedAt = result.get(AppConstants.KEY.REGISTRATION_DATE);
+                String baseEntityId = result.get(AppConstants.KeyConstants.BASE_ENTITY_ID);
+                String dobString = result.get(AppConstants.KeyConstants.DOB);
+                String updatedAt = result.get(AppConstants.KeyConstants.REGISTRATION_DATE);
 
                 if (StringUtils.isNotBlank(dobString)) {
                     Date dob = Utils.dobStringToDate(dobString);
@@ -190,7 +190,7 @@ public class CoverageDropoutIntentService extends IntentService {
             for (Map<String, String> result : results) {
                 try {
                     String baseEntityId = result.get(VaccineRepository.BASE_ENTITY_ID);
-                    String dobString = result.get(AppConstants.KEY.DOB);
+                    String dobString = result.get(AppConstants.KeyConstants.DOB);
                     String vaccineName = result.get(VaccineRepository.NAME);
                     String updatedAt = result.get(VaccineRepository.UPDATED_AT_COLUMN);
                     String eventDate = result.get(VaccineRepository.DATE);

@@ -408,7 +408,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                // do nothing
             }
         });
     }

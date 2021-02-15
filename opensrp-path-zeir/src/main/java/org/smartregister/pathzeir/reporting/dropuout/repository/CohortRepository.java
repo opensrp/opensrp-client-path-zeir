@@ -39,10 +39,6 @@ public class CohortRepository extends BaseRepository {
             COLUMN_CREATED_AT + " DATETIME NULL," +
             COLUMN_UPDATED_AT + " TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)";
 
-    public CohortRepository() {
-        super();
-    }
-
     public static void createTable(SQLiteDatabase database) {
         database.execSQL(COHORT_SQL);
     }

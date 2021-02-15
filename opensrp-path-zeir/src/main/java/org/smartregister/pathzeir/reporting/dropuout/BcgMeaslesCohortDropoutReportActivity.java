@@ -27,7 +27,6 @@ import java.util.Map;
  */
 public class BcgMeaslesCohortDropoutReportActivity extends BaseReportActivity {
     private ExpandableListView expandableListView;
-    private LocationSwitcherToolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class BcgMeaslesCohortDropoutReportActivity extends BaseReportActivity {
 
         setTitle("");
 
-        toolbar = (LocationSwitcherToolbar) getToolbar();
+        LocationSwitcherToolbar toolbar = (LocationSwitcherToolbar) getToolbar();
         toolbar.setNavigationOnClickListener(v -> {
 //                Intent intent = new Intent(BcgMeaslesCohortDropoutReportActivity.this, DropoutReportsActivity.class);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

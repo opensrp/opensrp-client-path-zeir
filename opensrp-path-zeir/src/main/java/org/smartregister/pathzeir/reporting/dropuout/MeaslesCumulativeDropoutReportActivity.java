@@ -1,6 +1,5 @@
 package org.smartregister.pathzeir.reporting.dropuout;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;

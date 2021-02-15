@@ -56,9 +56,9 @@ public class AppChildFormFragment extends ChildFormFragment {
     protected @NotNull HashMap<String, String> getKeyAliasMap() {
         return new HashMap<String, String>() {
             {
-                put("mother_guardian_last_name", AppConstants.KEY.LAST_NAME);
-                put("mother_guardian_first_name", AppConstants.KEY.FIRST_NAME);
-                put("mother_guardian_date_birth", AppConstants.KEY.DOB);
+                put("mother_guardian_last_name", AppConstants.KeyConstants.LAST_NAME);
+                put("mother_guardian_first_name", AppConstants.KeyConstants.FIRST_NAME);
+                put("mother_guardian_date_birth", AppConstants.KeyConstants.DOB);
             }
         };
     }

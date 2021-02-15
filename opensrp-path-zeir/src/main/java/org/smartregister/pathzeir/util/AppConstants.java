@@ -6,7 +6,7 @@ public class AppConstants {
         String ARABIC_LOCALE = "ar";
     }
 
-    public static final class KEY {
+    public static final class KeyConstants {
         public static final String REACTION_VACCINE = "Reaction_Vaccine";
         public static final String CHILD = "child";
         public static final String MOTHER_FIRST_NAME = "mother_first_name";
@@ -62,13 +62,13 @@ public class AppConstants {
         public static final String RESIDENTIAL_AREA = "residential_area";
     }
 
-    public static class CONFIGURATION {
+    public static class ConfigurationConstants {
         public static final String LOGIN = "login";
         public static final String CHILD_REGISTER = "child_register";
 
     }
 
-    public static final class EventType {
+    public static final class EventTypeConstants {
         public static final String CHILD_REGISTRATION = "Birth Registration";
         public static final String UPDATE_CHILD_REGISTRATION = "Update Birth Registration";
         public static final String OUT_OF_CATCHMENT = "Out of Area Service";
@@ -80,11 +80,11 @@ public class AppConstants {
         String OUT_OF_CATCHMENT_SERVICE = "out_of_catchment_service";
     }
 
-    public static class RELATIONSHIP {
+    public static class RelationshipConstants {
         public static final String MOTHER = "mother";
     }
 
-    public static class TABLE_NAME {
+    public static class TableNameConstants {
         public static final String ALL_CLIENTS = "ec_client";
         public static final String REGISTER_TYPE = "client_register_type";
         public static final String CHILD_UPDATED_ALERTS = "child_updated_alerts";
@@ -101,7 +101,7 @@ public class AppConstants {
         }
     }
 
-    public static final class EntityType {
+    public static final class EntityTypeConstants {
         public static final String CHILD = "child";
     }
 

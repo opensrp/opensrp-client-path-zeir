@@ -37,7 +37,7 @@ public class HIA2IntentService extends IntentService {
     //HIA2 Status
     private VaccineRepository vaccineRepository;
     private static final int DAYS_BEFORE_OVERDUE = 10;
-    private Context context;
+//    private Context context;
 
     public HIA2IntentService() {
         super("HIA2IntentService");
@@ -96,7 +96,7 @@ public class HIA2IntentService extends IntentService {
 //        hia2Service = new HIA2Service();
 //
         vaccineRepository = ZeirApplication.getInstance().vaccineRepository();
-        context = getBaseContext();
+//        context = getBaseContext();
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -178,7 +178,7 @@ public class HIA2IntentService extends IntentService {
 
     private Long countDaysAfterDueDate(Vaccine vaccine) {
 
-        CommonRepository commonRepository = ZeirApplication.getInstance().context().commonrepository(AppConstants.TABLE_NAME.ALL_CLIENTS);
+        CommonRepository commonRepository = ZeirApplication.getInstance().context().commonrepository(AppConstants.TableNameConstants.ALL_CLIENTS);
         if (vaccine == null || vaccine.getBaseEntityId() == null || vaccine.getDate() == null) {
             return null;
         }

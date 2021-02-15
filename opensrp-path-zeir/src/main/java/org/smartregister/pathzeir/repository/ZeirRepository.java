@@ -1,7 +1,6 @@
 package org.smartregister.pathzeir.repository;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -57,8 +56,6 @@ import org.smartregister.stock.util.StockUtils;
 import org.smartregister.util.DatabaseMigrationUtils;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import timber.log.Timber;
 
@@ -151,6 +148,7 @@ public class ZeirRepository extends Repository {
                     break;
                 case 13:
                     upgradeToVersion13(db);
+                    break;
                 default:
                     break;
             }

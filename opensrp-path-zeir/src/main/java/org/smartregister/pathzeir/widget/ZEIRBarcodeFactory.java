@@ -77,7 +77,7 @@ public class ZEIRBarcodeFactory implements FormWidgetFactory {
             try {
                 rootLayout.setId(canvasId);
                 final MaterialEditText editText = createEditText(rootLayout, jsonObject, canvasId, stepName, popup);
-                attachJson(rootLayout, stepName, context, formFragment, jsonObject, editText);
+                attachJson(rootLayout, context, jsonObject, editText);
                 ((JsonApi) context).addFormDataView(editText);
             } catch (JSONException e) {
                 Timber.e(e);
@@ -87,8 +87,7 @@ public class ZEIRBarcodeFactory implements FormWidgetFactory {
         return views;
     }
 
-    private void attachJson(final RelativeLayout rootLayout, final String stepName, final Context context, final JsonFormFragment formFragment,
-                            final JSONObject jsonObject, final MaterialEditText editText) throws JSONException {
+    private void attachJson(final RelativeLayout rootLayout, final Context context, final JSONObject jsonObject, final MaterialEditText editText) throws JSONException {
         final String relevance = jsonObject.optString(JsonFormConstants.RELEVANCE);
         final String calculation = jsonObject.optString(JsonFormConstants.CALCULATION);
         final String constraints = jsonObject.optString(JsonFormConstants.CONSTRAINTS);

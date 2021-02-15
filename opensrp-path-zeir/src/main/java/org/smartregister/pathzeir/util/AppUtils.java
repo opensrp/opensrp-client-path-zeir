@@ -64,8 +64,8 @@ public class AppUtils extends Utils {
 
         values.put(Constants.KEY.IS_CLOSED, 1);
         values.put(Constants.KEY.DATE_REMOVED, Utils.convertDateFormat(client.getDeathdate().toDate(), Utils.DB_DF));
-        updateChildTables(client, values, AppConstants.TABLE_NAME.CHILD_DETAILS);
-        updateChildTables(client, values, AppConstants.TABLE_NAME.ALL_CLIENTS);
+        updateChildTables(client, values, AppConstants.TableNameConstants.CHILD_DETAILS);
+        updateChildTables(client, values, AppConstants.TableNameConstants.ALL_CLIENTS);
     }
 
     private static void updateChildTables(Client client, ContentValues values, String tableName) {
@@ -120,11 +120,11 @@ public class AppUtils extends Utils {
         }
         try {
             Event baseEvent = AppJsonFormUtils.createEvent(new JSONArray(), new JSONObject().put(JsonFormUtils.ENCOUNTER_LOCATION, ""),
-                    AppJsonFormUtils.formTag(getAllSharedPreferences()), "", AppConstants.EventType.CARD_STATUS_UPDATE, AppConstants.EventType.CARD_STATUS_UPDATE);
+                    AppJsonFormUtils.formTag(getAllSharedPreferences()), "", AppConstants.EventTypeConstants.CARD_STATUS_UPDATE, AppConstants.EventTypeConstants.CARD_STATUS_UPDATE);
 
             baseEvent.setFormSubmissionId(UUID.randomUUID().toString());
-            baseEvent.addDetails(AppConstants.KEY.CARD_STATUS, cardStatus.name());
-            baseEvent.addDetails(AppConstants.KEY.CARD_STATUS_DATE, cardStatusDate);
+            baseEvent.addDetails(AppConstants.KeyConstants.CARD_STATUS, cardStatus.name());
+            baseEvent.addDetails(AppConstants.KeyConstants.CARD_STATUS_DATE, cardStatusDate);
             baseEvent.setBaseEntityId(baseEntityId);
             AppJsonFormUtils.tagEventMetadata(baseEvent);
 

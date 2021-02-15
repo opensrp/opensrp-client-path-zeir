@@ -28,18 +28,18 @@ public class AdvancedSearchPresenter extends BaseChildAdvancedSearchPresenter {
         if (localCursor != null && localCursor.getCount() > 0) {
             AdvancedMatrixCursor remoteLocalCursor = new AdvancedMatrixCursor(
                     new String[]{
-                            AppConstants.KEY.ID_LOWER_CASE,
-                            AppConstants.KEY.RELATIONALID,
-                            AppConstants.KEY.RELATIONAL_ID,
-                            AppConstants.KEY.FIRST_NAME,
-                            AppConstants.KEY.LAST_NAME,
-                            AppConstants.KEY.GENDER,
-                            AppConstants.KEY.DOB,
-                            AppConstants.KEY.ZEIR_ID,
-                            AppConstants.KEY.MOTHER_FIRST_NAME,
-                            AppConstants.KEY.MOTHER_LAST_NAME,
-                            AppConstants.KEY.INACTIVE,
-                            AppConstants.KEY.LOST_TO_FOLLOW_UP
+                            AppConstants.KeyConstants.ID_LOWER_CASE,
+                            AppConstants.KeyConstants.RELATIONALID,
+                            AppConstants.KeyConstants.RELATIONAL_ID,
+                            AppConstants.KeyConstants.FIRST_NAME,
+                            AppConstants.KeyConstants.LAST_NAME,
+                            AppConstants.KeyConstants.GENDER,
+                            AppConstants.KeyConstants.DOB,
+                            AppConstants.KeyConstants.ZEIR_ID,
+                            AppConstants.KeyConstants.MOTHER_FIRST_NAME,
+                            AppConstants.KeyConstants.MOTHER_LAST_NAME,
+                            AppConstants.KeyConstants.INACTIVE,
+                            AppConstants.KeyConstants.LOST_TO_FOLLOW_UP
                     });
             CursorJoiner joiner = new CursorJoiner(remoteCursor, new String[]{DBConstants.KEY.ZEIR_ID}, localCursor, new String[]{DBConstants.KEY.ZEIR_ID});
             for (CursorJoiner.Result joinerResult : joiner) {

@@ -20,19 +20,19 @@ public class AppVaccineScheduleUpdateIntentService extends VaccineSchedulesUpdat
     protected void onHandleIntent(@Nullable Intent intent) {
 
         String tableName = intent != null ? intent.getStringExtra(IMConstants.IntentKey.VaccineScheduleUpdateIntentService.CLIENT_TABLE_NAME)
-                : AppConstants.TABLE_NAME.ALL_CLIENTS;
+                : AppConstants.TableNameConstants.ALL_CLIENTS;
 
         sendLocalBroadcast(IMConstants.BroadcastAction.VaccineScheduleUpdate.SERVICE_STARTED);
 
         int page = 0;
         ArrayList<VaccinationClient> vaccinationClients;
         do {
-            vaccinationClients = getClients(tableName != null ? tableName :  AppConstants.TABLE_NAME.ALL_CLIENTS, page);
+            vaccinationClients = getClients(tableName != null ? tableName :  AppConstants.TableNameConstants.ALL_CLIENTS, page);
 
             for (VaccinationClient vaccinationClient : vaccinationClients) {
                 DateTime birthDateTime = vaccinationClient.getBirthDateTime();
                 String baseEntityId = vaccinationClient.getBaseEntityId();
-                VaccineSchedule.updateOfflineAlerts(baseEntityId, birthDateTime, AppConstants.KEY.CHILD);
+                VaccineSchedule.updateOfflineAlerts(baseEntityId, birthDateTime, AppConstants.KeyConstants.CHILD);
                 ServiceSchedule.updateOfflineAlerts(baseEntityId, birthDateTime);
             }
 

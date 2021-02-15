@@ -453,7 +453,7 @@ public abstract class BaseReportActivity extends BaseActivity implements Coverag
     }
 
     private List<VaccineRepo.Vaccine> generateVaccineList() {
-        List<VaccineRepo.Vaccine> vaccineList = VaccineRepo.getVaccines(AppConstants.EntityType.CHILD);
+        List<VaccineRepo.Vaccine> vaccineList = VaccineRepo.getVaccines(AppConstants.EntityTypeConstants.CHILD);
         Collections.sort(vaccineList, (lhs, rhs) -> lhs.display().compareToIgnoreCase(rhs.display()));
 
         vaccineList.remove(VaccineRepo.Vaccine.bcg2);

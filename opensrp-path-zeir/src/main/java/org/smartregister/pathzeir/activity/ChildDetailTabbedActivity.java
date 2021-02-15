@@ -193,10 +193,10 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
         for (int i = 0; i < fields.length(); i++) {
             JSONObject field = fields.getJSONObject(i);
             if (field != null && field.getString(JsonFormConstants.TYPE).equalsIgnoreCase(JsonFormConstants.DATE_PICKER)
-                    && !childDetails.getDetails().isEmpty() && childDetails.getDetails().containsKey(AppConstants.KEY.DOB)) {
-                Date date = Utils.dobStringToDate(childDetails.getDetails().get(AppConstants.KEY.DOB));
+                    && !childDetails.getDetails().isEmpty() && childDetails.getDetails().containsKey(AppConstants.KeyConstants.DOB)) {
+                Date date = Utils.dobStringToDate(childDetails.getDetails().get(AppConstants.KeyConstants.DOB));
                 field.put(JsonFormConstants.MIN_DATE, new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date));
-                field.put(JsonFormConstants.MAX_DATE, AppConstants.KEY.TODAY);
+                field.put(JsonFormConstants.MAX_DATE, AppConstants.KeyConstants.TODAY);
             }
         }
         return formJson.toString();

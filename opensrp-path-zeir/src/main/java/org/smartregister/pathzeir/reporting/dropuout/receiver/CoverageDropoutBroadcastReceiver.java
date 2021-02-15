@@ -18,7 +18,6 @@ import timber.log.Timber;
  */
 
 public class CoverageDropoutBroadcastReceiver extends BroadcastReceiver {
-    private static final String TAG = CoverageDropoutServiceListener.class.getCanonicalName();
     public static final String TYPE = "TYPE";
     public static final String ACTION_SERVICE_DONE = "COVERAGE_DROPOUT_DONE";
     public static final String TYPE_GENERATE_COHORT_INDICATORS = "GENERATE_COHORT_INDICATORS";

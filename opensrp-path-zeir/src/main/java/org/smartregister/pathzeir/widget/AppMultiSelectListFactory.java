@@ -13,10 +13,10 @@ public class AppMultiSelectListFactory extends MultiSelectListFactory {
     @Override
     public Set<String> getCustomTranslatableWidgetFields() {
         Set<String> translatableWidgetFields = super.getCustomTranslatableWidgetFields();
-        translatableWidgetFields.add(AppConstants.KEY.BUTTON_TEXT);
-        translatableWidgetFields.add(AppConstants.KEY.DIALOG_TITLE);
-        translatableWidgetFields.add(AppConstants.KEY.SEARCH_HINT);
-        translatableWidgetFields.add(AppConstants.KEY.OPTIONS_TEXT);
+        translatableWidgetFields.add(AppConstants.KeyConstants.BUTTON_TEXT);
+        translatableWidgetFields.add(AppConstants.KeyConstants.DIALOG_TITLE);
+        translatableWidgetFields.add(AppConstants.KeyConstants.SEARCH_HINT);
+        translatableWidgetFields.add(AppConstants.KeyConstants.OPTIONS_TEXT);
         return translatableWidgetFields;
     }
 }

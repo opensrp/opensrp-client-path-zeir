@@ -134,7 +134,7 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
             case DBConstants.RegisterTable.CHILD_DETAILS:
                 return new String[]{DBConstants.KEY.LOST_TO_FOLLOW_UP, DBConstants.KEY.INACTIVE};
             case DBConstants.RegisterTable.MOTHER_DETAILS:
-                return new String[]{AppConstants.KEY.MOTHER_GUARDIAN_NUMBER,};
+                return new String[]{AppConstants.KeyConstants.MOTHER_GUARDIAN_NUMBER,};
             default:
                 return null;
         }
@@ -142,15 +142,15 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
 
     private static String[] getFtsSortFields(String tableName, android.content.Context context) {
         switch (tableName) {
-            case AppConstants.TABLE_NAME.ALL_CLIENTS:
-                return Arrays.asList(AppConstants.KEY.FIRST_NAME, AppConstants.KEY.LAST_NAME,
-                        AppConstants.KEY.DOB, AppConstants.KEY.ZEIR_ID, AppConstants.KEY.LAST_INTERACTED_WITH,
-                        AppConstants.KEY.DOD, AppConstants.KEY.DATE_REMOVED).toArray(new String[0]);
+            case AppConstants.TableNameConstants.ALL_CLIENTS:
+                return Arrays.asList(AppConstants.KeyConstants.FIRST_NAME, AppConstants.KeyConstants.LAST_NAME,
+                        AppConstants.KeyConstants.DOB, AppConstants.KeyConstants.ZEIR_ID, AppConstants.KeyConstants.LAST_INTERACTED_WITH,
+                        AppConstants.KeyConstants.DOD, AppConstants.KeyConstants.DATE_REMOVED).toArray(new String[0]);
             case DBConstants.RegisterTable.CHILD_DETAILS:
                 List<VaccineGroup> vaccineList = VaccinatorUtils.getVaccineGroupsFromVaccineConfigFile(context, VaccinatorUtils.vaccines_file);
                 List<String> names = new ArrayList<>();
                 names.add(DBConstants.KEY.INACTIVE);
-                names.add(AppConstants.KEY.RELATIONAL_ID);
+                names.add(AppConstants.KeyConstants.RELATIONAL_ID);
                 names.add(DBConstants.KEY.LOST_TO_FOLLOW_UP);
 
                 for (VaccineGroup vaccineGroup : vaccineList) {
@@ -280,10 +280,10 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
     private ChildMetadata getMetadata() {
         ChildMetadata metadata = new ChildMetadata(ChildFormActivity.class, ChildProfileActivity.class,
                 ChildImmunizationActivity.class, ChildRegisterActivity.class, true, new AppChildRegisterQueryProvider());
-        metadata.updateChildRegister(AppConstants.JsonForm.CHILD_ENROLLMENT, AppConstants.TABLE_NAME.ALL_CLIENTS,
-                AppConstants.TABLE_NAME.ALL_CLIENTS, AppConstants.EventType.CHILD_REGISTRATION,
-                AppConstants.EventType.UPDATE_CHILD_REGISTRATION, AppConstants.EventType.OUT_OF_CATCHMENT, AppConstants.CONFIGURATION.CHILD_REGISTER,
-                AppConstants.RELATIONSHIP.MOTHER, AppConstants.JsonForm.OUT_OF_CATCHMENT_SERVICE);
+        metadata.updateChildRegister(AppConstants.JsonForm.CHILD_ENROLLMENT, AppConstants.TableNameConstants.ALL_CLIENTS,
+                AppConstants.TableNameConstants.ALL_CLIENTS, AppConstants.EventTypeConstants.CHILD_REGISTRATION,
+                AppConstants.EventTypeConstants.UPDATE_CHILD_REGISTRATION, AppConstants.EventTypeConstants.OUT_OF_CATCHMENT, AppConstants.ConfigurationConstants.CHILD_REGISTER,
+                AppConstants.RelationshipConstants.MOTHER, AppConstants.JsonForm.OUT_OF_CATCHMENT_SERVICE);
         metadata.setFieldsWithLocationHierarchy(new HashSet<>(Arrays.asList("home_facility", "birth_facility_name")));
         metadata.setLocationLevels(AppUtils.getLocationLevels());
         metadata.setHealthFacilityLevels(AppUtils.getHealthFacilityLevels());
@@ -302,7 +302,7 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
         try {
             List<VaccineGroup> childVaccines = VaccinatorUtils.getSupportedVaccines(this);
             List<Vaccine> specialVaccines = VaccinatorUtils.getSpecialVaccines(this);
-            VaccineSchedule.init(childVaccines, specialVaccines, AppConstants.KEY.CHILD);
+            VaccineSchedule.init(childVaccines, specialVaccines, AppConstants.KeyConstants.CHILD);
         } catch (Exception e) {
             Timber.e(e, "ZeirApplication --> initOfflineSchedules");
         }
@@ -422,10 +422,10 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
 
     @VisibleForTesting
     protected void fixHardcodedVaccineConfiguration() {
-        VaccineRepo.Vaccine[] vaccines = ImmunizationLibrary.getInstance().getVaccines(AppConstants.KEY.CHILD);
+        VaccineRepo.Vaccine[] vaccines = ImmunizationLibrary.getInstance().getVaccines(AppConstants.KeyConstants.CHILD);
 
         HashMap<String, VaccineDuplicate> replacementVaccines = new HashMap<>();
-        replacementVaccines.put("BCG 2", new VaccineDuplicate("BCG 2", VaccineRepo.Vaccine.bcg, 1825, 0, 15, AppConstants.KEY.CHILD));
+        replacementVaccines.put("BCG 2", new VaccineDuplicate("BCG 2", VaccineRepo.Vaccine.bcg, 1825, 0, 15, AppConstants.KeyConstants.CHILD));
 
         for (VaccineRepo.Vaccine vaccine : vaccines) {
             if (replacementVaccines.containsKey(vaccine.display())) {
@@ -438,7 +438,7 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
             }
         }
 
-        ImmunizationLibrary.getInstance().setVaccines(vaccines, AppConstants.KEY.CHILD);
+        ImmunizationLibrary.getInstance().setVaccines(vaccines, AppConstants.KeyConstants.CHILD);
     }
 
 

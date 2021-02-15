@@ -107,7 +107,7 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
 
     @Override
     protected void updateSearchItems(String barcodeSearchTerm) {
-        advancedSearchFormData.put(AppConstants.KEY.ZEIR_ID, barcodeSearchTerm);
+        advancedSearchFormData.put(AppConstants.KeyConstants.ZEIR_ID, barcodeSearchTerm);
         Fragment fragment = fragments[ADVANCED_SEARCH_POSITION - 1];
         if (fragment instanceof AdvancedSearchFragment) {
             AdvancedSearchFragment advancedSearchFragment = (AdvancedSearchFragment) fragment;

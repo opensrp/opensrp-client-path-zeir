@@ -15,15 +15,15 @@ import java.util.List;
 import java.util.Map;
 
 import static org.smartregister.child.util.Constants.KEY.RELATIONALID;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.DOB;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.FIRST_NAME;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.GENDER;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.ID;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.INACTIVE;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.LAST_NAME;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.LOST_TO_FOLLOW_UP;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.RELATIONAL_ID;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.ZEIR_ID;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.DOB;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.FIRST_NAME;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.GENDER;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.ID;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.INACTIVE;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.LAST_NAME;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.LOST_TO_FOLLOW_UP;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.RELATIONAL_ID;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.ZEIR_ID;
 import static org.smartregister.pathzeir.util.TableUtil.getAllClientColumn;
 import static org.smartregister.pathzeir.util.TableUtil.getChildDetailsColumn;
 
@@ -41,17 +41,17 @@ public class AdvancedSearchModel extends BaseChildAdvancedSearchModel {
     public AdvancedMatrixCursor createMatrixCursor(Response<String> response) {
 
         String[] columns = new String[]{
-                AppConstants.KEY.ID_LOWER_CASE,
+                AppConstants.KeyConstants.ID_LOWER_CASE,
                 RELATIONALID,
                 RELATIONAL_ID,
-                AppConstants.KEY.FATHER_RELATIONAL_ID,
+                AppConstants.KeyConstants.FATHER_RELATIONAL_ID,
                 FIRST_NAME,
                 LAST_NAME,
                 GENDER,
                 DOB,
                 ZEIR_ID,
-                AppConstants.KEY.MOTHER_FIRST_NAME,
-                AppConstants.KEY.MOTHER_LAST_NAME,
+                AppConstants.KeyConstants.MOTHER_FIRST_NAME,
+                AppConstants.KeyConstants.MOTHER_LAST_NAME,
                 INACTIVE,
                 LOST_TO_FOLLOW_UP
         };
@@ -89,8 +89,8 @@ public class AdvancedSearchModel extends BaseChildAdvancedSearchModel {
                 getAllClientColumn(GENDER),
                 getAllClientColumn(DOB),
                 getAllClientColumn(ZEIR_ID),
-                "mother.first_name                     as " + AppConstants.KEY.MOTHER_FIRST_NAME,
-                "mother.last_name                      as " + AppConstants.KEY.MOTHER_LAST_NAME,
+                "mother.first_name                     as " + AppConstants.KeyConstants.MOTHER_FIRST_NAME,
+                "mother.last_name                      as " + AppConstants.KeyConstants.MOTHER_LAST_NAME,
                 getChildDetailsColumn(INACTIVE),
                 getChildDetailsColumn(LOST_TO_FOLLOW_UP)
         };

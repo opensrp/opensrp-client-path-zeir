@@ -42,10 +42,6 @@ public class CohortPatientRepository extends BaseRepository {
 
     private static final String COHORT_CHILD_REPORT_COHORT_ID_INDEX = "CREATE INDEX " + TABLE_NAME + "_" + COLUMN_COHORT_ID + "_index ON " + TABLE_NAME + "(" + COLUMN_COHORT_ID + " );";
 
-    public CohortPatientRepository() {
-        super();
-    }
-
     public static void createTable(SQLiteDatabase database) {
         database.execSQL(COHORT_CHILD_REPORT_SQL);
         database.execSQL(COHORT_CHILD_REPORT_COHORT_ID_INDEX);

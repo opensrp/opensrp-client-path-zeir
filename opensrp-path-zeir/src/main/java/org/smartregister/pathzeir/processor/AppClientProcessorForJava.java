@@ -121,7 +121,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                     case RecurringIntentService.EVENT_TYPE:
                         processService(eventClient, serviceTable);
                         break;
-                    case AppConstants.EventType.CARD_STATUS_UPDATE:
+                    case AppConstants.EventTypeConstants.CARD_STATUS_UPDATE:
                         processCardStatusUpdateEvent(event);
                         break;
                     case ReportExtensionsKt.MONTHLY_REPORT:
@@ -158,7 +158,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                         if (eventClient.getClient() != null) {
                             processEventClient(clientClassification, eventClient, event);
                             if (eventType.equalsIgnoreCase(Constants.EventType.DEATH) &&
-                                    eventClient.getEvent().getEntityType().equals(AppConstants.EntityType.CHILD)) {
+                                    eventClient.getEvent().getEntityType().equals(AppConstants.EntityTypeConstants.CHILD)) {
                                 AppUtils.updateChildDeath(eventClient);
                             }
                         }
@@ -303,14 +303,14 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
     private void processCardStatusUpdateEvent(Event event) {
         if (event != null && StringUtils.isNotBlank(event.getBaseEntityId())) {
             Map<String, String> eventDetails = event.getDetails();
-            String cardStatus = eventDetails.get(AppConstants.KEY.CARD_STATUS);
-            String cardStatusDate = eventDetails.get(AppConstants.KEY.CARD_STATUS_DATE);
+            String cardStatus = eventDetails.get(AppConstants.KeyConstants.CARD_STATUS);
+            String cardStatusDate = eventDetails.get(AppConstants.KeyConstants.CARD_STATUS_DATE);
             if (StringUtils.isNotBlank(cardStatus) && StringUtils.isNotBlank(cardStatusDate)) {
-                CommonRepository commonrepository = getApplication().context().commonrepository(AppConstants.TABLE_NAME.CHILD_DETAILS);
+                CommonRepository commonrepository = getApplication().context().commonrepository(AppConstants.TableNameConstants.CHILD_DETAILS);
                 ContentValues contentValues = new ContentValues();
-                contentValues.put(AppConstants.KEY.CARD_STATUS, cardStatus);
-                contentValues.put(AppConstants.KEY.CARD_STATUS_DATE, cardStatusDate);
-                commonrepository.updateColumn(AppConstants.TABLE_NAME.CHILD_DETAILS, contentValues, event.getBaseEntityId());
+                contentValues.put(AppConstants.KeyConstants.CARD_STATUS, cardStatus);
+                contentValues.put(AppConstants.KeyConstants.CARD_STATUS_DATE, cardStatusDate);
+                commonrepository.updateColumn(AppConstants.TableNameConstants.CHILD_DETAILS, contentValues, event.getBaseEntityId());
             }
         }
     }
@@ -355,7 +355,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         String ftsSearchTable = bindTable + "_search";
         SQLiteDatabase db = ZeirApplication.getInstance().getRepository().getWritableDatabase();
         if (tableExists(db, ftsSearchTable)) {
-            String query = AppConstants.KEY.OBJECT_ID + " = ?";
+            String query = AppConstants.KeyConstants.OBJECT_ID + " = ?";
             db.delete(ftsSearchTable, query, new String[]{baseEntityId});
         }
     }
@@ -393,7 +393,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         for (String baseEntityId : stringDateTimeHashMap.keySet()) {
             DateTime birthDateTime = clientsForAlertUpdates.get(baseEntityId);
             if (birthDateTime != null) {
-                VaccineSchedule.updateOfflineAlerts(baseEntityId, birthDateTime, AppConstants.KEY.CHILD);
+                VaccineSchedule.updateOfflineAlerts(baseEntityId, birthDateTime, AppConstants.KeyConstants.CHILD);
                 ServiceSchedule.updateOfflineAlerts(baseEntityId, birthDateTime);
             }
         }
@@ -693,7 +693,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         }
 
         // Todo: Disable this in favour of the vaccine post-processing at the end :shrug: Might not be the best for real-time updates to the register
-        if (contentValues != null && AppConstants.TABLE_NAME.ALL_CLIENTS.equals(tableName)) {
+        if (contentValues != null && AppConstants.TableNameConstants.ALL_CLIENTS.equals(tableName)) {
             String dobString = contentValues.getAsString(Constants.KEY.DOB);
             // TODO: Fix this to use the ec_child_details table & fetch the birthDateTime from the ec_client table
             if (StringUtils.isNotBlank(dobString)) {
@@ -710,7 +710,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
 
     @Override
     public String[] getOpenmrsGenIds() {
-        return new String[]{AppConstants.KEY.ZEIR_ID};
+        return new String[]{AppConstants.KeyConstants.ZEIR_ID};
     }
 
     private void scheduleUpdatingClientAlerts(@NonNull String baseEntityId, @NonNull DateTime dateTime) {

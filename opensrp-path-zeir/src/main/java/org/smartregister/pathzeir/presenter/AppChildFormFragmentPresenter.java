@@ -35,8 +35,8 @@ import timber.log.Timber;
 
 import static com.vijay.jsonwizard.constants.JsonFormConstants.FIELDS;
 import static com.vijay.jsonwizard.constants.JsonFormConstants.STEP1;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.BIRTH_FACILITY_NAME;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.HOME_FACILITY;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.BIRTH_FACILITY_NAME;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.HOME_FACILITY;
 
 public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
 
@@ -58,8 +58,8 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
         } catch (JSONException e) {
             Timber.e(e, "Encounter type missing");
         }
-        if (encounterType != null && (encounterType.equalsIgnoreCase(AppConstants.EventType.CHILD_REGISTRATION)
-                || encounterType.equalsIgnoreCase(AppConstants.EventType.UPDATE_CHILD_REGISTRATION))) {
+        if (encounterType != null && (encounterType.equalsIgnoreCase(AppConstants.EventTypeConstants.CHILD_REGISTRATION)
+                || encounterType.equalsIgnoreCase(AppConstants.EventTypeConstants.UPDATE_CHILD_REGISTRATION))) {
             List<LocationTag> tags = getDistrictTags();
             String districtId = (tags != null && tags.size() > 0) ? tags.get(0).getLocationId() : "";
             populateLocationSpinner(districtId, HOME_FACILITY);
@@ -73,10 +73,10 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
         String key = (String) parent.getTag(R.id.key);
         try {
 
-            if (key.equals(AppConstants.KEY.REACTION_VACCINE)) {
+            if (key.equals(AppConstants.KeyConstants.REACTION_VACCINE)) {
                 MaterialSpinner spinnerReactionVaccine = (MaterialSpinner) ((ChildFormActivity)
                         formFragment.requireActivity()).getFormDataView(
-                        STEP1 + ":" + AppConstants.KEY.REACTION_VACCINE);
+                        STEP1 + ":" + AppConstants.KeyConstants.REACTION_VACCINE);
                 int selectedItemPos = spinnerReactionVaccine.getSelectedItemPosition();
                 AppChildFormFragment.OnReactionVaccineSelected onReactionVaccineSelected = formFragment.getOnReactionVaccineSelected();
                 if (selectedItemPos > 0) {
@@ -96,7 +96,7 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
     }
 
     private List<LocationTag> getDistrictTags() {
-        return ChildLibrary.getInstance().context().getLocationTagRepository().getLocationTagsByTagName(AppConstants.KEY.DISTRICT);
+        return ChildLibrary.getInstance().context().getLocationTagRepository().getLocationTagsByTagName(AppConstants.KeyConstants.DISTRICT);
     }
 
     private void populateLocationSpinner(String parentLocationId, String spinnerKey) {
