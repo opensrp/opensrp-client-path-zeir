@@ -1,7 +1,6 @@
 package org.smartregister.pathzeir.reporting.monthly.intent;
 
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
 
 import org.joda.time.DateTime;

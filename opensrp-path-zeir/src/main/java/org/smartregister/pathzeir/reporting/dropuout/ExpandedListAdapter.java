@@ -61,10 +61,10 @@ public class ExpandedListAdapter<K, L, T> extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-
-        if (convertView == null) {
+        View childView = convertView;
+        if (childView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(childLayout, null);
+            childView = inflater.inflate(childLayout, null);
         }
 
         ItemData<L, T> childObject = getChild(groupPosition, childPosition);
@@ -89,37 +89,19 @@ public class ExpandedListAdapter<K, L, T> extends BaseExpandableListAdapter {
 
             }
 
-            View tvView = convertView.findViewById(R.id.tv);
-            if (tvView != null && text != null) {
-                TextView tv = (TextView) tvView;
-                tv.setText(text);
-                convertView.setTag(text);
-            }
-
-            View detailView = convertView.findViewById(R.id.details);
-            if (detailView != null && details != null) {
-                TextView detailTextView = (TextView) detailView;
-                detailTextView.setText(details);
-
-                detailTextView.setTextColor(context.getResources().getColor(R.color.black));
-                if (childObject.isFinalized()) {
-                    detailTextView.setTextColor(context.getResources().getColor(R.color.bluetext));
-                }
-            }
-
-            View otherView = convertView.findViewById(R.id.other);
-            if (otherView != null && other != null) {
-                TextView otherTextView = (TextView) otherView;
-                otherTextView.setText(other);
-
-                otherTextView.setTextColor(context.getResources().getColor(R.color.black));
-                if (childObject.isFinalized()) {
-                    otherTextView.setTextColor(context.getResources().getColor(R.color.bluetext));
-                }
-            }
+           setTvView(text, childView);
+           setDetailView(details, childView, childObject);
+           setOtherView(other, childView, childObject);
         }
+        setDividerBottom(groupPosition, childPosition, childView);
 
-        View dividerBottom = convertView.findViewById(R.id.adapter_divider_bottom);
+        childView.setTag(R.id.item_data, childObject.getTagData());
+
+        return childView;
+    }
+
+    private void setDividerBottom(int groupPosition, int childPosition, View childView) {
+        View dividerBottom = childView.findViewById(R.id.adapter_divider_bottom);
         if (dividerBottom != null) {
             boolean lastChild = (getChildrenCount(groupPosition) - 1) == childPosition;
             if (lastChild) {
@@ -128,10 +110,41 @@ public class ExpandedListAdapter<K, L, T> extends BaseExpandableListAdapter {
                 dividerBottom.setVisibility(View.GONE);
             }
         }
+    }
 
-        convertView.setTag(R.id.item_data, childObject.getTagData());
+    private void setOtherView(String other, View childView, ItemData<L, T> childObject) {
+        View otherView = childView.findViewById(R.id.other);
+        if (otherView != null && other != null) {
+            TextView otherTextView = (TextView) otherView;
+            otherTextView.setText(other);
 
-        return convertView;
+            otherTextView.setTextColor(context.getResources().getColor(R.color.black));
+            if (childObject.isFinalized()) {
+                otherTextView.setTextColor(context.getResources().getColor(R.color.bluetext));
+            }
+        }
+    }
+
+    private void setDetailView(String details, View childView, ItemData<L, T> childObject) {
+        View detailView = childView.findViewById(R.id.details);
+        if (detailView != null && details != null) {
+            TextView detailTextView = (TextView) detailView;
+            detailTextView.setText(details);
+
+            detailTextView.setTextColor(context.getResources().getColor(R.color.black));
+            if (childObject.isFinalized()) {
+                detailTextView.setTextColor(context.getResources().getColor(R.color.bluetext));
+            }
+        }
+    }
+
+    private void setTvView(String text, View childView) {
+        View tvView = childView.findViewById(R.id.tv);
+        if (tvView != null && text != null) {
+            TextView tv = (TextView) tvView;
+            tv.setText(text);
+            childView.setTag(text);
+        }
     }
 
     @Override
@@ -159,10 +172,10 @@ public class ExpandedListAdapter<K, L, T> extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-
-        if (convertView == null) {
+        View groupView = convertView;
+        if (groupView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(headerLayout, null);
+            groupView = inflater.inflate(headerLayout, null);
         }
 
         Object group = getGroup(groupPosition);
@@ -179,14 +192,14 @@ public class ExpandedListAdapter<K, L, T> extends BaseExpandableListAdapter {
                 details = pair.second;
             }
 
-            View tvView = convertView.findViewById(R.id.tv);
+            View tvView = groupView.findViewById(R.id.tv);
             if (tvView != null) {
                 TextView tv = (TextView) tvView;
                 tv.setText(header);
-                convertView.setTag(header);
+                groupView.setTag(header);
             }
 
-            View detailView = convertView.findViewById(R.id.details);
+            View detailView = groupView.findViewById(R.id.details);
             if (detailView != null && details != null) {
                 TextView detailTextView = (TextView) detailView;
                 detailTextView.setText(details);
@@ -197,7 +210,7 @@ public class ExpandedListAdapter<K, L, T> extends BaseExpandableListAdapter {
         ExpandableListView mExpandableListView = (ExpandableListView) parent;
         mExpandableListView.expandGroup(groupPosition);
 
-        return convertView;
+        return groupView;
     }
 
     @Override

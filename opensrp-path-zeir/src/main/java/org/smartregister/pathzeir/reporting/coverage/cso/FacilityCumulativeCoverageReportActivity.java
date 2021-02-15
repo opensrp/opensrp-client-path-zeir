@@ -372,14 +372,7 @@ public class FacilityCumulativeCoverageReportActivity extends BaseReportActivity
 
         boolean isCheckCurrentTime = checkCurrentTime;
 
-        TableRow titleRow = (TableRow) findViewById(R.id.title_1);
-        for (int i = 0; i < titleRow.getChildCount(); i++) {
-            if (i > 0) {
-                TextView titleTextView = (TextView) titleRow.getChildAt(i);
-                titleTextView.setTextColor(getResources().getColor(R.color.silver));
-                titleTextView.setText(months[i - 1].toUpperCase());
-            }
-        }
+        setTitleRow(months);
 
         TableRow startTotalValueRow = (TableRow) findViewById(R.id.total_1);
         TableRow startCumValueRow = (TableRow) findViewById(R.id.cum_1);
@@ -443,19 +436,34 @@ public class FacilityCumulativeCoverageReportActivity extends BaseReportActivity
             startTotalTextView.setTextColor(getResources().getColor(R.color.cumulative_blue_line));
             startCumTextView.setTextColor(getResources().getColor(R.color.cumulative_blue_line));
 
-            if (isComparison) {
-                setColors();
-            }
+            updateViews(i, isComparison, startValueMap, endValueMap, months);
+        }
+    }
 
-            if (i == 0) {
-                if (isComparison) {
-                    setComparisonViews();
-                } else {
-                    startTotalTextView.setText(String.format(getString(R.string.total_vaccine), convertToUpperLower(vaccine.display())));
-                    startCumTextView.setText(String.format(getString(R.string.total_cum), convertToUpperLower(vaccine.display())));
-                }
+    private void updateViews(int i, boolean isComparison, Map<String, Long> startValueMap, Map<String, Long> endValueMap, String[] months) {
+        if (isComparison) {
+            setColors();
+        }
+
+        if (i == 0) {
+            if (isComparison) {
+                setComparisonViews();
             } else {
-                setViews(i, isComparison, startValueMap, endValueMap,  months);
+                startTotalTextView.setText(String.format(getString(R.string.total_vaccine), convertToUpperLower(vaccine.display())));
+                startCumTextView.setText(String.format(getString(R.string.total_cum), convertToUpperLower(vaccine.display())));
+            }
+        } else {
+            setViews(i, isComparison, startValueMap, endValueMap,  months);
+        }
+    }
+
+    private void setTitleRow(String[] months) {
+        TableRow titleRow = (TableRow) findViewById(R.id.title_1);
+        for (int i = 0; i < titleRow.getChildCount(); i++) {
+            if (i > 0) {
+                TextView titleTextView = (TextView) titleRow.getChildAt(i);
+                titleTextView.setTextColor(getResources().getColor(R.color.silver));
+                titleTextView.setText(months[i - 1].toUpperCase());
             }
         }
     }
@@ -496,6 +504,10 @@ public class FacilityCumulativeCoverageReportActivity extends BaseReportActivity
         }
         startCumTextView.setText(String.valueOf(cumStartValue));
 
+        updatePercentage(isComparison, cumStartValue, cumEndValue, startValue, endValue);
+    }
+
+    private void updatePercentage(boolean isComparison, Long cumStartValue, Long cumEndValue, Long startValue, Long endValue) {
         if (isComparison) {
             endCumTextView.setText(String.valueOf(cumEndValue));
 
@@ -631,12 +643,12 @@ public class FacilityCumulativeCoverageReportActivity extends BaseReportActivity
 
     @Override
     public void onUniqueIdFetched(Triple<String, Map<String, String>, String> triple, String s) {
-
+        // do nothing
     }
 
     @Override
     public void onNoUniqueId() {
-
+        // do nothing
     }
 
     @Override

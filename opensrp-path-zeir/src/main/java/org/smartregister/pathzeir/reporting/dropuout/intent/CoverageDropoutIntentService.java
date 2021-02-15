@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import androidx.core.util.Pair;
+
 import net.sqlcipher.database.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
@@ -104,9 +106,9 @@ public class CoverageDropoutIntentService extends IntentService {
 
         } catch (Exception e) {
             Timber.e(e);
-        }finally {
+        }/*finally {
 //            VaccinatorAlarmReceiver.completeWakefulIntent(intent);
-        }
+        }*/
         Timber.i(TAG, "Finishing  Coverage Dropout service");
     }
 
@@ -333,38 +335,49 @@ public class CoverageDropoutIntentService extends IntentService {
                 }
             }
 
-            if (subtract) {
-                vaccineList.remove(vaccineName);
-            } else {
-                vaccineList.add(vaccineName);
-            }
+            // Extracting method to reduce NPath complexity codacy issue
+            updateVaccineList(subtract, vaccineList, vaccineName);
 
             cohortPatientRepository.changeValidVaccines(StringUtils.join(vaccineList, COMMA), cohortPatient.getId());
 
-            CohortIndicator cohortIndicator = cohortIndicatorRepository.findByVaccineAndCohort(vaccineName, cohortPatient.getCohortId());
-            if (cohortIndicator == null) {
-                if (subtract) {
-                    throw CoverageDropoutException.newInstance("Impossible!!! subtract should only happen for already counted vaccines");
-                }
-                cohortIndicator = new CohortIndicator();
-                cohortIndicator.setCohortId(cohortPatient.getCohortId());
-                cohortIndicator.setValue(1L);
-                cohortIndicator.setVaccine(vaccineName);
-                cohortIndicatorRepository.add(cohortIndicator);
-            } else {
-                Long value = cohortIndicator.getValue();
-                if (subtract) {
-                    if (value <= 0) {
-                        return;
-                    }
-                    value -= 1L;
-                } else {
-                    value += 1L;
-                }
-                cohortIndicatorRepository.changeValue(value, cohortIndicator.getId());
-            }
+            // Extracting method to reduce NPath complexity codacy issue
+            processCohortIndicator(cohortIndicatorRepository, subtract, cohortPatient, vaccineName);
         } catch (Exception e) {
             Timber.e(e, TAG, e.getMessage());
+        }
+    }
+
+    private static void processCohortIndicator(CohortIndicatorRepository cohortIndicatorRepository, boolean subtract,
+                                               CohortPatient cohortPatient, String vaccineName) throws CoverageDropoutException {
+        CohortIndicator cohortIndicator = cohortIndicatorRepository.findByVaccineAndCohort(vaccineName, cohortPatient.getCohortId());
+        if (cohortIndicator == null) {
+            if (subtract) {
+                throw CoverageDropoutException.newInstance("Impossible!!! subtract should only happen for already counted vaccines");
+            }
+            cohortIndicator = new CohortIndicator();
+            cohortIndicator.setCohortId(cohortPatient.getCohortId());
+            cohortIndicator.setValue(1L);
+            cohortIndicator.setVaccine(vaccineName);
+            cohortIndicatorRepository.add(cohortIndicator);
+        } else {
+            Long value = cohortIndicator.getValue();
+            if (subtract) {
+                if (value <= 0) {
+                    return;
+                }
+                value -= 1L;
+            } else {
+                value += 1L;
+            }
+            cohortIndicatorRepository.changeValue(value, cohortIndicator.getId());
+        }
+    }
+
+    private static void updateVaccineList(boolean subtract, List<String> vaccineList, String vaccineName) {
+        if (subtract) {
+            vaccineList.remove(vaccineName);
+        } else {
+            vaccineList.add(vaccineName);
         }
     }
 
@@ -391,29 +404,8 @@ public class CoverageDropoutIntentService extends IntentService {
             Long cohortId = cohortPatient.getCohortId();
 
             String validVaccines = cohortPatient.getValidVaccines();
-            if (StringUtils.isNotBlank(validVaccines)) {
-                List<String> vaccineList = vaccinesAsList(validVaccines);
-
-                if (StringUtils.isBlank(vaccineName)) { // Child Centered
-                    for (String vaccine : vaccineList) { // Un register all vaccines
-                        deleteCohortIndicator(vaccine, cohortId);
-                    }
-                } else { // Vaccine Centered
-                    List<String> incomingVaccineList = formatAndSplitVaccineName(vaccineName);
-                    for (String incomingVaccine : incomingVaccineList) { // Un register incoming vaccine only
-                        if (vaccineList.contains(incomingVaccine)) {
-                            deleteCohortIndicator(incomingVaccine, cohortId);
-                        }
-                    }
-
-                    // Remove the vaccine in cohortPatient
-                    List<String> toRemoveList = toRemoveList(vaccineList, incomingVaccineList);
-                    if (toRemoveList != null && !toRemoveList.isEmpty()) {
-                        vaccineList.removeAll(toRemoveList);
-                        cohortPatientRepository.changeValidVaccines(StringUtils.join(vaccineList, COMMA), cohortPatient.getId());
-                    }
-                }
-            }
+            // Extracting method to reduce NPath complexity codacy issue
+            processVaccineIndicators(validVaccines, vaccineName, cohortPatientRepository, cohortId, cohortPatient);
 
             if (StringUtils.isNotBlank(vaccineName)) { // Vaccine Centered - Return
                 return;
@@ -430,6 +422,32 @@ public class CoverageDropoutIntentService extends IntentService {
             Timber.e(e);
         } finally {
             sendBroadcastMessage(context, CoverageDropoutBroadcastReceiver.TYPE_GENERATE_COHORT_INDICATORS);
+        }
+    }
+
+    private static void processVaccineIndicators(String validVaccines, String vaccineName, CohortPatientRepository cohortPatientRepository, Long cohortId, CohortPatient cohortPatient) {
+        if (StringUtils.isNotBlank(validVaccines)) {
+            List<String> vaccineList = vaccinesAsList(validVaccines);
+
+            if (StringUtils.isBlank(vaccineName)) { // Child Centered
+                for (String vaccine : vaccineList) { // Un register all vaccines
+                    deleteCohortIndicator(vaccine, cohortId);
+                }
+            } else { // Vaccine Centered
+                List<String> incomingVaccineList = formatAndSplitVaccineName(vaccineName);
+                for (String incomingVaccine : incomingVaccineList) { // Un register incoming vaccine only
+                    if (vaccineList.contains(incomingVaccine)) {
+                        deleteCohortIndicator(incomingVaccine, cohortId);
+                    }
+                }
+
+                // Remove the vaccine in cohortPatient
+                List<String> toRemoveList = toRemoveList(vaccineList, incomingVaccineList);
+                if (toRemoveList != null && !toRemoveList.isEmpty()) {
+                    vaccineList.removeAll(toRemoveList);
+                    cohortPatientRepository.changeValidVaccines(StringUtils.join(vaccineList, COMMA), cohortPatient.getId());
+                }
+            }
         }
     }
 
@@ -545,12 +563,9 @@ public class CoverageDropoutIntentService extends IntentService {
             // Don't add an already counted vaccine unless it's invalid now
             boolean alreadyCounted = false;
             List<String> vaccineList = vaccinesAsList(cumulativePatient.getValidVaccines());
-            for (String validVaccine : vaccineList) {
-                if (validVaccine.contains(vaccineName)) {
-                    alreadyCounted = true;
-                    oldDate = getDateFromValidVaccine(validVaccine);
-                }
-            }
+            Pair<Boolean, Date> values = getValuesPair(vaccineList, vaccineName); // to reduce NPath complexity
+            alreadyCounted = values.first;
+            oldDate = values.second;
 
             // Don't add invalid vaccines to the indicator table
             boolean isValid = isValidVaccineForCumulative(vaccineName, dob);
@@ -569,17 +584,36 @@ public class CoverageDropoutIntentService extends IntentService {
                 }
             }
 
-            if (replace) { // Move from one culumative to another -- is valid and already counted
-                if (oldDate != null && !AppUtils.isSameMonthAndYear(oldDate, vaccineDate)) { // If same month year, ignore
-                    updateCumulativeIndicator(cumulativePatient, vaccineName, oldDate, true);
-                    updateCumulativeIndicator(cumulativePatient, vaccineName, vaccineDate, false);
-                }
-            } else {
-                updateCumulativeIndicator(cumulativePatient, vaccineName, oldDate != null ? oldDate : vaccineDate, subtract);
-            }
+            // to reduce NPath complexity
+            updateCumulativePaient(replace, oldDate, vaccineDate, cumulativePatient, vaccineName, subtract);
         } catch (Exception e) {
             Timber.e(e);
         }
+    }
+
+    // to reduce NPath complexity
+    private static void updateCumulativePaient(boolean replace, Date oldDate, Date vaccineDate,
+                                               CumulativePatient cumulativePatient, String vaccineName, boolean subtract) {
+        if (replace) { // Move from one culumative to another -- is valid and already counted
+            if (oldDate != null && !AppUtils.isSameMonthAndYear(oldDate, vaccineDate)) { // If same month year, ignore
+                updateCumulativeIndicator(cumulativePatient, vaccineName, oldDate, true);
+                updateCumulativeIndicator(cumulativePatient, vaccineName, vaccineDate, false);
+            }
+        } else {
+            updateCumulativeIndicator(cumulativePatient, vaccineName, oldDate != null ? oldDate : vaccineDate, subtract);
+        }
+    }
+
+    private static Pair<Boolean, Date> getValuesPair(List<String> vaccineList, String vaccineName) {
+        boolean counted = false;
+        Date date = null;
+        for (String validVaccine : vaccineList) {
+            if (validVaccine.contains(vaccineName)) {
+                counted = true;
+                date = getDateFromValidVaccine(validVaccine);
+            }
+        }
+        return new Pair<>(counted, date);
     }
 
     private static void updateCumulativeIndicator(CumulativePatient cumulativePatient, String vaccineName, Date date, boolean subtract) {
@@ -666,33 +700,40 @@ public class CoverageDropoutIntentService extends IntentService {
             }
 
             String validVaccines = cumulativePatient.getValidVaccines();
-            if (StringUtils.isNotBlank(validVaccines)) {
-                List<String> vaccineList = vaccinesAsList(validVaccines);
-
-                // Vaccine Centered
-                List<String> incomingVaccineList = formatAndSplitVaccineName(vaccineName);
-                for (String validVaccine : vaccineList) {
-                    for (String incomingVaccine : incomingVaccineList) { // Un register incoming vaccine only
-                        if (validVaccine.contains(incomingVaccine)) {
-                            Date oldEventDate = getDateFromValidVaccine(validVaccine);
-                            deleteCumulativeIndicator(incomingVaccine, oldEventDate);
-                        }
-                    }
-                }
-
-                // Remove the vaccine in cohortPatient
-                List<String> toRemoveList = toRemoveList(vaccineList, incomingVaccineList);
-                if (toRemoveList != null && !toRemoveList.isEmpty()) {
-                    vaccineList.removeAll(toRemoveList);
-                    cumulativePatientRepository.changeValidVaccines(StringUtils.join(vaccineList, COMMA), cumulativePatient.getId());
-                }
-
-            }
+            // to reduce NPath complexity
+            processCumulativeVaccines(validVaccines, vaccineName, cumulativePatientRepository, cumulativePatient);
 
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
         } finally {
             sendBroadcastMessage(context, CoverageDropoutBroadcastReceiver.TYPE_GENERATE_CUMULATIVE_INDICATORS);
+        }
+    }
+
+    private static void processCumulativeVaccines(String validVaccines, String vaccineName,
+                                                  CumulativePatientRepository cumulativePatientRepository,
+                                                  CumulativePatient cumulativePatient) {
+        if (StringUtils.isNotBlank(validVaccines)) {
+            List<String> vaccineList = vaccinesAsList(validVaccines);
+
+            // Vaccine Centered
+            List<String> incomingVaccineList = formatAndSplitVaccineName(vaccineName);
+            for (String validVaccine : vaccineList) {
+                for (String incomingVaccine : incomingVaccineList) { // Un register incoming vaccine only
+                    if (validVaccine.contains(incomingVaccine)) {
+                        Date oldEventDate = getDateFromValidVaccine(validVaccine);
+                        deleteCumulativeIndicator(incomingVaccine, oldEventDate);
+                    }
+                }
+            }
+
+            // Remove the vaccine in cohortPatient
+            List<String> toRemoveList = toRemoveList(vaccineList, incomingVaccineList);
+            if (toRemoveList != null && !toRemoveList.isEmpty()) {
+                vaccineList.removeAll(toRemoveList);
+                cumulativePatientRepository.changeValidVaccines(StringUtils.join(vaccineList, COMMA), cumulativePatient.getId());
+            }
+
         }
     }
 
