@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/reportIndicatorsScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/reportIndicatorsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/report_indicator_form_margin"
+        android:layout_marginTop="@dimen/report_indicator_form_margin"
+        android:layout_marginEnd="@dimen/report_indicator_form_margin"
+        android:layout_marginBottom="@dimen/report_indicator_form_margin"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:scrollbars="vertical" />
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,488 @@
+<resources>
+    <string name="app_name">ZEIR</string>
+    <string name="tunisia_app_login_title" translatable="false">Carte électronique de vaccination Tunisienne\nبطـــــاقة التلقيـــــح الإلكترونيــــة التونسية</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="sync" translatable="false">Sync</string>
+    <string name="action_log_out">Logging Out</string>
+    <string name="powered_by" translatable="false">Powered by</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="done">Done</string>
+
+    <!-- Navigation Strings -->
+    <string name="navigation_drawer_close">Close</string>
+    <string name="side_nav_add">Add new child</string>
+    <string name="scan_card">Card Scanner</string>
+    <string name="side_nav_out_of_catchment">Record out of catchment vaccination</string>
+    <string name="nav_register">Register</string>
+    <string name="show_password_text">Show password</string>
+    <string name="app_version">App version: %1$s (built on %2$s)</string>
+    <string name="login_text">Log In</string>
+    <string name="log_out_text">Log Out</string>
+
+    <string name="iz_id_hint">ZEIR ID</string>
+
+    <string name="title_activity_child_immunization" translatable="false">ChildImmunizationActivity</string>
+
+    <string name="authentication_failed">Authentication Failed</string>
+    <string name="reset_card">Reset card</string>
+    <string name="logo_string">logo</string>
+
+    <string name="all_registers">All Registers</string>
+
+    <string name="vit_a_1">Vit A 1</string>
+    <string name="vit_a_2">Vit A 2</string>
+
+    <!-- Override BCG 2 dialog text to read BCG Repeated Dose -->
+    <string name="create_reminder_label">Create BCG Repeated Dose reminder?</string>
+    <string name="bcg_scar_not_present_label">Child does not have a BCG scar so BCG Repeated Dose is necessary.</string>
+    <string name="bcg_scar_present_label">BCG scar is present so no BCG Repeated Dose is necessary.</string>
+
+    <string name="ipv">IPV</string>
+    <string name="bcg">BCG</string>
+
+    <string name="due_only">Due Only</string>
+
+    <!-- Override labels in profile and immunization section -->
+    <string name="label_zeir">ZEIR ID</string>
+    <string name="system_id_colon">ZEIR ID:</string>
+    <string name="settings">Settings</string>
+
+    <string name="loading">Loading</string>
+    <string name="please_wait_message">Please wait</string>
+    <string name="reports">Reports</string>
+
+    <string name="str_page_info">Page {0} of {1}</string>
+    <string name="dismiss_lookup">Confirm</string>
+    <string name="fill_form_error_msg">Please register at least one service before saving</string>
+    <string name="close">Close</string>
+    <string name="tap_to_view">Tap to view</string>
+    <string name="dhis2_reports">DHIS2 Reports</string>
+    <string name="child_report_grouping_title">Child</string>
+
+    <!-- Immunization Names-->
+    <string name="hepb">HepB</string>
+    <string name="opv_0">OPV 0</string>
+    <string name="opv_1">OPV 1</string>
+    <string name="pcv_1">PCV 1</string>
+    <string name="penta_1">Penta 1</string>
+    <string name="rota_1">Rota 1</string>
+    <string name="opv_2">OPV 2</string>
+    <string name="pcv_2">PCV 2</string>
+    <string name="penta_2">Penta 2</string>
+    <string name="rota_2">Rota 2</string>
+    <string name="opv_3">OPV 3</string>
+    <string name="pcv_3">PCV 3</string>
+    <string name="penta_3">Penta 3</string>
+    <string name="meningococcal">Meningococcal</string>
+    <string name="yellow_fever">Yellow Fever</string>
+    <string name="mr_1">MR 1</string>
+    <string name="mr_2">MR 2</string>
+
+    <string name="search_hint">Search Register</string>
+
+    <string name="supported_by">Supported by</string>
+
+    <string name="child_birth_registration_number">Child\'s birth registration number</string>
+    <string name="child_unique_id">Child\'s unique government ID</string>
+    <string name="child_first_name">Child\'s first name</string>
+    <string name="child_last_name">Child\'s last name</string>
+    <string name="dob_range">Child\'s date of birth (range)</string>
+    <string name="mother_caregiver_first_name">"Mother/caregiver first name"</string>
+    <string name="mother_caregiver_last_name">"Mother/caregiver last name"</string>
+    <string name="mother_caregiver_phone">Mother/caregiver\'s phone number</string>
+    <string name="father_phone">Father phone number</string>
+    <string name="mother_dob">Mother date of birth</string>
+    <string name="mother_nationality">Mother/Caregiver nationality</string>
+    <string name="mother_nationality_other">"Indicate Mother/caregiver nationality "</string>
+    <string name="mother_caregiver_alt_phone">"Mother/Caregiver other phone "</string>
+    <string name="mother_tdv_doses">"Mother Td vaccine doses "</string>
+    <string name="mother_rubella">"Mother received Rubella vaccine  "</string>
+    <string name="child_DOB">Date of birth</string>
+    <string name="mother_name">M/CG: %1$s</string>
+    <string name="adverse_effects">Adverse Effects</string>
+    <string name="first_birth">Mother\'s first birth</string>
+    <string name="rubella_serology">Mother received Rubella Serology test</string>
+    <string name="serology_results">Serology test result</string>
+    <string name="maximum_extra_vaccines_reached">You can only record a maximum of 10 vaccines</string>
+    <string name="sms_recipient">Vaccines  SMS reminder recipient</string>
+    <string name="monthly_immunization_growth_monitoring_reports">Immunization and Growth Monitoring Monthly Reports</string>
+
+    <!-- Report indicators -->
+
+    <!-- Vaccination Activity at different ages-->
+    <string name="at_birth_vaccines_bcg">Children who received BCG within 24 hrs of birth</string>
+    <string name="at_birth_vaccines_bcg_2_59days">Children aged 2–59 days who received the BCG Vaccine</string>
+    <string name="bcg_total">Total number of children of all ages who received BCG vaccine at the facility</string>
+    <string name="at_birth_vaccines_hep_b_0_0_24hrs">Children aged 0–24hrs who received Hep B 0 vaccine</string>
+    <string name="at_birth_vaccines_hep_b_0_2_59days">Children aged 2–59 days who received Hep B 0 vaccine</string>
+    <string name="hepb_0_total">Total number of children of all ages who received Hep B 0 vaccine at the facility</string>
+    <string name="penta1_grp_penta1_2_6mnths">Children aged 2–6 months who received Penta1, IPV1 and PCV1 vaccine</string>
+    <string name="penta1_grp_penta1_7_11mnths">Children aged 7–11 months who received Penta1, IPV1 and PCV1 vaccines</string>
+    <string name="penta1_grp_penta1_12_17mnths">Children aged 12–17 months who received Penta1, IPV1 and PCV1 vaccines</string>
+    <string name="penta1_grp_penta1_18_23mnths">Children aged 18 -23months who received Penta1, IPV1 and PCV1 vaccines</string>
+    <string name="penta1_grp_penta1_24_59mnths">Children aged 24 -59 months who received Penta1, IPV1 and PCV1 vaccine</string>
+    <string name="penta1_total">Total number of children of all ages who received Penta1, IPV1 and PCV1 vaccines</string>
+    <string name="penta2_grp_penta2_2_6mnths">Children aged 2–6 months who received Penta2 and IPV2 vaccines</string>
+    <string name="penta2_grp_penta2_7_11mnths">Children aged 7–11 months who received Penta2 and IPV2 vaccines</string>
+    <string name="penta2_grp_penta2_12_17mnths">Children aged 12–17 months who received Penta2 and IPV2 vaccines</string>
+    <string name="penta2_grp_penta2_18_23mnths">Children aged 18 -23months who received Penta2 and IPV2 vaccines</string>
+    <string name="penta2_grp_penta2_24_59mnths">Children aged 24 -59 months who received Penta2 and IPV2 vaccine</string>
+    <string name="penta2_total">Total number of children of all ages who received Penta2 and IPV2 vaccines</string>
+    <string name="at_birth_vaccines_pcv_2_2_6mnths">Children aged 2–6 months who received PCV2 vaccine</string>
+    <string name="at_birth_vaccines_pcv_2_7_11mnths">Children aged 7–11 months who received PCV2 vaccine</string>
+    <string name="at_birth_vaccines_pcv_2_12_17mnths">Children aged 12–17 months who received PCV2 vaccine</string>
+    <string name="at_birth_vaccines_pcv_2_18_23mnths">Children aged 18 -23months who received PCV2 vaccine</string>
+    <string name="at_birth_vaccines_pcv_2_24_59mnths">Children aged 24 -59 months who received PCV2 vaccine</string>
+    <string name="pcv2_total">Total number of children of all ages who received  PCV2  vaccine</string>
+    <string name="penta3_grp_penta3_2_6mnths">Children aged 2–6 months who received Penta 3 and OPV1 vaccines</string>
+    <string name="penta3_grp_penta3_7_11mnths">Children aged 7–11 months who received Penta 3 and OPV1 vaccines</string>
+    <string name="penta3_grp_penta3_12_17mnths">Children aged 12–17 months who received Penta 3 and OPV1 vaccines</string>
+    <string name="penta3_grp_penta3_18_23mnths">Children aged 18 -23months who received Penta 3 and OPV1 vaccines</string>
+    <string name="penta3_grp_penta3_24_59mnths">Children aged 24 -59 months who received Penta 3 and OPV1 vaccine</string>
+    <string name="penta3_total">Total number of children of all ages who received Penta 3 and OPV1  vaccines</string>
+    <string name="at_birth_vaccines_pcv_3_7_11mnths">Children aged 7–11 months who received PCV3 vaccine</string>
+    <string name="at_birth_vaccines_pcv_3_12_17mnths">Children aged 12–17 months who received PCV3 vaccine</string>
+    <string name="at_birth_vaccines_pcv_3_18_23mnths">Children aged 18 -23months who received PCV3 vaccine</string>
+    <string name="at_birth_vaccines_pcv_3_24_59mnths">Children aged 24 -59 months who received PCV3 vaccine</string>
+    <string name="pcv3_total">Total number of children of all ages who received  PCV3 vaccine</string>
+    <string name="at_birth_vaccines_mr_1_12_17mnths">Children aged 12–17 months who received MR1 vaccine</string>
+    <string name="at_birth_vaccines_mr_1_18_23mnths">Children aged 18 -23months who received MR1 vaccine</string>
+    <string name="at_birth_vaccines_mr_1_24_59mnths">Children aged 24 -59 months who received MR1 vaccine</string>
+    <string name="mr1_total">Total number of children of all ages who received  MR1vaccine</string>
+    <string name="at_birth_vaccines_mr_2_18_23mnths">Children aged 18 -23months who received MR2 vaccine</string>
+    <string name="at_birth_vaccines_mr_2_24_59mnths">Children aged 24 -59 months who received MR2 vaccine</string>
+    <string name="mr2_total">Total number of children of all ages who received MR2 vaccine</string>
+    <string name="at_birth_vaccines_dtp_4_18_23mnths">Children aged 18 -23months who received DTP4 vaccine</string>
+    <string name="at_birth_vaccines_dtp_4_24_59mnths">Children aged 24 -59 months who received DTP4 vaccine</string>
+    <string name="dtp4_total">Total number of children of all ages who received DTP4 vaccine</string>
+
+    <!--    Vaccine utilization report-->
+    <string name="vaccine_doses_administered_vaccine_hep_b_0">Number of Hep B doses administered</string>
+    <string name="vaccine_doses_administered_vaccine_bcg">Number of BCG doses administered</string>
+    <string name="vaccine_doses_administered_opv">Number of OPV doses administered</string>
+    <string name="vaccine_doses_administered_penta">Number of penta doses administered</string>
+    <string name="vaccine_doses_administered_ipv">Number of  IPV doses administered</string>
+    <string name="vaccine_doses_administered_pcv">Number of PCV doses administered</string>
+    <string name="vaccine_doses_administered_mr">Number of MR doses administered</string>
+    <string name="vaccine_doses_administered_vaccine_dtp_4">Number of dtp doses administered</string>
+    <string name="vaccine_doses_administered_rubella">Number of Rubella doses administered</string>
+    <string name="vaccine_doses_administered_dt15to49">Vaccine doses administered - dT 15 to 49 years old</string>
+
+    <string name="vials_used_hepb">Number of HEP B vials used </string>
+    <string name="vials_used_bcg">Number of BCG vials used </string>
+    <string name="vials_used_opv">Number of OPV vials used </string>
+    <string name="vials_used_penta">Number of  Penta vials used </string>
+    <string name="vials_used_ipv">Number of IPV vials used </string>
+    <string name="vials_used_pcv">Number of PCV vials used </string>
+    <string name="vials_used_mr">Number of MR vials used </string>
+    <string name="vials_used_dtp">Number of DTP vials used </string>
+    <string name="vials_used_rubella">Number of Rubella vials used </string>
+    <string name="vials_used_dt15">Number of dT 15–49 years vials used </string>
+
+    <string name="doses_per_vial_hepb">Number of Hep B doses per vial</string>
+    <string name="doses_per_vial_bcg">Number of BCG doses per vial</string>
+    <string name="doses_per_vial_opv">Number of OPV doses per vial</string>
+    <string name="doses_per_vial_penta">Number of Penta doses per vial</string>
+    <string name="doses_per_vial_ipv">Number of IPV doses per vial</string>
+    <string name="doses_per_vial_pcv">Number of PCV doses per vial</string>
+    <string name="doses_per_vial_mr">Number of MR doses per vial</string>
+    <string name="doses_per_vial_dtp">Number of DTP doses per vial</string>
+    <string name="doses_per_vial_rubella">Number of  Rubella doses per vial</string>
+    <string name="doses_per_vial_dt15">Number of dT doses per vial</string>
+
+    <string name="total_doses_hepb">Total number of possible Hep B doses</string>
+    <string name="total_doses_bcg">Total number of possible BCG doses</string>
+    <string name="total_doses_opv">Total number of possible OPV doses</string>
+    <string name="total_doses_penta">Total number of possible Penta doses</string>
+    <string name="total_doses_ipv">Total number of possible IPV doses</string>
+    <string name="total_doses_pcv">Total number of possible PCV doses</string>
+    <string name="total_doses_mr">Total number of possible MR doses</string>
+    <string name="total_doses_dtp">Total number of possible DTP doses</string>
+    <string name="total_doses_rubella">Total number of possible Rubella doses</string>
+    <string name="total_doses_dt15">Total number of possible dT doses</string>
+
+    <string name="use_rate_hepb"> Hep B use rate (%)</string>
+    <string name="use_rate_bcg">BCG use rate (%)</string>
+    <string name="use_rate_opv">OPV use rate (%)</string>
+    <string name="use_rate_penta">Penta use rate (%)</string>
+    <string name="use_rate_ipv">IPV use rate (%)</string>
+    <string name="use_rate_pcv">PCV use rate (%)</string>
+    <string name="use_rate_mr">MR use rate (%)</string>
+    <string name="use_rate_dtp">DTP use rate(%)</string>
+    <string name="use_rate_rubella">Rubella use rate (%)</string>
+    <string name="use_rate_dt15">dT use rate (%)</string>
+
+    <!-- Children protected against Tetanus at Birth:  at the point of receiving Penta 1 -->
+    <string name="pab_mother_dt">Children protected at birth by dT only</string>
+    <string name="pab_assisted_delivery">Children protected at birth by assisted delivery only</string>
+    <string name="pab_dt_and_assisted_delivery">Children protected at birth by dT and assisted delivery</string>
+    <string name="pab_total">Total number of children protected at birth</string>
+
+    <!--Rubella Vaccination for woman giving birth for the first time -->
+    <string name="total_child_births">Total child births</string>
+    <string name="number_first_birth">Number of women who are primapara (delivering for the first time) in the facility this month</string>
+    <string name="percentage_first_birth">% primapara births (woman giving birth for the first time)</string>
+    <string name="number_rubella_serology">Number of primapara women(delivering for the first time) who got a serology test in the facility this month</string>
+    <string name="percentage_number_rubella_serology">% of primapara mother who undertook a rubella serology test</string>
+    <string name="negative_serology_results">Number of primapara women(delivering for the first time) who got a serology test that got a negative result in the facility this month</string>
+    <string name="percentage_serology_results">% of mothers who took the Rubella serology test had a negative result</string>
+    <string name="women_vaccinated_rubella">Number of women vaccinated against Rubella</string>
+
+    <!--Children with an adequate number of growth measurements-->
+    <string name="right_measures_6months">Children with the right measurements at 6 months</string>
+    <string name="percentage_right_measures_6months">% of children with right measurements at 6 months</string>
+    <string name="right_measures_12months">Children with the right measurements at 12 months</string>
+    <string name="percentage_right_measures_12months">% of children with right measurements at 12 months</string>
+    <string name="right_measures_18months">Children with the right measurements at 18 months</string>
+    <string name="percentage_right_measures_18months">% of children with right measurements at 18 months</string>
+
+    <!--Children with at least 1 previous episode of undernutrition-->
+    <string name="malnutrition_episode_6months">Children with at least 1 previous episode of undernutrition at 6 months</string>
+    <string name="percentage_malnutrition_episode_6months">% of children under nutrition at 6 months</string>
+    <string name="malnutrition_episode_12months">Children with at least 1 previous episode of undernutrition at 12 months</string>
+    <string name="percentage_malnutrition_episode_12months">% of children under nutrition at 12 months</string>
+    <string name="malnutrition_episode_18months">Children with at least 1 previous episode of undernutrition at 18 months</string>
+    <string name="percentage_malnutrition_episode_18months">% of children under nutrition at 18 months</string>
+
+    <!-- Children diagnosed as malnourished according to the weighing of the day-->
+    <string name="mid_mal_grp_children_6mnths">-1 and -2 Zscore at 6 months</string>
+    <string name="percentage_mid_mal_6mnths">(%) -1 and -2 Zscore at 6 months</string>
+    <string name="mid_mal_grp_children_12mnths">-1 and -2 Zscore at 12 months</string>
+    <string name="percentage_mid_mal_12mnths">(%) -1 and -2 Zscore at 12 months</string>
+    <string name="mid_mal_grp_children_18mnths">-1 and -2 Zscore at 18 months</string>
+    <string name="percentage_mid_mal_18mnths">(%) -1 and -2 Zscore at 18 months</string>
+
+    <string name="mod_mal_grp_children_6mnths">Between -2 and -3 Z-score at 6 months</string>
+    <string name="percentage_mod_mal_6mnths">(%) between -2 and -3 Z-score at 6 months</string>
+    <string name="mod_mal_grp_children_12mnths">Between -2 and -3 Z-score at 12 months</string>
+    <string name="percentage_mod_mal_12mnths">(%) between -2 and -3 Z-score at 12 months</string>
+    <string name="mod_mal_grp_children_18mnths">Between -2 and -3 Z-score at 18 months</string>
+    <string name="percentage_mod_mal_18mnths">(%) between -2 and -3 Z-score at 18 months</string>
+
+    <string name="sev_mal_grp_children_6mnths">Below -3 Z-score at 6 months</string>
+    <string name="percentage_sev_mal_6mnths">% below -3 Z-score at 6 months</string>
+    <string name="sev_mal_grp_children_12mnths">Below -3 Z-score at 12 months</string>
+    <string name="percentage_sev_mal_12mnths">% -3 Z-score at 12 months</string>
+    <string name="sev_mal_grp_children_18mnths">Below -3 Z-score at 18 months</string>
+    <string name="percentage_sev_mal_18mnths">% below -3 Z-score at 18 months</string>
+
+    <string name="obese_grp_children_6mnths">Above +2 Z-score at 6 months</string>
+    <string name="percentage_obese_grp_6mnths">% above +2 Z-score at 6 months</string>
+    <string name="obese_grp_children_12mnths">Above +2 Z-score at 12 months</string>
+    <string name="percentage_obese_grp_12mnths">% above +2 Z-score at 12 months</string>
+    <string name="obese_grp_children_18mnths">Above +2 Z-score at 18 months</string>
+    <string name="percentage_obese_grp_18mnths">% above +2 Z-score at 18 months</string>
+
+    <!--End of report indicators-->
+
+    <string name="card_id_hint">ZEIR ID</string>
+    <string name="zeir_id">ZEIR ID </string>
+
+    <!-- Months -->
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
+
+    <!--Overridden vaccines -->
+    <string name="hep_b_0">HEP B 0</string>
+    <string name="ipv_1">IPV 1</string>
+    <string name="ipv_2">IPV 2</string>
+    <string name="dtp_4">DTP 4</string>
+
+    <!-- Report grouping titles -->
+    <string name="report_group_header_vaccination_activity">Vaccination Activity at different ages</string>
+    <string name="report_group_header_vaccine_utilization">Vaccine utilization report</string>
+    <string name="report_group_header_tetanus_protected">Children protected against Tetanus at Birth:  at the point of receiving Penta 1</string>
+    <string name="report_group_header_rubella_vaccine">Rubella Vaccination for woman giving birth for the first time</string>
+    <string name="report_group_header_adequate_growth_measurement">Children with an adequate number of growth measurements</string>
+    <string name="report_group_header_previous_under_nutrition">Children with at least 1 previous episode of undernutrition</string>
+    <string name="report_group_header_diagnosed_malnourished">Children diagnosed as malnourished according to the weighing of the day</string>
+
+    <!-- Strings used for reporting -->
+    <string name="title_activity_report_tallies">ReportTalliesActivity</string>
+    <string name="report_indicators_summary">Report Indicators Summary</string>
+    <string name="report__daily_indicators_summary">Report Daily Indicators Summary</string>
+    <string name="report_indicators_form">Report Indicators Form</string>
+    <string name="annual_report_fragment">Annual Coverage Fragment</string>
+    <string name="month_year_draft">%1$s Draft</string>
+    <string name="error_saving_draft_reports">Error occurred while  saving drafts. Try again later</string>
+    <string name="error_sending_draft_reports">Error occurred while  sending  report. Try again later</string>
+    <string name="started_on">Started %1$s</string>
+    <string name="monthly_draft_saved">Monthly draft report saved</string>
+    <string name="monthly_draft_submitted">Monthly report sent</string>
+    <string name="confirm_send_draft_reports">Confirm Send Draft Report</string>
+    <string name="sent_report_details">Sent %1$s by %2$s</string>
+    <string name="monthly_draft_reports">Draft Reports (%1$d)</string>
+    <string name="monthly_sent_reports">Sent Reports</string>
+    <string name="monthly_sent_reports_with_year">Sent Reports  &gt; %1$s</string>
+    <string name="coverage_reports">Coverage Reports</string>
+    <string name="year">Year</string>
+    <string name="error_enter_valid_number">Please enter a valid number</string>
+    <string name="indicator">Indicator</string>
+    <string name="value">Value</string>
+    <string name="loading_monthly_reports_message">Generating monthly reports. Please wait…</string>
+    <string name="loading_daily_reports_message">Generating daily reports. Please wait…</string>
+    <string name="loading_monthly_reports_title">Loading Reports</string>
+    <string name="annual_coverage_report">Annual Coverage Report</string>
+    <string name="under_one_target">Under 1 target: %1$s</string>
+    <string name="one_two_years_target">1–2 yrs target: %1$s</string>
+    <string name="year_label">Year:</string>
+    <string name="vaccinated">Vaccinated</string>
+    <string name="coverage">Coverage</string>
+    <string name="current_report_year">%1$s (In Progress)</string>
+    <string name="error_no_target">Error: No target</string>
+    <string name="not_defined">Not defined</string>
+    <string name="set_under_one_target">Set under 1 year target population - %1$d</string>
+    <string name="set_one_two_year_target">Set 1–2 year target population -  %1$d</string>
+    <string name="under_one_target_population">Under 1 target population</string>
+    <string name="one_two_years_target_population"> 1–2 year target population</string>
+    <string name="specify_target_error">Please specify  population target</string>
+    <string name="error_saving_target">Error saving population target</string>
+
+    <!-- Card support strings -->
+    <string name="opensrp_id">ZEIR ID</string>
+    <string name="stock_control">Stock Control</string>
+    <string name="dropout_reports">Dropout Reports</string>
+    <string name="hia2_reports">HIA 2 Reports</string>
+    <string name="birth_health_facility">Health facility of birth</string>
+    <string name="update_birth_registration">Update Birth Registration</string>
+
+    <string name="bcg_measles_cumulative">BCG &#8211; Measles Cumulative</string>
+    <string name="bcg_measles_cumulative_dropout_report">BCG &#8211; Measles Cumulative Dropout Report</string>
+    <string name="bcg_measles_cohort">BCG &#8211; Measles Cohort</string>
+    <string name="bcg_measles_cohort_dropout_report">BCG &#8211; Measles Cohort Dropout Report</string>
+    <string name="penta_cumulative">Penta Cumulative</string>
+    <string name="penta_cumulative_dropout_report">Penta Cumulative Dropout Report</string>
+    <string name="penta_cohort">Penta Cohort</string>
+    <string name="penta_cohort_dropout_report">Penta Cohort Dropout Report</string>
+    <string name="measles_cumulative">Measles Cumulative</string>
+    <string name="measles_cumulative_dropout_report">Measles Cumulative Dropout Report</string>
+    <string name="cumulative_dropout">Cumulative Dropout (YTD): </string>
+    <string name="pls_set_cso_target">Please set the CSO Target first.</string>
+
+    <string name="filter_cohort">Cohort: </string>
+    <string name="filter_cohort_size">Cohort Size: </string>
+    <string name="filter_year">Year: </string>
+    <string name="filter_cso_target">CSO Target: </string>
+    <string name="filter_zeir_target">ZEIR Target: </string>
+
+    <string name="coverage_vaccine_header">Vaccine</string>
+    <string name="coverage_vaccinated_header">Vaccinated</string>
+    <string name="coverage_header">Coverage</string>
+    <string name="coverage_percentage">%1$d%%</string>
+
+    <string name="in_progress">(In Progress)</string>
+    <string name="enter_cso_hint">Enter %1$s CSO Under 1 Population</string>
+    <string name="set_cso_title">Set CSO Under 1 Population &#8211; %1$d</string>
+    <string name="cso_population_value">%1$d Children</string>
+    <string name="no_cso_target">Error: No CSO target</string>
+    <string name="cso_target_cannot_be_blank">CSO target cannot be blank.</string>
+    <string name="cso_target_must_be_greater_than_zero">Denominator must be greater than 0.</string>
+    <string name="cso_target_label">CSO Target: </string>
+    <string name="cso_target_monthly">CSO Target Monthly: </string>
+    <string name="facility_cumulative_title">Immunization Monitoring Chart - %1$d - %2$s</string>
+
+    <string name="dropout_month_header">Month</string>
+    <string name="dropout_cohort_header">Cohort</string>
+    <string name="dropout_started_completed_header">(Started - Completed) / Started </string>
+    <string name="dropout_percentage_header">Dropout Percent</string>
+    <string name="dropout_cohort_bcg_size_header">(Cohort Size - M/MR 1) / Cohort Size </string>
+    <string name="dropout_cohort_penta_size_header">(Cohort Size - Penta 3) / Cohort Size </string>
+
+    <string name="cohort_coverage_report">Cohort Coverage Report</string>
+    <string name="annual_coverage_report_cso">Annual Coverage Report - CSO</string>
+    <string name="annual_coverage_report_zeir">Annual Coverage Report - ZEIR</string>
+    <string name="facility_cumulative_coverage_report">Facility Cumulative Coverage Report</string>
+
+    <string name="total_vaccine">Total\n%1$s</string>
+    <string name="total_cum">Cum.\n%1$s</string>
+    <string name="total_dropout">Drop\nOut</string>
+    <string name="total_dropout_percentage">Drop\nOut %</string>
+    <string name="total_dropout_penta">Drop\nOut (1–3)</string>
+    <string name="total_cum_dropout">Cum\nDrop\nOut</string>
+    <string name="total_cum_dropout_percentage">Cum\nDrop\nOut %</string>
+
+    <string name="report_group_header_under_5_attendance">Under 5 Clinic Attendance</string>
+    <string name="report_group_header_growth_nutrition">Growth Monitoring and Nutrition</string>
+    <string name="report_group_header_vita_deworming_itns">Vitamin A, Deworming, and ITNs</string>
+    <string name="report_group_header_immunisation">Immunisation</string>
+
+    <string name="CHN1_005">Attendance child health &lt; 12 months (male)</string>
+    <string name="CHN1_010">Attendance child health &lt; 12 months (female)</string>
+    <string name="CHN1_011">Attendance child health &lt; 12 months (total)</string>
+    <string name="CHN1_015">Attendance child health 12–59 months male</string>
+    <string name="CHN1_020">Attendance child health 12–59 months female</string>
+    <string name="CHN1_021">Attendance child health 12–59 months (total)</string>
+    <string name="CHN1_025">Attendance child health total</string>
+    <string name="CHN1_030">Attendance from outside catchment\'s area</string>
+
+    <string name="CHN2_005">Child weighed 0–23 months</string>
+    <string name="CHN2_010">Child weighed 24–59 months</string>
+    <string name="CHN2_015">Total child weighed</string>
+    <string name="CHN2_020">Not gaining weight 0–23 months</string>
+    <string name="CHN2_025">Not gaining weight 24–59 months</string>
+    <string name="CHN2_030">Total not gaining weight age less than five years</string>
+    <string name="CHN2_035">Weight between –2Z &amp; –3Z score 0–23 months</string>
+    <string name="CHN2_040">Weight between –2Z &amp; –3Z score 24–59 months</string>
+    <string name="CHN2_041">Weight between –2Z &amp; –3Z score less than five years</string>
+    <string name="CHN2_045">Weight below –3Z scores 0–23 months</string>
+    <string name="CHN2_050">Weight below –3Z scores 24–59 months</string>
+    <string name="CHN2_051">Total weight below -3Z scores less than five years age</string>
+    <string name="CHN2_055">Weight above 2Z score 0–23 months</string>
+    <string name="CHN2_060">Weight above 2Z score 24–59 months</string>
+    <string name="CHN2_061">Total weight above 2Z less than five years age</string>
+    <string name="CHN2_065">Vitamin A supplement to infant and children 6–11 months</string>
+    <string name="CHN2_070">Vitamin A supplement to infant and children 12–59 months</string>
+    <string name="CHN2_075">Deworming dose 12–59 months</string>
+    <string name="CHN2_080">Children who received insecticide treated nets</string>
+
+    <string name="CHN3_005">BCG dose (&lt; 1 year) at the facility</string>
+    <string name="CHN3_005_O">BCG dose (&lt; 1 year) at outreach</string>
+    <string name="CHN3_010">OPV0 (&lt; 1 year) at facility</string>
+    <string name="CHN3_010_O">OPV0 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_015">OPV1 (&lt; 1 year) at facility</string>
+    <string name="CHN3_015_O">OPV1 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_020">OPV2 (&lt; 1 year) at facility</string>
+    <string name="CHN3_020_O">OPV2 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_025">OPV3 (&lt; 1 year) at facility</string>
+    <string name="CHN3_025_O">OPV3 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_027">IPV (&lt; 1 year) at facility</string>
+    <string name="CHN3_027_O">IPV (&lt; 1 year) at outreach</string>
+    <string name="CHN3_030">OPV4 (&lt; 1 year) at facility</string>
+    <string name="CHN3_030_O">OPV4 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_035">DPT-Hib+HepB 1 (&lt; 1 year) at facility</string>
+    <string name="CHN3_035_O">DPT-Hib+HepB 1 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_040">DPT-Hib+HepB 2 (&lt; 1 year) at facility</string>
+    <string name="CHN3_040_O">DPT-Hib+HepB 2 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_045">DPT-Hib+HepB 3 (&lt; 1 year) at facility</string>
+    <string name="CHN3_045_O">DPT-Hib+HepB 3 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_050">PCV 1 (&lt; 1 year) at facility</string>
+    <string name="CHN3_050_O">PCV 1 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_055">PCV 2 (&lt; 1 year) at facility</string>
+    <string name="CHN3_055_O">PCV 2 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_060">PCV 3 (&lt; 1 year) at facility</string>
+    <string name="CHN3_060_O">PCV 3 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_065">RV 1 (&lt; 1 year) at facility</string>
+    <string name="CHN3_065_O">RV 1 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_070">RV 2 (&lt; 1 year) at facility</string>
+    <string name="CHN3_070_O">RV 2 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_075">Measles/ MR 1 (&lt; 1 year) at facility</string>
+    <string name="CHN3_075_O">Measles/ MR 1 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_080">Fully immunised (&lt; 1 year) at facility</string>
+    <string name="CHN3_080_O">Fully immunised (&lt; 1 year) at outreach</string>
+    <string name="CHN3_085">Measles/ MR 2 (at 18 months) at facility</string>
+    <string name="CHN3_085_O">Measles/ MR 2 (at 18 months) at outreach</string>
+    <string name="CHN3_090">Number of days fridge non-functional</string>
+    <string name="daily_tallies_with_day">Daily Tallies &gt; %1s</string>
+
+</resources>
