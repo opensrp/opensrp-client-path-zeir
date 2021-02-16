@@ -291,11 +291,8 @@ public class CoverageDropoutIntentService extends IntentService {
         CohortPatientRepository cohortPatientRepository = ZeirApplication.getInstance().cohortPatientRepository();
         CohortIndicatorRepository cohortIndicatorRepository = ZeirApplication.getInstance().cohortIndicatorRepository();
 
-        if (cohortPatientRepository == null || cohortIndicatorRepository == null) {
-            return;
-        }
-
-        if (StringUtils.isBlank(baseEntityId) || StringUtils.isBlank(vaccineName) || dob == null || vaccineDate == null) {
+        if (cohortPatientRepository == null || cohortIndicatorRepository == null || StringUtils.isBlank(baseEntityId)
+                || StringUtils.isBlank(vaccineName) || dob == null || vaccineDate == null) {
             return;
         }
 
@@ -323,16 +320,13 @@ public class CoverageDropoutIntentService extends IntentService {
             boolean isValid = isVaccineValidForCohort(vaccineName, dob, vaccineDate);
 
             boolean subtract = false;
-            if (!isValid) {
-                if (alreadyCounted) { // Already counted but now invalid - remove
-                    subtract = true;
-                } else {
-                    return; // Not counted and invalid - no need to proceed
-                }
+
+            // To reduce NPath complexity
+            Pair<Boolean, Boolean> proceed = getProceedValues(isValid, alreadyCounted);
+            if (proceed.first) {
+                return;
             } else {
-                if (alreadyCounted) { // Valid and Already counted - no need to proceed
-                    return;
-                }
+                subtract = proceed.second;
             }
 
             // Extracting method to reduce NPath complexity codacy issue
@@ -345,6 +339,23 @@ public class CoverageDropoutIntentService extends IntentService {
         } catch (Exception e) {
             Timber.e(e, TAG, e.getMessage());
         }
+    }
+
+    private static Pair<Boolean, Boolean> getProceedValues(boolean isValid, boolean alreadyCounted) {
+        boolean subtract = false;
+        boolean returnValue = false;
+        if (!isValid) {
+            if (alreadyCounted) { // Already counted but now invalid - remove
+                subtract = true;
+            } else {
+                returnValue = true; // Not counted and invalid - no need to proceed
+            }
+        } else {
+            if (alreadyCounted) { // Valid and Already counted - no need to proceed
+                returnValue = true;
+            }
+        }
+        return new Pair<>(returnValue, subtract);
     }
 
     private static void processCohortIndicator(CohortIndicatorRepository cohortIndicatorRepository, boolean subtract,
@@ -529,11 +540,8 @@ public class CoverageDropoutIntentService extends IntentService {
 
     private static void updateCumulativeIndicators(Date dob, String baseEntityId, String vaccineName, Date vaccineDate) {
         CumulativePatientRepository cumulativePatientRepository = ZeirApplication.getInstance().cumulativePatientRepository();
-        if (cumulativePatientRepository == null) {
-            return;
-        }
-
-        if (StringUtils.isBlank(baseEntityId) || StringUtils.isBlank(vaccineName) || dob == null || vaccineDate == null) {
+        if (cumulativePatientRepository == null || StringUtils.isBlank(baseEntityId) || StringUtils.isBlank(vaccineName)
+                || dob == null || vaccineDate == null) {
             return;
         }
 
@@ -551,11 +559,8 @@ public class CoverageDropoutIntentService extends IntentService {
             }
 
             // Check if vaccine is valid
-            List<String> inValidVaccines = vaccinesAsList(cumulativePatient.getInvalidVaccines());
-            for (String invalidVaccine : inValidVaccines) {
-                if (vaccineName.equals(invalidVaccine)) {
-                    return;
-                }
+            if (isInvalidVaccine(cumulativePatient, vaccineName)) {
+                return;
             }
 
             Date oldDate = null;
@@ -591,6 +596,16 @@ public class CoverageDropoutIntentService extends IntentService {
         }
     }
 
+    private static boolean isInvalidVaccine(CumulativePatient cumulativePatient, String vaccineName) {
+        List<String> inValidVaccines = vaccinesAsList(cumulativePatient.getInvalidVaccines());
+        for (String invalidVaccine : inValidVaccines) {
+            if (vaccineName.equals(invalidVaccine)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // to reduce NPath complexity
     private static void updateCumulativePaient(boolean replace, Date oldDate, Date vaccineDate,
                                                CumulativePatient cumulativePatient, String vaccineName, boolean subtract) {
@@ -622,11 +637,9 @@ public class CoverageDropoutIntentService extends IntentService {
         CumulativePatientRepository cumulativePatientRepository = ZeirApplication.getInstance().cumulativePatientRepository();
         CumulativeIndicatorRepository cumulativeIndicatorRepository = ZeirApplication.getInstance().cumulativeIndicatorRepository();
 
-        if (cumulativeRepository == null || cumulativePatientRepository == null || cumulativeIndicatorRepository == null) {
-            return;
-        }
-
-        if (cumulativePatient == null || StringUtils.isBlank(vaccineName) || date == null) {
+        if (cumulativeRepository == null || cumulativePatientRepository == null
+                || cumulativeIndicatorRepository == null || cumulativePatient == null
+                || StringUtils.isBlank(vaccineName) || date == null) {
             return;
         }
 
@@ -646,31 +659,38 @@ public class CoverageDropoutIntentService extends IntentService {
                 return;
             }
 
-            CumulativeIndicator cumulativeIndicator = cumulativeIndicatorRepository.findByVaccineMonthAndCumulativeId(vaccineName, date, cumulative.getId());
-            if (cumulativeIndicator == null) {
-                if (subtract) {
-                    throw CoverageDropoutException.newInstance("Impossible!!! subtract should only happen for already counted vaccines");
-                }
-                cumulativeIndicator = new CumulativeIndicator();
-                cumulativeIndicator.setCumulativeId(cumulative.getId());
-                cumulativeIndicator.setValue(1L);
-                cumulativeIndicator.setVaccine(vaccineName);
-                cumulativeIndicator.setMonth(date);
-                cumulativeIndicatorRepository.add(cumulativeIndicator);
-            } else {
-                Long value = cumulativeIndicator.getValue();
-                if (subtract) {
-                    if (value <= 0) {
-                        return;
-                    }
-                    value -= 1L;
-                } else {
-                    value += 1L;
-                }
-                cumulativeIndicatorRepository.changeValue(value, cumulativeIndicator.getId());
-            }
+            // extract method to reduce NPath complexity
+            processCumulativeIndicator(cumulativeIndicatorRepository, subtract, vaccineName, cumulative, date);
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
+        }
+    }
+
+    private static void processCumulativeIndicator(CumulativeIndicatorRepository cumulativeIndicatorRepository,
+                                                   boolean subtract, String vaccineName, Cumulative cumulative,
+                                                   Date date) throws CoverageDropoutException {
+        CumulativeIndicator cumulativeIndicator = cumulativeIndicatorRepository.findByVaccineMonthAndCumulativeId(vaccineName, date, cumulative.getId());
+        if (cumulativeIndicator == null) {
+            if (subtract) {
+                throw CoverageDropoutException.newInstance("Impossible!!! subtract should only happen for already counted vaccines");
+            }
+            cumulativeIndicator = new CumulativeIndicator();
+            cumulativeIndicator.setCumulativeId(cumulative.getId());
+            cumulativeIndicator.setValue(1L);
+            cumulativeIndicator.setVaccine(vaccineName);
+            cumulativeIndicator.setMonth(date);
+            cumulativeIndicatorRepository.add(cumulativeIndicator);
+        } else {
+            Long value = cumulativeIndicator.getValue();
+            if (subtract) {
+                if (value <= 0) {
+                    return;
+                }
+                value -= 1L;
+            } else {
+                value += 1L;
+            }
+            cumulativeIndicatorRepository.changeValue(value, cumulativeIndicator.getId());
         }
     }
 
