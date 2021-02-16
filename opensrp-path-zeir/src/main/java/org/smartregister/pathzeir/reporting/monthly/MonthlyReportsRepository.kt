@@ -67,7 +67,7 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
         const val CREATE_TABLE_SQL = """
             CREATE TABLE monthly_tallies
             (
-                _id                INTEGER   NOT NULL PRIMARY KeyConstants AUTOINCREMENT,
+                _id                INTEGER   NOT NULL PRIMARY KEY AUTOINCREMENT,
                 indicator_code     VARCHAR   NOT NULL,
                 provider_id        VARCHAR   NOT NULL,
                 value              VARCHAR   NOT NULL,
