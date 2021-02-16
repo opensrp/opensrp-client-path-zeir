@@ -457,7 +457,6 @@ public abstract class BaseReportActivity extends BaseActivity implements Coverag
         Collections.sort(vaccineList, (lhs, rhs) -> lhs.display().compareToIgnoreCase(rhs.display()));
 
         vaccineList.remove(VaccineRepo.Vaccine.bcg2);
-        vaccineList.remove(VaccineRepo.Vaccine.ipv);
         vaccineList.remove(VaccineRepo.Vaccine.measles1);
         vaccineList.remove(VaccineRepo.Vaccine.measles2);
         vaccineList.remove(VaccineRepo.Vaccine.mr1);
