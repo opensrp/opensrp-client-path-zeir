@@ -310,24 +310,19 @@ public class CoverageDropoutIntentService extends IntentService {
             }
 
             // Don't add an already counted vaccine unless it's invalid now
-            boolean alreadyCounted = false;
             List<String> vaccineList = vaccinesAsList(cohortPatient.getValidVaccines());
-            if (!vaccineList.isEmpty() && vaccineList.contains(vaccineName)) {
-                alreadyCounted = true;
-            }
+            boolean alreadyCounted =  getAlreadyCounted(vaccineList, vaccineName);
 
             // Don't add invalid vaccines to the indicator table
             boolean isValid = isVaccineValidForCohort(vaccineName, dob, vaccineDate);
 
-            boolean subtract = false;
-
+            boolean subtract;
             // To reduce NPath complexity
             Pair<Boolean, Boolean> proceed = getProceedValues(isValid, alreadyCounted);
             if (proceed.first) {
                 return;
-            } else {
-                subtract = proceed.second;
             }
+            subtract = proceed.second;
 
             // Extracting method to reduce NPath complexity codacy issue
             updateVaccineList(subtract, vaccineList, vaccineName);
@@ -339,6 +334,10 @@ public class CoverageDropoutIntentService extends IntentService {
         } catch (Exception e) {
             Timber.e(e, TAG, e.getMessage());
         }
+    }
+
+    private static boolean getAlreadyCounted(List<String> vaccineList, String vaccineName) {
+        return !vaccineList.isEmpty() && vaccineList.contains(vaccineName);
     }
 
     private static Pair<Boolean, Boolean> getProceedValues(boolean isValid, boolean alreadyCounted) {
@@ -575,25 +574,38 @@ public class CoverageDropoutIntentService extends IntentService {
             // Don't add invalid vaccines to the indicator table
             boolean isValid = isValidVaccineForCumulative(vaccineName, dob);
 
-            boolean replace = false;
-            boolean subtract = false;
-            if (!isValid) {
-                if (alreadyCounted) { // Already counted but now invalid - remove
-                    subtract = true;
-                } else {
-                    return; // Not counted and invalid - no need to proceed
-                }
-            } else {
-                if (alreadyCounted) { // Valid and Already counted - no need to proceed
-                    replace = true;
-                }
+            boolean replace;
+            boolean subtract;
+            boolean[] proceedValues = getProceedReturnValues(isValid, alreadyCounted);
+            if (proceedValues[0]) {
+                return;
             }
+            subtract = proceedValues[1];
+            replace = proceedValues[2];
 
             // to reduce NPath complexity
             updateCumulativePaient(replace, oldDate, vaccineDate, cumulativePatient, vaccineName, subtract);
         } catch (Exception e) {
             Timber.e(e);
         }
+    }
+
+    private static boolean[] getProceedReturnValues(boolean isValid, boolean alreadyCounted) {
+        boolean returnValue = false;
+        boolean subtract = false;
+        boolean replace = false;
+        if (!isValid) {
+            if (alreadyCounted) { // Already counted but now invalid - remove
+                subtract = true;
+            } else {
+                returnValue = true; // Not counted and invalid - no need to proceed
+            }
+        } else {
+            if (alreadyCounted) { // Valid and Already counted - no need to proceed
+                replace = true;
+            }
+        }
+        return new boolean[] {returnValue, subtract, replace};
     }
 
     private static boolean isInvalidVaccine(CumulativePatient cumulativePatient, String vaccineName) {
@@ -646,11 +658,7 @@ public class CoverageDropoutIntentService extends IntentService {
         try {
             List<String> vaccineList = vaccinesAsList(cumulativePatient.getValidVaccines());
             String validVaccine = vaccineName + COLON + date.getTime();
-            if (subtract) {
-                vaccineList.remove(validVaccine);
-            } else {
-                vaccineList.add(validVaccine);
-            }
+            updateVaccineList(subtract, vaccineList, validVaccine);
 
             cumulativePatientRepository.changeValidVaccines(StringUtils.join(vaccineList, COMMA), cumulativePatient.getId());
 
