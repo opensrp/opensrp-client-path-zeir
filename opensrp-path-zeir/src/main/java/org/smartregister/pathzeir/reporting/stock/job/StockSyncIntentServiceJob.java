@@ -5,9 +5,7 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 
 import org.smartregister.job.BaseJob;
-import org.smartregister.pathzeir.reporting.dropuout.intent.CoverageDropoutIntentService;
 import org.smartregister.stock.sync.StockSyncIntentService;
-import org.smartregister.sync.intent.SyncIntentService;
 
 public class StockSyncIntentServiceJob extends BaseJob {
 

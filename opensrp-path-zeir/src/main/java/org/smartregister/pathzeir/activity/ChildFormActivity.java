@@ -17,11 +17,10 @@ import org.smartregister.pathzeir.util.AppConstants;
 import java.util.Map;
 
 import static org.smartregister.pathzeir.fragment.AppChildFormFragment.getFormFragment;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.FIRST_NAME;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.LAST_NAME;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.MOTHER_GUARDIAN_NRC;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.MOTHER_GUARDIAN_NUMBER;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.MOTHER_NRC_NUMBER;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.FIRST_NAME;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.LAST_NAME;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.MOTHER_GUARDIAN_NRC;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.MOTHER_GUARDIAN_NUMBER;
 import static org.smartregister.pathzeir.util.TableUtil.getMotherDetailsColumn;
 
 public class ChildFormActivity extends BaseChildFormActivity {
@@ -58,10 +57,10 @@ public class ChildFormActivity extends BaseChildFormActivity {
                 if (!isDate(value)) {
                     continue;
                 }
-                key = AppConstants.KEY.DOB;
+                key = AppConstants.KeyConstants.DOB;
             }
 
-            if (!key.equals(AppConstants.KEY.DOB)) {
+            if (!key.equals(AppConstants.KeyConstants.DOB)) {
                 if (StringUtils.isBlank(mainConditionString)) {
                     mainConditionString += " " + key + " Like '%" + value + "%'";
                 } else {
@@ -83,7 +82,7 @@ public class ChildFormActivity extends BaseChildFormActivity {
     public String lookUpQuery(Map<String, String> entityMap, String tableName) {
         RegisterQueryProvider queryProvider = Utils.metadata().getRegisterQueryProvider();
 
-        String[] lookupColumns = new String[]{queryProvider.getDemographicTable() + "." + MotherLookUpUtils.RELATIONALID, queryProvider.getDemographicTable() + "." + MotherLookUpUtils.DETAILS, Constants.KEY.ZEIR_ID, Constants.KEY.FIRST_NAME, Constants.KEY.LAST_NAME,
+        String[] lookupColumns = new String[]{queryProvider.getDemographicTable() + "." + MotherLookUpUtils.RELATIONALID, queryProvider.getDemographicTable() + "." + MotherLookUpUtils.DETAILS, Constants.KEY.ZEIR_ID, FIRST_NAME, LAST_NAME,
                 queryProvider.getDemographicTable() + "." + AllConstants.ChildRegistrationFields.GENDER,
                 queryProvider.getDemographicTable() + "." + Constants.KEY.DOB,
                 queryProvider.getDemographicTable() + "." + Constants.KEY.BASE_ENTITY_ID,
@@ -93,7 +92,7 @@ public class ChildFormActivity extends BaseChildFormActivity {
         SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
         queryBuilder.selectInitiateMainTable(tableName, lookupColumns);
         queryBuilder.customJoin(
-                " join " + queryProvider.getMotherDetailsTable() + " on " + queryProvider.getMotherDetailsTable() + "." + AppConstants.KEY.BASE_ENTITY_ID + "=" + queryProvider.getDemographicTable() + "." + Constants.KEY.BASE_ENTITY_ID +
+                " join " + queryProvider.getMotherDetailsTable() + " on " + queryProvider.getMotherDetailsTable() + "." + AppConstants.KeyConstants.BASE_ENTITY_ID + "=" + queryProvider.getDemographicTable() + "." + Constants.KEY.BASE_ENTITY_ID +
                         " join " + queryProvider.getChildDetailsTable() + " on " + queryProvider.getChildDetailsTable() + "." + Constants.KEY.RELATIONAL_ID + " = " + queryProvider.getMotherDetailsTable() + "." + Constants.KEY.BASE_ENTITY_ID);
         String query = queryBuilder.mainCondition(getMainConditionString(entityMap));
 

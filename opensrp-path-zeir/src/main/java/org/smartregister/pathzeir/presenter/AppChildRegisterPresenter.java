@@ -19,7 +19,7 @@ import java.util.Date;
 
 import timber.log.Timber;
 
-import static org.smartregister.pathzeir.util.AppConstants.KEY.CARD_STATUS;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.CARD_STATUS;
 
 public class AppChildRegisterPresenter extends BaseChildRegisterPresenter {
     private final EventClientRepository eventClientRepository = ZeirApplication.getInstance().eventClientRepository();
@@ -44,7 +44,7 @@ public class AppChildRegisterPresenter extends BaseChildRegisterPresenter {
                     try {
                         JSONObject clientAttributes = client.getJSONObject(AllConstants.ATTRIBUTES);
                         clientAttributes.put(CARD_STATUS, CardStatus.does_not_need_card.name());
-                        clientAttributes.put(AppConstants.KEY.CARD_STATUS_DATE, cardStatusDate);
+                        clientAttributes.put(AppConstants.KeyConstants.CARD_STATUS_DATE, cardStatusDate);
                         client.put(AllConstants.ATTRIBUTES, clientAttributes);
                         eventClientRepository.addorUpdateClient(baseEntityId, client);
                     } catch (JSONException e) {

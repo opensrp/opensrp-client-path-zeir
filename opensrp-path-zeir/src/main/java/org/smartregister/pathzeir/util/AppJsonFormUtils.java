@@ -38,20 +38,20 @@ public class AppJsonFormUtils extends ChildJsonFormUtils {
 
             if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase("Sex")) {
                 jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(ChildJsonFormUtils.GENDER).toLowerCase());
-            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.FIRST_HEALTH_FACILITY_CONTRACT)) {
-                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KEY.FIRST_HEALTH_FACILITY_CONTRACT));
-            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.MOTHER_GUARDIAN_NRC)) {
-                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KEY.MOTHER_GUARDIAN_NRC));
-            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.MOTHER_GUARDIAN_NUMBER)) {
-                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KEY.MOTHER_GUARDIAN_NUMBER));
-            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.PLACE_OF_BIRTH)) {
-                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KEY.PLACE_OF_BIRTH));
-            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.RESIDENTIAL_ADDRESS)) {
-                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KEY.RESIDENTIAL_ADDRESS));
-            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.PMTCT_STATUS)) {
-                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KEY.PMTCT_STATUS));
-            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KEY.RESIDENTIAL_AREA)) {
-                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KEY.RESIDENTIAL_AREA));
+            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KeyConstants.FIRST_HEALTH_FACILITY_CONTRACT)) {
+                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KeyConstants.FIRST_HEALTH_FACILITY_CONTRACT));
+            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KeyConstants.MOTHER_GUARDIAN_NRC)) {
+                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KeyConstants.MOTHER_GUARDIAN_NRC));
+            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KeyConstants.MOTHER_GUARDIAN_NUMBER)) {
+                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KeyConstants.MOTHER_GUARDIAN_NUMBER));
+            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KeyConstants.PLACE_OF_BIRTH)) {
+                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KeyConstants.PLACE_OF_BIRTH));
+            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KeyConstants.RESIDENTIAL_ADDRESS)) {
+                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KeyConstants.RESIDENTIAL_ADDRESS));
+            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KeyConstants.PMTCT_STATUS)) {
+                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KeyConstants.PMTCT_STATUS));
+            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KeyConstants.RESIDENTIAL_AREA)) {
+                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KeyConstants.RESIDENTIAL_AREA));
             }
         }
     }

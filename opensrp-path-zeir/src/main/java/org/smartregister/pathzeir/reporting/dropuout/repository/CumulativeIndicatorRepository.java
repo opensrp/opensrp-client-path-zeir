@@ -47,11 +47,6 @@ public class CumulativeIndicatorRepository extends BaseRepository {
             " UNIQUE(" + COLUMN_VACCINE + ", " + COLUMN_MONTH + ", " + COLUMN_CUMULATIVE_ID + ") ON CONFLICT IGNORE )";
     private static final String CUMULATIVE_INDICATOR_CUMULATIVE_ID_INDEX = "CREATE INDEX " + TABLE_NAME + "_" + COLUMN_CUMULATIVE_ID + "_index ON " + TABLE_NAME + "(" + COLUMN_CUMULATIVE_ID + ");";
 
-    public CumulativeIndicatorRepository() {
-        super();
-
-    }
-
     public static void createTable(SQLiteDatabase database) {
         database.execSQL(CUMULATIVE_INDICATOR_SQL);
         database.execSQL(CUMULATIVE_INDICATOR_CUMULATIVE_ID_INDEX);

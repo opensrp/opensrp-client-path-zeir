@@ -87,8 +87,8 @@ public class AppUtilsTest {
     @Test
     public void testUpdateChildDeath() {
         Mockito.when(zeirApplication.context()).thenReturn(context);
-        Mockito.when(context.allCommonsRepositoryobjects(AppConstants.TABLE_NAME.CHILD_DETAILS)).thenReturn(allCommonsRepository);
-        Mockito.when(context.allCommonsRepositoryobjects(AppConstants.TABLE_NAME.ALL_CLIENTS)).thenReturn(allCommonsRepository);
+        Mockito.when(context.allCommonsRepositoryobjects(AppConstants.TableNameConstants.CHILD_DETAILS)).thenReturn(allCommonsRepository);
+        Mockito.when(context.allCommonsRepositoryobjects(AppConstants.TableNameConstants.ALL_CLIENTS)).thenReturn(allCommonsRepository);
         Client client = new Client("123");
         client.setDeathdate(new DateTime());
         EventClient eventClient = new EventClient(new Event(), client);

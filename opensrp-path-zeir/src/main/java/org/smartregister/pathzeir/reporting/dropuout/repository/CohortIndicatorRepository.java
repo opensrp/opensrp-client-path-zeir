@@ -42,11 +42,6 @@ public class CohortIndicatorRepository extends BaseRepository {
             " UNIQUE(" + COLUMN_VACCINE + ", " + COLUMN_COHORT_ID + ") ON CONFLICT IGNORE )";
     private static final String COHORT_INDICATOR_COHORT_ID_INDEX = "CREATE INDEX " + TABLE_NAME + "_" + COLUMN_COHORT_ID + "_index ON " + TABLE_NAME + "(" + COLUMN_COHORT_ID + ");";
 
-    public CohortIndicatorRepository() {
-        super();
-
-    }
-
     public static void createTable(SQLiteDatabase database) {
         database.execSQL(COHORT_INDICATOR_SQL);
         database.execSQL(COHORT_INDICATOR_COHORT_ID_INDEX);

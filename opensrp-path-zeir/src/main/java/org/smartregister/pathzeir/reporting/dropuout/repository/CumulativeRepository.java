@@ -42,11 +42,6 @@ public class CumulativeRepository extends BaseRepository {
             COLUMN_CREATED_AT + " DATETIME NULL," +
             COLUMN_UPDATED_AT + " TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP)";
 
-    public CumulativeRepository() {
-        super();
-
-    }
-
     public static void createTable(SQLiteDatabase database) {
         database.execSQL(CUMULATIVE_SQL);
     }

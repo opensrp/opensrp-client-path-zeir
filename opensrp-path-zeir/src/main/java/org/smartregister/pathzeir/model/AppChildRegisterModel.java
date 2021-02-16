@@ -11,8 +11,8 @@ import org.smartregister.repository.AllSharedPreferences;
 
 import java.util.List;
 
-import static org.smartregister.pathzeir.util.AppConstants.KEY.REGISTRATION_LOCATION_ID;
-import static org.smartregister.pathzeir.util.AppConstants.KEY.REGISTRATION_LOCATION_NAME;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.REGISTRATION_LOCATION_ID;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.REGISTRATION_LOCATION_NAME;
 
 public class AppChildRegisterModel extends BaseChildRegisterModel {
 

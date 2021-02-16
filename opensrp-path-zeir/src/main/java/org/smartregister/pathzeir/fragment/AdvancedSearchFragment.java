@@ -139,9 +139,9 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         childUniqueGovtId.setInputType(InputType.TYPE_CLASS_NUMBER);
         childRegistrationNumber.addTextChangedListener(advancedSearchTextwatcher);
 
-        advancedFormSearchableFields.put(AppConstants.KEY.ZEIR_ID, cardId);
-        advancedFormSearchableFields.put(AppConstants.KEY.CHILD_BIRTH_CERTIFICATE, childRegistrationNumber);
-        advancedFormSearchableFields.put(AppConstants.KEY.CHILD_REGISTER_CARD_NUMBER, childUniqueGovtId);
+        advancedFormSearchableFields.put(AppConstants.KeyConstants.ZEIR_ID, cardId);
+        advancedFormSearchableFields.put(AppConstants.KeyConstants.CHILD_BIRTH_CERTIFICATE, childRegistrationNumber);
+        advancedFormSearchableFields.put(AppConstants.KeyConstants.CHILD_REGISTER_CARD_NUMBER, childUniqueGovtId);
         advancedFormSearchableFields.put(DBConstants.KEY.FIRST_NAME, firstName);
         advancedFormSearchableFields.put(DBConstants.KEY.LAST_NAME, lastName);
         advancedFormSearchableFields.put(DBConstants.KEY.MOTHER_FIRST_NAME, motherGuardianFirstName);
@@ -174,9 +174,9 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
             motherGuardianFirstName.setText(searchFormData.get(DBConstants.KEY.MOTHER_FIRST_NAME));
             motherGuardianLastName.setText(searchFormData.get(DBConstants.KEY.MOTHER_LAST_NAME));
             motherGuardianPhoneNumber.setText(searchFormData.get(Constants.KEY.MOTHER_GUARDIAN_NUMBER));
-            cardId.setText(searchFormData.get(AppConstants.KEY.ZEIR_ID));
-            childRegistrationNumber.setText(searchFormData.get(AppConstants.KEY.CHILD_BIRTH_CERTIFICATE));
-            childUniqueGovtId.setText(searchFormData.get(AppConstants.KEY.CHILD_REGISTER_CARD_NUMBER));
+            cardId.setText(searchFormData.get(AppConstants.KeyConstants.ZEIR_ID));
+            childRegistrationNumber.setText(searchFormData.get(AppConstants.KeyConstants.CHILD_BIRTH_CERTIFICATE));
+            childUniqueGovtId.setText(searchFormData.get(AppConstants.KeyConstants.CHILD_REGISTER_CARD_NUMBER));
         }
     }
 
@@ -190,9 +190,9 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         fields.put(Constants.KEY.MOTHER_GUARDIAN_NUMBER, motherGuardianPhoneNumber.getText().toString());
         fields.put(START_DATE, startDate.getText().toString());
         fields.put(END_DATE, endDate.getText().toString());
-        fields.put(AppConstants.KEY.ZEIR_ID, cardId.getText().toString());
-        fields.put(AppConstants.KEY.CHILD_BIRTH_CERTIFICATE, childRegistrationNumber.getText().toString());
-        fields.put(AppConstants.KEY.CHILD_REGISTER_CARD_NUMBER, childUniqueGovtId.getText().toString());
+        fields.put(AppConstants.KeyConstants.ZEIR_ID, cardId.getText().toString());
+        fields.put(AppConstants.KeyConstants.CHILD_BIRTH_CERTIFICATE, childRegistrationNumber.getText().toString());
+        fields.put(AppConstants.KeyConstants.CHILD_REGISTER_CARD_NUMBER, childUniqueGovtId.getText().toString());
         return fields;
     }
 
@@ -217,6 +217,75 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
     @Override
     protected Map<String, String> getSearchMap(boolean outOfArea) {
 
+        Map<String, String> searchParams = new HashMap<>();
+
+        searchParams.putAll(getFieldValuesParams());
+        searchParams.putAll(getStatusInfoParams());
+        searchParams.putAll(getIdsInfoParams());
+
+        return searchParams;
+    }
+
+    private Map<String, String> getIdsInfoParams() {
+        Map<String, String> searchParams = new HashMap<>();
+
+        String startDateString = startDate.getText().toString();
+        if (StringUtils.isNotBlank(startDateString)) {
+            searchParams.put(START_DATE, startDateString.trim());
+        }
+
+        String endDateString = endDate.getText().toString();
+        if (StringUtils.isNotBlank(endDateString)) {
+            searchParams.put(END_DATE, endDateString.trim());
+        }
+
+        String cardId = this.cardId.getText().toString();
+        if (!TextUtils.isEmpty(cardId)) {
+            searchParams.put(AppConstants.KeyConstants.ZEIR_ID, cardId);
+        }
+
+        String childUniqueId = this.childUniqueGovtId.getText().toString();
+        if (!TextUtils.isEmpty(childUniqueId)) {
+            searchParams.put(AppConstants.KeyConstants.CHILD_REGISTER_CARD_NUMBER, childUniqueId);
+        }
+
+        String childRegNumber = this.childRegistrationNumber.getText().toString();
+        if (!TextUtils.isEmpty(childRegNumber)) {
+            searchParams.put(AppConstants.KeyConstants.CHILD_BIRTH_CERTIFICATE, childRegNumber);
+        }
+        return searchParams;
+    }
+
+    private Map<String, String> getStatusInfoParams() {
+        Map<String, String> searchParams = new HashMap<>();
+
+        //Inactive
+        boolean isInactive = inactive.isChecked();
+        if (isInactive) {
+            searchParams.put(INACTIVE, Boolean.toString(true));
+        }
+        //Active
+        boolean isActive = active.isChecked();
+        if (isActive) {
+            searchParams.put(ACTIVE, Boolean.toString(true));
+        }
+
+        //Lost To Follow Up
+        boolean isLostToFollowUp = lostToFollowUp.isChecked();
+        if (isLostToFollowUp) {
+            searchParams.put(LOST_TO_FOLLOW_UP, Boolean.toString(true));
+        }
+
+        if (isActive == isInactive && isActive == isLostToFollowUp) {
+            searchParams.remove(INACTIVE);
+            searchParams.remove(ACTIVE);
+            searchParams.remove(LOST_TO_FOLLOW_UP);
+        }
+
+        return searchParams;
+    }
+
+    private Map<String, String> getFieldValuesParams() {
         Map<String, String> searchParams = new HashMap<>();
 
         String firstName = this.firstName.getText().toString();
@@ -244,57 +313,8 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         if (!TextUtils.isEmpty(lastName)) {
             searchParams.put(DBConstants.KEY.LAST_NAME, lastName);
         }
-
-        //Inactive
-        boolean isInactive = inactive.isChecked();
-        if (isInactive) {
-            searchParams.put(INACTIVE, Boolean.toString(true));
-        }
-        //Active
-        boolean isActive = active.isChecked();
-        if (isActive) {
-            searchParams.put(ACTIVE, Boolean.toString(true));
-        }
-
-        //Lost To Follow Up
-        boolean isLostToFollowUp = lostToFollowUp.isChecked();
-        if (isLostToFollowUp) {
-            searchParams.put(LOST_TO_FOLLOW_UP, Boolean.toString(true));
-        }
-
-        if (isActive == isInactive && isActive == isLostToFollowUp) {
-            searchParams.remove(Constants.CHILD_STATUS.INACTIVE);
-            searchParams.remove(Constants.CHILD_STATUS.ACTIVE);
-            searchParams.remove(Constants.CHILD_STATUS.LOST_TO_FOLLOW_UP);
-        }
-
-        String startDateString = startDate.getText().toString();
-        if (StringUtils.isNotBlank(startDateString)) {
-            searchParams.put(START_DATE, startDateString.trim());
-        }
-
-        String endDateString = endDate.getText().toString();
-        if (StringUtils.isNotBlank(endDateString)) {
-            searchParams.put(END_DATE, endDateString.trim());
-        }
-
-        String cardId = this.cardId.getText().toString();
-        if (!TextUtils.isEmpty(cardId)) {
-            searchParams.put(AppConstants.KEY.ZEIR_ID, cardId);
-        }
-
-        String childUniqueId = this.childUniqueGovtId.getText().toString();
-        if (!TextUtils.isEmpty(childUniqueId)) {
-            searchParams.put(AppConstants.KEY.CHILD_REGISTER_CARD_NUMBER, childUniqueId);
-        }
-
-        String childRegNumber = this.childRegistrationNumber.getText().toString();
-        if (!TextUtils.isEmpty(childRegNumber)) {
-            searchParams.put(AppConstants.KEY.CHILD_BIRTH_CERTIFICATE, childRegNumber);
-        }
         return searchParams;
     }
-
 
 
     /*
@@ -304,6 +324,11 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
      */
     @Override
     protected void updateDueOverdueCountText() {
+        /*
+         *  No Need update count from this fragment
+         * The whole functionality is working in
+         * ChildRegisterFragment already
+         */
     }
 
     public void searchByOpenSRPId(String barcodeSearchTerm) {
@@ -314,7 +339,7 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         }
 
         Map<String, String> searchParamsMap = new HashMap<>();
-        searchParamsMap.put(AppConstants.KEY.ZEIR_ID, barcodeSearchTerm);
+        searchParamsMap.put(AppConstants.KeyConstants.ZEIR_ID, barcodeSearchTerm);
         presenter.search(searchParamsMap, searchLocally);
     }
 }

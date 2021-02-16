@@ -57,7 +57,6 @@ import timber.log.Timber;
 
 public abstract class BaseReportActivity extends BaseActivity implements CoverageDropoutBroadcastReceiver.CoverageDropoutServiceListener {
 
-    private static final String TAG = BaseReportActivity.class.getCanonicalName();
     public static final String DIALOG_TAG = "report_dialog";
 
     //Global data variables
@@ -284,10 +283,7 @@ public abstract class BaseReportActivity extends BaseActivity implements Coverag
             List<CumulativeIndicator> cumulativeIndicators = cumulativeIndicatorRepository.findByVaccineAndCumulativeId(startedVaccineName, cumulative.getId(), CumulativeIndicatorRepository.COLUMN_MONTH + " ASC ");
             for (CumulativeIndicator startedCumulativeIndicator : cumulativeIndicators) {
 
-                long startCount = 0L;
-                if (startedCumulativeIndicator != null && startedCumulativeIndicator.getValue() != null) {
-                    startCount = startedCumulativeIndicator.getValue();
-                }
+                long startCount = getStartCount(startedCumulativeIndicator);
 
                 // If denominator is zero, skip
                 if (startCount == 0L) {
@@ -298,10 +294,7 @@ public abstract class BaseReportActivity extends BaseActivity implements Coverag
                 String completedVaccineName = generateVaccineName(completed);
                 CumulativeIndicator completedCumulativeIndicator = cumulativeIndicatorRepository.findByVaccineMonthAndCumulativeId(completedVaccineName, month, cumulative.getId());
 
-                long completeCount = 0L;
-                if (completedCumulativeIndicator != null && completedCumulativeIndicator.getValue() != null) {
-                    completeCount = completedCumulativeIndicator.getValue();
-                }
+                long completeCount = getCompleteCount(completedCumulativeIndicator);//0L;
 
                 long diff = startCount - completeCount;
                 int percentage = (int) (diff * 100.0 / startCount + 0.5);
@@ -322,6 +315,22 @@ public abstract class BaseReportActivity extends BaseActivity implements Coverag
 
         }
         return linkedHashMap;
+    }
+
+    private long getCompleteCount(CumulativeIndicator completedCumulativeIndicator) {
+        if (completedCumulativeIndicator != null && completedCumulativeIndicator.getValue() != null) {
+             return  completedCumulativeIndicator.getValue();
+        } else {
+            return 0L;
+        }
+    }
+
+    private long getStartCount(CumulativeIndicator startedCumulativeIndicator) {
+        if (startedCumulativeIndicator != null && startedCumulativeIndicator.getValue() != null) {
+            return startedCumulativeIndicator.getValue();
+        } else {
+            return 0L;
+        }
     }
 
     protected LinkedHashMap<String, List<ExpandedListAdapter.ItemData<Triple<String, String, String>, Date>>> generateCohortDropoutMap(VaccineRepo.Vaccine started, VaccineRepo.Vaccine completed) {
@@ -444,7 +453,7 @@ public abstract class BaseReportActivity extends BaseActivity implements Coverag
     }
 
     private List<VaccineRepo.Vaccine> generateVaccineList() {
-        List<VaccineRepo.Vaccine> vaccineList = VaccineRepo.getVaccines(AppConstants.EntityType.CHILD);
+        List<VaccineRepo.Vaccine> vaccineList = VaccineRepo.getVaccines(AppConstants.EntityTypeConstants.CHILD);
         Collections.sort(vaccineList, (lhs, rhs) -> lhs.display().compareToIgnoreCase(rhs.display()));
 
         vaccineList.remove(VaccineRepo.Vaccine.bcg2);

@@ -48,7 +48,7 @@ public class LoginPresenterTest extends BaseUnitTest {
 
         Setting setting = new Setting();
         setting.setValue(value);
-        Mockito.when(allSettings.getSetting(AppConstants.KEY.SITE_CHARACTERISTICS)).thenReturn(setting);
+        Mockito.when(allSettings.getSetting(AppConstants.KeyConstants.SITE_CHARACTERISTICS)).thenReturn(setting);
         Mockito.when(context.allSettings()).thenReturn(allSettings);
         LoginPresenter loginPresenter = new LoginPresenter(Mockito.mock(BaseLoginContract.View.class));
         Assert.assertTrue(loginPresenter.isServerSettingsSet());
@@ -72,7 +72,7 @@ public class LoginPresenterTest extends BaseUnitTest {
 
         Setting setting = new Setting();
         setting.setValue(value);
-        Mockito.when(allSettings.getSetting(AppConstants.KEY.SITE_CHARACTERISTICS)).thenReturn(setting);
+        Mockito.when(allSettings.getSetting(AppConstants.KeyConstants.SITE_CHARACTERISTICS)).thenReturn(setting);
         Mockito.when(context.allSettings()).thenReturn(allSettings);
         LoginPresenter loginPresenter = new LoginPresenter(Mockito.mock(BaseLoginContract.View.class));
         Assert.assertTrue(loginPresenter.isServerSettingsSet());

@@ -1,6 +1,5 @@
 package org.smartregister.pathzeir.reporting.coverage.cohort;
 
-import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.Pair;
@@ -16,7 +15,6 @@ import org.smartregister.immunization.db.VaccineRepo;
 import org.smartregister.pathzeir.R;
 import org.smartregister.pathzeir.application.ZeirApplication;
 import org.smartregister.pathzeir.reporting.BaseReportActivity;
-import org.smartregister.pathzeir.reporting.coverage.CoverageReportsActivity;
 import org.smartregister.pathzeir.reporting.dropuout.domain.Cohort;
 import org.smartregister.pathzeir.reporting.dropuout.domain.CohortIndicator;
 import org.smartregister.pathzeir.reporting.dropuout.domain.CoverageHolder;
@@ -246,16 +244,16 @@ public class CohortCoverageReportActivity extends BaseReportActivity {
 
     @Override
     public void onUniqueIdFetched(Triple<String, Map<String, String>, String> triple, String s) {
-
+        // override to remove functionality
     }
 
     @Override
     public void onNoUniqueId() {
-
+        // override to remove functionality
     }
 
     @Override
     public void onRegistrationSaved(boolean b) {
-
+        // override to remove functionality
     }
 }
