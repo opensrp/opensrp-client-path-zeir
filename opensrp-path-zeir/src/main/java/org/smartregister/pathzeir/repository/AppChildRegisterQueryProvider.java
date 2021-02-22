@@ -3,6 +3,8 @@ package org.smartregister.pathzeir.repository;
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.child.provider.RegisterQueryProvider;
 
+import static org.smartregister.child.util.Constants.SHOW_BCG2_REMINDER;
+import static org.smartregister.child.util.Constants.SHOW_BCG_SCAR;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.BASE_ENTITY_ID;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.BIRTH_FACILITY_NAME;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.CHILD_BIRTH_CERTIFICATE;
@@ -82,6 +84,8 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 getChildDetailsColumn(LOST_TO_FOLLOW_UP),
                 getChildDetailsColumn(PHYSICAL_LANDMARK),
                 getChildDetailsColumn(RESIDENTIAL_AREA),
+                getChildDetailsColumn(SHOW_BCG_SCAR),
+                getChildDetailsColumn(SHOW_BCG2_REMINDER),
                 "mother.first_name                     as " + MOTHER_FIRST_NAME,
                 "mother.last_name                      as " + MOTHER_LAST_NAME,
                 "mother.dob                            as " + MOTHER_DOB,
