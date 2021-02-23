@@ -109,6 +109,7 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
             .subtract(fetchDraftedMonths().map { it.first.convertToNamedMonth(true) })
             .subtract(ReportsDao.getSentReportMonths().map { it.first.convertToNamedMonth(true) })
             .toList()
+            .filterNot { date : String -> date.equals(dateFormatter("MMMM yyyy").format(Date()), ignoreCase = true) }
             .sortedByDescending { dateFormatter("MMMM yyyy").parse(it) }
 
     fun fetchDraftedMonths() = ReportsDao.getDraftedMonths()
