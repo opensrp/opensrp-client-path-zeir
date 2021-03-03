@@ -22,9 +22,9 @@ import org.smartregister.job.ValidateSyncDataServiceJob;
 import org.smartregister.pathzeir.reporting.dropuout.job.DropoutIntentServiceJob;
 import org.smartregister.pathzeir.reporting.monthly.job.HiA2IntentServiceJob;
 import org.smartregister.pathzeir.reporting.stock.job.StockSyncIntentServiceJob;
+import org.smartregister.pathzeir.service.intent.AppSyncIntentService;
 import org.smartregister.pathzeir.service.intent.ArchiveChildrenAgedAboveFiveIntentService;
 import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
-import org.smartregister.sync.intent.SyncIntentService;
 
 import timber.log.Timber;
 
@@ -34,7 +34,7 @@ public class AppJobCreator implements JobCreator {
     public Job create(@NonNull String tag) {
         switch (tag) {
             case SyncServiceJob.TAG:
-                return new SyncServiceJob(SyncIntentService.class);
+                return new SyncServiceJob(AppSyncIntentService.class);
             case ExtendedSyncServiceJob.TAG:
                 return new ExtendedSyncServiceJob();
             case PullUniqueIdsServiceJob.TAG:
