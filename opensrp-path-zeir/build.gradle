@@ -47,8 +47,8 @@ android {
         applicationId "org.smartregister.pathzeir"
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
-        versionCode 1
-        versionName "0.0.1"
+        versionCode 5
+        versionName "0.0.5"
         multiDexEnabled true
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
         buildConfigField "boolean", "TIME_CHECK", "false"
@@ -113,8 +113,8 @@ android {
             buildConfigField "int", "VIEW_SYNC_CONFIGURATIONS_MINUTES", '15'
             buildConfigField "int", "CLIENT_SETTINGS_SYNC_MINUTES", '15'
             buildConfigField "int", "GROWTH_MONITORING_SYNC_TIME", '15'
-            buildConfigField "String[]", "LOCATION_LEVELS", '{"National", "Province", "District", "Health Facility"}'
-            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National", "Province", "District", "Health Facility"}'
+            buildConfigField "String[]", "LOCATION_LEVELS", '{"National", "Province", "District", "Health Facility", "Zone"}'
+            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National", "Province", "District", "Health Facility", "Zone"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
             buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.release")
             buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.release")
@@ -138,8 +138,8 @@ android {
             buildConfigField "int", "VIEW_SYNC_CONFIGURATIONS_MINUTES", '15'
             buildConfigField "int", "CLIENT_SETTINGS_SYNC_MINUTES", '15'
             buildConfigField "int", "GROWTH_MONITORING_SYNC_TIME", '15'
-            buildConfigField "String[]", "LOCATION_LEVELS", '{"National", "Province", "District", "Health Facility"}'
-            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National", "Province", "District", "Health Facility"}'
+            buildConfigField "String[]", "LOCATION_LEVELS", '{"National", "Province", "District", "Health Facility", "Zone"}'
+            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National", "Province", "District", "Health Facility", "Zone"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
             testCoverageEnabled true
             buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.debug")
@@ -256,7 +256,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
-    implementation('org.smartregister:opensrp-client-core:4.2.0-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-core:4.2.5-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'com.android.support', module: 'appcompat-v7'
