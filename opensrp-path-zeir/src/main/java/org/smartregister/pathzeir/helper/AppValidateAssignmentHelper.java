@@ -28,4 +28,9 @@ public class AppValidateAssignmentHelper extends ValidateAssignmentHelper {
                 .filter(location -> location.getProperties().getGeographicLevel() == 4)
                 .map(PhysicalLocation::getId).collect(Collectors.toSet());
     }
+
+    @Override
+    public void validateUserAssignment() {
+        // Do Nothing
+    }
 }
