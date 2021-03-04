@@ -5,10 +5,12 @@ import android.content.ContentValues;
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
+import com.vijay.jsonwizard.constants.JsonFormConstants;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.child.presenter.BaseChildDetailsPresenter.CardStatus;
 import org.smartregister.child.util.Constants;
@@ -35,6 +37,12 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import timber.log.Timber;
+
+import static com.vijay.jsonwizard.constants.JsonFormConstants.FIELDS;
+import static com.vijay.jsonwizard.constants.JsonFormConstants.STEP1;
+import static com.vijay.jsonwizard.constants.JsonFormConstants.VALUE;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.CHILD_ZONE;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.KEY;
 
 public class AppUtils extends Utils {
 
@@ -215,5 +223,32 @@ public class AppUtils extends Utils {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return calendar.get(Calendar.YEAR);
+    }
+
+    public static String validateChildZone(String jsonString) {
+        try {
+            JSONObject jsonForm = JsonFormUtils.toJSONObject(jsonString);
+            JSONArray fields = JsonFormUtils.fields(jsonForm);
+            for (int fieldIndex = 0; fieldIndex < fields.length(); fieldIndex++) {
+                JSONObject field = fields.getJSONObject(fieldIndex);
+                if (field.getString(KEY).equalsIgnoreCase(CHILD_ZONE) &&
+                        field.has(JsonFormConstants.VALUE)) {
+                    String value = field.getString(JsonFormConstants.VALUE);
+                    if (StringUtils.isNotBlank(value)) {
+                        if (value.equalsIgnoreCase(field.getString(JsonFormConstants.HINT))) {
+                            field.remove(VALUE);
+                            fields.put(fieldIndex, field);
+                            break;
+                        }
+                    }
+                }
+
+            }
+            jsonForm.getJSONObject(STEP1).put(FIELDS, fields);
+            return jsonForm.toString();
+        } catch (JSONException e) {
+            Timber.e(e);
+        }
+        return "";
     }
 }

@@ -21,6 +21,7 @@ import org.smartregister.child.fragment.StatusEditDialogFragment;
 import org.smartregister.child.presenter.BaseChildDetailsPresenter.CardStatus;
 import org.smartregister.child.task.LoadAsyncTask;
 import org.smartregister.child.util.ChildDbUtils;
+import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
 import org.smartregister.client.utils.domain.Form;
 import org.smartregister.pathzeir.R;
@@ -40,6 +41,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import timber.log.Timber;
+
+import static org.smartregister.child.util.Constants.EventType.UPDATE_BITRH_REGISTRATION;
 
 /**
  * Created by ndegwamartin on 06/03/2019.
@@ -153,7 +156,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
     @Override
     public void startFormActivity(String formData) {
         String formDataString = formData;
-        if(StringUtils.isNotBlank(formData)) {
+        if (StringUtils.isNotBlank(formData)) {
             try {
                 Intent intent;
                 Form form = new Form();
@@ -238,5 +241,23 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
     public void notifyLostCardReported(String orderDate) {
         super.notifyLostCardReported(orderDate);
         AppUtils.createClientCardReceivedEvent(childDetails.getCaseId(), CardStatus.needs_card, orderDate);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        try {
+            String jsonString = data.getStringExtra(JsonFormConstants.JSON_FORM_KEY.JSON);
+            Timber.d(jsonString);
+            JSONObject form = new JSONObject(jsonString);
+            String encounterType = form.getString(ChildJsonFormUtils.ENCOUNTER_TYPE);
+            if (encounterType.equalsIgnoreCase(Constants.EventType.UPDATE_BITRH_REGISTRATION)) {
+                String jsonForm = AppUtils.validateChildZone(jsonString);
+                data.putExtra(JsonFormConstants.JSON_FORM_KEY.JSON, jsonForm);
+            }
+        } catch (Exception e) {
+            Timber.e(e);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

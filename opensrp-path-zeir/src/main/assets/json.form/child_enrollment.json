@@ -409,6 +409,16 @@
         }
       },
       {
+        "key": "child_zone",
+        "openmrs_entity_parent": "usual_residence",
+        "openmrs_entity": "person_address",
+        "openmrs_entity_id": "address3",
+        "openmrs_data_type": "text",
+        "type": "spinner",
+        "sub_type": "location",
+        "hint": "{{child_enrollment.step1.child_zone.hint}}"
+      },
+      {
         "key": "residential_address",
         "openmrs_entity_parent": "",
         "openmrs_entity": "person_attribute",
