@@ -148,7 +148,7 @@ android {
             buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.debug")
         }
 
-       /* preview {
+        preview {
             minifyEnabled false
             zipAlignEnabled true
             debuggable true
@@ -173,10 +173,11 @@ android {
             buildConfigField "int", "GROWTH_MONITORING_SYNC_TIME", '15'
             buildConfigField "String[]", "LOCATION_LEVELS", '{"National", "Province", "District", "Health Facility"}'
             buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National", "Province", "District", "Health Facility"}'
+            buildConfigField "String[]", "ALLOWED_LEVELS", '{"Health Facility", "Zone"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
             buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.preview")
             buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.preview")
-        }*/
+        }
     }
 
     packagingOptions {
