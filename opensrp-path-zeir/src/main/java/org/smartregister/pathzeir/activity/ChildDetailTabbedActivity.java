@@ -42,8 +42,6 @@ import java.util.Map;
 
 import timber.log.Timber;
 
-import static org.smartregister.child.util.Constants.EventType.UPDATE_BITRH_REGISTRATION;
-
 /**
  * Created by ndegwamartin on 06/03/2019.
  */

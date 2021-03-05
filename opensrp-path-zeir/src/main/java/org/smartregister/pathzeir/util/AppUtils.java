@@ -232,14 +232,12 @@ public class AppUtils extends Utils {
             for (int fieldIndex = 0; fieldIndex < fields.length(); fieldIndex++) {
                 JSONObject field = fields.getJSONObject(fieldIndex);
                 if (field.getString(KEY).equalsIgnoreCase(CHILD_ZONE) &&
-                        field.has(JsonFormConstants.VALUE)) {
-                    String value = field.getString(JsonFormConstants.VALUE);
-                    if (StringUtils.isNotBlank(value)) {
-                        if (value.equalsIgnoreCase(field.getString(JsonFormConstants.HINT))) {
-                            field.remove(VALUE);
-                            fields.put(fieldIndex, field);
-                            break;
-                        }
+                        field.has(VALUE)) {
+                    String value = field.getString(VALUE);
+                    if (StringUtils.isNotBlank(value) && value.equalsIgnoreCase(field.getString(JsonFormConstants.HINT))) {
+                        field.remove(VALUE);
+                        fields.put(fieldIndex, field);
+                        break;
                     }
                 }
 

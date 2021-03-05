@@ -1,9 +1,7 @@
 package org.smartregister.pathzeir.presenter;
 
-import com.vijay.jsonwizard.constants.JsonFormConstants;
 
 import org.apache.commons.lang3.StringUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
@@ -11,29 +9,20 @@ import org.smartregister.child.contract.ChildRegisterContract;
 import org.smartregister.child.domain.UpdateRegisterParams;
 import org.smartregister.child.presenter.BaseChildDetailsPresenter.CardStatus;
 import org.smartregister.child.presenter.BaseChildRegisterPresenter;
-import org.smartregister.child.util.ChildJsonFormUtils;
-import org.smartregister.child.util.Constants;
 import org.smartregister.clientandeventmodel.DateUtil;
 import org.smartregister.pathzeir.application.ZeirApplication;
 import org.smartregister.pathzeir.dao.AppChildDao;
 import org.smartregister.pathzeir.util.AppConstants;
 import org.smartregister.pathzeir.util.AppUtils;
 import org.smartregister.repository.EventClientRepository;
-import org.smartregister.util.JsonFormUtils;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.json.JsonObject;
 
 import timber.log.Timber;
 
-import static com.vijay.jsonwizard.constants.JsonFormConstants.FIELDS;
-import static com.vijay.jsonwizard.constants.JsonFormConstants.STEP1;
-import static com.vijay.jsonwizard.constants.JsonFormConstants.VALUE;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.CARD_STATUS;
-import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.CHILD_ZONE;
-import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.KEY;
 
 public class AppChildRegisterPresenter extends BaseChildRegisterPresenter {
     private final EventClientRepository eventClientRepository = ZeirApplication.getInstance().eventClientRepository();

@@ -3,7 +3,6 @@ package org.smartregister.pathzeir.presenter;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 
 import androidx.core.util.Pair;
 
