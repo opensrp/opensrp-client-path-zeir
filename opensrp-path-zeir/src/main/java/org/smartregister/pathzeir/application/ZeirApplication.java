@@ -267,7 +267,7 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
         initOfflineSchedules();
 
         SyncStatusBroadcastReceiver.init(this);
-        LocationHelper.init(new ArrayList<>(Arrays.asList(BuildConfig.LOCATION_LEVELS)), BuildConfig.DEFAULT_LOCATION);
+        LocationHelper.init(new ArrayList<>(Arrays.asList(BuildConfig.ALLOWED_LEVELS)), BuildConfig.DEFAULT_LOCATION);
         jsonSpecHelper = new JsonSpecHelper(this);
 
         //init Job Manager

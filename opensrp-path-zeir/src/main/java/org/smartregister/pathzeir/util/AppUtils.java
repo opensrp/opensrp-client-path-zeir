@@ -249,6 +249,6 @@ public class AppUtils extends Utils {
         } catch (JSONException e) {
             Timber.e(e);
         }
-        return "";
+        return jsonString;
     }
 }

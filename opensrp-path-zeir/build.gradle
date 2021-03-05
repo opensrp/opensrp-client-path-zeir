@@ -115,6 +115,7 @@ android {
             buildConfigField "int", "GROWTH_MONITORING_SYNC_TIME", '15'
             buildConfigField "String[]", "LOCATION_LEVELS", '{"National", "Province", "District", "Health Facility", "Zone"}'
             buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National", "Province", "District", "Health Facility", "Zone"}'
+            buildConfigField "String[]", "ALLOWED_LEVELS", '{"Health Facility", "Zone"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
             buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.release")
             buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.release")
@@ -140,6 +141,7 @@ android {
             buildConfigField "int", "GROWTH_MONITORING_SYNC_TIME", '15'
             buildConfigField "String[]", "LOCATION_LEVELS", '{"National", "Province", "District", "Health Facility", "Zone"}'
             buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National", "Province", "District", "Health Facility", "Zone"}'
+            buildConfigField "String[]", "ALLOWED_LEVELS", '{"Health Facility", "Zone"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
             testCoverageEnabled true
             buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.debug")
