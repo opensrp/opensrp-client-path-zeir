@@ -3,6 +3,8 @@ package org.smartregister.pathzeir.presenter;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.core.util.Pair;
 
@@ -35,13 +37,16 @@ import timber.log.Timber;
 
 import static com.vijay.jsonwizard.constants.JsonFormConstants.FIELDS;
 import static com.vijay.jsonwizard.constants.JsonFormConstants.STEP1;
+import static com.vijay.jsonwizard.constants.JsonFormConstants.VALUE;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.BIRTH_FACILITY_NAME;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.HOME_FACILITY;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.KEY;
 
 public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
 
     private final AppChildFormFragment formFragment;
     private final ChildFormActivity jsonFormView;
+    private String encounterType = null;
 
     public AppChildFormFragmentPresenter(JsonFormFragment formFragment, JsonFormInteractor jsonFormInteractor) {
         super(formFragment, jsonFormInteractor);
@@ -52,7 +57,6 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
     @Override
     public void addFormElements() {
         super.addFormElements();
-        String encounterType = null;
         try {
             encounterType = formFragment.getJsonApi().getmJSONObject().getString(JsonFormConstants.ENCOUNTER_TYPE);
         } catch (JSONException e) {
@@ -160,6 +164,55 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
         }
 
         return new Pair<>(codes, values);
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+        if (compoundButton instanceof CheckBox
+                && encounterType.equalsIgnoreCase(AppConstants.EventTypeConstants.OUT_OF_CATCHMENT)
+                && compoundButton.isChecked()) {
+            String parentKey = (String) compoundButton.getTag(com.vijay.jsonwizard.R.id.key);
+            String childKey = (String) compoundButton.getTag(com.vijay.jsonwizard.R.id.childKey);
+
+            if (isValidChoice(parentKey, childKey)) {
+                super.onCheckedChanged(compoundButton, isChecked);
+            } else {
+                compoundButton.setChecked(false);
+            }
+        } else {
+            super.onCheckedChanged(compoundButton, isChecked);
+        }
+    }
+
+    private boolean isValidChoice(String parentKey, String childKey) {
+        try {
+            JSONObject form = formFragment.getJsonApi().getmJSONObject();
+            JSONObject step1 = form.getJSONObject(STEP1);
+            JSONArray fields = step1.getJSONArray(FIELDS);
+            for (int i = 0; i < fields.length(); i++) {
+                JSONObject field = fields.getJSONObject(i);
+                if (field.has(VALUE) && !field.getString(KEY).equalsIgnoreCase(parentKey)) {
+                    String values = field.getString(VALUE);
+                    if (!values.isEmpty()
+                            && valueContainsKey(new Gson().fromJson(values, String[].class), childKey)) {
+                        return false;
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    private boolean valueContainsKey(String[] values, String childKey) {
+        for (String value : values) {
+            String val = value.split(" ")[0];
+            String key = childKey.split(" ")[0];
+            if (val.equalsIgnoreCase(key))
+                return true;
+        }
+        return false;
     }
 
 }
