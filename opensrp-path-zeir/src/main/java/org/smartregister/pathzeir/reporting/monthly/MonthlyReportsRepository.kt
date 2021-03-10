@@ -17,6 +17,7 @@ import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository.Col
 import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository.ColumnNames.PROVIDER_ID
 import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository.ColumnNames.UPDATED_AT
 import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository.ColumnNames.VALUE
+import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsRepository.Constants.MONTH_FORMAT
 import org.smartregister.pathzeir.reporting.monthly.domain.DailyTally
 import org.smartregister.pathzeir.reporting.monthly.domain.MonthlyTally
 import org.smartregister.reporting.ReportingLibrary
@@ -43,6 +44,7 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
 
     object Constants {
         const val TABLE_NAME = "monthly_tallies"
+        const val MONTH_FORMAT = "MMMM yyyy"
     }
 
     object ColumnNames {
@@ -109,7 +111,8 @@ class MonthlyReportsRepository private constructor() : BaseRepository() {
             .subtract(fetchDraftedMonths().map { it.first.convertToNamedMonth(true) })
             .subtract(ReportsDao.getSentReportMonths().map { it.first.convertToNamedMonth(true) })
             .toList()
-            .sortedByDescending { dateFormatter("MMMM yyyy").parse(it) }
+            .filterNot { date : String -> date.equals(dateFormatter(MONTH_FORMAT).format(Date()), ignoreCase = true) }
+            .sortedByDescending { dateFormatter(MONTH_FORMAT).parse(it) }
 
     fun fetchDraftedMonths() = ReportsDao.getDraftedMonths()
 
