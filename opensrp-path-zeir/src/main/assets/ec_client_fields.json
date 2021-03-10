@@ -261,6 +261,13 @@
           }
         },
         {
+          "column_name": "child_zone",
+          "type": "Client",
+          "json_mapping": {
+            "field": "addresses.address3"
+          }
+        },
+        {
           "column_name": "residential_address",
           "type": "Client",
           "json_mapping": {

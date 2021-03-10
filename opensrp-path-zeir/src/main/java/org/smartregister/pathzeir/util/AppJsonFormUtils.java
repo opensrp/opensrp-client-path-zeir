@@ -52,6 +52,12 @@ public class AppJsonFormUtils extends ChildJsonFormUtils {
                 jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KeyConstants.PMTCT_STATUS));
             } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KeyConstants.RESIDENTIAL_AREA)) {
                 jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KeyConstants.RESIDENTIAL_AREA));
+            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KeyConstants.HOME_FACILITY)) {
+                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KeyConstants.HOME_FACILITY));
+            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KeyConstants.CHILD_ZONE)) {
+                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KeyConstants.CHILD_ZONE));
+            } else if (jsonObject.getString(ChildJsonFormUtils.KEY).equalsIgnoreCase(AppConstants.KeyConstants.BIRTH_FACILITY_NAME)) {
+                jsonObject.put(ChildJsonFormUtils.VALUE, detailsMap.get(AppConstants.KeyConstants.BIRTH_FACILITY_NAME));
             }
         }
     }

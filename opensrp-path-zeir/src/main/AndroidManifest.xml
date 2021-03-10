@@ -190,7 +190,7 @@
         <service android:name="org.smartregister.sync.intent.ValidateIntentService" />
         <service android:name="org.smartregister.sync.intent.ExtendedSyncIntentService" />
         <service android:name="org.smartregister.sync.intent.SettingsSyncIntentService" />
-        <service android:name="org.smartregister.sync.intent.SyncIntentService" />
+        <service android:name=".service.intent.AppSyncIntentService" />
         <service android:name=".service.intent.ArchiveChildrenAgedAboveFiveIntentService" />
         <service android:name=".service.intent.AppVaccineScheduleUpdateIntentService" />
         <service android:name=".reporting.dropuout.intent.CoverageDropoutIntentService" />
