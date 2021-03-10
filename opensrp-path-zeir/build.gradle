@@ -246,6 +246,7 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-immunization'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-reporting'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'io.ona.rdt-capture', module: 'lib'
@@ -267,6 +268,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-media-compat'
         exclude group: 'com.android.support', module: 'cardview-v7'
         exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
         exclude group: 'com.ibm.fhir', module: 'fhir-model'
         exclude group: 'org.smartregister', module: 'opensrp-client-reporting'
     }
@@ -287,6 +289,7 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'com.android.support', module: 'design'
         exclude group: 'com.github.lecho', module: 'hellocharts-library'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
@@ -298,6 +301,18 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'org.smartregister', module: 'opensrp-client-reporting'
+    }
+
+    implementation('org.smartregister:opensrp-client-native-form:1.14.8.0-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'cardview-v7'
+        exclude group: 'io.ona.rdt-capture', module: 'lib'
+        exclude group: 'com.google.android.gms', module: 'play-services-vision'
+        exclude group: 'com.google.code.gson', module: 'gson'
     }
     implementation('com.google.android.material:material:1.2.1') {
         exclude group: 'com.android.support', module: 'recyclerview-v7'

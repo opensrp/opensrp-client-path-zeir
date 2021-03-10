@@ -58,6 +58,10 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
     @Override
     public void addFormElements() {
         super.addFormElements();
+        populateSpinners();
+    }
+
+    public void populateSpinners() {
         try {
             encounterType = formFragment.getJsonApi().getmJSONObject().getString(JsonFormConstants.ENCOUNTER_TYPE);
         } catch (JSONException e) {
@@ -120,20 +124,22 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
         String selectedLocation = getCurrentLocation(spinnerKey);
 
         MaterialSpinner spinner = (MaterialSpinner) jsonFormView.getFormDataView(STEP1 + ":" + spinnerKey);
-        if (locations != null && !locations.isEmpty()) {
-            Pair<JSONArray, JSONArray> options = populateLocationOptions(locations);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getView().getContext(), R.layout.native_form_simple_list_item_1,
-                    new Gson().fromJson(options.second != null ? options.second.toString() : null, String[].class));
-            spinner.setAdapter(adapter);
-            spinner.setTag(R.id.keys, options.first);
-            spinner.setVisibility(View.VISIBLE);
-            spinner.setOnItemSelectedListener(null);
-            if (encounterType.equalsIgnoreCase(AppConstants.EventTypeConstants.UPDATE_CHILD_REGISTRATION)
-                    && StringUtils.isNotBlank(selectedLocation))
-                spinner.setSelection(adapter.getPosition(selectedLocation) + 1);
-            spinner.post(() -> spinner.setOnItemSelectedListener(formFragment.getCommonListener()));
-        } else {
-            spinner.setVisibility(View.GONE);
+        if (spinner != null) {
+            if (locations != null && !locations.isEmpty()) {
+                Pair<JSONArray, JSONArray> options = populateLocationOptions(locations);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getView().getContext(), R.layout.native_form_simple_list_item_1,
+                        new Gson().fromJson(options.second != null ? options.second.toString() : null, String[].class));
+                spinner.setAdapter(adapter);
+                spinner.setTag(R.id.keys, options.first);
+                spinner.setVisibility(View.VISIBLE);
+                spinner.setOnItemSelectedListener(null);
+                if (encounterType.equalsIgnoreCase(AppConstants.EventTypeConstants.UPDATE_CHILD_REGISTRATION)
+                        && StringUtils.isNotBlank(selectedLocation))
+                    spinner.setSelection(adapter.getPosition(selectedLocation) + 1);
+                spinner.post(() -> spinner.setOnItemSelectedListener(formFragment.getCommonListener()));
+            } else {
+                spinner.setVisibility(View.GONE);
+            }
         }
     }
 
