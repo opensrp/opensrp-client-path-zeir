@@ -71,7 +71,8 @@ public class ZeirStockHelperRepository extends StockExternalRepository {
                 "from ec_client " +
                 "inner join ec_child_details " +
                 "on ec_client.base_entity_id = ec_child_details.base_entity_id " +
-                "where ec_child_details.inactive != 'true' and  ec_child_details.lost_to_follow_up != 'true' ", null);
+                "where (( ec_child_details.inactive IS NULL OR ec_child_details.inactive != 'true' ) " +
+                "and  ( ec_child_details.lost_to_follow_up IS NULL OR ec_child_details.lost_to_follow_up != 'true' ))", null);
         c.moveToFirst();
         boolean thismonth;
 
