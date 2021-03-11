@@ -1,0 +1,126 @@
+{
+  "count": "1",
+  "encounter_type": "booster_vaccines",
+  "entity_id": "",
+  "relational_id": "",
+  "validate_on_submit": true,
+  "show_errors_on_submit": true,
+  "metadata": {
+    "start": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "start",
+      "openmrs_entity_id": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "end": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "end",
+      "openmrs_entity_id": "163138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "today": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "encounter",
+      "openmrs_entity_id": "encounter_date"
+    },
+    "deviceid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "deviceid",
+      "openmrs_entity_id": "163149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "subscriberid": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "subscriberid",
+      "openmrs_entity_id": "163150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "simserial": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "simserial",
+      "openmrs_entity_id": "163151AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "phonenumber": {
+      "openmrs_entity_parent": "",
+      "openmrs_entity": "concept",
+      "openmrs_data_type": "phonenumber",
+      "openmrs_entity_id": "163152AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    "encounter_location": "",
+    "look_up": {
+      "entity_id": "",
+      "value": ""
+    }
+  },
+  "step1": {
+    "title": "{{booster_vaccines.step1.title}}",
+    "fields": [
+      {
+        "key": "booster_vaccine",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "booster_vaccine",
+        "buttonText": "{{booster_vaccines.step1.booster_vaccine.buttonText}}",
+        "sort": true,
+        "dialogTitle": "{{booster_vaccines.step1.booster_vaccine.dialogTitle}}",
+        "searchHint": "{{booster_vaccines.step1.booster_vaccine.searchHint}}",
+        "maxSelectable": 10,
+        "options": [
+          {
+            "key": "bcg_booster",
+            "text": "{{booster_vaccines.step1.booster_vaccine.options.bcg_booster.text}}",
+            "property": {}
+          },
+          {
+            "key": "opv_booster",
+            "text": "{{booster_vaccines.step1.booster_vaccine.options.opv_booster.text}}",
+            "property": {}
+          },
+          {
+            "key": "pcv_booster",
+            "text": "{{booster_vaccines.step1.booster_vaccine.options.pcv_booster.text}}",
+            "property": {}
+          },
+          {
+            "key": "penta_booster",
+            "text": "{{booster_vaccines.step1.booster_vaccine.options.penta_booster.text}}",
+            "property": {}
+          },
+          {
+            "key": "rota_booster",
+            "text": "{{booster_vaccines.step1.booster_vaccine.options.rota_booster.text}}",
+            "property": {}
+          },
+          {
+            "key": "ipv_booster",
+            "text": "{{booster_vaccines.step1.booster_vaccine.options.ipv_booster.text}}",
+            "property": {}
+          },
+          {
+            "key": "mr_booster",
+            "text": "{{booster_vaccines.step1.booster_vaccine.options.mr_booster.text}}",
+            "property": {}
+          }
+        ],
+        "type": "multi_select_list"
+      },
+      {
+        "key": "booster_vaccine_date",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "concept",
+        "openmrs_entity_id": "booster_vaccine_date",
+        "openmrs_data_type": "date",
+        "type": "date_picker",
+        "hint": "{{booster_vaccines.step1.booster_vaccine_date.hint}}",
+        "expanded": false,
+        "max_date": "today",
+        "v_required": {
+          "value": "true",
+          "err": "{{booster_vaccines.step1.booster_vaccine_date.v_required.err}}"
+        }
+      }
+    ]
+  },
+  "properties_file_name": "booster_vaccines"
+}

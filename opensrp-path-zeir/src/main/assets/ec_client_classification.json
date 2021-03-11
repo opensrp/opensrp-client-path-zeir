@@ -52,6 +52,13 @@
               "ec_client",
               "ec_child_details"
             ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "booster_vaccines",
+            "creates_case": [
+              "ec_booster_vaccines"
+            ]
           }
         ]
       }

@@ -324,6 +324,49 @@
           }
         }
       ]
+    },
+    {
+      "name": "ec_booster_vaccines",
+      "columns": [
+        {
+          "column_name": "entity_id",
+          "type": "Event",
+          "json_mapping": {
+            "field": "baseEntityId"
+          }
+        },
+        {
+          "column_name": "base_entity_id",
+          "type": "Event",
+          "json_mapping": {
+            "field": "formSubmissionId"
+          }
+        },
+        {
+          "column_name": "selected_vaccines",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "selected_vaccines"
+          }
+        },
+        {
+          "column_name": "selected_vaccines_counter",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "selected_vaccines_counter"
+          }
+        },
+        {
+          "column_name": "vaccine_date",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "booster_vaccine_date"
+          }
+        }
+      ]
     }
   ]
 }
