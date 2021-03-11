@@ -3,6 +3,7 @@ package org.smartregister.pathzeir.util;
 import android.content.ContentValues;
 
 import org.joda.time.DateTime;
+import org.json.JSONException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.robolectric.util.ReflectionHelpers;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.smartregister.Context;
 import org.smartregister.CoreLibrary;
 import org.smartregister.child.ChildLibrary;
@@ -119,6 +121,79 @@ public class AppUtilsTest {
         Assert.assertEquals("Default Location", AppUtils.getCurrentLocality());
         Mockito.verify(allSharedPreferences).saveCurrentLocality(String.valueOf(argumentCaptorSaveCurrentLocality.capture()));
         Assert.assertEquals("Default Location", argumentCaptorSaveCurrentLocality.getValue());
+    }
+
+    @Test
+    public void testValidateSpinnerValue() throws JSONException {
+        String initialJson = "{\n" +
+                "   \"count\":\"1\",\n" +
+                "   \"encounter_type\":\"Update Birth Registration\",\n" +
+                "   \"mother\":{\n" +
+                "      \"encounter_type\":\"New Woman Registration\"\n" +
+                "   },\n" +
+                "   \"entity_id\":\"d2812b33-2abe-482a-8838-c89fae8ac7b6\",\n" +
+                "   \"relational_id\":\"999891ad-1f4a-49c1-9186-029e1ce66509\",\n" +
+                "     \"step1\":{\n" +
+                "      \"title\":\"Update Birth Registration\",\n" +
+                "      \"fields\":[\n" +
+                "         {\n" +
+                "            \"key\":\"child_zone\",\n" +
+                "            \"openmrs_entity_parent\":\"usual_residence\",\n" +
+                "            \"openmrs_entity\":\"person_address\",\n" +
+                "            \"openmrs_entity_id\":\"address3\",\n" +
+                "            \"openmrs_data_type\":\"text\",\n" +
+                "            \"type\":\"spinner\",\n" +
+                "            \"sub_type\":\"location\",\n" +
+                "            \"hint\":\"The child's zone\",\n" +
+                "            \"value\":\"The child's zone\",\n" +
+                "            \"read_only\":false\n" +
+                "         }\n" +
+                "      ]\n" +
+                "   },\n" +
+                "   \"properties_file_name\":\"child_enrollment\",\n" +
+                "   \"current_zeir_id\":\"1704063\",\n" +
+                "   \"current_opensrp_id\":\"\",\n" +
+                "   \"invisible_required_fields\":\"[]\",\n" +
+                "   \"details\":{\n" +
+                "      \"appVersionName\":\"2.0.5-SNAPSHOT\",\n" +
+                "      \"formVersion\":\"\"\n" +
+                "   }\n" +
+                "}";
+        String finalJson = "{\n" +
+                "   \"count\":\"1\",\n" +
+                "   \"encounter_type\":\"Update Birth Registration\",\n" +
+                "   \"mother\":{\n" +
+                "      \"encounter_type\":\"New Woman Registration\"\n" +
+                "   },\n" +
+                "   \"entity_id\":\"d2812b33-2abe-482a-8838-c89fae8ac7b6\",\n" +
+                "   \"relational_id\":\"999891ad-1f4a-49c1-9186-029e1ce66509\",\n" +
+                "     \"step1\":{\n" +
+                "      \"title\":\"Update Birth Registration\",\n" +
+                "      \"fields\":[\n" +
+                "         {\n" +
+                "            \"key\":\"child_zone\",\n" +
+                "            \"openmrs_entity_parent\":\"usual_residence\",\n" +
+                "            \"openmrs_entity\":\"person_address\",\n" +
+                "            \"openmrs_entity_id\":\"address3\",\n" +
+                "            \"openmrs_data_type\":\"text\",\n" +
+                "            \"type\":\"spinner\",\n" +
+                "            \"sub_type\":\"location\",\n" +
+                "            \"hint\":\"The child's zone\",\n" +
+                "            \"read_only\":false\n" +
+                "         }\n" +
+                "      ]\n" +
+                "   },\n" +
+                "   \"properties_file_name\":\"child_enrollment\",\n" +
+                "   \"current_zeir_id\":\"1704063\",\n" +
+                "   \"current_opensrp_id\":\"\",\n" +
+                "   \"invisible_required_fields\":\"[]\",\n" +
+                "   \"details\":{\n" +
+                "      \"appVersionName\":\"2.0.5-SNAPSHOT\",\n" +
+                "      \"formVersion\":\"\"\n" +
+                "   }\n" +
+                "}";
+        String expectedJson = AppUtils.validateChildZone(initialJson);
+        JSONAssert.assertEquals(expectedJson, finalJson, false);
     }
 
     @After

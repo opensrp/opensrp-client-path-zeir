@@ -1,10 +1,12 @@
 package org.smartregister.pathzeir.presenter;
 
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.child.contract.ChildRegisterContract;
+import org.smartregister.child.domain.UpdateRegisterParams;
 import org.smartregister.child.presenter.BaseChildDetailsPresenter.CardStatus;
 import org.smartregister.child.presenter.BaseChildRegisterPresenter;
 import org.smartregister.clientandeventmodel.DateUtil;
@@ -16,6 +18,7 @@ import org.smartregister.repository.EventClientRepository;
 
 import java.util.Calendar;
 import java.util.Date;
+
 
 import timber.log.Timber;
 
@@ -55,4 +58,11 @@ public class AppChildRegisterPresenter extends BaseChildRegisterPresenter {
             }
         }
     }
+
+    @Override
+    public void saveForm(String jsonString, UpdateRegisterParams updateRegisterParams) {
+        String jsonForm = AppUtils.validateChildZone(jsonString);
+        super.saveForm(jsonForm, updateRegisterParams);
+    }
+
 }

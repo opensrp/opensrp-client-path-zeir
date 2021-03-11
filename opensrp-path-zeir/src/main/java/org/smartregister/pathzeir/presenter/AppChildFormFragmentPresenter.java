@@ -3,6 +3,8 @@ package org.smartregister.pathzeir.presenter;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.core.util.Pair;
 
@@ -35,13 +37,17 @@ import timber.log.Timber;
 
 import static com.vijay.jsonwizard.constants.JsonFormConstants.FIELDS;
 import static com.vijay.jsonwizard.constants.JsonFormConstants.STEP1;
+import static com.vijay.jsonwizard.constants.JsonFormConstants.VALUE;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.BIRTH_FACILITY_NAME;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.CHILD_ZONE;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.HOME_FACILITY;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.KEY;
 
 public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
 
     private final AppChildFormFragment formFragment;
     private final ChildFormActivity jsonFormView;
+    private String encounterType = null;
 
     public AppChildFormFragmentPresenter(JsonFormFragment formFragment, JsonFormInteractor jsonFormInteractor) {
         super(formFragment, jsonFormInteractor);
@@ -52,7 +58,10 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
     @Override
     public void addFormElements() {
         super.addFormElements();
-        String encounterType = null;
+        populateSpinners();
+    }
+
+    public void populateSpinners() {
         try {
             encounterType = formFragment.getJsonApi().getmJSONObject().getString(JsonFormConstants.ENCOUNTER_TYPE);
         } catch (JSONException e) {
@@ -64,7 +73,14 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
             String districtId = (tags != null && tags.size() > 0) ? tags.get(0).getLocationId() : "";
             populateLocationSpinner(districtId, HOME_FACILITY);
             populateLocationSpinner(districtId, BIRTH_FACILITY_NAME);
+            populateLocationSpinner(getDefaultHealthFacilityId(), CHILD_ZONE);
         }
+    }
+
+    private String getDefaultHealthFacilityId() {
+        String facilityId = getAllSharedPreferences().fetchUserLocalityId(getAllSharedPreferences().fetchRegisteredANM());
+        Location facility = getLocationById(facilityId);
+        return facility.getProperties().getParentId();
     }
 
     @Override
@@ -89,6 +105,10 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
                         }
                     }
                 }
+            } else if (key.equals(HOME_FACILITY)) {
+                JSONObject form = jsonFormView.getmJSONObject();
+                String healthFacilityId = ChildJsonFormUtils.getFieldValue(form.getJSONObject(STEP1).getJSONArray(FIELDS), HOME_FACILITY);
+                populateLocationSpinner(healthFacilityId, CHILD_ZONE);
             }
         } catch (Exception e) {
             Timber.e(e);
@@ -104,17 +124,22 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
         String selectedLocation = getCurrentLocation(spinnerKey);
 
         MaterialSpinner spinner = (MaterialSpinner) jsonFormView.getFormDataView(STEP1 + ":" + spinnerKey);
-        if (locations != null && !locations.isEmpty() && StringUtils.isNotBlank(selectedLocation)) {
-            Pair<JSONArray, JSONArray> options = populateLocationOptions(locations);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getView().getContext(), R.layout.native_form_simple_list_item_1,
-                    new Gson().fromJson(options.second != null ? options.second.toString() : null, String[].class));
-            spinner.setAdapter(adapter);
-            spinner.setOnItemSelectedListener(formFragment.getCommonListener());
-            spinner.setTag(R.id.keys, options.first);
-            spinner.setVisibility(View.VISIBLE);
-            spinner.setSelection(adapter.getPosition(selectedLocation) + 1);
-        } else {
-            spinner.setVisibility(View.GONE);
+        if (spinner != null) {
+            if (locations != null && !locations.isEmpty()) {
+                Pair<JSONArray, JSONArray> options = populateLocationOptions(locations);
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getView().getContext(), R.layout.native_form_simple_list_item_1,
+                        new Gson().fromJson(options.second != null ? options.second.toString() : null, String[].class));
+                spinner.setAdapter(adapter);
+                spinner.setTag(R.id.keys, options.first);
+                spinner.setVisibility(View.VISIBLE);
+                spinner.setOnItemSelectedListener(null);
+                if (encounterType.equalsIgnoreCase(AppConstants.EventTypeConstants.UPDATE_CHILD_REGISTRATION)
+                        && StringUtils.isNotBlank(selectedLocation))
+                    spinner.setSelection(adapter.getPosition(selectedLocation) + 1);
+                spinner.post(() -> spinner.setOnItemSelectedListener(formFragment.getCommonListener()));
+            } else {
+                spinner.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -128,8 +153,7 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
         try {
             JSONObject form = jsonFormView.getmJSONObject();
             if (form.getString(ChildJsonFormUtils.ENCOUNTER_TYPE).equals(Constants.EventType.UPDATE_BITRH_REGISTRATION)) {
-                String fieldValue = ChildJsonFormUtils.getFieldValue(form.getJSONObject(STEP1).getJSONArray(FIELDS), level);
-                facilityId = StringUtils.isBlank(fieldValue) ? facilityId : fieldValue;
+                facilityId = ChildJsonFormUtils.getFieldValue(form.getJSONObject(STEP1).getJSONArray(FIELDS), level);
             }
         } catch (JSONException e) {
             Timber.e(e, "Error loading current location");
@@ -160,6 +184,55 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
         }
 
         return new Pair<>(codes, values);
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+        if (compoundButton instanceof CheckBox
+                && encounterType.equalsIgnoreCase(AppConstants.EventTypeConstants.OUT_OF_CATCHMENT)
+                && compoundButton.isChecked()) {
+            String parentKey = (String) compoundButton.getTag(com.vijay.jsonwizard.R.id.key);
+            String childKey = (String) compoundButton.getTag(com.vijay.jsonwizard.R.id.childKey);
+
+            if (isValidChoice(parentKey, childKey)) {
+                super.onCheckedChanged(compoundButton, isChecked);
+            } else {
+                compoundButton.setChecked(false);
+            }
+        } else {
+            super.onCheckedChanged(compoundButton, isChecked);
+        }
+    }
+
+    private boolean isValidChoice(String parentKey, String childKey) {
+        try {
+            JSONObject form = formFragment.getJsonApi().getmJSONObject();
+            JSONObject step1 = form.getJSONObject(STEP1);
+            JSONArray fields = step1.getJSONArray(FIELDS);
+            for (int i = 0; i < fields.length(); i++) {
+                JSONObject field = fields.getJSONObject(i);
+                if (field.has(VALUE) && !field.getString(KEY).equalsIgnoreCase(parentKey)) {
+                    String values = field.getString(VALUE);
+                    if (!values.isEmpty()
+                            && valueContainsKey(new Gson().fromJson(values, String[].class), childKey)) {
+                        return false;
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    private boolean valueContainsKey(String[] values, String childKey) {
+        for (String value : values) {
+            String val = value.split(" ")[0];
+            String key = childKey.split(" ")[0];
+            if (val.equalsIgnoreCase(key))
+                return true;
+        }
+        return false;
     }
 
 }

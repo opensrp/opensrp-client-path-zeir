@@ -12,6 +12,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.child.activity.BaseChildRegisterActivity;
+import org.smartregister.child.domain.UpdateRegisterParams;
 import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
 import org.smartregister.child.util.Utils;
@@ -22,6 +23,7 @@ import org.smartregister.pathzeir.fragment.ChildRegisterFragment;
 import org.smartregister.pathzeir.model.AppChildRegisterModel;
 import org.smartregister.pathzeir.presenter.AppChildRegisterPresenter;
 import org.smartregister.pathzeir.util.AppConstants;
+import org.smartregister.pathzeir.util.AppUtils;
 import org.smartregister.pathzeir.view.NavDrawerActivity;
 import org.smartregister.pathzeir.view.NavigationMenu;
 import org.smartregister.view.fragment.BaseRegisterFragment;
@@ -129,5 +131,11 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
             clients.setTitle(getString(R.string.header_children));
         }
         bottomNavigationView.getMenu().removeItem(R.id.action_library);
+    }
+
+    @Override
+    public void saveForm(String jsonString, UpdateRegisterParams updateRegisterParam) {
+        String jsonForm = AppUtils.validateChildZone(jsonString);
+        super.saveForm(jsonForm, updateRegisterParam);
     }
 }
