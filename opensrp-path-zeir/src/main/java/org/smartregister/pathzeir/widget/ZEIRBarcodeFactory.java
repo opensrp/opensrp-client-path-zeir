@@ -31,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.smartregister.pathzeir.util.AppConstants;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -69,14 +70,15 @@ public class ZEIRBarcodeFactory implements FormWidgetFactory {
     public List<View> getViewsFromJson(final String stepName, final Context context,
                                        final JsonFormFragment formFragment, final JSONObject jsonObject,
                                        CommonListener listener, final boolean popup) throws Exception {
-
+        formFragment.getJsonApi().getmJSONObject().getString(JsonFormConstants.ENCOUNTER_TYPE);
         List<View> views = new ArrayList<>(1);
         final RelativeLayout rootLayout = getRootLayout(context);
         final int canvasId = ViewUtil.generateViewId();
         ((Activity) context).runOnUiThread(() -> {
             try {
                 rootLayout.setId(canvasId);
-                final MaterialEditText editText = createEditText(rootLayout, jsonObject, canvasId, stepName, popup);
+                final String encounterType = formFragment.getJsonApi().getmJSONObject().getString(JsonFormConstants.ENCOUNTER_TYPE);
+                final MaterialEditText editText = createEditText(rootLayout, jsonObject, canvasId, stepName, popup, encounterType);
                 attachJson(rootLayout, context, jsonObject, editText);
                 ((JsonApi) context).addFormDataView(editText);
             } catch (JSONException e) {
@@ -156,7 +158,7 @@ public class ZEIRBarcodeFactory implements FormWidgetFactory {
         }
     }
 
-    private MaterialEditText createEditText(RelativeLayout rootLayout, JSONObject jsonObject, int canvasId, String stepName, boolean popup) throws JSONException {
+    private MaterialEditText createEditText(RelativeLayout rootLayout, JSONObject jsonObject, int canvasId, String stepName, boolean popup, String encounterType) throws JSONException {
         final MaterialEditText editText = rootLayout.findViewById(com.vijay.jsonwizard.R.id.edit_text);
         String openMrsEntityParent = jsonObject.getString(JsonFormConstants.OPENMRS_ENTITY_PARENT);
         String openMrsEntity = jsonObject.getString(JsonFormConstants.OPENMRS_ENTITY);
@@ -181,6 +183,11 @@ public class ZEIRBarcodeFactory implements FormWidgetFactory {
                         new RequiredValidator(requiredObject.getString(JsonFormConstants.ERR)));
                 FormUtils.setRequiredOnHint(editText);
             }
+        }
+        // Make ZEIR Id field read-only for Birth Registration Form
+        if (encounterType.equalsIgnoreCase(AppConstants.EventTypeConstants.CHILD_REGISTRATION)) {
+            editText.setFocusable(false);
+            editText.setFocusableInTouchMode(false);
         }
         return editText;
     }
