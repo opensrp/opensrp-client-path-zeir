@@ -81,6 +81,7 @@ public class AdvancedSearchFragment extends BaseAdvancedSearchFragment {
         cardId = view.findViewById(R.id.card_id);
         cardId.addTextChangedListener(advancedSearchTextwatcher);
         cardId.setEnabled(true);
+        cardId.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         Button scanCardQRCodeView = view.findViewById(R.id.scanCardButton);
         scanCardQRCodeView.setText(R.string.scan_qr_code);

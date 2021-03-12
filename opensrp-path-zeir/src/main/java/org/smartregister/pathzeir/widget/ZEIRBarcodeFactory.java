@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -175,6 +176,7 @@ public class ZEIRBarcodeFactory implements FormWidgetFactory {
         editText.setTag(com.vijay.jsonwizard.R.id.extraPopup, popup);
         editText.setTag(com.vijay.jsonwizard.R.id.openmrs_entity, openMrsEntity);
         editText.setTag(com.vijay.jsonwizard.R.id.openmrs_entity_id, openMrsEntityId);
+        editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         if (jsonObject.has(JsonFormConstants.V_REQUIRED)) {
             JSONObject requiredObject = jsonObject.optJSONObject(JsonFormConstants.V_REQUIRED);
             boolean requiredValue = requiredObject.getBoolean(JsonFormConstants.VALUE);
