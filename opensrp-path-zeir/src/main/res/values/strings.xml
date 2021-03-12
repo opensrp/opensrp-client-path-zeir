@@ -84,7 +84,7 @@
     <string name="supported_by">Supported by</string>
 
     <string name="child_birth_registration_number">Child\'s birth registration number</string>
-    <string name="child_unique_id">Child\'s unique government ID</string>
+    <string name="child_unique_id">Child\'s birth certificate number</string>
     <string name="child_first_name">Child\'s first name</string>
     <string name="child_last_name">Child\'s last name</string>
     <string name="dob_range">Child\'s date of birth (range)</string>
@@ -484,5 +484,8 @@
     <string name="CHN3_085_O">Measles/ MR 2 (at 18 months) at outreach</string>
     <string name="CHN3_090">Number of days fridge non-functional</string>
     <string name="daily_tallies_with_day">Daily Tallies &gt; %1s</string>
+
+    <string name="child_birth_certificate">Birth Certificate Number</string>
+    <string name="child_register_card_number">Registration Card Number</string>
 
 </resources>

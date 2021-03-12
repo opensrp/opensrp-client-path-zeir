@@ -214,7 +214,7 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
                 if (field.has(VALUE) && !field.getString(KEY).equalsIgnoreCase(parentKey)) {
                     String values = field.getString(VALUE);
                     if (!values.isEmpty()
-                            && valueContainsKey(new Gson().fromJson(values, String[].class), childKey)) {
+                            && valueContainsKey(getArray(values), childKey)) {
                         return false;
                     }
                 }
@@ -223,6 +223,15 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
             e.printStackTrace();
         }
         return true;
+    }
+
+    private String[] getArray(String values) {
+        try {
+            return new Gson().fromJson(values, String[].class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new String[0];
     }
 
     private boolean valueContainsKey(String[] values, String childKey) {
