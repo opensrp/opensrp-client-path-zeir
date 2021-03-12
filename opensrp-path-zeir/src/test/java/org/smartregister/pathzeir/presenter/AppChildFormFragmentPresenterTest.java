@@ -135,7 +135,8 @@ public class AppChildFormFragmentPresenterTest extends BaseUnitTest {
                 "        \"v_required\": {\n" +
                 "          \"value\": \"true\",\n" +
                 "          \"err\": \"Enter the date of service\"\n" +
-                "        }\n" +
+                "        },\n" +
+                "        \"value\": \"12-03-2021\"\n" +
                 "      },\n" +
                 "      {\n" +
                 "        \"key\": \"Vaccines_Provided_Label\",\n" +
