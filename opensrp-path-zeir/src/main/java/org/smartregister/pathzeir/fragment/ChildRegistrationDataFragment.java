@@ -101,7 +101,7 @@ public class ChildRegistrationDataFragment extends BaseChildRegistrationDataFrag
         setmAdapter(new ChildRegistrationDataAdapter(detailsList));
     }
 
-    private String getFieldValue(Map<String, String> detailsMap, Field field, String key) {
+    protected String getFieldValue(Map<String, String> detailsMap, Field field, String key) {
         String value;
         value = detailsMap.get(field.getKey().toLowerCase(Locale.getDefault()));
         value = !StringUtils.isBlank(value) ? value : detailsMap.get(getPrefix(field.getEntityId()) + key.toLowerCase(Locale.getDefault()));
