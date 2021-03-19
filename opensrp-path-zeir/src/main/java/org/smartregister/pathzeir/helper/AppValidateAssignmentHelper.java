@@ -29,8 +29,4 @@ public class AppValidateAssignmentHelper extends ValidateAssignmentHelper {
                 .map(PhysicalLocation::getId).collect(Collectors.toSet());
     }
 
-    @Override
-    public void validateUserAssignment() {
-        // Do Nothing
-    }
 }
