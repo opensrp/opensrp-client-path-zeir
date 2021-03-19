@@ -25,7 +25,7 @@ public class AppSyncConfiguration extends SyncConfiguration {
     @Override
     public String getSyncFilterValue() {
         String providerId = Context.getInstance().allSharedPreferences().fetchRegisteredANM();
-        return org.smartregister.Context.getInstance().allSharedPreferences().fetchDefaultTeamId(providerId);
+        return Context.getInstance().allSharedPreferences().fetchDefaultTeamId(providerId);
     }
 
     @Override
