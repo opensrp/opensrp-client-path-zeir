@@ -20,7 +20,6 @@ import org.smartregister.job.SyncServiceJob;
 import org.smartregister.job.SyncSettingsServiceJob;
 import org.smartregister.job.ValidateSyncDataServiceJob;
 import org.smartregister.pathzeir.reporting.dropuout.job.DropoutIntentServiceJob;
-import org.smartregister.pathzeir.reporting.monthly.job.HiA2IntentServiceJob;
 import org.smartregister.pathzeir.reporting.stock.job.StockSyncIntentServiceJob;
 import org.smartregister.pathzeir.service.intent.AppSyncIntentService;
 import org.smartregister.pathzeir.service.intent.ArchiveChildrenAgedAboveFiveIntentService;
@@ -68,8 +67,6 @@ public class AppJobCreator implements JobCreator {
                 return new DropoutIntentServiceJob();
             case StockSyncIntentServiceJob.TAG:
                 return new StockSyncIntentServiceJob();
-            case HiA2IntentServiceJob.TAG:
-                return new HiA2IntentServiceJob();
             default:
                 Timber.w("%s is not declared in Job Creator", tag);
                 return null;

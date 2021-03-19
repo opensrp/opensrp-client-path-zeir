@@ -40,9 +40,9 @@ import org.smartregister.pathzeir.BuildConfig;
 import org.smartregister.pathzeir.reporting.coverage.CoverageReportsActivity;
 import org.smartregister.pathzeir.reporting.dropuout.DropoutReportsActivity;
 import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsActivity;
+import org.smartregister.pathzeir.reporting.monthly.intent.HIA2IntentService;
 import org.smartregister.pathzeir.reporting.stock.ZeirStockActivity;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
-import org.smartregister.reporting.service.IndicatorGeneratorIntentService;
 import org.smartregister.pathzeir.R;
 import org.smartregister.pathzeir.activity.ChildRegisterActivity;
 import org.smartregister.pathzeir.application.ZeirApplication;
@@ -195,10 +195,11 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
     private void syncApp(final Activity parentActivity) {
         syncMenuItem.setOnClickListener(v -> {
-            Intent intent = new Intent(parentActivity, IndicatorGeneratorIntentService.class);
+            // Call HiA2Intent Service to generate Reporting indicators
+            Intent intent = new Intent(parentActivity, HIA2IntentService.class);
             parentActivity.startService(intent);
             mPresenter.sync(parentActivity);
-            Timber.i("IndicatorGeneratorIntentService start service called");
+            Timber.i("HIA2IntentService start service called");
         });
     }
 
