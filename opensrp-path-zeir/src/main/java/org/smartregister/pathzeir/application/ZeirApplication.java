@@ -101,6 +101,7 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
     private CumulativeRepository cumulativeRepository;
     private CumulativePatientRepository cumulativePatientRepository;
     private CumulativeIndicatorRepository cumulativeIndicatorRepository;
+    private List<String> syncLocations = new ArrayList<>();
 
     public static JsonSpecHelper getJsonSpecHelper() {
         return jsonSpecHelper;
@@ -268,6 +269,7 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
 
         SyncStatusBroadcastReceiver.init(this);
         LocationHelper.init(new ArrayList<>(Arrays.asList(BuildConfig.ALLOWED_LEVELS)), BuildConfig.DEFAULT_LOCATION);
+
         jsonSpecHelper = new JsonSpecHelper(this);
 
         //init Job Manager
@@ -511,5 +513,12 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
         return cumulativeIndicatorRepository;
     }
 
+    public void setSyncLocations(List<String> syncLocations) {
+        this.syncLocations = syncLocations;
+    }
+
+    public List<String> getSyncLocations() {
+        return syncLocations;
+    }
 }
 

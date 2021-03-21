@@ -7,9 +7,9 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.pathzeir.BaseUnitTest;
 import org.smartregister.pathzeir.contract.NavigationContract;
+import org.smartregister.repository.AllSharedPreferences;
 
 import java.util.Date;
 

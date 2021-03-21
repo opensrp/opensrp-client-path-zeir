@@ -28,8 +28,8 @@ import org.smartregister.domain.Client;
 import org.smartregister.domain.Event;
 import org.smartregister.domain.db.EventClient;
 import org.smartregister.location.helper.LocationHelper;
-import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.pathzeir.application.ZeirApplication;
+import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.view.activity.BaseProfileActivity;
 import org.smartregister.view.activity.DrishtiApplication;
 

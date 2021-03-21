@@ -1,13 +1,12 @@
 package org.smartregister.pathzeir.helper;
 
-import java.util.Set;
-
 import org.smartregister.CoreLibrary;
 import org.smartregister.domain.PhysicalLocation;
 import org.smartregister.repository.LocationRepository;
 import org.smartregister.sync.helper.ValidateAssignmentHelper;
 import org.smartregister.util.SyncUtils;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AppValidateAssignmentHelper extends ValidateAssignmentHelper {

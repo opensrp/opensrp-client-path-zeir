@@ -73,14 +73,9 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
             String districtId = (tags != null && tags.size() > 0) ? tags.get(0).getLocationId() : "";
             populateLocationSpinner(districtId, HOME_FACILITY);
             populateLocationSpinner(districtId, BIRTH_FACILITY_NAME);
-            populateLocationSpinner(getDefaultHealthFacilityId(), CHILD_ZONE);
+            String facilityLocationId = getAllSharedPreferences().fetchDefaultLocalityId(getAllSharedPreferences().fetchRegisteredANM());
+            populateLocationSpinner(facilityLocationId, CHILD_ZONE);
         }
-    }
-
-    private String getDefaultHealthFacilityId() {
-        String facilityId = getAllSharedPreferences().fetchUserLocalityId(getAllSharedPreferences().fetchRegisteredANM());
-        Location facility = getLocationById(facilityId);
-        return facility.getProperties().getParentId();
     }
 
     @Override

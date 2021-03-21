@@ -9,9 +9,7 @@ import org.smartregister.growthmonitoring.job.WeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.ZScoreRefreshIntentServiceJob;
 import org.smartregister.immunization.job.VaccineServiceJob;
 import org.smartregister.job.ImageUploadServiceJob;
-import org.smartregister.job.SyncAllLocationsServiceJob;
 import org.smartregister.job.SyncServiceJob;
-import org.smartregister.job.SyncSettingsServiceJob;
 import org.smartregister.pathzeir.contract.NavigationContract;
 import org.smartregister.pathzeir.interactor.NavigationInteractor;
 import org.smartregister.pathzeir.model.NavigationModel;
@@ -55,12 +53,10 @@ public class NavigationPresenter implements NavigationContract.Presenter {
     public void sync(Activity activity) {
         ImageUploadServiceJob.scheduleJobImmediately(ImageUploadServiceJob.TAG);
         SyncServiceJob.scheduleJobImmediately(SyncServiceJob.TAG);
-        SyncSettingsServiceJob.scheduleJobImmediately(SyncSettingsServiceJob.TAG);
         ZScoreRefreshIntentServiceJob.scheduleJobImmediately(ZScoreRefreshIntentServiceJob.TAG);
         WeightIntentServiceJob.scheduleJobImmediately(WeightIntentServiceJob.TAG);
         HeightIntentServiceJob.scheduleJobImmediately(HeightIntentServiceJob.TAG);
         VaccineServiceJob.scheduleJobImmediately(VaccineServiceJob.TAG);
-        SyncAllLocationsServiceJob.scheduleJobImmediately(SyncAllLocationsServiceJob.TAG);
         SyncStockServiceJob.scheduleJobImmediately(SyncStockServiceJob.TAG);
     }
 

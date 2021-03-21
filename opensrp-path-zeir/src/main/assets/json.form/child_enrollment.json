@@ -127,7 +127,7 @@
           "err": "{{child_enrollment.step1.first_name.v_regex.err}}"
         },
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{child_enrollment.step1.first_name.v_required.err}}"
         }
       },

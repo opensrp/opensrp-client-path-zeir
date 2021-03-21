@@ -1,6 +1,7 @@
 package org.smartregister.pathzeir.application;
 
-import org.smartregister.Context;
+import android.text.TextUtils;
+
 import org.smartregister.SyncConfiguration;
 import org.smartregister.SyncFilter;
 import org.smartregister.pathzeir.BuildConfig;
@@ -19,13 +20,12 @@ public class AppSyncConfiguration extends SyncConfiguration {
 
     @Override
     public SyncFilter getSyncFilterParam() {
-        return SyncFilter.TEAM_ID;
+        return SyncFilter.LOCATION;
     }
 
     @Override
     public String getSyncFilterValue() {
-        String providerId = Context.getInstance().allSharedPreferences().fetchRegisteredANM();
-        return org.smartregister.Context.getInstance().allSharedPreferences().fetchDefaultTeamId(providerId);
+        return TextUtils.join(",", ZeirApplication.getInstance().getSyncLocations());
     }
 
     @Override
@@ -82,5 +82,6 @@ public class AppSyncConfiguration extends SyncConfiguration {
     public Class<? extends BaseLoginActivity> getAuthenticationActivity() {
         return LoginActivity.class;
     }
+
 }
 

@@ -15,7 +15,6 @@ import org.joda.time.LocalDate;
 import org.joda.time.Months;
 import org.smartregister.child.util.Utils;
 import org.smartregister.immunization.db.VaccineRepo;
-
 import org.smartregister.immunization.repository.VaccineRepository;
 import org.smartregister.pathzeir.application.ZeirApplication;
 import org.smartregister.pathzeir.reporting.dropuout.domain.Cohort;

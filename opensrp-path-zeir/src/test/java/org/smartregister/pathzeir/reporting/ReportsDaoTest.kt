@@ -10,9 +10,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
-import org.smartregister.repository.Repository
 import org.smartregister.pathzeir.reporting.ReportsDao.SqlQueries
 import org.smartregister.pathzeir.reporting.annual.coverage.domain.CoverageTargetType
+import org.smartregister.repository.Repository
 import java.util.*
 
 class ReportsDaoTest {

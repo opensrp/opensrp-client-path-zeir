@@ -1,5 +1,6 @@
 package org.smartregister.pathzeir.interactor;
 
+import org.smartregister.child.ChildLibrary;
 import org.smartregister.child.job.ArchiveClientsJob;
 import org.smartregister.growthmonitoring.job.HeightIntentServiceJob;
 import org.smartregister.growthmonitoring.job.WeightIntentServiceJob;
@@ -12,6 +13,7 @@ import org.smartregister.job.SyncAllLocationsServiceJob;
 import org.smartregister.job.SyncServiceJob;
 import org.smartregister.login.interactor.BaseLoginInteractor;
 import org.smartregister.pathzeir.BuildConfig;
+import org.smartregister.pathzeir.application.ZeirApplication;
 import org.smartregister.pathzeir.job.AppVaccineUpdateJob;
 import org.smartregister.pathzeir.reporting.annual.coverage.job.SyncAnnualReportWorker;
 import org.smartregister.pathzeir.reporting.dropuout.job.DropoutIntentServiceJob;
@@ -20,6 +22,7 @@ import org.smartregister.pathzeir.reporting.stock.job.StockSyncIntentServiceJob;
 import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
 import org.smartregister.view.contract.BaseLoginContract;
 
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class LoginInteractor extends BaseLoginInteractor implements BaseLoginContract.Interactor {
@@ -44,10 +47,8 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
                 TimeUnit.MINUTES.toMinutes(BuildConfig.DATA_SYNC_DURATION_MINUTES),
                 getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
 
+        //This will also take care of SyncServiceJob when done
         SyncServiceJob.scheduleJob(SyncServiceJob.TAG, TimeUnit.MINUTES.toMinutes(BuildConfig.DATA_SYNC_DURATION_MINUTES),
-                getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
-
-        SyncAllLocationsServiceJob.scheduleJob(SyncAllLocationsServiceJob.TAG, TimeUnit.MINUTES.toMinutes(BuildConfig.DATA_SYNC_DURATION_MINUTES),
                 getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
 
         PullUniqueIdsServiceJob.scheduleJob(PullUniqueIdsServiceJob.TAG, TimeUnit.MINUTES.toMinutes(BuildConfig.PULL_UNIQUE_IDS_MINUTES),
@@ -80,6 +81,9 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
 
     @Override
     protected void scheduleJobsImmediately() {
+        //Sync data for allowed locations only i.e Health facility and Zone levels below the facility
+        ZeirApplication.getInstance().setSyncLocations(ChildLibrary.getInstance().getAllowedLevelLocationIds(Arrays.asList(BuildConfig.ALLOWED_LEVELS)));
+
         SyncServiceJob.scheduleJobImmediately(SyncServiceJob.TAG);
         SyncAllLocationsServiceJob.scheduleJobImmediately(SyncAllLocationsServiceJob.TAG);
         PullUniqueIdsServiceJob.scheduleJobImmediately(PullUniqueIdsServiceJob.TAG);
