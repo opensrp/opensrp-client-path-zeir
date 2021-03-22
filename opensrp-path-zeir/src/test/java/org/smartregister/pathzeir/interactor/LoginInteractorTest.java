@@ -35,7 +35,7 @@ public class LoginInteractorTest extends BaseRobolectricTest {
         loginInteractor.scheduleJobsPeriodically();
         Assert.assertTrue(ShadowBaseJob.getShadowHelper().isCalled(ShadowBaseJob.scheduleJobMN));
         HashMap<Integer, ArrayList<Object>> methodCalls = ShadowBaseJob.getShadowHelper().getMethodCalls(ShadowBaseJob.scheduleJobMN);
-        assertEquals(13, methodCalls.size());
+        assertEquals(12, methodCalls.size());
         assertEquals(VaccineServiceJob.TAG, methodCalls.get(0).get(0));
         for (int i = 0; i < methodCalls.size(); i++) {
             ArrayList<Object> items = methodCalls.get(i);
