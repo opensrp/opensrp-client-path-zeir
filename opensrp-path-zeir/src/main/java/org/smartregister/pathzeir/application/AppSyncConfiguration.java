@@ -1,10 +1,10 @@
 package org.smartregister.pathzeir.application;
 
-import org.smartregister.Context;
 import org.smartregister.SyncConfiguration;
 import org.smartregister.SyncFilter;
 import org.smartregister.pathzeir.BuildConfig;
 import org.smartregister.pathzeir.activity.LoginActivity;
+import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.view.activity.BaseLoginActivity;
 
 import java.util.ArrayList;
@@ -19,13 +19,14 @@ public class AppSyncConfiguration extends SyncConfiguration {
 
     @Override
     public SyncFilter getSyncFilterParam() {
-        return SyncFilter.TEAM_ID;
+        return SyncFilter.LOCATION;
     }
 
     @Override
     public String getSyncFilterValue() {
-        String providerId = Context.getInstance().allSharedPreferences().fetchRegisteredANM();
-        return Context.getInstance().allSharedPreferences().fetchDefaultTeamId(providerId);
+        AllSharedPreferences sharedPreferences = ZeirApplication.getInstance().context().userService()
+                .getAllSharedPreferences();
+        return sharedPreferences.fetchDefaultLocalityId(sharedPreferences.fetchRegisteredANM());
     }
 
     @Override
