@@ -19,7 +19,6 @@ import org.smartregister.pathzeir.reporting.dropuout.domain.CumulativeIndicator;
 import org.smartregister.pathzeir.reporting.dropuout.receiver.CoverageDropoutBroadcastReceiver;
 import org.smartregister.pathzeir.reporting.dropuout.repository.CumulativeIndicatorRepository;
 
-
 import java.io.Serializable;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;

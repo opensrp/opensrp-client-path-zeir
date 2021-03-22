@@ -5,3 +5,10 @@ priority: 1
 condition: "step1_place_of_birth == 'health_facility'"
 actions:
   - "isRelevant = true"
+---
+name: step1_birth_facility_name_other
+description: birth_facility_name_other
+priority: 1
+condition: "step1_birth_facility_name == 'other'"
+actions:
+  - "isRelevant = true"

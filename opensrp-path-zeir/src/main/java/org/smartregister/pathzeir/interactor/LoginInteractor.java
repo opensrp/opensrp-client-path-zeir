@@ -43,10 +43,8 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
                 TimeUnit.MINUTES.toMinutes(BuildConfig.DATA_SYNC_DURATION_MINUTES),
                 getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
 
+        //This will also take care of SyncServiceJob when done
         SyncServiceJob.scheduleJob(SyncServiceJob.TAG, TimeUnit.MINUTES.toMinutes(BuildConfig.DATA_SYNC_DURATION_MINUTES),
-                getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
-
-        SyncAllLocationsServiceJob.scheduleJob(SyncAllLocationsServiceJob.TAG, TimeUnit.MINUTES.toMinutes(BuildConfig.DATA_SYNC_DURATION_MINUTES),
                 getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
 
         PullUniqueIdsServiceJob.scheduleJob(PullUniqueIdsServiceJob.TAG, TimeUnit.MINUTES.toMinutes(BuildConfig.PULL_UNIQUE_IDS_MINUTES),

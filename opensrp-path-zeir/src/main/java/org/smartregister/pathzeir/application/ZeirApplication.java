@@ -268,6 +268,7 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
 
         SyncStatusBroadcastReceiver.init(this);
         LocationHelper.init(new ArrayList<>(Arrays.asList(BuildConfig.ALLOWED_LEVELS)), BuildConfig.DEFAULT_LOCATION);
+
         jsonSpecHelper = new JsonSpecHelper(this);
 
         //init Job Manager
@@ -511,5 +512,10 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
         return cumulativeIndicatorRepository;
     }
 
+    public String getSyncLocations() {
+        if (LocationHelper.getInstance() != null && LocationHelper.getInstance().locationIdsFromHierarchy() != null)
+            return LocationHelper.getInstance().locationIdsFromHierarchy();
+        return "";
+    }
 }
 

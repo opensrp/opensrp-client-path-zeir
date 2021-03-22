@@ -9,7 +9,6 @@ import org.apache.commons.lang3.tuple.Triple;
 import org.smartregister.child.domain.NamedObject;
 import org.smartregister.child.toolbar.LocationSwitcherToolbar;
 import org.smartregister.immunization.db.VaccineRepo;
-
 import org.smartregister.pathzeir.R;
 import org.smartregister.pathzeir.reporting.BaseReportActivity;
 import org.smartregister.pathzeir.reporting.dropuout.receiver.CoverageDropoutBroadcastReceiver;

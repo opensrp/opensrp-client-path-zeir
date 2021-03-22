@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.pathzeir.R;
 import org.smartregister.pathzeir.reporting.dropuout.domain.CoverageHolder;
 
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;

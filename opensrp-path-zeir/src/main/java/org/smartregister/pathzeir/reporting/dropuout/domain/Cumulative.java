@@ -2,7 +2,6 @@ package org.smartregister.pathzeir.reporting.dropuout.domain;
 
 import android.util.Log;
 
-
 import org.smartregister.pathzeir.reporting.dropuout.repository.CumulativeRepository;
 
 import java.io.Serializable;

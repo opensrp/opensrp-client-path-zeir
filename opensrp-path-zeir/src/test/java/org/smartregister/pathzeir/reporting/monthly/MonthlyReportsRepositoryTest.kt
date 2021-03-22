@@ -5,11 +5,11 @@ import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
-import org.smartregister.reporting.domain.IndicatorTally
-import org.smartregister.reporting.repository.DailyIndicatorCountRepository
 import org.smartregister.pathzeir.reporting.ReportingTestDataProvider.getSentMonthlyTallies
 import org.smartregister.pathzeir.reporting.ReportsDao
 import org.smartregister.pathzeir.reporting.common.ReportingUtils
+import org.smartregister.reporting.domain.IndicatorTally
+import org.smartregister.reporting.repository.DailyIndicatorCountRepository
 import java.util.*
 
 class MonthlyReportsRepositoryTest {

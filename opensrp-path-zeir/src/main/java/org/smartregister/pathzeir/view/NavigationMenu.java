@@ -48,8 +48,14 @@ import org.smartregister.pathzeir.activity.ChildRegisterActivity;
 import org.smartregister.pathzeir.application.ZeirApplication;
 import org.smartregister.pathzeir.contract.NavigationContract;
 import org.smartregister.pathzeir.presenter.NavigationPresenter;
+import org.smartregister.pathzeir.reporting.coverage.CoverageReportsActivity;
+import org.smartregister.pathzeir.reporting.dropuout.DropoutReportsActivity;
+import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsActivity;
 import org.smartregister.pathzeir.reporting.register.ReportRegisterActivity;
+import org.smartregister.pathzeir.reporting.stock.ZeirStockActivity;
 import org.smartregister.pathzeir.util.AppConstants;
+import org.smartregister.receiver.SyncStatusBroadcastReceiver;
+import org.smartregister.reporting.service.IndicatorGeneratorIntentService;
 import org.smartregister.util.FormUtils;
 import org.smartregister.util.LangUtils;
 
