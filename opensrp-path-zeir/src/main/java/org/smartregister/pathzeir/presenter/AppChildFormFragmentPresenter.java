@@ -6,8 +6,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-import androidx.core.util.Pair;
-
 import com.google.gson.Gson;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.customviews.MaterialSpinner;
@@ -18,19 +16,16 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smartregister.CoreLibrary;
-import org.smartregister.child.ChildLibrary;
+import org.smartregister.AllConstants;
 import org.smartregister.child.presenter.ChildFormFragmentPresenter;
-import org.smartregister.child.util.ChildJsonFormUtils;
-import org.smartregister.child.util.Constants;
-import org.smartregister.domain.Location;
-import org.smartregister.domain.LocationTag;
+import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.pathzeir.R;
 import org.smartregister.pathzeir.activity.ChildFormActivity;
 import org.smartregister.pathzeir.fragment.AppChildFormFragment;
 import org.smartregister.pathzeir.util.AppConstants;
-import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.util.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import timber.log.Timber;
@@ -58,10 +53,7 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
     @Override
     public void addFormElements() {
         super.addFormElements();
-        populateSpinners();
-    }
-
-    public void populateSpinners() {
+        //Set Health Facility to default location
         try {
             encounterType = formFragment.getJsonApi().getmJSONObject().getString(JsonFormConstants.ENCOUNTER_TYPE);
         } catch (JSONException e) {
@@ -69,12 +61,54 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
         }
         if (encounterType != null && (encounterType.equalsIgnoreCase(AppConstants.EventTypeConstants.CHILD_REGISTRATION)
                 || encounterType.equalsIgnoreCase(AppConstants.EventTypeConstants.UPDATE_CHILD_REGISTRATION))) {
-            List<LocationTag> tags = getDistrictTags();
-            String districtId = (tags != null && tags.size() > 0) ? tags.get(0).getLocationId() : "";
-            populateLocationSpinner(districtId, HOME_FACILITY);
-            populateLocationSpinner(districtId, BIRTH_FACILITY_NAME);
-            String facilityLocationId = getAllSharedPreferences().fetchDefaultLocalityId(getAllSharedPreferences().fetchRegisteredANM());
-            populateLocationSpinner(facilityLocationId, CHILD_ZONE);
+
+            String facilityName = LocationHelper.getInstance().getDefaultLocation(); //Default location always the Health Facility
+            populateLocationSpinner(HOME_FACILITY, getSpinnerKeys(facilityName), getSpinnerValues(facilityName));
+
+            String other = formFragment.getString(R.string.other);
+            String facilities = facilityName + "," + other;
+            populateLocationSpinner(BIRTH_FACILITY_NAME, getSpinnerKeys(facilities), getSpinnerValues(facilities));
+
+            String operationalAreas = Utils.getAllSharedPreferences().getPreference(AllConstants.OPERATIONAL_AREAS); // Operational areas are at the ZONE level
+            populateLocationSpinner(CHILD_ZONE, getSpinnerKeys(operationalAreas), getSpinnerValues(operationalAreas));
+
+        }
+    }
+
+    private JSONArray getSpinnerKeys(String locations) {
+        JSONArray keys = new JSONArray();
+        String[] splitLocations = locations.split(",");
+
+        for (String location : splitLocations) {
+            keys.put(location.trim().toLowerCase().replace(" ", "_"));
+        }
+        return keys;
+    }
+
+    private String[] getSpinnerValues(String locations) {
+        List<String> values = new ArrayList<>();
+        String[] splitLocations = locations.split(",");
+        for (String splitLocation : splitLocations) {
+            String location = splitLocation.trim();
+            values.add(location);
+        }
+        return values.toArray(new String[]{});
+    }
+
+    private void populateLocationSpinner(String fieldName, JSONArray spinnerOptionKeys, String[] spinnerOptionValues) {
+
+        MaterialSpinner spinner = (MaterialSpinner) jsonFormView.getFormDataView(JsonFormConstants.STEP1 + ":" + fieldName);
+        if (spinnerOptionValues != null && spinnerOptionValues.length > 0 && spinnerOptionKeys != null && spinnerOptionKeys.length() > 0) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(getView().getContext(), R.layout.native_form_simple_list_item_1, spinnerOptionValues);
+            spinner.setAdapter(adapter);
+            spinner.setOnItemSelectedListener(formFragment.getCommonListener());
+            spinner.setTag(R.id.keys, spinnerOptionKeys);
+            spinner.setVisibility(View.VISIBLE);
+            if (adapter.getCount() == 1) {
+                spinner.setSelection(1);
+            }
+        } else {
+            spinner.setVisibility(View.GONE);
         }
     }
 
@@ -83,7 +117,6 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
         super.onItemSelected(parent, view, position, id);
         String key = (String) parent.getTag(R.id.key);
         try {
-
             if (key.equals(AppConstants.KeyConstants.REACTION_VACCINE)) {
                 MaterialSpinner spinnerReactionVaccine = (MaterialSpinner) ((ChildFormActivity)
                         formFragment.requireActivity()).getFormDataView(
@@ -100,86 +133,12 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
                         }
                     }
                 }
-            } else if (key.equals(HOME_FACILITY)) {
-                JSONObject form = jsonFormView.getmJSONObject();
-                String healthFacilityId = ChildJsonFormUtils.getFieldValue(form.getJSONObject(STEP1).getJSONArray(FIELDS), HOME_FACILITY);
-                populateLocationSpinner(healthFacilityId, CHILD_ZONE);
             }
         } catch (Exception e) {
             Timber.e(e);
         }
     }
 
-    private List<LocationTag> getDistrictTags() {
-        return ChildLibrary.getInstance().context().getLocationTagRepository().getLocationTagsByTagName(AppConstants.KeyConstants.DISTRICT);
-    }
-
-    private void populateLocationSpinner(String parentLocationId, String spinnerKey) {
-        List<Location> locations = getLocationsByParentId(parentLocationId);
-        String selectedLocation = getCurrentLocation(spinnerKey);
-
-        MaterialSpinner spinner = (MaterialSpinner) jsonFormView.getFormDataView(STEP1 + ":" + spinnerKey);
-        if (spinner != null) {
-            if (locations != null && !locations.isEmpty()) {
-                Pair<JSONArray, JSONArray> options = populateLocationOptions(locations);
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getView().getContext(), R.layout.native_form_simple_list_item_1,
-                        new Gson().fromJson(options.second != null ? options.second.toString() : null, String[].class));
-                spinner.setAdapter(adapter);
-                spinner.setTag(R.id.keys, options.first);
-                spinner.setVisibility(View.VISIBLE);
-                spinner.setOnItemSelectedListener(null);
-                if (encounterType.equalsIgnoreCase(AppConstants.EventTypeConstants.UPDATE_CHILD_REGISTRATION)
-                        && StringUtils.isNotBlank(selectedLocation))
-                    spinner.setSelection(adapter.getPosition(selectedLocation) + 1);
-                spinner.post(() -> spinner.setOnItemSelectedListener(formFragment.getCommonListener()));
-            } else {
-                spinner.setVisibility(View.GONE);
-            }
-        }
-    }
-
-    private List<Location> getLocationsByParentId(String parentId) {
-        return ChildLibrary.getInstance().getLocationRepository().getLocationsByParentId(parentId);
-    }
-
-    private String getCurrentLocation(String level) {
-        String facilityId = getAllSharedPreferences().fetchUserLocalityId(getAllSharedPreferences().fetchRegisteredANM());
-
-        try {
-            JSONObject form = jsonFormView.getmJSONObject();
-            if (form.getString(ChildJsonFormUtils.ENCOUNTER_TYPE).equals(Constants.EventType.UPDATE_BITRH_REGISTRATION)) {
-                facilityId = ChildJsonFormUtils.getFieldValue(form.getJSONObject(STEP1).getJSONArray(FIELDS), level);
-            }
-        } catch (JSONException e) {
-            Timber.e(e, "Error loading current location");
-        }
-
-        Location facility = getLocationById(facilityId);
-
-        return facility != null ? facility.getProperties().getName() : null;
-    }
-
-    private AllSharedPreferences getAllSharedPreferences() {
-        return CoreLibrary.getInstance().context().allSharedPreferences();
-    }
-
-    private Location getLocationById(String locationId) {
-        return ChildLibrary.getInstance().getLocationRepository().getLocationById(locationId);
-    }
-
-    public Pair<JSONArray, JSONArray> populateLocationOptions(List<Location> locations) {
-        if (locations == null)
-            return null;
-        JSONArray codes = new JSONArray();
-        JSONArray values = new JSONArray();
-
-        for (Location location : locations) {
-            codes.put(location.getId());
-            values.put(location.getProperties().getName());
-        }
-
-        return new Pair<>(codes, values);
-    }
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {

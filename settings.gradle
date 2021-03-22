@@ -1,4 +1,4 @@
 include ':opensrp-path-zeir'
 
-include ':opensrp-child'
-project(":opensrp-child").projectDir = new File("../opensrp-client-child/opensrp-child")
+//include ':opensrp-child'
+//project(":opensrp-child").projectDir = new File("../opensrp-client-child/opensrp-child")

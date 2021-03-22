@@ -487,5 +487,6 @@
 
     <string name="child_birth_certificate">Birth Certificate Number</string>
     <string name="child_register_card_number">Registration Card Number</string>
+    <string name="other">Other</string>
 
 </resources>

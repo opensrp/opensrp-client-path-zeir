@@ -1,7 +1,5 @@
 package org.smartregister.pathzeir.application;
 
-import android.text.TextUtils;
-
 import org.smartregister.SyncConfiguration;
 import org.smartregister.SyncFilter;
 import org.smartregister.pathzeir.BuildConfig;
@@ -25,7 +23,7 @@ public class AppSyncConfiguration extends SyncConfiguration {
 
     @Override
     public String getSyncFilterValue() {
-        return TextUtils.join(",", ZeirApplication.getInstance().getSyncLocations());
+        return ZeirApplication.getInstance().getSyncLocations();
     }
 
     @Override
