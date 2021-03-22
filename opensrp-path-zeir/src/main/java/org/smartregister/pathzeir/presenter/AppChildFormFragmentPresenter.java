@@ -97,7 +97,7 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
 
     private void populateLocationSpinner(String fieldName, JSONArray spinnerOptionKeys, String[] spinnerOptionValues) {
 
-        MaterialSpinner spinner = (MaterialSpinner) jsonFormView.getFormDataView(JsonFormConstants.STEP1 + ":" + fieldName);
+        MaterialSpinner spinner = (MaterialSpinner) jsonFormView.getFormDataView(STEP1 + ":" + fieldName);
         if (spinnerOptionValues != null && spinnerOptionValues.length > 0 && spinnerOptionKeys != null && spinnerOptionKeys.length() > 0) {
             ArrayAdapter<String> adapter = new ArrayAdapter<>(getView().getContext(), R.layout.native_form_simple_list_item_1, spinnerOptionValues);
             spinner.setAdapter(adapter);
