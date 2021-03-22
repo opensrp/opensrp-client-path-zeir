@@ -18,7 +18,7 @@ public class AppValidateAssignmentHelper extends ValidateAssignmentHelper {
     /**
      * Validate Health Facility Level only
      *
-     * @return
+     * @return existing jurisdictions set
      */
     @Override
     protected Set<String> getExistingJurisdictions() {
@@ -28,4 +28,9 @@ public class AppValidateAssignmentHelper extends ValidateAssignmentHelper {
                 .map(PhysicalLocation::getId).collect(Collectors.toSet());
     }
 
+
+    @Override
+    public void validateUserAssignment() {
+        // Do nothing
+    }
 }
