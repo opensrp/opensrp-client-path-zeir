@@ -8,17 +8,27 @@ import net.sqlcipher.database.SQLiteDatabase;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.json.JSONObject;
+import org.smartregister.child.util.Constants;
+import org.smartregister.domain.Alert;
+import org.smartregister.immunization.ImmunizationLibrary;
+import org.smartregister.immunization.db.VaccineRepo;
+import org.smartregister.immunization.domain.Vaccine;
+import org.smartregister.immunization.util.VaccinatorUtils;
 import org.smartregister.pathzeir.application.ZeirApplication;
 import org.smartregister.pathzeir.repository.ZeirRepository;
 import org.smartregister.repository.Repository;
-import org.smartregister.stock.StockLibrary;
+import org.smartregister.service.AlertService;
 import org.smartregister.stock.domain.ActiveChildrenStats;
 import org.smartregister.stock.repository.StockExternalRepository;
+import org.smartregister.util.Utils;
 
-import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import static org.smartregister.immunization.util.VaccinatorUtils.receivedVaccines;
 
 /**
  * Created by samuelgithengi on 2/14/18.
@@ -128,29 +138,48 @@ public class ZeirStockHelperRepository extends StockExternalRepository {
     public int getVaccinesDueBasedOnSchedule(JSONObject vaccineobject) {
         int countofNextMonthVaccineDue = 0;
         try {
-            Repository repo = StockLibrary.getInstance().getRepository();
+            ZeirRepository repo = (ZeirRepository) ZeirApplication.getInstance().getRepository();
             SQLiteDatabase db = repo.getReadableDatabase();
-
-            DateTime today = new DateTime(System.currentTimeMillis());
-
-            //////////////////////next month///////////////////////////////////////////////////////////
-            DateTime startofNextMonth = today.plusMonths(1).dayOfMonth().withMinimumValue();
-//            DateTime EndofNextMonth = today.plusMonths(1).dayOfMonth().withMaximumValue();
-            DecimalFormat mFormat = new DecimalFormat("00");
-            String monthstring = mFormat.format(startofNextMonth.getMonthOfYear());
-            mFormat = new DecimalFormat("0000");
-
-            String yearstring = mFormat.format(startofNextMonth.getYear());
-            String nextmonthdateString = yearstring + "-" + monthstring;
-
-            Cursor c = db.rawQuery("Select count(*) from alerts where scheduleName = '" + vaccineobject.getString("name") + "' and startDate like '%" + nextmonthdateString + "%'", null);
+            Cursor c = db.rawQuery("select ec_client.dob, ec_client.base_entity_id " +
+                    "from ec_client " +
+                    "inner join ec_child_details " +
+                    "on ec_client.base_entity_id = ec_child_details.base_entity_id " +
+                    "where (( ec_child_details.inactive IS NULL OR ec_child_details.inactive != 'true' ) " +
+                    "and  ( ec_child_details.lost_to_follow_up IS NULL OR ec_child_details.lost_to_follow_up != 'true' ))", null);
             c.moveToFirst();
-            if (c.getCount() > 0) {
-                countofNextMonthVaccineDue = Integer.parseInt(c.getString(0));
+            String vaccineName = vaccineobject.getString("name");
+            Thread.sleep(5000);
+
+            while (!c.isAfterLast()) {
+                String dobString = c.getString(0);
+                String baseEntityId = c.getString(1);
+                if (!TextUtils.isEmpty(dobString)) {
+                    List<Vaccine> vaccines = ZeirApplication.getInstance().vaccineRepository().findByEntityId(baseEntityId);
+                    AlertService alertService = ImmunizationLibrary.getInstance().context().alertService();
+                    List<Alert> alerts = alertService.findByEntityId(baseEntityId);
+
+                    Map<String, Date> receivedVaccines = receivedVaccines(vaccines);
+                    DateTime dateTime = Utils.dobStringToDateTime(dobString);
+                    List<Map<String, Object>> scheduleList = VaccinatorUtils.generateScheduleList(Constants.KEY.CHILD, dateTime, receivedVaccines, alerts);
+
+                    for (Map<String, Object> scheduledVaccine : scheduleList ) {
+                        DateTime dueDate = (DateTime) scheduledVaccine.get(Constants.DATE);
+                        VaccineRepo.Vaccine vaccine = (VaccineRepo.Vaccine) scheduledVaccine.get(Constants.KEY.VACCINE);
+
+                        if (vaccine.display().equalsIgnoreCase(vaccineName) && dueDate != null) {
+                            DateTime today = new DateTime(System.currentTimeMillis());
+                            DateTime startOfNextMonth = today.plusMonths(1).dayOfMonth().withMinimumValue();
+
+                            if (dueDate.yearOfCentury().equals(startOfNextMonth.yearOfCentury())
+                                    && dueDate.monthOfYear().equals(startOfNextMonth.monthOfYear())) {
+                                countofNextMonthVaccineDue++;
+                            }
+                        }
+                    }
+                }
+                c.moveToNext();
             }
             c.close();
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
