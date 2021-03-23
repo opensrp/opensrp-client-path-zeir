@@ -7,8 +7,10 @@ import net.sqlcipher.database.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.pathzeir.application.ZeirApplication;
+import org.smartregister.pathzeir.dao.AppChildDao;
 import org.smartregister.pathzeir.repository.ZeirRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.stock.StockLibrary;
@@ -19,6 +21,8 @@ import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import timber.log.Timber;
 
 /**
  * Created by samuelgithengi on 2/14/18.
@@ -125,35 +129,12 @@ public class ZeirStockHelperRepository extends StockExternalRepository {
     }
 
     @Override
-    public int getVaccinesDueBasedOnSchedule(JSONObject vaccineobject) {
-        int countofNextMonthVaccineDue = 0;
+    public int getVaccinesDueBasedOnSchedule(JSONObject vaccineObject) {
         try {
-            Repository repo = StockLibrary.getInstance().getRepository();
-            SQLiteDatabase db = repo.getReadableDatabase();
-
-            DateTime today = new DateTime(System.currentTimeMillis());
-
-            //////////////////////next month///////////////////////////////////////////////////////////
-            DateTime startofNextMonth = today.plusMonths(1).dayOfMonth().withMinimumValue();
-//            DateTime EndofNextMonth = today.plusMonths(1).dayOfMonth().withMaximumValue();
-            DecimalFormat mFormat = new DecimalFormat("00");
-            String monthstring = mFormat.format(startofNextMonth.getMonthOfYear());
-            mFormat = new DecimalFormat("0000");
-
-            String yearstring = mFormat.format(startofNextMonth.getYear());
-            String nextmonthdateString = yearstring + "-" + monthstring;
-
-            Cursor c = db.rawQuery("Select count(*) from alerts where scheduleName = '" + vaccineobject.getString("name") + "' and startDate like '%" + nextmonthdateString + "%'", null);
-            c.moveToFirst();
-            if (c.getCount() > 0) {
-                countofNextMonthVaccineDue = Integer.parseInt(c.getString(0));
-            }
-            c.close();
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            return AppChildDao.getDueVaccineCount(vaccineObject.getString("name"));
+        } catch (JSONException e) {
+            Timber.e(e);
+            return 0;
         }
-        return countofNextMonthVaccineDue;
     }
 }
