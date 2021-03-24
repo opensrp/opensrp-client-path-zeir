@@ -13,11 +13,9 @@ import org.smartregister.pathzeir.application.ZeirApplication;
 import org.smartregister.pathzeir.dao.AppChildDao;
 import org.smartregister.pathzeir.repository.ZeirRepository;
 import org.smartregister.repository.Repository;
-import org.smartregister.stock.StockLibrary;
 import org.smartregister.stock.domain.ActiveChildrenStats;
 import org.smartregister.stock.repository.StockExternalRepository;
 
-import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
