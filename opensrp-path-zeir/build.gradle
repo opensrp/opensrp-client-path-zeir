@@ -333,7 +333,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
     implementation 'com.evernote:android-job:1.2.6'
     implementation 'com.github.lecho:hellocharts-android:v1.5.8'
-    implementation 'id.zelory:compressor:2.1.0'
+    implementation 'id.zelory:compressor:2.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
