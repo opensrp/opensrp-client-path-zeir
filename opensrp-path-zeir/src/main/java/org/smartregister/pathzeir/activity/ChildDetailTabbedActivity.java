@@ -153,7 +153,6 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
 
     @Override
     public void startFormActivity(String formData) {
-        String formDataString = formData;
         if (StringUtils.isNotBlank(formData)) {
             try {
                 Intent intent;
@@ -171,7 +170,6 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
                     form.setActionBarBackground(R.color.actionbar);
                     form.setNavigationBackground(R.color.primary_dark);
                     intent = new Intent(this, JsonWizardFormActivity.class);
-                    formDataString = obtainUpdatedForm(formJson);
                 } else {
                     form.setWizard(false);
                     form.setHideSaveLabel(true);
@@ -179,6 +177,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
                     intent = new Intent(this, org.smartregister.child.util.Utils.metadata().childFormActivity);
                 }
 
+                String formDataString = obtainUpdatedForm(formJson);
                 intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
                 intent.putExtra(JsonFormConstants.JSON_FORM_KEY.JSON, formDataString);
                 intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
