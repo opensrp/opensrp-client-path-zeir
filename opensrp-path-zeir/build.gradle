@@ -47,8 +47,6 @@ android {
         applicationId "org.smartregister.pathzeir"
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
-        versionCode 8
-        versionName "0.0.8"
         multiDexEnabled true
         buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
         buildConfigField "boolean", "TIME_CHECK", "false"
@@ -94,6 +92,8 @@ android {
     buildTypes {
 
         release {
+            defaultConfig.versionCode 1
+            defaultConfig.versionName "0.0.1"
             minifyEnabled false
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rule.pro'
@@ -122,7 +122,8 @@ android {
         }
 
         debug {
-
+            defaultConfig.versionCode 9
+            defaultConfig.versionName "0.0.9"
             versionNameSuffix "-debug"
             resValue "string", 'opensrp_url', '"https://path-zeir-stage.smartregister.org/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
@@ -149,12 +150,13 @@ android {
         }
 
         preview {
+            defaultConfig.versionCode 8
+            defaultConfig.versionName "0.0.8"
             minifyEnabled false
             zipAlignEnabled true
             debuggable true
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rule.pro'
-
             versionNameSuffix "-preview"
             resValue "string", 'opensrp_url', '"https://path-zeir-preview.smartregister.org/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '10'
