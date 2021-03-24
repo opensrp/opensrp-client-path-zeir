@@ -8,10 +8,10 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.smartregister.Context;
 import org.smartregister.domain.Setting;
-import org.smartregister.repository.AllSettings;
 import org.smartregister.pathzeir.BaseUnitTest;
 import org.smartregister.pathzeir.application.ZeirApplication;
 import org.smartregister.pathzeir.util.AppConstants;
+import org.smartregister.repository.AllSettings;
 import org.smartregister.view.contract.BaseLoginContract;
 
 public class LoginPresenterTest extends BaseUnitTest {

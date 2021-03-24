@@ -19,7 +19,6 @@ import org.smartregister.repository.EventClientRepository;
 import java.util.Calendar;
 import java.util.Date;
 
-
 import timber.log.Timber;
 
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.CARD_STATUS;

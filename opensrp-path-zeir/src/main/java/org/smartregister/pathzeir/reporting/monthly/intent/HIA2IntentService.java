@@ -12,6 +12,7 @@ import org.smartregister.immunization.domain.VaccineSchedule;
 import org.smartregister.immunization.repository.VaccineRepository;
 import org.smartregister.pathzeir.application.ZeirApplication;
 import org.smartregister.pathzeir.util.AppConstants;
+import org.smartregister.reporting.service.IndicatorGeneratorIntentService;
 import org.smartregister.util.Utils;
 
 import java.util.Date;
@@ -53,13 +54,15 @@ public class HIA2IntentService extends IntentService {
         try {
 //            boolean generateReport = intent.getBooleanExtra(GENERATE_REPORT, false);
 //            if (!generateReport) {
-                //Update H1A2 status (Within or Overdue)
-                updateVaccineHIA2Status();
+            //Update H1A2 status (Within or Overdue)
+            updateVaccineHIA2Status();
+            // Generate Indicators;
+            startService(new Intent(getApplicationContext(), IndicatorGeneratorIntentService.class));
 
-                // Generate daily HIA2 indicators
+            // Generate daily HIA2 indicators
 //                generateDailyHia2Indicators();
 
-                // Send broadcast message
+            // Send broadcast message
 //                sendBroadcastMessage(Hia2ServiceBroadcastReceiver.TYPE_GENERATE_DAILY_INDICATORS);
 //            } else {
 //                String monthString = intent.getStringExtra(REPORT_MONTH);

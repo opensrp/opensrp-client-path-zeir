@@ -7,21 +7,6 @@ import java.util.List;
 
 public class AppChildDao extends ChildDao {
 
-    public static boolean isPrematureBaby(String baseEntityID) {
-        String sql = String.format("SELECT count(*) count\n" +
-                "FROM ec_child_details\n" +
-                "WHERE base_entity_id = '%s'\n" +
-                "  AND pcv4_required is '1'", baseEntityID);
-
-        DataMap<Integer> dataMap = cursor -> getCursorIntValue(cursor, "count");
-
-        List<Integer> result = readData(sql, dataMap);
-        if (result == null || result.size() != 1)
-            return false;
-
-        return result.get(0) > 0;
-    }
-
     public static List<String> getChildrenAboveFiveYears() {
         String sql = "SELECT ec_client.base_entity_id\n" +
                 "FROM ec_child_details\n" +
@@ -70,5 +55,20 @@ public class AppChildDao extends ChildDao {
             return false;
 
         return result.get(0) > 0;
+    }
+
+    public static int getDueVaccineCount(String vaccine) {
+        String sql = "SELECT count(*) count\n" +
+                "FROM alerts\n" +
+                "WHERE scheduleName = '$s' COLLATE NOCASE\n" +
+                "  AND startDate LIKE '%' || strftime('%Y-%m', date('now', 'start of month', '+1 month')) || '%'".replace("$s", vaccine);
+
+        DataMap<Integer> dataMap = cursor -> getCursorIntValue(cursor, "count");
+
+        List<Integer> result = readData(sql, dataMap);
+        if (result == null || result.size() != 1)
+            return result.get(0);
+
+        return 0;
     }
 }

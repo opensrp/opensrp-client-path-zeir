@@ -254,6 +254,13 @@
           }
         },
         {
+          "column_name": "birth_facility_name_other",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.birth_facility_name_other"
+          }
+        },
+        {
           "column_name": "residential_area",
           "type": "Client",
           "json_mapping": {

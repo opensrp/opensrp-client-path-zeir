@@ -3,7 +3,6 @@ package org.smartregister.pathzeir.reporting.dropuout
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_report_register.*

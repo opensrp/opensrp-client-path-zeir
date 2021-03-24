@@ -4,7 +4,6 @@ import org.smartregister.SyncConfiguration;
 import org.smartregister.SyncFilter;
 import org.smartregister.pathzeir.BuildConfig;
 import org.smartregister.pathzeir.activity.LoginActivity;
-import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.view.activity.BaseLoginActivity;
 
 import java.util.ArrayList;
@@ -24,9 +23,7 @@ public class AppSyncConfiguration extends SyncConfiguration {
 
     @Override
     public String getSyncFilterValue() {
-        AllSharedPreferences sharedPreferences = ZeirApplication.getInstance().context().userService()
-                .getAllSharedPreferences();
-        return sharedPreferences.fetchDefaultLocalityId(sharedPreferences.fetchRegisteredANM());
+        return ZeirApplication.getInstance().getSyncLocations();
     }
 
     @Override
@@ -83,5 +80,6 @@ public class AppSyncConfiguration extends SyncConfiguration {
     public Class<? extends BaseLoginActivity> getAuthenticationActivity() {
         return LoginActivity.class;
     }
+
 }
 

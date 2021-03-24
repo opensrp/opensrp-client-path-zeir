@@ -35,9 +35,9 @@ import org.smartregister.immunization.ImmunizationLibrary;
 import org.smartregister.immunization.domain.ServiceRecord;
 import org.smartregister.immunization.repository.RecurringServiceRecordRepository;
 import org.smartregister.immunization.repository.RecurringServiceTypeRepository;
+import org.smartregister.pathzeir.application.ZeirApplication;
 import org.smartregister.repository.DetailsRepository;
 import org.smartregister.repository.Repository;
-import org.smartregister.pathzeir.application.ZeirApplication;
 import org.smartregister.view.activity.BaseProfileActivity;
 
 public class AppClientProcessorForJavaTest {

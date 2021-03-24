@@ -1,13 +1,12 @@
 package org.smartregister.pathzeir.helper;
 
-import java.util.Set;
-
 import org.smartregister.CoreLibrary;
 import org.smartregister.domain.PhysicalLocation;
 import org.smartregister.repository.LocationRepository;
 import org.smartregister.sync.helper.ValidateAssignmentHelper;
 import org.smartregister.util.SyncUtils;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class AppValidateAssignmentHelper extends ValidateAssignmentHelper {
@@ -19,7 +18,7 @@ public class AppValidateAssignmentHelper extends ValidateAssignmentHelper {
     /**
      * Validate Health Facility Level only
      *
-     * @return
+     * @return existing jurisdictions set
      */
     @Override
     protected Set<String> getExistingJurisdictions() {
@@ -29,8 +28,9 @@ public class AppValidateAssignmentHelper extends ValidateAssignmentHelper {
                 .map(PhysicalLocation::getId).collect(Collectors.toSet());
     }
 
+
     @Override
     public void validateUserAssignment() {
-        // Do Nothing
+        // Do nothing
     }
 }

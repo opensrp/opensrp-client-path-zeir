@@ -12,7 +12,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_hia2_daily_tallies_report.*
 import org.smartregister.pathzeir.R
-import org.smartregister.pathzeir.reporting.common.*
+import org.smartregister.pathzeir.reporting.common.DAILY_TALLIES
+import org.smartregister.pathzeir.reporting.common.DAY
+import org.smartregister.pathzeir.reporting.common.ReportingUtils
+import org.smartregister.pathzeir.reporting.common.SHOW_DATA
 import org.smartregister.pathzeir.reporting.monthly.MonthlyReportsViewModel
 import org.smartregister.pathzeir.reporting.monthly.domain.DailyTally
 import org.smartregister.pathzeir.reporting.monthly.indicator.ReportIndicatorsActivity

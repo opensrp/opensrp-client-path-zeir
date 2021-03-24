@@ -127,7 +127,7 @@
           "err": "{{child_enrollment.step1.first_name.v_regex.err}}"
         },
         "v_required": {
-          "value": "true",
+          "value": "false",
           "err": "{{child_enrollment.step1.first_name.v_required.err}}"
         }
       },
@@ -386,6 +386,26 @@
         "v_required": {
           "value": true,
           "err": "{{child_enrollment.step1.birth_facility_name.v_required.err}}"
+        },
+        "relevance": {
+          "rules-engine": {
+            "ex-rules": {
+              "rules-file": "child_register_registration_relevance_rules.yml"
+            }
+          }
+        }
+      },
+      {
+        "key": "birth_facility_name_other",
+        "openmrs_entity_parent": "",
+        "openmrs_entity": "person_attribute",
+        "openmrs_entity_id": "birth_facility_name_other",
+        "type": "edit_text",
+        "hint": "{{child_enrollment.step1.birth_facility_name_other.hint}}",
+        "edit_type": "name",
+        "v_required": {
+          "value": "true",
+          "err": "{{child_enrollment.step1.birth_facility_name_other.v_required.err}}"
         },
         "relevance": {
           "rules-engine": {
