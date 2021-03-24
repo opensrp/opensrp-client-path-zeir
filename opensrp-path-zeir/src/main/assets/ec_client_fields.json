@@ -28,6 +28,13 @@
           "column_name": "opensrp_id",
           "type": "Client",
           "json_mapping": {
+            "field": "identifiers.ZEIR_ID"
+          }
+        },
+        {
+          "column_name": "opensrp_id",
+          "type": "Client",
+          "json_mapping": {
             "field": "identifiers.M_ZEIR_ID"
           }
         },
@@ -64,6 +71,20 @@
           "type": "Client",
           "json_mapping": {
             "field": "identifiers.zeir_id"
+          }
+        },
+        {
+          "column_name": "zeir_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "identifiers.ZEIR_ID"
+          }
+        },
+        {
+          "column_name": "zeir_id",
+          "type": "Client",
+          "json_mapping": {
+            "field": "identifiers.M_ZEIR_ID"
           }
         },
         {
@@ -135,6 +156,13 @@
           }
         },
         {
+          "column_name": "mother_guardian_nrc",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.NRC_Number"
+          }
+        },
+        {
           "column_name": "mother_guardian_number",
           "type": "Client",
           "json_mapping": {
@@ -142,19 +170,11 @@
           }
         },
         {
-          "column_name": "chw_name",
+          "column_name": "mother_guardian_number",
           "type": "Event",
           "json_mapping": {
             "field": "obs.fieldCode",
-            "concept": "chw_name"
-          }
-        },
-        {
-          "column_name": "chw_phone_number",
-          "type": "Event",
-          "json_mapping": {
-            "field": "obs.fieldCode",
-            "concept": "chw_phone_number"
+            "concept": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         },
         {
@@ -198,6 +218,13 @@
           }
         },
         {
+          "column_name": "child_birth_certificate",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.Child_Birth_Certificate"
+          }
+        },
+        {
           "column_name": "child_register_card_number",
           "type": "Client",
           "json_mapping": {
@@ -205,10 +232,25 @@
           }
         },
         {
+          "column_name": "child_register_card_number",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.Child_Register_Card_Number"
+          }
+        },
+        {
           "column_name": "first_health_facility_contract",
           "type": "Client",
           "json_mapping": {
             "field": "attributes.first_health_facility_contract"
+          }
+        },
+        {
+          "column_name": "first_health_facility_contract",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "163260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         },
         {
@@ -226,10 +268,25 @@
           }
         },
         {
+          "column_name": "father_guardian_name",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "1594AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+        {
           "column_name": "father_nrc_number",
           "type": "Client",
           "json_mapping": {
             "field": "attributes.father_nrc_number"
+          }
+        },
+        {
+          "column_name": "father_nrc_number",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.Father_NRC_Number"
           }
         },
         {
@@ -240,17 +297,33 @@
           }
         },
         {
+          "column_name": "place_of_birth",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "1572AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+        {
           "column_name": "home_facility",
           "type": "Client",
           "json_mapping": {
-            "field": "addresses.address1"
+            "field": "addresses.address5"
           }
         },
         {
           "column_name": "birth_facility_name",
           "type": "Client",
           "json_mapping": {
-            "field": "addresses.address2"
+            "field": "addresses.address6"
+          }
+        },
+        {
+          "column_name": "birth_facility_name",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "163531AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         },
         {
@@ -261,6 +334,14 @@
           }
         },
         {
+          "column_name": "birth_facility_name_other",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        },
+        {
           "column_name": "residential_area",
           "type": "Client",
           "json_mapping": {
@@ -268,10 +349,17 @@
           }
         },
         {
-          "column_name": "child_zone",
+          "column_name": "residential_area",
           "type": "Client",
           "json_mapping": {
             "field": "addresses.address3"
+          }
+        },
+        {
+          "column_name": "child_zone",
+          "type": "Client",
+          "json_mapping": {
+            "field": "addresses.address4"
           }
         },
         {
@@ -282,6 +370,13 @@
           }
         },
         {
+          "column_name": "residential_address",
+          "type": "Client",
+          "json_mapping": {
+            "field": "addresses.address2"
+          }
+        },
+        {
           "column_name": "physical_landmark",
           "type": "Client",
           "json_mapping": {
@@ -289,10 +384,25 @@
           }
         },
         {
+          "column_name": "physical_landmark",
+          "type": "Client",
+          "json_mapping": {
+            "field": "addresses.address1"
+          }
+        },
+        {
           "column_name": "pmtct_status",
           "type": "Client",
           "json_mapping": {
             "field": "attributes.pmtct_status"
+          }
+        },
+        {
+          "column_name": "pmtct_status",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "1396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
           }
         },
         {
@@ -328,6 +438,36 @@
           "type": "Client",
           "json_mapping": {
             "field": "attributes.dateRemoved"
+          }
+        },
+        {
+          "column_name": "chw_name",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "chw_name"
+          }
+        },
+        {
+          "column_name": "chw_name",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.CHW_Name"
+          }
+        },
+        {
+          "column_name": "chw_phone_number",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "concept": "chw_phone_number"
+          }
+        },
+        {
+          "column_name": "chw_phone_number",
+          "type": "Client",
+          "json_mapping": {
+            "field": "attributes.CHW_Phone_Number"
           }
         }
       ]
