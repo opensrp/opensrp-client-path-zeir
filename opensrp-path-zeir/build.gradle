@@ -122,8 +122,8 @@ android {
         }
 
         debug {
-            defaultConfig.versionCode 9
-            defaultConfig.versionName "0.0.9"
+            defaultConfig.versionCode 8
+            defaultConfig.versionName "0.0.8"
             versionNameSuffix "-debug"
             resValue "string", 'opensrp_url', '"https://path-zeir-stage.smartregister.org/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
