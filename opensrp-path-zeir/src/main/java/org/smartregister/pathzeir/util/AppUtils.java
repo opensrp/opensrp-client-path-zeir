@@ -56,10 +56,6 @@ public class AppUtils extends Utils {
         ALLOWED_LEVELS.add(FACILITY);
     }
 
-    public static String getLanguage() {
-        return AppUtils.getAllSharedPreferences().fetchLanguagePreference();
-    }
-
     public static void updateChildDeath(@NonNull EventClient eventClient) {
         Client client = eventClient.getClient();
         ContentValues values = new ContentValues();

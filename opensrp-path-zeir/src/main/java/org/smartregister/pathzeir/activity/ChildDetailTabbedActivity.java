@@ -26,7 +26,6 @@ import org.smartregister.child.util.Constants;
 import org.smartregister.client.utils.domain.Form;
 import org.smartregister.pathzeir.R;
 import org.smartregister.pathzeir.fragment.ChildRegistrationDataFragment;
-import org.smartregister.pathzeir.util.AppConstants;
 import org.smartregister.pathzeir.util.AppJsonFormUtils;
 import org.smartregister.pathzeir.util.AppUtils;
 import org.smartregister.util.FormUtils;
@@ -41,6 +40,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import timber.log.Timber;
+
+import static org.smartregister.pathzeir.util.FormUtils.obtainUpdatedForm;
 
 /**
  * Created by ndegwamartin on 06/03/2019.
@@ -177,7 +178,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
                     intent = new Intent(this, org.smartregister.child.util.Utils.metadata().childFormActivity);
                 }
 
-                String formDataString = obtainUpdatedForm(formJson);
+                String formDataString = obtainUpdatedForm(formJson, childDetails, getContext());
                 intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
                 intent.putExtra(JsonFormConstants.JSON_FORM_KEY.JSON, formDataString);
                 intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
@@ -186,20 +187,6 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
                 Timber.e(e);
             }
         }
-    }
-
-    private String obtainUpdatedForm(JSONObject formJson) throws JSONException {
-        JSONArray fields = JsonFormUtils.fields(formJson);
-        for (int i = 0; i < fields.length(); i++) {
-            JSONObject field = fields.getJSONObject(i);
-            if (field != null && field.getString(JsonFormConstants.TYPE).equalsIgnoreCase(JsonFormConstants.DATE_PICKER)
-                    && !childDetails.getDetails().isEmpty() && childDetails.getDetails().containsKey(AppConstants.KeyConstants.DOB)) {
-                Date date = Utils.dobStringToDate(childDetails.getDetails().get(AppConstants.KeyConstants.DOB));
-                field.put(JsonFormConstants.MIN_DATE, new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date));
-                field.put(JsonFormConstants.MAX_DATE, AppConstants.KeyConstants.TODAY);
-            }
-        }
-        return formJson.toString();
     }
 
     @Override

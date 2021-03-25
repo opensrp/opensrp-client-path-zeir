@@ -7,6 +7,7 @@ import static org.smartregister.child.util.Constants.SHOW_BCG2_REMINDER;
 import static org.smartregister.child.util.Constants.SHOW_BCG_SCAR;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.BASE_ENTITY_ID;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.BIRTH_FACILITY_NAME;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.BIRTH_FACILITY_NAME_OTHER;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.CHILD_BIRTH_CERTIFICATE;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.CHILD_REGISTER_CARD_NUMBER;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.CHILD_ZONE;
@@ -80,6 +81,7 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 getChildDetailsColumn(FATHER_GUARDIAN_NAME),
                 getChildDetailsColumn(FATHER_NRC_NUMBER),
                 getChildDetailsColumn(BIRTH_FACILITY_NAME),
+                getChildDetailsColumn(BIRTH_FACILITY_NAME_OTHER),
                 getChildDetailsColumn(PMTCT_STATUS),
                 getChildDetailsColumn(INACTIVE),
                 getChildDetailsColumn(LOST_TO_FOLLOW_UP),
