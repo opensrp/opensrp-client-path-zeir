@@ -9,7 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.clientandeventmodel.Event;
-import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.pathzeir.R;
 
 import java.util.List;
