@@ -39,7 +39,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
         }
         containerViewPager.apply {
             adapter = reportsPagerAdapter
-            currentItem = intent.getIntExtra(Constants.SELECT_TAB, 1)
+            currentItem = intent.getIntExtra(Constants.SELECT_TAB, 0)
         }
 
         reportFragmentTabLayout.apply {
