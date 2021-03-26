@@ -9,6 +9,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.AllConstants;
 import org.smartregister.child.activity.BaseChildRegisterActivity;
@@ -24,11 +25,14 @@ import org.smartregister.pathzeir.model.AppChildRegisterModel;
 import org.smartregister.pathzeir.presenter.AppChildRegisterPresenter;
 import org.smartregister.pathzeir.util.AppConstants;
 import org.smartregister.pathzeir.util.AppUtils;
+import org.smartregister.pathzeir.util.FormUtils;
 import org.smartregister.pathzeir.view.NavDrawerActivity;
 import org.smartregister.pathzeir.view.NavigationMenu;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
 import java.lang.ref.WeakReference;
+
+import timber.log.Timber;
 
 public class ChildRegisterActivity extends BaseChildRegisterActivity implements NavDrawerActivity {
 
@@ -101,7 +105,13 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
         form.setNextLabel("");
 
         Intent intent = new Intent(this, Utils.metadata().childFormActivity);
-        intent.putExtra(Constants.INTENT_KEY.JSON, jsonForm.toString());
+        String updatedForm = jsonForm.toString();
+        try {
+            updatedForm = FormUtils.obtainUpdatedForm(jsonForm, this);
+        } catch (JSONException e) {
+            Timber.e(e);
+        }
+        intent.putExtra(Constants.INTENT_KEY.JSON, updatedForm);
         intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
         intent.putExtra(JsonFormConstants.PERFORM_FORM_TRANSLATION, true);
         startActivityForResult(intent, ChildJsonFormUtils.REQUEST_CODE_GET_JSON);

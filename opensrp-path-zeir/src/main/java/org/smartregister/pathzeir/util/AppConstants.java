@@ -62,6 +62,10 @@ public class AppConstants {
         public static final String RESIDENTIAL_AREA = "residential_area";
         public static final String CHILD_ZONE = "child_zone";
         public static final String BIRTH_WEIGHT = "Birth_Weight";
+        public static final String BIRTH_FACILITY_NAME_OTHER = "birth_facility_name_other";
+        public static final String OTHER = "other";
+        public static final String OA_SERVICE_DATE = "OA_Service_Date";
+        public static final String OPENSRP_ID = "opensrp_id";
     }
 
     public static class ConfigurationConstants {

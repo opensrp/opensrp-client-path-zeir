@@ -19,9 +19,16 @@ import org.smartregister.pathzeir.reporting.stock.job.StockSyncIntentServiceJob;
 import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
 import org.smartregister.view.contract.BaseLoginContract;
 
+import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
 public class LoginInteractor extends BaseLoginInteractor implements BaseLoginContract.Interactor {
+
+    @Override
+    public void login(WeakReference<BaseLoginContract.View> view, String userName, char[] password) {
+        //change case to lowercase before login attempt
+        super.login(view, userName.toLowerCase(), password);
+    }
 
     public LoginInteractor(BaseLoginContract.Presenter loginPresenter) {
         super(loginPresenter);

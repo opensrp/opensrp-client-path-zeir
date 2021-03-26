@@ -2,6 +2,8 @@ package org.smartregister.pathzeir.util;
 
 import android.content.Context;
 
+import com.vijay.jsonwizard.constants.JsonFormConstants;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +24,7 @@ public class AppJsonFormUtils extends ChildJsonFormUtils {
         try {
             form = new JSONObject(populatedForm);
             JSONObject stepOne = form.getJSONObject(ChildJsonFormUtils.STEP1);
-            stepOne.put("title", context.getString(R.string.update_birth_registration));
+            stepOne.put(JsonFormConstants.STEP_TITLE, context.getString(R.string.update_birth_registration));
             JSONArray jsonArray = stepOne.getJSONArray(ChildJsonFormUtils.FIELDS);
             updateFormDetailsForEdi(detailsMap, jsonArray);
         } catch (JSONException e) {
@@ -62,7 +64,7 @@ public class AppJsonFormUtils extends ChildJsonFormUtils {
         }
     }
 
-    public static void tagEventMetadata(Event event){
+    public static void tagEventMetadata(Event event) {
         tagSyncMetadata(event);
     }
 }
