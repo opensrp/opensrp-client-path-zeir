@@ -1,11 +1,15 @@
 package org.smartregister.pathzeir.presenter;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import com.google.gson.Gson;
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.customviews.MaterialSpinner;
 import com.vijay.jsonwizard.fragments.JsonFormFragment;
@@ -21,36 +25,87 @@ import org.smartregister.pathzeir.activity.ChildFormActivity;
 import org.smartregister.pathzeir.fragment.AppChildFormFragment;
 import org.smartregister.pathzeir.util.AppConstants;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 import timber.log.Timber;
 
 import static com.vijay.jsonwizard.constants.JsonFormConstants.FIELDS;
 import static com.vijay.jsonwizard.constants.JsonFormConstants.STEP1;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.KEY;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.OA_SERVICE_DATE;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.OPENSRP_ID;
 
 public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
 
     private final AppChildFormFragment formFragment;
-    private final ChildFormActivity jsonFormView;
+    private final ChildFormActivity childFormActivity;
     private String encounterType = null;
-    private JSONObject formJson;
 
     public AppChildFormFragmentPresenter(JsonFormFragment formFragment, JsonFormInteractor jsonFormInteractor) {
         super(formFragment, jsonFormInteractor);
         this.formFragment = (AppChildFormFragment) formFragment;
-        jsonFormView = (ChildFormActivity) formFragment.getActivity();
+        childFormActivity = (ChildFormActivity) formFragment.getActivity();
     }
 
     @Override
     public void addFormElements() {
         //Set Health Facility to default location
+        super.addFormElements();
         try {
-            formJson = formFragment.getJsonApi().getmJSONObject();
+            JSONObject formJson = formFragment.getJsonApi().getmJSONObject();
             encounterType = formJson.getString(JsonFormConstants.ENCOUNTER_TYPE);
+
+            if (AppConstants.EventTypeConstants.OUT_OF_CATCHMENT.equalsIgnoreCase(encounterType)) {
+                disableViews(Arrays.asList(STEP1 + ":" + OA_SERVICE_DATE, STEP1 + ":" + OPENSRP_ID));
+            }
         } catch (JSONException e) {
             Timber.e(e, "Encounter type missing");
         }
+    }
 
-        super.addFormElements();
+    public void disableViews(List<String> skippedViews) {
+        toggleReadOnly(false, skippedViews);
+        MaterialEditText serviceDateEditText = (MaterialEditText) childFormActivity.getFormDataView(
+                STEP1 + ":" + OA_SERVICE_DATE);
+        serviceDateEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+                //Do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                //Do nothing
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                toggleReadOnly(StringUtils.isNotBlank(editable.toString()), skippedViews);
+            }
+        });
+    }
+
+    private void toggleReadOnly(boolean enabled, List<String> skippedViews) {
+        Collection<View> formDataViews = childFormActivity.getFormDataViews();
+        for (View formDataView : formDataViews) {
+            String address = (String) formDataView.getTag(R.id.address);
+            if (address != null && skippedViews.contains(address))
+                continue;
+            setViewAndChildrenEnabled(formDataView, enabled);
+        }
+    }
+
+    private static void setViewAndChildrenEnabled(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) view;
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                View child = viewGroup.getChildAt(i);
+                setViewAndChildrenEnabled(child, enabled);
+            }
+        }
     }
 
     @Override
