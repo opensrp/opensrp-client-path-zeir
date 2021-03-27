@@ -118,7 +118,6 @@ public class ChildRegisterDataFragmentTest extends BaseUnitTest {
         });
 
         Mockito.doReturn("").when(fragment).cleanValue(Mockito.any(), Mockito.anyString());
-        Mockito.doReturn("").when(fragment).getFieldValue(Mockito.any(), Mockito.any(), Mockito.anyString());
         Mockito.doReturn(RandomStringUtils.random(6)).when(fragment).getResourceLabel(Mockito.anyString());
 
         fragment.resetAdapterData(detailMap);

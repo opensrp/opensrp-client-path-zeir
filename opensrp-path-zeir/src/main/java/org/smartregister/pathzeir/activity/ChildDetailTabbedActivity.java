@@ -3,9 +3,12 @@ package org.smartregister.pathzeir.activity;
 import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import com.vijay.jsonwizard.activities.JsonWizardFormActivity;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
@@ -24,8 +27,10 @@ import org.smartregister.child.util.ChildDbUtils;
 import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
 import org.smartregister.client.utils.domain.Form;
+import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.pathzeir.R;
 import org.smartregister.pathzeir.fragment.ChildRegistrationDataFragment;
+import org.smartregister.pathzeir.util.AppConstants;
 import org.smartregister.pathzeir.util.AppJsonFormUtils;
 import org.smartregister.pathzeir.util.AppUtils;
 import org.smartregister.util.FormUtils;
@@ -41,6 +46,7 @@ import java.util.Map;
 
 import timber.log.Timber;
 
+import static org.smartregister.child.util.Utils.metadata;
 import static org.smartregister.pathzeir.util.FormUtils.obtainUpdatedForm;
 
 /**
@@ -62,6 +68,26 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
 
     public ChildRegistrationDataFragment getChildRegistrationDataFragment() {
         return new ChildRegistrationDataFragment();
+    }
+
+
+    @Nullable
+    @Override
+    protected Bundle initLoadChildDetails() {
+        Bundle bundle = super.initLoadChildDetails();
+        //Backward compatibility of residential area --> previously the location identifier was saved, but not anymore
+        if (LocationHelper.getInstance() != null) {
+            String location = childDetails.getColumnmaps().get(AppConstants.KeyConstants.RESIDENTIAL_AREA);
+            String openMrsLocationName = LocationHelper.getInstance().getOpenMrsLocationName(location);
+            updateDetailsMap(AppConstants.KeyConstants.RESIDENTIAL_AREA, openMrsLocationName != null ? openMrsLocationName : location);
+        }
+        return bundle;
+    }
+
+    private void updateDetailsMap(String key, String value) {
+        childDetails.getDetails().put(key, value);
+        childDetails.getColumnmaps().put(key, value);
+        detailsMap.put(key, value);
     }
 
     @Override
@@ -175,7 +201,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
                     form.setWizard(false);
                     form.setHideSaveLabel(true);
                     form.setNextLabel("");
-                    intent = new Intent(this, org.smartregister.child.util.Utils.metadata().childFormActivity);
+                    intent = new Intent(this, metadata().childFormActivity);
                 }
 
                 String formDataString = obtainUpdatedForm(formJson, childDetails, getContext());

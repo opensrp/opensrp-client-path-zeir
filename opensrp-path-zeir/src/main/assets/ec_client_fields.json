@@ -312,6 +312,14 @@
           }
         },
         {
+          "column_name": "home_facility",
+          "type": "Event",
+          "json_mapping": {
+            "field": "obs.fieldCode",
+            "formSubmissionField": "Home_Facility"
+          }
+        },
+        {
           "column_name": "birth_facility_name",
           "type": "Client",
           "json_mapping": {

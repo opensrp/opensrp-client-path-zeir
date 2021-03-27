@@ -19,9 +19,9 @@ import timber.log.Timber;
 public class AppJsonFormUtils extends ChildJsonFormUtils {
 
     public static String populateFormValues(Context context, Map<String, String> detailsMap, List<String> nonEditableFields) {
-        String populatedForm = ChildJsonFormUtils.getMetadataForEditForm(context, detailsMap, nonEditableFields);
         JSONObject form = null;
         try {
+            String populatedForm = ChildJsonFormUtils.getMetadataForEditForm(context, detailsMap, nonEditableFields);
             form = new JSONObject(populatedForm);
             JSONObject stepOne = form.getJSONObject(ChildJsonFormUtils.STEP1);
             stepOne.put(JsonFormConstants.STEP_TITLE, context.getString(R.string.update_birth_registration));
