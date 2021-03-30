@@ -7,6 +7,7 @@ import org.smartregister.child.domain.Field;
 import org.smartregister.child.domain.KeyValueItem;
 import org.smartregister.child.fragment.BaseChildRegistrationDataFragment;
 import org.smartregister.pathzeir.R;
+import org.smartregister.pathzeir.activity.ChildDetailTabbedActivity;
 import org.smartregister.pathzeir.util.AppConstants;
 
 import java.util.Collections;
@@ -51,6 +52,16 @@ public class ChildRegistrationDataFragment extends BaseChildRegistrationDataFrag
             }
         };
         return super.getDataRowLabelResourceIds();
+    }
+
+    @Override
+    public void resetAdapterData(Map<String, String> detailsMap) {
+        if (getActivity() instanceof ChildDetailTabbedActivity) {
+            ChildDetailTabbedActivity childDetailTabbedActivity = (ChildDetailTabbedActivity) getActivity();
+            childDetailTabbedActivity.updateChildDetails();
+            detailsMap.putAll(childDetailTabbedActivity.getChildDetails().getColumnmaps());
+        }
+        super.resetAdapterData(detailsMap);
     }
 
     @Override

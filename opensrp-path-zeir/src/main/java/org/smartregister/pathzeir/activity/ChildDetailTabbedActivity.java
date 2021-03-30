@@ -23,16 +23,16 @@ import org.smartregister.child.activity.BaseChildDetailTabbedActivity;
 import org.smartregister.child.fragment.StatusEditDialogFragment;
 import org.smartregister.child.presenter.BaseChildDetailsPresenter.CardStatus;
 import org.smartregister.child.task.LoadAsyncTask;
-import org.smartregister.child.util.ChildDbUtils;
 import org.smartregister.child.util.ChildJsonFormUtils;
 import org.smartregister.child.util.Constants;
 import org.smartregister.client.utils.domain.Form;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.pathzeir.R;
 import org.smartregister.pathzeir.fragment.ChildRegistrationDataFragment;
-import org.smartregister.pathzeir.util.AppConstants;
+import org.smartregister.pathzeir.util.AppConstants.KeyConstants;
 import org.smartregister.pathzeir.util.AppJsonFormUtils;
 import org.smartregister.pathzeir.util.AppUtils;
+import org.smartregister.util.DateUtil;
 import org.smartregister.util.FormUtils;
 import org.smartregister.util.JsonFormUtils;
 import org.smartregister.util.Utils;
@@ -47,6 +47,8 @@ import java.util.Map;
 import timber.log.Timber;
 
 import static org.smartregister.child.util.Utils.metadata;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.MOTHER_GUARDIAN_NUMBER;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.MOTHER_PHONE;
 import static org.smartregister.pathzeir.util.FormUtils.obtainUpdatedForm;
 
 /**
@@ -70,18 +72,38 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
         return new ChildRegistrationDataFragment();
     }
 
-
     @Nullable
     @Override
     protected Bundle initLoadChildDetails() {
         Bundle bundle = super.initLoadChildDetails();
+        updateChildDetails();
+        return bundle;
+    }
+
+    public void updateChildDetails() {
         //Backward compatibility of residential area --> previously the location identifier was saved, but not anymore
         if (LocationHelper.getInstance() != null) {
-            String location = childDetails.getColumnmaps().get(AppConstants.KeyConstants.RESIDENTIAL_AREA);
-            String openMrsLocationName = LocationHelper.getInstance().getOpenMrsLocationName(location);
-            updateDetailsMap(AppConstants.KeyConstants.RESIDENTIAL_AREA, openMrsLocationName != null ? openMrsLocationName : location);
+            String location = childDetails.getColumnmaps().get(KeyConstants.RESIDENTIAL_AREA);
+            if (KeyConstants.OTHER.equalsIgnoreCase(location)) {
+                updateDetailsMap(KeyConstants.RESIDENTIAL_AREA, childDetails.getColumnmaps().get(KeyConstants.RESIDENTIAL_ADDRESS_OTHER));
+            } else {
+                String openMrsLocationName = LocationHelper.getInstance().getOpenMrsLocationName(location);
+                updateDetailsMap(KeyConstants.RESIDENTIAL_AREA, openMrsLocationName != null ? openMrsLocationName : location);
+            }
         }
-        return bundle;
+
+        //Convert date to the right format dd-MM-YYYY
+        if (detailsMap.containsKey(KeyConstants.FIRST_HEALTH_FACILITY_CONTRACT)) {
+            String value = detailsMap.get(KeyConstants.FIRST_HEALTH_FACILITY_CONTRACT);
+            String formatDate = DateUtil.formatDate(value, "dd-MM-YYYY");
+            updateDetailsMap(KeyConstants.FIRST_HEALTH_FACILITY_CONTRACT,
+                    StringUtils.isBlank(formatDate) ? value : formatDate);
+        }
+
+        //Backward compatibility
+        if (detailsMap.containsKey(MOTHER_PHONE) && detailsMap.get(MOTHER_PHONE) != null) {
+            updateDetailsMap(MOTHER_GUARDIAN_NUMBER, detailsMap.get(MOTHER_PHONE));
+        }
     }
 
     private void updateDetailsMap(String key, String value) {
@@ -101,11 +123,10 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        detailsMap = ChildDbUtils.fetchChildDetails(getChildDetails().entityId());
-        detailsMap.putAll(ChildDbUtils.fetchChildFirstGrowthAndMonitoring(getChildDetails().entityId()));
 
         switch (item.getItemId()) {
             case R.id.registration_data:
+                updateChildDetails();
                 String populatedForm = AppJsonFormUtils.populateFormValues(this, detailsMap, nonEditableFields);
                 startFormActivity(populatedForm);
                 // User chose the "Settings" item, show the app settings UI...
