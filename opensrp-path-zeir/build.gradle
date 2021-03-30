@@ -98,7 +98,6 @@ android {
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rule.pro'
             versionNameSuffix "-release"
-            resValue "string", 'opensrp_url', '"https://path-zeir.smartregister.org/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '1'
@@ -122,8 +121,8 @@ android {
         }
 
         debug {
-            defaultConfig.versionCode 8
-            defaultConfig.versionName "0.0.8"
+            defaultConfig.versionCode 9
+            defaultConfig.versionName "0.0.9"
             versionNameSuffix "-debug"
             resValue "string", 'opensrp_url', '"https://path-zeir-stage.smartregister.org/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
@@ -150,8 +149,8 @@ android {
         }
 
         preview {
-            defaultConfig.versionCode 8
-            defaultConfig.versionName "0.0.8"
+            defaultConfig.versionCode 9
+            defaultConfig.versionName "0.0.9"
             minifyEnabled false
             zipAlignEnabled true
             debuggable true
@@ -241,7 +240,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
 //    implementation(project(':opensrp-child')) {
-    implementation('org.smartregister:opensrp-client-child:0.6.12-ALPHA1-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-child:0.6.12-ZEIR-PREVIEW-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-growth-monitoring'
@@ -254,7 +253,7 @@ dependencies {
         exclude group: 'io.ona.rdt-capture', module: 'lib'
     }
 
-    implementation('org.smartregister:opensrp-client-immunization:3.0.7-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-immunization:3.0.9-ZEIR-PREVIEW-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
