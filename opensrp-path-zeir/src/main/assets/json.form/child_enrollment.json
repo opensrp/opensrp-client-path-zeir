@@ -69,7 +69,7 @@
         "key": "home_facility",
         "openmrs_entity_parent": "usual_residence",
         "openmrs_entity": "person_address",
-        "openmrs_entity_id": "address5",
+        "openmrs_entity_id": "address7",
         "openmrs_data_type": "text",
         "type": "spinner",
         "sub_type": "location",
