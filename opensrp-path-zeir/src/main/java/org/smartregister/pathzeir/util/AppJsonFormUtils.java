@@ -22,8 +22,11 @@ import java.util.Map;
 import timber.log.Timber;
 
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.BIRTH_FACILITY_NAME;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.CHOOSE_IMAGE;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.DOB;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.MOTHER_DOB;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.MOTHER_FIRST_NAME;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.MOTHER_LAST_NAME;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.PLACE_OF_BIRTH;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.PMTCT_STATUS;
 
@@ -31,9 +34,9 @@ public class AppJsonFormUtils extends ChildJsonFormUtils {
 
     private static final HashMap<String, String> alternativeKeys = new HashMap<String, String>() {
         {
-            put("mother_guardian_first_name", AppConstants.KeyConstants.MOTHER_FIRST_NAME);
-            put("mother_guardian_last_name", AppConstants.KeyConstants.MOTHER_LAST_NAME);
-            put("mother_guardian_date_birth", AppConstants.KeyConstants.MOTHER_DOB);
+            put("mother_guardian_first_name", MOTHER_FIRST_NAME);
+            put("mother_guardian_last_name", MOTHER_LAST_NAME);
+            put("mother_guardian_date_birth", MOTHER_DOB);
             put("Sex", "gender");
             put("Date_Birth", "dob");
             put("Birth_Weight", "birth_weight");
@@ -76,7 +79,7 @@ public class AppJsonFormUtils extends ChildJsonFormUtils {
             key = alternativeKeys.get(key);
         }
         switch (field.getString(JsonFormConstants.TYPE)) {
-            case AppConstants.KeyConstants.CHOOSE_IMAGE:
+            case CHOOSE_IMAGE:
                 processPhoto(childDetails.get(Constants.KEY.BASE_ENTITY_ID), field);
                 break;
             case JsonFormConstants.DATE_PICKER:
