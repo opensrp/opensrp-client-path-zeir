@@ -6,27 +6,27 @@
     app:startDestination="@id/reportsIndicatorFragment">
     <fragment
         android:id="@+id/reportIndicatorsDailySummaryFragment"
-        android:name="org.smartregister.pathzeir.reporting.monthly.indicator.daily.ReportDailyIndicatorsSummaryFragment"
+        android:name="org.smartregister.path.reporting.monthly.indicator.daily.ReportDailyIndicatorsSummaryFragment"
         android:label="@string/report_indicators_summary"
         tools:layout="@layout/fragment_report_indicators_summary" />
       <fragment
         android:id="@+id/reportIndicatorsSummaryFragment"
-        android:name="org.smartregister.pathzeir.reporting.monthly.indicator.summary.ReportIndicatorsSummaryFragment"
+        android:name="org.smartregister.path.reporting.monthly.indicator.summary.ReportIndicatorsSummaryFragment"
         android:label="@string/report_indicators_summary"
         tools:layout="@layout/fragment_report_indicators_summary" />
     <fragment
         android:id="@+id/reportIndicatorsFormFragment"
-        android:name="org.smartregister.pathzeir.reporting.monthly.indicator.form.ReportIndicatorsFormFragment"
+        android:name="org.smartregister.path.reporting.monthly.indicator.form.ReportIndicatorsFormFragment"
         android:label="@string/report_indicators_form"
         tools:layout="@layout/fragment_report_indicators_form" />
     <dialog
         android:id="@+id/confirmSendDraftReportsDialog"
-        android:name="org.smartregister.pathzeir.reporting.monthly.draft.ConfirmSendDraftDialog"
+        android:name="org.smartregister.path.reporting.monthly.draft.ConfirmSendDraftDialog"
         android:label="@string/confirm_send_draft_reports"
         tools:layout="@layout/dialog_fragment_send_monthly" />
     <fragment
         android:id="@+id/reportsIndicatorFragment"
-        android:name="org.smartregister.pathzeir.reporting.monthly.indicator.ReportIndicatorFragment"
+        android:name="org.smartregister.path.reporting.monthly.indicator.ReportIndicatorFragment"
         android:label="fragment_reports_indicator"
         tools:layout="@layout/fragment_report_indicator" />
 

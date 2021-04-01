@@ -6,7 +6,7 @@
     app:startDestination="@id/annualReportFragment">
     <fragment
         android:id="@+id/annualReportFragment"
-        android:name="org.smartregister.pathzeir.reporting.annual.coverage.AnnualCoverageFragment"
+        android:name="org.smartregister.path.reporting.annual.coverage.AnnualCoverageFragment"
         android:label="@string/annual_report_fragment"
         tools:layout="@layout/fragment_annual_report" />
 </navigation>
