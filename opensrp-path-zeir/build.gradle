@@ -44,7 +44,7 @@ android {
     buildToolsVersion androidBuildToolsVersion
 
     defaultConfig {
-        applicationId "org.smartregister.pathzeir"
+        applicationId "org.smartregister.path"
         minSdkVersion androidMinSdkVersion
         targetSdkVersion androidTargetSdkVersion
         multiDexEnabled true
@@ -62,7 +62,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [eventBusIndex: 'org.smartregister.pathzeir.AppEventBusIndex']
+                arguments = [eventBusIndex: 'org.smartregister.path.AppEventBusIndex']
             }
         }
         vectorDrawables.useSupportLibrary = true
