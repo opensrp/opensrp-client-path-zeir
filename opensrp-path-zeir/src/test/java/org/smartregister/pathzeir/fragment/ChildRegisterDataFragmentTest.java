@@ -52,6 +52,8 @@ public class ChildRegisterDataFragmentTest extends BaseUnitTest {
         detailMap.put("zeir_id", "1889542");
         detailMap.put("last_name", "Puff");
         detailMap.put("base_entity_id", "1111111");
+        detailMap.put("birth_weight", "5");
+        detailMap.put("birth_height", "55");
     }
 
     @Test
