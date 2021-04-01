@@ -46,7 +46,7 @@ class ZeirStockActivity : BaseActivity()  {
         val allStockTypes = StockLibrary.getInstance().stockTypeRepository.getAllStockTypes(null)
         val stockTypes = allStockTypes.toTypedArray()
         val adapter = StockGridAdapter(this, stockTypes, StockControlActivity::class.java)
-        stockgrid.setAdapter(adapter)
+        stockgrid.adapter = adapter
         adapter.notifyDataSetChanged()
     }
 

@@ -10,8 +10,8 @@ public class AppChildDao extends ChildDao {
     public static List<String> getChildrenAboveFiveYears() {
         String sql = "SELECT ec_client.base_entity_id\n" +
                 "FROM ec_child_details\n" +
-                "         join ec_client on ec_client.base_entity_id = ec_child_details.base_entity_id\n" +
-                "WHERE cast(strftime('%Y-%m-%d %H:%M:%S', 'now') - strftime('%Y-%m-%d %H:%M:%S', ec_client.dob) as int) >= 5\n" +
+                "         JOIN ec_client ON ec_client.base_entity_id = ec_child_details.base_entity_id\n" +
+                "WHERE (julianday(strftime('%Y-%m-%d', 'now')) - julianday(strftime('%Y-%m-%d', ec_client.dob))) / 365 >= 5\n" +
                 "  AND ec_client.is_closed = '0'\n" +
                 "  AND ec_client.date_removed is null\n" +
                 "  AND ec_child_details.is_closed = '0'";

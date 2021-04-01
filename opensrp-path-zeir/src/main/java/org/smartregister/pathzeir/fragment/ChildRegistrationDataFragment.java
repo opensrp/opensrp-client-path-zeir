@@ -3,23 +3,16 @@ package org.smartregister.pathzeir.fragment;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.vijay.jsonwizard.constants.JsonFormConstants;
-
-import org.apache.commons.lang3.StringUtils;
-import org.smartregister.child.adapter.ChildRegistrationDataAdapter;
 import org.smartregister.child.domain.Field;
 import org.smartregister.child.domain.KeyValueItem;
 import org.smartregister.child.fragment.BaseChildRegistrationDataFragment;
-import org.smartregister.child.util.ChildDbUtils;
-import org.smartregister.child.util.Utils;
 import org.smartregister.pathzeir.R;
+import org.smartregister.pathzeir.activity.ChildDetailTabbedActivity;
 import org.smartregister.pathzeir.util.AppConstants;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -35,6 +28,7 @@ public class ChildRegistrationDataFragment extends BaseChildRegistrationDataFrag
                 put("mother_guardian_number", "mother_phone_number");
             }
         };
+
     }
 
     @Override
@@ -62,52 +56,20 @@ public class ChildRegistrationDataFragment extends BaseChildRegistrationDataFrag
 
     @Override
     public void resetAdapterData(Map<String, String> detailsMap) {
-        // Add Birth weight to the details
-        if (detailsMap.get(AppConstants.KeyConstants.BIRTH_WEIGHT.toLowerCase()) == null) {
-            String caseId = detailsMap.get(AppConstants.KeyConstants.BASE_ENTITY_ID);
-            Utils.putAll(detailsMap, ChildDbUtils.fetchChildFirstGrowthAndMonitoring(caseId));
-            String weight = detailsMap.get(AppConstants.KeyConstants.BIRTH_WEIGHT.toLowerCase());
-            if (weight != null && !TextUtils.isEmpty(weight)) {
-                detailsMap.put(AppConstants.KeyConstants.BIRTH_WEIGHT.toLowerCase(), Utils.kgStringSuffix(weight));
-            }
+        if (getActivity() instanceof ChildDetailTabbedActivity) {
+            ChildDetailTabbedActivity childDetailTabbedActivity = (ChildDetailTabbedActivity) getActivity();
+            childDetailTabbedActivity.updateChildDetails();
+            detailsMap.putAll(childDetailTabbedActivity.getChildDetails().getColumnmaps());
         }
-        List<KeyValueItem> detailsList = new ArrayList<>();
-        String key;
-        String value;
-
-        for (int i = 0; i < getFields().size(); i++) {
-            Field field = getFields().get(i);
-            key = field.getKey();
-
-            //Some fields have alias name on query
-            if (fieldNameAliasMap.containsKey(key)) {
-                String keyAlias = fieldNameAliasMap.get(key);
-                value = getFieldValue(detailsMap, field, keyAlias);
-            } else {
-                value = getFieldValue(detailsMap, field, key);
-            }
-
-            //TODO Temporary fix for spinner setting value as hint when nothing is selected
-            if (JsonFormConstants.SPINNER.equalsIgnoreCase(field.getType()) && value != null && value.equalsIgnoreCase(field.getHint())) {
-                value = null;
-            }
-
-            String label = getResourceLabel(key);
-
-            if (!TextUtils.isEmpty(label)) {
-                detailsList.add(new KeyValueItem(label, cleanValue(field, value)));
-            }
-        }
-        setmAdapter(new ChildRegistrationDataAdapter(detailsList));
+        super.resetAdapterData(detailsMap);
     }
 
-    protected String getFieldValue(Map<String, String> detailsMap, Field field, String key) {
-        String value;
-        value = detailsMap.get(field.getKey().toLowerCase(Locale.getDefault()));
-        value = !StringUtils.isBlank(value) ? value : detailsMap.get(getPrefix(field.getEntityId()) + key.toLowerCase(Locale.getDefault()));
-        value = !StringUtils.isBlank(value) ? value : detailsMap.get(getPrefix(field.getEntityId()) + cleanOpenMRSEntityId(field.getOpenmrsEntityId().toLowerCase(Locale.getDefault())));
-        value = !StringUtils.isBlank(value) ? value : detailsMap.get(key.toLowerCase(Locale.getDefault()));
-        return value;
+    @Override
+    protected void addDetail(String key, String value, Field field) {
+        String resourceLabel = getResourceLabel(key);
+        if (!TextUtils.isEmpty(resourceLabel)) {
+            getDetailsList().add(new KeyValueItem(resourceLabel, cleanValue(field, value)));
+        }
     }
 
     @Override

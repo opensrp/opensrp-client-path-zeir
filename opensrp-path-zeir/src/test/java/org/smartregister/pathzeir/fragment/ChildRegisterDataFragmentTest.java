@@ -52,6 +52,8 @@ public class ChildRegisterDataFragmentTest extends BaseUnitTest {
         detailMap.put("zeir_id", "1889542");
         detailMap.put("last_name", "Puff");
         detailMap.put("base_entity_id", "1111111");
+        detailMap.put("birth_weight", "5");
+        detailMap.put("birth_height", "55");
     }
 
     @Test
@@ -118,7 +120,6 @@ public class ChildRegisterDataFragmentTest extends BaseUnitTest {
         });
 
         Mockito.doReturn("").when(fragment).cleanValue(Mockito.any(), Mockito.anyString());
-        Mockito.doReturn("").when(fragment).getFieldValue(Mockito.any(), Mockito.any(), Mockito.anyString());
         Mockito.doReturn(RandomStringUtils.random(6)).when(fragment).getResourceLabel(Mockito.anyString());
 
         fragment.resetAdapterData(detailMap);

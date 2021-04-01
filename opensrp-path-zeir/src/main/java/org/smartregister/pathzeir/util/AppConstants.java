@@ -25,7 +25,6 @@ public class AppConstants {
         public static final String DOB = "dob";//Date Of Birth
         public static final String DOD = "dod";//Date Of Death
         public static final String DATE_REMOVED = "date_removed";
-        public static final String MOTHER_NRC_NUMBER = "nrc_number";
         public static final String VIEW_CONFIGURATION_PREFIX = "ViewConfiguration_";
         public static final String HOME_FACILITY = "home_facility";
         public static final String BIRTH_FACILITY_NAME = "birth_facility_name";
@@ -56,16 +55,18 @@ public class AppConstants {
         public static final String PMTCT_STATUS = "pmtct_status";
         public static final String MOTHER_GUARDIAN_NRC = "mother_guardian_nrc";
         public static final String RESIDENTIAL_ADDRESS = "residential_address";
+        public static final String RESIDENTIAL_ADDRESS_OTHER = "residential_address_other";
         public static final String PHYSICAL_LANDMARK = "physical_landmark";
         public static final String CHW_NAME = "chw_name";
         public static final String CHW_PHONE_NUMBER = "chw_phone_number";
         public static final String RESIDENTIAL_AREA = "residential_area";
         public static final String CHILD_ZONE = "child_zone";
-        public static final String BIRTH_WEIGHT = "Birth_Weight";
         public static final String BIRTH_FACILITY_NAME_OTHER = "birth_facility_name_other";
         public static final String OTHER = "other";
         public static final String OA_SERVICE_DATE = "OA_Service_Date";
         public static final String OPENSRP_ID = "opensrp_id";
+        public static final String CHOOSE_IMAGE = "choose_image";
+        public static final String MOTHER_PHONE = "mother_phone";
     }
 
     public static class ConfigurationConstants {

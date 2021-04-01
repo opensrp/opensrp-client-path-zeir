@@ -30,6 +30,7 @@ import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.MOTHER_F
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.MOTHER_GUARDIAN_NRC;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.MOTHER_GUARDIAN_NUMBER;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.MOTHER_LAST_NAME;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.MOTHER_PHONE;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.PHYSICAL_LANDMARK;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.PLACE_OF_BIRTH;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.PMTCT_STATUS;
@@ -37,6 +38,7 @@ import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.REGISTRA
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.RELATIONALID;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.RELATIONAL_ID;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.RESIDENTIAL_ADDRESS;
+import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.RESIDENTIAL_ADDRESS_OTHER;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.RESIDENTIAL_AREA;
 import static org.smartregister.pathzeir.util.AppConstants.KeyConstants.ZEIR_ID;
 import static org.smartregister.pathzeir.util.TableUtil.getAllClientColumn;
@@ -78,6 +80,7 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 getChildDetailsColumn(PLACE_OF_BIRTH),
                 getChildDetailsColumn(HOME_FACILITY),
                 getChildDetailsColumn(RESIDENTIAL_ADDRESS),
+                getChildDetailsColumn(RESIDENTIAL_ADDRESS_OTHER),
                 getChildDetailsColumn(FATHER_GUARDIAN_NAME),
                 getChildDetailsColumn(FATHER_NRC_NUMBER),
                 getChildDetailsColumn(BIRTH_FACILITY_NAME),
@@ -90,6 +93,7 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 getChildDetailsColumn(SHOW_BCG_SCAR),
                 getChildDetailsColumn(SHOW_BCG2_REMINDER),
                 getChildDetailsColumn(CHILD_ZONE),
+                getChildDetailsColumn(MOTHER_GUARDIAN_NUMBER) + " as " + MOTHER_PHONE,
                 "mother.first_name                     as " + MOTHER_FIRST_NAME,
                 "mother.last_name                      as " + MOTHER_LAST_NAME,
                 "mother.dob                            as " + MOTHER_DOB,
