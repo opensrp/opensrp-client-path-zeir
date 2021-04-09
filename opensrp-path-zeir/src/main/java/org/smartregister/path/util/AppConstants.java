@@ -48,7 +48,6 @@ public class AppConstants {
         public static final String CARD_STATUS_DATE = "card_status_date";
         public static final String REGISTRATION_LOCATION_ID = "registration_location_id";
         public static final String REGISTRATION_LOCATION_NAME = "registration_location_name";
-        public static final String DISTRICT = "District";
         public static final String FIRST_HEALTH_FACILITY_CONTRACT = "first_health_facility_contract";
         public static final String FATHER_GUARDIAN_NAME = "father_guardian_name";
         public static final String FATHER_NRC_NUMBER = "father_nrc_number";

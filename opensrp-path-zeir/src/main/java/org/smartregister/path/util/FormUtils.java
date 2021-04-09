@@ -7,7 +7,6 @@ import com.vijay.jsonwizard.constants.JsonFormConstants;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.smartregister.AllConstants;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.path.R;
@@ -16,11 +15,14 @@ import org.smartregister.util.Utils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import timber.log.Timber;
+
+import static org.smartregister.child.util.Constants.JSON_FORM_KEY.SUB_TYPE;
 
 public class FormUtils {
 
@@ -31,6 +33,7 @@ public class FormUtils {
     public static String obtainUpdatedForm(JSONObject form, CommonPersonObjectClient childDetails, Context context) throws JSONException {
         JSONArray fields = JsonFormUtils.fields(form);
         String facilityName = LocationHelper.getInstance().getDefaultLocation(); //Default location always the Health Facility
+
         for (int i = 0; i < fields.length(); i++) {
             JSONObject field = fields.getJSONObject(i);
 
@@ -41,14 +44,23 @@ public class FormUtils {
                     field.put(JsonFormConstants.MIN_DATE, new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(date));
                     field.put(JsonFormConstants.MAX_DATE, AppConstants.KeyConstants.TODAY);
                 }
-                createSpinnerOptions(field, AppConstants.KeyConstants.HOME_FACILITY, getSpinnerKeys(facilityName), getSpinnerValues(facilityName));
 
-                String other = context.getString(R.string.other);
-                String facilities = facilityName + "," + AppConstants.KeyConstants.OTHER;
-                createSpinnerOptions(field, AppConstants.KeyConstants.BIRTH_FACILITY_NAME, getSpinnerKeys(facilities), getSpinnerValues(facilityName + "," + other));
+                if (field.has(SUB_TYPE)) {
+                    createSpinnerOptions(field, AppConstants.KeyConstants.HOME_FACILITY, getSpinnerKeys(facilityName), getSpinnerValues(facilityName));
 
-                String operationalAreas = Utils.getAllSharedPreferences().getPreference(AllConstants.OPERATIONAL_AREAS); // Operational areas are at the ZONE level
-                createSpinnerOptions(field, AppConstants.KeyConstants.CHILD_ZONE, getSpinnerKeys(operationalAreas), getSpinnerValues(operationalAreas));
+                    String other = context.getString(R.string.other);
+                    String facilities = facilityName + "," + AppConstants.KeyConstants.OTHER;
+                    createSpinnerOptions(field, AppConstants.KeyConstants.BIRTH_FACILITY_NAME, getSpinnerKeys(facilities), getSpinnerValues(facilityName + "," + other));
+
+                    LocationHelper locationHelper = LocationHelper.getInstance();
+                    if (locationHelper != null) {
+                        List<String> locationNames = locationHelper.getLocationNames();
+                        locationNames.remove(facilityName);
+                        Collections.sort(locationNames);
+                        String[] operationalAreas = locationNames.toArray(new String[]{});
+                        createSpinnerOptions(field, AppConstants.KeyConstants.CHILD_ZONE, getSpinnerKeys(operationalAreas), getSpinnerValues(operationalAreas));
+                    }
+                }
             }
 
         }
@@ -57,8 +69,11 @@ public class FormUtils {
     }
 
     private static JSONArray getSpinnerKeys(String locations) {
+        return getSpinnerKeys(locations.split(","));
+    }
+
+    private static JSONArray getSpinnerKeys(String[] splitLocations) {
         JSONArray keys = new JSONArray();
-        String[] splitLocations = locations.split(",");
 
         if (LocationHelper.getInstance() != null) {
             for (String location : splitLocations) {
@@ -72,8 +87,11 @@ public class FormUtils {
     }
 
     private static String[] getSpinnerValues(String locations) {
+        return getSpinnerValues(locations.split(","));
+    }
+
+    private static String[] getSpinnerValues(String[] splitLocations) {
         List<String> values = new ArrayList<>();
-        String[] splitLocations = locations.split(",");
         for (String splitLocation : splitLocations) {
             String location = splitLocation.trim();
             values.add(location);
