@@ -115,11 +115,11 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onIndicatorTalliesEvent(event: IndicatorTallyEvent) { /* Do something */
         when (event.status) {
-            TallyStatus.STARTED -> Toast.makeText(this, "Generating daily tallies started", Toast.LENGTH_SHORT).show()
-            TallyStatus.INPROGRESS -> Toast.makeText(this, "Generating daily tallies in-progress", Toast.LENGTH_SHORT).show()
+            TallyStatus.STARTED -> Toast.makeText(this, getString(R.string.generating_daily_tallies_started), Toast.LENGTH_SHORT).show()
+            TallyStatus.INPROGRESS -> Toast.makeText(this, getString(R.string.generating_daily_tallies_in_progress), Toast.LENGTH_SHORT).show()
             TallyStatus.COMPLETE -> {
                 fetchData()
-                Toast.makeText(this, "Generating daily tallies completed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.generating_daily_tallies_completed), Toast.LENGTH_SHORT).show()
             }
             else -> {
             }
