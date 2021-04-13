@@ -45,7 +45,6 @@ import org.smartregister.path.presenter.NavigationPresenter;
 import org.smartregister.path.reporting.coverage.CoverageReportsActivity;
 import org.smartregister.path.reporting.dropuout.DropoutReportsActivity;
 import org.smartregister.path.reporting.monthly.MonthlyReportsActivity;
-import org.smartregister.path.reporting.monthly.intent.HIA2IntentService;
 import org.smartregister.path.reporting.register.ReportRegisterActivity;
 import org.smartregister.path.reporting.stock.ZeirStockActivity;
 import org.smartregister.path.util.AppConstants;
@@ -196,8 +195,6 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
     private void syncApp(final Activity parentActivity) {
         syncMenuItem.setOnClickListener(v -> {
             // Call HiA2Intent Service to generate Reporting indicators
-            Intent intent = new Intent(parentActivity, HIA2IntentService.class);
-            parentActivity.startService(intent);
             mPresenter.sync(parentActivity);
             Timber.i("HIA2IntentService start service called");
         });

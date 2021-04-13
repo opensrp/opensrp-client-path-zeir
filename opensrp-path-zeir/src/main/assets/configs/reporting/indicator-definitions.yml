@@ -265,7 +265,7 @@ indicators:
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
                         AND v.out_of_area = 0 AND lower(v.name) = 'bcg';"
 
-  - key: "CHN3_005-O"
+  - key: "CHN3_005_O"
     description: "Number of children < one year who received BCG dose at outreach conducted by this facility in this month"
     grouping: "report_group_header_immunisation"
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) as age
@@ -281,7 +281,7 @@ indicators:
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
                         AND v.out_of_area = 0 AND lower(v.name) = 'opv_0';"
 
-  - key: "CHN3_010-O"
+  - key: "CHN3_010_O"
     description: "Number of children < one year who received OPV0 dose at outreach conducted by this facility in this month"
     grouping: "report_group_header_immunisation"
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) as age
@@ -297,7 +297,7 @@ indicators:
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
                         AND v.out_of_area = 0 AND lower(v.name) = 'opv_1';"
 
-  - key: "CHN3_015-O"
+  - key: "CHN3_015_O"
     description: "Number of children < one year who received OPV1 dose at outreach conducted by this facility in this month"
     grouping: "report_group_header_immunisation"
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) as age

@@ -1,13 +1,27 @@
 package org.smartregister.path.reporting.monthly
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_monthly_reports.*
+import kotlinx.android.synthetic.main.activity_monthly_reports.reportSyncBtn
+import kotlinx.android.synthetic.main.activity_monthly_reports.titleTextView
+import kotlinx.android.synthetic.main.activity_report_register.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.smartregister.Context
 import org.smartregister.path.BuildConfig
 import org.smartregister.path.R
 import org.smartregister.path.reporting.ReportGroupingModel
 import org.smartregister.path.reporting.common.ReportingUtils
+import org.smartregister.path.reporting.monthly.intent.HIA2IntentService
+import org.smartregister.reporting.domain.TallyStatus
+import org.smartregister.reporting.event.BaseEvent
+import org.smartregister.reporting.event.IndicatorTallyEvent
 import org.smartregister.view.activity.MultiLanguageActivity
 
 class MonthlyReportsActivity : MultiLanguageActivity() {
@@ -40,6 +54,21 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
         containerViewPager.apply {
             adapter = reportsPagerAdapter
             currentItem = intent.getIntExtra(Constants.SELECT_TAB, 0)
+            addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                }
+
+                override fun onPageSelected(position: Int) {
+                    if (position == 0)
+                        reportSyncBtn.visibility = View.VISIBLE
+                    else
+                        reportSyncBtn.visibility = View.GONE
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                }
+
+            })
         }
 
         reportFragmentTabLayout.apply {
@@ -52,6 +81,14 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
             else
                 text = ReportGroupingModel(this@MonthlyReportsActivity).reportGroupings.first().displayName
         }
+
+        reportSyncBtn.apply {
+            setOnClickListener {
+                // Call HiA2Intent Service to generate Reporting indicators
+                val intent = Intent(this@MonthlyReportsActivity, HIA2IntentService::class.java)
+                startService(intent)
+            }
+        }
     }
 
     private fun getLoggedInUserInitials(): String {
@@ -62,6 +99,10 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
 
     override fun onResume() {
         super.onResume()
+        fetchData()
+    }
+
+    private fun fetchData() {
         monthlyReportsViewModel.apply {
             fetchDraftedMonths()
             fetchUnDraftedMonths()
@@ -69,4 +110,30 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
             fetchAllDailyTalliesDays()
         }
     }
+
+    @Suppress("unused")
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onIndicatorTalliesEvent(event: IndicatorTallyEvent) { /* Do something */
+        when (event.status) {
+            TallyStatus.STARTED -> Toast.makeText(this, "Generating daily tallies started", Toast.LENGTH_SHORT).show()
+            TallyStatus.INPROGRESS -> Toast.makeText(this, "Generating daily tallies in-progress", Toast.LENGTH_SHORT).show()
+            TallyStatus.COMPLETE -> {
+                fetchData()
+                Toast.makeText(this, "Generating daily tallies completed", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
 }
