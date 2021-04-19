@@ -56,6 +56,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
             currentItem = intent.getIntExtra(Constants.SELECT_TAB, 0)
             addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                    // Do nothing
                 }
 
                 override fun onPageSelected(position: Int) {
@@ -66,6 +67,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
                 }
 
                 override fun onPageScrollStateChanged(state: Int) {
+                    // Do nothing
                 }
 
             })
