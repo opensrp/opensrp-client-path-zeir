@@ -20,7 +20,6 @@ import org.smartregister.path.reporting.ReportGroupingModel
 import org.smartregister.path.reporting.common.ReportingUtils
 import org.smartregister.path.reporting.monthly.intent.HIA2IntentService
 import org.smartregister.reporting.domain.TallyStatus
-import org.smartregister.reporting.event.BaseEvent
 import org.smartregister.reporting.event.IndicatorTallyEvent
 import org.smartregister.view.activity.MultiLanguageActivity
 
@@ -89,6 +88,8 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
                 // Call HiA2Intent Service to generate Reporting indicators
                 val intent = Intent(this@MonthlyReportsActivity, HIA2IntentService::class.java)
                 startService(intent)
+                // To notify user immediately (Fix late notification display issue)
+                Toast.makeText(this@MonthlyReportsActivity, getString(R.string.generating_daily_tallies_started), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -115,7 +116,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
 
     @Suppress("unused")
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onIndicatorTalliesEvent(event: IndicatorTallyEvent) { /* Do something */
+    fun onIndicatorTalliesEvent(event: IndicatorTallyEvent) {
         when (event.status) {
             TallyStatus.STARTED -> Toast.makeText(this, getString(R.string.generating_daily_tallies_started), Toast.LENGTH_SHORT).show()
             TallyStatus.INPROGRESS -> Toast.makeText(this, getString(R.string.generating_daily_tallies_in_progress), Toast.LENGTH_SHORT).show()
@@ -124,6 +125,7 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
                 Toast.makeText(this, getString(R.string.generating_daily_tallies_completed), Toast.LENGTH_SHORT).show()
             }
             else -> {
+                // Do nothing
             }
         }
     }
