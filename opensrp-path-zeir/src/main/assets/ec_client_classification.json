@@ -59,6 +59,20 @@
             "creates_case": [
               "ec_booster_vaccines"
             ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "update_booster_vaccines",
+            "creates_case": [
+              "ec_booster_vaccines"
+            ]
+          },
+          {
+            "field": "eventType",
+            "field_value": "remove_booster_vaccines",
+            "closes_case": [
+              "ec_booster_vaccines"
+            ]
           }
         ]
       }
