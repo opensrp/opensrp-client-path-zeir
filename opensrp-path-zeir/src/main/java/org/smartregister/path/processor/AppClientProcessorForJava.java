@@ -167,6 +167,10 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                     case Constants.EventType.BOOSTER_VACCINES:
                         processEventClient(clientClassification, eventClient, event);
                         break;
+                    case Constants.EventType.UPDATE_DYNAMIC_VACCINES:
+                    case Constants.EventType.DELETE_DYNAMIC_VACCINES:
+                        processUpdateDynamicVaccineEvent(event);
+                        break;
                     case Constants.EventType.BITRH_REGISTRATION:
                     case Constants.EventType.UPDATE_BITRH_REGISTRATION:
                     case Constants.EventType.NEW_WOMAN_REGISTRATION:
@@ -312,6 +316,22 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 contentValues.put(AppConstants.KeyConstants.CARD_STATUS, cardStatus);
                 contentValues.put(AppConstants.KeyConstants.CARD_STATUS_DATE, cardStatusDate);
                 commonrepository.updateColumn(AppConstants.TableNameConstants.CHILD_DETAILS, contentValues, event.getBaseEntityId());
+            }
+        }
+    }
+
+    private void processUpdateDynamicVaccineEvent(Event event) {
+        CommonRepository commonrepository = getApplication().context().commonrepository(AppConstants.TableNameConstants.BOOSTER_VACCINES);
+        if (event != null && StringUtils.isNotBlank(event.getBaseEntityId())) {
+            Map<String, String> details = event.getDetails();
+            String vaccineDate = details.get(Constants.KEY.VACCINE_DATE);
+            if (StringUtils.isNotBlank(vaccineDate) && StringUtils.isNotBlank(vaccineDate) &&
+                    Constants.EventType.UPDATE_DYNAMIC_VACCINES.equalsIgnoreCase(event.getEventType())) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(Constants.KEY.VACCINE_DATE, vaccineDate);
+                commonrepository.updateColumn(AppConstants.TableNameConstants.BOOSTER_VACCINES, contentValues, event.getBaseEntityId());
+            } else if (Constants.EventType.DELETE_DYNAMIC_VACCINES.equalsIgnoreCase(event.getEventType()) && details.get(Constants.KEY.BASE_ENTITY_ID) != null) {
+                commonrepository.deleteCase(details.get(Constants.KEY.BASE_ENTITY_ID), AppConstants.TableNameConstants.BOOSTER_VACCINES);
             }
         }
     }
@@ -684,7 +704,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
     @Override
     public void updateFTSsearch(String tableName, String entityId, ContentValues contentValues) {
 
-        Timber.i("Starting updateFTSsearch table: %s", tableName);
+        Timber.i("Starting updateFTSsearch table: %s Base Entity ID %s", tableName, entityId);
 
         AllCommonsRepository allCommonsRepository = getApplication().context().
                 allCommonsRepositoryobjects(tableName);
@@ -700,7 +720,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
             if (StringUtils.isNotBlank(dobString)) {
                 DateTime birthDateTime = Utils.dobStringToDateTime(dobString);
                 if (birthDateTime != null) {
-                    VaccineSchedule.updateOfflineAlerts(entityId, birthDateTime, "child");
+                    VaccineSchedule.updateOfflineAlertsOnly(entityId, birthDateTime, "child");
                     ServiceSchedule.updateOfflineAlerts(entityId, birthDateTime);
                 }
             }

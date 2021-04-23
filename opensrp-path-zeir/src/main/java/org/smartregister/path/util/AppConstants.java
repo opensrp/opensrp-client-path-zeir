@@ -96,6 +96,7 @@ public class AppConstants {
         public static final String CHILD_UPDATED_ALERTS = "child_updated_alerts";
         public static final String MOTHER_DETAILS = "ec_mother_details";
         public static final String CHILD_DETAILS = "ec_child_details";
+        public static final String BOOSTER_VACCINES = "ec_booster_vaccines";
     }
 
     public interface Columns {
@@ -109,6 +110,7 @@ public class AppConstants {
 
     public static final class EntityTypeConstants {
         public static final String CHILD = "child";
+        public static final String MOTHER = "mother";
     }
 
     public interface IntentKeyUtil {

@@ -81,5 +81,8 @@ public class AppSyncConfiguration extends SyncConfiguration {
         return LoginActivity.class;
     }
 
+    public boolean validateUserAssignments() {
+        return false;
+    }
 }
 
