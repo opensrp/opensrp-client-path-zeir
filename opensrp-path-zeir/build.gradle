@@ -71,13 +71,13 @@ android {
     applicationVariants.all { variant ->
         if (variant.name == "debug") {
             variant.outputs.each { output ->
-                output.versionCodeOverride = 9
-                output.versionNameOverride = "0.0.9-debug"
+                output.versionCodeOverride = 10
+                output.versionNameOverride = "0.0.10-debug"
             }
         } else if (variant.name == "preview") {
             variant.outputs.each { output ->
-                output.versionCodeOverride = 9
-                output.versionNameOverride = "0.0.9-preview"
+                output.versionCodeOverride = 10
+                output.versionNameOverride = "0.0.10-preview"
             }
         } else if (variant.name == "release") {
             variant.outputs.each { output ->
@@ -252,7 +252,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
 //    implementation(project(':opensrp-child')) {
-    implementation('org.smartregister:opensrp-client-child:0.7.0-ALPHA1-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-child:0.7.0-ALPHA4-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-growth-monitoring'
