@@ -488,5 +488,8 @@
     <string name="child_birth_certificate">Birth Certificate Number</string>
     <string name="child_register_card_number">Registration Card Number</string>
     <string name="other">Other</string>
+    <string name="generating_daily_tallies_started">Generating daily tallies started</string>
+    <string name="generating_daily_tallies_in_progress">Generating daily tallies in-progress</string>
+    <string name="generating_daily_tallies_completed">Generating daily tallies completed</string>
 
 </resources>
