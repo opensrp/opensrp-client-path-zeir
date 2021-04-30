@@ -491,5 +491,6 @@
     <string name="generating_daily_tallies_started">Generating daily tallies started</string>
     <string name="generating_daily_tallies_in_progress">Generating daily tallies in-progress</string>
     <string name="generating_daily_tallies_completed">Generating daily tallies completed</string>
+    <string name="ministerio_de_salud_p_blica"> Ministerio de Salud Pública</string>
 
 </resources>

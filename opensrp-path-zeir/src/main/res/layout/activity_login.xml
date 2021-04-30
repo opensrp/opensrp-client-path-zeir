@@ -37,7 +37,7 @@
                 android:layout_marginBottom="16dp"
                 android:contentDescription="@string/logo_string"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_logo"
+                app:srcCompat="@drawable/ic_logo_new"
                 app:tint="@color/primary" />
 
             <TextView
@@ -48,6 +48,23 @@
                 android:gravity="center_horizontal"
                 android:text="@string/app_version"
                 android:textSize="@dimen/login_build_text_view_textSize" />
+            <TextView
+                android:id="@+id/moh_name_arabic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal"
+                android:text="وزارة الصحة الع�...و�...ية الصحر"
+                android:textSize="@dimen/login_build_text_view_textSize" />
+            <TextView
+                android:id="@+id/moh_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal"
+                android:text="@string/ministerio_de_salud_p_blica"
+                android:textSize="@dimen/login_build_text_view_textSize" />
+
 
         </LinearLayout>
         <!-- Middle section -->
@@ -182,6 +199,19 @@
 
             <ImageView
                 android:id="@+id/opensrp_logo_image_view"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:adjustViewBounds="false"
+                android:cropToPadding="false"
+                android:paddingTop="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/unicef_tunisia_opensrp_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView21"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/wfp_logo"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
