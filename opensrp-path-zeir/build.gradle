@@ -130,9 +130,9 @@ android {
             buildConfigField "int", "VIEW_SYNC_CONFIGURATIONS_MINUTES", '15'
             buildConfigField "int", "CLIENT_SETTINGS_SYNC_MINUTES", '15'
             buildConfigField "int", "GROWTH_MONITORING_SYNC_TIME", '15'
-            buildConfigField "String[]", "LOCATION_LEVELS", '{"Country", "Province", "District", "Health Facility", "Zone"}'
-            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Province", "District", "Health Facility", "Zone"}'
-            buildConfigField "String[]", "ALLOWED_LEVELS", '{"Health Facility", "Zone"}'
+            buildConfigField "String[]", "LOCATION_LEVELS", '{"Country", "Province", "District", "Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
+            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"Country", "Province", "District", "Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
+            buildConfigField "String[]", "ALLOWED_LEVELS", '{"Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
             buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.release")
             buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.release")
@@ -155,9 +155,9 @@ android {
             buildConfigField "int", "VIEW_SYNC_CONFIGURATIONS_MINUTES", '15'
             buildConfigField "int", "CLIENT_SETTINGS_SYNC_MINUTES", '15'
             buildConfigField "int", "GROWTH_MONITORING_SYNC_TIME", '15'
-            buildConfigField "String[]", "LOCATION_LEVELS", '{"National", "Province", "District", "Health Facility", "Zone"}'
-            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National", "Province", "District", "Health Facility", "Zone"}'
-            buildConfigField "String[]", "ALLOWED_LEVELS", '{"Health Facility", "Zone"}'
+            buildConfigField "String[]", "LOCATION_LEVELS", '{"National", "Province", "District", "Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
+            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National", "Province", "District", "Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
+            buildConfigField "String[]", "ALLOWED_LEVELS", '{"Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
             buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.debug")
             buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.debug")
@@ -184,9 +184,9 @@ android {
             buildConfigField "int", "VIEW_SYNC_CONFIGURATIONS_MINUTES", '15'
             buildConfigField "int", "CLIENT_SETTINGS_SYNC_MINUTES", '15'
             buildConfigField "int", "GROWTH_MONITORING_SYNC_TIME", '15'
-            buildConfigField "String[]", "LOCATION_LEVELS", '{"National", "Province", "District", "Health Facility", "Zone"}'
-            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National", "Province", "District", "Health Facility", "Zone"}'
-            buildConfigField "String[]", "ALLOWED_LEVELS", '{"Health Facility", "Zone"}'
+            buildConfigField "String[]", "LOCATION_LEVELS", '{"National", "Province", "District", "Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
+            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National", "Province", "District", "Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
+            buildConfigField "String[]", "ALLOWED_LEVELS", '{"Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
             buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.preview")
             buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.preview")
@@ -251,8 +251,8 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
     implementation "androidx.cardview:cardview:1.0.0"
 
-//    implementation(project(':opensrp-child')) {
-    implementation('org.smartregister:opensrp-client-child:0.7.0-ALPHA4-SNAPSHOT@aar') {
+    implementation(project(':opensrp-child')) {
+//    implementation('org.smartregister:opensrp-client-child:0.7.0-ALPHA4-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-growth-monitoring'

@@ -89,6 +89,8 @@
     <string name="child_last_name">Child\'s last name</string>
     <string name="dob_range">Child\'s date of birth (range)</string>
     <string name="mother_caregiver_first_name">"Mother/caregiver first name"</string>
+    <string name="mother_first_name">"Mother first name"</string>
+    <string name="mother_last_name">"Mother last name"</string>
     <string name="mother_caregiver_last_name">"Mother/caregiver last name"</string>
     <string name="mother_caregiver_phone">Mother/caregiver\'s phone number</string>
     <string name="father_phone">Father phone number</string>
@@ -489,7 +491,7 @@
     <string name="child_register_card_number">Registration Card Number</string>
     <string name="other">Other</string>
     <string name="generating_daily_tallies_started">Generating daily tallies started</string>
-    <string name="generating_daily_tallies_in_progress">Generating daily tallies in-progress</string>
+    <string name="generating_daily_tallies_in_progress">Generating daily tallies…</string>
     <string name="generating_daily_tallies_completed">Generating daily tallies completed</string>
 
 </resources>
