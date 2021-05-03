@@ -37,15 +37,25 @@
                 android:layout_marginBottom="16dp"
                 android:contentDescription="@string/logo_string"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_logo_saharawi" />
+                app:srcCompat="@drawable/logo_sahrawi_alte" />
             <TextView
                 android:id="@+id/moh_name_arabic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
-                android:text=""
-                android:textSize="@dimen/login_build_text_view_textSize" />
+                android:text="وزارة الصحة العمومية الصحراوية"
+                android:textSize="@dimen/login_build_text_view_textSize"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/moh_name_spanish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal"
+                android:text="Ministerio de Salud Pública"
+                android:textSize="@dimen/login_build_text_view_textSize"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/login_build_text_view"
