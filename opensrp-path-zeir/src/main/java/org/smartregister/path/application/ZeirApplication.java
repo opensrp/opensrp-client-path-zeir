@@ -6,9 +6,8 @@ import android.util.Pair;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.core.CrashlyticsCore;
 import com.evernote.android.job.JobManager;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
@@ -81,7 +80,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
 public class ZeirApplication extends DrishtiApplication implements TimeChangedBroadcastReceiver.OnTimeChangedListener {
@@ -261,7 +259,7 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
         ReportingLibrary.init(context, getRepository(), null, BuildConfig.VERSION_CODE, BuildConfig.DATABASE_VERSION);
         ReportingLibrary.getInstance().addMultiResultProcessor(new ReportIndicatorsProcessor());
 
-        Fabric.with(this, new Crashlytics.Builder().core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build()).build());
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG);
 
         initRepositories();
         initOfflineSchedules();

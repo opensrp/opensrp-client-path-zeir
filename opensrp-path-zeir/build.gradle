@@ -2,23 +2,26 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven { url 'https://maven.fabric.io/public' }
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.0.2"
+        classpath "com.android.tools.build:gradle:4.1.3"
         classpath 'gradle.plugin.org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.10.2'
-        classpath 'io.fabric.tools:gradle:1.31.2'
+        classpath 'com.google.gms:google-services:4.3.5'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.2'
+        classpath 'com.google.firebase:perf-plugin:1.3.5'  // Performance Monitoring plugin
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
-apply plugin: 'io.fabric'
 apply plugin: 'org.smartregister.gradle.jarjar'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.firebase.firebase-perf' // Apply the Performance Monitoring plugin
 
 jacoco {
     toolVersion = jacocoVersion
@@ -234,6 +237,8 @@ tasks.withType(Test) {
 
 dependencies {
     implementation fileTree(dir: "./build/libs", include: ['*.jar'])
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:27.1.0')
     jarJar 'com.ibm.fhir:fhir-model:4.2.3'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
 
@@ -352,13 +357,12 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.24'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'org.jeasy:easy-rules-core:3.3.0'
     implementation 'org.jeasy:easy-rules-mvel:3.3.0'
-    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.24'
-    implementation group: 'io.fabric.sdk.android', name: 'fabric', version: '1.4.8'
+    implementation group: "org.yaml", name: 'snakeyaml', version: '1.24'
     implementation 'com.github.florent37:expansionpanel:1.2.4'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-perf'
 
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 
