@@ -493,7 +493,16 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
                 VaccineRepository vaccineRepository = getApplication().vaccineRepository();
                 Vaccine vaccineObj = new Vaccine();
                 vaccineObj.setBaseEntityId(contentValues.getAsString(VaccineRepository.BASE_ENTITY_ID));
-                vaccineObj.setName(contentValues.getAsString(VaccineRepository.NAME));
+
+                String name = contentValues.getAsString(VaccineRepository.NAME);
+
+                if (AppConstants.KeyConstants.MEASLES_1.equalsIgnoreCase(name)) {
+                    name = AppConstants.KeyConstants.MR_1;
+                } else if (AppConstants.KeyConstants.MEASLES_2.equalsIgnoreCase(name)) {
+                    name = AppConstants.KeyConstants.MR_2;
+                }
+
+                vaccineObj.setName(name);
                 if (contentValues.containsKey(VaccineRepository.CALCULATION)) {
                     vaccineObj.setCalculation(parseInt(contentValues.getAsString(VaccineRepository.CALCULATION)));
                 }

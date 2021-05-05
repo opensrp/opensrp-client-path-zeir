@@ -66,6 +66,10 @@ public class AppConstants {
         public static final String OPENSRP_ID = "opensrp_id";
         public static final String CHOOSE_IMAGE = "choose_image";
         public static final String MOTHER_PHONE = "mother_phone";
+        public static final String MEASLES_1 = "measles_1";
+        public static final String MEASLES_2 = "measles_2";
+        public static final String MR_1 = "mr_1";
+        public static final String MR_2 = "mr_2";
     }
 
     public static class ConfigurationConstants {

@@ -63,7 +63,7 @@ public class ZeirRepository extends Repository {
 
     private SQLiteDatabase readableDatabase;
     private SQLiteDatabase writableDatabase;
-    private Context context;
+    private final Context context;
 
     public ZeirRepository(@NonNull Context context, @NonNull org.smartregister.Context openSRPContext) {
         super(context, AllConstants.DATABASE_NAME, BuildConfig.DATABASE_VERSION, openSRPContext.session(),
@@ -100,7 +100,7 @@ public class ZeirRepository extends Repository {
 
         runLegacyUpgrades(database);
 
-        onUpgrade(database, 12, BuildConfig.DATABASE_VERSION);
+        onUpgrade(database, 13, BuildConfig.DATABASE_VERSION);
 
         // initialize from yml file
         ReportingLibrary reportingLibraryInstance = ReportingLibrary.getInstance();
@@ -148,6 +148,9 @@ public class ZeirRepository extends Repository {
                     break;
                 case 13:
                     upgradeToVersion13(db);
+                    break;
+                case 14:
+                    upgradeToVersion14(db);
                     break;
                 default:
                     break;
@@ -301,6 +304,7 @@ public class ZeirRepository extends Repository {
             Timber.e(e, "upgradeToVersion5");
         }
     }
+
     private void upgradeToVersion6(@NonNull SQLiteDatabase db) {
         try {
             WeightZScoreRepository.createTable(db);
@@ -429,5 +433,10 @@ public class ZeirRepository extends Repository {
 //        StockRepository.migrateAddInventoryColumns(db);
 //        StockTypeRepository.migrationAdditionalProductProperties(db);
 //        StockTypeRepository.migrationAddServerVersionColumn(db);
+    }
+
+    private void upgradeToVersion14(SQLiteDatabase db) {
+        db.execSQL("UPDATE vaccines SET name = ? WHERE name = ?", new String[]{AppConstants.KeyConstants.MR_1, AppConstants.KeyConstants.MEASLES_1});
+        db.execSQL("UPDATE vaccines SET name = ? WHERE name = ?", new String[]{AppConstants.KeyConstants.MR_2, AppConstants.KeyConstants.MEASLES_2});
     }
 }
