@@ -68,6 +68,3 @@ apply plugin: 'build-dashboard'
 buildDashboard {
     reports.html.setDestination(file("build/"))
 }
-
-//test.reports.html.enabled = false
-//test.reports.junitXml.enabled = false
