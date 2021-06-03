@@ -398,7 +398,7 @@
     <string name="dropout_cohort_header">Cohort</string>
     <string name="dropout_started_completed_header">(Started - Completed) / Started </string>
     <string name="dropout_percentage_header">Dropout Percent</string>
-    <string name="dropout_cohort_bcg_size_header">(Cohort Size - M/MR 1) / Cohort Size </string>
+    <string name="dropout_cohort_bcg_size_header">(Cohort Size - MR 1) / Cohort Size </string>
     <string name="dropout_cohort_penta_size_header">(Cohort Size - Penta 3) / Cohort Size </string>
 
     <string name="cohort_coverage_report">Cohort Coverage Report</string>
