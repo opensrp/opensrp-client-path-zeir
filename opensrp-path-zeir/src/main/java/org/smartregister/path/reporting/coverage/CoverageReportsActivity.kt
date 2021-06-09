@@ -44,14 +44,14 @@ class CoverageReportsActivity : BaseActivity(), CoverageReportContract.View, Cov
             setOnClickListener {
                 val allSharedPreferences = ZeirApplication.getInstance().context().allSharedPreferences()
                 val reportJobExecutionTime = allSharedPreferences.getPreference("report_job_execution_time")
-//                if (reportJobExecutionTime.isBlank() || AppUtils.timeBetweenLastExecutionAndNow(0, reportJobExecutionTime)) {
+                if (reportJobExecutionTime.isBlank() || AppUtils.timeBetweenLastExecutionAndNow(0, reportJobExecutionTime)) {
                     allSharedPreferences.savePreference("report_job_execution_time", System.currentTimeMillis().toString())
                     DropoutIntentServiceJob.scheduleJobImmediately(DropoutIntentServiceJob.TAG)
                     StockSyncIntentServiceJob.scheduleJobImmediately(StockSyncIntentServiceJob.TAG)
                     Toast.makeText(context, "Reporting Job Has Started, It will take some time", Toast.LENGTH_LONG).show()
-//                } else {
-//                    Toast.makeText(context, "Reporting Job Has Already Been Started, Try again in 30 mins", Toast.LENGTH_LONG).show()
-//                }
+                } else {
+                    Toast.makeText(context, "Reporting Job Has Already Been Started, Try again in 30 mins", Toast.LENGTH_LONG).show()
+                }
             }
         }
         backButton.apply { setOnClickListener { navigationMenu.openDrawer() } }
