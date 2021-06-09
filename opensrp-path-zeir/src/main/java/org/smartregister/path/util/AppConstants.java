@@ -70,6 +70,8 @@ public class AppConstants {
         public static final String MEASLES_2 = "measles_2";
         public static final String MR_1 = "mr_1";
         public static final String MR_2 = "mr_2";
+        public static final String MR = "MR";
+        public static final String M_MR = "M/MR";
     }
 
     public static class ConfigurationConstants {

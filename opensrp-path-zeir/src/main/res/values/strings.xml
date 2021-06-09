@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">ZEIR</string>
-    <string name="tunisia_app_login_title" translatable="false">Carte électronique de vaccination Tunisienne\nبطـــــاقة التلقيـــــح الإلكترونيــــة التونسية</string>
     <string name="action_settings" translatable="false">Settings</string>
     <string name="sync" translatable="false">Sync</string>
     <string name="action_log_out">Logging Out</string>
@@ -52,7 +51,7 @@
     <string name="please_wait_message">Please wait</string>
     <string name="reports">Reports</string>
 
-    <string name="str_page_info">Page {0} of {1}</string>
+    <string name="str_page_info">Page %1$d of %2$d</string>
     <string name="dismiss_lookup">Confirm</string>
     <string name="fill_form_error_msg">Please register at least one service before saving</string>
     <string name="close">Close</string>
@@ -398,7 +397,7 @@
     <string name="dropout_cohort_header">Cohort</string>
     <string name="dropout_started_completed_header">(Started - Completed) / Started </string>
     <string name="dropout_percentage_header">Dropout Percent</string>
-    <string name="dropout_cohort_bcg_size_header">(Cohort Size - M/MR 1) / Cohort Size </string>
+    <string name="dropout_cohort_bcg_size_header">(Cohort Size - MR 1) / Cohort Size </string>
     <string name="dropout_cohort_penta_size_header">(Cohort Size - Penta 3) / Cohort Size </string>
 
     <string name="cohort_coverage_report">Cohort Coverage Report</string>
