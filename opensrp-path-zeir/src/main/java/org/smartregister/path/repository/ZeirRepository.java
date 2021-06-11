@@ -100,7 +100,7 @@ public class ZeirRepository extends Repository {
 
         runLegacyUpgrades(database);
 
-        onUpgrade(database, 14, BuildConfig.DATABASE_VERSION);
+        onUpgrade(database, 15, BuildConfig.DATABASE_VERSION);
 
         // initialize from yml file
         ReportingLibrary reportingLibraryInstance = ReportingLibrary.getInstance();
@@ -146,14 +146,14 @@ public class ZeirRepository extends Repository {
                     PlanDefinitionRepository.createTable(db);
                     PlanDefinitionSearchRepository.createTable(db);
                     break;
-                case 13:
-                    upgradeToVersion13(db);
-                    break;
                 case 14:
                     upgradeToVersion14(db);
                     break;
                 case 15:
                     upgradeToVersion15(db);
+                    break;
+                case 16:
+                    upgradeToVersion16(db);
                     break;
                 default:
                     break;
@@ -431,13 +431,6 @@ public class ZeirRepository extends Repository {
         }
     }
 
-    @SuppressWarnings("unused")
-    private void upgradeToVersion13(SQLiteDatabase db) { //TODO revisit this
-//        StockRepository.migrateAddInventoryColumns(db);
-//        StockTypeRepository.migrationAdditionalProductProperties(db);
-//        StockTypeRepository.migrationAddServerVersionColumn(db);
-    }
-
     private void upgradeToVersion14(SQLiteDatabase db) {
         db.execSQL("UPDATE vaccines SET name = ? WHERE name = ?", new String[]{AppConstants.KeyConstants.MR_1, AppConstants.KeyConstants.MEASLES_1});
         db.execSQL("UPDATE vaccines SET name = ? WHERE name = ?", new String[]{AppConstants.KeyConstants.MR_2, AppConstants.KeyConstants.MEASLES_2});
@@ -447,5 +440,11 @@ public class ZeirRepository extends Repository {
         //Update Stock module name from M/MR to MR
         db.execSQL("UPDATE stock_types SET name = ? WHERE name = ?", new String[]{AppConstants.KeyConstants.MR, AppConstants.KeyConstants.M_MR});
 
+    }
+
+    private void upgradeToVersion16(SQLiteDatabase db) {
+        StockRepository.migrateAddInventoryColumns(db);
+        StockTypeRepository.migrationAdditionalProductProperties(db);
+        StockTypeRepository.migrationAddServerVersionColumn(db);
     }
 }
