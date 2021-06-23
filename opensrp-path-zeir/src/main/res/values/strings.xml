@@ -477,12 +477,12 @@
     <string name="CHN3_065_O">RV 1 (&lt; 1 year) at outreach</string>
     <string name="CHN3_070">RV 2 (&lt; 1 year) at facility</string>
     <string name="CHN3_070_O">RV 2 (&lt; 1 year) at outreach</string>
-    <string name="CHN3_075">Measles/ MR 1 (&lt; 1 year) at facility</string>
-    <string name="CHN3_075_O">Measles/ MR 1 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_075">MR 1 (&lt; 1 year) at facility</string>
+    <string name="CHN3_075_O">MR 1 (&lt; 1 year) at outreach</string>
     <string name="CHN3_080">Fully immunised (&lt; 1 year) at facility</string>
-    <string name="CHN3_080_O">Fully immunised (&lt; 1 year) at outreach</string>
-    <string name="CHN3_085">Measles/ MR 2 (at 18 months) at facility</string>
-    <string name="CHN3_085_O">Measles/ MR 2 (at 18 months) at outreach</string>
+    <string name="CHN3_080_O">Fully ismmunised (&lt; 1 year) at outreach</string>
+    <string name="CHN3_085">MR 2 (at 18 months) at facility</string>
+    <string name="CHN3_085_O">MR 2 (at 18 months) at outreach</string>
     <string name="CHN3_090">Number of days fridge non-functional</string>
     <string name="daily_tallies_with_day">Daily Tallies &gt; %1s</string>
 
