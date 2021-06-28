@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">ZEIR</string>
-    <string name="tunisia_app_login_title" translatable="false">Carte électronique de vaccination Tunisienne\nبطـــــاقة التلقيـــــح الإلكترونيــــة التونسية</string>
     <string name="action_settings" translatable="false">Settings</string>
     <string name="sync" translatable="false">Sync</string>
     <string name="action_log_out">Logging Out</string>
@@ -52,7 +51,7 @@
     <string name="please_wait_message">Please wait</string>
     <string name="reports">Reports</string>
 
-    <string name="str_page_info">Page {0} of {1}</string>
+    <string name="str_page_info">Page %1$d of %2$d</string>
     <string name="dismiss_lookup">Confirm</string>
     <string name="fill_form_error_msg">Please register at least one service before saving</string>
     <string name="close">Close</string>
@@ -398,7 +397,7 @@
     <string name="dropout_cohort_header">Cohort</string>
     <string name="dropout_started_completed_header">(Started - Completed) / Started </string>
     <string name="dropout_percentage_header">Dropout Percent</string>
-    <string name="dropout_cohort_bcg_size_header">(Cohort Size - M/MR 1) / Cohort Size </string>
+    <string name="dropout_cohort_bcg_size_header">(Cohort Size - MR 1) / Cohort Size </string>
     <string name="dropout_cohort_penta_size_header">(Cohort Size - Penta 3) / Cohort Size </string>
 
     <string name="cohort_coverage_report">Cohort Coverage Report</string>
@@ -478,12 +477,12 @@
     <string name="CHN3_065_O">RV 1 (&lt; 1 year) at outreach</string>
     <string name="CHN3_070">RV 2 (&lt; 1 year) at facility</string>
     <string name="CHN3_070_O">RV 2 (&lt; 1 year) at outreach</string>
-    <string name="CHN3_075">Measles/ MR 1 (&lt; 1 year) at facility</string>
-    <string name="CHN3_075_O">Measles/ MR 1 (&lt; 1 year) at outreach</string>
+    <string name="CHN3_075">MR 1 (&lt; 1 year) at facility</string>
+    <string name="CHN3_075_O">MR 1 (&lt; 1 year) at outreach</string>
     <string name="CHN3_080">Fully immunised (&lt; 1 year) at facility</string>
-    <string name="CHN3_080_O">Fully immunised (&lt; 1 year) at outreach</string>
-    <string name="CHN3_085">Measles/ MR 2 (at 18 months) at facility</string>
-    <string name="CHN3_085_O">Measles/ MR 2 (at 18 months) at outreach</string>
+    <string name="CHN3_080_O">Fully ismmunised (&lt; 1 year) at outreach</string>
+    <string name="CHN3_085">MR 2 (at 18 months) at facility</string>
+    <string name="CHN3_085_O">MR 2 (at 18 months) at outreach</string>
     <string name="CHN3_090">Number of days fridge non-functional</string>
     <string name="daily_tallies_with_day">Daily Tallies &gt; %1s</string>
 

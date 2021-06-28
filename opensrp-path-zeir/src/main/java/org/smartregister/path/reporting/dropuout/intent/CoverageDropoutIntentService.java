@@ -52,13 +52,15 @@ import timber.log.Timber;
 public class CoverageDropoutIntentService extends IntentService {
     private static final String TAG = CoverageDropoutIntentService.class.getCanonicalName();
 
-    private static final String DOD_FILTER = " (" + AppConstants.KeyConstants.DOD + " is NULL OR " + AppConstants.KeyConstants.DOD + " = '') ";
+    private static final String DOD_FILTER = " (c." + AppConstants.KeyConstants.DOD + " is NULL OR c." + AppConstants.KeyConstants.DOD + " = '') ";
 
-    private static final String  BIRTH_REGISTRATION_QUERY = "SELECT " +
+    private static final String BIRTH_REGISTRATION_QUERY = "SELECT c." +
             AppConstants.KeyConstants.BASE_ENTITY_ID +
-            ", " + AppConstants.KeyConstants.DOB +
-            ", " + AppConstants.KeyConstants.REGISTRATION_DATE +
-            " FROM " + AppConstants.TableNameConstants.ALL_CLIENTS +
+            ", c." + AppConstants.KeyConstants.DOB +
+            ", c." + AppConstants.KeyConstants.REGISTRATION_DATE +
+            " FROM " + AppConstants.TableNameConstants.ALL_CLIENTS + " c" +
+            " INNER JOIN " + AppConstants.TableNameConstants.CHILD_DETAILS + " cd " +
+            " ON c." + AppConstants.KeyConstants.BASE_ENTITY_ID + " = " + "cd." + AppConstants.KeyConstants.BASE_ENTITY_ID +
             " WHERE " + DOD_FILTER;
 
     private static final String VACCINE_QUERY = "SELECT " +
@@ -73,12 +75,14 @@ public class CoverageDropoutIntentService extends IntentService {
 
 
     private static final String TOTAL_ZEIR_QUERY = " SELECT " +
-            " COUNT(*) as count, " +
-            " CAST ((julianday('now') - julianday(strftime('%Y-%m-%d', " + AppConstants.KeyConstants.DOB + ")))/(365/12) AS INTEGER)as age, " +
-            " strftime('%Y-%m-%d', " + AppConstants.KeyConstants.REGISTRATION_DATE + ") as " + AppConstants.KeyConstants.REGISTRATION_DATE +
-            " FROM " + AppConstants.TableNameConstants.ALL_CLIENTS +
-            " WHERE " + DOD_FILTER +
-            " AND age <= ? AND " + AppConstants.KeyConstants.REGISTRATION_DATE + " <  ? ";
+            " COUNT(DISTINCT c."+ AppConstants.KeyConstants.BASE_ENTITY_ID +") as count, " +
+            " CAST ((julianday(?) - julianday(strftime('%Y-%m-%d', c." + AppConstants.KeyConstants.DOB + ")))/(365/12) AS INTEGER)as age " +
+            " FROM " + AppConstants.TableNameConstants.ALL_CLIENTS + " c " +
+            " INNER JOIN " + AppConstants.TableNameConstants.CHILD_DETAILS + " cd " +
+            " ON c." + AppConstants.KeyConstants.BASE_ENTITY_ID + " = " + "cd." + AppConstants.KeyConstants.BASE_ENTITY_ID +
+            " WHERE "+DOD_FILTER +
+            " AND age <= ? " +
+            " AND julianday(?) > julianday(strftime('%Y-%m-%d', c." + AppConstants.KeyConstants.DOB + "))";
 
     private static final String COVERAGE_DROPOUT_BIRTH_REGISTRATION_LAST_PROCESSED_DATE = "COVERAGE_DROPOUT_BIRTH_REGISTRATION_LAST_PROCESSED_DATE";
     private static final String COVERAGE_DROPOUT_VACCINATION_LAST_PROCESSED_DATE = "COVERAGE_DROPOUT_VACCINATION_LAST_PROCESSED_DATE";
@@ -310,7 +314,7 @@ public class CoverageDropoutIntentService extends IntentService {
 
             // Don't add an already counted vaccine unless it's invalid now
             List<String> vaccineList = vaccinesAsList(cohortPatient.getValidVaccines());
-            boolean alreadyCounted =  getAlreadyCounted(vaccineList, vaccineName);
+            boolean alreadyCounted = getAlreadyCounted(vaccineList, vaccineName);
 
             // Don't add invalid vaccines to the indicator table
             boolean isValid = isVaccineValidForCohort(vaccineName, dob, vaccineDate);
@@ -507,7 +511,7 @@ public class CoverageDropoutIntentService extends IntentService {
             String firstDayOfYear = simpleDateFormat.format(cal.getTime());
             Long ageLimit = 12L;
 
-            long totalZeir = cumulativeRepository.executeQueryAndReturnCount(TOTAL_ZEIR_QUERY, new String[]{ageLimit.toString(), firstDayOfYear});
+            long totalZeir = cumulativeRepository.executeQueryAndReturnCount(TOTAL_ZEIR_QUERY, new String[]{firstDayOfYear, ageLimit.toString(), firstDayOfYear});
 
             Cumulative cumulative = cumulativeRepository.findByYear(vaccineDate);
             if (cumulative == null) {
@@ -604,7 +608,7 @@ public class CoverageDropoutIntentService extends IntentService {
                 replace = true;
             }
         }
-        return new boolean[] {returnValue, subtract, replace};
+        return new boolean[]{returnValue, subtract, replace};
     }
 
     private static boolean isInvalidVaccine(CumulativePatient cumulativePatient, String vaccineName) {

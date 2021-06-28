@@ -208,11 +208,11 @@ public abstract class BaseReportActivity extends BaseActivity implements Coverag
 
                 String display = vaccine.display();
                 if (vaccine.equals(VaccineRepo.Vaccine.measles1)) {
-                    display = VaccineRepo.Vaccine.measles1.display() + " / " + VaccineRepo.Vaccine.mr1.display();
+                    display = VaccineRepo.Vaccine.mr1.display();
                 }
 
                 if (vaccine.equals(VaccineRepo.Vaccine.measles2)) {
-                    display = VaccineRepo.Vaccine.measles2.display() + " / " + VaccineRepo.Vaccine.mr2.display();
+                    display = VaccineRepo.Vaccine.mr2.display();
                 }
 
                 TextView vaccineTextView = (TextView) view.findViewById(R.id.vaccine);
@@ -319,7 +319,7 @@ public abstract class BaseReportActivity extends BaseActivity implements Coverag
 
     private long getCompleteCount(CumulativeIndicator completedCumulativeIndicator) {
         if (completedCumulativeIndicator != null && completedCumulativeIndicator.getValue() != null) {
-             return  completedCumulativeIndicator.getValue();
+            return  completedCumulativeIndicator.getValue();
         } else {
             return 0L;
         }

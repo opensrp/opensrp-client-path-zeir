@@ -36,7 +36,7 @@
   },
   {
     "quantity": "10",
-    "name": "M/MR",
+    "name": "MR",
     "openmrs_parent_entity_id": "",
     "openmrs_date_concept_id": "",
     "openmrs_quantity_concept_id": ""

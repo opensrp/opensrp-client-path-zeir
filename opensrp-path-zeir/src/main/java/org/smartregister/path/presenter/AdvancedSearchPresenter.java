@@ -81,6 +81,11 @@ public class AdvancedSearchPresenter extends BaseChildAdvancedSearchPresenter {
     }
 
     @Override
+    public String getCountQuery() {
+        return model.countSelect(getMainCondition());
+    }
+
+    @Override
     public String getMainCondition() {
         return "(ec_client.dod IS NULL AND ec_client.date_removed is null AND ec_client.is_closed IS NOT '1' AND ec_child_details.is_closed IS NOT '1')";
     }

@@ -15,6 +15,8 @@ import org.smartregister.path.activity.ChildRegisterActivity
 import org.smartregister.path.application.ZeirApplication
 import org.smartregister.path.reporting.DropoutReportGroup
 import org.smartregister.path.reporting.DropoutReportGroupingModel
+import org.smartregister.path.reporting.dropuout.job.DropoutIntentServiceJob
+import org.smartregister.path.reporting.stock.job.StockSyncIntentServiceJob
 import org.smartregister.path.util.AppUtils
 import org.smartregister.path.view.NavigationMenu
 import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob
@@ -43,7 +45,8 @@ class DropoutReportsActivity : BaseActivity(), DropoutReportContract.View, Dropo
                 val reportJobExecutionTime = allSharedPreferences.getPreference("report_job_execution_time")
                 if (reportJobExecutionTime.isBlank() || AppUtils.timeBetweenLastExecutionAndNow(30, reportJobExecutionTime)) {
                     allSharedPreferences.savePreference("report_job_execution_time", System.currentTimeMillis().toString())
-                    RecurringIndicatorGeneratingJob.scheduleJobImmediately(RecurringIndicatorGeneratingJob.TAG)
+                    DropoutIntentServiceJob.scheduleJobImmediately(DropoutIntentServiceJob.TAG)
+                    StockSyncIntentServiceJob.scheduleJobImmediately(StockSyncIntentServiceJob.TAG)
                     Toast.makeText(context, "Reporting Job Has Started, It will take some time", Toast.LENGTH_LONG).show()
                 } else {
                     Toast.makeText(context, "Reporting Job Has Already Been Started, Try again in 30 mins", Toast.LENGTH_LONG).show()

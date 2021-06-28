@@ -281,11 +281,13 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
             if (data != null) {
                 String jsonString = data.getStringExtra(JsonFormConstants.JSON_FORM_KEY.JSON);
                 Timber.d(jsonString);
-                JSONObject form = new JSONObject(jsonString);
-                String encounterType = form.getString(ChildJsonFormUtils.ENCOUNTER_TYPE);
-                if (encounterType.equalsIgnoreCase(Constants.EventType.UPDATE_BITRH_REGISTRATION)) {
-                    String jsonForm = AppUtils.validateChildZone(jsonString);
-                    data.putExtra(JsonFormConstants.JSON_FORM_KEY.JSON, jsonForm);
+                if (jsonString != null) {
+                    JSONObject form = new JSONObject(jsonString);
+                    String encounterType = form.getString(ChildJsonFormUtils.ENCOUNTER_TYPE);
+                    if (encounterType.equalsIgnoreCase(Constants.EventType.UPDATE_BITRH_REGISTRATION)) {
+                        String jsonForm = AppUtils.validateChildZone(jsonString);
+                        data.putExtra(JsonFormConstants.JSON_FORM_KEY.JSON, jsonForm);
+                    }
                 }
             }
         } catch (Exception e) {
