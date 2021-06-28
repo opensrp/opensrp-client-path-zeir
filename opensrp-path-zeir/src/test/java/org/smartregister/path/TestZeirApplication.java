@@ -7,6 +7,7 @@ import androidx.work.testing.SynchronousExecutor;
 import androidx.work.testing.WorkManagerTestInitHelper;
 
 import com.google.common.collect.Lists;
+import com.google.firebase.FirebaseApp;
 
 import org.smartregister.immunization.domain.jsonmapping.Vaccine;
 import org.smartregister.immunization.domain.jsonmapping.VaccineGroup;
@@ -77,7 +78,7 @@ public class TestZeirApplication extends ZeirApplication {
         vaccineGroups.add(vaccineGroup);
 
         setVaccineGroups(vaccineGroups);
-
+        FirebaseApp.initializeApp(this);
         super.onCreate();
         setTheme(R.style.Theme_AppCompat); //or just R.style.Theme_AppCompat
     }
