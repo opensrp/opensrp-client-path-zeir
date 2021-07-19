@@ -1,5 +1,9 @@
 package org.smartregister.path.presenter;
 
+import static com.vijay.jsonwizard.constants.JsonFormConstants.FIELDS;
+import static com.vijay.jsonwizard.constants.JsonFormConstants.STEP1;
+import static org.smartregister.path.util.AppConstants.KeyConstants.KEY;
+
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
@@ -22,10 +26,6 @@ import org.smartregister.path.fragment.AppChildFormFragment;
 import org.smartregister.path.util.AppConstants;
 
 import timber.log.Timber;
-
-import static com.vijay.jsonwizard.constants.JsonFormConstants.FIELDS;
-import static com.vijay.jsonwizard.constants.JsonFormConstants.STEP1;
-import static org.smartregister.path.util.AppConstants.KeyConstants.KEY;
 
 public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
 

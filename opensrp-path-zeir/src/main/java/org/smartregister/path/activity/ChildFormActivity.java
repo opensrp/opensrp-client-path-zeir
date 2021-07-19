@@ -1,5 +1,12 @@
 package org.smartregister.path.activity;
 
+import static org.smartregister.path.fragment.AppChildFormFragment.getFormFragment;
+import static org.smartregister.path.util.AppConstants.KeyConstants.FIRST_NAME;
+import static org.smartregister.path.util.AppConstants.KeyConstants.LAST_NAME;
+import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_GUARDIAN_NRC;
+import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_GUARDIAN_NUMBER;
+import static org.smartregister.path.util.TableUtil.getMotherDetailsColumn;
+
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 
 import org.apache.commons.lang3.StringUtils;
@@ -15,13 +22,6 @@ import org.smartregister.path.fragment.AppChildFormFragment;
 import org.smartregister.path.util.AppConstants;
 
 import java.util.Map;
-
-import static org.smartregister.path.fragment.AppChildFormFragment.getFormFragment;
-import static org.smartregister.path.util.AppConstants.KeyConstants.FIRST_NAME;
-import static org.smartregister.path.util.AppConstants.KeyConstants.LAST_NAME;
-import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_GUARDIAN_NRC;
-import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_GUARDIAN_NUMBER;
-import static org.smartregister.path.util.TableUtil.getMotherDetailsColumn;
 
 public class ChildFormActivity extends BaseChildFormActivity {
     @Override

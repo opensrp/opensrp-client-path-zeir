@@ -1,5 +1,7 @@
 package org.smartregister.path.util;
 
+import static org.smartregister.child.util.Constants.JSON_FORM_KEY.SUB_TYPE;
+
 import android.content.Context;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
@@ -21,8 +23,6 @@ import java.util.List;
 import java.util.Locale;
 
 import timber.log.Timber;
-
-import static org.smartregister.child.util.Constants.JSON_FORM_KEY.SUB_TYPE;
 
 public class FormUtils {
 

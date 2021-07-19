@@ -19,7 +19,6 @@ import org.smartregister.path.reporting.dropuout.job.DropoutIntentServiceJob
 import org.smartregister.path.reporting.stock.job.StockSyncIntentServiceJob
 import org.smartregister.path.util.AppUtils
 import org.smartregister.path.view.NavigationMenu
-import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob
 
 class DropoutReportsActivity : BaseActivity(), DropoutReportContract.View, DropoutReportRegisterTypeAdapter.OnDropoutItemClick {
 

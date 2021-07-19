@@ -1,5 +1,9 @@
 package org.smartregister.path.fragment;
 
+import static org.smartregister.child.util.Constants.CHILD_STATUS.ACTIVE;
+import static org.smartregister.child.util.Constants.CHILD_STATUS.INACTIVE;
+import static org.smartregister.child.util.Constants.CHILD_STATUS.LOST_TO_FOLLOW_UP;
+
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
@@ -23,10 +27,6 @@ import org.smartregister.view.activity.BaseRegisterActivity;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.smartregister.child.util.Constants.CHILD_STATUS.ACTIVE;
-import static org.smartregister.child.util.Constants.CHILD_STATUS.INACTIVE;
-import static org.smartregister.child.util.Constants.CHILD_STATUS.LOST_TO_FOLLOW_UP;
 
 /**
  * Created by ndegwamartin on 08/03/2019.
