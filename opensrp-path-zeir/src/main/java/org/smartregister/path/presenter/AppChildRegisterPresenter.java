@@ -1,6 +1,8 @@
 package org.smartregister.path.presenter;
 
 
+import static org.smartregister.path.util.AppConstants.KeyConstants.CARD_STATUS;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,8 +22,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 import timber.log.Timber;
-
-import static org.smartregister.path.util.AppConstants.KeyConstants.CARD_STATUS;
 
 public class AppChildRegisterPresenter extends BaseChildRegisterPresenter {
     private final EventClientRepository eventClientRepository = ZeirApplication.getInstance().eventClientRepository();

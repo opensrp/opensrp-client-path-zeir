@@ -1,5 +1,18 @@
 package org.smartregister.path.model;
 
+import static org.smartregister.child.util.Constants.KEY.RELATIONALID;
+import static org.smartregister.path.util.AppConstants.KeyConstants.DOB;
+import static org.smartregister.path.util.AppConstants.KeyConstants.FIRST_NAME;
+import static org.smartregister.path.util.AppConstants.KeyConstants.GENDER;
+import static org.smartregister.path.util.AppConstants.KeyConstants.ID;
+import static org.smartregister.path.util.AppConstants.KeyConstants.INACTIVE;
+import static org.smartregister.path.util.AppConstants.KeyConstants.LAST_NAME;
+import static org.smartregister.path.util.AppConstants.KeyConstants.LOST_TO_FOLLOW_UP;
+import static org.smartregister.path.util.AppConstants.KeyConstants.RELATIONAL_ID;
+import static org.smartregister.path.util.AppConstants.KeyConstants.ZEIR_ID;
+import static org.smartregister.path.util.TableUtil.getAllClientColumn;
+import static org.smartregister.path.util.TableUtil.getChildDetailsColumn;
+
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -13,19 +26,6 @@ import org.smartregister.path.util.AppConstants;
 
 import java.util.List;
 import java.util.Map;
-
-import static org.smartregister.child.util.Constants.KEY.RELATIONALID;
-import static org.smartregister.path.util.AppConstants.KeyConstants.DOB;
-import static org.smartregister.path.util.AppConstants.KeyConstants.FIRST_NAME;
-import static org.smartregister.path.util.AppConstants.KeyConstants.GENDER;
-import static org.smartregister.path.util.AppConstants.KeyConstants.ID;
-import static org.smartregister.path.util.AppConstants.KeyConstants.INACTIVE;
-import static org.smartregister.path.util.AppConstants.KeyConstants.LAST_NAME;
-import static org.smartregister.path.util.AppConstants.KeyConstants.LOST_TO_FOLLOW_UP;
-import static org.smartregister.path.util.AppConstants.KeyConstants.RELATIONAL_ID;
-import static org.smartregister.path.util.AppConstants.KeyConstants.ZEIR_ID;
-import static org.smartregister.path.util.TableUtil.getAllClientColumn;
-import static org.smartregister.path.util.TableUtil.getChildDetailsColumn;
 
 /**
  * Created by ndegwamartin on 2019-05-27.

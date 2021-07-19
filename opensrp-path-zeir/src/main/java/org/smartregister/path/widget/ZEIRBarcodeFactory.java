@@ -1,5 +1,8 @@
 package org.smartregister.path.widget;
 
+import static android.app.Activity.RESULT_OK;
+import static android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
@@ -40,9 +43,6 @@ import java.util.List;
 import java.util.Set;
 
 import timber.log.Timber;
-
-import static android.app.Activity.RESULT_OK;
-import static android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS;
 
 /*
 *

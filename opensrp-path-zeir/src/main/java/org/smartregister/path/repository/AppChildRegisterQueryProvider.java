@@ -1,8 +1,5 @@
 package org.smartregister.path.repository;
 
-import org.apache.commons.lang3.StringUtils;
-import org.smartregister.child.provider.RegisterQueryProvider;
-
 import static org.smartregister.child.util.Constants.SHOW_BCG2_REMINDER;
 import static org.smartregister.child.util.Constants.SHOW_BCG_SCAR;
 import static org.smartregister.path.util.AppConstants.KeyConstants.BASE_ENTITY_ID;
@@ -44,6 +41,9 @@ import static org.smartregister.path.util.AppConstants.KeyConstants.ZEIR_ID;
 import static org.smartregister.path.util.TableUtil.getAllClientColumn;
 import static org.smartregister.path.util.TableUtil.getChildDetailsColumn;
 import static org.smartregister.path.util.TableUtil.getMotherDetailsColumn;
+
+import org.apache.commons.lang3.StringUtils;
+import org.smartregister.child.provider.RegisterQueryProvider;
 
 public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
 

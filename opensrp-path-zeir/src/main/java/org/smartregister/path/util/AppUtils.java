@@ -1,5 +1,11 @@
 package org.smartregister.path.util;
 
+import static com.vijay.jsonwizard.constants.JsonFormConstants.FIELDS;
+import static com.vijay.jsonwizard.constants.JsonFormConstants.STEP1;
+import static com.vijay.jsonwizard.constants.JsonFormConstants.VALUE;
+import static org.smartregister.path.util.AppConstants.KeyConstants.CHILD_ZONE;
+import static org.smartregister.path.util.AppConstants.KeyConstants.KEY;
+
 import android.content.ContentValues;
 
 import androidx.annotation.NonNull;
@@ -37,12 +43,6 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import timber.log.Timber;
-
-import static com.vijay.jsonwizard.constants.JsonFormConstants.FIELDS;
-import static com.vijay.jsonwizard.constants.JsonFormConstants.STEP1;
-import static com.vijay.jsonwizard.constants.JsonFormConstants.VALUE;
-import static org.smartregister.path.util.AppConstants.KeyConstants.CHILD_ZONE;
-import static org.smartregister.path.util.AppConstants.KeyConstants.KEY;
 
 public class AppUtils extends Utils {
 

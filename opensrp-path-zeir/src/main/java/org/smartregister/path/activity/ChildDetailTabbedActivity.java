@@ -1,5 +1,10 @@
 package org.smartregister.path.activity;
 
+import static org.smartregister.child.util.Utils.metadata;
+import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_GUARDIAN_NUMBER;
+import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_PHONE;
+import static org.smartregister.path.util.FormUtils.obtainUpdatedForm;
+
 import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -45,11 +50,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import timber.log.Timber;
-
-import static org.smartregister.child.util.Utils.metadata;
-import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_GUARDIAN_NUMBER;
-import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_PHONE;
-import static org.smartregister.path.util.FormUtils.obtainUpdatedForm;
 
 /**
  * Created by ndegwamartin on 06/03/2019.

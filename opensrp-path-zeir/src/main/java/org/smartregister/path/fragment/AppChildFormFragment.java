@@ -1,5 +1,9 @@
 package org.smartregister.path.fragment;
 
+import static com.vijay.jsonwizard.constants.JsonFormConstants.STEP1;
+import static org.smartregister.path.util.AppConstants.KeyConstants.OA_SERVICE_DATE;
+import static org.smartregister.path.util.AppConstants.KeyConstants.OPENSRP_ID;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,10 +31,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-
-import static com.vijay.jsonwizard.constants.JsonFormConstants.STEP1;
-import static org.smartregister.path.util.AppConstants.KeyConstants.OA_SERVICE_DATE;
-import static org.smartregister.path.util.AppConstants.KeyConstants.OPENSRP_ID;
 
 public class AppChildFormFragment extends ChildFormFragment {
 

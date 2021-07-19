@@ -1,5 +1,8 @@
 package org.smartregister.path.model;
 
+import static org.smartregister.path.util.AppConstants.KeyConstants.REGISTRATION_LOCATION_ID;
+import static org.smartregister.path.util.AppConstants.KeyConstants.REGISTRATION_LOCATION_NAME;
+
 import androidx.annotation.NonNull;
 
 import org.smartregister.child.domain.ChildEventClient;
@@ -10,9 +13,6 @@ import org.smartregister.path.application.ZeirApplication;
 import org.smartregister.repository.AllSharedPreferences;
 
 import java.util.List;
-
-import static org.smartregister.path.util.AppConstants.KeyConstants.REGISTRATION_LOCATION_ID;
-import static org.smartregister.path.util.AppConstants.KeyConstants.REGISTRATION_LOCATION_NAME;
 
 public class AppChildRegisterModel extends BaseChildRegisterModel {
 

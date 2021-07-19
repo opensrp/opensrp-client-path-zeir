@@ -1,5 +1,14 @@
 package org.smartregister.path.util;
 
+import static org.smartregister.path.util.AppConstants.KeyConstants.BIRTH_FACILITY_NAME;
+import static org.smartregister.path.util.AppConstants.KeyConstants.CHOOSE_IMAGE;
+import static org.smartregister.path.util.AppConstants.KeyConstants.DOB;
+import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_DOB;
+import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_FIRST_NAME;
+import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_LAST_NAME;
+import static org.smartregister.path.util.AppConstants.KeyConstants.PLACE_OF_BIRTH;
+import static org.smartregister.path.util.AppConstants.KeyConstants.PMTCT_STATUS;
+
 import android.content.Context;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
@@ -20,15 +29,6 @@ import java.util.List;
 import java.util.Map;
 
 import timber.log.Timber;
-
-import static org.smartregister.path.util.AppConstants.KeyConstants.BIRTH_FACILITY_NAME;
-import static org.smartregister.path.util.AppConstants.KeyConstants.CHOOSE_IMAGE;
-import static org.smartregister.path.util.AppConstants.KeyConstants.DOB;
-import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_DOB;
-import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_FIRST_NAME;
-import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_LAST_NAME;
-import static org.smartregister.path.util.AppConstants.KeyConstants.PLACE_OF_BIRTH;
-import static org.smartregister.path.util.AppConstants.KeyConstants.PMTCT_STATUS;
 
 public class AppJsonFormUtils extends ChildJsonFormUtils {
 
