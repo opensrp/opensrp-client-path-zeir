@@ -8,6 +8,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 
 import org.smartregister.AllConstants;
 import org.smartregister.child.util.ChildDbMigrations;
+import org.smartregister.child.util.DBConstants;
 import org.smartregister.child.util.Utils;
 import org.smartregister.configurableviews.repository.ConfigurableViewsRepository;
 import org.smartregister.domain.db.Column;
@@ -452,12 +453,10 @@ public class ZeirRepository extends Repository {
     }
 
     private void upgradeToVersion17(SQLiteDatabase db) {
-        try
-        {
-            db.execSQL("ALTER TABLE ec_mother_details ADD COLUMN sms_reminder VARCHAR NOT NULL DEFAULT ''");
-            db.execSQL("ALTER TABLE ec_mother_details ADD COLUMN sms_reminder_phone VARCHAR NOT NULL DEFAULT ''");
-            db.execSQL("ALTER TABLE ec_mother_details ADD COLUMN sms_reminder_phone_formatted VARCHAR NOT NULL DEFAULT ''");
-
+        try {
+            db.execSQL("ALTER TABLE ec_mother_details ADD COLUMN sms_reminder VARCHAR");
+            db.execSQL("ALTER TABLE ec_mother_details ADD COLUMN sms_reminder_phone VARCHAR");
+            db.execSQL("ALTER TABLE ec_mother_details ADD COLUMN sms_reminder_phone_formatted VARCHAR");
         }
         catch (Exception e)
         {
