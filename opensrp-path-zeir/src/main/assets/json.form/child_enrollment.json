@@ -483,7 +483,6 @@
           }
         ]
       },
-
       {
         "key": "sms_reminder_phone",
         "openmrs_entity_parent": "",
@@ -504,7 +503,6 @@
           "value": true,
           "err": "{{child_enrollment.step1.home_facility.v_required.err}}"
         },
-
         "relevance": {
           "rules-engine": {
             "ex-rules": {
