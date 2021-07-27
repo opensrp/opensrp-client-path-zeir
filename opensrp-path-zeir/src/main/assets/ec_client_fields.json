@@ -169,7 +169,6 @@
             "field": "attributes.sms_reminder"
           }
         },
-
         {
           "column_name": "sms_reminder_phone",
           "type": "Client",
@@ -177,7 +176,6 @@
             "field": "attributes.sms_reminder_phone"
           }
         },
-
         {
           "column_name": "sms_reminder_phone_formatted",
           "type": "Client",
