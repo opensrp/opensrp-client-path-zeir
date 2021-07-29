@@ -302,6 +302,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'org.smartregister', module: 'opensrp-client-reporting'
         exclude group: 'com.ibm.fhir', module: 'fhir-model'
+        exclude group: 'com.github.lecho', module: 'hellocharts-library'
     }
 
     implementation('org.smartregister:opensrp-client-reporting:0.0.22-SNAPSHOT@aar') {
@@ -358,7 +359,7 @@ dependencies {
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
     implementation 'com.evernote:android-job:1.4.2'
-    implementation 'com.github.lecho:hellocharts-android:v1.5.8'
+    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
     implementation 'id.zelory:compressor:2.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
