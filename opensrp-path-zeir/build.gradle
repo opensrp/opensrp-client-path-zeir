@@ -75,18 +75,18 @@ android {
     applicationVariants.all { variant ->
         if (variant.name == "debug") {
             variant.outputs.each { output ->
-                output.versionCodeOverride = 15
-                output.versionNameOverride = "0.0.15-debug"
+                output.versionCodeOverride = 16
+                output.versionNameOverride = "0.0.16-debug"
             }
         } else if (variant.name == "preview") {
             variant.outputs.each { output ->
-                output.versionCodeOverride = 15
-                output.versionNameOverride = "0.0.15-preview"
+                output.versionCodeOverride = 16
+                output.versionNameOverride = "0.0.16-preview"
             }
         } else if (variant.name == "release") {
             variant.outputs.each { output ->
-                output.versionCodeOverride = 17
-                output.versionNameOverride = "2.0.2-release"
+                output.versionCodeOverride = 18
+                output.versionNameOverride = "2.0.3-release"
             }
         }
     }
@@ -357,7 +357,7 @@ dependencies {
     // Because RxAndroid releases are few and far between, it is recommended you also
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
-    implementation 'com.evernote:android-job:1.2.6'
+    implementation 'com.evernote:android-job:1.4.2'
     implementation 'com.github.lecho:hellocharts-android:v1.5.8'
     implementation 'id.zelory:compressor:2.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
