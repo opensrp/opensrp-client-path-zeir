@@ -2,7 +2,7 @@
 
 buildscript {
 
-    ext.kotlinVersion = '1.4.21'
+    ext.kotlinVersion = '1.5.21'
 
     repositories {
         google()
@@ -13,7 +13,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:4.0.1"
+        classpath "com.android.tools.build:gradle:4.0.2"
         classpath 'org.smartregister:gradle-jarjar-plugin:1.0.0-SNAPSHOT'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
@@ -21,16 +21,16 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-        mavenLocal()
+        google()
         mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         maven { url 'https://jitpack.io' }
         maven { url "http://acra.googlecode.com/svn/repository/releases" }
         maven { url "https://repo.maven.apache.org/maven2" }
         maven { url "http://cloudant.github.io/cloudant-sync-eap/repository" }
         maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
         maven { url 'https://dl.bintray.com/ibm-watson-health/ibm-fhir-server-releases'}
-        google()
+        mavenLocal()
         jcenter()
     }
 }

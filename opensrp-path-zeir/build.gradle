@@ -8,9 +8,9 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.3"
         classpath 'gradle.plugin.org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.10.2'
-        classpath 'com.google.gms:google-services:4.3.5'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.2'
-        classpath 'com.google.firebase:perf-plugin:1.3.5'  // Performance Monitoring plugin
+        classpath 'com.google.gms:google-services:4.3.8'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
+        classpath 'com.google.firebase:perf-plugin:1.4.0'  // Performance Monitoring plugin
     }
 }
 
@@ -240,22 +240,22 @@ dependencies {
     implementation fileTree(dir: "./build/libs", include: ['*.jar'])
     // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:27.1.0')
-    jarJar 'com.ibm.fhir:fhir-model:4.7.0'
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
+    jarJar 'com.ibm.fhir:fhir-model:4.7.1'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
     implementation "androidx.work:work-runtime-ktx:2.5.0"
-    implementation "androidx.core:core-ktx:1.3.2"
+    implementation "androidx.core:core-ktx:1.6.0"
     implementation "androidx.sqlite:sqlite-ktx:2.1.0"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation "androidx.cardview:cardview:1.0.0"
 
 //    implementation(project(':opensrp-child')) {
@@ -280,7 +280,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
-    implementation('org.smartregister:opensrp-client-core:4.3.7-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-core:4.3.10-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -340,12 +340,12 @@ dependencies {
         exclude group: 'com.simprints', module: 'libsimprints'
         exclude group: 'com.ibm.fhir', module: 'fhir-model'
     }
-    implementation('com.google.android.material:material:1.2.1') {
+    implementation('com.google.android.material:material:1.4.0') {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
         exclude group: 'com.android.support', module: 'cardview-v7'
     }
 
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
     annotationProcessor 'com.jakewharton:butterknife:10.2.1'
     implementation 'net.zetetic:android-database-sqlcipher:4.4.0@aar'
     implementation 'commons-validator:commons-validator:1.6'
@@ -361,20 +361,20 @@ dependencies {
     implementation 'com.evernote:android-job:1.4.2'
     implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
     implementation 'id.zelory:compressor:2.1.1'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'org.jeasy:easy-rules-mvel:3.3.0'
-    implementation group: "org.yaml", name: 'snakeyaml', version: '1.24'
+    implementation group: "org.yaml", name: 'snakeyaml', version: '1.27'
     implementation 'com.github.florent37:expansionpanel:1.2.4'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-perf'
 
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 
-    androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
 
     def robolectricVersion = '4.4'
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
@@ -382,12 +382,12 @@ dependencies {
     testImplementation "org.robolectric:shadows-supportv4:$robolectricVersion"
     testImplementation 'org.apache.maven:maven-ant-tasks:2.1.3'
     testImplementation group: 'org.skyscreamer', name: 'jsonassert', version: '1.5.0'
-    testImplementation 'com.ibm.fhir:fhir-model:4.7.0'
+    testImplementation 'com.ibm.fhir:fhir-model:4.7.1'
     testImplementation 'junit:junit:4.13.1'
-    testImplementation 'androidx.test:core:1.3.0'
+    testImplementation 'androidx.test:core:1.4.0'
     testImplementation 'androidx.work:work-testing:2.5.0'
     testImplementation 'org.mockito:mockito-core:3.1.0'
-    testImplementation "io.mockk:mockk:1.10.2"
+    testImplementation "io.mockk:mockk:1.12.0"
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
