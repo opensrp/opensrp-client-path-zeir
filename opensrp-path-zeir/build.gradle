@@ -75,13 +75,13 @@ android {
     applicationVariants.all { variant ->
         if (variant.name == "debug") {
             variant.outputs.each { output ->
-                output.versionCodeOverride = 17
-                output.versionNameOverride = "0.0.17-debug"
+                output.versionCodeOverride = 18
+                output.versionNameOverride = "0.0.18-debug"
             }
         } else if (variant.name == "preview") {
             variant.outputs.each { output ->
-                output.versionCodeOverride = 17
-                output.versionNameOverride = "0.0.17-preview"
+                output.versionCodeOverride = 18
+                output.versionNameOverride = "0.0.18-preview"
             }
         } else if (variant.name == "release") {
             variant.outputs.each { output ->
