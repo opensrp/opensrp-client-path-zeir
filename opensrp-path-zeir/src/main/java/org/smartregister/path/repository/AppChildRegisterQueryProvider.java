@@ -1,5 +1,8 @@
 package org.smartregister.path.repository;
 
+import org.apache.commons.lang3.StringUtils;
+import org.smartregister.child.provider.RegisterQueryProvider;
+
 import static org.smartregister.child.util.Constants.SHOW_BCG2_REMINDER;
 import static org.smartregister.child.util.Constants.SHOW_BCG_SCAR;
 import static org.smartregister.path.util.AppConstants.KeyConstants.BASE_ENTITY_ID;
@@ -37,13 +40,13 @@ import static org.smartregister.path.util.AppConstants.KeyConstants.RELATIONAL_I
 import static org.smartregister.path.util.AppConstants.KeyConstants.RESIDENTIAL_ADDRESS;
 import static org.smartregister.path.util.AppConstants.KeyConstants.RESIDENTIAL_ADDRESS_OTHER;
 import static org.smartregister.path.util.AppConstants.KeyConstants.RESIDENTIAL_AREA;
+import static org.smartregister.path.util.AppConstants.KeyConstants.SMS_REMINDER;
+import static org.smartregister.path.util.AppConstants.KeyConstants.SMS_REMINDER_PHONE;
+import static org.smartregister.path.util.AppConstants.KeyConstants.SMS_REMINDER_PHONE_FORMATTED;
 import static org.smartregister.path.util.AppConstants.KeyConstants.ZEIR_ID;
 import static org.smartregister.path.util.TableUtil.getAllClientColumn;
 import static org.smartregister.path.util.TableUtil.getChildDetailsColumn;
 import static org.smartregister.path.util.TableUtil.getMotherDetailsColumn;
-
-import org.apache.commons.lang3.StringUtils;
-import org.smartregister.child.provider.RegisterQueryProvider;
 
 public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
 
@@ -71,6 +74,9 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 getAllClientColumn(LAST_INTERACTED_WITH),
                 getMotherDetailsColumn(MOTHER_GUARDIAN_NUMBER),
                 getMotherDetailsColumn(MOTHER_GUARDIAN_NRC),
+                getMotherDetailsColumn(SMS_REMINDER),
+                getMotherDetailsColumn(SMS_REMINDER_PHONE),
+                getMotherDetailsColumn(SMS_REMINDER_PHONE_FORMATTED),
                 getChildDetailsColumn(CHW_NAME),
                 getChildDetailsColumn(CHW_PHONE_NUMBER),
                 getChildDetailsColumn(RELATIONAL_ID),

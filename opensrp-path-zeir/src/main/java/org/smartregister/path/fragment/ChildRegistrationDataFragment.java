@@ -10,7 +10,7 @@ import org.smartregister.path.R;
 import org.smartregister.path.activity.ChildDetailTabbedActivity;
 import org.smartregister.path.util.AppConstants;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +39,10 @@ public class ChildRegistrationDataFragment extends BaseChildRegistrationDataFrag
 
     @Override
     protected List<String> addUnFormattedNumberFields(String... key) {
-        return Collections.singletonList("mother_guardian_number");
+        List<String> unFormattedFields = new ArrayList<>();
+        unFormattedFields.add("mother_guardian_number");
+        unFormattedFields.add("sms_reminder_phone");
+        return unFormattedFields;
     }
 
     @Override

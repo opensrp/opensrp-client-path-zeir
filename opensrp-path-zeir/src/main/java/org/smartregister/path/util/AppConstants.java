@@ -54,6 +54,9 @@ public class AppConstants {
         public static final String PMTCT_STATUS = "pmtct_status";
         public static final String MOTHER_GUARDIAN_NRC = "mother_guardian_nrc";
         public static final String RESIDENTIAL_ADDRESS = "residential_address";
+        public static final String SMS_REMINDER = "sms_reminder";
+        public static final String SMS_REMINDER_PHONE = "sms_reminder_phone";
+        public static final String SMS_REMINDER_PHONE_FORMATTED = "sms_reminder_phone_formatted";
         public static final String RESIDENTIAL_ADDRESS_OTHER = "residential_address_other";
         public static final String PHYSICAL_LANDMARK = "physical_landmark";
         public static final String CHW_NAME = "chw_name";
