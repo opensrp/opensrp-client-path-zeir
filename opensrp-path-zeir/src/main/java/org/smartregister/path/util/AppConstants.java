@@ -19,6 +19,7 @@ public class AppConstants {
         public static final String INACTIVE = "inactive";
         public static final String LAST_INTERACTED_WITH = "last_interacted_with";
         public static final String RELATIONALID = "relationalid";
+        public static final String SYSTEM_OF_REGISTRATION = "system_of_registration";
         public static final String RELATIONAL_ID = "relational_id";
         public static final String ID_LOWER_CASE = "_id";
         public static final String BASE_ENTITY_ID = "base_entity_id";

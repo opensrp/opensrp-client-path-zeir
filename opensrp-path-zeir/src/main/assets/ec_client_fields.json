@@ -224,6 +224,13 @@
           }
         },
         {
+          "column_name": "system_of_registration",
+          "type": "Client",
+          "json_mapping": {
+            "field": "system_of_registration"
+          }
+        },
+        {
           "column_name": "child_birth_certificate",
           "type": "Client",
           "json_mapping": {

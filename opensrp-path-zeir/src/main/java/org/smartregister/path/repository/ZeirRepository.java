@@ -158,6 +158,8 @@ public class ZeirRepository extends Repository {
                 case 17:
                     upgradeToVersion17(db);
                     break;
+                case 18:
+                    upgradeToVersion18(db);
                 default:
                     break;
             }
@@ -456,6 +458,16 @@ public class ZeirRepository extends Repository {
             db.execSQL("ALTER TABLE ec_mother_details ADD COLUMN sms_reminder VARCHAR");
             db.execSQL("ALTER TABLE ec_mother_details ADD COLUMN sms_reminder_phone VARCHAR");
             db.execSQL("ALTER TABLE ec_mother_details ADD COLUMN sms_reminder_phone_formatted VARCHAR");
+        }
+        catch (Exception e)
+        {
+            Timber.e("upgradeToVersion17 "+e.getMessage());
+        }
+    }
+
+    private void upgradeToVersion18(SQLiteDatabase db) {
+        try {
+            db.execSQL("ALTER TABLE ec_child_details ADD COLUMN system_of_registration VARCHAR");
         }
         catch (Exception e)
         {

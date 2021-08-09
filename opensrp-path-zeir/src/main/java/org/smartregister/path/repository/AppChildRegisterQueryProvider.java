@@ -43,6 +43,7 @@ import static org.smartregister.path.util.AppConstants.KeyConstants.RESIDENTIAL_
 import static org.smartregister.path.util.AppConstants.KeyConstants.SMS_REMINDER;
 import static org.smartregister.path.util.AppConstants.KeyConstants.SMS_REMINDER_PHONE;
 import static org.smartregister.path.util.AppConstants.KeyConstants.SMS_REMINDER_PHONE_FORMATTED;
+import static org.smartregister.path.util.AppConstants.KeyConstants.SYSTEM_OF_REGISTRATION;
 import static org.smartregister.path.util.AppConstants.KeyConstants.ZEIR_ID;
 import static org.smartregister.path.util.TableUtil.getAllClientColumn;
 import static org.smartregister.path.util.TableUtil.getChildDetailsColumn;
@@ -84,6 +85,7 @@ public class AppChildRegisterQueryProvider extends RegisterQueryProvider {
                 getChildDetailsColumn(CHILD_REGISTER_CARD_NUMBER),
                 getChildDetailsColumn(FIRST_HEALTH_FACILITY_CONTRACT),
                 getChildDetailsColumn(PLACE_OF_BIRTH),
+                getChildDetailsColumn(SYSTEM_OF_REGISTRATION),
                 getChildDetailsColumn(HOME_FACILITY),
                 getChildDetailsColumn(RESIDENTIAL_ADDRESS),
                 getChildDetailsColumn(RESIDENTIAL_ADDRESS_OTHER),
