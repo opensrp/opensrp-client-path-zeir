@@ -50,7 +50,7 @@ subprojects {
     ext.androidAnnotationsVersion = '3.0.1'
     ext.androidAnnotationsAPIVersion = '3.0.1'
 
-    ext.jacocoVersion = "0.8.5"
+    ext.jacocoVersion = "0.8.7"
 
     // Improve build server performance by allowing disabling of pre-dexing
     // (see http://tools.android.com/tech-docs/new-build-system/tips#TOC-Improving-Build-Server-performance.)
