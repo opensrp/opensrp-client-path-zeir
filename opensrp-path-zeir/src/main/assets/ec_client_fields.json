@@ -227,7 +227,7 @@
           "column_name": "system_of_registration",
           "type": "Client",
           "json_mapping": {
-            "field": "system_of_registration"
+            "field": "attributes.system_of_registration"
           }
         },
         {
