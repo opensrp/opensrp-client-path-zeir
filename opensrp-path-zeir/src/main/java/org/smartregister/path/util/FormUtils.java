@@ -69,7 +69,7 @@ public class FormUtils {
     }
 
     private static JSONArray getSpinnerKeys(String locations) {
-        return getSpinnerKeys(locations.split(","));
+        return getSpinnerKeys(locations!=null? locations.split(","): null);
     }
 
     private static JSONArray getSpinnerKeys(String[] splitLocations) {

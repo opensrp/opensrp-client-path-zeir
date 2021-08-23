@@ -43,7 +43,7 @@ class ReportingRulesEngine<T : Tally>(tallies: MutableMap<String, T>, rulesFileP
                 val calculatedValue: String = when {
                     facts.asMap()[calculationField] is String -> facts.asMap()[calculationField] as String
                     facts.asMap()[calculationField] is Boolean -> "0"
-                    else -> facts.get<Number>(calculationField).toDouble().toWholeNumber().toString()
+                    else -> facts.get<Number>(calculationField)?.toDouble()?.toWholeNumber()?.toString() ?: "0"
                 }
                 this[calculationField]?.value = calculatedValue
                 fieldValueHandler(calculationField, calculatedValue)
