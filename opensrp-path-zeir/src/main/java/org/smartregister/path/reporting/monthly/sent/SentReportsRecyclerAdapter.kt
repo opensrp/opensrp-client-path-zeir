@@ -58,7 +58,7 @@ class SentReportsRecyclerAdapter(val onClickListener: View.OnClickListener) :
                     dateReportSentTextView.text = dateFormatter("yyyy-MM").format(it.month)
                             .convertToNamedMonth(hasHyphen = true).translateString(context)
                     sentReportDetailsTextView.text = context.getString(R.string.sent_report_details,
-                            dateFormatter("dd/MM/YYYY").format(it.dateSent!!), it.providerId)
+                            dateFormatter("dd/MM/yyyy").format(it.dateSent!!), it.providerId)
                     setOnClickListener(onClickListener)
                 }
                 sentReportContainer.addView(view)
