@@ -87,14 +87,16 @@ public class FormUtils {
     }
 
     private static String[] getSpinnerValues(String locations) {
-        return getSpinnerValues(locations.split(","));
+        return getSpinnerValues(locations!=null? locations.split(","): null);
     }
 
     private static String[] getSpinnerValues(String[] splitLocations) {
         List<String> values = new ArrayList<>();
-        for (String splitLocation : splitLocations) {
-            String location = splitLocation.trim();
-            values.add(location);
+        if(splitLocations != null) {
+            for (String splitLocation : splitLocations) {
+                String location = splitLocation.trim();
+                values.add(location);
+            }
         }
         return values.toArray(new String[]{});
     }
