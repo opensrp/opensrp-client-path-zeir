@@ -75,7 +75,7 @@ public class FormUtils {
     private static JSONArray getSpinnerKeys(String[] splitLocations) {
         JSONArray keys = new JSONArray();
 
-        if (LocationHelper.getInstance() != null) {
+        if (LocationHelper.getInstance() != null && splitLocations != null ) {
             for (String location : splitLocations) {
                 String locationId = LocationHelper.getInstance().getOpenMrsLocationId(location);
                 if (locationId != null) {
