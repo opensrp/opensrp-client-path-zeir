@@ -295,7 +295,6 @@ dependencies {
 
     implementation('org.smartregister:opensrp-client-growth-monitoring:2.0.6-SNAPSHOT@aar') {
         transitive = true
-
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'com.android.support', module: 'design'
