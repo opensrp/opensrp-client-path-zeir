@@ -33,6 +33,8 @@ import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.view.activity.BaseProfileActivity;
 import org.smartregister.view.activity.DrishtiApplication;
 
+import java.util.Date;
+
 public class AppUtilsTest {
 
     @Spy
@@ -194,6 +196,13 @@ public class AppUtilsTest {
                 "}";
         String expectedJson = AppUtils.validateChildZone(initialJson);
         JSONAssert.assertEquals(expectedJson, finalJson, false);
+    }
+
+    @Test
+    public void testyearFromDate ()
+    {
+        Date date = new Date(1629970470 * 1000L);// date for year 2021
+        Assert.assertEquals(AppUtils.yearFromDate(date),2021);
     }
 
     @After

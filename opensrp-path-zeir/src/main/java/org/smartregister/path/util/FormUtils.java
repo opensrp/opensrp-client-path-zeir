@@ -69,13 +69,13 @@ public class FormUtils {
     }
 
     private static JSONArray getSpinnerKeys(String locations) {
-        return getSpinnerKeys(locations.split(","));
+        return getSpinnerKeys(locations!=null? locations.split(","): null);
     }
 
     private static JSONArray getSpinnerKeys(String[] splitLocations) {
         JSONArray keys = new JSONArray();
 
-        if (LocationHelper.getInstance() != null) {
+        if (LocationHelper.getInstance() != null && splitLocations != null ) {
             for (String location : splitLocations) {
                 String locationId = LocationHelper.getInstance().getOpenMrsLocationId(location);
                 if (locationId != null) {
@@ -87,14 +87,16 @@ public class FormUtils {
     }
 
     private static String[] getSpinnerValues(String locations) {
-        return getSpinnerValues(locations.split(","));
+        return getSpinnerValues(locations!=null? locations.split(","): null);
     }
 
     private static String[] getSpinnerValues(String[] splitLocations) {
         List<String> values = new ArrayList<>();
-        for (String splitLocation : splitLocations) {
-            String location = splitLocation.trim();
-            values.add(location);
+        if(splitLocations != null) {
+            for (String splitLocation : splitLocations) {
+                String location = splitLocation.trim();
+                values.add(location);
+            }
         }
         return values.toArray(new String[]{});
     }
