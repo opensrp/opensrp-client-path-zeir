@@ -467,6 +467,7 @@
         "openmrs_entity_id": "sms_reminder",
         "entity_id": "mother",
         "type": "spinner",
+        "look_up": "true",
         "hint": "{{child_enrollment.step1.sms_reminder.hint}}",
         "options": [
           {
@@ -490,6 +491,7 @@
         "openmrs_entity_id": "sms_reminder_phone",
         "entity_id": "mother",
         "type": "edit_text",
+        "look_up": "true",
         "hint": "{{child_enrollment.step1.sms_reminder_phone.hint}}",
         "v_numeric": {
           "value": "true",
