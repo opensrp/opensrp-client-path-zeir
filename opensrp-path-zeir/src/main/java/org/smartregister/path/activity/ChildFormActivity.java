@@ -5,6 +5,8 @@ import static org.smartregister.path.util.AppConstants.KeyConstants.FIRST_NAME;
 import static org.smartregister.path.util.AppConstants.KeyConstants.LAST_NAME;
 import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_GUARDIAN_NRC;
 import static org.smartregister.path.util.AppConstants.KeyConstants.MOTHER_GUARDIAN_NUMBER;
+import static org.smartregister.path.util.AppConstants.KeyConstants.SMS_REMINDER;
+import static org.smartregister.path.util.AppConstants.KeyConstants.SMS_REMINDER_PHONE;
 import static org.smartregister.path.util.TableUtil.getMotherDetailsColumn;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
@@ -82,12 +84,17 @@ public class ChildFormActivity extends BaseChildFormActivity {
     public String lookUpQuery(Map<String, String> entityMap, String tableName) {
         RegisterQueryProvider queryProvider = Utils.metadata().getRegisterQueryProvider();
 
-        String[] lookupColumns = new String[]{queryProvider.getDemographicTable() + "." + MotherLookUpUtils.RELATIONALID, queryProvider.getDemographicTable() + "." + MotherLookUpUtils.DETAILS, Constants.KEY.ZEIR_ID, FIRST_NAME, LAST_NAME,
+        String[] lookupColumns = new String[]{queryProvider.getDemographicTable() + "." +
+                MotherLookUpUtils.RELATIONALID, queryProvider.getDemographicTable() + "." +
+                MotherLookUpUtils.DETAILS, Constants.KEY.ZEIR_ID, FIRST_NAME, LAST_NAME,
                 queryProvider.getDemographicTable() + "." + AllConstants.ChildRegistrationFields.GENDER,
                 queryProvider.getDemographicTable() + "." + Constants.KEY.DOB,
                 queryProvider.getDemographicTable() + "." + Constants.KEY.BASE_ENTITY_ID,
+                getMotherDetailsColumn(SMS_REMINDER),
+                getMotherDetailsColumn(SMS_REMINDER_PHONE),
                 getMotherDetailsColumn(MOTHER_GUARDIAN_NUMBER),
-                getMotherDetailsColumn(MOTHER_GUARDIAN_NRC)};
+                getMotherDetailsColumn(MOTHER_GUARDIAN_NRC)
+        };
 
         SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
         queryBuilder.selectInitiateMainTable(tableName, lookupColumns);
