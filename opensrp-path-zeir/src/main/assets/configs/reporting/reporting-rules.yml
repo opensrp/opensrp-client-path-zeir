@@ -1,26 +1,26 @@
----
-name: CHN1_011
-description: Attendance child health <12months (total)
-priority: 1
-condition: "true"
-actions:
-  - "CHN1_011 = new Integer(CHN1_005) + new Integer(CHN1_010)"
+#---
+#name: CHN1_011
+#description: Attendance child health <12months (total)
+#priority: 1
+#condition: "true"
+#actions:
+#  - "CHN1_011 = new Integer(CHN1_005) + new Integer(CHN1_010)"
+#
+#---
+#name: CHN1_021
+#description: Attendance child health 12-59 months (total)
+#priority: 1
+#condition: "true"
+#actions:
+#  - "CHN1_021 = new Integer(CHN1_015) + new Integer(CHN1_020)"
 
 ---
-name: CHN1_021
-description: Attendance child health 12-59 months (total)
-priority: 1
-condition: "true"
-actions:
-  - "CHN1_021 = new Integer(CHN1_015) + new Integer(CHN1_020)"
-
----
-name: CHN1_025
+name: CHN1_015
 description: Attendance child health total
 priority: 1
 condition: "true"
 actions:
-  - "CHN1_025 = new Integer(CHN1_011) + new Integer(CHN1_021)"
+  - "CHN1_015 = new Integer(CHN1_005) + new Integer(CHN1_010)"
 
 ---
 name: CHN2_015
@@ -32,19 +32,19 @@ actions:
 
 ---
 name: CHN2_030
-description: Total not gaining weight age < five years
+description: Total child height/length taken
 priority: 1
 condition: "true"
 actions:
   - "CHN2_030 = new Integer(CHN2_020) + new Integer(CHN2_025)"
 
 ---
-name: CHN2_041
-description: Weight between -2Z & -3Z score < five years
+name: CHN2_045
+description: Total children with both height/length and weight measured
 priority: 1
 condition: "true"
 actions:
-  - "CHN2_041 = new Integer(CHN2_035) + new Integer(CHN2_040)"
+  - "CHN2_045 = new Integer(CHN2_020) + new Integer(CHN2_025)"
 
 ---
 name: CHN2_051
@@ -55,6 +55,43 @@ actions:
   - "CHN2_051 = new Integer(CHN2_045) + new Integer(CHN2_050)"
 
 ---
+
+name: CHN2_060
+description: Total moderately underweight <5years
+priority: 1
+condition: "true"
+actions:
+  - "CHN2_060 = new Integer(CHN2_050) + new Integer(CHN2_055)"
+
+---
+
+name: CHN2_075
+description: Total moderately underweight <5years
+priority: 1
+condition: "true"
+actions:
+  - "CHN2_075 = new Integer(CHN2_065) + new Integer(CHN2_070)"
+
+---
+
+name: CHN2_090
+description: Total moderately underweight <5years
+priority: 1
+condition: "true"
+actions:
+  - "CHN2_090 = new Integer(CHN2_080) + new Integer(CHN2_085)"
+
+---
+
+name: CHN2_105
+description: Total severe stunting <5years
+priority: 1
+condition: "true"
+actions:
+  - "CHN2_105 = new Integer(CHN2_095) + new Integer(CHN2_100)"
+
+---
+
 name: CHN2_061
 description: Total weight above 2Z < five years
 priority: 1

@@ -418,10 +418,10 @@
     <string name="report_group_header_vita_deworming_itns">Vitamin A, Deworming, and ITNs</string>
     <string name="report_group_header_immunisation">Immunisation</string>
 
-    <string name="CHN1_005">Attendance child health &lt; 12 months (male)</string>
-    <string name="CHN1_010">Attendance child health &lt; 12 months (female)</string>
+    <string name="CHN1_005">Attendance child health 0-23 months</string>
+    <string name="CHN1_010">Attendance child health 24 -59 months</string>
     <string name="CHN1_011">Attendance child health &lt; 12 months (total)</string>
-    <string name="CHN1_015">Attendance child health 12–59 months male</string>
+    <string name="CHN1_015">Attendance child health total</string>
     <string name="CHN1_020">Attendance child health 12–59 months female</string>
     <string name="CHN1_021">Attendance child health 12–59 months (total)</string>
     <string name="CHN1_025">Attendance child health total</string>
