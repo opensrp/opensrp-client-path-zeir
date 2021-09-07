@@ -15,12 +15,12 @@
 #  - "CHN1_021 = new Integer(CHN1_015) + new Integer(CHN1_020)"
 
 ---
-name: CHN1_015
+name: CHN1_025
 description: Attendance child health total
 priority: 1
 condition: "true"
 actions:
-  - "CHN1_015 = new Integer(CHN1_005) + new Integer(CHN1_010)"
+  - "CHN1_025 = new Integer(CHN1_005) + new Integer(CHN1_010)"
 
 ---
 name: CHN2_015
@@ -44,7 +44,7 @@ description: Total children with both height/length and weight measured
 priority: 1
 condition: "true"
 actions:
-  - "CHN2_045 = new Integer(CHN2_020) + new Integer(CHN2_025)"
+  - "CHN2_045 = new Integer(CHN2_035) + new Integer(CHN2_040)"
 
 ---
 name: CHN2_051

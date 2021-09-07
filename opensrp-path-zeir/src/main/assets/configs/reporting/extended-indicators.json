@@ -3,46 +3,17 @@
     "indicator": "CHN1_005",
     "grouping": "report_group_header_under_5_attendance",
     "dependentCalculations": [
-      "CHN1_011"
+      "CHN1_025"
     ]
   },
   {
     "indicator": "CHN1_010",
     "grouping": "report_group_header_under_5_attendance",
     "dependentCalculations": [
-      "CHN1_011"
-    ]
-  },
-  {
-    "indicator": "CHN1_011",
-    "grouping": "report_group_header_under_5_attendance",
-    "enteredManually": false,
-    "dependentCalculations": [
       "CHN1_025"
     ]
   },
-  {
-    "indicator": "CHN1_015",
-    "grouping": "report_group_header_under_5_attendance",
-    "dependentCalculations": [
-      "CHN1_021"
-    ]
-  },
-  {
-    "indicator": "CHN1_020",
-    "grouping": "report_group_header_under_5_attendance",
-    "dependentCalculations": [
-      "CHN1_021"
-    ]
-  },
-  {
-    "indicator": "CHN1_021",
-    "grouping": "report_group_header_under_5_attendance",
-    "enteredManually": false,
-    "dependentCalculations": [
-      "CHN1_025"
-    ]
-  },
+
   {
     "indicator": "CHN1_025",
     "grouping": "report_group_header_under_5_attendance",
@@ -68,6 +39,7 @@
     "grouping": "report_group_header_growth_nutrition",
     "enteredManually": false
   },
+
   {
     "indicator": "CHN2_020",
     "grouping": "report_group_header_growth_nutrition",
@@ -83,16 +55,20 @@
       "CHN2_030"
     ]
   },
+
   {
     "indicator": "CHN2_030",
     "grouping": "report_group_header_growth_nutrition",
     "enteredManually": false
   },
+
+
+
   {
     "indicator": "CHN2_035",
     "grouping": "report_group_header_growth_nutrition",
     "dependentCalculations": [
-      "CHN2_041"
+      "CHN2_045"
     ]
   },
   {
@@ -100,58 +76,103 @@
     "grouping": "report_group_header_growth_nutrition",
     "enteredManually": false,
     "dependentCalculations": [
-      "CHN2_041"
+      "CHN2_045"
     ]
-  },
-  {
-    "indicator": "CHN2_041",
-    "grouping": "report_group_header_growth_nutrition",
-    "enteredManually": false
   },
   {
     "indicator": "CHN2_045",
     "grouping": "report_group_header_growth_nutrition",
-    "dependentCalculations": [
-      "CHN2_051"
-    ]
+    "enteredManually": false
   },
+
+
   {
     "indicator": "CHN2_050",
     "grouping": "report_group_header_growth_nutrition",
-    "enteredManually": false,
     "dependentCalculations": [
-      "CHN2_051"
+      "CHN2_060"
     ]
-  },
-  {
-    "indicator": "CHN2_051",
-    "grouping": "report_group_header_growth_nutrition",
-    "enteredManually": false
   },
   {
     "indicator": "CHN2_055",
     "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false,
     "dependentCalculations": [
-      "CHN2_061"
+      "CHN2_060"
     ]
   },
   {
     "indicator": "CHN2_060",
     "grouping": "report_group_header_growth_nutrition",
-    "enteredManually": false,
+    "enteredManually": false
+  },
+
+  {
+    "indicator": "CHN2_065",
+    "grouping": "report_group_header_growth_nutrition",
     "dependentCalculations": [
-      "CHN2_061"
+      "CHN2_075"
     ]
   },
   {
-    "indicator": "CHN2_061",
+    "indicator": "CHN2_070",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false,
+    "dependentCalculations": [
+      "CHN2_075"
+    ]
+  },
+  {
+    "indicator": "CHN2_075",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false
+  },
+
+  {
+    "indicator": "CHN2_080",
+    "grouping": "report_group_header_growth_nutrition",
+    "dependentCalculations": [
+      "CHN2_090"
+    ]
+  },
+  {
+    "indicator": "CHN2_085",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false,
+    "dependentCalculations": [
+      "CHN2_090"
+    ]
+  },
+  {
+    "indicator": "CHN2_090",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false
+  },
+
+  {
+    "indicator": "CHN2_095",
+    "grouping": "report_group_header_growth_nutrition",
+    "dependentCalculations": [
+      "CHN2_105"
+    ]
+  },
+  {
+    "indicator": "CHN2_100",
+    "grouping": "report_group_header_growth_nutrition",
+    "enteredManually": false,
+    "dependentCalculations": [
+      "CHN2_105"
+    ]
+  },
+  {
+    "indicator": "CHN2_105",
     "grouping": "report_group_header_growth_nutrition",
     "enteredManually": false
   },
   {
-    "indicator": "CHN3_090",
+    "indicator": "CHN3_390",
     "grouping": "report_group_header_immunisation",
-    "enteredManually": true
+    "enteredManually": false
   }
 
 ]
