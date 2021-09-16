@@ -75,8 +75,8 @@ android {
     applicationVariants.all { variant ->
         if (variant.name == "debug") {
             variant.outputs.each { output ->
-                output.versionCodeOverride = 19
-                output.versionNameOverride = "0.0.19-debug"
+                output.versionCodeOverride = 20
+                output.versionNameOverride = "0.0.20-debug"
             }
         } else if (variant.name == "preview") {
             variant.outputs.each { output ->
