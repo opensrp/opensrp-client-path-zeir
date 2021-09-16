@@ -721,23 +721,14 @@ indicators:
   - key: "CHN3_305"
     description: "MANUAL ENTRY number of children under 12 months who have received vaccines that may have been given outside the routine schedule [booster_vaccine] in this facility. "
     grouping: "report_group_header_immunisation"
-    indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
-                                             FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
-                                             WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                                             AND v.out_of_area = 0 AND lower(v.hia2_status) = 'overdue' ;"
+    indicatorQuery: ""
 
   - key: "CHN3_310"
     description: "MANUAL ENTRY number of children under 12 months who have received vaccines that may have been given outside the routine schedule [booster_vaccine] during an outreach conducted by this facility."
     grouping: "report_group_header_immunisation"
-    indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
-                                             FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
-                                             WHERE age <12  AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                                             AND v.out_of_area = 1 AND lower(v.hia2_status) = 'overdue' ;"
+    indicatorQuery: ""
 
   - key: "CHN3_315"
     description: "MANUAL ENTRY number of children over 12 months who have received vaccines that may have been given outside the routine schedule [booster_vaccine] in this facility + outreaches"
     grouping: "report_group_header_immunisation"
-    indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
-                                             FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
-                                             WHERE age >12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                                             AND lower(v.hia2_status) = 'overdue' ;"
+    indicatorQuery: ""

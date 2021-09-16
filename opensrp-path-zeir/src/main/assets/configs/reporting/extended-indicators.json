@@ -173,6 +173,26 @@
     "indicator": "CHN3_390",
     "grouping": "report_group_header_immunisation",
     "enteredManually": false
+  },
+  {
+    "indicator": "CHN3_395",
+    "grouping": "report_group_header_immunisation",
+    "enteredManually": true
+  },
+  {
+    "indicator": "CHN3_305",
+    "grouping": "report_group_header_immunisation",
+    "enteredManually": true
+  },
+  {
+    "indicator": "CHN3_310",
+    "grouping": "report_group_header_immunisation",
+    "enteredManually": true
+  },
+  {
+    "indicator": "CHN3_315",
+    "grouping": "report_group_header_immunisation",
+    "enteredManually": true
   }
 
 ]
