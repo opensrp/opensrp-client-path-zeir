@@ -233,7 +233,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'bcg';"
+                        AND v.outreach = 0 AND lower(v.name) = 'bcg';"
 
   - key: "CHN3_010"
     description: "Number of children < one year who received BCG dose at outreach conducted by this facility in this month"
@@ -241,7 +241,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) as age
                        FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                        WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                       AND v.out_of_area = 1 AND lower(v.name) = 'bcg';"
+                       AND v.outreach = 1 AND lower(v.name) = 'bcg';"
 
   - key: "CHN3_015"
     description: "Number of children > one year who received BCG dose at outreach conducted by this facility + in the facility in this month "
@@ -257,7 +257,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'opv_0';"
+                        AND v.outreach = 0 AND lower(v.name) = 'opv_0';"
 
   - key: "CHN3_030"
     description: "Number of children < one year who received OPV0 dose at outreach conducted by this facility in this month"
@@ -265,7 +265,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 1 AND lower(v.name) = 'opv_0';"
+                        AND v.outreach = 1 AND lower(v.name) = 'opv_0';"
 
   - key: "CHN3_035"
     description: "Number of children > one year who received OPV0 dose at outreach conducted by this facility + in the facility in this month "
@@ -282,7 +282,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'opv_1';"
+                        AND v.outreach = 0 AND lower(v.name) = 'opv_1';"
 
   - key: "CHN3_050"
     description: "Number of children < one year who received OPV1 dose at outreach conducted by this facility in this month"
@@ -290,7 +290,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 1 AND lower(v.name) = 'opv_1';"
+                        AND v.outreach = 1 AND lower(v.name) = 'opv_1';"
 
   - key: "CHN3_055"
     description: "Number of children > one year who received OPV1 dose at outreach conducted by this facility + in the facility in this month"
@@ -306,7 +306,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count, CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'opv_2';"
+                        AND v.outreach = 0 AND lower(v.name) = 'opv_2';"
 
   - key: "CHN3_070"
     description: "Number of children < one year who received OPV2 dose at outreach conducted by this facility in this month"
@@ -314,7 +314,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count, CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 1 AND lower(v.name) = 'opv_2';"
+                        AND v.outreach = 1 AND lower(v.name) = 'opv_2';"
 
   - key: "CHN3_075"
     description: "Number of children > one year who received OPV2 dose at outreach conducted by this facility + in the facility in this month "
@@ -330,7 +330,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'opv_3';"
+                        AND v.outreach = 0 AND lower(v.name) = 'opv_3';"
 
   - key: "CHN3_090"
     description: "Number of children < one year who received OPV3 dose at outreach conducted by this facility in this month"
@@ -338,7 +338,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 1 AND lower(v.name) = 'opv_3';"
+                        AND v.outreach = 1 AND lower(v.name) = 'opv_3';"
 
   - key: "CHN3_095"
     description: "Number of children > one year who received OPV3 dose at outreach conducted by this facility + in the facility in this month "
@@ -354,7 +354,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'ipv';"
+                        AND v.outreach = 0 AND lower(v.name) = 'ipv';"
 
   - key: "CHN3_290"
     description: "Number of children < one year who received IPV dose at outreach conducted by this facility in this month"
@@ -362,7 +362,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 1 AND lower(v.name) = 'ipv';"
+                        AND v.outreach = 1 AND lower(v.name) = 'ipv';"
 
 
   - key: "CHN3_295"
@@ -380,7 +380,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'opv_4';"
+                        AND v.outreach = 0 AND lower(v.name) = 'opv_4';"
 
   - key: "CHN3_110"
     description: "Number of children < one year who received OPV4 dose at outreach conducted by this facility in this month"
@@ -388,7 +388,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 1 AND lower(v.name) = 'opv_4';"
+                        AND v.outreach = 1 AND lower(v.name) = 'opv_4';"
 
   - key: "CHN3_115"
     description: "Number of children > one year who received OPV4 dose at outreach conducted by this facility + in the facility in this month "
@@ -405,7 +405,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'penta_1';"
+                        AND v.outreach = 0 AND lower(v.name) = 'penta_1';"
 
   - key: "CHN3_130"
     description: "Number of children < one year who received DPT-Hib+HepB 1 dose at outreach conducted by this facility in this month"
@@ -413,7 +413,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 1 AND lower(v.name) = 'penta_1';"
+                        AND v.outreach = 1 AND lower(v.name) = 'penta_1';"
   - key: "CHN3_135"
     description: "Number of children > one year who received Penta 1 dose at outreach conducted by this facility + in the facility in this month "
     grouping: "report_group_header_immunisation"
@@ -428,7 +428,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'penta_2';"
+                        AND v.outreach = 0 AND lower(v.name) = 'penta_2';"
 
   - key: "CHN3_150"
     description: "Number of children < one year who received DPT-Hib+HepB 2 dose at outreach conducted by this facility in this month"
@@ -436,7 +436,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 1 AND lower(v.name) = 'penta_2';"
+                        AND v.outreach = 1 AND lower(v.name) = 'penta_2';"
 
   - key: "CHN3_155"
     description: "Number of children > one year who received Penta 2 dose at outreach conducted by this facility + in the facility in this month h"
@@ -452,7 +452,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'penta_3';"
+                        AND v.outreach = 0 AND lower(v.name) = 'penta_3';"
 
   - key: "CHN3_170"
     description: "Number of children < one year who received DPT-Hib+HepB 3 dose at outreach conducted by this facility in this month"
@@ -460,7 +460,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 1 AND lower(v.name) = 'penta_3';"
+                        AND v.outreach = 1 AND lower(v.name) = 'penta_3';"
 
   - key: "CHN3_175"
     description: "Number of children > one year who received Penta 3 dose at outreach conducted by this facility + in the facility in this month "
@@ -477,7 +477,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'pcv_1';"
+                        AND v.outreach = 0 AND lower(v.name) = 'pcv_1';"
 
   - key: "CHN3_190"
     description: "Number of children < one year who received PCV 1 dose at outreach conducted by this facility in this month"
@@ -485,7 +485,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 1 AND lower(v.name) = 'pcv_1';"
+                        AND v.outreach = 1 AND lower(v.name) = 'pcv_1';"
 
   - key: "CHN3_195"
     description: "Number of children > one year who received PCV1 dose at outreach conducted by this facility + in the facility in this month "
@@ -501,7 +501,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'pcv_2';"
+                        AND v.outreach = 0 AND lower(v.name) = 'pcv_2';"
 
   - key: "CHN3_210"
     description: "Number of children < one year who received PCV 2 dose at outreach conducted by this facility in this month"
@@ -509,7 +509,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 1 AND lower(v.name) = 'pcv_2';"
+                        AND v.outreach = 1 AND lower(v.name) = 'pcv_2';"
 
   - key: "CHN3_215"
     description: "Number of children > one year who received PCV2 dose at outreach conducted by this facility + in the facility in this month "
@@ -525,7 +525,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'pcv_3';"
+                        AND v.outreach = 0 AND lower(v.name) = 'pcv_3';"
 
   - key: "CHN3_230"
     description: "Number of children < one year who received PCV 3 dose at outreach conducted by this facility in this month"
@@ -533,7 +533,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 1 AND lower(v.name) = 'pcv_3';"
+                        AND v.outreach = 1 AND lower(v.name) = 'pcv_3';"
   - key: "CHN3_235"
     description: "Number of children > one year who received PCV3 dose at outreach conducted by this facility + in the facility in this month "
     grouping: "report_group_header_immunisation"
@@ -545,22 +545,22 @@ indicators:
   - key: "CHN3_245"
     description: "Number of children < one year who received RV 1  dose at this facility in this month"
     grouping: "report_group_header_immunisation"
-    indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('&s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
+    indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'rota_1';"
+                        AND v.outreach = 0 AND lower(v.name) = 'rota_1';"
 
   - key: "CHN3_250"
     description: "Number of children < one year who received RV 1 dose at outreach conducted by this facility in this month"
     grouping: "report_group_header_immunisation"
-    indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('&s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
+    indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 1 AND lower(v.name) = 'rota_1';"
+                        AND v.outreach = 1 AND lower(v.name) = 'rota_1';"
   - key: "CHN3_255"
     description: "Number of children > one year who received RV1 dose at outreach conducted by this facility + in the facility in this month "
     grouping: "report_group_header_immunisation"
-    indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('&s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
+    indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age >12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
                         AND lower(v.name) = 'rota_1';"
@@ -571,7 +571,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 0 AND lower(v.name) = 'rota_2';"
+                        AND v.outreach = 0 AND lower(v.name) = 'rota_2';"
 
   - key: "CHN3_270"
     description: "Number of children < one year who received RV 2 dose at outreach conducted by this facility in this month"
@@ -579,7 +579,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                         FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                         WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                        AND v.out_of_area = 1 AND lower(v.name) = 'rota_2';"
+                        AND v.outreach = 1 AND lower(v.name) = 'rota_2';"
 
   - key: "CHN3_275"
     description: "Number of children > one year who received RV 2 dose at outreach conducted by this facility + in the facility in this month "
@@ -595,7 +595,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                       FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                       WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                      AND v.out_of_area = 0 AND (lower(v.name) = 'measles_1' OR lower(v.name) = 'mr_1');"
+                      AND v.outreach = 0 AND (lower(v.name) = 'measles_1' OR lower(v.name) = 'mr_1');"
 
   - key: "CHN3_330"
     description: "Number of children < one year who received Measles/ MR dose at outreach conducted by this facility in this month"
@@ -603,7 +603,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                       FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                       WHERE age <12 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                      AND v.out_of_area = 1 AND (lower(v.name) = 'measles_1' OR lower(v.name) = 'mr_1');"
+                      AND v.outreach = 1 AND (lower(v.name) = 'measles_1' OR lower(v.name) = 'mr_1');"
   - key: "CHN3_335"
     description: "COUNT Number of children > one year [Date_Birth] who received MR 1 dose [Name_Vaccine] at outreach conducted by this facility + in the facility in this month "
     grouping: "report_group_header_immunisation"
@@ -621,8 +621,8 @@ indicators:
                                     SELECT child.base_entity_id AS base_entity_id
                                     FROM vaccines vaccine INNER join ec_client child ON vaccine.base_entity_id = child.base_entity_id
                                     WHERE '%s' = strftime('%Y-%m-%d',datetime(vaccine.date/1000,'unixepoch', 'localtime'))
-                                    AND out_of_area = 0 AND CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) <= 12 AND hia2_status = 'Within'
-                            ) AND out_of_area = 0 AND hia2_status = 'Within' AND name in (
+                                    AND outreach = 0 AND CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) <= 12 AND hia2_status = 'Within'
+                            ) AND outreach = 0 AND hia2_status = 'Within' AND name in (
                             'bcg', 'opv_0', 'opv_1', 'opv_2', 'opv_3', 'opv_4','penta_1', 'penta_2', 'penta_3','pcv_1', 'pcv_2', 'pcv_3','rota_1', 'rota_2', 'ipv', 'measles_1','mr_1'
                         ) GROUP BY base_entity_id
                       ) WHERE vaccine_count >= 15"
@@ -636,8 +636,8 @@ indicators:
                                     SELECT child.base_entity_id AS base_entity_id
                                     FROM vaccines vaccine INNER join ec_client child ON vaccine.base_entity_id = child.base_entity_id
                                     WHERE '%s' = strftime('%Y-%m-%d',datetime(vaccine.date/1000,'unixepoch', 'localtime', 'localtime'))
-                                    AND out_of_area = 0 AND CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) <= 12 AND hia2_status = 'Within'
-                            ) AND out_of_area = 1 AND hia2_status = 'Within' AND name in (
+                                    AND outreach = 0 AND CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) <= 12 AND hia2_status = 'Within'
+                            ) AND outreach = 1 AND hia2_status = 'Within' AND name in (
                             'bcg', 'opv_0', 'opv_1', 'opv_2', 'opv_3', 'opv_4','penta_1', 'penta_2', 'penta_3','pcv_1', 'pcv_2', 'pcv_3','rota_1', 'rota_2', 'ipv', 'measles_1','mr_1'
                         ) GROUP BY base_entity_id
                       ) WHERE vaccine_count >= 15"
@@ -652,8 +652,8 @@ indicators:
                                     SELECT child.base_entity_id AS base_entity_id
                                     FROM vaccines vaccine INNER join ec_client child ON vaccine.base_entity_id = child.base_entity_id
                                     WHERE '%s' = strftime('%Y-%m-%d',datetime(vaccine.date/1000,'unixepoch', 'localtime', 'localtime'))
-                                    AND out_of_area = 0 AND CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) > 12 AND hia2_status = 'Within'
-                            ) AND out_of_area = 1 AND hia2_status = 'Within' AND name in (
+                                    AND outreach = 0 AND CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) > 12 AND hia2_status = 'Within'
+                            ) AND outreach = 1 AND hia2_status = 'Within' AND name in (
                             'bcg', 'opv_0', 'opv_1', 'opv_2', 'opv_3', 'opv_4','penta_1', 'penta_2', 'penta_3','pcv_1', 'pcv_2', 'pcv_3','rota_1', 'rota_2', 'ipv', 'measles_1','mr_1'
                         ) GROUP BY base_entity_id
                       ) WHERE vaccine_count >= 15"
@@ -665,7 +665,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                       FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                       WHERE age between 18 and 19 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                      AND v.out_of_area = 0 AND (lower(v.name) = 'measles_2' OR lower(v.name) = 'mr_2');"
+                      AND v.outreach = 0 AND (lower(v.name) = 'measles_2' OR lower(v.name) = 'mr_2');"
 
   - key: "CHN3_370"
     description: "Number of children  at 18 months who received Measles/ MR 2 dose at outreach conducted by this facility in this month"
@@ -673,7 +673,7 @@ indicators:
     indicatorQuery: "SELECT count(DISTINCT v.base_entity_id) AS count,  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                       FROM vaccines v INNER JOIN ec_client child ON child.base_entity_id = v.base_entity_id
                       WHERE age between 18 and 19 AND '%s' = strftime('%Y-%m-%d',datetime(v.date/1000, 'unixepoch', 'localtime'))
-                      AND v.out_of_area = 1 AND (lower(v.name) = 'measles_2' OR lower(v.name) = 'mr_2');"
+                      AND v.outreach = 1 AND (lower(v.name) = 'measles_2' OR lower(v.name) = 'mr_2');"
 
   - key: "CHN3_375"
     description: "Number of children at 18  months who received MR 2 dose at outreach conducted by this facility + in the facility in this month "
@@ -692,8 +692,8 @@ indicators:
                                                          SELECT child.base_entity_id AS base_entity_id
                                                          FROM vaccines vaccine INNER join ec_client child ON vaccine.base_entity_id = child.base_entity_id
                                                          WHERE '%s' = strftime('%Y-%m-%d',datetime(vaccine.date/1000,'unixepoch', 'localtime', 'localtime'))
-                                                         AND out_of_area = 0 AND CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) < 24 AND hia2_status = 'Within'
-                                                 ) AND out_of_area = 1 AND hia2_status = 'Within' AND name in (
+                                                         AND outreach = 0 AND CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) < 24 AND hia2_status = 'Within'
+                                                 ) AND outreach = 1 AND hia2_status = 'Within' AND name in (
                                                  'bcg', 'opv_0', 'opv_1', 'opv_2', 'opv_3', 'opv_4','penta_1', 'penta_2', 'penta_3','pcv_1', 'pcv_2', 'pcv_3','rota_1', 'rota_2', 'ipv', 'measles_1','mr_1'
                                              ) GROUP BY base_entity_id
                                            ) WHERE vaccine_count >= 15"
@@ -707,8 +707,8 @@ indicators:
                                                          SELECT child.base_entity_id AS base_entity_id
                                                          FROM vaccines vaccine INNER join ec_client child ON vaccine.base_entity_id = child.base_entity_id
                                                          WHERE '%s' = strftime('%Y-%m-%d',datetime(vaccine.date/1000,'unixepoch', 'localtime', 'localtime'))
-                                                         AND out_of_area = 0 AND CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) < 24 AND hia2_status = 'Within'
-                                                 ) AND out_of_area = 1 AND hia2_status = 'Within' AND name in (
+                                                         AND outreach = 0 AND CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER) < 24 AND hia2_status = 'Within'
+                                                 ) AND outreach = 1 AND hia2_status = 'Within' AND name in (
                                                  'bcg', 'opv_0', 'opv_1', 'opv_2', 'opv_3', 'opv_4','penta_1', 'penta_2', 'penta_3','pcv_1', 'pcv_2', 'pcv_3','rota_1', 'rota_2', 'ipv', 'measles_1','mr_1'
                                              ) GROUP BY base_entity_id
                                            ) WHERE vaccine_count >= 15"
