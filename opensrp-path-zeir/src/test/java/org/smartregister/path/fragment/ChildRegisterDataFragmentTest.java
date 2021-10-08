@@ -127,6 +127,12 @@ public class ChildRegisterDataFragmentTest extends BaseUnitTest {
         Assert.assertEquals(fragment.getmAdapter().getItemCount(), detailMap.size());
     }
 
+    @Test
+    public void testAddUnFormattedNumberFields()
+    {
+        Assert.assertNotNull(childRegisterDataFragment.addUnFormattedNumberFields());
+    }
+
     @After
     public void tearDown() {
         ReflectionHelpers.setStaticField(CoreLibrary.class, "instance", null);
