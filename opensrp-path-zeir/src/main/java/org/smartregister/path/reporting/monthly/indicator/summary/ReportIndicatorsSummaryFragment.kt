@@ -62,7 +62,7 @@ class ReportIndicatorsSummaryFragment : Fragment() {
                 if (groupedTallies.isNotEmpty()) {
                     val firstMonthlyTally: MonthlyTally = groupedTallies.values.first()[0]
                     val submittedBy = requireContext().getString(R.string.submitted_by_,
-                            dateFormatter("dd/MM/YYYY").format(firstMonthlyTally.dateSent!!), firstMonthlyTally.providerId)
+                            dateFormatter("dd/MM/yyyy").format(firstMonthlyTally.dateSent!!), firstMonthlyTally.providerId)
                     submittedByTextView.text = submittedBy
                     submittedByTextView.typeface = Typeface.DEFAULT_BOLD
                     reportIndicators = groupedTallies.toList()
