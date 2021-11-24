@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
-import org.mvel2.util.Make;
 import org.smartregister.AllConstants;
 import org.smartregister.child.util.ChildDbMigrations;
 import org.smartregister.child.util.Utils;
@@ -23,7 +22,6 @@ import org.smartregister.immunization.repository.VaccineNameRepository;
 import org.smartregister.immunization.repository.VaccineRepository;
 import org.smartregister.immunization.repository.VaccineTypeRepository;
 import org.smartregister.immunization.util.IMDatabaseUtils;
-import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.path.BuildConfig;
 import org.smartregister.path.application.ZeirApplication;
 import org.smartregister.path.reporting.annual.coverage.repository.AnnualReportRepository;
