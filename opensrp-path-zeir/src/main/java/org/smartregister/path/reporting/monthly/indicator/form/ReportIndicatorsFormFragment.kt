@@ -143,6 +143,7 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
     private fun createIndicatorInputFields(tallyEntry: Map.Entry<String, List<MonthlyTally>>) {
 //        val sortedIndicators = tallyEntry.value.sortIndicators()
         tallyEntry.value.forEach {
+            it.enteredManually = true
             reportIndicatorsLayout.addView(TextInputLayout(requireContext()).apply { addView(createEditText(it)) })
         }
     }

@@ -106,18 +106,20 @@ indicators:
     description: "Number of total children age 0-23months who has a score of below -2 (weight for age zscore)"
     grouping: "report_group_header_growth_nutrition"
     indicatorQuery: "select count(DISTINCT child.base_entity_id) as count,
-                                                 CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
-                                                 from ec_client child inner join weights w on w.base_entity_id=child.base_entity_id
-                                                 where w.z_score between -3 and -2 and age <= 23"
+                                                                      CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
+                                                                      from ec_client child inner join weights w on w.base_entity_id=child.base_entity_id
+                                                                      where w.z_score between -3 and -2 and age <= 23
+                     												 and strftime('%Y-%m-%d',w.created_at) = '%s'"
 
 
   - key: "CHN2_055"
     description: "Number of total children age 24 - 59 months who has a score of below -2 (weight for age zscore)"
     grouping: "report_group_header_growth_nutrition"
     indicatorQuery: "select count(DISTINCT child.base_entity_id) as count,
-                                                     CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
-                                                     from ec_client child inner join weights w on w.base_entity_id=child.base_entity_id
-                                                      where w.z_score between -3 and -2 and age between 24 and 59"
+                                                                          CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
+                                                                          from ec_client child inner join weights w on w.base_entity_id=child.base_entity_id
+                                                                           where w.z_score between -3 and -2 and age between 24 and 59
+                     													  and strftime('%Y-%m-%d',w.created_at) = '%s'"
 
   - key: "CHN2_060"
     description: "Number of total children age <5 years who has a score of below -2 (weight for age zscore)"
@@ -130,7 +132,7 @@ indicators:
     indicatorQuery: "select count(DISTINCT child.base_entity_id) as count,
                                                      CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                                                      from ec_client child inner join weights w on w.base_entity_id=child.base_entity_id
-                                                     where w.z_score < -3 and age <= 23"
+                                                     where w.z_score < -3 and age <= 23 and strftime('%Y-%m-%d',w.created_at) = '%s'"
 
   - key: "CHN2_070"
     description: "Number of total children age 24 - 59 months who has a score of below -3 (weight for age zscore)"
@@ -138,7 +140,7 @@ indicators:
     indicatorQuery: "select count(DISTINCT child.base_entity_id) as count,
                                                             CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                                                             from ec_client child inner join weights w on w.base_entity_id=child.base_entity_id
-                                                            where w.z_score < -3 and age between 24 and 59"
+                                                            where w.z_score < -3 and age between 24 and 59 and strftime('%Y-%m-%d',w.created_at) = '%s'"
 
 
   - key: "CHN2_075"
@@ -153,7 +155,7 @@ indicators:
     indicatorQuery: "select count(DISTINCT child.base_entity_id) as count,
                                                  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                                                  from ec_client child inner join heights h on h.base_entity_id=child.base_entity_id
-                                                 where h.z_score between -3 and -2 and age <= 23"
+                                                 where h.z_score between -3 and -2 and age <= 23 and strftime('%Y-%m-%d',h.created_at) = '%s'"
 
   - key: "CHN2_085"
     description: "Number of total children age 24 - 59 months who has a score of below -2 (height for age zscore)"
@@ -161,7 +163,7 @@ indicators:
     indicatorQuery: "select count(DISTINCT child.base_entity_id) as count,
                                                     CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                                                     from ec_client child inner join heights h on h.base_entity_id=child.base_entity_id
-                                                    where h.z_score between -3 and -2 and age between 24 and 59"
+                                                    where h.z_score between -3 and -2 and age between 24 and 59 and strftime('%Y-%m-%d',h.created_at) = '%s'"
 
 
   - key: "CHN2_090"
@@ -176,7 +178,7 @@ indicators:
     indicatorQuery: "select count(DISTINCT child.base_entity_id) as count,
                                                       CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
                                                       from ec_client child inner join heights h on h.base_entity_id=child.base_entity_id
-                                                      where h.z_score < -3 and age <= 23"
+                                                      where h.z_score < -3 and age <= 23 and strftime('%Y-%m-%d',h.created_at) = '%s'"
 
 
   - key: "CHN2_100"
@@ -184,8 +186,8 @@ indicators:
     grouping: "report_group_header_growth_nutrition"
     indicatorQuery: "select count(DISTINCT child.base_entity_id) as count,
                                                       CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
-                                                      from ec_client child inner join heights h on h.base_entity_id=child.base_entity_id
-                                                      where h.z_score < -3 and age between 24 and 59"
+                                                      from ec_client child inner join heights h on h.base_entity_id = child.base_entity_id
+                                                      where h.z_score < -3 and age between 24 and 59 and strftime('%Y-%m-%d',h.created_at) = '%s'"
 
 
   - key: "CHN2_105"
@@ -742,14 +744,23 @@ indicators:
   - key: "CHN3_305"
     description: "MANUAL ENTRY number of children under 12 months who have received vaccines that may have been given outside the routine schedule [booster_vaccine] in this facility. "
     grouping: "report_group_header_immunisation"
-    indicatorQuery: ""
+    indicatorQuery: "select count(DISTINCT base_entity_id) as count,
+                                             CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
+                                             from ec_client child inner join event e on e.baseEntityId= child.base_entity_id where age <= 12 and
+                                             '%s'=strftime('%Y-%m-%d',e.eventDate) and eventType = 'booster_vaccines' and e.locationId = '%facility_location%' "
 
   - key: "CHN3_310"
     description: "MANUAL ENTRY number of children under 12 months who have received vaccines that may have been given outside the routine schedule [booster_vaccine] during an outreach conducted by this facility."
     grouping: "report_group_header_immunisation"
-    indicatorQuery: ""
+    indicatorQuery: "select count(DISTINCT base_entity_id) as count,
+                                                                  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
+                                                                  from ec_client child inner join event e on e.baseEntityId= child.base_entity_id where age <= 12 and
+                                                                  '%s'=strftime('%Y-%m-%d',e.eventDate) and eventType = 'booster_vaccines' and e.locationId != '%facility_location%'"
 
   - key: "CHN3_315"
     description: "MANUAL ENTRY number of children over 12 months who have received vaccines that may have been given outside the routine schedule [booster_vaccine] in this facility + outreaches"
     grouping: "report_group_header_immunisation"
-    indicatorQuery: ""
+    indicatorQuery: "select count(DISTINCT base_entity_id) as count,
+                                                                  CAST ((julianday('%s') - julianday(strftime('%Y-%m-%d',child.dob)))/(365/12) AS INTEGER)as age
+                                                                  from ec_client child inner join event e on e.baseEntityId= child.base_entity_id where age > 12 and
+                                                                  '%s'=strftime('%Y-%m-%d',e.eventDate) and eventType = 'booster_vaccines'"

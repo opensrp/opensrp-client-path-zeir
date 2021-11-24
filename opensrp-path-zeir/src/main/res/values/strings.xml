@@ -507,9 +507,9 @@
     <string name="CHN3_380">Fully immunised &lt; 2 years (under 2) at facility</string>
     <string name="CHN3_385">Fully immunised &lt; 2 years (under 2) at outreach</string>
     <string name="CHN3_390">Fully immunised &lt; 2 years </string>
-    <string name="CHN3_395">Number of days fridge non-functional</string>
+    <string name="CHN3_395">Days in a month Cold-chain fridge was functional</string>
     <string name="CHN3_305">Total number of children &lt; 1 year who received other immunizations at the facility</string>
-    <string name="CHN3_310">Total number of children &lt; 1 year who received other immunizations at the facility</string>
+    <string name="CHN3_310">Total number of children &lt; 1 year who received other immunizations at outreach</string>
     <string name="CHN3_315">Total number of children &gt; 1 year who received other immunizations at the facility</string>
 
     <string name="daily_tallies_with_day">Daily Tallies &gt; %1s</string>

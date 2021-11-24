@@ -177,7 +177,7 @@
   {
     "indicator": "CHN3_395",
     "grouping": "report_group_header_immunisation",
-    "enteredManually": true
+    "enteredManually": false
   },
   {
     "indicator": "CHN3_305",

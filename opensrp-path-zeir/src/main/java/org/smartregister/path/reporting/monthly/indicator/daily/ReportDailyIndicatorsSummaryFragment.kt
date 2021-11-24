@@ -69,6 +69,7 @@ class ReportDailyIndicatorsSummaryFragment : Fragment() {
                     value.providerId = MonthlyReportsRepository.getInstance().getProviderId()
                     value.day = ReportingUtils.dateFormatter("dd MMMM yyyy").parse(reportIndicatorsViewModel.day.value!!)!!
                     value.value = "0"
+                    value.enteredManually = tallyEntry.value.enteredManually
                 }
                 includeExtendedTallies(dailyTallies, tallyEntry)
             }
@@ -112,6 +113,11 @@ class ReportDailyIndicatorsSummaryFragment : Fragment() {
                 && dailyTallies[tallyEntry.key]?.dependentCalculations?.isEmpty()!!
                 && !tallyEntry.value.dependentCalculations.isNullOrEmpty()) {
             dailyTallies[tallyEntry.key]?.dependentCalculations = tallyEntry.value.dependentCalculations
+            dailyTallies[tallyEntry.key]?.enteredManually = tallyEntry.value.enteredManually
+        }
+        else if (dailyTallies.containsKey(tallyEntry.key))
+        {
+            dailyTallies[tallyEntry.key]?.enteredManually = tallyEntry.value.enteredManually
         }
     }
 }
