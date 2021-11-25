@@ -128,7 +128,7 @@ public class ChildRegisterDataFragmentTest extends BaseUnitTest {
     }
 
     @Test
-    public void testAddUnFormattedNumberFields()
+    public void testAddUnFormattedFieldsNotNull()
     {
         Assert.assertNotNull(childRegisterDataFragment.addUnFormattedNumberFields());
     }
