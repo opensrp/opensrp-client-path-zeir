@@ -51,7 +51,7 @@ public class ChildFormActivity extends BaseChildFormActivity {
                 key = LAST_NAME;
             }
 
-            if (StringUtils.equalsIgnoreCase(key, MotherLookUpUtils.MOTHER_GUARDIAN_PHONE_NUMBER)) {
+            if (StringUtils.equalsIgnoreCase(key, MotherLookUpUtils.MOTHER_GUARDIAN_PHONE_NUMBER) || StringUtils.equalsAnyIgnoreCase(key,MOTHER_GUARDIAN_NUMBER)) {
                 key = getMotherDetailsColumn(MOTHER_GUARDIAN_NUMBER);
             }
 
