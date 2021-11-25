@@ -64,11 +64,14 @@ public class ZeirRepository extends Repository {
     private SQLiteDatabase readableDatabase;
     private SQLiteDatabase writableDatabase;
     private final Context context;
+    private final org.smartregister.Context openSRPContext;
+
 
     public ZeirRepository(@NonNull Context context, @NonNull org.smartregister.Context openSRPContext) {
         super(context, AllConstants.DATABASE_NAME, BuildConfig.DATABASE_VERSION, openSRPContext.session(),
                 ZeirApplication.createCommonFtsObject(context), openSRPContext.sharedRepositoriesArray());
         this.context = context;
+        this.openSRPContext = openSRPContext;
     }
 
     @Override
@@ -160,6 +163,10 @@ public class ZeirRepository extends Repository {
                     break;
                 case 18:
                     upgradeToVersion18(db);
+                    break;
+                case 19:
+                    upgradeToVersion19(db);
+                    break;
                 default:
                     break;
             }
@@ -471,7 +478,21 @@ public class ZeirRepository extends Repository {
         }
         catch (Exception e)
         {
-            Timber.e("upgradeToVersion17 "+e.getMessage());
+            Timber.e("upgradeTocontext.allSharedPreferences()Version17 "+e.getMessage());
+        }
+    }
+
+    private void upgradeToVersion19(SQLiteDatabase db)
+    {
+        try {
+            db.execSQL("ALTER TABLE vaccines ADD COLUMN outreach INTEGER DEFAULT 0");
+            db.execSQL("UPDATE vaccines " +
+                    "SET outreach = 1" +
+                    " WHERE location_id != ?", new String[]{openSRPContext.allSharedPreferences().fetchDefaultLocalityId(openSRPContext.allSharedPreferences().fetchPioneerUser())});
+        }
+        catch (Exception e)
+        {
+            Timber.e(e);
         }
     }
 }

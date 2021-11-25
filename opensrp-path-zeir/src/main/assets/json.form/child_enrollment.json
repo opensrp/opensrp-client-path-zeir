@@ -467,6 +467,7 @@
         "openmrs_entity_id": "sms_reminder",
         "entity_id": "mother",
         "type": "spinner",
+        "value": "yes",
         "look_up": "true",
         "hint": "{{child_enrollment.step1.sms_reminder.hint}}",
         "options": [

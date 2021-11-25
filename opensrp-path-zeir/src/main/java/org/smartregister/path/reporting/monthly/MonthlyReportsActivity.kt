@@ -52,7 +52,8 @@ class MonthlyReportsActivity : MultiLanguageActivity() {
         }
         containerViewPager.apply {
             adapter = reportsPagerAdapter
-            currentItem = intent.getIntExtra(Constants.SELECT_TAB, 1)
+            currentItem = intent.getIntExtra(Constants.SELECT_TAB, 0)
+            reportSyncBtn.visibility = View.VISIBLE
             addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                 override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
                     // Do nothing

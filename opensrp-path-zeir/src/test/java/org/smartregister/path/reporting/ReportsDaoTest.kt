@@ -6,8 +6,7 @@ import io.mockk.unmockkAll
 import net.sqlcipher.MatrixCursor
 import net.sqlcipher.database.SQLiteDatabase
 import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.smartregister.path.reporting.ReportsDao.SqlQueries
@@ -21,6 +20,8 @@ class ReportsDaoTest {
     private val database: SQLiteDatabase = mockk(relaxed = true)
     private val monthlyTalliesColumns = arrayOf("_id", "indicator_code", "provider_id", "value", "month", "date_sent", "indicator_grouping", "created_at", "updated_at")
     private val reportMonthsColumns = arrayOf("month", "created_at")
+    private val daily = arrayOf("_id", "indicator_code","indicator_is_value_set", "indicator_value", "day", "indicator_grouping", "created_at", "updated_at")
+
 
     @Before
     fun `Before every test`() {
@@ -65,6 +66,21 @@ class ReportsDaoTest {
         assertEquals(1, monthlyTallies.size)
         assertNull(monthlyTallies.first().dateSent)
         assertEquals("indicator_code", monthlyTallies.first().indicator)
+    }
+
+    @Test
+    fun `Should return a list of daily tallies for the given month`() {
+        val day = "2020-01-01"
+        val matrixCursor = mockMatrixCursor(
+            columnArray = daily,
+            rowData = arrayOf(arrayOf("1", "indicator_code", "1", "3", day, "report_group_header_vaccination_activity", 1607077960529L, 1607077960529L))
+        )
+        every { database.rawQuery(SqlQueries.reportsByDaySql(day), any()) } returns matrixCursor
+        val dailyTallies = ReportsDao.getReportsByDay(day)
+
+        assertEquals(1, dailyTallies.size)
+        assertNotNull(dailyTallies.first().day)
+        assertEquals("indicator_code", dailyTallies.first().indicator)
     }
 
     @Test

@@ -75,8 +75,8 @@ android {
     applicationVariants.all { variant ->
         if (variant.name == "debug") {
             variant.outputs.each { output ->
-                output.versionCodeOverride = 19
-                output.versionNameOverride = "0.0.19-debug"
+                output.versionCodeOverride = 30
+                output.versionNameOverride = "0.0.30-debug"
             }
         } else if (variant.name == "preview") {
             variant.outputs.each { output ->
@@ -149,7 +149,7 @@ android {
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
             buildConfigField "int", "VACCINE_SYNC_TIME", '0'
-            buildConfigField "int", "DATABASE_VERSION", '18'
+            buildConfigField "int", "DATABASE_VERSION", '19'
             buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
             buildConfigField "boolean", "TIME_CHECK", "true"
             buildConfigField "int", "DATA_SYNC_DURATION_MINUTES", '15'
@@ -259,7 +259,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
 //    implementation(project(':opensrp-child')) {
-    implementation('org.smartregister:opensrp-client-child:0.7.1-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-child:0.7.2-PREVIEW-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-growth-monitoring'
@@ -272,7 +272,7 @@ dependencies {
         exclude group: 'io.ona.rdt-capture', module: 'lib'
     }
 
-    implementation('org.smartregister:opensrp-client-immunization:3.0.10-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-immunization:4.0.2-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -305,7 +305,7 @@ dependencies {
         exclude group: 'com.github.lecho', module: 'hellocharts-library'
     }
 
-    implementation('org.smartregister:opensrp-client-reporting:0.0.22-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-reporting:0.1.5-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
@@ -327,7 +327,7 @@ dependencies {
         exclude group: 'com.ibm.fhir', module: 'fhir-model'
     }
 
-    implementation('org.smartregister:opensrp-client-native-form:2.1.3-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-native-form:2.1.9-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.android.support', module: 'recyclerview-v7'
         exclude group: 'com.android.support', module: 'appcompat-v7'

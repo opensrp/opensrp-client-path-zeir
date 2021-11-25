@@ -33,6 +33,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/valueEditText"
+        android:visibility="gone"
+        android:background="@null"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/value"
+        android:maxLines="1"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textAlignment="textEnd"
+        android:textColor="@color/primary"
+        android:textSize="@dimen/indicator_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <View
         android:id="@+id/separatorLineView"
         android:layout_width="match_parent"
