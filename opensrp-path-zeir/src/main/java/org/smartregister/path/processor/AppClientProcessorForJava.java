@@ -192,7 +192,9 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
             }
 
             // Process alerts for clients
-            Runnable runnable = () -> updateClientAlerts(clientsForAlertUpdates);
+            Runnable runnable = () -> {
+                updateClientAlerts(clientsForAlertUpdates);
+            };
             appExecutors.diskIO().execute(runnable);
             // Unsync events that are should not be in this device
             unSync(eventsToRemove);
