@@ -8,16 +8,27 @@ import androidx.core.content.ContextCompat;
 import org.smartregister.child.domain.RegisterClickables;
 import org.smartregister.child.fragment.BaseChildRegisterFragment;
 import org.smartregister.child.util.Constants;
+import org.smartregister.child.util.Utils;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.path.R;
 import org.smartregister.path.activity.ChildImmunizationActivity;
 import org.smartregister.path.activity.ChildRegisterActivity;
+import org.smartregister.path.application.ZeirApplication;
 import org.smartregister.path.model.ChildRegisterFragmentModel;
 import org.smartregister.path.presenter.ChildRegisterFragmentPresenter;
+import org.smartregister.path.util.AppExecutors;
 import org.smartregister.path.util.DBQueryHelper;
 import org.smartregister.view.activity.BaseRegisterActivity;
 
+import timber.log.Timber;
+
 public class ChildRegisterFragment extends BaseChildRegisterFragment {
+
+    private AppExecutors appExecutors;
+
+    public ChildRegisterFragment() {
+        appExecutors = ZeirApplication.getInstance().getAppExecutors();
+    }
 
     @Override
     protected void initializePresenter() {
@@ -116,4 +127,29 @@ public class ChildRegisterFragment extends BaseChildRegisterFragment {
                 ContextCompat.getColor(requireContext(), R.color.toolbar_background));
         searchView.setHint(getContext().getString(R.string.search_hint));
     }
+    @Override
+    public void countExecute() {
+        try {
+            appExecutors.diskIO().execute(new Runnable() {
+                @Override
+                public void run() {
+                    String sql = Utils.metadata().getRegisterQueryProvider().getCountExecuteQuery(mainCondition, filters);
+                    Timber.i(sql);
+                    int totalCount = commonRepository().countSearchIds(sql);
+                    appExecutors.mainThread().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            clientAdapter.setTotalcount(totalCount);
+                            Timber.i("Total Register Count %d", clientAdapter.getTotalcount());
+                            clientAdapter.setCurrentlimit(20);
+                            clientAdapter.setCurrentoffset(0);
+                        }
+                    });
+                }
+            });
+        } catch (Exception e) {
+            Timber.e(e);
+        }
+    }
 }
+

@@ -59,6 +59,7 @@ import org.smartregister.path.repository.ChildAlertUpdatedRepository;
 import org.smartregister.path.repository.ClientRegisterTypeRepository;
 import org.smartregister.path.repository.ZeirRepository;
 import org.smartregister.path.util.AppConstants;
+import org.smartregister.path.util.AppExecutors;
 import org.smartregister.path.util.AppUtils;
 import org.smartregister.path.util.VaccineDuplicate;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
@@ -99,6 +100,7 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
     private CumulativeRepository cumulativeRepository;
     private CumulativePatientRepository cumulativePatientRepository;
     private CumulativeIndicatorRepository cumulativeIndicatorRepository;
+    private AppExecutors appExecutors;
 
     public static JsonSpecHelper getJsonSpecHelper() {
         return jsonSpecHelper;
@@ -514,6 +516,12 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
         if (LocationHelper.getInstance() != null && LocationHelper.getInstance().locationIdsFromHierarchy() != null)
             return LocationHelper.getInstance().locationIdsFromHierarchy();
         return "";
+    }
+    public AppExecutors getAppExecutors() {
+        if (appExecutors == null) {
+            appExecutors = new AppExecutors();
+        }
+        return appExecutors;
     }
 }
 
