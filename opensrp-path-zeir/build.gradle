@@ -85,8 +85,8 @@ android {
             }
         } else if (variant.name == "release") {
             variant.outputs.each { output ->
-                output.versionCodeOverride = 21
-                output.versionNameOverride = "2.0.6-release"
+                output.versionCodeOverride = 22
+                output.versionNameOverride = "2.0.7-release"
             }
         }
     }
@@ -144,7 +144,7 @@ android {
 
         debug {
             testCoverageEnabled true
-            resValue "string", 'opensrp_url', '"hhttps://path-zeir-stage.smartregister.org/opensrp/"'
+            resValue "string", 'opensrp_url', '"https://path-zeir-stage.smartregister.org/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
@@ -280,7 +280,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
-    implementation('org.smartregister:opensrp-client-core:4.3.24-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-core:4.3.23-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -374,7 +374,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-perf'
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 
     androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
