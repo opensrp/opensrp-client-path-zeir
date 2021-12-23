@@ -85,8 +85,8 @@ android {
             }
         } else if (variant.name == "release") {
             variant.outputs.each { output ->
-                output.versionCodeOverride = 22
-                output.versionNameOverride = "2.0.7-release"
+                output.versionCodeOverride = 20
+                output.versionNameOverride = "2.0.5-release"
             }
         }
     }
