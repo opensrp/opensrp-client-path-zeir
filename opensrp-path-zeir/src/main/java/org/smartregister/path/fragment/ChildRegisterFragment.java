@@ -114,6 +114,6 @@ public class ChildRegisterFragment extends BaseChildRegisterFragment {
         super.setupSearchView(view);
         ((View) searchView.getParent().getParent()).setBackgroundColor(
                 ContextCompat.getColor(requireContext(), R.color.toolbar_background));
-        searchView.setHint(getContext().getString(R.string.search_hint));
+        searchView.setHint(requireContext().getString(R.string.search_hint));
     }
 }
