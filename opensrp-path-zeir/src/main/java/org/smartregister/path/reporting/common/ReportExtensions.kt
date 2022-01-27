@@ -15,13 +15,17 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.joda.time.DateTime
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import org.smartregister.AllConstants
+import org.smartregister.child.util.ChildJsonFormUtils
+import org.smartregister.child.util.Constants
 import org.smartregister.domain.Event
 import org.smartregister.domain.Obs
 import org.smartregister.path.R
+import org.smartregister.path.application.ZeirApplication
 import org.smartregister.path.reporting.ReportsDao
 import org.smartregister.path.reporting.annual.coverage.domain.AnnualVaccineReport
 import org.smartregister.path.reporting.annual.coverage.domain.CoverageTarget
@@ -30,9 +34,12 @@ import org.smartregister.path.reporting.annual.coverage.repository.AnnualReportR
 import org.smartregister.path.reporting.annual.coverage.repository.VaccineCoverageTargetRepository
 import org.smartregister.path.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.path.reporting.monthly.domain.MonthlyTally
+import org.smartregister.path.reporting.monthly.domain.Report
+import org.smartregister.path.reporting.monthly.domain.ReportHia2Indicator
 import org.smartregister.path.reporting.monthly.domain.Tally
 import org.smartregister.path.util.AppJsonFormUtils
 import timber.log.Timber
+import java.lang.Exception
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.SimpleDateFormat
@@ -51,12 +58,37 @@ const val YEAR_MONTH = "year_month"
 const val DAY = "day"
 const val SHOW_DATA = "show_data"
 const val VACCINE_COVERAGE_TARGET = "vaccine_coverage_target"
-
 /**
  * Utility method for creating ViewModel Factory
  */
 @Suppress("UNCHECKED_CAST")
 object ReportingUtils {
+
+    @JvmStatic
+    fun createReportAndSaveReport(hia2Indicators: List<ReportHia2Indicator?>, month: Date,
+                                  reportType: String, grouping: String) {
+        try {
+            val providerId: String = ZeirApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM()
+            val locationId: String = ZeirApplication.getInstance().context().allSharedPreferences().getPreference(Constants.CURRENT_LOCATION_ID)
+            val report = Report()
+            report.formSubmissionId = UUID.randomUUID().toString()
+            report.hia2Indicators = hia2Indicators
+            report.locationId = locationId
+            report.providerId = providerId
+            report.dateCreated = DateTime.now()
+            report.grouping = grouping
+            // Get the second last day of the month
+            val calendar = Calendar.getInstance()
+            calendar.time = month
+            calendar[Calendar.DAY_OF_MONTH] = calendar.getActualMaximum(Calendar.DAY_OF_MONTH) - 2
+            report.reportDate = DateTime(calendar.time)
+            report.reportType = reportType
+            val reportJson = JSONObject(ChildJsonFormUtils.gson.toJson(report))
+            ZeirApplication.getInstance().hia2ReportRepository().addReport(reportJson)
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
+    }
 
     @JvmStatic
     fun <T : ViewModel> createFor(viewModel: T): ViewModelProvider.Factory {

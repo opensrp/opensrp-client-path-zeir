@@ -31,14 +31,18 @@ import org.json.JSONException
 import org.json.JSONObject
 import org.smartregister.path.R
 import org.smartregister.path.application.ZeirApplication
+import org.smartregister.path.job.ZeirHIA2IntentServiceJob
+import org.smartregister.path.model.Hia2Indicator
 import org.smartregister.path.reporting.ReportingRulesEngine
 import org.smartregister.path.reporting.common.*
 import org.smartregister.path.reporting.common.ReportingUtils.dateFormatter
 import org.smartregister.path.reporting.monthly.MonthlyReportsActivity
 import org.smartregister.path.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.path.reporting.monthly.domain.MonthlyTally
+import org.smartregister.path.reporting.monthly.domain.ReportHia2Indicator
 import org.smartregister.path.reporting.monthly.draft.ConfirmSendDraftDialog
 import org.smartregister.path.reporting.monthly.indicator.ReportIndicatorsViewModel
+import org.smartregister.path.util.AppConstants
 import org.smartregister.path.util.AppJsonFormUtils
 import org.smartregister.path.util.AppUtils
 import org.smartregister.util.JsonFormUtils
@@ -243,13 +247,34 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
         val appInstance = ZeirApplication.getInstance()
         return try {
             withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
+                val monthlyTalliesMap = reportIndicatorsViewModel.monthlyTalliesMap.value
+                val yearMonth = reportIndicatorsViewModel.yearMonth.value
+
+                // Save reports for sending to sync to the server then dhis2
+                val hia2IndicatorHashMap: HashMap<String, Hia2Indicator> = ZeirApplication.getInstance().hIA2IndicatorsRepository().findAllByGrouping(AppConstants.ReportConstants.CHN_GROUPING);
+                if (monthlyTalliesMap != null) {
+                    val reportHia2Indicators: MutableList<ReportHia2Indicator> = ArrayList<ReportHia2Indicator>()
+                    for (curTally in monthlyTalliesMap.values) {
+                        val reportHia2Indicator = ReportHia2Indicator(curTally.indicator, curTally.indicator, curTally.grouping, curTally.value)
+                        val hia2Indicator: Hia2Indicator? = hia2IndicatorHashMap[reportHia2Indicator.indicatorCode]
+                        if (hia2Indicator != null) {
+                            reportHia2Indicator.dhisId = hia2Indicator.dhisId
+                            reportHia2Indicator.categoryOptionCombo = hia2Indicator.categoryOptionCombo
+                        } else {
+                            reportHia2Indicator.dhisId = AppConstants.ReportConstants.UNKNOWN
+                        }
+                        reportHia2Indicators.add(reportHia2Indicator)
+                    }
+
+                    ReportingUtils.createReportAndSaveReport(reportHia2Indicators, dateFormatter().parse(reportIndicatorsViewModel.yearMonth.value),
+                            AppConstants.ReportConstants.REPORT_TYPE, AppConstants.ReportConstants.CHN_GROUPING)
+                    ZeirHIA2IntentServiceJob.scheduleJobImmediately(ZeirHIA2IntentServiceJob.TAG);
+                }
 
                 val baseEvent = AppJsonFormUtils.createEvent(JSONArray(), JSONObject().put(JsonFormUtils.ENCOUNTER_LOCATION, ""),
                         AppJsonFormUtils.formTag(allSharedPreferences), "", MONTHLY_REPORT, MONTHLY_REPORT)
 
                 with(baseEvent) {
-                    val monthlyTalliesMap = reportIndicatorsViewModel.monthlyTalliesMap.value
-                    val yearMonth = reportIndicatorsViewModel.yearMonth.value
 
                     addDetails(MONTHLY_REPORT, JSONObject().apply {
                         put(YEAR_MONTH, yearMonth)

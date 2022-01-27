@@ -67,6 +67,8 @@ public class AppJobCreator implements JobCreator {
                 return new DropoutIntentServiceJob();
             case StockSyncIntentServiceJob.TAG:
                 return new StockSyncIntentServiceJob();
+            case ZeirHIA2IntentServiceJob.TAG:
+                return new ZeirHIA2IntentServiceJob();
             default:
                 Timber.w("%s is not declared in Job Creator", tag);
                 return null;

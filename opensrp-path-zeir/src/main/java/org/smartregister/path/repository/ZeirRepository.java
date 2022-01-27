@@ -3,6 +3,7 @@ package org.smartregister.path.repository;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
@@ -39,6 +40,7 @@ import org.smartregister.reporting.ReportingLibrary;
 import org.smartregister.reporting.repository.DailyIndicatorCountRepository;
 import org.smartregister.reporting.repository.IndicatorQueryRepository;
 import org.smartregister.reporting.repository.IndicatorRepository;
+import org.smartregister.reporting.util.ReportingUtils;
 import org.smartregister.repository.AlertRepository;
 import org.smartregister.repository.EventClientRepository;
 import org.smartregister.repository.Hia2ReportRepository;
@@ -56,6 +58,8 @@ import org.smartregister.stock.util.StockUtils;
 import org.smartregister.util.DatabaseMigrationUtils;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import timber.log.Timber;
 
@@ -103,7 +107,7 @@ public class ZeirRepository extends Repository {
 
         runLegacyUpgrades(database);
 
-        onUpgrade(database,  BuildConfig.DATABASE_VERSION-1, BuildConfig.DATABASE_VERSION);
+        onUpgrade(database,  11, BuildConfig.DATABASE_VERSION);
 
         // initialize from yml file
         ReportingLibrary reportingLibraryInstance = ReportingLibrary.getInstance();
@@ -167,6 +171,8 @@ public class ZeirRepository extends Repository {
                 case 19:
                     upgradeToVersion19(db);
                     break;
+                case 20:
+                    upgradeToVersion20AddHia2IndicatorTables(db);
                 default:
                     break;
             }
@@ -413,8 +419,6 @@ public class ZeirRepository extends Repository {
             CumulativeIndicatorRepository.createTable(database);
             CumulativePatientRepository.createTable(database);
 
-//            dumpHIA2IndicatorsCSV(database);
-
         } catch (Exception e) {
             Timber.e("upgradeToVersion10 %s", e.getMessage());
         }
@@ -493,6 +497,29 @@ public class ZeirRepository extends Repository {
         catch (Exception e)
         {
             Timber.e(e);
+        }
+    }
+
+    @VisibleForTesting
+    protected void dumpHIA2IndicatorsCSV(SQLiteDatabase db) {
+        List<Map<String, String>> csvData = Utils.populateTableFromCSV(
+                context,
+                HIA2IndicatorsRepository.INDICATORS_CSV_FILE,
+                HIA2IndicatorsRepository.CSV_COLUMN_MAPPING);
+        HIA2IndicatorsRepository hIA2IndicatorsRepository = ZeirApplication.getInstance()
+                .hIA2IndicatorsRepository();
+        hIA2IndicatorsRepository.save(db, csvData);
+    }
+
+    private void upgradeToVersion20AddHia2IndicatorTables(SQLiteDatabase db) {
+
+        if (!ReportingUtils.isTableExists(db, HIA2IndicatorsRepository.TABLE_NAME)) {
+            HIA2IndicatorsRepository.createTable(db);
+            dumpHIA2IndicatorsCSV(db);
+        }
+
+        if (!ReportingUtils.isTableExists(db, Hia2ReportRepository.Table.hia2_report.name())) {
+            EventClientRepository.createTable(db, Hia2ReportRepository.Table.hia2_report, ZeirHia2ReportRepository.ReportColumn.values());
         }
     }
 }
