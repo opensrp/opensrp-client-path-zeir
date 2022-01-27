@@ -26,6 +26,8 @@ import org.smartregister.domain.Event
 import org.smartregister.domain.Obs
 import org.smartregister.path.R
 import org.smartregister.path.application.ZeirApplication
+import org.smartregister.path.job.ZeirHIA2IntentServiceJob
+import org.smartregister.path.model.Hia2Indicator
 import org.smartregister.path.reporting.ReportsDao
 import org.smartregister.path.reporting.annual.coverage.domain.AnnualVaccineReport
 import org.smartregister.path.reporting.annual.coverage.domain.CoverageTarget
@@ -37,9 +39,9 @@ import org.smartregister.path.reporting.monthly.domain.MonthlyTally
 import org.smartregister.path.reporting.monthly.domain.Report
 import org.smartregister.path.reporting.monthly.domain.ReportHia2Indicator
 import org.smartregister.path.reporting.monthly.domain.Tally
+import org.smartregister.path.util.AppConstants
 import org.smartregister.path.util.AppJsonFormUtils
 import timber.log.Timber
-import java.lang.Exception
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.SimpleDateFormat
@@ -58,6 +60,7 @@ const val YEAR_MONTH = "year_month"
 const val DAY = "day"
 const val SHOW_DATA = "show_data"
 const val VACCINE_COVERAGE_TARGET = "vaccine_coverage_target"
+
 /**
  * Utility method for creating ViewModel Factory
  */
@@ -160,6 +163,28 @@ object ReportingUtils {
     }
 
     fun dateFormatter(pattern: String = "yyyy-MM") = SimpleDateFormat(pattern, Locale.ENGLISH)
+
+    @JvmStatic
+    fun saveReportAndInitiateSync(month: String, monthlyTallies: MutableCollection<MonthlyTally>) {
+        val hia2IndicatorHashMap: HashMap<String, Hia2Indicator> = ZeirApplication.getInstance().hIA2IndicatorsRepository().findAllByGrouping(AppConstants.ReportConstants.CHN_GROUPING);
+        val reportHia2Indicators: MutableList<ReportHia2Indicator> = ArrayList<ReportHia2Indicator>()
+        for (curTally in monthlyTallies) {
+            val reportHia2Indicator = ReportHia2Indicator(curTally.indicator, curTally.indicator, curTally.grouping, curTally.value)
+            val hia2Indicator: Hia2Indicator? = hia2IndicatorHashMap[reportHia2Indicator.indicatorCode]
+            if (hia2Indicator != null) {
+                reportHia2Indicator.dhisId = hia2Indicator.dhisId
+                reportHia2Indicator.categoryOptionCombo = hia2Indicator.categoryOptionCombo
+            } else {
+                reportHia2Indicator.dhisId = AppConstants.ReportConstants.UNKNOWN
+            }
+            reportHia2Indicators.add(reportHia2Indicator)
+        }
+
+        createReportAndSaveReport(reportHia2Indicators, dateFormatter().parse(month),
+                AppConstants.ReportConstants.REPORT_TYPE, AppConstants.ReportConstants.CHN_GROUPING)
+        ZeirHIA2IntentServiceJob.scheduleJobImmediately(ZeirHIA2IntentServiceJob.TAG);
+    }
+
 }
 
 /**
