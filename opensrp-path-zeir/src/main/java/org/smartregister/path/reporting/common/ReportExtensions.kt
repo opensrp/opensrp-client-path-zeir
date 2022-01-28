@@ -88,7 +88,7 @@ object ReportingUtils {
             report.reportType = reportType
             val reportJson = JSONObject(ChildJsonFormUtils.gson.toJson(report))
             ZeirApplication.getInstance().hia2ReportRepository().addReport(reportJson)
-        } catch (e: Exception) {
+        } catch (e: JSONException) {
             Timber.e(e)
         }
     }
