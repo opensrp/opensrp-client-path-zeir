@@ -15,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.apache.commons.lang3.StringUtils
 import org.joda.time.DateTime
 import org.json.JSONArray
 import org.json.JSONException
@@ -171,7 +172,7 @@ object ReportingUtils {
         for (curTally in monthlyTallies) {
             val reportHia2Indicator = ReportHia2Indicator(curTally.indicator, curTally.indicator, curTally.grouping, curTally.value)
             val hia2Indicator: Hia2Indicator? = hia2IndicatorHashMap[reportHia2Indicator.indicatorCode]
-            if (hia2Indicator != null) {
+            if (hia2Indicator != null && StringUtils.isNotBlank(hia2Indicator.dhisId) && StringUtils.isNotBlank(hia2Indicator.categoryOptionCombo)) {
                 reportHia2Indicator.dhisId = hia2Indicator.dhisId
                 reportHia2Indicator.categoryOptionCombo = hia2Indicator.categoryOptionCombo
             } else {
