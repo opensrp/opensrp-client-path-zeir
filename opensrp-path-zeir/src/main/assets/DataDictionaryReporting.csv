@@ -1,0 +1,85 @@
+1,CHN1_005,Attendance Child Health (CH) 0_23 mths,Nvs1E7Ecedz,a7YosoDQrIk,0_23 mths,chn
+2,CHN1_010,Attendance Child Health (CH) 24_59 mths,Nvs1E7Ecedz,uyQHU0tJvtL,24_59 mths,chn
+3,CHN1_035,Children who received insecticide_treated nets (ITNs) defaultx,G4vWZAJ0uz7,USfPOPAeN16,defaultx,chn
+4,CHN2_005,Children weighed 0_23 mths,B3tw3JWHK91,a7YosoDQrIk,0_23 mths,chn
+5,CHN2_010,Children weighed 24_59 mths,B3tw3JWHK91,uyQHU0tJvtL,24_59 mths,chn
+6,CHN2_020,Children Height/Length taken 0_23 mths,qGeyZUZuXyK,a7YosoDQrIk,0_23 mths,chn
+7,CHN2_025,Children Height/Length taken 24_59 mths,qGeyZUZuXyK,uyQHU0tJvtL,24_59 mths,chn
+8,CHN2_035,Both Height and weight measured 0_23 mths,fW7PsEHiF3o,a7YosoDQrIk,0_23 mths,chn
+9,CHN2_040,Both Height and weight measured 24_59 mths,fW7PsEHiF3o,uyQHU0tJvtL,24_59 mths,chn
+10,CHN2_050,Moderate Underweight 0_23 mths,piy0nkwwRWS,a7YosoDQrIk,0_23 mths,chn
+11,CHN2_055,Moderate Underweight 24_59 mths,piy0nkwwRWS,uyQHU0tJvtL,24_59 mths,chn
+12,CHN2_065,Severe Underweight 0_23 mths,kdtdtKlJqdr,a7YosoDQrIk,0_23 mths,chn
+13,CHN2_070,Severe Underweight 24_59 mths,kdtdtKlJqdr,uyQHU0tJvtL,24_59 mths,chn
+14,CHN2_080,Moderate Stunting 0_23 mths,uoNVIR5hYdL,a7YosoDQrIk,0_23 mths,chn
+15,CHN2_085,Moderate Stunting 24_59 mths,uoNVIR5hYdL,uyQHU0tJvtL,24_59 mths,chn
+16,CHN2_095,Severe Stunting 0_23 mths,aRr1LIpCD9I,a7YosoDQrIk,0_23 mths,chn
+17,CHN2_100,Severe Stunting 24_59 mths,aRr1LIpCD9I,uyQHU0tJvtL,24_59 mths,chn
+18,CHN2_110,Moderate Wasting 0_23 mths,ximm8z0dteP,a7YosoDQrIk,0_23 mths,chn
+19,CHN2_115,Moderate Wasting 24_59 mths,ximm8z0dteP,uyQHU0tJvtL,24_59 mths,chn
+20,CHN2_125,Severe Wasting 0_23 mths,owQizCl45uC,a7YosoDQrIk,0_23 mths,chn
+21,CHN2_130,Severe Wasting 24_59 mths,owQizCl45uC,uyQHU0tJvtL,24_59 mths,chn
+22,CHN2_140,Overweight/Obesity 0_23 mths,hoTdBjTRQj3,a7YosoDQrIk,0_23 mths,chn
+23,CHN2_145,Overweight/Obesity 24_59 mths,hoTdBjTRQj3,uyQHU0tJvtL,24_59 mths,chn
+24,CHN2_250,Vitamin A Supplemented to child 6_11 mths,mGFLREFlmEG,jm8PnSVbABo,6_11 mths,chn
+25,CHN2_255,Vitamin A Supplemented to child 12_59 months,mGFLREFlmEG,cMxQtV43Bh8,12_59 months,chn
+26,CHN2_260,Child Dewormed 12_59 months,w5yhLpivvrR,cMxQtV43Bh8,12_59 months,chn
+27,CHN3_375,Measles 2nd dose (18+ months) 12 months & thereafter,sqfX5MniMIH,yrFX1PtsDGQ,12 months & thereafter,chn
+28,CHN3_005,BCG (<12 months) Facility,ZTeQmMrVmNR,fJpntCVMEcK,Facility,chn
+29,CHN3_010,BCG (<12 months) Outreach,ZTeQmMrVmNR,TDwTSSSrLIw,Outreach,chn
+30,CHN3_025,OPV 0  (<12 months) Facility,rwNWKJC4dIO,fJpntCVMEcK,Facility,chn
+31,CHN3_025,Pentavalent 1 (<12 months) Facility,N7VEEjo8AdV,fJpntCVMEcK,Facility,chn
+32,CHN3_030,OPV 0  (<12 months) Outreach,rwNWKJC4dIO,TDwTSSSrLIw,Outreach,chn
+33,CHN3_035,OPV 0  (<12 months) 12 months & thereafter,rwNWKJC4dIO,yrFX1PtsDGQ,12 months & thereafter,chn
+34,CHN3_045,OPV 1 (<12 months) Facility,J3Kd9wHj7mR,fJpntCVMEcK,Facility,chn
+35,CHN3_050,OPV 1 (<12 months) Outreach,J3Kd9wHj7mR,TDwTSSSrLIw,Outreach,chn
+36,CHN3_055,OPV 1 (<12 months) 12 months & thereafter,J3Kd9wHj7mR,yrFX1PtsDGQ,12 months & thereafter,chn
+37,CHN3_065,OPV 2 (<12 months) Facility,Jbxssr389B6,fJpntCVMEcK,Facility,chn
+38,CHN3_070,OPV 2 (<12 months) Outreach,Jbxssr389B6,TDwTSSSrLIw,Outreach,chn
+39,CHN3_075,OPV 2 (<12 months) 12 months & thereafter,Jbxssr389B6,yrFX1PtsDGQ,12 months & thereafter,chn
+40,CHN3_085,OPV 3 (<12 months) Facility,dqsYPg0F8DJ,fJpntCVMEcK,Facility,chn
+41,CHN3_090,OPV 3 (<12 months) Outreach,dqsYPg0F8DJ,TDwTSSSrLIw,Outreach,chn
+42,CHN3_095,OPV 3 (<12 months) 12 months & thereafter,dqsYPg0F8DJ,yrFX1PtsDGQ,12 months & thereafter,chn
+43,CHN3_105,OPV 4 (<12 months) Facility,poPXN7Wn3RL,fJpntCVMEcK,Facility,chn
+44,CHN3_110,OPV 4 (<12 months) Outreach,poPXN7Wn3RL,TDwTSSSrLIw,Outreach,chn
+45,CHN3_115,OPV 4 (<12 months) 12 months & thereafter,poPXN7Wn3RL,yrFX1PtsDGQ,12 months & thereafter,chn
+46,CHN3_130,Pentavalent 1 (<12 months) Outreach,N7VEEjo8AdV,TDwTSSSrLIw,Outreach,chn
+47,CHN3_135,Pentavalent 1 (<12 months) 12 months & thereafter,N7VEEjo8AdV,yrFX1PtsDGQ,12 months & thereafter,chn
+48,CHN3_145,Pentavalent 2 (<12 months) Facility,R2JLWtup2XR,fJpntCVMEcK,Facility,chn
+49,CHN3_150,Pentavalent 2 (<12 months) Outreach,R2JLWtup2XR,TDwTSSSrLIw,Outreach,chn
+50,CHN3_155,Pentavalent 2 (<12 months) 12 months & thereafter,R2JLWtup2XR,yrFX1PtsDGQ,12 months & thereafter,chn
+51,CHN3_165,Pentavalent 3 (<12 months) Facility,ujEvTSZ0Wvn,fJpntCVMEcK,Facility,chn
+52,CHN3_170,Pentavalent 3 (<12 months) Outreach,ujEvTSZ0Wvn,TDwTSSSrLIw,Outreach,chn
+53,CHN3_175,Pentavalent 3 (<12 months) 12 months & thereafter,ujEvTSZ0Wvn,yrFX1PtsDGQ,12 months & thereafter,chn
+54,CHN3_185,PCV 1  (<12 months) Facility,dPpDhpO7GpB,fJpntCVMEcK,Facility,chn
+55,CHN3_190,PCV 1  (<12 months) Outreach,dPpDhpO7GpB,TDwTSSSrLIw,Outreach,chn
+56,CHN3_195,PCV 1  (<12 months) 12 months & thereafter,dPpDhpO7GpB,yrFX1PtsDGQ,12 months & thereafter,chn
+57,CHN3_205,PCV 2  (<12 months) Facility,AU3Zp03Atnf,fJpntCVMEcK,Facility,chn
+58,CHN3_210,PCV 2  (<12 months) Outreach,AU3Zp03Atnf,TDwTSSSrLIw,Outreach,chn
+59,CHN3_215,PCV 2  (<12 months) 12 months & thereafter,AU3Zp03Atnf,yrFX1PtsDGQ,12 months & thereafter,chn
+60,CHN3_225,PCV 3  (<12 months) Facility,K5XarM6QLxq,fJpntCVMEcK,Facility,chn
+61,CHN3_230,PCV 3  (<12 months) Outreach,K5XarM6QLxq,TDwTSSSrLIw,Outreach,chn
+62,CHN3_235,PCV 3  (<12 months) 12 months & thereafter,K5XarM6QLxq,yrFX1PtsDGQ,12 months & thereafter,chn
+63,CHN3_245,RV 1 (<12 months) Facility,ziezVvnYWj0,fJpntCVMEcK,Facility,chn
+64,CHN3_250,RV 1 (<12 months) Outreach,ziezVvnYWj0,TDwTSSSrLIw,Outreach,chn
+65,CHN3_255,RV 1 (<12 months) 12 months & thereafter,ziezVvnYWj0,yrFX1PtsDGQ,12 months & thereafter,chn
+66,CHN3_265,RV 2 (<12 months) Facility,dpKLNY9JjRR,fJpntCVMEcK,Facility,chn
+67,CHN3_270,RV 2 (<12 months) Outreach,dpKLNY9JjRR,TDwTSSSrLIw,Outreach,chn
+68,CHN3_275,RV 2 (<12 months) 12 months & thereafter,dpKLNY9JjRR,yrFX1PtsDGQ,12 months & thereafter,chn
+69,CHN3_285,IPV 1 (<12 months) Facility,HenXSmnXu8B,fJpntCVMEcK,Facility,chn
+70,CHN3_290,IPV 1 (<12 months) Outreach,HenXSmnXu8B,TDwTSSSrLIw,Outreach,chn
+71,CHN3_295,IPV 1 (<12 months) 12 months & thereafter,HenXSmnXu8B,yrFX1PtsDGQ,12 months & thereafter,chn
+72,CHN3_305,Vaccinations (Other)  (<12 months) Facility,WG28Ko3hAku,fJpntCVMEcK,Facility,chn
+73,CHN3_310,Vaccinations (Other)  (<12 months) Outreach,WG28Ko3hAku,TDwTSSSrLIw,Outreach,chn
+74,CHN3_315,Vaccinations (Other)  (<12 months) 12 months & thereafter,WG28Ko3hAku,yrFX1PtsDGQ,12 months & thereafter,chn
+75,CHN3_325,Measles (<12 months) Facility,zIM9ehVMkNW,fJpntCVMEcK,Facility,chn
+76,CHN3_330,Measles (<12 months) Outreach,zIM9ehVMkNW,TDwTSSSrLIw,Outreach,chn
+77,CHN3_335,Measles (<12 months) 12 months & thereafter,zIM9ehVMkNW,yrFX1PtsDGQ,12 months & thereafter,chn
+78,CHN3_345,Immunised fully (<12 months) Facility,dzllAar6RrI,fJpntCVMEcK,Facility,chn
+79,CHN3_350,Immunised fully (<12 months) Outreach,dzllAar6RrI,TDwTSSSrLIw,Outreach,chn
+80,CHN3_355,Immunised fully (<12 months) 12 months & thereafter,dzllAar6RrI,yrFX1PtsDGQ,12 months & thereafter,chn
+81,CHN3_365,Measles 2nd dose (18+ months) Facility,sqfX5MniMIH,fJpntCVMEcK,Facility,chn
+82,CHN3_370,Measles 2nd dose (18+ months) Outreach,sqfX5MniMIH,TDwTSSSrLIw,Outreach,chn
+83,CHN3_380,Fully Immunised 2 Facility,lnvuUZSx58H,fJpntCVMEcK,Facility,chn
+84,CHN3_385,Fully Immunised 2 Outreach,lnvuUZSx58H,TDwTSSSrLIw,Outreach,chn
+85,CHN3_390,Fully Immunised 2 12 months & thereafter,lnvuUZSx58H,yrFX1PtsDGQ,12 months & thereafter,chn

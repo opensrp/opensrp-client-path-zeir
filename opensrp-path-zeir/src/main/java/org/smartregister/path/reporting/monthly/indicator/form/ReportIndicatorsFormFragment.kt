@@ -243,13 +243,18 @@ class ReportIndicatorsFormFragment : Fragment(), View.OnClickListener {
         val appInstance = ZeirApplication.getInstance()
         return try {
             withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
+                val monthlyTalliesMap = reportIndicatorsViewModel.monthlyTalliesMap.value
+                val yearMonth = reportIndicatorsViewModel.yearMonth.value
+
+                // Save reports for sending to sync to the server then dhis2
+                if (monthlyTalliesMap != null && yearMonth != null)
+                    ReportingUtils.saveReportAndInitiateSync(yearMonth, monthlyTalliesMap.values)
+
 
                 val baseEvent = AppJsonFormUtils.createEvent(JSONArray(), JSONObject().put(JsonFormUtils.ENCOUNTER_LOCATION, ""),
                         AppJsonFormUtils.formTag(allSharedPreferences), "", MONTHLY_REPORT, MONTHLY_REPORT)
 
                 with(baseEvent) {
-                    val monthlyTalliesMap = reportIndicatorsViewModel.monthlyTalliesMap.value
-                    val yearMonth = reportIndicatorsViewModel.yearMonth.value
 
                     addDetails(MONTHLY_REPORT, JSONObject().apply {
                         put(YEAR_MONTH, yearMonth)

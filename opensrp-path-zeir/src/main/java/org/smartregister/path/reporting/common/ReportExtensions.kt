@@ -15,13 +15,20 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.apache.commons.lang3.StringUtils
+import org.joda.time.DateTime
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import org.smartregister.AllConstants
+import org.smartregister.child.util.ChildJsonFormUtils
+import org.smartregister.child.util.Constants
 import org.smartregister.domain.Event
 import org.smartregister.domain.Obs
 import org.smartregister.path.R
+import org.smartregister.path.application.ZeirApplication
+import org.smartregister.path.job.ZeirHIA2IntentServiceJob
+import org.smartregister.path.model.Hia2Indicator
 import org.smartregister.path.reporting.ReportsDao
 import org.smartregister.path.reporting.annual.coverage.domain.AnnualVaccineReport
 import org.smartregister.path.reporting.annual.coverage.domain.CoverageTarget
@@ -30,7 +37,10 @@ import org.smartregister.path.reporting.annual.coverage.repository.AnnualReportR
 import org.smartregister.path.reporting.annual.coverage.repository.VaccineCoverageTargetRepository
 import org.smartregister.path.reporting.monthly.MonthlyReportsRepository
 import org.smartregister.path.reporting.monthly.domain.MonthlyTally
+import org.smartregister.path.reporting.monthly.domain.Report
+import org.smartregister.path.reporting.monthly.domain.ReportHia2Indicator
 import org.smartregister.path.reporting.monthly.domain.Tally
+import org.smartregister.path.util.AppConstants
 import org.smartregister.path.util.AppJsonFormUtils
 import timber.log.Timber
 import java.math.BigDecimal
@@ -57,6 +67,32 @@ const val VACCINE_COVERAGE_TARGET = "vaccine_coverage_target"
  */
 @Suppress("UNCHECKED_CAST")
 object ReportingUtils {
+
+    @JvmStatic
+    fun createReportAndSaveReport(hia2Indicators: List<ReportHia2Indicator?>, month: Date,
+                                  reportType: String, grouping: String) {
+        try {
+            val providerId: String = ZeirApplication.getInstance().context().allSharedPreferences().fetchRegisteredANM()
+            val locationId: String = ZeirApplication.getInstance().context().allSharedPreferences().getPreference(Constants.CURRENT_LOCATION_ID)
+            val report = Report()
+            report.formSubmissionId = UUID.randomUUID().toString()
+            report.hia2Indicators = hia2Indicators
+            report.locationId = locationId
+            report.providerId = providerId
+            report.dateCreated = DateTime.now()
+            report.grouping = grouping
+            // Get the second last day of the month
+            val calendar = Calendar.getInstance()
+            calendar.time = month
+            calendar[Calendar.DAY_OF_MONTH] = calendar.getActualMaximum(Calendar.DAY_OF_MONTH) - 2
+            report.reportDate = DateTime(calendar.time)
+            report.reportType = reportType
+            val reportJson = JSONObject(ChildJsonFormUtils.gson.toJson(report))
+            ZeirApplication.getInstance().hia2ReportRepository().addReport(reportJson)
+        } catch (e: JSONException) {
+            Timber.e(e)
+        }
+    }
 
     @JvmStatic
     fun <T : ViewModel> createFor(viewModel: T): ViewModelProvider.Factory {
@@ -128,6 +164,28 @@ object ReportingUtils {
     }
 
     fun dateFormatter(pattern: String = "yyyy-MM") = SimpleDateFormat(pattern, Locale.ENGLISH)
+
+    @JvmStatic
+    fun saveReportAndInitiateSync(month: String, monthlyTallies: MutableCollection<MonthlyTally>) {
+        val hia2IndicatorHashMap: HashMap<String, Hia2Indicator> = ZeirApplication.getInstance().hIA2IndicatorsRepository().findAllByGrouping(AppConstants.ReportConstants.CHN_GROUPING);
+        val reportHia2Indicators: MutableList<ReportHia2Indicator> = ArrayList<ReportHia2Indicator>()
+        for (curTally in monthlyTallies) {
+            val reportHia2Indicator = ReportHia2Indicator(curTally.indicator, curTally.indicator, curTally.grouping, curTally.value)
+            val hia2Indicator: Hia2Indicator? = hia2IndicatorHashMap[reportHia2Indicator.indicatorCode]
+            if (hia2Indicator != null && StringUtils.isNotBlank(hia2Indicator.dhisId) && StringUtils.isNotBlank(hia2Indicator.categoryOptionCombo)) {
+                reportHia2Indicator.dhisId = hia2Indicator.dhisId
+                reportHia2Indicator.categoryOptionCombo = hia2Indicator.categoryOptionCombo
+            } else {
+                reportHia2Indicator.dhisId = AppConstants.ReportConstants.UNKNOWN
+            }
+            reportHia2Indicators.add(reportHia2Indicator)
+        }
+
+        createReportAndSaveReport(reportHia2Indicators, dateFormatter().parse(month),
+                AppConstants.ReportConstants.REPORT_TYPE, AppConstants.ReportConstants.CHN_GROUPING)
+        ZeirHIA2IntentServiceJob.scheduleJobImmediately(ZeirHIA2IntentServiceJob.TAG);
+    }
+
 }
 
 /**

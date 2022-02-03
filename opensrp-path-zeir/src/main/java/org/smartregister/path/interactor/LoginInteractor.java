@@ -13,6 +13,7 @@ import org.smartregister.job.SyncServiceJob;
 import org.smartregister.login.interactor.BaseLoginInteractor;
 import org.smartregister.path.BuildConfig;
 import org.smartregister.path.job.AppVaccineUpdateJob;
+import org.smartregister.path.job.ZeirHIA2IntentServiceJob;
 import org.smartregister.path.reporting.annual.coverage.job.SyncAnnualReportWorker;
 import org.smartregister.path.reporting.dropuout.job.DropoutIntentServiceJob;
 import org.smartregister.path.reporting.stock.job.StockSyncIntentServiceJob;
@@ -78,6 +79,9 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
         RecurringServiceJob.scheduleJob(RecurringServiceJob.TAG,
                 TimeUnit.MINUTES.toMinutes(BuildConfig.VACCINE_SYNC_PROCESSING_MINUTES),
                 getFlexValue(BuildConfig.VACCINE_SYNC_PROCESSING_MINUTES));
+
+        ZeirHIA2IntentServiceJob.scheduleJob(ZeirHIA2IntentServiceJob.TAG, TimeUnit.MINUTES.toMinutes(BuildConfig.DATA_SYNC_DURATION_MINUTES),
+                getFlexValue(BuildConfig.DATA_SYNC_DURATION_MINUTES));
     }
 
     @Override
@@ -91,5 +95,6 @@ public class LoginInteractor extends BaseLoginInteractor implements BaseLoginCon
         RecurringServiceJob.scheduleJobImmediately(RecurringServiceJob.TAG);
         DropoutIntentServiceJob.scheduleJobImmediately(DropoutIntentServiceJob.TAG);
         StockSyncIntentServiceJob.scheduleJobImmediately(StockSyncIntentServiceJob.TAG);
+        ZeirHIA2IntentServiceJob.scheduleJobImmediately(ZeirHIA2IntentServiceJob.TAG);
     }
 }

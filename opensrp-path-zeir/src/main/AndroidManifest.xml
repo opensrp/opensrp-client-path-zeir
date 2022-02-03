@@ -201,6 +201,7 @@
         <service
             android:name="org.smartregister.immunization.service.intent.RecurringIntentService"
             android:exported="false" />
+        <service android:name="org.smartregister.path.reporting.monthly.intent.ZeirHIA2IntentService" />
 
         <receiver android:name="org.smartregister.path.reporting.dropuout.receiver.CoverageDropoutBroadcastReceiver" />
 

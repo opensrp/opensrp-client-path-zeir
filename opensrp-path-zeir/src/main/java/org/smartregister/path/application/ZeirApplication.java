@@ -57,6 +57,8 @@ import org.smartregister.path.reporting.stock.repository.ZeirStockHelperReposito
 import org.smartregister.path.repository.AppChildRegisterQueryProvider;
 import org.smartregister.path.repository.ChildAlertUpdatedRepository;
 import org.smartregister.path.repository.ClientRegisterTypeRepository;
+import org.smartregister.path.repository.HIA2IndicatorsRepository;
+import org.smartregister.path.repository.ZeirHia2ReportRepository;
 import org.smartregister.path.repository.ZeirRepository;
 import org.smartregister.path.util.AppConstants;
 import org.smartregister.path.util.AppExecutors;
@@ -65,6 +67,7 @@ import org.smartregister.path.util.VaccineDuplicate;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.reporting.ReportingLibrary;
 import org.smartregister.repository.EventClientRepository;
+import org.smartregister.repository.Hia2ReportRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.stock.StockLibrary;
 import org.smartregister.sync.ClientProcessorForJava;
@@ -101,6 +104,8 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
     private CumulativePatientRepository cumulativePatientRepository;
     private CumulativeIndicatorRepository cumulativeIndicatorRepository;
     private AppExecutors appExecutors;
+    private HIA2IndicatorsRepository hia2IndicatorsRepository;
+    private Hia2ReportRepository hia2ReportRepository;
 
     public static JsonSpecHelper getJsonSpecHelper() {
         return jsonSpecHelper;
@@ -522,6 +527,20 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
             appExecutors = new AppExecutors();
         }
         return appExecutors;
+    }
+
+    public HIA2IndicatorsRepository hIA2IndicatorsRepository() {
+        if (hia2IndicatorsRepository == null) {
+            hia2IndicatorsRepository = new HIA2IndicatorsRepository();
+        }
+        return hia2IndicatorsRepository;
+    }
+
+    public Hia2ReportRepository hia2ReportRepository() {
+        if (hia2ReportRepository == null) {
+            hia2ReportRepository = new ZeirHia2ReportRepository();
+        }
+        return hia2ReportRepository;
     }
 }
 

@@ -140,4 +140,10 @@ public class AppConstants {
         String INDICATOR_CONFIG_FILE = "configs/reporting/indicator-definitions.yml";
     }
 
+    public interface ReportConstants {
+        String REPORT_TYPE = "HIA2  Version 2021";
+        String UNKNOWN = "unknown";
+        String CHN_GROUPING = "chn";
+    }
+
 }
