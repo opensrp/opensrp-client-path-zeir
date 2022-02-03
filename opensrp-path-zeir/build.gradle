@@ -76,7 +76,7 @@ android {
         if (variant.name == "debug") {
             variant.outputs.each { output ->
                 output.versionCodeOverride = 32
-                output.versionNameOverride = "0.0.33-debug"
+                output.versionNameOverride = "0.0.34-debug"
             }
         } else if (variant.name == "preview") {
             variant.outputs.each { output ->
@@ -159,10 +159,10 @@ android {
             buildConfigField "int", "VIEW_SYNC_CONFIGURATIONS_MINUTES", '15'
             buildConfigField "int", "CLIENT_SETTINGS_SYNC_MINUTES", '15'
             buildConfigField "int", "GROWTH_MONITORING_SYNC_TIME", '15'
-            buildConfigField "String[]", "LOCATION_LEVELS", '{"National", "Province", "District", "Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
-            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National", "Province", "District", "Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
-            buildConfigField "String[]", "ALLOWED_LEVELS", '{"Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
-            buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
+            buildConfigField "String[]", "LOCATION_LEVELS", '{"National level", "Province level", "District level", "Facility level", "Zone level"}'
+            buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National level", "Province level", "District level", "Facility level", "Zone level"}'
+            buildConfigField "String[]", "ALLOWED_LEVELS", '{"Facility level","Zone level"}'
+            buildConfigField "String", 'DEFAULT_LOCATION', '"Facility level"'
             buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.debug")
             buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.debug")
         }
