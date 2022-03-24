@@ -295,4 +295,15 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
+   @Override
+    public void onDestroy() {
+        super.onDestroy();
+   }
+
+    @Override
+    public void updateViews() {
+
+    }
 }

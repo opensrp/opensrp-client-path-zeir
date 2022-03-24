@@ -21,6 +21,7 @@ import org.smartregister.child.fragment.ChildFormFragment;
 import org.smartregister.child.presenter.ChildFormFragmentPresenter;
 import org.smartregister.path.R;
 import org.smartregister.path.activity.ChildFormActivity;
+import org.smartregister.path.contract.ChildFormContract;
 import org.smartregister.path.interactor.ChildFormInteractor;
 import org.smartregister.path.presenter.AppChildFormFragmentPresenter;
 import org.smartregister.path.util.AppConstants;
@@ -31,6 +32,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+
+import timber.log.Timber;
 
 public class AppChildFormFragment extends ChildFormFragment {
 
@@ -73,6 +76,9 @@ public class AppChildFormFragment extends ChildFormFragment {
     public void onDestroy() {
         setOnReactionVaccineSelected(null);
         super.onDestroy();
+        ChildFormContract.Presenter childFormFragmentPresenter = (ChildFormContract.Presenter) this.presenter;
+        childFormFragmentPresenter.tearDown();
+
     }
 
     @Override

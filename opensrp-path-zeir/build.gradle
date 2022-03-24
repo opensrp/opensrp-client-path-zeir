@@ -144,9 +144,9 @@ android {
 
         debug {
             testCoverageEnabled true
-            resValue "string", 'opensrp_url', '"https://path-zeir-stage.smartregister.org/opensrp/"'
-            buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
-            buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
+            resValue "string", 'opensrp_url', '"https://zeir.smartregister.org/opensrp/"'
+            buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '0'
+            buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '0'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
             buildConfigField "int", "VACCINE_SYNC_TIME", '0'
             buildConfigField "int", "DATABASE_VERSION", '19'
@@ -163,8 +163,8 @@ android {
             buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National", "Province", "District", "Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
             buildConfigField "String[]", "ALLOWED_LEVELS", '{"Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
-            buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.debug")
-            buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.debug")
+            buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.release")
+            buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.release")
         }
 
         preview {
@@ -259,7 +259,8 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
 //    implementation(project(':opensrp-child')) {
-    implementation('org.smartregister:opensrp-client-child:0.7.2-PREVIEW-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-child:0.8.1-ALPHA6-SNAPSHOT@aar') {
+//    implementation('org.smartregister:opensrp-client-child:0.7.2-PREVIEW-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-growth-monitoring'
@@ -374,7 +375,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-perf'
 
-//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 
     androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

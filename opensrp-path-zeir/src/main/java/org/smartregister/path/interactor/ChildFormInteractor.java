@@ -6,11 +6,14 @@ import com.vijay.jsonwizard.interactors.JsonFormInteractor;
 import org.smartregister.child.widgets.ChildCheckboxTextFactory;
 import org.smartregister.child.widgets.ChildEditTextFactory;
 import org.smartregister.child.widgets.ChildSpinnerFactory;
+import org.smartregister.path.contract.ChildFormContract;
 import org.smartregister.path.widget.AdverseEffectDatePickerFactory;
 import org.smartregister.path.widget.AppMultiSelectListFactory;
 import org.smartregister.path.widget.ZEIRBarcodeFactory;
 
-public class ChildFormInteractor extends JsonFormInteractor {
+import timber.log.Timber;
+
+public class ChildFormInteractor extends JsonFormInteractor implements ChildFormContract.Interactor {
 
     private static final ChildFormInteractor instance = new ChildFormInteractor();
 
@@ -31,5 +34,11 @@ public class ChildFormInteractor extends JsonFormInteractor {
         map.put(JsonFormConstants.SPINNER, new ChildSpinnerFactory());
         map.put(JsonFormConstants.MULTI_SELECT_LIST, new AppMultiSelectListFactory());
         map.put(JsonFormConstants.BARCODE, new ZEIRBarcodeFactory());
+    }
+
+
+    @Override
+    public void tearDown() {
+        map.clear();
     }
 }
