@@ -144,6 +144,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     parentActivity, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
             drawer.addDrawerListener(toggle);
             toggle.syncState();
         }
@@ -420,5 +421,9 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
     public void openDrawer() {
         drawer.openDrawer(GravityCompat.START);
+    }
+
+    public void cleanUp() {
+        drawer = null;
     }
 }

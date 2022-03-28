@@ -148,4 +148,10 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
         String jsonForm = AppUtils.validateChildZone(jsonString);
         super.saveForm(jsonForm, updateRegisterParam);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        navigationMenu.cleanUp();
+    }
 }
