@@ -425,5 +425,19 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
     public void cleanUp() {
         drawer = null;
+        cancelButton = null;
+        coverageReportsView = null;
+        syncMenuItem = null;
+        outOfAreaMenu = null;
+        registerView = null;
+        reportView = null;
+        droputReportsView = null;
+        coverageReportsView = null;
+        stockControlView = null;
+        loggedInUserTextView = null;
+        userInitialsTextView = null;
+        syncTextView = null;
+        logoutButton = null;
+        languageSpinner = null;
     }
 }
