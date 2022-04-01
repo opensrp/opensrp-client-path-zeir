@@ -259,7 +259,7 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
 
 //    implementation(project(':opensrp-child')) {
-    implementation('org.smartregister:opensrp-client-child:0.8.1-ALPHA6-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-child:0.8.1-ALPHA10-SNAPSHOT@aar') {
 //    implementation('org.smartregister:opensrp-client-child:0.7.2-PREVIEW-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
