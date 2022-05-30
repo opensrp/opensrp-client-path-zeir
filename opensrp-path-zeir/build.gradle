@@ -75,8 +75,8 @@ android {
     applicationVariants.all { variant ->
         if (variant.name == "debug") {
             variant.outputs.each { output ->
-                output.versionCodeOverride = 34
-                output.versionNameOverride = "0.0.34-debug"
+                output.versionCodeOverride = 35
+                output.versionNameOverride = "0.0.35-debug"
             }
         } else if (variant.name == "preview") {
             variant.outputs.each { output ->
@@ -85,8 +85,8 @@ android {
             }
         } else if (variant.name == "release") {
             variant.outputs.each { output ->
-                output.versionCodeOverride = 21
-                output.versionNameOverride = "2.1.0-release"
+                output.versionCodeOverride = 22
+                output.versionNameOverride = "2.1.1-release"
             }
         }
     }
@@ -144,10 +144,10 @@ android {
 
         debug {
             testCoverageEnabled true
-            resValue "string", 'opensrp_url', '"https://path-zeir-stage.smartregister.org/opensrp/"'
-            buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
-            buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
-            buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
+            resValue "string", 'opensrp_url', '"https://zeir.smartregister.org/opensrp/"'
+            buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '3'
+            buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '3'
+            buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '1'
             buildConfigField "int", "VACCINE_SYNC_TIME", '0'
             buildConfigField "int", "DATABASE_VERSION", '19'
             buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
@@ -163,8 +163,8 @@ android {
             buildConfigField "String[]", "HEALTH_FACILITY_LEVELS", '{"National", "Province", "District", "Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
             buildConfigField "String[]", "ALLOWED_LEVELS", '{"Health Facility", "Health Centre Urban", "Health Centre Rural", "Zone"}'
             buildConfigField "String", 'DEFAULT_LOCATION', '"Health Facility"'
-            buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.debug")
-            buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.debug")
+            buildConfigField "String", "OAUTH_CLIENT_ID", getLocalProperty("oauth.client.id.release")
+            buildConfigField "String", "OAUTH_CLIENT_SECRET", getLocalProperty("oauth.client.secret.release")
         }
 
         preview {
