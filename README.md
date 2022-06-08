@@ -22,6 +22,9 @@ These instructions will get you a copy of the project up and running on your loc
 ## Deployment
 [Production releases](https://smartregister.atlassian.net/wiki/spaces/Documentation/pages/1141866503/How+to+create+a+release+APK)
 
+## Publishing the APK via Git TAG
+[Publishing via TAG](https://smartregister.atlassian.net/wiki/spaces/Documentation/pages/2983428097/How+to+set+up+Android+client+CI+CD+on+Github#Publishing-via-TAG)
+
 ## Features
 -   Child registration (birth and death)
 -   Growth monitoring with 3 z-scores
