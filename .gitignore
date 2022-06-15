@@ -30,3 +30,4 @@ out/
 project.properties
 target/
 tmp/
+keystore.properties

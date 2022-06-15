@@ -23,6 +23,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.google.firebase.firebase-perf' // Apply the Performance Monitoring plugin
+apply from: '../properties.gradle'
 
 jacoco {
     toolVersion = jacocoVersion
@@ -112,12 +113,29 @@ android {
         targetCompatibility 1.8
     }
 
+    signingConfigs {
+        release {
+
+            v1SigningEnabled true
+            v2SigningEnabled true
+
+            //Store your keystore.properties file in the project root folder
+            keyAlias System.getenv("KEYSTORE_ALIAS")?: project.KEYSTORE_ALIAS
+            keyPassword System.getenv("KEY_PASSWORD") ?: project.KEY_PASSWORD
+            storePassword System.getenv("KEYSTORE_PASSWORD") ?: project.KEYSTORE_PASSWORD
+
+            //Save your keystore file as ~/zeir.keystore.jks (in your home directory)
+            storeFile file(System.getProperty("user.home") + "/zeir.keystore.jks")
+        }
+    }
+
     buildTypes {
 
         release {
             minifyEnabled false
             zipAlignEnabled true
             debuggable false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rule.pro'
             resValue "string", 'opensrp_url', '"https://zeir.smartregister.org/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
@@ -143,6 +161,7 @@ android {
         }
 
         debug {
+            signingConfig signingConfigs.debug
             testCoverageEnabled true
             resValue "string", 'opensrp_url', '"https://zeir.smartregister.org/opensrp/"'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '3'
