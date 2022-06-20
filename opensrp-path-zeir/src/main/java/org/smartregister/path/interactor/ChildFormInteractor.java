@@ -11,8 +11,6 @@ import org.smartregister.path.widget.AdverseEffectDatePickerFactory;
 import org.smartregister.path.widget.AppMultiSelectListFactory;
 import org.smartregister.path.widget.ZEIRBarcodeFactory;
 
-import timber.log.Timber;
-
 public class ChildFormInteractor extends JsonFormInteractor implements ChildFormContract.Interactor {
 
     private static final ChildFormInteractor instance = new ChildFormInteractor();

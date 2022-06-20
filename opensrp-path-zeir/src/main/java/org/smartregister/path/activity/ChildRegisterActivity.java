@@ -152,6 +152,8 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        navigationMenu.cleanUp();
+        if (navigationMenu != null)
+            navigationMenu.cleanUp();
+    }
     }
 }

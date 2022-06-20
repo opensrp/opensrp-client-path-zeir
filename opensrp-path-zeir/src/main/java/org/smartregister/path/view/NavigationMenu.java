@@ -222,7 +222,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             }
         });
 
-        droputReportsView.setOnClickListener(v-> {
+        droputReportsView.setOnClickListener(v -> {
             if (activityWeakReference.get() instanceof DropoutReportsActivity) {
                 drawer.closeDrawer(GravityCompat.START);
                 return;
@@ -232,7 +232,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             drawer.closeDrawer(GravityCompat.START);
         });
 
-        coverageReportsView.setOnClickListener(v-> {
+        coverageReportsView.setOnClickListener(v -> {
             if (activityWeakReference.get() instanceof CoverageReportsActivity) {
                 drawer.closeDrawer(GravityCompat.START);
                 return;
@@ -242,7 +242,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             drawer.closeDrawer(GravityCompat.START);
         });
 
-        stockControlView.setOnClickListener(v-> {
+        stockControlView.setOnClickListener(v -> {
             if (activityWeakReference.get() instanceof ZeirStockActivity) {
                 drawer.closeDrawer(GravityCompat.START);
                 return;
@@ -412,7 +412,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         });
     }
 
-    private void refresh(Context activity){
+    private void refresh(Context activity) {
 
         Intent intent = new Intent(activity, activity.getClass());
         activity.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
