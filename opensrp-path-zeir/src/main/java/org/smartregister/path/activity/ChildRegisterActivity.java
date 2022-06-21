@@ -155,5 +155,4 @@ public class ChildRegisterActivity extends BaseChildRegisterActivity implements 
         if (navigationMenu != null)
             navigationMenu.cleanUp();
     }
-    }
 }
