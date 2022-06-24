@@ -29,7 +29,7 @@ jobs:
           FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
         run: echo $FIREBASE_CONFIG > opensrp-path-zeir/google-services.json
       - name: Run unit tests with Gradle
-        run: ./gradlew :opensrp-path-zeir:jacocoTestReport --stacktrace
+        run: ./gradlew :opensrp-path-zeir:jacocoTestReport -x :opensrp-path-zeir:createDebugAndroidTestCoverageReport --stacktrace
       - name: Generate Javadoc with Gradle
         run: ./gradlew javadoc
       - name: Upload coverage to Coveralls with Gradle

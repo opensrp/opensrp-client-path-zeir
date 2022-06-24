@@ -33,8 +33,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-import timber.log.Timber;
-
 public class AppChildFormFragment extends ChildFormFragment {
 
     private OnReactionVaccineSelected OnReactionVaccineSelected;
@@ -48,6 +46,17 @@ public class AppChildFormFragment extends ChildFormFragment {
         return jsonFormFragment;
     }
 
+    private static void setViewAndChildrenEnabled(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) view;
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                View child = viewGroup.getChildAt(i);
+                setViewAndChildrenEnabled(child, enabled);
+            }
+        }
+    }
+
     public OnReactionVaccineSelected getOnReactionVaccineSelected() {
         return OnReactionVaccineSelected;
     }
@@ -59,11 +68,9 @@ public class AppChildFormFragment extends ChildFormFragment {
     @Override
     protected ChildFormFragmentPresenter createPresenter() {
         WeakReference<JsonFormFragment> weakReference = new WeakReference<>(this);
-        return new AppChildFormFragmentPresenter(weakReference.get(), ChildFormInteractor.getInstance());
-    }
-
-    public interface OnReactionVaccineSelected {
-        void updateDatePicker(String date);
+        ChildFormInteractor childFormInteractor = ChildFormInteractor.getInstance();
+        childFormInteractor.reRegisterWidgets();
+        return new AppChildFormFragmentPresenter(weakReference.get(), childFormInteractor);
     }
 
     @Override
@@ -143,14 +150,7 @@ public class AppChildFormFragment extends ChildFormFragment {
         }
     }
 
-    private static void setViewAndChildrenEnabled(View view, boolean enabled) {
-        view.setEnabled(enabled);
-        if (view instanceof ViewGroup) {
-            ViewGroup viewGroup = (ViewGroup) view;
-            for (int i = 0; i < viewGroup.getChildCount(); i++) {
-                View child = viewGroup.getChildAt(i);
-                setViewAndChildrenEnabled(child, enabled);
-            }
-        }
+    public interface OnReactionVaccineSelected {
+        void updateDatePicker(String date);
     }
 }

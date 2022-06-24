@@ -142,7 +142,7 @@ android {
             buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '1'
             buildConfigField "int", "VACCINE_SYNC_TIME", '0'
-            buildConfigField "int", "DATABASE_VERSION", '19'
+            buildConfigField "int", "DATABASE_VERSION", '20'
             buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
             buildConfigField "boolean", "TIME_CHECK", "true"
             buildConfigField "int", "DATA_SYNC_DURATION_MINUTES", '15'
@@ -164,11 +164,11 @@ android {
             signingConfig signingConfigs.debug
             testCoverageEnabled true
             resValue "string", 'opensrp_url', '"https://path-zeir-stage.smartregister.org/opensrp/"'
-            buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '3'
-            buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '3'
-            buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '1'
+            buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
+            buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
+            buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '2'
             buildConfigField "int", "VACCINE_SYNC_TIME", '0'
-            buildConfigField "int", "DATABASE_VERSION", '19'
+            buildConfigField "int", "DATABASE_VERSION", '20'
             buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
             buildConfigField "boolean", "TIME_CHECK", "true"
             buildConfigField "int", "DATA_SYNC_DURATION_MINUTES", '15'
@@ -189,15 +189,15 @@ android {
         preview {
             minifyEnabled false
             zipAlignEnabled true
-            debuggable true
+            debuggable false
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rule.pro'
             resValue "string", 'opensrp_url', '"https://path-zeir-preview.smartregister.org/opensrp/"'
-            buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '250'
-            buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '100'
+            buildConfigField "int", "OPENMRS_UNIQUE_ID_INITIAL_BATCH_SIZE", '50'
+            buildConfigField "int", "OPENMRS_UNIQUE_ID_BATCH_SIZE", '10'
             buildConfigField "int", "OPENMRS_UNIQUE_ID_SOURCE", '3'
             buildConfigField "int", "VACCINE_SYNC_TIME", '0'
-            buildConfigField "int", "DATABASE_VERSION", '19'
+            buildConfigField "int", "DATABASE_VERSION", '20'
             buildConfigField "long", "MAX_SERVER_TIME_DIFFERENCE", "1800000l"
             buildConfigField "boolean", "TIME_CHECK", "true"
             buildConfigField "int", "DATA_SYNC_DURATION_MINUTES", '15'
@@ -282,9 +282,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navigationKTXVersion"
     implementation "androidx.cardview:cardview:1.0.0"
 
-//    implementation(project(':opensrp-child')) {
-    implementation('org.smartregister:opensrp-client-child:1.0.0-DEV3-SNAPSHOT@aar') {
-//    implementation('org.smartregister:opensrp-client-child:0.7.2-PREVIEW-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-child:1.0.0-ALPHA-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-growth-monitoring'
@@ -297,7 +295,7 @@ dependencies {
         exclude group: 'io.ona.rdt-capture', module: 'lib'
     }
 
-    implementation('org.smartregister:opensrp-client-immunization:4.0.2-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-immunization:5.0.0-BETA-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -305,7 +303,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
-    implementation('org.smartregister:opensrp-client-core:6.0.0-ALPHA-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-core:6.0.0-BETA-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -318,8 +316,7 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-reporting'
     }
 
-
-    implementation('org.smartregister:opensrp-client-growth-monitoring:2.0.6-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-growth-monitoring:3.0.0-ALPHA-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'id.zelory', module: 'compressor'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
@@ -353,7 +350,7 @@ dependencies {
         exclude group: 'com.ibm.fhir', module: 'fhir-model'
     }
 
-    implementation('org.smartregister:opensrp-client-native-form:3.0.0-ALPHA-SNAPSHOT@aar') {
+    implementation('org.smartregister:opensrp-client-native-form:3.0.0-BETA-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.android.support', module: 'recyclerview-v7'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -395,7 +392,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'org.jeasy:easy-rules-mvel:3.3.0'
+    implementation 'org.jeasy:easy-rules-mvel:3.4.0'
     implementation group: "org.yaml", name: 'snakeyaml', version: '1.30'
     implementation 'com.github.florent37:expansionpanel:1.2.4'
     implementation 'com.fasterxml.jackson.core:jackson-core:2.13.3'
@@ -417,10 +414,10 @@ dependencies {
     testImplementation 'org.apache.maven:maven-ant-tasks:2.1.3'
     testImplementation group: 'org.skyscreamer', name: 'jsonassert', version: '1.5.0'
     testImplementation 'com.ibm.fhir:fhir-model:4.7.1'
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
     testImplementation 'androidx.test:core:1.4.0'
-    testImplementation 'androidx.work:work-testing:2.5.0'
-    testImplementation 'org.mockito:mockito-core:3.1.0'
+    testImplementation 'androidx.work:work-testing:2.7.1'
+    testImplementation 'org.mockito:mockito-core:3.12.4'
     testImplementation "io.mockk:mockk:1.12.0"
 }
 

@@ -18,7 +18,9 @@ import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.immunization.domain.ServiceSchedule;
 import org.smartregister.immunization.domain.VaccineSchedule;
 import org.smartregister.immunization.job.VaccineSchedulesUpdateJob;
+import org.smartregister.immunization.util.IMConstants;
 import org.smartregister.path.application.ZeirApplication;
+import org.smartregister.path.util.AppConstants;
 
 import java.util.Calendar;
 import java.util.Map;
@@ -123,10 +125,10 @@ public class ChildImmunizationActivity extends BaseChildImmunizationActivity {
                 calendar.set(Calendar.HOUR_OF_DAY, 1);
                 long hoursSince1AM = (System.currentTimeMillis() - calendar.getTimeInMillis()) / TimeUnit.HOURS.toMillis(1);
                 if (VaccineSchedulesUpdateJob.isLastTimeRunLongerThan(hoursSince1AM) && !ZeirApplication.getInstance().alertUpdatedRepository().findOne(childDetails.entityId())) {
-                    String dobString = Utils.getValue(childDetails.getColumnmaps(), "dob", false);
+                    String dobString = Utils.getValue(childDetails.getColumnmaps(), AppConstants.KeyConstants.DOB, false);
                     DateTime dateTime = Utils.dobStringToDateTime(dobString);
                     if (dateTime != null) {
-                        VaccineSchedule.updateOfflineAlerts(childDetails.entityId(), dateTime, "child");
+                        VaccineSchedule.updateOfflineAlertsOnly(childDetails.entityId(), dateTime, IMConstants.VACCINE_TYPE.CHILD);
                         ServiceSchedule.updateOfflineAlerts(childDetails.entityId(), dateTime);
                     }
                     ZeirApplication.getInstance().alertUpdatedRepository().saveOrUpdate(childDetails.entityId());

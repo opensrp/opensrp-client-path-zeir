@@ -22,6 +22,7 @@ import org.smartregister.path.activity.ChildImmunizationActivity;
 import org.smartregister.path.activity.ChildRegisterActivity;
 import org.smartregister.path.model.ChildRegisterFragmentModel;
 import org.smartregister.path.presenter.ChildRegisterFragmentPresenter;
+import org.smartregister.path.repository.ZeirVaccineOverdueCountRepository;
 import org.smartregister.path.util.DBQueryHelper;
 import org.smartregister.view.activity.BaseRegisterActivity;
 
@@ -208,7 +209,7 @@ public class ChildRegisterFragment extends BaseChildRegisterFragment {
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         super.onLoadFinished(loader, cursor);
 
-        /*if (!registerQueryFinished && getOverDueCount() == 0) {
+        if (!registerQueryFinished && getOverDueCount() == 0) {
             // Get notified when all the recycler views have been rendered and the previous cursor is done accessing the DB
             clientsView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
@@ -219,7 +220,7 @@ public class ChildRegisterFragment extends BaseChildRegisterFragment {
                     runVaccineOverdueQuery();
                 }
             });
-        }*/
+        }
     }
 
     /**
@@ -229,26 +230,18 @@ public class ChildRegisterFragment extends BaseChildRegisterFragment {
      */
     private void runVaccineOverdueQuery() {
         AppExecutors executors = new AppExecutors();
-        executors.diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                Timber.e("Started running the overdue count query");
+        executors.diskIO().execute(() -> {
+            Timber.d("Started running the overdue count query");
 
-                String sqlOverdueCount = Utils.metadata().getRegisterQueryProvider()
-                        .getCountExecuteQuery(filterSelectionCondition(true), "");
-                int overDueCount = commonRepository().countSearchIds(sqlOverdueCount);
-                setOverDueCount(overDueCount);
+            int overDueCount = ZeirVaccineOverdueCountRepository.getOverdueCount();
+            setOverDueCount(overDueCount);
 
-                Timber.e("Gotten the overdue count: " + overDueCount);
+            Timber.d("Gotten the overdue count: " + overDueCount);
 
-                executors.mainThread().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        updateDueOverdueCountText();
-                        registerQueryFinished = false;
-                    }
-                });
-            }
+            executors.mainThread().execute(() -> {
+                updateDueOverdueCountText();
+                registerQueryFinished = false;
+            });
         });
     }
 }

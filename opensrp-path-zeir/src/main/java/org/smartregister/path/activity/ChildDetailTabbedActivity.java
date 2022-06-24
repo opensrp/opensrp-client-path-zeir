@@ -34,6 +34,7 @@ import org.smartregister.client.utils.domain.Form;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.path.R;
 import org.smartregister.path.fragment.ChildRegistrationDataFragment;
+import org.smartregister.path.repository.ZeirVaccineOverdueCountRepository;
 import org.smartregister.path.util.AppConstants.KeyConstants;
 import org.smartregister.path.util.AppJsonFormUtils;
 import org.smartregister.path.util.AppUtils;
@@ -250,7 +251,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
                         SimpleDateFormat simpleDateFormat =
                                 new SimpleDateFormat(com.vijay.jsonwizard.utils.FormUtils.NATIIVE_FORM_DATE_FORMAT_PATTERN,
                                         Locale.ENGLISH);
-                        String dobString = Utils.getValue(childDetails.getColumnmaps(), "dob", true);
+                        String dobString = Utils.getValue(childDetails.getColumnmaps(), KeyConstants.DOB, true);
                         Date dob = Utils.dobStringToDate(dobString);
                         if (dob != null) {
                             jsonObject.put("min_date", simpleDateFormat.format(dob));

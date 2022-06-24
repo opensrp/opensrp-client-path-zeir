@@ -39,4 +39,12 @@ public class ChildFormInteractor extends JsonFormInteractor implements ChildForm
     public void tearDown() {
         map.clear();
     }
+
+    /**
+     * On form destroy we clear the widget map to avoid memory leaks by calling {@link #tearDown()}
+     * When the form is recreated/re-rendered we need to re-register them
+     */
+    public void reRegisterWidgets() {
+        registerWidgets();
+    }
 }
