@@ -497,7 +497,7 @@ public class ZeirRepository extends Repository {
 
         try {
             db.execSQL(VaccineOverdueCountRepository.CREATE_TABLE_SQL);
-            db.execSQL(ZeirVaccineOverdueCountRepository.MIGRATE_VACCINES_QUERY);
+            db.execSQL(VaccineOverdueCountRepositoryHelper.MIGRATE_VACCINES_QUERY);
         } catch (Exception e) {
             Timber.e(e);
         }

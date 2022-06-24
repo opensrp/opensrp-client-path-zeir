@@ -24,7 +24,6 @@ import org.smartregister.path.R;
 import org.smartregister.path.activity.ChildFormActivity;
 import org.smartregister.path.contract.ChildFormContract;
 import org.smartregister.path.fragment.AppChildFormFragment;
-import org.smartregister.path.interactor.ChildFormInteractor;
 import org.smartregister.path.util.AppConstants;
 
 import timber.log.Timber;

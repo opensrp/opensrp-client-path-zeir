@@ -22,7 +22,7 @@ import org.smartregister.path.activity.ChildImmunizationActivity;
 import org.smartregister.path.activity.ChildRegisterActivity;
 import org.smartregister.path.model.ChildRegisterFragmentModel;
 import org.smartregister.path.presenter.ChildRegisterFragmentPresenter;
-import org.smartregister.path.repository.ZeirVaccineOverdueCountRepository;
+import org.smartregister.path.repository.VaccineOverdueCountRepositoryHelper;
 import org.smartregister.path.util.DBQueryHelper;
 import org.smartregister.view.activity.BaseRegisterActivity;
 
@@ -233,7 +233,7 @@ public class ChildRegisterFragment extends BaseChildRegisterFragment {
         executors.diskIO().execute(() -> {
             Timber.d("Started running the overdue count query");
 
-            int overDueCount = ZeirVaccineOverdueCountRepository.getOverdueCount();
+            int overDueCount = VaccineOverdueCountRepositoryHelper.getOverdueCount();
             setOverDueCount(overDueCount);
 
             Timber.d("Gotten the overdue count: " + overDueCount);

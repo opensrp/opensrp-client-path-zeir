@@ -3,7 +3,11 @@ package org.smartregister.path.repository;
 import org.smartregister.immunization.ImmunizationLibrary;
 import org.smartregister.immunization.repository.VaccineOverdueCountRepository;
 
-public class ZeirVaccineOverdueCountRepository {
+/**
+ * Helper class with migration script for the new Overdue counter implementation (MIGRATE_VACCINES_QUERY)
+ * plus the query to efficiently count the overdue alerts (COUNT_QUERY_SQL)
+ */
+public class VaccineOverdueCountRepositoryHelper {
 
     public static final String MIGRATE_VACCINES_QUERY = "INSERT INTO vaccine_overdue_count SELECT DISTINCT ec_child_details.id FROM alerts a INNER JOIN ec_child_details ON a.caseID = ec_child_details.id INNER JOIN ec_client ON a.caseID = ec_client.base_entity_id \n" +
             "WHERE (ec_client.dod IS NULL AND ec_client.date_removed IS NULL AND ec_client.is_closed IS NOT '1' AND ec_child_details.is_closed IS NOT '1') \n" +

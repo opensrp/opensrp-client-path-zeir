@@ -1,7 +1,6 @@
 package org.smartregister.path.application;
 
 import android.content.Intent;
-import android.os.StrictMode;
 import android.util.Pair;
 
 import androidx.annotation.VisibleForTesting;
@@ -518,6 +517,7 @@ public class ZeirApplication extends DrishtiApplication implements TimeChangedBr
             return LocationHelper.getInstance().locationIdsFromHierarchy();
         return "";
     }
+
     public AppExecutors getAppExecutors() {
         if (appExecutors == null) {
             appExecutors = new AppExecutors();
