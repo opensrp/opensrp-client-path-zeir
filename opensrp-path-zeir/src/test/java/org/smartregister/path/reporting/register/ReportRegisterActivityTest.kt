@@ -7,6 +7,7 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
@@ -19,6 +20,7 @@ import org.smartregister.path.application.ZeirApplication
 
 @RunWith(RobolectricTestRunner::class)
 @Config(application = TestZeirApplication::class)
+@Ignore("Fix memory leak error: #250")
 class ReportRegisterActivityTest {
 
     private val controller = Robolectric.buildActivity(ReportRegisterActivity::class.java)

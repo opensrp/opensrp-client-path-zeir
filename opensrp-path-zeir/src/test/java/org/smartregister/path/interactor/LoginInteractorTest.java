@@ -2,6 +2,7 @@ package org.smartregister.path.interactor;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.smartregister.growthmonitoring.job.ZScoreRefreshIntentServiceJob;
@@ -21,6 +22,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Ephraim Kigamba - nek.eam@gmail.com on 05-03-2020.
  */
+@Ignore("Fix memory leak error: #250")
 public class LoginInteractorTest extends BaseRobolectricTest {
 
     private LoginInteractor loginInteractor;

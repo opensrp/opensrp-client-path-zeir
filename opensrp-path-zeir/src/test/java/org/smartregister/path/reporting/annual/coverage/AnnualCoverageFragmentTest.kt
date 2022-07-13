@@ -4,6 +4,7 @@ import android.widget.ImageButton
 import org.junit.After
 import org.junit.Assert.assertTrue
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
@@ -15,6 +16,7 @@ import org.smartregister.path.reporting.annual.AnnualReportActivity
 
 @RunWith(RobolectricTestRunner::class)
 @Config(application = TestZeirApplication::class)
+@Ignore("Fix memory leak error: #250")
 class AnnualCoverageFragmentTest {
 
     private val annualReportActivityController = Robolectric.buildActivity(AnnualReportActivity::class.java)

@@ -13,6 +13,7 @@ import androidx.test.core.app.ApplicationProvider;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -24,6 +25,7 @@ import org.smartregister.path.BaseActivityUnitTest;
 import org.smartregister.path.R;
 import org.smartregister.view.contract.BaseLoginContract;
 
+@Ignore("Fix memory leak error: #250")
 public class LoginActivityTest extends BaseActivityUnitTest {
 
     private static final String STRING_SETTINGS = "Settings";

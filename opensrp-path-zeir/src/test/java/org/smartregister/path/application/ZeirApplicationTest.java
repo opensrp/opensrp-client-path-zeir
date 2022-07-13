@@ -4,6 +4,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
 import org.smartregister.commonregistry.CommonFtsObject;
@@ -13,6 +14,7 @@ import org.smartregister.path.TestZeirApplication;
 /**
  * Created by ndegwamartin on 2019-12-13.
  */
+@Ignore("Fix memory leak error: #250")
 public class ZeirApplicationTest extends BaseUnitTest {
     @Before
     public void setUp() {

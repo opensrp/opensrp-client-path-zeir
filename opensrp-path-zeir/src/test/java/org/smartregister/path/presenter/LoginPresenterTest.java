@@ -2,6 +2,7 @@ package org.smartregister.path.presenter;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -13,7 +14,7 @@ import org.smartregister.path.application.ZeirApplication;
 import org.smartregister.path.util.AppConstants;
 import org.smartregister.repository.AllSettings;
 import org.smartregister.view.contract.BaseLoginContract;
-
+@Ignore("Fix memory leak error: #250")
 public class LoginPresenterTest extends BaseUnitTest {
 
     @Mock
