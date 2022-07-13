@@ -19,6 +19,7 @@ import org.smartregister.growthmonitoring.repository.WeightZScoreRepository;
 import org.smartregister.immunization.repository.RecurringServiceRecordRepository;
 import org.smartregister.immunization.repository.RecurringServiceTypeRepository;
 import org.smartregister.immunization.repository.VaccineNameRepository;
+import org.smartregister.immunization.repository.VaccineOverdueCountRepository;
 import org.smartregister.immunization.repository.VaccineRepository;
 import org.smartregister.immunization.repository.VaccineTypeRepository;
 import org.smartregister.immunization.util.IMDatabaseUtils;
@@ -61,11 +62,10 @@ import timber.log.Timber;
 
 public class ZeirRepository extends Repository {
 
-    private SQLiteDatabase readableDatabase;
-    private SQLiteDatabase writableDatabase;
     private final Context context;
     private final org.smartregister.Context openSRPContext;
-
+    private SQLiteDatabase readableDatabase;
+    private SQLiteDatabase writableDatabase;
 
     public ZeirRepository(@NonNull Context context, @NonNull org.smartregister.Context openSRPContext) {
         super(context, AllConstants.DATABASE_NAME, BuildConfig.DATABASE_VERSION, openSRPContext.session(),
@@ -166,6 +166,9 @@ public class ZeirRepository extends Repository {
                     break;
                 case 19:
                     upgradeToVersion19(db);
+                    break;
+                case 20:
+                    upgradeToVersion20(db);
                     break;
                 default:
                     break;
@@ -465,33 +468,45 @@ public class ZeirRepository extends Repository {
             db.execSQL("ALTER TABLE ec_mother_details ADD COLUMN sms_reminder VARCHAR");
             db.execSQL("ALTER TABLE ec_mother_details ADD COLUMN sms_reminder_phone VARCHAR");
             db.execSQL("ALTER TABLE ec_mother_details ADD COLUMN sms_reminder_phone_formatted VARCHAR");
-        }
-        catch (Exception e)
-        {
-            Timber.e("upgradeToVersion17 "+e.getMessage());
+        } catch (Exception e) {
+            Timber.e("upgradeToVersion17 " + e.getMessage());
         }
     }
 
     private void upgradeToVersion18(SQLiteDatabase db) {
         try {
             db.execSQL("ALTER TABLE ec_child_details ADD COLUMN system_of_registration VARCHAR");
-        }
-        catch (Exception e)
-        {
-            Timber.e("upgradeTocontext.allSharedPreferences()Version17 "+e.getMessage());
+        } catch (Exception e) {
+            Timber.e("upgradeTocontext.allSharedPreferences()Version17 " + e.getMessage());
         }
     }
 
-    private void upgradeToVersion19(SQLiteDatabase db)
-    {
+    private void upgradeToVersion19(SQLiteDatabase db) {
         try {
             db.execSQL("ALTER TABLE vaccines ADD COLUMN outreach INTEGER DEFAULT 0");
             db.execSQL("UPDATE vaccines " +
                     "SET outreach = 1" +
                     " WHERE location_id != ?", new String[]{openSRPContext.allSharedPreferences().fetchDefaultLocalityId(openSRPContext.allSharedPreferences().fetchPioneerUser())});
+        } catch (Exception e) {
+            Timber.e(e);
         }
-        catch (Exception e)
-        {
+    }
+
+    private void upgradeToVersion20(SQLiteDatabase db) {
+        addOutreachColumn(db);
+
+        try {
+            db.execSQL(VaccineOverdueCountRepository.CREATE_TABLE_SQL);
+            db.execSQL(VaccineOverdueCountRepositoryHelper.MIGRATE_VACCINES_QUERY);
+        } catch (Exception e) {
+            Timber.e(e);
+        }
+    }
+
+    private void addOutreachColumn(SQLiteDatabase db) {
+        try {
+            db.execSQL("ALTER TABLE vaccines ADD COLUMN outreach INTEGER DEFAULT 0");
+        } catch (Exception e) {
             Timber.e(e);
         }
     }

@@ -46,6 +46,7 @@ import org.smartregister.immunization.repository.RecurringServiceTypeRepository;
 import org.smartregister.immunization.repository.VaccineRepository;
 import org.smartregister.immunization.service.intent.RecurringIntentService;
 import org.smartregister.immunization.service.intent.VaccineIntentService;
+import org.smartregister.immunization.util.IMConstants;
 import org.smartregister.path.application.ZeirApplication;
 import org.smartregister.path.reporting.common.ReportExtensionsKt;
 import org.smartregister.path.reporting.common.ReportingUtils;
@@ -416,7 +417,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         for (String baseEntityId : stringDateTimeHashMap.keySet()) {
             DateTime birthDateTime = clientsForAlertUpdates.get(baseEntityId);
             if (birthDateTime != null) {
-                VaccineSchedule.updateOfflineAlerts(baseEntityId, birthDateTime, AppConstants.KeyConstants.CHILD);
+                VaccineSchedule.updateOfflineAlertsOnly(baseEntityId, birthDateTime, IMConstants.VACCINE_TYPE.CHILD);
                 ServiceSchedule.updateOfflineAlerts(baseEntityId, birthDateTime);
             }
         }
@@ -428,7 +429,9 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         if (client != null) {
             try {
                 processEvent(event, client, clientClassification);
-                scheduleUpdatingClientAlerts(client.getBaseEntityId(), client.getBirthdate());
+                if (AppConstants.EntityTypeConstants.CHILD.equals(client.getClientType()) || client.getRelationships() != null) {
+                    scheduleUpdatingClientAlerts(client.getBaseEntityId(), client.getBirthdate());
+                }
             } catch (Exception e) {
                 Timber.e(e);
             }
@@ -470,7 +473,9 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
         }
 
         processVaccine(eventClient, vaccineTable, eventType.equals(VaccineIntentService.EVENT_TYPE_OUT_OF_CATCHMENT));
-        scheduleUpdatingClientAlerts(client.getBaseEntityId(), client.getBirthdate());
+        if (AppConstants.EntityTypeConstants.CHILD.equals(client.getClientType()) || client.getRelationships() != null) {
+            scheduleUpdatingClientAlerts(client.getBaseEntityId(), client.getBirthdate());
+        }
     }
 
     private boolean childExists(String entityId) {
@@ -563,7 +568,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
 
                 if (contentValues.containsKey(WeightRepository.Z_SCORE)) {
                     String zscoreString = contentValues.getAsString(WeightRepository.Z_SCORE);
-                    if (NumberUtils.isNumber(zscoreString)) {
+                    if (NumberUtils.isCreatable(zscoreString)) {
                         weightObj.setZScore(Double.valueOf(zscoreString));
                     }
                 }
@@ -713,12 +718,14 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
     }
 
     @Override
-    public void updateFTSsearch(String tableName, String entityId, ContentValues contentValues) {
+    public void updateFTSsearch(String tableName, String entityType, String entityId, ContentValues contentValues) {
+        if (!(Utils.metadata().getRegisterQueryProvider().getDemographicTable().equals(tableName) && Constants.ENTITY.CHILD.equals(entityType))) {
+            return;
+        }
 
         Timber.i("Starting updateFTSsearch table: %s Base Entity ID %s", tableName, entityId);
 
-        AllCommonsRepository allCommonsRepository = getApplication().context().
-                allCommonsRepositoryobjects(tableName);
+        AllCommonsRepository allCommonsRepository = getApplication().context().allCommonsRepositoryobjects(tableName);
 
         if (allCommonsRepository != null) {
             allCommonsRepository.updateSearch(entityId);
@@ -731,7 +738,7 @@ public class AppClientProcessorForJava extends ClientProcessorForJava {
             if (StringUtils.isNotBlank(dobString)) {
                 DateTime birthDateTime = Utils.dobStringToDateTime(dobString);
                 if (birthDateTime != null) {
-                    VaccineSchedule.updateOfflineAlertsOnly(entityId, birthDateTime, "child");
+                    VaccineSchedule.updateOfflineAlertsOnly(entityId, birthDateTime, IMConstants.VACCINE_TYPE.CHILD);
                     ServiceSchedule.updateOfflineAlerts(entityId, birthDateTime);
                 }
             }

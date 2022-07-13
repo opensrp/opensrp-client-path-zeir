@@ -144,6 +144,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     parentActivity, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
             drawer.addDrawerListener(toggle);
             toggle.syncState();
         }
@@ -221,7 +222,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             }
         });
 
-        droputReportsView.setOnClickListener(v-> {
+        droputReportsView.setOnClickListener(v -> {
             if (activityWeakReference.get() instanceof DropoutReportsActivity) {
                 drawer.closeDrawer(GravityCompat.START);
                 return;
@@ -231,7 +232,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             drawer.closeDrawer(GravityCompat.START);
         });
 
-        coverageReportsView.setOnClickListener(v-> {
+        coverageReportsView.setOnClickListener(v -> {
             if (activityWeakReference.get() instanceof CoverageReportsActivity) {
                 drawer.closeDrawer(GravityCompat.START);
                 return;
@@ -241,7 +242,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             drawer.closeDrawer(GravityCompat.START);
         });
 
-        stockControlView.setOnClickListener(v-> {
+        stockControlView.setOnClickListener(v -> {
             if (activityWeakReference.get() instanceof ZeirStockActivity) {
                 drawer.closeDrawer(GravityCompat.START);
                 return;
@@ -411,7 +412,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         });
     }
 
-    private void refresh(Context activity){
+    private void refresh(Context activity) {
 
         Intent intent = new Intent(activity, activity.getClass());
         activity.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
@@ -420,5 +421,23 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
     public void openDrawer() {
         drawer.openDrawer(GravityCompat.START);
+    }
+
+    public void cleanUp() {
+        drawer = null;
+        cancelButton = null;
+        coverageReportsView = null;
+        syncMenuItem = null;
+        outOfAreaMenu = null;
+        registerView = null;
+        reportView = null;
+        droputReportsView = null;
+        coverageReportsView = null;
+        stockControlView = null;
+        loggedInUserTextView = null;
+        userInitialsTextView = null;
+        syncTextView = null;
+        logoutButton = null;
+        languageSpinner = null;
     }
 }

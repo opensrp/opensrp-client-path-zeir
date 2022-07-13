@@ -8,6 +8,7 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Robolectric
@@ -22,6 +23,7 @@ import org.smartregister.path.reporting.common.ReportingUtils.dateFormatter
 
 @RunWith(RobolectricTestRunner::class)
 @Config(application = TestZeirApplication::class)
+@Ignore("Fix memory leak error: #250")
 class MonthlyReportsActivityTest {
 
     private lateinit var tabLayout: TabLayout

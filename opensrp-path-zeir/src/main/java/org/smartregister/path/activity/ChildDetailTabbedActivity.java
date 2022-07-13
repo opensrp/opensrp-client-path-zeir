@@ -250,7 +250,7 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
                         SimpleDateFormat simpleDateFormat =
                                 new SimpleDateFormat(com.vijay.jsonwizard.utils.FormUtils.NATIIVE_FORM_DATE_FORMAT_PATTERN,
                                         Locale.ENGLISH);
-                        String dobString = Utils.getValue(childDetails.getColumnmaps(), "dob", true);
+                        String dobString = Utils.getValue(childDetails.getColumnmaps(), KeyConstants.DOB, true);
                         Date dob = Utils.dobStringToDate(dobString);
                         if (dob != null) {
                             jsonObject.put("min_date", simpleDateFormat.format(dob));
@@ -294,5 +294,10 @@ public class ChildDetailTabbedActivity extends BaseChildDetailTabbedActivity {
             Timber.e(e);
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void updateViews() {
+       //Do nothing??
     }
 }

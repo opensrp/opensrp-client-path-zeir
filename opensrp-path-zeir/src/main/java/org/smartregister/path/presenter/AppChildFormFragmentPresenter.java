@@ -22,12 +22,13 @@ import org.json.JSONObject;
 import org.smartregister.child.presenter.ChildFormFragmentPresenter;
 import org.smartregister.path.R;
 import org.smartregister.path.activity.ChildFormActivity;
+import org.smartregister.path.contract.ChildFormContract;
 import org.smartregister.path.fragment.AppChildFormFragment;
 import org.smartregister.path.util.AppConstants;
 
 import timber.log.Timber;
 
-public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
+public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter implements ChildFormContract.Presenter {
 
     private final AppChildFormFragment formFragment;
     private String encounterType = null;
@@ -127,5 +128,11 @@ public class AppChildFormFragmentPresenter extends ChildFormFragmentPresenter {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void tearDown() {
+        ChildFormContract.Interactor interactor = (ChildFormContract.Interactor) getInteractor();
+        interactor.tearDown();
     }
 }

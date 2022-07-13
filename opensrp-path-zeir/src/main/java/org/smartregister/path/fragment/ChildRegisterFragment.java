@@ -1,23 +1,38 @@
 package org.smartregister.path.fragment;
 
 import android.annotation.SuppressLint;
+import android.database.Cursor;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewTreeObserver;
 
 import androidx.core.content.ContextCompat;
+import androidx.loader.content.Loader;
 
+import org.apache.commons.lang3.StringUtils;
 import org.smartregister.child.domain.RegisterClickables;
 import org.smartregister.child.fragment.BaseChildRegisterFragment;
+import org.smartregister.child.util.AppExecutors;
 import org.smartregister.child.util.Constants;
+import org.smartregister.child.util.Utils;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.path.R;
 import org.smartregister.path.activity.ChildImmunizationActivity;
 import org.smartregister.path.activity.ChildRegisterActivity;
 import org.smartregister.path.model.ChildRegisterFragmentModel;
 import org.smartregister.path.presenter.ChildRegisterFragmentPresenter;
+import org.smartregister.path.repository.VaccineOverdueCountRepositoryHelper;
 import org.smartregister.path.util.DBQueryHelper;
 import org.smartregister.view.activity.BaseRegisterActivity;
 
+import java.util.List;
+
+import timber.log.Timber;
+
 public class ChildRegisterFragment extends BaseChildRegisterFragment {
+
+    private boolean registerQueryFinished = false;
 
     @Override
     protected void initializePresenter() {
@@ -115,5 +130,118 @@ public class ChildRegisterFragment extends BaseChildRegisterFragment {
         ((View) searchView.getParent().getParent()).setBackgroundColor(
                 ContextCompat.getColor(requireContext(), R.color.toolbar_background));
         searchView.setHint(requireContext().getString(R.string.search_hint));
+    }
+
+    @Override
+    public void countExecute() {
+        AppExecutors executors = new AppExecutors();
+        executors.diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String sql;
+                    if (filters != null && !filters.isEmpty()) {
+                        sql = Utils.metadata().getRegisterQueryProvider().getCountExecuteQuery(mainCondition, filters);
+                    } else {
+                        sql = "SELECT count(id) FROM ec_child_details WHERE (date_removed IS NULL AND ec_child_details.inactive is NOT true AND is_closed IS NOT '1')";
+                    }
+
+                    Timber.i(sql);
+                    int totalCount = commonRepository().countSearchIds(sql);
+
+                    executors.mainThread().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            clientAdapter.setTotalcount(totalCount);
+                            Timber.i("Total Register Count %d", clientAdapter.getTotalcount());
+                            clientAdapter.setCurrentlimit(20);
+                            clientAdapter.setCurrentoffset(0);
+
+                        }
+                    });
+                } catch (Exception e) {
+                    Timber.e(e);
+                }
+            }
+        });
+    }
+
+    @Override
+    protected String filterAndSortQuery() {
+        SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder(mainSelect);
+        String query = "";
+        try {
+            if (isValidFilterForFts(commonRepository())) {
+                String sql;
+                if (filters != null && !filters.isEmpty()) {
+                    sql = Utils.metadata().getRegisterQueryProvider().getObjectIdsQuery(this.mainCondition, this.filters) + (StringUtils.isBlank(this.getDefaultSortQuery()) ? "" : " order by " + this.getDefaultSortQuery());
+                } else {
+                    sql = "SELECT ec_child_details.id FROM ec_child_details INNER JOIN ec_client ON ec_child_details.id = ec_client.id WHERE (ec_child_details.date_removed IS NULL AND ec_child_details.inactive is NOT true AND ec_child_details.is_closed IS NOT '1') order by ec_client.last_interacted_with DESC ";
+                }
+
+                sql = sqb.addlimitandOffset(sql, clientAdapter.getCurrentlimit(), clientAdapter.getCurrentoffset());
+
+                List<String> ids = commonRepository().findSearchIds(sql);
+                query = Utils.metadata().getRegisterQueryProvider().mainRegisterQuery() +
+                        " WHERE _id IN (%s) " + (StringUtils.isBlank(getDefaultSortQuery()) ? "" : " order by " + getDefaultSortQuery());
+
+                String joinedIds = "'" + StringUtils.join(ids, "','") + "'";
+                return query.replace("%s", joinedIds);
+            } else {
+                if (!TextUtils.isEmpty(filters) && !TextUtils.isEmpty(Sortqueries)) {
+                    sqb.addCondition(filters);
+                    query = sqb.orderbyCondition(Sortqueries);
+                    query = sqb.Endquery(sqb.addlimitandOffset(query
+                            , clientAdapter.getCurrentlimit()
+                            , clientAdapter.getCurrentoffset()));
+                }
+                return query;
+            }
+
+        } catch (Exception e) {
+            Timber.e(e);
+        }
+
+        return query;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        super.onLoadFinished(loader, cursor);
+
+        if (!registerQueryFinished && getOverDueCount() == 0) {
+            // Get notified when all the recycler views have been rendered and the previous cursor is done accessing the DB
+            clientsView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    clientsView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    registerQueryFinished = true;
+
+                    runVaccineOverdueQuery();
+                }
+            });
+        }
+    }
+
+    /**
+     * Runs the query to count the clients with overdue/urgent vaccines.
+     * <p>
+     * This query is expensive and should be avoided as it almost blocks any access from the DB. The query takes 20-50 seconds
+     */
+    private void runVaccineOverdueQuery() {
+        AppExecutors executors = new AppExecutors();
+        executors.diskIO().execute(() -> {
+            Timber.d("Started running the overdue count query");
+
+            int overDueCount = VaccineOverdueCountRepositoryHelper.getOverdueCount();
+            setOverDueCount(overDueCount);
+
+            Timber.d("Gotten the overdue count: " + overDueCount);
+
+            executors.mainThread().execute(() -> {
+                updateDueOverdueCountText();
+                registerQueryFinished = false;
+            });
+        });
     }
 }

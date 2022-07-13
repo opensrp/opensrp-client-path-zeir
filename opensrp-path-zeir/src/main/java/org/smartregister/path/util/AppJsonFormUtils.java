@@ -38,7 +38,7 @@ public class AppJsonFormUtils extends ChildJsonFormUtils {
             put("mother_guardian_last_name", MOTHER_LAST_NAME);
             put("mother_guardian_date_birth", MOTHER_DOB);
             put("Sex", "gender");
-            put("Date_Birth", "dob");
+            put("Date_Birth", DOB);
             put("Birth_Weight", "birth_weight");
         }
     };

@@ -21,6 +21,7 @@ import org.smartregister.child.fragment.ChildFormFragment;
 import org.smartregister.child.presenter.ChildFormFragmentPresenter;
 import org.smartregister.path.R;
 import org.smartregister.path.activity.ChildFormActivity;
+import org.smartregister.path.contract.ChildFormContract;
 import org.smartregister.path.interactor.ChildFormInteractor;
 import org.smartregister.path.presenter.AppChildFormFragmentPresenter;
 import org.smartregister.path.util.AppConstants;
@@ -45,6 +46,17 @@ public class AppChildFormFragment extends ChildFormFragment {
         return jsonFormFragment;
     }
 
+    private static void setViewAndChildrenEnabled(View view, boolean enabled) {
+        view.setEnabled(enabled);
+        if (view instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup) view;
+            for (int i = 0; i < viewGroup.getChildCount(); i++) {
+                View child = viewGroup.getChildAt(i);
+                setViewAndChildrenEnabled(child, enabled);
+            }
+        }
+    }
+
     public OnReactionVaccineSelected getOnReactionVaccineSelected() {
         return OnReactionVaccineSelected;
     }
@@ -56,11 +68,9 @@ public class AppChildFormFragment extends ChildFormFragment {
     @Override
     protected ChildFormFragmentPresenter createPresenter() {
         WeakReference<JsonFormFragment> weakReference = new WeakReference<>(this);
-        return new AppChildFormFragmentPresenter(weakReference.get(), ChildFormInteractor.getInstance());
-    }
-
-    public interface OnReactionVaccineSelected {
-        void updateDatePicker(String date);
+        ChildFormInteractor childFormInteractor = ChildFormInteractor.getInstance();
+        childFormInteractor.reRegisterWidgets();
+        return new AppChildFormFragmentPresenter(weakReference.get(), childFormInteractor);
     }
 
     @Override
@@ -73,6 +83,9 @@ public class AppChildFormFragment extends ChildFormFragment {
     public void onDestroy() {
         setOnReactionVaccineSelected(null);
         super.onDestroy();
+        ChildFormContract.Presenter childFormFragmentPresenter = (ChildFormContract.Presenter) this.presenter;
+        childFormFragmentPresenter.tearDown();
+
     }
 
     @Override
@@ -137,14 +150,7 @@ public class AppChildFormFragment extends ChildFormFragment {
         }
     }
 
-    private static void setViewAndChildrenEnabled(View view, boolean enabled) {
-        view.setEnabled(enabled);
-        if (view instanceof ViewGroup) {
-            ViewGroup viewGroup = (ViewGroup) view;
-            for (int i = 0; i < viewGroup.getChildCount(); i++) {
-                View child = viewGroup.getChildAt(i);
-                setViewAndChildrenEnabled(child, enabled);
-            }
-        }
+    public interface OnReactionVaccineSelected {
+        void updateDatePicker(String date);
     }
 }
